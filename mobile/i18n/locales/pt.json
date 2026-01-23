@@ -1,0 +1,34 @@
+{
+  "common": {
+    "continue": "Continuar",
+    "start": "Iniciar",
+    "skipDemo": "Pular (demo)"
+  },
+  "onboarding": {
+    "welcome": {
+      "title": "Bem-vindo ao Lumen",
+      "subtitle": "Clareza em 5 minutos por dia",
+      "start": "Começar",
+      "skip": "Pular"
+    },
+    "language": {
+      "title": "Escolha seu idioma",
+      "subtitle": "Você pode mudar depois",
+      "continue": "Continuar"
+    },
+    "goals": {
+      "title": "O que você quer desenvolver?",
+      "subtitle": "Selecione de 1 a 3 áreas.",
+      "continue": "Continuar"
+    },
+    "daily-time": {
+      "title": "Quanto tempo por dia?",
+      "subtitle": "Voce pode fazer mais se quiser.",
+      "continue": "Continuar"
+    }
+  },
+  "home": {
+    "todaySession": "Sua sessão de hoje",
+    "thisWeek": "Esta semana"
+  }
+}

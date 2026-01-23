@@ -8,6 +8,7 @@ import { Pressable } from "../../components/ui/pressable";
 import { router } from "expo-router";
 import { LumenButton } from "../../components/ui/lumen/Button";
 import { LumenCard } from "../../components/ui/lumen/Card";
+import { useTranslation } from "react-i18next";
 
 const GOALS = [
   { key: "repertorio", label: "Repertório geral" },
@@ -23,6 +24,7 @@ export default function Goals() {
     () => selected.length >= 1 && selected.length <= 3,
     [selected],
   );
+  const { t } = useTranslation();
 
   function toggle(key: string) {
     setSelected((prev) => {
@@ -36,9 +38,11 @@ export default function Goals() {
   return (
     <Box className="flex-1 bg-[#0B0F14] px-6 pt-6">
       <Text className="text-[#E6EAF2] text-[26px] font-semibold">
-        O que você quer desenvolver?
+        {t("onboarding.language.title")}
       </Text>
-      <Text className="text-[#AAB0C0] mt-2">Selecione de 1 a 3 áreas.</Text>
+      <Text className="text-[#AAB0C0] mt-2">
+        {t("onboarding.language.subtitle")}
+      </Text>
 
       <VStack className="mt-6" space="md">
         {GOALS.map((g) => {
@@ -69,7 +73,7 @@ export default function Goals() {
           disabled={!canContinue}
           onPress={() => router.push("/(onboarding)/daily-time")}
         >
-          Continuar
+          {t("onboarding.language.continue")}
         </LumenButton>
       </Box>
     </Box>

@@ -6,6 +6,7 @@ import { Pressable } from "../../components/ui/pressable";
 import { router } from "expo-router";
 import { LumenButton } from "../../components/ui/lumen/Button";
 import { LumenCard } from "../../components/ui/lumen/Card";
+import { useTranslation } from "react-i18next";
 
 const OPTIONS = [
   { key: 5, label: "5 min" },
@@ -15,14 +16,15 @@ const OPTIONS = [
 
 export default function DailyTime() {
   const [minutes, setMinutes] = useState<number>(10);
+  const { t } = useTranslation();
 
   return (
     <Box className="flex-1 bg-[#0B0F14] px-6 pt-6">
       <Text className="text-[#E6EAF2] text-[26px] font-semibold">
-        Quanto tempo por dia?
+        {t("onboarding.language.title")}
       </Text>
       <Text className="text-[#AAB0C0] mt-2">
-        Você pode fazer mais se quiser.
+        {t("onboarding.language.subtitle")}
       </Text>
 
       <VStack className="mt-6" space="md">
@@ -56,7 +58,7 @@ export default function DailyTime() {
 
       <Box className="pb-6 mt-auto">
         <LumenButton onPress={() => router.replace("/(tabs)/home")}>
-          Continuar
+          {t("onboarding.language.continue")}
         </LumenButton>
       </Box>
     </Box>

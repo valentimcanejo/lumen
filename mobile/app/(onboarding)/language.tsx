@@ -8,6 +8,7 @@ import { router } from "expo-router";
 import { LumenButton } from "../../components/ui/lumen/Button";
 import { LumenCard } from "../../components/ui/lumen/Card";
 import { Pressable } from "../../components/ui/pressable";
+import { useTranslation } from "react-i18next";
 
 const LANGS = [
   { key: "pt", label: "Português", flag: "🇧🇷" },
@@ -17,13 +18,16 @@ const LANGS = [
 
 export default function Language() {
   const [lang, setLang] = useState<(typeof LANGS)[number]["key"]>("pt");
+  const { t } = useTranslation();
 
   return (
     <Box className="flex-1 bg-[#0B0F14] px-6 pt-6">
       <Text className="text-[#E6EAF2] text-[26px] font-semibold">
-        Escolha seu idioma
+        {t("onboarding.language.title")}
       </Text>
-      <Text className="text-[#AAB0C0] mt-2">Você pode mudar depois.</Text>
+      <Text className="text-[#AAB0C0] mt-2">
+        {t("onboarding.language.subtitle")}
+      </Text>
 
       <VStack className="mt-6" space="md">
         {LANGS.map((l) => {
@@ -54,7 +58,7 @@ export default function Language() {
 
       <Box className="pb-6 mt-auto">
         <LumenButton onPress={() => router.push("/(onboarding)/goals")}>
-          Continuar
+          {t("onboarding.language.continue")}
         </LumenButton>
       </Box>
     </Box>

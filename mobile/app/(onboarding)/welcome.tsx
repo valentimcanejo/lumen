@@ -6,8 +6,11 @@ import { Text } from "../../components/ui/text";
 import { VStack } from "../../components/ui/vstack";
 import { router } from "expo-router";
 import { LumenButton } from "../../components/ui/lumen/Button";
+import { useTranslation } from "react-i18next";
 
 export default function Welcome() {
+  const { t } = useTranslation();
+
   return (
     <ImageBackground
       source={require("../../assets/images/lumen_welcome_bg.png")}
@@ -21,10 +24,10 @@ export default function Welcome() {
 
             <VStack className="items-center" space="xs">
               <Text className="text-[#E6EAF2] text-[28px] font-semibold text-center">
-                Sua sessão em hoje
+                {t("onboarding.welcome.title")}
               </Text>
               <Text className="text-[#AAB0C0] text-[14px] text-center">
-                Clareza em 5 minutos por dia
+                {t("onboarding.welcome.subtitle")}
               </Text>
             </VStack>
 
@@ -32,7 +35,7 @@ export default function Welcome() {
               <LumenButton
                 onPress={() => router.push("/(onboarding)/language")}
               >
-                Iniciar
+                {t("onboarding.welcome.start")}
               </LumenButton>
             </Box>
 
@@ -41,7 +44,7 @@ export default function Welcome() {
                 variant="ghost"
                 onPress={() => router.replace("/(tabs)/home")}
               >
-                Pular (demo)
+                {t("onboarding.welcome.skip")}
               </LumenButton>
             </Box>
           </VStack>
