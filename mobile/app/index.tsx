@@ -5,6 +5,8 @@ import { Redirect } from "expo-router";
 const hasOnboarded = false;
 
 export default function Index() {
+  console.log(hasOnboarded);
+
   return hasOnboarded ? (
     <Redirect href="/(tabs)/home" />
   ) : (
