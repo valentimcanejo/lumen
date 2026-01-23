@@ -7,7 +7,7 @@ import { LumenCard } from "../../components/ui/lumen/Card";
 import { LumenButton } from "../../components/ui/lumen/Button";
 import { Chip } from "../../components/ui/lumen/Chip";
 import { Pill } from "../../components/ui/lumen/Pill";
-import { Redirect } from "expo-router";
+import { Redirect, router } from "expo-router";
 import { useTranslation } from "react-i18next";
 
 export default function Home() {
@@ -48,12 +48,15 @@ export default function Home() {
 
             <HStack className="mt-2" space="md">
               <Box className="flex-1">
-                <LumenButton onPress={() => {}}>
+                <LumenButton onPress={() => router.push("/(session)/lesson")}>
                   {t("tabs.home.start")}
                 </LumenButton>
               </Box>
               <Box className="flex-1">
-                <LumenButton variant="ghost" onPress={() => {}}>
+                <LumenButton
+                  variant="ghost"
+                  onPress={() => router.push("/(session)/lesson")}
+                >
                   {t("tabs.home.seeTrail")}
                 </LumenButton>
               </Box>
