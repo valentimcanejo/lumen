@@ -27,8 +27,14 @@
       "continue": "Continuar"
     }
   },
-  "home": {
-    "todaySession": "Sua sessão de hoje",
-    "thisWeek": "Esta semana"
+  "tabs": {
+    "home": {
+      "title": "Sua sessão de hoje",
+      "streak": "Sequência",
+      "start": "Iniciar",
+      "seeTrail": "Ver Trilha",
+      "thisWeek": "Esta semana",
+      "studied": "estudados"
+    }
   }
 }
