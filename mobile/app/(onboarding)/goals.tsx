@@ -5,26 +5,22 @@ import { HStack } from "../../components/ui/hstack";
 import { Text } from "../../components/ui/text";
 import { VStack } from "../../components/ui/vstack";
 import { Pressable } from "../../components/ui/pressable";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { LumenButton } from "../../components/ui/lumen/Button";
 import { LumenCard } from "../../components/ui/lumen/Card";
 import { useTranslation } from "react-i18next";
-
-const GOALS = [
-  { key: "repertorio", label: "Repertório geral" },
-  { key: "critico", label: "Pensamento crítico" },
-  { key: "mundo", label: "Entender o mundo" },
-  { key: "ciencia", label: "Ciência & tecnologia" },
-  { key: "comunicacao", label: "Comunicação" },
-] as const;
+import { Lang } from "../../models/lang";
+import { GOALS } from "../../goalsMock";
 
 export default function Goals() {
-  const [selected, setSelected] = useState<string[]>(["repertorio", "critico"]);
+  const [selected, setSelected] = useState<string[]>([]);
   const canContinue = useMemo(
     () => selected.length >= 1 && selected.length <= 3,
     [selected],
   );
   const { t } = useTranslation();
+
+  const { selectedLanguage, userId } = useLocalSearchParams();
 
   function toggle(key: string) {
     setSelected((prev) => {
@@ -35,24 +31,30 @@ export default function Goals() {
     });
   }
 
+  const handleNext = () =>
+    router.push({
+      pathname: `/(onboarding)/daily-time`,
+      params: { selectedLanguage, selectedGoals: selected.join(","), userId },
+    });
+
   return (
     <Box className="flex-1 bg-[#0B0F14] px-6 pt-6">
       <Text className="text-[#E6EAF2] text-[26px] font-semibold">
-        {t("onboarding.language.title")}
+        {t("onboarding.goals.title")}
       </Text>
       <Text className="text-[#AAB0C0] mt-2">
-        {t("onboarding.language.subtitle")}
+        {t("onboarding.goals.subtitle")}
       </Text>
 
       <VStack className="mt-6" space="md">
         {GOALS.map((g) => {
-          const active = selected.includes(g.key);
+          const active = selected.includes(g.id);
           return (
-            <Pressable key={g.key} onPress={() => toggle(g.key)}>
+            <Pressable key={g.id} onPress={() => toggle(g.id)}>
               <LumenCard>
                 <HStack className="items-center justify-between">
                   <Text className="text-[#E6EAF2] text-[16px] font-medium">
-                    {g.label}
+                    {g.title[selectedLanguage as Lang]}
                   </Text>
                   <Text
                     className={
@@ -69,11 +71,8 @@ export default function Goals() {
       </VStack>
 
       <Box className="pb-6 mt-auto">
-        <LumenButton
-          disabled={!canContinue}
-          onPress={() => router.push("/(onboarding)/daily-time")}
-        >
-          {t("onboarding.language.continue")}
+        <LumenButton disabled={!canContinue} onPress={handleNext}>
+          {t("onboarding.goals.continue")}
         </LumenButton>
       </Box>
     </Box>

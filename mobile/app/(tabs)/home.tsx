@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "../../components/ui/box";
 import { HStack } from "../../components/ui/hstack";
 import { Text } from "../../components/ui/text";
@@ -7,11 +7,26 @@ import { LumenCard } from "../../components/ui/lumen/Card";
 import { LumenButton } from "../../components/ui/lumen/Button";
 import { Chip } from "../../components/ui/lumen/Chip";
 import { Pill } from "../../components/ui/lumen/Pill";
-import { Redirect, router } from "expo-router";
+import { Redirect, router, useLocalSearchParams } from "expo-router";
 import { useTranslation } from "react-i18next";
+import { useUser } from "../../hooks/useUser";
+import { UserProfile } from "../../models/user";
 
 export default function Home() {
   const { t } = useTranslation();
+  const { selectedLanguage, selectedGoals, selectedMinutes, userId } =
+    useLocalSearchParams();
+  const { getUserData, loading } = useUser();
+  const [user, setUser] = useState<UserProfile | null>(null);
+
+  const userGoals = useEffect(() => {
+    const fetchUserData = async () => {
+      const userData = await getUserData({ userId: userId as string });
+      setUser(userData || null);
+    };
+
+    fetchUserData();
+  }, []);
 
   return (
     <Box className="flex-1 bg-[#0B0F14] px-6 pt-6">
@@ -28,9 +43,12 @@ export default function Home() {
       </Text>
 
       <HStack className="mt-3" space="sm">
-        <Pill icon="🔥" text={`${t("tabs.home.streak")}: 7`} />
-        <Pill icon="⏱" text="8 min" />
-        <Pill icon="🌍" text="PT" />
+        <Pill
+          icon="🔥"
+          text={`${t("tabs.home.streak")}: ${user?.streak?.current || 0}`}
+        />
+        {/* <Pill icon="⏱" text="8 min" /> */}
+        <Pill icon="🌍" text={user?.lang || ""} />
       </HStack>
 
       <Box className="mt-5">

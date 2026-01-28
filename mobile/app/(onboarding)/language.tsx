@@ -9,6 +9,7 @@ import { LumenButton } from "../../components/ui/lumen/Button";
 import { LumenCard } from "../../components/ui/lumen/Card";
 import { Pressable } from "../../components/ui/pressable";
 import { useTranslation } from "react-i18next";
+import { ensureAnonymousAuth } from "../../services/auth.service";
 
 const LANGS = [
   { key: "pt", label: "Português", flag: "🇧🇷" },
@@ -19,6 +20,19 @@ const LANGS = [
 export default function Language() {
   const [lang, setLang] = useState<(typeof LANGS)[number]["key"]>("pt");
   const { t } = useTranslation();
+
+  const handleNext = async () => {
+    try {
+      const userCredentials = await ensureAnonymousAuth();
+
+      router.push({
+        pathname: `/(onboarding)/goals`,
+        params: { selectedLanguage: lang, userId: userCredentials.uid },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box className="flex-1 bg-[#0B0F14] px-6 pt-6">
@@ -57,7 +71,7 @@ export default function Language() {
       </VStack>
 
       <Box className="pb-6 mt-auto">
-        <LumenButton onPress={() => router.push("/(onboarding)/goals")}>
+        <LumenButton onPress={handleNext}>
           {t("onboarding.language.continue")}
         </LumenButton>
       </Box>

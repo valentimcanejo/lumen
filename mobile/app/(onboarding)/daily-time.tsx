@@ -3,10 +3,12 @@ import { Box } from "../../components/ui/box";
 import { Text } from "../../components/ui/text";
 import { VStack } from "../../components/ui/vstack";
 import { Pressable } from "../../components/ui/pressable";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { LumenButton } from "../../components/ui/lumen/Button";
 import { LumenCard } from "../../components/ui/lumen/Card";
 import { useTranslation } from "react-i18next";
+import { useUser } from "../../hooks/useUser";
+import { Lang } from "../../models/lang";
 
 const OPTIONS = [
   { key: 5, label: "5 min" },
@@ -17,14 +19,39 @@ const OPTIONS = [
 export default function DailyTime() {
   const [minutes, setMinutes] = useState<number>(10);
   const { t } = useTranslation();
+  const { setUserPreferences } = useUser();
+
+  const { selectedLanguage, selectedGoals, userId } = useLocalSearchParams();
+
+  const handleNext = async () => {
+    try {
+      await setUserPreferences({
+        userId: userId as string,
+        lang: selectedLanguage as Lang,
+        minutes,
+      });
+
+      router.push({
+        pathname: `/(tabs)/home`,
+        params: {
+          selectedLanguage,
+          selectedMinutes: minutes,
+          selectedGoals,
+          userId,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box className="flex-1 bg-[#0B0F14] px-6 pt-6">
       <Text className="text-[#E6EAF2] text-[26px] font-semibold">
-        {t("onboarding.language.title")}
+        {t("onboarding.daily-time.title")}
       </Text>
       <Text className="text-[#AAB0C0] mt-2">
-        {t("onboarding.language.subtitle")}
+        {t("onboarding.daily-time.subtitle")}
       </Text>
 
       <VStack className="mt-6" space="md">
@@ -57,8 +84,8 @@ export default function DailyTime() {
       </VStack>
 
       <Box className="pb-6 mt-auto">
-        <LumenButton onPress={() => router.replace("/(tabs)/home")}>
-          {t("onboarding.language.continue")}
+        <LumenButton onPress={handleNext}>
+          {t("onboarding.daily-time.continue")}
         </LumenButton>
       </Box>
     </Box>
