@@ -18,6 +18,7 @@ export function useUser() {
     lang: Lang;
     topicHint?: string;
     minutes?: number;
+    selectedGoalIds?: string[];
   }) {
     setLoading(true);
     try {
@@ -27,7 +28,7 @@ export function useUser() {
         updatedAt: Date.now(),
         hasOnboarded: true,
         streak: { current: 0, best: 0, shields: 0, lastStudyDate: null },
-        selectedGoalIds: ["critical_thinking", "world_affairs"],
+        selectedGoalIds: args.selectedGoalIds || [],
       });
 
       await AsyncStorage.setItem("hasOnboarded", "true");

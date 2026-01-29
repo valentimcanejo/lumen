@@ -21,7 +21,12 @@ export default function DailyTime() {
   const { t } = useTranslation();
   const { setUserPreferences } = useUser();
 
-  const { selectedLanguage, selectedGoals, userId } = useLocalSearchParams();
+  const { selectedLanguage, selectedGoals, userId } =
+    useLocalSearchParams() as {
+      selectedLanguage: Lang;
+      selectedGoals: string;
+      userId: string;
+    };
 
   const handleNext = async () => {
     try {
@@ -29,6 +34,7 @@ export default function DailyTime() {
         userId: userId as string,
         lang: selectedLanguage as Lang,
         minutes,
+        selectedGoalIds: selectedGoals?.split(",") || [],
       });
 
       router.push({

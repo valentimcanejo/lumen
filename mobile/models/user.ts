@@ -19,6 +19,8 @@ export type UserProfile = {
   selectedTrackIds: string[];
   premium: PremiumInfo;
   streak: StreakInfo;
+  selectedGoalIds: string[];
+  hasOnboarded: boolean;
   createdAt: number; // ms
   updatedAt: number; // ms
 };

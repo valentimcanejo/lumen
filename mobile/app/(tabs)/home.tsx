@@ -11,22 +11,24 @@ import { Redirect, router, useLocalSearchParams } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../../hooks/useUser";
 import { UserProfile } from "../../models/user";
+import { GOALS } from "../../goalsMock";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Home() {
   const { t } = useTranslation();
-  const { selectedLanguage, selectedGoals, selectedMinutes, userId } =
-    useLocalSearchParams();
+  const { uid: currentUserId } = useAuth();
+
   const { getUserData, loading } = useUser();
   const [user, setUser] = useState<UserProfile | null>(null);
 
-  const userGoals = useEffect(() => {
+  useEffect(() => {
     const fetchUserData = async () => {
-      const userData = await getUserData({ userId: userId as string });
+      const userData = await getUserData({ userId: currentUserId as string });
       setUser(userData || null);
     };
 
     fetchUserData();
-  }, []);
+  }, [currentUserId]);
 
   return (
     <Box className="flex-1 bg-[#0B0F14] px-6 pt-6">
@@ -48,39 +50,47 @@ export default function Home() {
           text={`${t("tabs.home.streak")}: ${user?.streak?.current || 0}`}
         />
         {/* <Pill icon="⏱" text="8 min" /> */}
-        <Pill icon="🌍" text={user?.lang || ""} />
+        {/* <Pill icon="🌍" text={user?.lang || ""} /> */}
       </HStack>
 
       <Box className="mt-5">
-        <LumenCard>
-          <VStack space="md">
-            <Text className="text-[#E6EAF2] text-[20px] font-semibold">
-              O Equilíbrio de Poder
-            </Text>
-            <Text className="text-[#AAB0C0]">Geopolítica • 8 min</Text>
+        {GOALS?.filter((goal) => user?.selectedGoalIds?.includes(goal.id))?.map(
+          (goal) => (
+            <LumenCard>
+              <VStack space="md">
+                <Text className="text-[#E6EAF2] text-[20px] font-semibold">
+                  {goal.title[user?.lang || "en"]}
+                </Text>
+                <Text className="text-[#AAB0C0]">
+                  {goal.description[user?.lang || "en"]}
+                </Text>
 
-            <HStack space="sm">
-              <Chip label="Geopolítica" />
-              <Chip label="Poder" />
-            </HStack>
+                {/* <HStack space="sm">
+                  <Chip label="Geopolítica" />
+                  <Chip label="Poder" />
+                </HStack> */}
 
-            <HStack className="mt-2" space="md">
-              <Box className="flex-1">
-                <LumenButton onPress={() => router.push("/(session)/lesson")}>
-                  {t("tabs.home.start")}
-                </LumenButton>
-              </Box>
-              <Box className="flex-1">
-                <LumenButton
-                  variant="ghost"
-                  onPress={() => router.push("/(session)/lesson")}
-                >
-                  {t("tabs.home.seeTrail")}
-                </LumenButton>
-              </Box>
-            </HStack>
-          </VStack>
-        </LumenCard>
+                <HStack className="mt-2" space="md">
+                  <Box className="flex-1">
+                    <LumenButton
+                      onPress={() =>
+                        router.push({
+                          pathname: "/(session)/lesson",
+                          params: {
+                            contentId: goal.id,
+                            version: "1",
+                          },
+                        })
+                      }
+                    >
+                      {t("tabs.home.start")}
+                    </LumenButton>
+                  </Box>
+                </HStack>
+              </VStack>
+            </LumenCard>
+          ),
+        )}
       </Box>
 
       <Box className="mt-6">
