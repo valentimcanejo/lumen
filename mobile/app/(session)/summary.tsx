@@ -7,9 +7,6 @@ import { Text } from "@/components/ui/text";
 import { HStack } from "@/components/ui/hstack";
 import { VStack } from "@/components/ui/vstack";
 import { Pressable } from "@/components/ui/pressable";
-
-import { usePack } from "../../hooks/usePack";
-import { useUser } from "../../hooks/useUser";
 import { PACKS } from "../../pack-mock";
 
 function TopProgress({ value }: { value: number }) {

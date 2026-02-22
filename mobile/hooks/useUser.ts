@@ -1,9 +1,6 @@
 import { useState } from "react";
 import type { Lang } from "../models/lang";
-import type { Pack } from "../models/pack";
-import { generateAiPack } from "../services/functions.service";
-import { saveAiPackToCache } from "../repositories/packs.repo";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getDocData } from "../services/firestore.service";

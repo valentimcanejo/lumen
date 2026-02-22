@@ -10,10 +10,7 @@ import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 
 import { LessonBlocks } from "./_components/LessonBlocks";
-import { usePack } from "../../hooks/usePack";
-import { useUser } from "../../hooks/useUser";
 import { PACKS } from "../../pack-mock";
-import { Pack } from "../../models/pack";
 
 // --- Mini componente: barra de progresso (topo) ---
 function TopProgress({ value }: { value: number }) {
@@ -61,20 +58,13 @@ export default function LessonScreen() {
     version: string;
   };
 
-  // const { pack, loading, error } = usePack({
-  //   contentId,
-  //   version: Number(version),
-  //   lang,
-  // });
   const pack = PACKS.find((p) => p.id === contentId) as any;
 
-  // progresso "1/4" por enquanto fixo (depois você usa o flow)
   const stepLabel = "1 / 4";
   const progressValue = 0.22;
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
-      {/* Top bar */}
       <Box className="px-5 pt-14">
         <HStack className="items-center" space="md">
           <Pressable onPress={() => router.back()}>
