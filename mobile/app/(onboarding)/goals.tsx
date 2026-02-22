@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from "react";
 import { Box } from "../../components/ui/box";
-import { Center } from "../../components/ui/center";
 import { HStack } from "../../components/ui/hstack";
 import { Text } from "../../components/ui/text";
 import { VStack } from "../../components/ui/vstack";

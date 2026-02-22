@@ -1,6 +1,5 @@
 // app/(tabs)/_layout.tsx
 import { Tabs } from "expo-router";
-import { EditIcon, Icon } from "../../components/ui/icon";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function TabsLayout() {
