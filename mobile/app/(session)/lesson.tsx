@@ -7,7 +7,6 @@ import { Box } from "@/components/ui/box";
 import { Pressable } from "@/components/ui/pressable";
 import { HStack } from "@/components/ui/hstack";
 import { Text } from "@/components/ui/text";
-import { VStack } from "@/components/ui/vstack";
 
 import { LessonBlocks } from "./_components/LessonBlocks";
 import { PACKS } from "../../pack-mock";
