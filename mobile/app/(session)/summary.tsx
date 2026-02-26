@@ -78,7 +78,6 @@ export default function SummaryScreen() {
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
-      {/* Top bar */}
       <Box className="px-5 pt-14">
         <HStack className="items-center" space="md">
           <Pressable onPress={() => router.back()}>
@@ -93,7 +92,6 @@ export default function SummaryScreen() {
         </HStack>
       </Box>
 
-      {/* Header */}
       <Box className="px-5 pt-6">
         <Text className="text-[#E6EAF2] text-[22px] font-semibold">Resumo</Text>
         <Text className="text-[#AAB0C0] text-[13px] mt-1">
@@ -104,7 +102,6 @@ export default function SummaryScreen() {
       </Box>
 
       <Box className="flex-1 px-5 pt-5">
-        {/* Result card */}
         <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
           <HStack className="items-center justify-between">
             <VStack space="xs">
@@ -123,7 +120,6 @@ export default function SummaryScreen() {
               )}
             </VStack>
 
-            {/* Circular-ish badge */}
             <Box className="w-[64px] h-[64px] rounded-full bg-[#0E141E] border border-[#1A2233] items-center justify-center">
               <Text className="text-[#F5C77A] text-[18px] font-semibold">
                 {totalN > 0 ? Math.round(scorePct * 100) : 100}%
@@ -131,7 +127,6 @@ export default function SummaryScreen() {
             </Box>
           </HStack>
 
-          {/* Progress bar */}
           <Box className="h-[6px] rounded-full bg-[#1A2233] overflow-hidden mt-4">
             <Box
               className="h-full bg-[#F5C77A]"
