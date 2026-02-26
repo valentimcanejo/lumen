@@ -101,7 +101,6 @@ export default function CardsScreen() {
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
-      {/* Top bar */}
       <Box className="px-5 pt-14">
         <HStack className="items-center" space="md">
           <Pressable onPress={() => router.back()}>
@@ -116,7 +115,6 @@ export default function CardsScreen() {
         </HStack>
       </Box>
 
-      {/* Header */}
       <Box className="px-5 pt-6">
         <Text className="text-[#E6EAF2] text-[22px] font-semibold">Cards</Text>
         <Text className="text-[#AAB0C0] text-[13px] mt-1">
@@ -127,7 +125,6 @@ export default function CardsScreen() {
         <Box className="h-[1px] bg-[#1A2233] mt-4" />
       </Box>
 
-      {/* Content */}
       <Box className="flex-1 px-5 pt-5">
         {!pack || total === 0 ? (
           <VStack space="md" className="mt-3">
@@ -149,7 +146,6 @@ export default function CardsScreen() {
           </VStack>
         ) : (
           <>
-            {/* Card */}
             <Pressable
               onPress={() => setRevealed((v) => !v)}
               className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5 flex-1 justify-between"
@@ -172,7 +168,6 @@ export default function CardsScreen() {
                   {revealed ? current.back : current.front}
                 </Text>
 
-                {/* hint */}
                 {!revealed ? (
                   <Text className="text-[#7B8193] text-[13px] leading-[20px]">
                     Pense na resposta antes de revelar.
@@ -184,7 +179,6 @@ export default function CardsScreen() {
                 )}
               </VStack>
 
-              {/* bottom little gradient block */}
               <Box className="mt-4 h-[90px] rounded-[18px] bg-[#0E141E] border border-[#141C2A] overflow-hidden">
                 <Box className="absolute inset-0 bg-black/10" />
                 <Box className="absolute -bottom-10 left-0 right-0 h-[120px] bg-black/35" />
@@ -199,7 +193,6 @@ export default function CardsScreen() {
               </Box>
             </Pressable>
 
-            {/* Actions */}
             <VStack space="sm" className="mt-4">
               <HStack space="sm">
                 <Pressable
@@ -233,7 +226,6 @@ export default function CardsScreen() {
                 </Text>
               </Pressable>
 
-              {/* Skip */}
               <Pressable
                 onPress={goNext}
                 className="h-[52px] rounded-2xl border border-[#1A2233] items-center justify-center"
