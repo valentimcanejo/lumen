@@ -83,7 +83,6 @@ export default function LessonScreen() {
         contentContainerStyle={{ paddingBottom: 28 }}
       >
         <Box className="px-5 pt-6">
-          {/* Title */}
           <Text className="text-[#E6EAF2] text-[22px] font-semibold">
             {pack.lesson.title}
           </Text>
@@ -92,10 +91,8 @@ export default function LessonScreen() {
             {pack.tags?.[0] ?? "Lição"} • {pack.estimatedMinutes} min
           </Text>
 
-          {/* divider */}
           <Box className="h-[1px] bg-[#1A2233] mt-4" />
 
-          {/* Player card (visual por enquanto) */}
           <Box className="mt-5 bg-[#121826] border border-[#1A2233] rounded-[18px] p-4">
             <HStack className="items-center">
               <Pressable
@@ -128,10 +125,8 @@ export default function LessonScreen() {
             ) : null}
           </Box>
 
-          {/* Content from JSON blocks */}
           <LessonBlocks blocks={pack.lesson.blocks} />
 
-          {/* subtle “stars” section */}
           <Box className="mt-6 h-[140px] rounded-[18px] bg-[#0E141E] border border-[#141C2A] overflow-hidden">
             <Box className="absolute inset-0 bg-black/10" />
             <Box className="absolute -bottom-10 left-0 right-0 h-[120px] bg-black/35" />
@@ -145,7 +140,6 @@ export default function LessonScreen() {
             </HStack>
           </Box>
 
-          {/* Bottom CTA */}
           <Box className="mt-6">
             <Pressable
               onPress={() =>

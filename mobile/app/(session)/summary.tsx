@@ -134,7 +134,6 @@ export default function SummaryScreen() {
             />
           </Box>
 
-          {/* Notes */}
           <Box className="mt-4">
             <Text className="text-[#AAB0C0] text-[12px]">INSIGHT</Text>
             <Text className="text-[#E6EAF2] text-[14px] leading-[22px] mt-2">
@@ -144,7 +143,6 @@ export default function SummaryScreen() {
           </Box>
         </Box>
 
-        {/* Decorative block */}
         <Box className="mt-5 h-[140px] rounded-[18px] bg-[#0E141E] border border-[#141C2A] overflow-hidden">
           <Box className="absolute inset-0 bg-black/10" />
           <Box className="absolute -bottom-10 left-0 right-0 h-[120px] bg-black/35" />
@@ -158,7 +156,6 @@ export default function SummaryScreen() {
           </HStack>
         </Box>
 
-        {/* Actions */}
         <VStack space="sm" className="pb-6 mt-auto">
           <Pressable
             onPress={onFinish}

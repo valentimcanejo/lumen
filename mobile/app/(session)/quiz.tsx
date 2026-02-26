@@ -31,7 +31,6 @@ function OptionRow({
   state: "idle" | "correct" | "wrong";
   onPress: () => void;
 }) {
-  // styles
   const base =
     "rounded-[18px] border px-4 py-4 flex-row items-center justify-between";
   const idleBorder = selected ? "border-[#F5C77A]/60" : "border-[#1A2233]";
@@ -179,7 +178,6 @@ export default function QuizScreen() {
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
-      {/* Top bar */}
       <Box className="px-5 pt-14">
         <HStack className="items-center" space="md">
           <Pressable onPress={() => router.back()}>
@@ -194,7 +192,6 @@ export default function QuizScreen() {
         </HStack>
       </Box>
 
-      {/* Header */}
       <Box className="px-5 pt-6">
         <Text className="text-[#E6EAF2] text-[22px] font-semibold">Quiz</Text>
         <Text className="text-[#AAB0C0] text-[13px] mt-1">
@@ -205,7 +202,6 @@ export default function QuizScreen() {
         <Box className="h-[1px] bg-[#1A2233] mt-4" />
       </Box>
 
-      {/* Body */}
       <Box className="flex-1 px-5 pt-5">
         {!pack || total === 0 || !current ? (
           <VStack space="md" className="mt-3">
@@ -227,7 +223,6 @@ export default function QuizScreen() {
           </VStack>
         ) : (
           <>
-            {/* Question card */}
             <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
               <Text className="text-[#AAB0C0] text-[12px]">PERGUNTA</Text>
               <Text className="text-[#E6EAF2] text-[18px] font-semibold leading-[26px] mt-2">
@@ -244,7 +239,6 @@ export default function QuizScreen() {
               </HStack>
             </Box>
 
-            {/* Options */}
             <VStack space="sm" className="mt-4">
               {current.options.map((opt, idx) => {
                 const state = getOptionState({
@@ -267,7 +261,6 @@ export default function QuizScreen() {
               })}
             </VStack>
 
-            {/* Explanation */}
             {answered ? (
               <Box className="mt-4 bg-[#0E141E] border border-[#1A2233] rounded-[18px] p-4">
                 <Text className="text-[#AAB0C0] text-[12px]">EXPLICAÇÃO</Text>
@@ -277,7 +270,6 @@ export default function QuizScreen() {
               </Box>
             ) : null}
 
-            {/* CTA */}
             <Box className="pb-6 mt-auto">
               <Pressable
                 onPress={onNext}
