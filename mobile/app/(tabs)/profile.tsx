@@ -111,7 +111,6 @@ export default function ProfileScreen() {
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
-      {/* Top bar */}
       <Box className="px-5 pt-14">
         <HStack className="items-center" space="md">
           <Pressable onPress={() => router.push("/(tabs)/home")}>
@@ -123,23 +122,19 @@ export default function ProfileScreen() {
         </HStack>
       </Box>
 
-      {/* Content */}
       <Box className="flex-1 px-5 py-6">
         {loading ? (
           <Text className="text-[#AAB0C0]">Carregando dados do perfil...</Text>
         ) : (
           <>
-            {/* Streak */}
             <Box className="mt-6">
               <StreakInfo streak={streak} />
             </Box>
 
-            {/* Daily Goal */}
             <Box className="mt-6">
               <DailyGoal goal={dailyGoal} />
             </Box>
 
-            {/* Change Language */}
             <Box className="mt-6">
               <Text className="text-[#E6EAF2] text-[16px] font-semibold">
                 Idioma
@@ -150,7 +145,6 @@ export default function ProfileScreen() {
               />
             </Box>
 
-            {/* Save changes button */}
             <Box className="mt-6">
               <Pressable
                 onPress={handleSaveChanges}
