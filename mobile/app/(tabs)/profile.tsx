@@ -12,6 +12,15 @@ import { useUser } from "../../hooks/useUser";
 // import { setSavedLanguage } from "@/src/i18n/lang.storage"; // mudar idioma
 
 // --- Componente: Streak
+function UserInfo({ name }: { name: string }) {
+  return (
+    <VStack className="items-center space-y-1">
+      <Text className="text-[#E6EAF2] text-[16px] font-semibold">Nome</Text>
+      <Text className="text-[#F5C77A] text-[32px] font-semibold">{name}</Text>
+    </VStack>
+  );
+}
+
 function StreakInfo({ streak }: { streak: number }) {
   return (
     <VStack className="items-center space-y-1">
@@ -89,7 +98,9 @@ export default function ProfileScreen() {
     lang: "pt",
     streak: { current: 0, best: 0, shields: 0, lastStudyDate: null },
     dailyGoalMin: 10,
+    name: "John Doe",
   };
+  const [name, setName] = useState(user?.name ?? "");
   const [language, setLanguage] = useState(user?.lang ?? "pt");
   const [saving, setSaving] = useState(false);
   const [streak, setStreak] = useState(user?.streak?.current ?? 0);
@@ -100,6 +111,7 @@ export default function ProfileScreen() {
       setLanguage(user.lang);
       setStreak(user.streak?.current ?? 0);
       setDailyGoal(user.dailyGoalMin ?? 10);
+      setName(user.name);
     }
   }, [user]);
 
@@ -136,6 +148,10 @@ export default function ProfileScreen() {
           <Text className="text-[#AAB0C0]">Carregando dados do perfil...</Text>
         ) : (
           <>
+            <Box className="mt-6">
+              <UserInfo name={name} />
+            </Box>
+
             <Box className="mt-6">
               <StreakInfo streak={streak} />
             </Box>
