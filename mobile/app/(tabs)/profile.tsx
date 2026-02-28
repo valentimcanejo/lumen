@@ -48,22 +48,31 @@ function LanguageSelector({
   onChange: (lang: string) => void;
 }) {
   return (
-    <HStack className="space-x-3">
-      <Pressable onPress={() => onChange("pt")}>
+    <HStack className="flex flex-col gap-2">
+      <Pressable
+        onPress={() => onChange("pt")}
+        className="border border-[#AAB0C0] rounded-[16px] p-4"
+      >
         <Text
           className={`text-[16px] ${lang === "pt" ? "text-[#F5C77A]" : "text-[#AAB0C0]"}`}
         >
           Português
         </Text>
       </Pressable>
-      <Pressable onPress={() => onChange("en")}>
+      <Pressable
+        onPress={() => onChange("en")}
+        className="border border-[#AAB0C0] rounded-[16px] p-4"
+      >
         <Text
           className={`text-[16px] ${lang === "en" ? "text-[#F5C77A]" : "text-[#AAB0C0]"}`}
         >
           English
         </Text>
       </Pressable>
-      <Pressable onPress={() => onChange("es")}>
+      <Pressable
+        onPress={() => onChange("es")}
+        className="border border-[#AAB0C0] rounded-[16px] p-4"
+      >
         <Text
           className={`text-[16px] ${lang === "es" ? "text-[#F5C77A]" : "text-[#AAB0C0]"}`}
         >
