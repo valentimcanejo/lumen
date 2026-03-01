@@ -53,12 +53,11 @@ export default function SummaryScreen() {
   }, [scorePct, totalN]);
 
   async function onFinish() {
-    // Aqui você pluga Firestore depois:
     // await markDayCompleted(uid, ...)
     // await updateStreak(uid, ...)
     setSaving(true);
     try {
-      await new Promise((r) => setTimeout(r, 450)); // placeholder visual
+      await new Promise((r) => setTimeout(r, 450));
       setSaved(true);
     } finally {
       setSaving(false);
@@ -70,7 +69,6 @@ export default function SummaryScreen() {
   }
 
   function nextContent() {
-    // Aqui você pluga seu picker:
     // const { nextContentId, nextVersion } = await getNextContent(...)
     // router.replace({ pathname:"/(session)/lesson", params:{contentId: nextContentId, version: String(nextVersion)} })
     router.replace("/(tabs)/home");
