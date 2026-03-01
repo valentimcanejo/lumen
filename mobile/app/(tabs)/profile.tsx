@@ -9,9 +9,7 @@ import { Pressable } from "@/components/ui/pressable";
 import { VStack } from "@/components/ui/vstack";
 
 import { useUser } from "../../hooks/useUser";
-// import { setSavedLanguage } from "@/src/i18n/lang.storage"; // mudar idioma
 
-// --- Componente: Streak
 function UserInfo({ name }: { name: string }) {
   return (
     <VStack className="items-center space-y-1">
@@ -34,7 +32,6 @@ function StreakInfo({ streak }: { streak: number }) {
   );
 }
 
-// --- Componente: Meta diária
 function DailyGoal({ goal }: { goal: number }) {
   return (
     <VStack className="items-center space-y-1">
@@ -48,7 +45,6 @@ function DailyGoal({ goal }: { goal: number }) {
   );
 }
 
-// --- Componente: Botões de idioma ---
 function LanguageSelector({
   lang,
   onChange,
@@ -104,7 +100,7 @@ export default function ProfileScreen() {
   const [language, setLanguage] = useState(user?.lang ?? "pt");
   const [saving, setSaving] = useState(false);
   const [streak, setStreak] = useState(user?.streak?.current ?? 0);
-  const [dailyGoal, setDailyGoal] = useState(user?.dailyGoalMin ?? 10); // Default 10min
+  const [dailyGoal, setDailyGoal] = useState(user?.dailyGoalMin ?? 10);
 
   useEffect(() => {
     if (user) {
@@ -117,7 +113,7 @@ export default function ProfileScreen() {
 
   const handleLanguageChange = async (newLang: string) => {
     setSaving(true);
-    //await setSavedLanguage(newLang);
+
     setLanguage(newLang);
     setSaving(false);
   };
