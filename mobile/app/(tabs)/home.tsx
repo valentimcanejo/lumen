@@ -55,7 +55,7 @@ export default function Home() {
       <Box className="mt-5">
         {GOALS?.filter((goal) => user?.selectedGoalIds?.includes(goal.id))?.map(
           (goal) => (
-            <LumenCard>
+            <LumenCard key={goal.id}>
               <VStack space="md">
                 <Text className="text-[#E6EAF2] text-[20px] font-semibold">
                   {goal.title[user?.lang || "en"]}
