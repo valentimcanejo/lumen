@@ -102,10 +102,8 @@ function getOptionState(args: {
   const { answered, optionIndex, selectedIndex, correctIndex } = args;
   if (!answered) return "idle";
 
-  // mostra correto sempre
   if (optionIndex === correctIndex) return "correct";
 
-  // se era o escolhido e tá errado
   if (selectedIndex === optionIndex && selectedIndex !== correctIndex)
     return "wrong";
 

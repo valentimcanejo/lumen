@@ -59,7 +59,6 @@ export default function CardsScreen() {
   const current = cards[index];
 
   const progressValue = useMemo(() => {
-    // etapa 2/4 => começa em 0.25 e vai até ~0.5
     if (!total) return 0.35;
     const stepStart = 0.25;
     const stepEnd = 0.5;
