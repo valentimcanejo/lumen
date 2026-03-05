@@ -11,7 +11,6 @@ import { Text } from "@/components/ui/text";
 import { LessonBlocks } from "./_components/LessonBlocks";
 import { PACKS } from "../../pack-mock";
 
-// --- Mini componente: barra de progresso (topo) ---
 function TopProgress({ value }: { value: number }) {
   const pct = Math.max(0, Math.min(1, value));
   return (
@@ -21,7 +20,6 @@ function TopProgress({ value }: { value: number }) {
   );
 }
 
-// --- Mini componente: waveform fake (visual) ---
 function Waveform() {
   const bars = useMemo(
     () =>
