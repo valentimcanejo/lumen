@@ -134,7 +134,6 @@ export default function QuizScreen() {
   const current: PackQuizQuestion | undefined = quiz[qIndex];
 
   const progressValue = useMemo(() => {
-    // etapa 3/4 => 0.5 a 0.75
     if (!total) return 0.62;
     const stepStart = 0.5;
     const stepEnd = 0.75;
