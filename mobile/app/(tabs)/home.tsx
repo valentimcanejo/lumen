@@ -17,7 +17,7 @@ export default function Home() {
   const { t } = useTranslation();
   const { uid: currentUserId } = useAuth();
 
-  const { getUserData, loading } = useUser();
+  const { getUserData } = useUser();
   const [user, setUser] = useState<UserProfile | null>(null);
 
   useEffect(() => {
