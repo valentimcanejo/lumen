@@ -27,12 +27,6 @@ function gradeLabel(g: Grade) {
   return "Não sei";
 }
 
-function gradeColor(g: Grade) {
-  if (g === "know") return "bg-[#5ED19A]";
-  if (g === "almost") return "bg-[#F0B86E]";
-  return "bg-[#E26D6D]";
-}
-
 export default function CardsScreen() {
   const { contentId, version } = useLocalSearchParams() as {
     contentId: string;
