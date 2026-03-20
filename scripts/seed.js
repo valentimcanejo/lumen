@@ -18,7 +18,7 @@ const serviceAccount = require(path.join(__dirname, "serviceAccountKey.json"));
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: `${serviceAccount.project_id}.firebasestorage.app`,
+  storageBucket: "lumen-13d0d.firebasestorage.app",
 });
 
 const db = admin.firestore();
