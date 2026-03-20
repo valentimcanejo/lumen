@@ -1,4 +1,4 @@
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 
 const ROOT = `${FileSystem.documentDirectory}lumen_cache/`;
 
