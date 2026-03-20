@@ -20,13 +20,7 @@ function TopProgress({ value }: { value: number }) {
   );
 }
 
-type Grade = "know" | "almost" | "dont";
-
-function gradeLabel(g: Grade) {
-  if (g === "know") return "Sei";
-  if (g === "almost") return "Quase";
-  return "Não sei";
-}
+type Grade = "know" | "dont";
 
 export default function CardsScreen() {
   const { contentId, version, lang } = useLocalSearchParams() as {
@@ -108,7 +102,7 @@ export default function CardsScreen() {
         <Text className="text-[#E6EAF2] text-[22px] font-semibold">Cards</Text>
         <Text className="text-[#AAB0C0] text-[13px] mt-1">
           {pack?.lesson?.title ?? "Conteúdo"} •{" "}
-          {total ? `${index + 1}/${total}` : ""}
+          {total ? `${index + 1} / ${total}` : ""}
         </Text>
 
         <Box className="h-[1px] bg-[#1A2233] mt-4" />
@@ -118,7 +112,6 @@ export default function CardsScreen() {
         {!pack || total === 0 ? (
           <VStack space="md" className="mt-3">
             <Text className="text-[#AAB0C0]">Não há cards nesse conteúdo.</Text>
-
             <Pressable
               onPress={() =>
                 router.push({
@@ -135,85 +128,62 @@ export default function CardsScreen() {
           </VStack>
         ) : (
           <>
-            <Pressable
-              onPress={() => setRevealed((v) => !v)}
-              className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5 flex-1 justify-between"
-            >
-              <VStack space="md">
-                <HStack className="items-center justify-between">
-                  <HStack className="items-center" space="sm">
-                    <Box className="w-[8px] h-[8px] rounded-full bg-[#F5C77A]" />
-                    <Text className="text-[#AAB0C0] text-[12px]">
-                      {revealed ? "VERSO" : "FRENTE"}
-                    </Text>
-                  </HStack>
-
-                  <Text className="text-[#7B8193] text-[12px]">
-                    toque para {revealed ? "ocultar" : "revelar"}
-                  </Text>
-                </HStack>
-
+            {/* Card */}
+            <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5 flex-1">
+              <VStack space="sm">
+                <Text className="text-[#AAB0C0] text-[12px]">PERGUNTA</Text>
                 <Text className="text-[#E6EAF2] text-[18px] font-semibold leading-[26px]">
-                  {revealed ? current.back : current.front}
+                  {current.front}
                 </Text>
-
-                {!revealed ? (
-                  <Text className="text-[#7B8193] text-[13px] leading-[20px]">
-                    Pense na resposta antes de revelar.
-                  </Text>
-                ) : (
-                  <Text className="text-[#7B8193] text-[13px] leading-[20px]">
-                    Agora avalie seu domínio e avance.
-                  </Text>
-                )}
               </VStack>
 
-              <Box className="mt-4 h-[90px] rounded-[18px] bg-[#0E141E] border border-[#141C2A] overflow-hidden">
-                <Box className="absolute inset-0 bg-black/10" />
-                <Box className="absolute -bottom-10 left-0 right-0 h-[120px] bg-black/35" />
-                <HStack className="absolute bottom-10 left-5" space="xs">
-                  {Array.from({ length: 18 }).map((_, i) => (
-                    <Box
-                      key={i}
-                      className="w-[3px] h-[3px] rounded-full bg-[#AAB0C0]/20"
-                    />
-                  ))}
+              {revealed && (
+                <>
+                  <Box className="h-[1px] bg-[#1A2233] my-5" />
+                  <VStack space="sm">
+                    <Text className="text-[#AAB0C0] text-[12px]">RESPOSTA</Text>
+                    <Text className="text-[#E6EAF2] text-[16px] leading-[24px]">
+                      {current.back}
+                    </Text>
+                  </VStack>
+                </>
+              )}
+            </Box>
+
+            {/* Buttons */}
+            <VStack space="sm" className="mt-4 pb-6">
+              {!revealed ? (
+                <Pressable
+                  onPress={() => setRevealed(true)}
+                  className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
+                >
+                  <Text className="text-[#0B0F14] text-[16px] font-semibold">
+                    Revelar resposta
+                  </Text>
+                </Pressable>
+              ) : (
+                <HStack space="sm">
+                  <Pressable
+                    onPress={() => onGrade("know")}
+                    className="flex-1 h-[52px] rounded-2xl items-center justify-center"
+                    style={{ backgroundColor: "#5ED19A" }}
+                  >
+                    <Text className="text-[#0B0F14] text-[16px] font-semibold">
+                      Acertei
+                    </Text>
+                  </Pressable>
+
+                  <Pressable
+                    onPress={() => onGrade("dont")}
+                    className="flex-1 h-[52px] rounded-2xl items-center justify-center"
+                    style={{ backgroundColor: "#E26D6D" }}
+                  >
+                    <Text className="text-[#0B0F14] text-[16px] font-semibold">
+                      Errei
+                    </Text>
+                  </Pressable>
                 </HStack>
-              </Box>
-            </Pressable>
-
-            <VStack space="sm" className="mt-4">
-              <HStack space="sm">
-                <Pressable
-                  onPress={() => onGrade("know")}
-                  className="flex-1 h-[52px] rounded-2xl items-center justify-center"
-                  style={{ backgroundColor: "#5ED19A" }}
-                >
-                  <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                    {gradeLabel("know")}
-                  </Text>
-                </Pressable>
-
-                <Pressable
-                  onPress={() => onGrade("almost")}
-                  className="flex-1 h-[52px] rounded-2xl items-center justify-center"
-                  style={{ backgroundColor: "#F0B86E" }}
-                >
-                  <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                    {gradeLabel("almost")}
-                  </Text>
-                </Pressable>
-              </HStack>
-
-              <Pressable
-                onPress={() => onGrade("dont")}
-                className="h-[52px] rounded-2xl items-center justify-center"
-                style={{ backgroundColor: "#E26D6D" }}
-              >
-                <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                  {gradeLabel("dont")}
-                </Text>
-              </Pressable>
+              )}
 
               <Pressable
                 onPress={goNext}

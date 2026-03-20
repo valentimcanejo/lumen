@@ -103,7 +103,10 @@ export default function LessonScreen() {
         ? audioUrl!
         : await getStorageDownloadUrl(audioUrl!);
 
-      await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
+      await Audio.setAudioModeAsync({
+        playsInSilentModeIOS: true,
+        staysActiveInBackground: true,
+      });
 
       const { sound } = await Audio.Sound.createAsync(
         { uri: url },
