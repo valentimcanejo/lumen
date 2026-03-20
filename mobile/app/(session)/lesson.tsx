@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Audio, AVPlaybackStatus } from "expo-av";
+import * as Speech from "expo-speech";
 
 import { Box } from "@/components/ui/box";
 import { Pressable } from "@/components/ui/pressable";
@@ -14,8 +14,26 @@ import { usePack } from "../../hooks/usePack";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import { toggleSaveContent } from "../../repositories/user.repo";
-import { getStorageDownloadUrl } from "../../services/storage.service";
 import type { Lang } from "../../models/lang";
+import type { LessonBlock } from "../../models/pack";
+
+const LANG_LOCALE: Record<Lang, string> = {
+  pt: "pt-BR",
+  en: "en-US",
+  es: "es-ES",
+};
+
+function extractText(blocks: LessonBlock[]): string {
+  return blocks
+    .map((b) => (b.type === "bullets" ? b.items.join(". ") : b.text))
+    .join(" ");
+}
+
+// Estimate duration in ms at ~140 words per minute
+function estimateDurationMs(text: string): number {
+  const words = text.trim().split(/\s+/).length;
+  return Math.round((words / 140) * 60 * 1000);
+}
 
 function formatMs(ms: number) {
   const s = Math.floor(ms / 1000);
@@ -73,12 +91,19 @@ export default function LessonScreen() {
     lang: lang ?? "pt",
   });
 
-  // Audio
-  const soundRef = useRef<Audio.Sound | null>(null);
+  // TTS state
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const startMsRef = useRef<number>(0);
   const [playing, setPlaying] = useState(false);
   const [positionMs, setPositionMs] = useState(0);
-  const [durationMs, setDurationMs] = useState(0);
-  const audioProgress = durationMs > 0 ? positionMs / durationMs : 0;
+
+  const ttsText = useMemo(
+    () => (pack ? extractText(pack.lesson.blocks) : ""),
+    [pack],
+  );
+
+  const durationMs = useMemo(() => estimateDurationMs(ttsText), [ttsText]);
+  const audioProgress = durationMs > 0 ? Math.min(1, positionMs / durationMs) : 0;
 
   // Save
   const [saved, setSaved] = useState(false);
@@ -92,60 +117,48 @@ export default function LessonScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid, contentId]);
 
+  // Cleanup on unmount
   useEffect(() => {
-    const audioUrl = pack?.lesson?.audioUrl;
-    if (!audioUrl) return;
-
-    let alive = true;
-    let loadedSound: Audio.Sound | null = null;
-
-    async function load() {
-      const url = audioUrl!.startsWith("https://")
-        ? audioUrl!
-        : await getStorageDownloadUrl(audioUrl!);
-
-      await Audio.setAudioModeAsync({
-        playsInSilentModeIOS: true,
-        staysActiveInBackground: true,
-      });
-
-      const { sound } = await Audio.Sound.createAsync(
-        { uri: url },
-        { shouldPlay: false },
-        (status: AVPlaybackStatus) => {
-          if (!alive || !status.isLoaded) return;
-          setPositionMs(status.positionMillis);
-          setDurationMs(status.durationMillis ?? 0);
-          if (status.didJustFinish) setPlaying(false);
-        },
-      );
-
-      if (alive) {
-        soundRef.current = sound;
-        loadedSound = sound;
-      } else {
-        sound.unloadAsync();
-      }
-    }
-
-    load().catch(() => {});
-
     return () => {
-      alive = false;
-      loadedSound?.unloadAsync();
-      soundRef.current = null;
+      Speech.stop();
+      if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [pack?.lesson?.audioUrl]);
+  }, []);
 
-  async function handlePlayPause() {
-    const s = soundRef.current;
-    if (!s) return;
+  function handlePlayPause() {
     if (playing) {
-      await s.pauseAsync();
+      Speech.stop();
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
       setPlaying(false);
     } else {
-      await s.playAsync();
+      setPositionMs(0);
       setPlaying(true);
+      startMsRef.current = Date.now();
+
+      const id = setInterval(() => {
+        const elapsed = Date.now() - startMsRef.current;
+        setPositionMs(Math.min(elapsed, durationMs));
+      }, 200);
+      intervalRef.current = id;
+
+      const onFinish = () => {
+        clearInterval(id);
+        intervalRef.current = null;
+        setPlaying(false);
+      };
+
+      Speech.speak(ttsText, {
+        language: LANG_LOCALE[lang ?? "pt"],
+        onDone: () => {
+          setPositionMs(durationMs);
+          onFinish();
+        },
+        onStopped: onFinish,
+        onError: onFinish,
+      });
     }
   }
 
@@ -185,8 +198,6 @@ export default function LessonScreen() {
     );
   }
 
-  const hasAudio = !!pack.lesson.audioUrl;
-
   return (
     <Box className="flex-1 bg-[#0B0F14]">
       <Box className="px-5 pt-14">
@@ -222,9 +233,7 @@ export default function LessonScreen() {
             <HStack className="items-center">
               <Pressable
                 onPress={handlePlayPause}
-                disabled={!hasAudio}
                 className="w-[44px] h-[44px] rounded-full bg-[#1A2233] items-center justify-center border border-[#2A3448]"
-                style={{ opacity: hasAudio ? 1 : 0.4 }}
               >
                 <Ionicons
                   name={playing ? "pause" : "play"}
@@ -237,9 +246,7 @@ export default function LessonScreen() {
               <Waveform progress={audioProgress} />
 
               <Text className="text-[#7B8193] text-[11px] w-[68px] text-right">
-                {hasAudio
-                  ? `${formatMs(positionMs)} / ${formatMs(durationMs)}`
-                  : "--:-- / --:--"}
+                {`${formatMs(positionMs)} / ${formatMs(durationMs)}`}
               </Text>
             </HStack>
 
