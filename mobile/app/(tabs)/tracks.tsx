@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
+import { router } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import { Box } from "../../components/ui/box";
 import { HStack } from "../../components/ui/hstack";
 import { VStack } from "../../components/ui/vstack";
 import { Text } from "../../components/ui/text";
+import { Pressable } from "../../components/ui/pressable";
 import { getTracks } from "../../repositories/tracks.repo";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
+import { useAiPack } from "../../hooks/useAiPack";
 import type { Track } from "../../models/track";
 import type { Lang } from "../../models/lang";
 
@@ -63,9 +67,11 @@ function TrackCard({ track, lang }: { track: Track; lang: Lang }) {
 export default function Tracks() {
   const { uid } = useAuth();
   const { getUserData } = useUser();
+  const { generate, loading: generating } = useAiPack();
   const [tracks, setTracks] = useState<Track[]>([]);
   const [lang, setLang] = useState<Lang>("pt");
   const [loading, setLoading] = useState(true);
+  const [aiError, setAiError] = useState<string | null>(null);
 
   useEffect(() => {
     getTracks()
@@ -81,6 +87,21 @@ export default function Tracks() {
     });
   }, [uid]);
 
+  async function handleGenerate() {
+    setAiError(null);
+    try {
+      const pack = await generate({ lang, minutes: 10 });
+      if (pack) {
+        router.push({
+          pathname: "/(session)/lesson",
+          params: { contentId: pack.id, version: String(pack.version), lang },
+        });
+      }
+    } catch {
+      setAiError("Não foi possível gerar o conteúdo. Tente novamente.");
+    }
+  }
+
   return (
     <Box className="flex-1 bg-[#0B0F14]">
       <Box className="px-6 pt-14 pb-4">
@@ -94,12 +115,41 @@ export default function Tracks() {
         className="flex-1 px-6"
         contentContainerStyle={{ paddingBottom: 32 }}
       >
-        {loading ? (
-          <Text className="text-[#AAB0C0] text-center mt-10">
-            Carregando…
+        {/* AI Pack */}
+        <Box className="bg-[#121826] border border-[#F5C77A]/30 rounded-[22px] p-5 mb-5">
+          <HStack className="items-center mb-2" space="sm">
+            <Ionicons name="sparkles" size={16} color="#F5C77A" />
+            <Text className="text-[#F5C77A] text-[12px] font-semibold">
+              PREMIUM · IA
+            </Text>
+          </HStack>
+          <Text className="text-[#E6EAF2] text-[16px] font-semibold">
+            Gerar conteúdo com IA
           </Text>
+          <Text className="text-[#AAB0C0] text-[13px] mt-1 leading-[20px]">
+            Crie uma sessão personalizada no seu idioma com conteúdo gerado sob
+            demanda.
+          </Text>
+          {aiError ? (
+            <Text className="text-[#E26D6D] text-[12px] mt-3">{aiError}</Text>
+          ) : null}
+          <Pressable
+            onPress={handleGenerate}
+            disabled={generating}
+            className="mt-4 h-[44px] rounded-2xl bg-[#F5C77A] items-center justify-center"
+            style={{ opacity: generating ? 0.6 : 1 }}
+          >
+            <Text className="text-[#0B0F14] text-[15px] font-semibold">
+              {generating ? "Gerando…" : "Gerar sessão"}
+            </Text>
+          </Pressable>
+        </Box>
+
+        {/* Track list */}
+        {loading ? (
+          <Text className="text-[#AAB0C0] text-center mt-6">Carregando…</Text>
         ) : tracks.length === 0 ? (
-          <Text className="text-[#AAB0C0] text-center mt-10">
+          <Text className="text-[#AAB0C0] text-center mt-6">
             Nenhuma trilha disponível.
           </Text>
         ) : (

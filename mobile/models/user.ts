@@ -20,6 +20,7 @@ export type UserProfile = {
   premium: PremiumInfo;
   streak: StreakInfo;
   selectedGoalIds: string[];
+  savedContentIds?: string[];
   hasOnboarded: boolean;
   createdAt: number; // ms
   updatedAt: number; // ms

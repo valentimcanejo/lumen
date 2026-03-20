@@ -1,3 +1,5 @@
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 import type { UserProfile } from "../models/user";
 import type { Lang } from "../models/lang";
 import {
@@ -36,6 +38,17 @@ export async function setUserLanguage(uid: string, lang: Lang) {
 export async function setDailyGoal(uid: string, minutes: 5 | 10 | 15) {
   await updateDocData<UserProfile>(userPath(uid), {
     dailyGoalMin: minutes,
+    updatedAt: Date.now(),
+  });
+}
+
+export async function toggleSaveContent(
+  uid: string,
+  contentId: string,
+  save: boolean,
+) {
+  await updateDoc(doc(db, userPath(uid)), {
+    savedContentIds: save ? arrayUnion(contentId) : arrayRemove(contentId),
     updatedAt: Date.now(),
   });
 }

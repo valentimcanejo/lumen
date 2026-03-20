@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -8,6 +8,7 @@ import { HStack } from "@/components/ui/hstack";
 import { VStack } from "@/components/ui/vstack";
 import { Pressable } from "@/components/ui/pressable";
 import { useAuth } from "../../hooks/useAuth";
+import { useUser } from "../../hooks/useUser";
 import { markDayCompleted, updateStreak } from "../../repositories/progress.repo";
 import { todayYmd } from "../../repositories/session.repo";
 import { usePack } from "../../hooks/usePack";
@@ -46,8 +47,21 @@ export default function SummaryScreen() {
   const scorePct = totalN > 0 ? clamp(correctN / totalN, 0, 1) : 0;
 
   const { uid } = useAuth();
+  const { getUserData } = useUser();
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [nextGoalId, setNextGoalId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!uid) return;
+    getUserData({ userId: uid }).then((user) => {
+      const ids = user?.selectedGoalIds ?? [];
+      const idx = ids.indexOf(contentId);
+      if (idx === -1 || ids.length <= 1) return;
+      const nextId = ids[(idx + 1) % ids.length];
+      if (nextId !== contentId) setNextGoalId(nextId);
+    });
+  }, [uid, contentId]);
 
   const scoreLabel = useMemo(() => {
     if (totalN === 0) return "Sessão concluída";
@@ -55,6 +69,18 @@ export default function SummaryScreen() {
     if (scorePct >= 0.6) return "Muito bom";
     if (scorePct >= 0.35) return "Bom começo";
     return "Continue";
+  }, [scorePct, totalN]);
+
+  const insight = useMemo(() => {
+    if (totalN === 0)
+      return "Você leu o conteúdo com atenção. Fazer o quiz na próxima vez vai ajudar a fixar melhor.";
+    if (scorePct >= 0.85)
+      return "Excelente! Você dominou os conceitos principais. Uma revisão rápida amanhã vai consolidar ainda mais.";
+    if (scorePct >= 0.6)
+      return "Bom trabalho! Você está no caminho certo. Revise os cards para fixar os pontos que faltaram.";
+    if (scorePct >= 0.35)
+      return "Bom começo! Alguns conceitos ainda precisam de atenção. Releia o conteúdo e tente novamente.";
+    return "Não desanime! Cada sessão é aprendizado. Revise o conteúdo e tente o quiz de novo.";
   }, [scorePct, totalN]);
 
   async function onFinish() {
@@ -81,9 +107,14 @@ export default function SummaryScreen() {
   }
 
   function nextContent() {
-    // const { nextContentId, nextVersion } = await getNextContent(...)
-    // router.replace({ pathname:"/(session)/lesson", params:{contentId: nextContentId, version: String(nextVersion)} })
-    router.replace("/(tabs)/home");
+    if (nextGoalId) {
+      router.replace({
+        pathname: "/(session)/lesson",
+        params: { contentId: nextGoalId, version: "1", lang: lang ?? "pt" },
+      });
+    } else {
+      router.replace("/(tabs)/home");
+    }
   }
 
   return (
@@ -147,8 +178,7 @@ export default function SummaryScreen() {
           <Box className="mt-4">
             <Text className="text-[#AAB0C0] text-[12px]">INSIGHT</Text>
             <Text className="text-[#E6EAF2] text-[14px] leading-[22px] mt-2">
-              Você consolidou os conceitos principais. Amanhã, uma revisão curta
-              ajuda a fixar ainda mais.
+              {insight}
             </Text>
           </Box>
         </Box>
@@ -185,14 +215,16 @@ export default function SummaryScreen() {
             </Text>
           </Pressable>
 
-          <Pressable
-            onPress={nextContent}
-            className="h-[52px] rounded-2xl border border-[#1A2233] items-center justify-center"
-          >
-            <Text className="text-[#AAB0C0] text-[16px] font-semibold">
-              Próximo conteúdo
-            </Text>
-          </Pressable>
+          {nextGoalId && (
+            <Pressable
+              onPress={nextContent}
+              className="h-[52px] rounded-2xl border border-[#1A2233] items-center justify-center"
+            >
+              <Text className="text-[#AAB0C0] text-[16px] font-semibold">
+                Próximo conteúdo
+              </Text>
+            </Pressable>
+          )}
 
           <Pressable
             onPress={goHome}
