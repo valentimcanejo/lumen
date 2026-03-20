@@ -29,6 +29,7 @@ export default function Home() {
       setUser(userData || null);
     });
     getWeeklyMinutes(currentUserId).then(setWeeklyMinutes).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUserId]);
 
   useEffect(() => {

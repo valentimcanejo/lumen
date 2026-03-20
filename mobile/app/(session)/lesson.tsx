@@ -89,6 +89,7 @@ export default function LessonScreen() {
     getUserData({ userId: uid }).then((user) => {
       setSaved(user?.savedContentIds?.includes(contentId) ?? false);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid, contentId]);
 
   useEffect(() => {

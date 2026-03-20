@@ -4,7 +4,6 @@ import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Box } from "../../components/ui/box";
 import { HStack } from "../../components/ui/hstack";
-import { VStack } from "../../components/ui/vstack";
 import { Text } from "../../components/ui/text";
 import { Pressable } from "../../components/ui/pressable";
 import { getTracks } from "../../repositories/tracks.repo";
@@ -85,6 +84,7 @@ export default function Tracks() {
     getUserData({ userId: uid }).then((user) => {
       if (user?.lang) setLang(user.lang);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
 
   async function handleGenerate() {

@@ -98,6 +98,7 @@ export default function ProfileScreen() {
       setStreak(user.streak?.current ?? 0);
       setDailyGoal(user.dailyGoalMin ?? 10);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
 
   const handleLanguageChange = (newLang: string) => {

@@ -61,6 +61,7 @@ export default function SummaryScreen() {
       const nextId = ids[(idx + 1) % ids.length];
       if (nextId !== contentId) setNextGoalId(nextId);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid, contentId]);
 
   const scoreLabel = useMemo(() => {
