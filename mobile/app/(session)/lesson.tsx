@@ -93,7 +93,6 @@ export default function LessonScreen() {
 
   // TTS state
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const startMsRef = useRef<number>(0);
   const [playing, setPlaying] = useState(false);
   const [positionMs, setPositionMs] = useState(0);
 
@@ -125,39 +124,51 @@ export default function LessonScreen() {
     };
   }, []);
 
+  function stopSpeech() {
+    Speech.stop();
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    setPlaying(false);
+  }
+
   function handlePlayPause() {
     if (playing) {
-      Speech.stop();
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-      setPlaying(false);
+      stopSpeech();
     } else {
       setPositionMs(0);
       setPlaying(true);
-      startMsRef.current = Date.now();
 
+      // Poll isSpeakingAsync so position only advances when audio is actually playing
+      const tickMs = 250;
       const id = setInterval(() => {
-        const elapsed = Date.now() - startMsRef.current;
-        setPositionMs(Math.min(elapsed, durationMs));
-      }, 200);
+        Speech.isSpeakingAsync().then((speaking) => {
+          if (speaking) {
+            setPositionMs((prev) => Math.min(prev + tickMs, durationMs));
+          }
+        });
+      }, tickMs);
       intervalRef.current = id;
-
-      const onFinish = () => {
-        clearInterval(id);
-        intervalRef.current = null;
-        setPlaying(false);
-      };
 
       Speech.speak(ttsText, {
         language: LANG_LOCALE[lang ?? "pt"],
         onDone: () => {
+          clearInterval(id);
+          intervalRef.current = null;
           setPositionMs(durationMs);
-          onFinish();
+          setPlaying(false);
         },
-        onStopped: onFinish,
-        onError: onFinish,
+        onStopped: () => {
+          clearInterval(id);
+          intervalRef.current = null;
+          setPlaying(false);
+        },
+        onError: () => {
+          clearInterval(id);
+          intervalRef.current = null;
+          setPlaying(false);
+        },
       });
     }
   }
@@ -234,6 +245,10 @@ export default function LessonScreen() {
               <Pressable
                 onPress={handlePlayPause}
                 className="w-[44px] h-[44px] rounded-full bg-[#1A2233] items-center justify-center border border-[#2A3448]"
+                style={({ pressed }: { pressed: boolean }) => ({
+                  opacity: pressed ? 0.6 : 1,
+                  transform: [{ scale: pressed ? 0.93 : 1 }],
+                })}
               >
                 <Ionicons
                   name={playing ? "pause" : "play"}
