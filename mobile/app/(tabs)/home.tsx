@@ -67,7 +67,7 @@ export default function Home() {
                   {goal.title[user?.lang || "en"]}
                 </Text>
                 <Text className="text-[#AAB0C0]">
-                  {goal.description[user?.lang || "en"]}
+                  {goal.description?.[user?.lang || "en"]}
                 </Text>
 
                 {/* <HStack space="sm">
