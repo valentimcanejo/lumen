@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Box } from "../../components/ui/box";
 import { HStack } from "../../components/ui/hstack";
 import { Text } from "../../components/ui/text";
@@ -9,15 +9,20 @@ import { LumenButton } from "../../components/ui/lumen/Button";
 import { LumenCard } from "../../components/ui/lumen/Card";
 import { useTranslation } from "react-i18next";
 import { Lang } from "../../models/lang";
-import { GOALS } from "../../goalsMock";
+import { getActiveGoals, type Goal } from "../../repositories/goals.repo";
 
 export default function Goals() {
   const [selected, setSelected] = useState<string[]>([]);
+  const [goals, setGoals] = useState<Goal[]>([]);
   const canContinue = useMemo(
     () => selected.length >= 1 && selected.length <= 3,
     [selected],
   );
   const { t } = useTranslation();
+
+  useEffect(() => {
+    getActiveGoals().then(setGoals).catch(() => setGoals([]));
+  }, []);
 
   const { selectedLanguage, userId } = useLocalSearchParams();
 
@@ -46,7 +51,7 @@ export default function Goals() {
       </Text>
 
       <VStack className="mt-6" space="md">
-        {GOALS.map((g) => {
+        {goals.map((g) => {
           const active = selected.includes(g.id);
           return (
             <Pressable key={g.id} onPress={() => toggle(g.id)}>

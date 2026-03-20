@@ -10,8 +10,8 @@ import { router } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../../hooks/useUser";
 import { UserProfile } from "../../models/user";
-import { GOALS } from "../../goalsMock";
 import { useAuth } from "../../hooks/useAuth";
+import { getActiveGoals, type Goal } from "../../repositories/goals.repo";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -19,15 +19,18 @@ export default function Home() {
 
   const { getUserData } = useUser();
   const [user, setUser] = useState<UserProfile | null>(null);
+  const [goals, setGoals] = useState<Goal[]>([]);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const userData = await getUserData({ userId: currentUserId as string });
+    if (!currentUserId) return;
+    getUserData({ userId: currentUserId }).then((userData) => {
       setUser(userData || null);
-    };
-
-    fetchUserData();
+    });
   }, [currentUserId]);
+
+  useEffect(() => {
+    getActiveGoals().then(setGoals).catch(() => setGoals([]));
+  }, []);
 
   return (
     <Box className="flex-1 bg-[#0B0F14] px-6 pt-6">
@@ -53,7 +56,7 @@ export default function Home() {
       </HStack>
 
       <Box className="mt-5">
-        {GOALS?.filter((goal) => user?.selectedGoalIds?.includes(goal.id))?.map(
+        {goals?.filter((goal) => user?.selectedGoalIds?.includes(goal.id))?.map(
           (goal) => (
             <LumenCard key={goal.id}>
               <VStack space="md">

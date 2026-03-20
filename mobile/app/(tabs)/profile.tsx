@@ -9,15 +9,9 @@ import { Pressable } from "@/components/ui/pressable";
 import { VStack } from "@/components/ui/vstack";
 
 import { useUser } from "../../hooks/useUser";
-
-function UserInfo({ name }: { name: string }) {
-  return (
-    <VStack className="items-center space-y-1">
-      <Text className="text-[#E6EAF2] text-[16px] font-semibold">Nome</Text>
-      <Text className="text-[#F5C77A] text-[32px] font-semibold">{name}</Text>
-    </VStack>
-  );
-}
+import { useAuth } from "../../hooks/useAuth";
+import { setUserLanguage } from "../../repositories/user.repo";
+import type { Lang } from "../../models/lang";
 
 function StreakInfo({ streak }: { streak: number }) {
   return (
@@ -89,41 +83,35 @@ function LanguageSelector({
 }
 
 export default function ProfileScreen() {
-  const { loading } = useUser();
-  const user = {
-    lang: "pt",
-    streak: { current: 0, best: 0, shields: 0, lastStudyDate: null },
-    dailyGoalMin: 10,
-    name: "John Doe",
-  };
-  const [name, setName] = useState(user?.name ?? "");
-  const [language, setLanguage] = useState(user?.lang ?? "pt");
+  const { loading, getUserData } = useUser();
+  const { uid } = useAuth();
+  const [language, setLanguage] = useState<Lang>("pt");
   const [saving, setSaving] = useState(false);
-  const [streak, setStreak] = useState(user?.streak?.current ?? 0);
-  const [dailyGoal, setDailyGoal] = useState(user?.dailyGoalMin ?? 10);
+  const [streak, setStreak] = useState(0);
+  const [dailyGoal, setDailyGoal] = useState(10);
 
   useEffect(() => {
-    if (user) {
+    if (!uid) return;
+    getUserData({ userId: uid }).then((user) => {
+      if (!user) return;
       setLanguage(user.lang);
       setStreak(user.streak?.current ?? 0);
       setDailyGoal(user.dailyGoalMin ?? 10);
-      setName(user.name);
-    }
-  }, [user]);
+    });
+  }, [uid]);
 
-  const handleLanguageChange = async (newLang: string) => {
-    setSaving(true);
-
-    setLanguage(newLang);
-    setSaving(false);
+  const handleLanguageChange = (newLang: string) => {
+    setLanguage(newLang as Lang);
   };
 
   const handleSaveChanges = async () => {
-    // Aqui você pode salvar no Firestore as mudanças
-    // Exemplo:
-    // await setUserLanguage(user.uid, language);
-    // await setDailyGoal(user.uid, dailyGoal);
-    console.log("Mudanças salvas: ", { language, dailyGoal });
+    if (!uid) return;
+    setSaving(true);
+    try {
+      await setUserLanguage(uid, language);
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -144,10 +132,6 @@ export default function ProfileScreen() {
           <Text className="text-[#AAB0C0]">Carregando dados do perfil...</Text>
         ) : (
           <>
-            <Box className="mt-6">
-              <UserInfo name={name} />
-            </Box>
-
             <Box className="mt-6">
               <StreakInfo streak={streak} />
             </Box>

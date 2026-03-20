@@ -7,6 +7,7 @@ import { HStack } from "@/components/ui/hstack";
 import { VStack } from "@/components/ui/vstack";
 import { Pressable } from "@/components/ui/pressable";
 import { useUser } from "../../hooks/useUser";
+import { useAuth } from "../../hooks/useAuth";
 import { UserProfile } from "../../models/user";
 import { PACKS } from "../../pack-mock";
 
@@ -34,6 +35,7 @@ export default function CardsScreen() {
   };
   const [user, setUser] = useState<UserProfile | null>(null);
   const { getUserData } = useUser();
+  const { uid } = useAuth();
 
   const lang = user?.lang ?? "pt";
 
@@ -61,15 +63,13 @@ export default function CardsScreen() {
   }, [index, total]);
 
   useEffect(() => {
+    if (!uid) return;
     const fetchUserData = async () => {
-      const userData = await getUserData({
-        userId: "IamdaGVIZgSVnBEAh7NiWg4KYf83",
-      });
+      const userData = await getUserData({ userId: uid });
       setUser(userData || null);
     };
-
     fetchUserData();
-  }, []);
+  }, [uid]);
 
   function goNext() {
     setRevealed(false);

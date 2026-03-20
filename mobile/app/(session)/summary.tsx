@@ -8,6 +8,9 @@ import { HStack } from "@/components/ui/hstack";
 import { VStack } from "@/components/ui/vstack";
 import { Pressable } from "@/components/ui/pressable";
 import { PACKS } from "../../pack-mock";
+import { useAuth } from "../../hooks/useAuth";
+import { markDayCompleted, updateStreak } from "../../repositories/progress.repo";
+import { todayYmd } from "../../repositories/session.repo";
 
 function TopProgress({ value }: { value: number }) {
   const pct = Math.max(0, Math.min(1, value));
@@ -41,6 +44,7 @@ export default function SummaryScreen() {
   const totalN = Number(total ?? 0);
   const scorePct = totalN > 0 ? clamp(correctN / totalN, 0, 1) : 0;
 
+  const { uid } = useAuth();
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
@@ -53,11 +57,18 @@ export default function SummaryScreen() {
   }, [scorePct, totalN]);
 
   async function onFinish() {
-    // await markDayCompleted(uid, ...)
-    // await updateStreak(uid, ...)
     setSaving(true);
     try {
-      await new Promise((r) => setTimeout(r, 450));
+      if (uid) {
+        const date = todayYmd();
+        await markDayCompleted(uid, date, {
+          contentId,
+          contentVersion: Number(version),
+          minutes: pack?.estimatedMinutes ?? 0,
+          quizScore: totalN > 0 ? correctN / totalN : 1,
+        });
+        await updateStreak(uid, date);
+      }
       setSaved(true);
     } finally {
       setSaving(false);
