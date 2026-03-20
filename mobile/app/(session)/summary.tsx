@@ -7,10 +7,11 @@ import { Text } from "@/components/ui/text";
 import { HStack } from "@/components/ui/hstack";
 import { VStack } from "@/components/ui/vstack";
 import { Pressable } from "@/components/ui/pressable";
-import { PACKS } from "../../pack-mock";
 import { useAuth } from "../../hooks/useAuth";
 import { markDayCompleted, updateStreak } from "../../repositories/progress.repo";
 import { todayYmd } from "../../repositories/session.repo";
+import { usePack } from "../../hooks/usePack";
+import type { Lang } from "../../models/lang";
 
 function TopProgress({ value }: { value: number }) {
   const pct = Math.max(0, Math.min(1, value));
@@ -26,19 +27,19 @@ function clamp(n: number, min: number, max: number) {
 }
 
 export default function SummaryScreen() {
-  const { contentId, version, correct, total } = useLocalSearchParams() as {
+  const { contentId, version, lang, correct, total } = useLocalSearchParams() as {
     contentId: string;
     version: string;
+    lang: Lang;
     correct?: string;
     total?: string;
   };
 
-  //   const { pack, loading, error } = usePack({
-  //     contentId,
-  //     version: Number(version),
-  //     lang,
-  //   });
-  const pack = PACKS.find((p) => p.id === contentId);
+  const { pack } = usePack({
+    contentId,
+    version: Number(version),
+    lang: lang ?? "pt",
+  });
 
   const correctN = Number(correct ?? 0);
   const totalN = Number(total ?? 0);

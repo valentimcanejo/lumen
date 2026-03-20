@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Box } from "@/components/ui/box";
@@ -6,10 +6,10 @@ import { Text } from "@/components/ui/text";
 import { HStack } from "@/components/ui/hstack";
 import { VStack } from "@/components/ui/vstack";
 import { Pressable } from "@/components/ui/pressable";
-import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
-import { UserProfile } from "../../models/user";
-import { PACKS } from "../../pack-mock";
+import { usePack } from "../../hooks/usePack";
+import { gradeCard } from "../../repositories/progress.repo";
+import type { Lang } from "../../models/lang";
 
 function TopProgress({ value }: { value: number }) {
   const pct = Math.max(0, Math.min(1, value));
@@ -29,22 +29,18 @@ function gradeLabel(g: Grade) {
 }
 
 export default function CardsScreen() {
-  const { contentId, version } = useLocalSearchParams() as {
+  const { contentId, version, lang } = useLocalSearchParams() as {
     contentId: string;
     version: string;
+    lang: Lang;
   };
-  const [user, setUser] = useState<UserProfile | null>(null);
-  const { getUserData } = useUser();
   const { uid } = useAuth();
 
-  const lang = user?.lang ?? "pt";
-
-  //   const { pack, loading, error } = usePack({
-  //     contentId,
-  //     version: Number(version),
-  //     lang,
-  //   });
-  const pack = PACKS.find((p) => p.id === contentId);
+  const { pack, loading } = usePack({
+    contentId,
+    version: Number(version),
+    lang: lang ?? "pt",
+  });
 
   const cards = pack?.cards ?? [];
   const total = cards.length;
@@ -62,15 +58,6 @@ export default function CardsScreen() {
     return stepStart + (stepEnd - stepStart) * pct;
   }, [index, total]);
 
-  useEffect(() => {
-    if (!uid) return;
-    const fetchUserData = async () => {
-      const userData = await getUserData({ userId: uid });
-      setUser(userData || null);
-    };
-    fetchUserData();
-  }, [uid]);
-
   function goNext() {
     setRevealed(false);
     setIndex((prev) => {
@@ -78,7 +65,7 @@ export default function CardsScreen() {
       if (next >= total) {
         router.push({
           pathname: "/(session)/quiz",
-          params: { contentId, version },
+          params: { contentId, version, lang },
         });
         return prev;
       }
@@ -87,9 +74,18 @@ export default function CardsScreen() {
   }
 
   function onGrade(g: Grade) {
-    // TODO: salvar progresso local/remote por card (spaced repetition)
-    // ex: progressRepo.gradeCard(uid, contentId, current.id, g)
+    if (uid && current) {
+      gradeCard(uid, contentId, current.id, g).catch(() => {});
+    }
     goNext();
+  }
+
+  if (loading) {
+    return (
+      <Box className="flex-1 bg-[#0B0F14] items-center justify-center">
+        <Text className="text-[#AAB0C0]">Carregando…</Text>
+      </Box>
+    );
   }
 
   return (
@@ -127,7 +123,7 @@ export default function CardsScreen() {
               onPress={() =>
                 router.push({
                   pathname: "/(session)/quiz",
-                  params: { contentId, version },
+                  params: { contentId, version, lang },
                 })
               }
               className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"

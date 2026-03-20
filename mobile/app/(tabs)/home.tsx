@@ -12,6 +12,7 @@ import { useUser } from "../../hooks/useUser";
 import { UserProfile } from "../../models/user";
 import { useAuth } from "../../hooks/useAuth";
 import { getActiveGoals, type Goal } from "../../repositories/goals.repo";
+import { getWeeklyMinutes } from "../../repositories/progress.repo";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -20,12 +21,14 @@ export default function Home() {
   const { getUserData } = useUser();
   const [user, setUser] = useState<UserProfile | null>(null);
   const [goals, setGoals] = useState<Goal[]>([]);
+  const [weeklyMinutes, setWeeklyMinutes] = useState<number | null>(null);
 
   useEffect(() => {
     if (!currentUserId) return;
     getUserData({ userId: currentUserId }).then((userData) => {
       setUser(userData || null);
     });
+    getWeeklyMinutes(currentUserId).then(setWeeklyMinutes).catch(() => {});
   }, [currentUserId]);
 
   useEffect(() => {
@@ -81,6 +84,7 @@ export default function Home() {
                           params: {
                             contentId: goal.id,
                             version: "1",
+                            lang: user?.lang ?? "pt",
                           },
                         })
                       }
@@ -100,7 +104,8 @@ export default function Home() {
           {t("tabs.home.thisWeek")}
         </Text>
         <Text className="text-[#AAB0C0] mt-2">
-          32 min {t("tabs.home.studied")}
+          {weeklyMinutes !== null ? `${weeklyMinutes} min` : "…"}{" "}
+          {t("tabs.home.studied")}
         </Text>
       </Box>
     </Box>

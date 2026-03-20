@@ -7,7 +7,8 @@ import { HStack } from "@/components/ui/hstack";
 import { VStack } from "@/components/ui/vstack";
 import { Pressable } from "@/components/ui/pressable";
 import type { PackQuizQuestion } from "../../models/pack";
-import { PACKS } from "../../pack-mock";
+import { usePack } from "../../hooks/usePack";
+import type { Lang } from "../../models/lang";
 
 function TopProgress({ value }: { value: number }) {
   const pct = Math.max(0, Math.min(1, value));
@@ -111,17 +112,17 @@ function getOptionState(args: {
 }
 
 export default function QuizScreen() {
-  const { contentId, version } = useLocalSearchParams() as {
+  const { contentId, version, lang } = useLocalSearchParams() as {
     contentId: string;
     version: string;
+    lang: Lang;
   };
 
-  //   const { pack, loading, error } = usePack({
-  //     contentId,
-  //     version: Number(version),
-  //     lang,
-  //   });
-  const pack = PACKS.find((p) => p.id === contentId);
+  const { pack, loading } = usePack({
+    contentId,
+    version: Number(version),
+    lang: lang ?? "pt",
+  });
 
   const quiz = pack?.quiz ?? [];
   const total = quiz.length;
@@ -161,6 +162,7 @@ export default function QuizScreen() {
         params: {
           contentId,
           version,
+          lang,
           correct: String(correctCount),
           total: String(total),
         },
@@ -200,7 +202,11 @@ export default function QuizScreen() {
       </Box>
 
       <Box className="flex-1 px-5 pt-5">
-        {!pack || total === 0 || !current ? (
+        {loading ? (
+          <Box className="flex-1 items-center justify-center">
+            <Text className="text-[#AAB0C0]">Carregando…</Text>
+          </Box>
+        ) : !pack || total === 0 || !current ? (
           <VStack space="md" className="mt-3">
             <Text className="text-[#AAB0C0]">Não há quiz nesse conteúdo.</Text>
 
@@ -208,7 +214,7 @@ export default function QuizScreen() {
               onPress={() =>
                 router.push({
                   pathname: "/(session)/summary",
-                  params: { contentId, version },
+                  params: { contentId, version, lang },
                 })
               }
               className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
@@ -293,6 +299,7 @@ export default function QuizScreen() {
                     params: {
                       contentId,
                       version,
+                      lang,
                       correct: String(correctCount),
                       total: String(total),
                     },

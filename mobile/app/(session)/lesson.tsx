@@ -9,7 +9,8 @@ import { HStack } from "@/components/ui/hstack";
 import { Text } from "@/components/ui/text";
 
 import { LessonBlocks } from "./_components/LessonBlocks";
-import { PACKS } from "../../pack-mock";
+import { usePack } from "../../hooks/usePack";
+import type { Lang } from "../../models/lang";
 
 function TopProgress({ value }: { value: number }) {
   const pct = Math.max(0, Math.min(1, value));
@@ -50,15 +51,41 @@ function Waveform() {
 export default function LessonScreen() {
   const [playing, setPlaying] = useState(false);
 
-  const { contentId, version } = useLocalSearchParams() as {
+  const { contentId, version, lang } = useLocalSearchParams() as {
     contentId: string;
     version: string;
+    lang: Lang;
   };
 
-  const pack = PACKS.find((p) => p.id === contentId) as any;
+  const { pack, loading, error } = usePack({
+    contentId,
+    version: Number(version),
+    lang: lang ?? "pt",
+  });
 
   const stepLabel = "1 / 4";
   const progressValue = 0.22;
+
+  if (loading) {
+    return (
+      <Box className="flex-1 bg-[#0B0F14] items-center justify-center">
+        <Text className="text-[#AAB0C0]">Carregando…</Text>
+      </Box>
+    );
+  }
+
+  if (error || !pack) {
+    return (
+      <Box className="flex-1 bg-[#0B0F14] items-center justify-center px-6">
+        <Text className="text-[#E26D6D] text-center">
+          {error ?? "Conteúdo não encontrado."}
+        </Text>
+        <Pressable onPress={() => router.back()} className="mt-4">
+          <Text className="text-[#AAB0C0]">Voltar</Text>
+        </Pressable>
+      </Box>
+    );
+  }
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
@@ -146,6 +173,7 @@ export default function LessonScreen() {
                   params: {
                     contentId: pack.id,
                     version: String(pack.version),
+                    lang,
                   },
                 })
               }
