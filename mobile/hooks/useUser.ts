@@ -22,10 +22,12 @@ export function useUser() {
       await setDoc(
         doc(userCollection, args.userId),
         {
-          ...args,
+          lang: args.lang,
+          ...(args.topicHint !== undefined && { topicHint: args.topicHint }),
+          ...(args.minutes !== undefined && { dailyGoalMin: args.minutes }),
+          selectedGoalIds: args.selectedGoalIds ?? [],
           updatedAt: Date.now(),
           hasOnboarded: true,
-          selectedGoalIds: args.selectedGoalIds || [],
         },
         { merge: true }, // never overwrite xp/level/achievements/streak
       );
