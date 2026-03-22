@@ -22,9 +22,10 @@ import {
 import { setLanguage as setI18nLanguage } from "../../i18n/setLanguage";
 import type { Lang } from "../../models/lang";
 import {
-  LEVEL_XP_THRESHOLDS,
+  levelXpThreshold,
   xpToLevel,
   xpForNextLevel,
+  getLevelTier,
   type AchievementId,
   type UserProfile,
 } from "../../models/user";
@@ -247,7 +248,8 @@ export default function ProfileScreen() {
   const dailyGoal = profileData?.dailyGoalMin ?? 10;
   const xp = profileData?.xp ?? 0;
   const level = xpToLevel(xp);
-  const xpFloor = LEVEL_XP_THRESHOLDS[level - 1] ?? 0;
+  const tier = getLevelTier(level);
+  const xpFloor = levelXpThreshold(level);
   const xpCeil = xpForNextLevel(level);
   const xpPct = xpCeil > xpFloor ? (xp - xpFloor) / (xpCeil - xpFloor) : 1;
   const unlockedAchievements = ACHIEVEMENTS.filter(
@@ -336,20 +338,39 @@ export default function ProfileScreen() {
               </VStack>
             </HStack>
 
-            {/* XP progress bar */}
+            {/* Tier + XP progress */}
             <Box className="mb-6">
-              <HStack className="items-center justify-between mb-2">
-                <Text className="text-[#AAB0C0] text-[12px]">
-                  {t("tabs.profile.level")} {level}
-                </Text>
+              <HStack className="items-center justify-between mb-3">
+                <HStack className="items-center" space="sm">
+                  <Box
+                    style={{
+                      paddingHorizontal: 10,
+                      paddingVertical: 4,
+                      borderRadius: 100,
+                      backgroundColor: `${tier.color}22`,
+                      borderWidth: 1,
+                      borderColor: `${tier.color}66`,
+                    }}
+                  >
+                    <Text style={{ color: tier.color, fontSize: 12, fontWeight: "700" }}>
+                      {tier.name}
+                    </Text>
+                  </Box>
+                  <Text className="text-[#AAB0C0] text-[13px]">
+                    {t("tabs.profile.level")} {level}
+                  </Text>
+                </HStack>
                 <Text className="text-[#7B8193] text-[12px]">
                   {xp} / {xpCeil} XP
                 </Text>
               </HStack>
               <Box className="h-[6px] bg-[#1A2233] rounded-full overflow-hidden">
                 <Box
-                  className="h-full bg-[#F5C77A]"
-                  style={{ width: `${Math.min(xpPct * 100, 100)}%` }}
+                  className="h-full"
+                  style={{
+                    width: `${Math.min(xpPct * 100, 100)}%`,
+                    backgroundColor: tier.color,
+                  }}
                 />
               </Box>
             </Box>

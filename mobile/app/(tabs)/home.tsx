@@ -29,9 +29,10 @@ import { getWeeklyData, getTodaySession, type DayData } from "../../repositories
 import { todayYmd } from "../../repositories/session.repo";
 import {
   type UserProfile,
-  LEVEL_XP_THRESHOLDS,
+  levelXpThreshold,
   xpToLevel,
   xpForNextLevel,
+  getLevelTier,
 } from "../../models/user";
 import type { Lang } from "../../models/lang";
 
@@ -381,7 +382,8 @@ export default function Home() {
   const streak = user?.streak?.current ?? 0;
   const xp = user?.xp ?? 0;
   const level = xpToLevel(xp);
-  const xpFloor = LEVEL_XP_THRESHOLDS[level - 1] ?? 0;
+  const tier = getLevelTier(level);
+  const xpFloor = levelXpThreshold(level);
   const xpCeil = xpForNextLevel(level);
   const xpPct = xpCeil > xpFloor ? (xp - xpFloor) / (xpCeil - xpFloor) : 1;
 
@@ -415,18 +417,37 @@ export default function Home() {
       className="flex-1 bg-[#0B0F14]"
       contentContainerStyle={{ paddingBottom: 40 }}
     >
-      {/* Header with level + XP bar */}
+      {/* Header with level + tier + XP bar */}
       <Box className="px-6" style={{ paddingTop: insets.top + 8 }}>
         <HStack className="items-center justify-between">
           <Text className="text-[#E6EAF2] text-[22px] font-bold">Lumen</Text>
-          <Text className="text-[#F5C77A] text-[13px] font-semibold">
-            {t("tabs.home.level", { level })}
-          </Text>
+          <HStack className="items-center" space="sm">
+            <Box
+              style={{
+                paddingHorizontal: 8,
+                paddingVertical: 3,
+                borderRadius: 100,
+                backgroundColor: `${tier.color}22`,
+                borderWidth: 1,
+                borderColor: `${tier.color}66`,
+              }}
+            >
+              <Text style={{ color: tier.color, fontSize: 11, fontWeight: "700" }}>
+                {tier.name}
+              </Text>
+            </Box>
+            <Text className="text-[#AAB0C0] text-[13px]">
+              {t("tabs.home.level", { level })}
+            </Text>
+          </HStack>
         </HStack>
         <Box className="h-[3px] bg-[#1A2233] rounded-full mt-2 overflow-hidden">
           <Box
-            className="h-full bg-[#F5C77A]"
-            style={{ width: `${Math.min(xpPct * 100, 100)}%` }}
+            className="h-full"
+            style={{
+              width: `${Math.min(xpPct * 100, 100)}%`,
+              backgroundColor: tier.color,
+            }}
           />
         </Box>
       </Box>
