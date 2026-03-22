@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Stack } from "expo-router";
+import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 import * as Notifications from "expo-notifications";
@@ -21,6 +22,13 @@ Notifications.setNotificationHandler({
 export default function RootLayout() {
   useEffect(() => {
     loadLanguage();
+  }, []);
+
+  useEffect(() => {
+    const sub = Notifications.addNotificationResponseReceivedListener(() => {
+      router.push("/(tabs)/home");
+    });
+    return () => sub.remove();
   }, []);
 
   return (
