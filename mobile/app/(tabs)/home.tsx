@@ -19,6 +19,7 @@ import { Text } from "../../components/ui/text";
 import { VStack } from "../../components/ui/vstack";
 import { LumenCard } from "../../components/ui/lumen/Card";
 import { LumenButton } from "../../components/ui/lumen/Button";
+import { SkeletonCard } from "../../components/ui/lumen/Skeleton";
 
 import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
@@ -324,10 +325,14 @@ export default function Home() {
   const [goals, setGoals] = useState<Goal[]>([]);
   const [weeklyData, setWeeklyData] = useState<DayData[]>([]);
   const [showWelcomeBack, setShowWelcomeBack] = useState(false);
+  const [loadingUser, setLoadingUser] = useState(true);
 
   useEffect(() => {
     if (!currentUserId) return;
-    getUserData({ userId: currentUserId }).then((u) => setUser(u ?? null));
+    setLoadingUser(true);
+    getUserData({ userId: currentUserId })
+      .then((u) => setUser(u ?? null))
+      .finally(() => setLoadingUser(false));
     getWeeklyData(currentUserId).then(setWeeklyData).catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUserId]);
@@ -403,7 +408,12 @@ export default function Home() {
       </Box>
 
       {/* Pack of the day */}
-      {todayGoal && (
+      {loadingUser && (
+        <Box className="px-6 mt-5">
+          <SkeletonCard />
+        </Box>
+      )}
+      {!loadingUser && todayGoal && (
         <Box className="px-6 mt-5">
           <Text className="text-[#AAB0C0] text-[11px] font-semibold tracking-widest mb-2">
             {t("tabs.home.pack_of_day").toUpperCase()}
@@ -427,7 +437,7 @@ export default function Home() {
       )}
 
       {/* Other selected goals */}
-      {goals
+      {!loadingUser && goals
         .filter(
           (g) => selectedGoals.includes(g.id) && g.id !== todayPackId,
         )

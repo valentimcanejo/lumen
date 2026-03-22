@@ -12,6 +12,7 @@ import { getTracks } from "../../repositories/tracks.repo";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import { useAiPack } from "../../hooks/useAiPack";
+import { SkeletonTrackCard } from "../../components/ui/lumen/Skeleton";
 import type { Track } from "../../models/track";
 import type { Lang } from "../../models/lang";
 
@@ -167,7 +168,7 @@ export default function Tracks() {
 
         {/* Track list */}
         {loading ? (
-          <Text className="text-[#AAB0C0] text-center mt-6">{t("common.loading")}</Text>
+          [0, 1, 2, 3].map((i) => <SkeletonTrackCard key={i} />)
         ) : tracks.length === 0 ? (
           <Text className="text-[#AAB0C0] text-center mt-6">
             {t("tabs.tracks.empty")}

@@ -18,6 +18,7 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
+import { SkeletonLessonRow } from "../../components/ui/lumen/Skeleton";
 import type { Track } from "../../models/track";
 import type { Lang } from "../../models/lang";
 
@@ -138,9 +139,11 @@ export default function TrackDetailScreen() {
         contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
       >
         {loading ? (
-          <Text className="text-[#AAB0C0] text-center mt-10">
-            {t("common.loading")}
-          </Text>
+          [0, 1, 2].map((i) => (
+            <Box key={i} className="mb-2">
+              <SkeletonLessonRow />
+            </Box>
+          ))
         ) : lessons.length === 0 ? (
           <Text className="text-[#AAB0C0] text-center mt-10">
             {t("track.empty")}
