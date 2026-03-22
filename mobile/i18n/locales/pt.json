@@ -128,6 +128,12 @@
     "min": "min"
   },
   "session": {
+    "intro": {
+      "start": "Começar lição",
+      "includes_lesson": "Leitura com narração",
+      "includes_cards": "Cards de revisão",
+      "includes_quiz": "Quiz de fixação"
+    },
     "lesson": {
       "step": "1 / 4"
     },

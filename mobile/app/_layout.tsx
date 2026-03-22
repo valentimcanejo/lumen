@@ -43,7 +43,8 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ animation: "none" }} />
         <Stack.Screen name="(onboarding)" options={{ animation: "slide_from_right" }} />
         <Stack.Screen name="track/[id]" options={{ animation: "slide_from_right" }} />
-        <Stack.Screen name="(session)/lesson" options={{ animation: "slide_from_bottom" }} />
+        <Stack.Screen name="(session)/intro" options={{ animation: "slide_from_right" }} />
+        <Stack.Screen name="(session)/lesson" options={{ animation: "slide_from_right" }} />
         <Stack.Screen name="(session)/cards" options={{ animation: "slide_from_right" }} />
         <Stack.Screen name="(session)/quiz" options={{ animation: "slide_from_right" }} />
         <Stack.Screen name="(session)/summary" options={{ animation: "slide_from_right" }} />

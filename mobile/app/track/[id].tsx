@@ -147,8 +147,15 @@ export default function TrackDetailScreen() {
 
   function startLesson(lesson: LessonMeta) {
     router.push({
-      pathname: "/(session)/lesson",
-      params: { contentId: lesson.id, version: String(lesson.version), lang },
+      pathname: "/(session)/intro",
+      params: {
+        contentId: lesson.id,
+        version: String(lesson.version),
+        lang,
+        title: lesson.title[lang] ?? lesson.title.en ?? lesson.id,
+        difficulty: String(lesson.difficulty),
+        estimatedMinutes: String(lesson.estimatedMinutes),
+      },
     });
   }
 
