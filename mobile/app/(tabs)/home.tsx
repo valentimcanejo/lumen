@@ -24,6 +24,7 @@ import { SkeletonCard } from "../../components/ui/lumen/Skeleton";
 import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
 import { getActiveGoals, type Goal } from "../../repositories/goals.repo";
+import { getLessonMeta } from "../../repositories/lessons.repo";
 import { getWeeklyData, getTodaySession, type DayData } from "../../repositories/progress.repo";
 import { todayYmd } from "../../repositories/session.repo";
 import {
@@ -389,9 +390,17 @@ export default function Home() {
   const todayGoal = goals.find((g) => g.id === todayPackId);
 
   function startSession(contentId: string) {
+    const meta = getLessonMeta(contentId);
     router.push({
-      pathname: "/(session)/lesson",
-      params: { contentId, version: "1", lang },
+      pathname: "/(session)/intro",
+      params: {
+        contentId,
+        version: String(meta?.version ?? 1),
+        lang,
+        title: meta?.title[lang] ?? meta?.title.en ?? contentId,
+        difficulty: String(meta?.difficulty ?? 1),
+        estimatedMinutes: String(meta?.estimatedMinutes ?? 0),
+      },
     });
   }
 
