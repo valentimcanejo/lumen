@@ -5,6 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 import * as Notifications from "expo-notifications";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
+import { OfflineBanner } from "../components/ui/lumen/OfflineBanner";
 import "../i18n";
 import { loadLanguage } from "../i18n/setLanguage";
 import "@/global.css";
@@ -49,6 +50,7 @@ export default function RootLayout() {
         <Stack.Screen name="(session)/quiz" options={{ animation: "slide_from_right" }} />
         <Stack.Screen name="(session)/summary" options={{ animation: "slide_from_right" }} />
       </Stack>
+      <OfflineBanner />
       <StatusBar style="auto" />
     </GluestackUIProvider>
   );
