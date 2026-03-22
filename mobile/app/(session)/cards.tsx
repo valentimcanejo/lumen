@@ -11,6 +11,7 @@ import { VStack } from "@/components/ui/vstack";
 import { Pressable } from "@/components/ui/pressable";
 import { useAuth } from "../../hooks/useAuth";
 import { usePack } from "../../hooks/usePack";
+import { SessionError } from "./_components/SessionError";
 import { gradeCard } from "../../repositories/progress.repo";
 import type { Lang } from "../../models/lang";
 
@@ -35,7 +36,7 @@ export default function CardsScreen() {
   };
   const { uid } = useAuth();
 
-  const { pack, loading } = usePack({
+  const { pack, loading, error } = usePack({
     contentId,
     version: Number(version),
     lang: lang ?? "pt",
@@ -78,6 +79,8 @@ export default function CardsScreen() {
     }
     goNext();
   }
+
+  if (error) return <SessionError message={error} />;
 
   if (loading) {
     return (

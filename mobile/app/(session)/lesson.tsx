@@ -12,6 +12,7 @@ import { HStack } from "@/components/ui/hstack";
 import { Text } from "@/components/ui/text";
 
 import { LessonBlocks } from "./_components/LessonBlocks";
+import { SessionError } from "./_components/SessionError";
 import { usePack } from "../../hooks/usePack";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
@@ -193,16 +194,7 @@ export default function LessonScreen() {
   }
 
   if (error || !pack) {
-    return (
-      <Box className="flex-1 bg-[#0B0F14] items-center justify-center px-6">
-        <Text className="text-[#E26D6D] text-center">
-          {error ?? t("common.error_not_found")}
-        </Text>
-        <Pressable onPress={() => router.back()} className="mt-4">
-          <Text className="text-[#AAB0C0]">{t("common.back")}</Text>
-        </Pressable>
-      </Box>
-    );
+    return <SessionError message={error ?? undefined} />;
   }
 
   return (

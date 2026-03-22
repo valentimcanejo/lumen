@@ -11,6 +11,7 @@ import { VStack } from "@/components/ui/vstack";
 import { Pressable } from "@/components/ui/pressable";
 import type { PackQuizQuestion } from "../../models/pack";
 import { usePack } from "../../hooks/usePack";
+import { SessionError } from "./_components/SessionError";
 import type { Lang } from "../../models/lang";
 
 function TopProgress({ value }: { value: number }) {
@@ -119,7 +120,7 @@ export default function QuizScreen() {
     lang: Lang;
   };
 
-  const { pack, loading } = usePack({
+  const { pack, loading, error } = usePack({
     contentId,
     version: Number(version),
     lang: lang ?? "pt",
@@ -172,6 +173,8 @@ export default function QuizScreen() {
     setSelectedIndex(null);
     setAnswered(false);
   }
+
+  if (error) return <SessionError message={error} />;
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
