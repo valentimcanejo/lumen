@@ -1,0 +1,86 @@
+{
+  "id": "geopolitics",
+  "version": 1,
+  "lang": "en",
+  "estimatedMinutes": 8,
+  "difficulty": 2,
+  "tags": ["geopolitics", "influence", "power"],
+  "source": "local",
+  "lesson": {
+    "title": "Sphere of Influence",
+    "summary": "How great powers control regions without necessarily occupying them militarily.",
+    "audioUrl": null,
+    "blocks": [
+      { "type": "h2", "text": "What is a sphere of influence?" },
+      {
+        "type": "p",
+        "text": "A sphere of influence is a region where a state exercises predominant political, economic, or military power, even without formal control over it."
+      },
+      {
+        "type": "p",
+        "text": "Great powers use spheres of influence to ensure border security, access to resources, and power projection in the international arena."
+      },
+      { "type": "h2", "text": "How does it work in practice?" },
+      {
+        "type": "p",
+        "text": "Mechanisms range from trade agreements and military alliances to diplomatic pressure and support for allied governments. Influence rarely requires direct physical presence."
+      },
+      {
+        "type": "quote",
+        "text": "Great powers do not ask permission to define their zones of interest."
+      },
+      { "type": "h2", "text": "Historical and current examples" },
+      {
+        "type": "bullets",
+        "items": [
+          "Monroe Doctrine (USA in Latin America)",
+          "Post-Soviet space (Russia and neighboring countries)",
+          "Belt and Road Initiative (China in Asia and Africa)"
+        ]
+      }
+    ]
+  },
+  "cards": [
+    {
+      "id": "c1",
+      "front": "What defines a sphere of influence?",
+      "back": "A region where a state exercises predominant power without necessarily controlling it formally."
+    },
+    {
+      "id": "c2",
+      "front": "Name two influence mechanisms that do not require military force.",
+      "back": "Trade agreements, diplomatic alliances, financial support for allied governments, cultural soft power."
+    },
+    {
+      "id": "c3",
+      "front": "What principle defined the US sphere of influence in the Americas?",
+      "back": "The Monroe Doctrine (1823), which declared opposition to European interference in the American continent."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question": "What characterizes a sphere of influence?",
+      "options": [
+        "Direct military occupation of a territory",
+        "Formal control via annexation treaty",
+        "Predominant power over a region without formal control",
+        "Bilateral free trade agreements"
+      ],
+      "answerIndex": 2,
+      "explanation": "Spheres of influence involve predominant power — political, economic, or military — without necessarily including formal territorial control."
+    },
+    {
+      "id": "q2",
+      "question": "The Belt and Road Initiative is a sphere of influence instrument mainly through:",
+      "options": [
+        "Military invasions",
+        "Infrastructure investment and economic agreements",
+        "Trade sanctions",
+        "Collective defense treaties"
+      ],
+      "answerIndex": 1,
+      "explanation": "China uses massive infrastructure investment as its main vector of economic and political influence."
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "foundations",
+  "version": 1,
+  "lang": "en",
+  "estimatedMinutes": 7,
+  "difficulty": 1,
+  "tags": ["foundations", "systems", "thinking"],
+  "source": "local",
+  "lesson": {
+    "title": "Systems Thinking",
+    "summary": "How to see the world as a set of interconnected parts, not isolated events.",
+    "audioUrl": null,
+    "blocks": [
+      { "type": "h2", "text": "What is systems thinking?" },
+      {
+        "type": "p",
+        "text": "Systems thinking is the ability to see beyond isolated events and notice the patterns, structures, and interconnections that generate them."
+      },
+      {
+        "type": "p",
+        "text": "Instead of asking 'who caused this?', systems thinking asks 'how does this system produce this result?'."
+      },
+      { "type": "h2", "text": "Feedback loops" },
+      {
+        "type": "p",
+        "text": "Systems operate through feedback loops: an action produces an effect, which in turn influences the next action. Loops can be reinforcing (amplifying change) or balancing (stabilizing the system)."
+      },
+      {
+        "type": "quote",
+        "text": "You cannot solve a problem with the same level of thinking that created it. — Albert Einstein"
+      },
+      { "type": "h2", "text": "Why does it matter?" },
+      {
+        "type": "bullets",
+        "items": [
+          "Avoids solutions that create new problems",
+          "Reveals root causes, not just symptoms",
+          "Improves decisions in complex environments"
+        ]
+      }
+    ]
+  },
+  "cards": [
+    {
+      "id": "c1",
+      "front": "What is systems thinking?",
+      "back": "The ability to see patterns and interconnections rather than treating events as isolated."
+    },
+    {
+      "id": "c2",
+      "front": "What is the difference between a reinforcing and a balancing loop?",
+      "back": "Reinforcing loops amplify change (e.g., exponential growth). Balancing loops seek stability (e.g., a thermostat)."
+    },
+    {
+      "id": "c3",
+      "front": "Why do quick fixes often fail in complex systems?",
+      "back": "Because they address symptoms without changing the system's structure, which keeps producing the same problem."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question": "What does systems thinking seek to understand?",
+      "options": [
+        "Who is to blame for a problem",
+        "The patterns and structures that generate events",
+        "How to predict the future precisely",
+        "Which events are most important"
+      ],
+      "answerIndex": 1,
+      "explanation": "The focus is on the structures and interconnections that produce outcomes, not on blame or isolated events."
+    },
+    {
+      "id": "q2",
+      "question": "A thermostat that turns on the heater when temperature drops is an example of:",
+      "options": [
+        "A reinforcing loop",
+        "Linear thinking",
+        "A balancing loop",
+        "Emergence"
+      ],
+      "answerIndex": 2,
+      "explanation": "The thermostat uses a balancing loop: it detects deviation from a target and acts to correct it."
+    }
+  ]
+}

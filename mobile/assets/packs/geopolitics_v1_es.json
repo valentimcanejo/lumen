@@ -1,0 +1,86 @@
+{
+  "id": "geopolitics",
+  "version": 1,
+  "lang": "es",
+  "estimatedMinutes": 8,
+  "difficulty": 2,
+  "tags": ["geopolítica", "influencia", "poder"],
+  "source": "local",
+  "lesson": {
+    "title": "Esfera de Influencia",
+    "summary": "Cómo las grandes potencias controlan regiones sin necesariamente ocuparlas militarmente.",
+    "audioUrl": null,
+    "blocks": [
+      { "type": "h2", "text": "¿Qué es una esfera de influencia?" },
+      {
+        "type": "p",
+        "text": "Una esfera de influencia es una región donde un Estado ejerce poder político, económico o militar predominante, incluso sin control formal sobre ella."
+      },
+      {
+        "type": "p",
+        "text": "Las grandes potencias usan esferas de influencia para garantizar seguridad en sus fronteras, acceso a recursos y proyección de poder en el escenario internacional."
+      },
+      { "type": "h2", "text": "¿Cómo funciona en la práctica?" },
+      {
+        "type": "p",
+        "text": "Los mecanismos van desde acuerdos comerciales y alianzas militares hasta presión diplomática y apoyo a gobiernos aliados. La influencia rara vez requiere presencia física directa."
+      },
+      {
+        "type": "quote",
+        "text": "Las grandes potencias no piden permiso para definir sus zonas de interés."
+      },
+      { "type": "h2", "text": "Ejemplos históricos y actuales" },
+      {
+        "type": "bullets",
+        "items": [
+          "Doctrina Monroe (EE.UU. en América Latina)",
+          "Espacio postsoviético (Rusia y países vecinos)",
+          "Iniciativa de la Franja y la Ruta (China en Asia y África)"
+        ]
+      }
+    ]
+  },
+  "cards": [
+    {
+      "id": "c1",
+      "front": "¿Qué define una esfera de influencia?",
+      "back": "Una región donde un Estado ejerce poder predominante sin necesariamente controlarla formalmente."
+    },
+    {
+      "id": "c2",
+      "front": "Nombra dos mecanismos de influencia que no requieren fuerza militar.",
+      "back": "Acuerdos comerciales, alianzas diplomáticas, apoyo financiero a gobiernos aliados, soft power cultural."
+    },
+    {
+      "id": "c3",
+      "front": "¿Qué principio definió la esfera de influencia de EE.UU. en las Américas?",
+      "back": "La Doctrina Monroe (1823), que declaraba oposición a la interferencia europea en el continente americano."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question": "¿Qué caracteriza una esfera de influencia?",
+      "options": [
+        "Ocupación militar directa de un territorio",
+        "Control formal mediante tratado de anexión",
+        "Poder predominante sobre una región sin control formal",
+        "Acuerdos bilaterales de libre comercio"
+      ],
+      "answerIndex": 2,
+      "explanation": "Las esferas de influencia implican poder predominante —político, económico o militar— sin incluir necesariamente control territorial formal."
+    },
+    {
+      "id": "q2",
+      "question": "La Iniciativa de la Franja y la Ruta es un instrumento de esfera de influencia principalmente a través de:",
+      "options": [
+        "Invasiones militares",
+        "Inversión en infraestructura y acuerdos económicos",
+        "Sanciones comerciales",
+        "Tratados de defensa colectiva"
+      ],
+      "answerIndex": 1,
+      "explanation": "China utiliza inversiones masivas en infraestructura como principal vector de influencia económica y política."
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "id": "economics",
+  "version": 1,
+  "lang": "pt",
+  "estimatedMinutes": 7,
+  "difficulty": 2,
+  "tags": ["economia", "pib", "crescimento"],
+  "source": "local",
+  "lesson": {
+    "title": "O que é o PIB?",
+    "summary": "O indicador mais usado para medir o tamanho de uma economia — e suas limitações.",
+    "audioUrl": null,
+    "blocks": [
+      { "type": "h2", "text": "Definição" },
+      {
+        "type": "p",
+        "text": "O Produto Interno Bruto (PIB) é o valor total de todos os bens e serviços finais produzidos em um país durante um período, geralmente um ano."
+      },
+      {
+        "type": "p",
+        "text": "É o principal termômetro da atividade econômica de um país: cresce quando a economia aquece e cai em recessões."
+      },
+      { "type": "h2", "text": "Como é calculado?" },
+      {
+        "type": "p",
+        "text": "A fórmula mais comum é: PIB = Consumo + Investimento + Gastos do governo + (Exportações − Importações)."
+      },
+      {
+        "type": "quote",
+        "text": "O PIB mede tudo, exceto o que faz a vida valer a pena. — Robert Kennedy"
+      },
+      { "type": "h2", "text": "Limitações do PIB" },
+      {
+        "type": "bullets",
+        "items": [
+          "Não mede desigualdade na distribuição da renda",
+          "Ignora trabalho não remunerado (doméstico, voluntário)",
+          "Pode crescer com atividades prejudiciais (poluição, guerras)",
+          "Não capta bem-estar ou qualidade de vida"
+        ]
+      }
+    ]
+  },
+  "cards": [
+    {
+      "id": "c1",
+      "front": "O que é o PIB?",
+      "back": "O valor total de bens e serviços finais produzidos em um país em um período determinado."
+    },
+    {
+      "id": "c2",
+      "front": "Qual a fórmula básica do PIB pela ótica da despesa?",
+      "back": "PIB = Consumo + Investimento + Gastos do governo + (Exportações − Importações)"
+    },
+    {
+      "id": "c3",
+      "front": "Cite duas limitações do PIB como medida de bem-estar.",
+      "back": "Não mede desigualdade, ignora trabalho não remunerado, pode crescer com atividades prejudiciais."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question": "O PIB inclui qual tipo de produção?",
+      "options": [
+        "Todos os bens produzidos, inclusive intermediários",
+        "Apenas bens exportados",
+        "Apenas bens e serviços finais produzidos internamente",
+        "Apenas o consumo das famílias"
+      ],
+      "answerIndex": 2,
+      "explanation": "O PIB conta apenas bens e serviços finais para evitar dupla contagem dos insumos intermediários."
+    },
+    {
+      "id": "q2",
+      "question": "Se um país aumenta o PIB devido a um desastre natural que gerou reconstrução, isso indica:",
+      "options": [
+        "Que a população está mais rica",
+        "Que o PIB pode crescer sem refletir melhora no bem-estar",
+        "Que a economia está saudável",
+        "Que o investimento externo aumentou"
+      ],
+      "answerIndex": 1,
+      "explanation": "Essa é uma das principais críticas ao PIB: atividades economicamente custosas podem inflá-lo sem gerar bem-estar real."
+    }
+  ]
+}
