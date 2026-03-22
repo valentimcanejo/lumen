@@ -37,8 +37,17 @@ export default function RootLayout() {
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: "#0B0F14" },
+          animation: "fade",
         }}
-      />
+      >
+        <Stack.Screen name="(tabs)" options={{ animation: "none" }} />
+        <Stack.Screen name="(onboarding)" options={{ animation: "slide_from_right" }} />
+        <Stack.Screen name="track/[id]" options={{ animation: "slide_from_right" }} />
+        <Stack.Screen name="(session)/lesson" options={{ animation: "slide_from_bottom" }} />
+        <Stack.Screen name="(session)/cards" options={{ animation: "slide_from_right" }} />
+        <Stack.Screen name="(session)/quiz" options={{ animation: "slide_from_right" }} />
+        <Stack.Screen name="(session)/summary" options={{ animation: "slide_from_right" }} />
+      </Stack>
       <StatusBar style="auto" />
     </GluestackUIProvider>
   );
