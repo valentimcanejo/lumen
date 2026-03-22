@@ -111,7 +111,12 @@
       "saving": "Salvando...",
       "xp": "XP",
       "level": "Nível",
-      "achievements": "Conquistas"
+      "achievements": "Conquistas",
+      "notifications": "Lembretes",
+      "notifications_active": "Lembretes diários ativos",
+      "notifications_enable": "Ativar lembretes diários",
+      "notifications_hint": "Receba um aviso todo dia para não perder o ritmo.",
+      "notifications_open_settings": "Abrir configurações"
     }
   },
   "track": {

@@ -111,7 +111,12 @@
       "saving": "Saving...",
       "xp": "XP",
       "level": "Level",
-      "achievements": "Achievements"
+      "achievements": "Achievements",
+      "notifications": "Reminders",
+      "notifications_active": "Daily reminders are active",
+      "notifications_enable": "Enable daily reminders",
+      "notifications_hint": "Get a daily nudge to keep your streak alive.",
+      "notifications_open_settings": "Open settings"
     }
   },
   "track": {

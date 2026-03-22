@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Platform, ScrollView, ActivityIndicator } from "react-native";
+import { Platform, ScrollView, ActivityIndicator, Linking } from "react-native";
+import * as Notifications from "expo-notifications";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -14,6 +15,10 @@ import { VStack } from "@/components/ui/vstack";
 import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
 import { setUserLanguage } from "../../repositories/user.repo";
+import {
+  requestNotificationPermission,
+  scheduleDailyReminder,
+} from "../../services/notifications.service";
 import { setLanguage as setI18nLanguage } from "../../i18n/setLanguage";
 import type { Lang } from "../../models/lang";
 import {
@@ -202,6 +207,8 @@ export default function ProfileScreen() {
   const [language, setLanguage] = useState<Lang>("pt");
   const [saving, setSaving] = useState(false);
   const [profileData, setProfileData] = useState<UserProfile | null>(null);
+  const [notifGranted, setNotifGranted] = useState<boolean | null>(null);
+  const [enablingNotif, setEnablingNotif] = useState(false);
 
   useEffect(() => {
     if (!uid) return;
@@ -212,6 +219,29 @@ export default function ProfileScreen() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
+
+  useEffect(() => {
+    Notifications.getPermissionsAsync().then(({ status }) => {
+      setNotifGranted(status === "granted");
+    });
+  }, []);
+
+  async function handleEnableNotifications() {
+    setEnablingNotif(true);
+    try {
+      const granted = await requestNotificationPermission();
+      if (granted) {
+        const title = t("onboarding.notifications.reminder_title");
+        const body = t("onboarding.notifications.reminder_body");
+        await scheduleDailyReminder(8, 0, title, body);
+        setNotifGranted(true);
+      } else {
+        Linking.openSettings();
+      }
+    } finally {
+      setEnablingNotif(false);
+    }
+  }
 
   const streak = profileData?.streak?.current ?? 0;
   const dailyGoal = profileData?.dailyGoalMin ?? 10;
@@ -357,6 +387,44 @@ export default function ProfileScreen() {
                 lang={language}
                 onChange={(l) => setLanguage(l as Lang)}
               />
+            </Box>
+
+            {/* Notifications */}
+            <Box className="mb-6">
+              <Text className="text-[#E6EAF2] text-[16px] font-semibold mb-3">
+                {t("tabs.profile.notifications")}
+              </Text>
+              <Box className="bg-[#111827] rounded-2xl p-4">
+                <Text className="text-[#AAB0C0] text-[13px] mb-3">
+                  {t("tabs.profile.notifications_hint")}
+                </Text>
+                {notifGranted ? (
+                  <HStack className="items-center" space="sm">
+                    <Ionicons name="checkmark-circle" size={18} color="#5ED19A" />
+                    <Text className="text-[#5ED19A] text-[14px] font-semibold">
+                      {t("tabs.profile.notifications_active")}
+                    </Text>
+                  </HStack>
+                ) : (
+                  <Pressable
+                    onPress={handleEnableNotifications}
+                    disabled={enablingNotif}
+                    className="h-[44px] rounded-xl bg-[#1A2233] border border-[#F5C77A]/40 items-center justify-center"
+                    style={{ opacity: enablingNotif ? 0.6 : 1 }}
+                  >
+                    {enablingNotif ? (
+                      <ActivityIndicator size="small" color="#F5C77A" />
+                    ) : (
+                      <HStack className="items-center" space="sm">
+                        <Ionicons name="notifications-outline" size={17} color="#F5C77A" />
+                        <Text className="text-[#F5C77A] text-[14px] font-semibold">
+                          {t("tabs.profile.notifications_enable")}
+                        </Text>
+                      </HStack>
+                    )}
+                  </Pressable>
+                )}
+              </Box>
             </Box>
 
             <Pressable

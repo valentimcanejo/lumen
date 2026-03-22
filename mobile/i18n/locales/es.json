@@ -111,7 +111,12 @@
       "saving": "Guardando...",
       "xp": "XP",
       "level": "Nivel",
-      "achievements": "Logros"
+      "achievements": "Logros",
+      "notifications": "Recordatorios",
+      "notifications_active": "Recordatorios diarios activos",
+      "notifications_enable": "Activar recordatorios diarios",
+      "notifications_hint": "Recibe un aviso diario para mantener tu racha.",
+      "notifications_open_settings": "Abrir ajustes"
     }
   },
   "track": {
