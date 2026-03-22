@@ -56,6 +56,9 @@ export default function CardsScreen() {
   const [revealed, setRevealed] = useState(false);
   const [showBack, setShowBack] = useState(false);
   const flipScale = useSharedValue(1);
+  const flipAnimStyle = useAnimatedStyle(() => ({
+    transform: [{ scaleX: flipScale.value }],
+  }));
 
   const current = cards[index];
 
@@ -175,7 +178,7 @@ export default function CardsScreen() {
             contentContainerStyle={{ paddingTop: 20, paddingBottom: 16 }}
             showsVerticalScrollIndicator={false}
           >
-            <Animated.View style={useAnimatedStyle(() => ({ transform: [{ scaleX: flipScale.value }] }))}>
+            <Animated.View style={flipAnimStyle}>
               <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
                 <VStack space="sm">
                   <Text className="text-[#AAB0C0] text-[12px]">

@@ -23,7 +23,11 @@ export function LumenButton({
 }: Props) {
   const primary = variant === "primary";
   const bg = primary ? (color ?? "#F5C77A") : "transparent";
-  const borderBottom = primary ? (color ? darken(color) : "#C49B4A") : "#1A2233";
+  const borderBottom = primary
+    ? color
+      ? darken(color)
+      : "#C49B4A"
+    : "#1A2233";
 
   return (
     <Pressable
@@ -31,17 +35,18 @@ export function LumenButton({
       disabled={disabled}
       style={({ pressed }: { pressed: boolean }) => [
         s.base,
-        primary ? { backgroundColor: bg, borderBottomColor: borderBottom, borderBottomWidth: 4 } : s.ghost,
+        primary
+          ? {
+              backgroundColor: bg,
+              borderBottomColor: borderBottom,
+              borderBottomWidth: 4,
+            }
+          : s.ghost,
         disabled && s.disabled,
         pressed && s.pressed,
       ]}
     >
-      <Text
-        style={[
-          s.label,
-          { color: primary ? "#0B0F14" : "#AAB0C0" },
-        ]}
-      >
+      <Text style={[s.label, { color: primary ? "#0B0F14" : "#AAB0C0" }]}>
         {children}
       </Text>
     </Pressable>

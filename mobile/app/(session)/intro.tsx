@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -60,22 +60,28 @@ export default function LessonIntroScreen() {
           {
             backgroundColor: bg,
             borderBottomColor: `${color}33`,
-            paddingTop: insets.top + 12,
+            paddingTop: insets.top + 8,
           },
         ]}
       >
-        <TouchableOpacity onPress={() => router.back()} style={s.back} activeOpacity={0.7}>
-          <Ionicons name="chevron-back" size={22} color={color} />
-        </TouchableOpacity>
-
-        {/* Track color dot + decorative circles */}
-        <Box style={[s.dot, { backgroundColor: color }]} />
         <Box style={[s.circle1, { borderColor: `${color}22` }]} />
         <Box style={[s.circle2, { borderColor: `${color}11` }]} />
+
+        <TouchableOpacity
+          onPress={() => router.back()}
+          style={s.back}
+          activeOpacity={0.7}
+        >
+          <Ionicons name="chevron-back" size={22} color={color} />
+        </TouchableOpacity>
       </Box>
 
-      {/* Content */}
-      <Box className="px-6 flex-1" style={{ paddingTop: 32 }}>
+      {/* Scrollable content */}
+      <ScrollView
+        className="flex-1 px-6"
+        contentContainerStyle={{ paddingTop: 32, paddingBottom: 16 }}
+        showsVerticalScrollIndicator={false}
+      >
         {/* Difficulty + time row */}
         <HStack className="items-center mb-4" space="sm">
           <Box style={[s.badge, { backgroundColor: `${diffColor}18` }]}>
@@ -99,9 +105,18 @@ export default function LessonIntroScreen() {
         {/* What's included */}
         <VStack space="md">
           {[
-            { icon: "book-outline" as const, labelKey: "session.intro.includes_lesson" },
-            { icon: "layers-outline" as const, labelKey: "session.intro.includes_cards" },
-            { icon: "help-circle-outline" as const, labelKey: "session.intro.includes_quiz" },
+            {
+              icon: "book-outline" as const,
+              labelKey: "session.intro.includes_lesson",
+            },
+            {
+              icon: "layers-outline" as const,
+              labelKey: "session.intro.includes_cards",
+            },
+            {
+              icon: "help-circle-outline" as const,
+              labelKey: "session.intro.includes_quiz",
+            },
           ].map(({ icon, labelKey }) => (
             <HStack key={labelKey} className="items-center" space="sm">
               <Box
@@ -116,18 +131,16 @@ export default function LessonIntroScreen() {
               >
                 <Ionicons name={icon} size={18} color={color} />
               </Box>
-              <Text className="text-[#AAB0C0] text-[14px]">
-                {t(labelKey)}
-              </Text>
+              <Text className="text-[#AAB0C0] text-[14px]">{t(labelKey)}</Text>
             </HStack>
           ))}
         </VStack>
-      </Box>
+      </ScrollView>
 
-      {/* CTA */}
+      {/* Fixed CTA */}
       <Box
-        className="px-6"
-        style={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
+        className="px-6 pt-3 border-t border-[#1A2233]"
+        style={{ paddingBottom: Math.max(insets.bottom + 16, 24) }}
       >
         <LumenButton onPress={startLesson} color={color}>
           {t("session.intro.start")}
@@ -139,7 +152,7 @@ export default function LessonIntroScreen() {
 
 const s = StyleSheet.create({
   header: {
-    height: 160,
+    paddingBottom: 20,
     borderBottomWidth: 1,
     paddingHorizontal: 20,
     overflow: "hidden",
@@ -149,14 +162,6 @@ const s = StyleSheet.create({
     height: 36,
     alignItems: "center",
     justifyContent: "center",
-  },
-  dot: {
-    position: "absolute",
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    bottom: 24,
-    left: 20,
   },
   circle1: {
     position: "absolute",
