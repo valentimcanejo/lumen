@@ -12,6 +12,7 @@ import Animated, {
   withSpring,
   Easing,
 } from "react-native-reanimated";
+import * as Haptics from "expo-haptics";
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 import { HStack } from "@/components/ui/hstack";
@@ -192,6 +193,9 @@ export default function QuizScreen() {
     setAnswered(true);
     if (optionIdx === current.answerIndex) {
       setCorrectCount((v) => v + 1);
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    } else {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
     }
   }
 

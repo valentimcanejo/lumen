@@ -7,6 +7,7 @@ import Animated, {
   runOnJS,
 } from "react-native-reanimated";
 import { router, useLocalSearchParams } from "expo-router";
+import * as Haptics from "expo-haptics";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -67,6 +68,7 @@ export default function CardsScreen() {
   }, [index, total]);
 
   function revealCard() {
+    Haptics.selectionAsync();
     flipScale.value = withTiming(0, { duration: 180 }, (done) => {
       if (done) runOnJS(setShowBack)(true);
     });
@@ -97,6 +99,11 @@ export default function CardsScreen() {
   }
 
   function onGrade(g: Grade) {
+    if (g === "know") {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    } else {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+    }
     if (uid && current) {
       gradeCard(uid, contentId, current.id, g).catch(() => {});
     }
