@@ -1,0 +1,56 @@
+[
+  {
+    "id": "critical_thinking",
+    "order": 1,
+    "icon": "brain",
+    "color": "#F5C77A",
+    "isActive": true,
+    "title": {
+      "pt": "Pensamento crítico",
+      "en": "Critical thinking",
+      "es": "Pensamiento crítico"
+    },
+    "description": {
+      "pt": "Analisar ideias, argumentos e informações com profundidade",
+      "en": "Analyze ideas, arguments and information deeply",
+      "es": "Analizar ideas, argumentos e información en profundidad"
+    },
+    "tags": ["logic", "argumentation", "bias"]
+  },
+  {
+    "id": "geopolitics",
+    "order": 2,
+    "icon": "globe",
+    "color": "#5ED19A",
+    "isActive": true,
+    "title": {
+      "pt": "Geopolítica",
+      "en": "Geopolitics",
+      "es": "Geopolítica"
+    },
+    "description": {
+      "pt": "Entender as relações de poder entre países e regiões",
+      "en": "Understand power relations between countries and regions",
+      "es": "Entender las relaciones de poder entre países y regiones"
+    },
+    "tags": ["power", "diplomacy", "international"]
+  },
+  {
+    "id": "economics",
+    "order": 3,
+    "icon": "chart",
+    "color": "#AAB0C0",
+    "isActive": true,
+    "title": {
+      "pt": "Economia",
+      "en": "Economics",
+      "es": "Economía"
+    },
+    "description": {
+      "pt": "Compreender como mercados, dinheiro e decisões moldam o mundo",
+      "en": "Understand how markets, money and decisions shape the world",
+      "es": "Comprender cómo los mercados, el dinero y las decisiones moldean el mundo"
+    },
+    "tags": ["markets", "finance", "policy"]
+  }
+]

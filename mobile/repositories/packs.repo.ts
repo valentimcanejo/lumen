@@ -2,6 +2,7 @@ import type { Pack } from "../models/pack";
 import type { Lang } from "../models/lang";
 import { cacheGetJson, cacheSetJson } from "../storage/cache.fs";
 import { downloadJson } from "../services/storage.service";
+import { getBundledPack } from "../assets/packs";
 
 function packCacheKey(contentId: string, version: number, lang: Lang) {
   return `pack:${contentId}:v${version}:${lang}`;
@@ -21,6 +22,9 @@ export async function getPack(
 
   const cached = await cacheGetJson<Pack>(key);
   if (cached) return cached;
+
+  const bundled = getBundledPack(contentId, version, lang);
+  if (bundled) return bundled;
 
   const remote = await downloadJson<Pack>(
     storagePathForPack(contentId, version, lang),

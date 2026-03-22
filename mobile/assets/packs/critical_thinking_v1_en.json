@@ -1,0 +1,85 @@
+{
+  "id": "critical_thinking",
+  "version": 1,
+  "lang": "en",
+  "estimatedMinutes": 8,
+  "difficulty": 2,
+  "tags": ["geopolitics", "power", "diplomacy"],
+  "source": "local",
+  "lesson": {
+    "title": "The Balance of Power",
+    "summary": "How countries prevent a single nation from dominating the international system.",
+    "audioUrl": null,
+    "blocks": [
+      { "type": "h2", "text": "What is the balance of power?" },
+      {
+        "type": "p",
+        "text": "The balance of power is a principle of international politics stating that no nation should become powerful enough to dominate all others."
+      },
+      {
+        "type": "p",
+        "text": "When a country grows rapidly, others tend to react by forming alliances, increasing military spending, or creating containment mechanisms."
+      },
+      {
+        "type": "quote",
+        "text": "Power is not something one possesses in isolation, but something that exists in relation to others."
+      },
+      { "type": "h2", "text": "Why does it matter?" },
+      {
+        "type": "p",
+        "text": "This mechanism helps explain why major wars often arise when the balance is broken — and why international alliances are so common."
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "Prevents absolute hegemonies",
+          "Encourages strategic alliances",
+          "Reduces the risk of total domination"
+        ]
+      }
+    ]
+  },
+  "cards": [
+    {
+      "id": "c1",
+      "front": "What is the balance of power?",
+      "back": "The idea that no nation should concentrate enough power to dominate all others."
+    },
+    {
+      "id": "c2",
+      "front": "How do countries react to a rising rival?",
+      "back": "By forming alliances, strengthening military capabilities, or adopting containment policies."
+    },
+    {
+      "id": "c3",
+      "front": "What is the main goal of the balance of power?",
+      "back": "To maintain stability and prevent hegemonies in the international system."
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question": "What is the main purpose of the balance of power?",
+      "options": [
+        "Promote cultural cooperation",
+        "Prevent a single country from dominating others",
+        "Eliminate international conflicts",
+        "Create global governments"
+      ],
+      "answerIndex": 1,
+      "explanation": "The balance of power seeks to prevent hegemonies, not eliminate conflicts or create global governments."
+    },
+    {
+      "id": "q2",
+      "question": "Which of these actions is NOT typical of a balance of power policy?",
+      "options": [
+        "Forming alliances",
+        "Increasing military spending",
+        "Permanent neutrality",
+        "Containment policies"
+      ],
+      "answerIndex": 2,
+      "explanation": "Permanent neutrality is not an active response to a power imbalance."
+    }
+  ]
+}
