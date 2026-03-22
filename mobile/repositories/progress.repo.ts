@@ -3,6 +3,7 @@ import {
   getDocs,
   query,
   orderBy,
+  where,
   limit as fbLimit,
 } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
@@ -15,7 +16,7 @@ import type { UserProfile } from "../models/user";
 import { xpToLevel } from "../models/user";
 
 export type CompletedSession = {
-  date: string; // YYYY-MM-DD (document ID)
+  date: string; // YYYY-MM-DD
   contentId: string;
   contentVersion: number;
   minutes: number;
@@ -28,11 +29,21 @@ export type DayData = {
   minutes: number;
 };
 
+// Doc ID: "{date}_{contentId}" — supports multiple sessions per day
+function userDailyPath(uid: string, date: string, contentId: string) {
+  return `users/${uid}/daily_sessions/${date}_${contentId}`;
+}
+
 export async function getTodaySession(uid: string): Promise<CompletedSession | null> {
   const today = ymd(new Date());
-  const data = await getDocData<Omit<CompletedSession, "date">>(userDailyPath(uid, today));
-  if (!data) return null;
-  return { date: today, ...data };
+  const q = query(
+    collection(db, "users", uid, "daily_sessions"),
+    where("date", "==", today),
+    fbLimit(1),
+  );
+  const snap = await getDocs(q);
+  if (snap.empty) return null;
+  return snap.docs[0].data() as CompletedSession;
 }
 
 export async function getRecentSessions(
@@ -45,14 +56,7 @@ export async function getRecentSessions(
     fbLimit(count),
   );
   const snap = await getDocs(q);
-  return snap.docs.map((d) => ({
-    date: d.id,
-    ...(d.data() as Omit<CompletedSession, "date">),
-  }));
-}
-
-function userDailyPath(uid: string, date: string) {
-  return `users/${uid}/daily_sessions/${date}`;
+  return snap.docs.map((d) => d.data() as CompletedSession);
 }
 
 function ymd(d: Date): string {
@@ -80,11 +84,20 @@ export async function getWeeklyData(uid: string): Promise<DayData[]> {
     return ymd(d);
   });
 
-  const sessions = await Promise.all(
-    dates.map((date) => getDocData<{ minutes: number }>(userDailyPath(uid, date))),
+  const q = query(
+    collection(db, "users", uid, "daily_sessions"),
+    where("date", ">=", dates[0]),
+    where("date", "<=", dates[6]),
   );
+  const snap = await getDocs(q);
 
-  return dates.map((date, i) => ({ date, minutes: sessions[i]?.minutes ?? 0 }));
+  const minutesByDate: Record<string, number> = {};
+  for (const doc of snap.docs) {
+    const s = doc.data() as CompletedSession;
+    minutesByDate[s.date] = (minutesByDate[s.date] ?? 0) + s.minutes;
+  }
+
+  return dates.map((date) => ({ date, minutes: minutesByDate[date] ?? 0 }));
 }
 
 type CardGrade = "know" | "almost" | "dont";
@@ -110,7 +123,8 @@ export async function markDayCompleted(
     quizScore: number;
   },
 ) {
-  await setDocData(userDailyPath(uid, date), {
+  await setDocData(userDailyPath(uid, date, payload.contentId), {
+    date,
     ...payload,
     completedAt: Date.now(),
   });
