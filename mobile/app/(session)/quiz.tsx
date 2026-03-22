@@ -1,9 +1,17 @@
-import React, { useMemo, useState } from "react";
-import { ScrollView } from "react-native";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { ScrollView, StyleSheet } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSequence,
+  withTiming,
+  withSpring,
+  Easing,
+} from "react-native-reanimated";
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 import { HStack } from "@/components/ui/hstack";
@@ -23,6 +31,8 @@ function TopProgress({ value }: { value: number }) {
   );
 }
 
+type OptionState = "idle" | "correct" | "wrong";
+
 function OptionRow({
   label,
   selected,
@@ -33,77 +43,109 @@ function OptionRow({
   label: string;
   selected: boolean;
   disabled: boolean;
-  state: "idle" | "correct" | "wrong";
+  state: OptionState;
   onPress: () => void;
 }) {
-  const base =
-    "rounded-[18px] border px-4 py-4 flex-row items-center justify-between";
-  const idleBorder = selected ? "border-[#F5C77A]/60" : "border-[#1A2233]";
-  const idleBg = selected ? "bg-[#121826]" : "bg-[#0E141E]";
+  const scale = useSharedValue(1);
+  const translateX = useSharedValue(0);
+  const prevState = useRef<OptionState>("idle");
 
-  const correct = "border-[#5ED19A]/70 bg-[#0F1C16]";
-  const wrong = "border-[#E26D6D]/70 bg-[#1C0F12]";
+  useEffect(() => {
+    if (prevState.current === state) return;
+    prevState.current = state;
 
-  const className =
-    state === "idle"
-      ? `${base} ${idleBorder} ${idleBg}`
-      : state === "correct"
-        ? `${base} ${correct}`
-        : `${base} ${wrong}`;
+    if (state === "correct") {
+      scale.value = withSequence(
+        withSpring(1.04, { damping: 4, stiffness: 300 }),
+        withSpring(1, { damping: 10, stiffness: 200 }),
+      );
+    } else if (state === "wrong") {
+      translateX.value = withSequence(
+        withTiming(-8, { duration: 50, easing: Easing.linear }),
+        withTiming(8, { duration: 50, easing: Easing.linear }),
+        withTiming(-6, { duration: 50, easing: Easing.linear }),
+        withTiming(6, { duration: 50, easing: Easing.linear }),
+        withTiming(-3, { duration: 50, easing: Easing.linear }),
+        withTiming(0, { duration: 50, easing: Easing.linear }),
+      );
+    }
+  }, [state]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const dotColor =
-    state === "idle"
-      ? selected
-        ? "#F5C77A"
-        : "#2A3448"
-      : state === "correct"
-        ? "#5ED19A"
-        : "#E26D6D";
+  const animStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }, { translateX: translateX.value }],
+  }));
+
+  const bg =
+    state === "correct" ? "#0F2019" :
+    state === "wrong"   ? "#1E0D10" :
+    selected            ? "#141D2E" : "#0E131C";
+
+  const border =
+    state === "correct" ? "#5ED19A" :
+    state === "wrong"   ? "#E26D6D" :
+    selected            ? "#F5C77A" : "#1A2233";
 
   const textColor =
-    state === "idle" ? "#E6EAF2" : state === "correct" ? "#DFF7EC" : "#F7E0E0";
+    state === "correct" ? "#DFF7EC" :
+    state === "wrong"   ? "#F7E0E0" : "#E6EAF2";
+
+  const dotColor =
+    state === "correct" ? "#5ED19A" :
+    state === "wrong"   ? "#E26D6D" :
+    selected            ? "#F5C77A" : "#2A3448";
 
   return (
-    <Pressable
-      onPress={onPress}
-      disabled={disabled}
-      className={className}
-      style={{ opacity: disabled ? 0.85 : 1 }}
-    >
-      <HStack className="items-center flex-1" space="md">
-        <Box
-          className="w-[10px] h-[10px] rounded-full"
-          style={{ backgroundColor: dotColor }}
-        />
-        <Text
-          className="text-[14px] leading-[20px]"
-          style={{ color: textColor }}
-        >
-          {label}
-        </Text>
-      </HStack>
-
-      <Box className="ml-3">
-        {state === "correct" ? (
-          <Ionicons name="checkmark-circle" size={18} color="#5ED19A" />
-        ) : state === "wrong" ? (
-          <Ionicons name="close-circle" size={18} color="#E26D6D" />
-        ) : selected ? (
-          <Ionicons name="radio-button-on" size={18} color="#F5C77A" />
-        ) : (
-          <Ionicons name="radio-button-off" size={18} color="#7B8193" />
-        )}
-      </Box>
-    </Pressable>
+    <Animated.View style={[s.optionWrap, { backgroundColor: bg, borderColor: border }, animStyle]}>
+      <Pressable
+        onPress={onPress}
+        disabled={disabled}
+        style={s.optionInner}
+      >
+        <HStack className="items-center flex-1" space="md">
+          <Box style={[s.dot, { backgroundColor: dotColor }]} />
+          <Text style={[s.optionText, { color: textColor, flex: 1 }]}>
+            {label}
+          </Text>
+        </HStack>
+        <Box className="ml-3">
+          {state === "correct" ? (
+            <Ionicons name="checkmark-circle" size={20} color="#5ED19A" />
+          ) : state === "wrong" ? (
+            <Ionicons name="close-circle" size={20} color="#E26D6D" />
+          ) : selected ? (
+            <Ionicons name="radio-button-on" size={20} color="#F5C77A" />
+          ) : (
+            <Ionicons name="radio-button-off" size={20} color="#3A4562" />
+          )}
+        </Box>
+      </Pressable>
+    </Animated.View>
   );
 }
+
+const s = StyleSheet.create({
+  optionWrap: {
+    borderRadius: 18,
+    borderWidth: 1.5,
+    overflow: "hidden",
+  },
+  optionInner: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+  },
+  dot: { width: 10, height: 10, borderRadius: 5 },
+  optionText: { fontSize: 14, lineHeight: 20 },
+});
 
 function getOptionState(args: {
   answered: boolean;
   optionIndex: number;
   selectedIndex: number | null;
   correctIndex: number;
-}): "idle" | "correct" | "wrong" {
+}): OptionState {
   const { answered, optionIndex, selectedIndex, correctIndex } = args;
   if (!answered) return "idle";
   if (optionIndex === correctIndex) return "correct";
@@ -262,7 +304,7 @@ export default function QuizScreen() {
                 });
                 return (
                   <OptionRow
-                    key={idx}
+                    key={`${qIndex}-${idx}`}
                     label={opt}
                     selected={selectedIndex === idx}
                     disabled={answered}
