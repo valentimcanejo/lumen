@@ -9,6 +9,7 @@ import { HStack } from "../../components/ui/hstack";
 import { Text } from "../../components/ui/text";
 import { Pressable } from "../../components/ui/pressable";
 import { getTracks } from "../../repositories/tracks.repo";
+import { getLessonCountForTrack } from "../../repositories/lessons.repo";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import { useAiPack } from "../../hooks/useAiPack";
@@ -37,12 +38,22 @@ function DifficultyBadge({ level }: { level: 1 | 2 | 3 }) {
   );
 }
 
-function TrackCard({ track, lang }: { track: Track; lang: Lang }) {
+function TrackCard({
+  track,
+  lang,
+  completedIds,
+}: {
+  track: Track;
+  lang: Lang;
+  completedIds: string[];
+}) {
   const { t } = useTranslation();
   const title = track.title[lang] ?? track.title.en ?? track.id;
   const description = track.description?.[lang] ?? track.description?.en ?? "";
   const color = trackColor(track.id);
   const bg = trackBg(track.id);
+  const total = getLessonCountForTrack(track.id);
+  const done = completedIds.filter((id) => id.startsWith(track.id)).length;
 
   return (
     <Pressable onPress={() => router.push(`/track/${track.id}`)}>
@@ -85,10 +96,29 @@ function TrackCard({ track, lang }: { track: Track; lang: Lang }) {
           </HStack>
         )}
 
-        <HStack className="items-center mt-3" space="xs">
-          <Text style={{ color, fontSize: 12, fontWeight: "600" }}>{t("track.lessons")}</Text>
-          <Ionicons name="chevron-forward" size={12} color={color} />
-        </HStack>
+        {total > 0 && (
+          <Box className="mt-3">
+            <HStack className="items-center justify-between mb-1">
+              <HStack className="items-center" space="xs">
+                <Text style={{ color, fontSize: 12, fontWeight: "600" }}>{t("track.lessons")}</Text>
+                <Ionicons name="chevron-forward" size={12} color={color} />
+              </HStack>
+              <Text style={{ color: done > 0 ? color : "#7B8193", fontSize: 11, fontWeight: "600" }}>
+                {done}/{total}
+              </Text>
+            </HStack>
+            <Box className="h-[3px] rounded-full bg-[#1A2233] overflow-hidden">
+              <Box
+                style={{
+                  height: "100%",
+                  width: total > 0 ? `${(done / total) * 100}%` : "0%",
+                  backgroundColor: color,
+                  borderRadius: 99,
+                }}
+              />
+            </Box>
+          </Box>
+        )}
       </Box>
     </Pressable>
   );
@@ -103,6 +133,7 @@ export default function Tracks() {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [lang, setLang] = useState<Lang>("pt");
   const [loading, setLoading] = useState(true);
+  const [completedIds, setCompletedIds] = useState<string[]>([]);
 
   useEffect(() => {
     getTracks()
@@ -115,6 +146,7 @@ export default function Tracks() {
     if (!uid) return;
     getUserData({ userId: uid }).then((user) => {
       if (user?.lang) setLang(user.lang);
+      setCompletedIds(user?.completedContentIds ?? []);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
@@ -193,7 +225,7 @@ export default function Tracks() {
           </Text>
         ) : (
           tracks.map((track) => (
-            <TrackCard key={track.id} track={track} lang={lang} />
+            <TrackCard key={track.id} track={track} lang={lang} completedIds={completedIds} />
           ))
         )}
       </ScrollView>
