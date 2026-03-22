@@ -36,17 +36,28 @@ function DifficultyDot({ level }: { level: 1 | 2 | 3 }) {
 function LessonCard({
   lesson,
   lang,
+  completed,
+  color,
   onStart,
 }: {
   lesson: LessonMeta;
   lang: Lang;
+  completed: boolean;
+  color: string;
   onStart: () => void;
 }) {
   const { t } = useTranslation();
   const title = lesson.title[lang] ?? lesson.title.en ?? lesson.id;
 
   return (
-    <Box className="bg-[#121826] border border-[#1A2233] rounded-[18px] p-4 mb-3">
+    <Box
+      className="rounded-[18px] p-4 mb-3"
+      style={{
+        backgroundColor: completed ? "#0D1A10" : "#121826",
+        borderWidth: 1,
+        borderColor: completed ? `${color}44` : "#1A2233",
+      }}
+    >
       <HStack className="items-center justify-between">
         <VStack space="xs" className="flex-1 mr-3">
           <HStack className="items-center" space="sm">
@@ -55,16 +66,40 @@ function LessonCard({
               {title}
             </Text>
           </HStack>
-          <Text className="text-[#7B8193] text-[12px]">
-            {lesson.estimatedMinutes} {t("track.min")}
-          </Text>
+          <HStack className="items-center" space="xs">
+            <Text className="text-[#7B8193] text-[12px]">
+              {lesson.estimatedMinutes} {t("track.min")}
+            </Text>
+            {completed && (
+              <>
+                <Text className="text-[#7B8193] text-[12px]">·</Text>
+                <Ionicons name="checkmark-circle" size={13} color={color} />
+                <Text style={{ color, fontSize: 12 }}>{t("track.completed")}</Text>
+              </>
+            )}
+          </HStack>
         </VStack>
         <Pressable
           onPress={onStart}
-          className="px-4 h-[36px] rounded-xl bg-[#F5C77A] items-center justify-center"
+          style={{
+            paddingHorizontal: 14,
+            height: 36,
+            borderRadius: 12,
+            backgroundColor: completed ? "transparent" : color,
+            borderWidth: completed ? 1 : 0,
+            borderColor: color,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
-          <Text className="text-[#0B0F14] text-[13px] font-semibold">
-            {t("track.start")}
+          <Text
+            style={{
+              color: completed ? color : "#0B0F14",
+              fontSize: 13,
+              fontWeight: "600",
+            }}
+          >
+            {completed ? t("track.review") : t("track.start")}
           </Text>
         </Pressable>
       </HStack>
@@ -82,6 +117,7 @@ export default function TrackDetailScreen() {
   const [track, setTrack] = useState<Track | null>(null);
   const [lessons, setLessons] = useState<LessonMeta[]>([]);
   const [lang, setLang] = useState<Lang>("pt");
+  const [completedIds, setCompletedIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -100,6 +136,7 @@ export default function TrackDetailScreen() {
     if (!uid) return;
     getUserData({ userId: uid }).then((u) => {
       if (u?.lang) setLang(u.lang);
+      setCompletedIds(u?.completedContentIds ?? []);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
@@ -163,6 +200,8 @@ export default function TrackDetailScreen() {
               key={lesson.id}
               lesson={lesson}
               lang={lang}
+              completed={completedIds.includes(lesson.id)}
+              color={color}
               onStart={() => startLesson(lesson)}
             />
           ))

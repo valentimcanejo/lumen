@@ -27,7 +27,7 @@ import {
   updateStreak,
   grantSessionXP,
 } from "../../repositories/progress.repo";
-import { toggleSaveContent } from "../../repositories/user.repo";
+import { toggleSaveContent, markContentCompleted } from "../../repositories/user.repo";
 import {
   checkAndGrantAchievements,
   ACHIEVEMENTS,
@@ -327,6 +327,7 @@ export default function SummaryScreen() {
         await updateStreak(uid, date);
         const { gained } = await grantSessionXP(uid, quizScore);
         setGainedXp(gained);
+        await markContentCompleted(uid, contentId);
         const unlockedIds = await checkAndGrantAchievements(uid, { quizScore });
         const defs = unlockedIds
           .map((id) => ACHIEVEMENTS.find((a) => a.id === id))

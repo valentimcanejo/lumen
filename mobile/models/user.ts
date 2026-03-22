@@ -31,6 +31,7 @@ export type UserProfile = {
   streak: StreakInfo;
   selectedGoalIds: string[];
   savedContentIds?: string[];
+  completedContentIds?: string[];
   hasOnboarded: boolean;
   xp?: number;
   level?: number;

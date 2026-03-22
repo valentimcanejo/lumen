@@ -42,6 +42,13 @@ export async function setDailyGoal(uid: string, minutes: 5 | 10 | 15) {
   });
 }
 
+export async function markContentCompleted(uid: string, contentId: string) {
+  await updateDoc(doc(db, userPath(uid)), {
+    completedContentIds: arrayUnion(contentId),
+    updatedAt: Date.now(),
+  });
+}
+
 export async function toggleSaveContent(
   uid: string,
   contentId: string,

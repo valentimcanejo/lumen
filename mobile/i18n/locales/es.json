@@ -117,6 +117,8 @@
   "track": {
     "lessons": "Lecciones",
     "start": "Iniciar",
+    "review": "Repasar",
+    "completed": "Completado",
     "empty": "No hay lecciones disponibles.",
     "min": "min"
   },
