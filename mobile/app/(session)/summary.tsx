@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { Dimensions, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -9,6 +10,7 @@ import Animated, {
   withSequence,
   withTiming,
   withDelay,
+  withRepeat,
 } from "react-native-reanimated";
 
 import { Box } from "@/components/ui/box";
@@ -33,6 +35,108 @@ import { todayYmd } from "../../repositories/session.repo";
 import { usePack } from "../../hooks/usePack";
 import type { Lang } from "../../models/lang";
 import type { AchievementId } from "../../models/user";
+
+// ---------------------------------------------------------------------------
+// Confetti
+// ---------------------------------------------------------------------------
+
+const { width: SW, height: SH } = Dimensions.get("window");
+const CONFETTI_COLORS = [
+  "#F5C77A", "#5ED19A", "#7B8FE0", "#E26D6D",
+  "#F0D060", "#8BE0D8", "#FF8A65", "#F48FB1",
+];
+
+type PConf = {
+  x: number; color: string; size: number;
+  delay: number; duration: number; circle: boolean; sway: number;
+};
+
+// Generated once at module load — stable across renders
+const PARTICLES: PConf[] = Array.from({ length: 60 }, (_, i) => {
+  const rng = (seed: number) => {
+    const x = Math.sin(seed * 9301 + 49297) * 233280;
+    return x - Math.floor(x);
+  };
+  return {
+    x: rng(i * 3) * SW,
+    color: CONFETTI_COLORS[Math.floor(rng(i * 3 + 1) * CONFETTI_COLORS.length)],
+    size: 6 + rng(i * 3 + 2) * 8,
+    delay: rng(i + 10) * 700,
+    duration: 2200 + rng(i + 20) * 1200,
+    circle: rng(i + 30) > 0.5,
+    sway: (rng(i + 40) - 0.5) * 120,
+  };
+});
+
+function ConfettiPiece({ p, active }: { p: PConf; active: boolean }) {
+  const y = useSharedValue(-30);
+  const x = useSharedValue(0);
+  const r = useSharedValue(0);
+  const o = useSharedValue(0);
+
+  useEffect(() => {
+    if (!active) return;
+    y.value = withDelay(p.delay, withTiming(SH + 80, { duration: p.duration }));
+    x.value = withDelay(
+      p.delay,
+      withSequence(
+        withTiming(p.sway, { duration: p.duration * 0.5 }),
+        withTiming(-p.sway * 0.4, { duration: p.duration * 0.5 }),
+      ),
+    );
+    r.value = withDelay(p.delay, withRepeat(withTiming(360, { duration: 500 }), -1, false));
+    o.value = withDelay(
+      p.delay,
+      withSequence(
+        withTiming(1, { duration: 120 }),
+        withDelay(p.duration - 500, withTiming(0, { duration: 500 })),
+      ),
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active]);
+
+  const style = useAnimatedStyle(() => ({
+    opacity: o.value,
+    transform: [
+      { translateY: y.value },
+      { translateX: x.value },
+      { rotate: `${r.value}deg` },
+    ],
+  }));
+
+  return (
+    <Animated.View
+      style={[
+        style,
+        {
+          position: "absolute",
+          left: p.x,
+          top: 0,
+          width: p.size,
+          height: p.size,
+          borderRadius: p.circle ? p.size / 2 : 2,
+          backgroundColor: p.color,
+        },
+      ]}
+    />
+  );
+}
+
+function ConfettiOverlay({ active }: { active: boolean }) {
+  if (!active) return null;
+  return (
+    <View
+      pointerEvents="none"
+      style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 200 }}
+    >
+      {PARTICLES.map((p, i) => (
+        <ConfettiPiece key={i} p={p} active={active} />
+      ))}
+    </View>
+  );
+}
+
+// ---------------------------------------------------------------------------
 
 function TopProgress({ value }: { value: number }) {
   const pct = Math.max(0, Math.min(1, value));
@@ -120,6 +224,7 @@ export default function SummaryScreen() {
   const [gainedXp, setGainedXp] = useState<number | null>(null);
   const [newAchievements, setNewAchievements] = useState<AchievementDef[]>([]);
   const [bookmarked, setBookmarked] = useState(false);
+  const [confettiActive, setConfettiActive] = useState(false);
 
   useEffect(() => {
     if (!uid) return;
@@ -179,6 +284,7 @@ export default function SummaryScreen() {
         setNewAchievements(defs);
       }
       setSaved(true);
+      setConfettiActive(true);
     } finally {
       setSaving(false);
     }
@@ -201,6 +307,7 @@ export default function SummaryScreen() {
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
+      <ConfettiOverlay active={confettiActive} />
       <AchievementToast achievements={newAchievements} />
 
       <Box className="px-5" style={{ paddingTop: insets.top + 8 }}>

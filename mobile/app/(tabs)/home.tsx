@@ -7,6 +7,7 @@ import Animated, {
   withSequence,
   withTiming,
 } from "react-native-reanimated";
+import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -71,43 +72,105 @@ function StreakPill({ streak }: { streak: number }) {
 // Weekly bar chart
 // ---------------------------------------------------------------------------
 
-const DAY_SHORT: Record<string, string[]> = {
-  pt: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
-  en: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-  es: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+const DAY_LABELS: Record<string, string[]> = {
+  pt: ["S", "T", "Q", "Q", "S", "S", "D"],
+  en: ["M", "T", "W", "T", "F", "S", "S"],
+  es: ["L", "M", "X", "J", "V", "S", "D"],
 };
 
-function WeeklyBars({
+function WeeklyCard({
   data,
   goalMin,
   lang,
+  studiedLabel,
 }: {
   data: DayData[];
   goalMin: number;
   lang: string;
+  studiedLabel: string;
 }) {
-  const max = Math.max(goalMin, ...data.map((d) => d.minutes), 1);
-  const labels = DAY_SHORT[lang] ?? DAY_SHORT.en;
+  const today = new Date().getDay();
+  const todayIndex = today === 0 ? 6 : today - 1; // Mon=0 … Sun=6
+  const labels = DAY_LABELS[lang] ?? DAY_LABELS.en;
+  const totalMinutes = data.reduce((s, d) => s + d.minutes, 0);
+  const weekGoal = goalMin * 7;
+  const weekPct = weekGoal > 0 ? Math.min(totalMinutes / weekGoal, 1) : 0;
+  const weekDone = weekPct >= 1;
 
   return (
-    <HStack className="items-end" space="xs">
-      {data.map((d, i) => {
-        const pct = d.minutes / max;
-        const reached = d.minutes >= goalMin;
-        return (
-          <VStack key={d.date} className="flex-1 items-center" space="xs">
-            <Box
-              style={{ height: Math.max(4, Math.round(pct * 48)) }}
-              className={[
-                "w-full rounded-full",
-                reached ? "bg-[#F5C77A]" : "bg-[#1A2233]",
-              ].join(" ")}
-            />
-            <Text className="text-[#7B8193] text-[10px]">{labels[i]}</Text>
-          </VStack>
-        );
-      })}
-    </HStack>
+    <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
+      {/* Header row */}
+      <HStack className="items-end justify-between mb-5">
+        <HStack className="items-baseline" space="xs">
+          <Text className="text-[#F5C77A] text-[28px] font-bold">{totalMinutes}</Text>
+          <Text className="text-[#AAB0C0] text-[13px]">min {studiedLabel}</Text>
+        </HStack>
+        {weekDone && (
+          <Box className="bg-[#F5C77A]/15 border border-[#F5C77A]/30 rounded-full px-3 py-1">
+            <Text className="text-[#F5C77A] text-[11px] font-semibold">🏆 Meta!</Text>
+          </Box>
+        )}
+      </HStack>
+
+      {/* Day circles */}
+      <HStack className="justify-between mb-4">
+        {data.map((d, i) => {
+          const done = d.minutes >= goalMin;
+          const isToday = i === todayIndex;
+          const isFuture = i > todayIndex;
+
+          return (
+            <VStack key={d.date} className="items-center" space="xs">
+              <Box
+                className="w-[38px] h-[38px] rounded-full items-center justify-center"
+                style={{
+                  backgroundColor: done
+                    ? "#F5C77A"
+                    : isToday
+                      ? "transparent"
+                      : "#1A2233",
+                  borderWidth: isToday && !done ? 2 : 0,
+                  borderColor: "#F5C77A99",
+                }}
+              >
+                {done ? (
+                  <Ionicons name="checkmark" size={20} color="#0B0F14" />
+                ) : isToday ? (
+                  <Box className="w-[7px] h-[7px] rounded-full bg-[#F5C77A]" />
+                ) : isFuture ? null : (
+                  <Box className="w-[5px] h-[5px] rounded-full bg-[#3A4458]" />
+                )}
+              </Box>
+              <Text
+                className="text-[11px] font-semibold"
+                style={{ color: isToday ? "#F5C77A" : "#4A5568" }}
+              >
+                {labels[i]}
+              </Text>
+            </VStack>
+          );
+        })}
+      </HStack>
+
+      {/* Progress bar */}
+      <Box className="h-[5px] bg-[#1A2233] rounded-full overflow-hidden">
+        <Box
+          className="h-full rounded-full"
+          style={{
+            width: `${weekPct * 100}%`,
+            backgroundColor: weekDone ? "#5ED19A" : "#F5C77A",
+          }}
+        />
+      </Box>
+      <HStack className="justify-between mt-1">
+        <Text className="text-[#4A5568] text-[11px]">
+          {Math.round(weekPct * 100)}% da semana
+        </Text>
+        <Text className="text-[#4A5568] text-[11px]">
+          {totalMinutes} / {weekGoal} min
+        </Text>
+      </HStack>
+    </Box>
   );
 }
 
@@ -157,7 +220,6 @@ export default function Home() {
   const xpCeil = xpForNextLevel(level);
   const xpPct = xpCeil > xpFloor ? (xp - xpFloor) / (xpCeil - xpFloor) : 1;
 
-  const weeklyMinutes = weeklyData.reduce((s, d) => s + d.minutes, 0);
   const selectedGoals = user?.selectedGoalIds ?? [];
   const todayPackId = packOfDay(selectedGoals, todayYmd());
   const todayGoal = goals.find((g) => g.id === todayPackId);
@@ -245,25 +307,19 @@ export default function Home() {
         ))}
 
       {/* Weekly progress */}
-      <Box className="px-6 mt-6">
-        <HStack className="items-center justify-between mb-3">
-          <Text className="text-[#E6EAF2] text-[16px] font-semibold">
+      {weeklyData.length > 0 && (
+        <Box className="px-6 mt-6">
+          <Text className="text-[#E6EAF2] text-[16px] font-semibold mb-3">
             {t("tabs.home.thisWeek")}
           </Text>
-          <Text className="text-[#AAB0C0] text-[13px]">
-            {weeklyMinutes} min {t("tabs.home.studied")}
-          </Text>
-        </HStack>
-        {weeklyData.length > 0 && (
-          <Box className="bg-[#121826] border border-[#1A2233] rounded-[18px] p-4">
-            <WeeklyBars
-              data={weeklyData}
-              goalMin={user?.dailyGoalMin ?? 10}
-              lang={lang}
-            />
-          </Box>
-        )}
-      </Box>
+          <WeeklyCard
+            data={weeklyData}
+            goalMin={user?.dailyGoalMin ?? 10}
+            lang={lang}
+            studiedLabel={t("tabs.home.studied")}
+          />
+        </Box>
+      )}
     </ScrollView>
   );
 }
