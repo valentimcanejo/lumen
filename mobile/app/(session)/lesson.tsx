@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
-import { ScrollView } from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as Speech from "expo-speech";
 import { useTranslation } from "react-i18next";
@@ -137,12 +137,28 @@ export default function LessonScreen() {
     setPlaying(false);
   }
 
-  function handlePlayPause() {
+  async function handlePlayPause() {
     if (playing) {
       stopSpeech();
     } else {
       setPositionMs(0);
       setPlaying(true);
+
+      const locale = LANG_LOCALE[lang ?? "pt"];
+
+      // Pick the best available voice for the locale (Enhanced/Premium first)
+      let voiceId: string | undefined;
+      try {
+        const voices = await Speech.getAvailableVoicesAsync();
+        const forLocale = voices.filter((v) => v.language === locale || v.language.startsWith(locale.split("-")[0]));
+        const best =
+          forLocale.find((v) => v.quality === "Enhanced") ??
+          forLocale.find((v) => v.quality === "Default") ??
+          forLocale[0];
+        voiceId = best?.identifier;
+      } catch {
+        // ignore — fall back to system default
+      }
 
       const tickMs = 250;
       const id = setInterval(() => {
@@ -155,7 +171,10 @@ export default function LessonScreen() {
       intervalRef.current = id;
 
       Speech.speak(ttsText, {
-        language: LANG_LOCALE[lang ?? "pt"],
+        language: locale,
+        voice: voiceId,
+        rate: 0.88,
+        pitch: 1.0,
         onDone: () => {
           clearInterval(id);
           intervalRef.current = null;
@@ -233,13 +252,10 @@ export default function LessonScreen() {
 
           <Box className="mt-5 bg-[#121826] border border-[#1A2233] rounded-[18px] p-4">
             <HStack className="items-center">
-              <Pressable
+              <TouchableOpacity
                 onPress={handlePlayPause}
-                className="w-[44px] h-[44px] rounded-full bg-[#1A2233] items-center justify-center border border-[#2A3448]"
-                style={({ pressed }: { pressed: boolean }) => ({
-                  opacity: pressed ? 0.6 : 1,
-                  transform: [{ scale: pressed ? 0.93 : 1 }],
-                })}
+                activeOpacity={0.65}
+                style={[as.playBtn, { borderColor: `${color}55` }]}
               >
                 <Ionicons
                   name={playing ? "pause" : "play"}
@@ -247,7 +263,7 @@ export default function LessonScreen() {
                   color={color}
                   style={{ marginLeft: playing ? 0 : 2 }}
                 />
-              </Pressable>
+              </TouchableOpacity>
 
               <Waveform progress={audioProgress} />
 
@@ -329,3 +345,15 @@ export default function LessonScreen() {
     </Box>
   );
 }
+
+const as = StyleSheet.create({
+  playBtn: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: "#1A2233",
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
