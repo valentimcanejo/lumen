@@ -16,6 +16,8 @@ import {
   getRecentSessions,
   type CompletedSession,
 } from "../../repositories/progress.repo";
+import { getLessonMeta } from "../../repositories/lessons.repo";
+import { trackColor } from "../../constants/tracks";
 import type { Lang } from "../../models/lang";
 
 const DATE_LOCALE: Record<string, string> = {
@@ -46,10 +48,15 @@ function ScoreBadge({ score }: { score: number }) {
 function SessionRow({
   session,
   locale,
+  lang,
 }: {
   session: CompletedSession;
   locale: string;
+  lang: Lang;
 }) {
+  const meta = getLessonMeta(session.contentId);
+  const title = meta?.title[lang] ?? meta?.title.en ?? session.contentId;
+  const color = trackColor(session.contentId);
   const date = new Date(session.completedAt);
   const dateLabel = date.toLocaleDateString(locale, {
     day: "2-digit",
@@ -60,9 +67,12 @@ function SessionRow({
     <Box className="bg-[#121826] border border-[#1A2233] rounded-[18px] p-4 mb-3">
       <HStack className="items-center justify-between">
         <VStack space="xs" className="flex-1 mr-3">
-          <Text className="text-[#E6EAF2] text-[14px] font-semibold">
-            {session.contentId}
-          </Text>
+          <HStack className="items-center" space="xs">
+            <Box style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: color }} />
+            <Text className="text-[#E6EAF2] text-[14px] font-semibold flex-1">
+              {title}
+            </Text>
+          </HStack>
           <HStack space="md">
             <Text className="text-[#7B8193] text-[12px]">{dateLabel}</Text>
             <Text className="text-[#7B8193] text-[12px]">
@@ -89,22 +99,36 @@ function SavedCard({
   lang: Lang;
   startLabel: string;
 }) {
+  const meta = getLessonMeta(contentId);
+  const title = meta?.title[lang] ?? meta?.title.en ?? contentId;
+  const color = trackColor(contentId);
+
   return (
     <Box className="bg-[#121826] border border-[#1A2233] rounded-[18px] p-4 mb-3">
       <HStack className="items-center justify-between">
-        <Text className="text-[#E6EAF2] text-[14px] font-semibold flex-1 mr-3">
-          {contentId}
-        </Text>
+        <HStack className="items-center flex-1 mr-3" space="xs">
+          <Box style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: color }} />
+          <Text className="text-[#E6EAF2] text-[14px] font-semibold flex-1">
+            {title}
+          </Text>
+        </HStack>
         <Pressable
           onPress={() =>
             router.push({
-              pathname: "/(session)/lesson",
-              params: { contentId, version: "1", lang },
+              pathname: "/(session)/intro",
+              params: {
+                contentId,
+                version: String(meta?.version ?? 1),
+                lang,
+                title,
+                difficulty: String(meta?.difficulty ?? 1),
+                estimatedMinutes: String(meta?.estimatedMinutes ?? 0),
+              },
             })
           }
-          className="px-4 h-[36px] rounded-xl bg-[#1A2233] items-center justify-center"
+          style={{ paddingHorizontal: 14, height: 36, borderRadius: 12, backgroundColor: `${color}22`, alignItems: "center", justifyContent: "center" }}
         >
-          <Text className="text-[#F5C77A] text-[13px] font-semibold">
+          <Text style={{ color, fontSize: 13, fontWeight: "600" }}>
             {startLabel}
           </Text>
         </Pressable>
@@ -208,7 +232,7 @@ export default function Library() {
             </VStack>
           ) : (
             sessions.map((s) => (
-              <SessionRow key={s.date} session={s} locale={locale} />
+              <SessionRow key={s.date} session={s} locale={locale} lang={lang} />
             ))
           )
         ) : savedIds.length === 0 ? (

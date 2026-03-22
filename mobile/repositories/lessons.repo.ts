@@ -32,6 +32,10 @@ const BUNDLED_LESSONS: LessonMeta[] = [
   { id: "critical_thinking_bias", trackId: "critical_thinking", version: 1, order: 3, title: { pt: "Vieses Cognitivos", en: "Cognitive Biases", es: "Sesgos Cognitivos" }, estimatedMinutes: 10, difficulty: 3 },
 ];
 
+export function getLessonMeta(contentId: string): LessonMeta | undefined {
+  return BUNDLED_LESSONS.find((l) => l.id === contentId);
+}
+
 export function getLessonCountForTrack(trackId: string): number {
   return BUNDLED_LESSONS.filter((l) => l.trackId === trackId).length;
 }
