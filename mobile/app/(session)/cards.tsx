@@ -1,5 +1,11 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ScrollView } from "react-native";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  runOnJS,
+} from "react-native-reanimated";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -47,6 +53,8 @@ export default function CardsScreen() {
 
   const [index, setIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
+  const [showBack, setShowBack] = useState(false);
+  const flipScale = useSharedValue(1);
 
   const current = cards[index];
 
@@ -58,8 +66,23 @@ export default function CardsScreen() {
     return stepStart + (stepEnd - stepStart) * pct;
   }, [index, total]);
 
+  function revealCard() {
+    flipScale.value = withTiming(0, { duration: 180 }, (done) => {
+      if (done) runOnJS(setShowBack)(true);
+    });
+  }
+
+  useEffect(() => {
+    if (showBack) {
+      setRevealed(true);
+      flipScale.value = withTiming(1, { duration: 180 });
+    }
+  }, [showBack]);
+
   function goNext() {
     setRevealed(false);
+    setShowBack(false);
+    flipScale.value = 1;
     setIndex((prev) => {
       const next = prev + 1;
       if (next >= total) {
@@ -145,30 +168,21 @@ export default function CardsScreen() {
             contentContainerStyle={{ paddingTop: 20, paddingBottom: 16 }}
             showsVerticalScrollIndicator={false}
           >
-            <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
-              <VStack space="sm">
-                <Text className="text-[#AAB0C0] text-[12px]">
-                  {t("session.cards.question")}
-                </Text>
-                <Text className="text-[#E6EAF2] text-[18px] font-semibold leading-[26px]">
-                  {current.front}
-                </Text>
-              </VStack>
-
-              {revealed && (
-                <>
-                  <Box className="h-[1px] bg-[#1A2233] my-5" />
-                  <VStack space="sm">
-                    <Text className="text-[#AAB0C0] text-[12px]">
-                      {t("session.cards.answer")}
-                    </Text>
-                    <Text className="text-[#E6EAF2] text-[16px] leading-[24px]">
-                      {current.back}
-                    </Text>
-                  </VStack>
-                </>
-              )}
-            </Box>
+            <Animated.View style={useAnimatedStyle(() => ({ transform: [{ scaleX: flipScale.value }] }))}>
+              <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
+                <VStack space="sm">
+                  <Text className="text-[#AAB0C0] text-[12px]">
+                    {showBack ? t("session.cards.answer") : t("session.cards.question")}
+                  </Text>
+                  <Text
+                    className="text-[#E6EAF2] font-semibold leading-[26px]"
+                    style={{ fontSize: showBack ? 16 : 18 }}
+                  >
+                    {showBack ? current.back : current.front}
+                  </Text>
+                </VStack>
+              </Box>
+            </Animated.View>
           </ScrollView>
 
           {/* Fixed bottom buttons — always visible */}
@@ -178,7 +192,7 @@ export default function CardsScreen() {
           >
             {!revealed ? (
               <Pressable
-                onPress={() => setRevealed(true)}
+                onPress={revealCard}
                 className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
               >
                 <Text className="text-[#0B0F14] text-[16px] font-semibold">
