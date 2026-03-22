@@ -13,6 +13,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import { useAiPack } from "../../hooks/useAiPack";
 import { SkeletonTrackCard } from "../../components/ui/lumen/Skeleton";
+import { trackColor, trackBg } from "../../constants/tracks";
 import type { Track } from "../../models/track";
 import type { Lang } from "../../models/lang";
 
@@ -40,14 +41,27 @@ function TrackCard({ track, lang }: { track: Track; lang: Lang }) {
   const { t } = useTranslation();
   const title = track.title[lang] ?? track.title.en ?? track.id;
   const description = track.description?.[lang] ?? track.description?.en ?? "";
+  const color = trackColor(track.id);
+  const bg = trackBg(track.id);
 
   return (
     <Pressable onPress={() => router.push(`/track/${track.id}`)}>
-      <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5 mb-3">
+      <Box
+        className="rounded-[22px] p-5 mb-3"
+        style={{ backgroundColor: bg, borderWidth: 1.5, borderColor: `${color}44` }}
+      >
         <HStack className="items-start justify-between mb-2">
-          <Text className="text-[#E6EAF2] text-[17px] font-semibold flex-1 mr-3">
-            {title}
-          </Text>
+          <HStack className="items-center flex-1 mr-3" space="sm">
+            <Box
+              style={{
+                width: 10, height: 10, borderRadius: 5,
+                backgroundColor: color, marginTop: 3,
+              }}
+            />
+            <Text className="text-[#E6EAF2] text-[17px] font-semibold flex-1">
+              {title}
+            </Text>
+          </HStack>
           <DifficultyBadge level={track.difficulty} />
         </HStack>
 
@@ -60,16 +74,20 @@ function TrackCard({ track, lang }: { track: Track; lang: Lang }) {
         {track.tags?.length > 0 && (
           <HStack className="mt-3 flex-wrap" space="xs">
             {track.tags.map((tag) => (
-              <Box key={tag} className="px-2 py-1 rounded-full bg-[#1A2233]">
-                <Text className="text-[#7B8193] text-[11px]">{tag}</Text>
+              <Box
+                key={tag}
+                className="px-2 py-1 rounded-full"
+                style={{ backgroundColor: `${color}18` }}
+              >
+                <Text style={{ color, fontSize: 11 }}>{tag}</Text>
               </Box>
             ))}
           </HStack>
         )}
 
         <HStack className="items-center mt-3" space="xs">
-          <Text className="text-[#7B8193] text-[12px]">{t("track.lessons")}</Text>
-          <Ionicons name="chevron-forward" size={12} color="#7B8193" />
+          <Text style={{ color, fontSize: 12, fontWeight: "600" }}>{t("track.lessons")}</Text>
+          <Ionicons name="chevron-forward" size={12} color={color} />
         </HStack>
       </Box>
     </Pressable>

@@ -19,6 +19,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
 import { SkeletonLessonRow } from "../../components/ui/lumen/Skeleton";
+import { trackColor, trackBg } from "../../constants/tracks";
 import type { Track } from "../../models/track";
 import type { Lang } from "../../models/lang";
 
@@ -104,6 +105,8 @@ export default function TrackDetailScreen() {
   }, [uid]);
 
   const title = track?.title[lang] ?? track?.title.en ?? id;
+  const color = trackColor(id as string);
+  const bg = trackBg(id as string);
 
   function startLesson(lesson: LessonMeta) {
     router.push({
@@ -115,21 +118,27 @@ export default function TrackDetailScreen() {
   return (
     <Box className="flex-1 bg-[#0B0F14]">
       {/* Header */}
-      <Box className="px-5 pb-4" style={{ paddingTop: insets.top + 8 }}>
+      <Box
+        className="px-5 pb-5"
+        style={{ paddingTop: insets.top + 8, backgroundColor: bg, borderBottomWidth: 1, borderBottomColor: `${color}33` }}
+      >
         <HStack className="items-center" space="md">
           <Pressable onPress={() => router.back()}>
-            <Ionicons name="chevron-back" size={22} color="#AAB0C0" />
+            <Ionicons name="chevron-back" size={22} color={color} />
           </Pressable>
-          <Text className="text-[#E6EAF2] text-[20px] font-semibold flex-1">
-            {title}
-          </Text>
+          <HStack className="items-center flex-1" space="sm">
+            <Box style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: color }} />
+            <Text className="text-[#E6EAF2] text-[20px] font-semibold flex-1">
+              {title}
+            </Text>
+          </HStack>
         </HStack>
         {track?.description?.[lang] ? (
-          <Text className="text-[#AAB0C0] text-[13px] mt-2 ml-8">
+          <Text className="text-[#AAB0C0] text-[13px] mt-3 ml-8">
             {track.description[lang]}
           </Text>
         ) : null}
-        <Text className="text-[#7B8193] text-[12px] mt-3 ml-8">
+        <Text className="text-[12px] font-semibold mt-3 ml-8" style={{ color }}>
           {lessons.length} {t("track.lessons")}
         </Text>
       </Box>

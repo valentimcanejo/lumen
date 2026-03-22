@@ -17,6 +17,7 @@ import { usePack } from "../../hooks/usePack";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import { toggleSaveContent } from "../../repositories/user.repo";
+import { trackColor } from "../../constants/tracks";
 import type { Lang } from "../../models/lang";
 import type { LessonBlock } from "../../models/pack";
 
@@ -43,11 +44,11 @@ function formatMs(ms: number) {
   return `${String(m).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 }
 
-function TopProgress({ value }: { value: number }) {
+function TopProgress({ value, color = "#F5C77A" }: { value: number; color?: string }) {
   const pct = Math.max(0, Math.min(1, value));
   return (
     <Box className="flex-1 h-[6px] rounded-full bg-[#1A2233] overflow-hidden">
-      <Box style={{ width: `${pct * 100}%` }} className="h-full bg-[#F5C77A]" />
+      <Box style={{ width: `${pct * 100}%`, height: "100%", backgroundColor: color }} />
     </Box>
   );
 }
@@ -86,6 +87,8 @@ export default function LessonScreen() {
     version: string;
     lang: Lang;
   };
+
+  const color = trackColor(contentId);
 
   const { uid } = useAuth();
   const { getUserData } = useUser();
@@ -205,7 +208,7 @@ export default function LessonScreen() {
             <Ionicons name="chevron-back" size={22} color="#AAB0C0" />
           </Pressable>
 
-          <TopProgress value={0.22} />
+          <TopProgress value={0.22} color={color} />
 
           <Text className="text-[#AAB0C0] text-[12px] w-[54px] text-right">
             {t("session.lesson.step")}
@@ -241,7 +244,7 @@ export default function LessonScreen() {
                 <Ionicons
                   name={playing ? "pause" : "play"}
                   size={18}
-                  color="#F5C77A"
+                  color={color}
                   style={{ marginLeft: playing ? 0 : 2 }}
                 />
               </Pressable>
@@ -255,8 +258,7 @@ export default function LessonScreen() {
 
             <Box className="h-[4px] rounded-full bg-[#1A2233] overflow-hidden mt-3">
               <Box
-                className="h-full bg-[#F5C77A]"
-                style={{ width: `${audioProgress * 100}%` }}
+                style={{ height: "100%", width: `${audioProgress * 100}%`, backgroundColor: color }}
               />
             </Box>
 
@@ -294,7 +296,7 @@ export default function LessonScreen() {
                   },
                 })
               }
-              className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
+              style={{ height: 52, borderRadius: 18, backgroundColor: color, alignItems: "center", justifyContent: "center" }}
             >
               <Text className="text-[#0B0F14] text-[16px] font-semibold">
                 {t("common.next")}
@@ -311,11 +313,11 @@ export default function LessonScreen() {
                 <Ionicons
                   name={saved ? "bookmark" : "bookmark-outline"}
                   size={18}
-                  color={saved ? "#F5C77A" : "#AAB0C0"}
+                  color={saved ? color : "#AAB0C0"}
                 />
                 <Text
                   className="text-[16px] font-semibold"
-                  style={{ color: saved ? "#F5C77A" : "#AAB0C0" }}
+                  style={{ color: saved ? color : "#AAB0C0" }}
                 >
                   {saved ? t("common.saved") : t("common.save")}
                 </Text>
