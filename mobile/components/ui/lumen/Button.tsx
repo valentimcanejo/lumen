@@ -1,5 +1,7 @@
 import React from "react";
-import { Button, ButtonText } from "../button";
+import { StyleSheet } from "react-native";
+import { Pressable } from "../pressable";
+import { Text } from "../text";
 import { cn } from "../../../lib/cn";
 
 type Props = {
@@ -8,6 +10,7 @@ type Props = {
   variant?: "primary" | "ghost";
   disabled?: boolean;
   className?: string;
+  color?: string;
 };
 
 export function LumenButton({
@@ -16,28 +19,60 @@ export function LumenButton({
   variant = "primary",
   disabled,
   className,
+  color,
 }: Props) {
   const primary = variant === "primary";
+  const bg = primary ? (color ?? "#F5C77A") : "transparent";
+  const borderBottom = primary ? (color ? darken(color) : "#C49B4A") : "#1A2233";
 
   return (
-    <Button
+    <Pressable
       onPress={onPress}
-      isDisabled={disabled}
-      className={cn(
-        "h-[52px] rounded-2xl px-5 items-center justify-center",
-        primary ? "bg-[#F5C77A]" : "bg-transparent border border-[#1A2233]",
-        disabled && "opacity-60",
-        className,
-      )}
+      disabled={disabled}
+      style={({ pressed }: { pressed: boolean }) => [
+        s.base,
+        primary ? { backgroundColor: bg, borderBottomColor: borderBottom, borderBottomWidth: 4 } : s.ghost,
+        disabled && s.disabled,
+        pressed && s.pressed,
+      ]}
     >
-      <ButtonText
-        className={cn(
-          "text-[16px] font-semibold",
-          primary ? "text-[#0B0F14]" : "text-[#AAB0C0]",
-        )}
+      <Text
+        style={[
+          s.label,
+          { color: primary ? "#0B0F14" : "#AAB0C0" },
+        ]}
       >
         {children}
-      </ButtonText>
-    </Button>
+      </Text>
+    </Pressable>
   );
 }
+
+function darken(hex: string): string {
+  const n = parseInt(hex.replace("#", ""), 16);
+  const r = Math.max(0, ((n >> 16) & 0xff) - 40);
+  const g = Math.max(0, ((n >> 8) & 0xff) - 40);
+  const b = Math.max(0, (n & 0xff) - 40);
+  return `#${[r, g, b].map((c) => c.toString(16).padStart(2, "0")).join("")}`;
+}
+
+const s = StyleSheet.create({
+  base: {
+    height: 56,
+    borderRadius: 20,
+    paddingHorizontal: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  ghost: {
+    borderWidth: 1.5,
+    borderColor: "#1A2233",
+  },
+  disabled: { opacity: 0.55 },
+  pressed: { opacity: 0.82, transform: [{ scale: 0.975 }] },
+  label: {
+    fontSize: 16,
+    fontWeight: "700",
+    letterSpacing: 0.2,
+  },
+});
