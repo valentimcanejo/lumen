@@ -1,0 +1,59 @@
+{
+  "id": "geopolitics_nato",
+  "version": 1,
+  "lang": "es",
+  "estimatedMinutes": 9,
+  "difficulty": 2,
+  "tags": ["OTAN", "alianza", "defensa", "Atlántico"],
+  "source": "local",
+  "lesson": {
+    "title": "La OTAN y el Atlántico",
+    "summary": "Cómo funciona la principal alianza militar del mundo y por qué sigue importando en el siglo XXI.",
+    "audioUrl": null,
+    "blocks": [
+      { "type": "h2", "text": "¿Qué es la OTAN?" },
+      { "type": "p", "text": "La Organización del Tratado del Atlántico Norte (OTAN) es una alianza militar fundada en 1949 para garantizar la defensa colectiva de sus países miembros. Su principio central: un ataque a un miembro es un ataque a todos." },
+      { "type": "h2", "text": "La cláusula del Artículo 5" },
+      { "type": "p", "text": "El Artículo 5 del Tratado del Atlántico Norte es la columna vertebral de la alianza. Fue invocado solo una vez en la historia — tras los ataques del 11 de septiembre de 2001 en Estados Unidos." },
+      { "type": "h2", "text": "La OTAN en el siglo XXI" },
+      { "type": "p", "text": "Con la invasión rusa de Ucrania en 2022, la OTAN volvió al centro del debate geopolítico. Países históricamente neutrales como Finlandia y Suecia ingresaron a la alianza — mostrando cómo la seguridad europea se ha transformado." },
+      { "type": "quote", "text": "La OTAN es la alianza de defensa más exitosa de la historia. — Anders Fogh Rasmussen" },
+      { "type": "bullets", "items": [
+        "32 países miembros (2024)",
+        "Meta: 2% del PIB en gasto de defensa",
+        "Sede en Bruselas, Bélgica"
+      ]}
+    ]
+  },
+  "cards": [
+    { "id": "c1", "front": "¿Qué establece el Artículo 5 de la OTAN?", "back": "Que un ataque armado contra cualquier miembro se considera un ataque contra todos, requiriendo una respuesta colectiva." },
+    { "id": "c2", "front": "¿Cuándo se invocó el Artículo 5 por primera vez?", "back": "Tras los ataques terroristas del 11 de septiembre de 2001, cuando los aliados de la OTAN declararon solidaridad con EE.UU." },
+    { "id": "c3", "front": "¿Por qué Finlandia y Suecia se unieron a la OTAN?", "back": "La invasión rusa de Ucrania en 2022 cambió el cálculo de seguridad de estos países históricamente neutrales." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question": "¿Cuál es el principio central del Artículo 5 de la OTAN?",
+      "options": [
+        "Cada nación defiende solo su propio territorio",
+        "Un ataque a un miembro es un ataque a todos",
+        "Las grandes potencias protegen a las más pequeñas",
+        "Solo los ataques nucleares activan la defensa colectiva"
+      ],
+      "answerIndex": 1,
+      "explanation": "El Artículo 5 establece la defensa colectiva: un ataque contra un aliado requiere respuesta de todos los miembros."
+    },
+    {
+      "id": "q2",
+      "question": "¿Qué llevó a Finlandia y Suecia a abandonar la neutralidad y unirse a la OTAN?",
+      "options": [
+        "Presión económica de EE.UU.",
+        "Una invitación formal de la Unión Europea",
+        "La invasión rusa de Ucrania en 2022",
+        "Un ataque directo en sus territorios"
+      ],
+      "answerIndex": 2,
+      "explanation": "La guerra en Ucrania demostró los riesgos de la neutralidad frente a una Rusia expansionista, llevando a ambos países a buscar la protección de la OTAN."
+    }
+  ]
+}

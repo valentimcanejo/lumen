@@ -1,0 +1,59 @@
+{
+  "id": "foundations_first_principles",
+  "version": 1,
+  "lang": "es",
+  "estimatedMinutes": 8,
+  "difficulty": 2,
+  "tags": ["razonamiento", "innovación", "resolución de problemas"],
+  "source": "local",
+  "lesson": {
+    "title": "Primeros Principios",
+    "summary": "Cómo cuestionar suposiciones y reconstruir ideas desde cero para pensar con originalidad.",
+    "audioUrl": null,
+    "blocks": [
+      { "type": "h2", "text": "¿Qué son los primeros principios?" },
+      { "type": "p", "text": "Razonar desde primeros principios significa descomponer un problema en sus elementos más fundamentales — verdades que no pueden reducirse más — y reconstruir soluciones desde ahí." },
+      { "type": "p", "text": "Es lo opuesto al razonamiento por analogía, que se basa en 'cómo siempre se han hecho las cosas'." },
+      { "type": "h2", "text": "Cómo aplicarlo" },
+      { "type": "bullets", "items": [
+        "Identifica las suposiciones que estás haciendo",
+        "Cuestiona cada suposición: '¿Esto es realmente cierto?'",
+        "Construye tu solución desde las verdades fundamentales restantes"
+      ]},
+      { "type": "quote", "text": "Es importante razonar desde primeros principios en lugar de por analogía. — Elon Musk" },
+      { "type": "h2", "text": "Por qué importa" },
+      { "type": "p", "text": "La mayoría de las ideas innovadoras surgen de personas que se negaron a aceptar 'así siempre se ha hecho' como respuesta final. Los primeros principios liberan el pensamiento creativo." }
+    ]
+  },
+  "cards": [
+    { "id": "c1", "front": "¿Qué significa razonar desde primeros principios?", "back": "Descomponer un problema en sus elementos más fundamentales y construir la solución desde esas verdades básicas, sin depender de analogías." },
+    { "id": "c2", "front": "¿Cuál es la diferencia entre primeros principios y razonamiento analógico?", "back": "Los primeros principios parten de verdades fundamentales. El razonamiento analógico copia lo que ya existe o cómo siempre se ha hecho algo." },
+    { "id": "c3", "front": "¿Cuál es el primer paso para pensar desde primeros principios?", "back": "Identificar y cuestionar las suposiciones que estás haciendo sobre el problema." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question": "Razonar desde primeros principios significa:",
+      "options": [
+        "Seguir las mejores prácticas del sector",
+        "Basarse en cómo otros resolvieron problemas similares",
+        "Descomponer hasta verdades fundamentales y reconstruir",
+        "Usar intuición y experiencia acumulada"
+      ],
+      "answerIndex": 2,
+      "explanation": "Los primeros principios requieren deconstruir supuestos hasta llegar a verdades básicas innegables y reconstruir desde ahí."
+    },
+    {
+      "id": "q2",
+      "question": "¿Por qué el razonamiento analógico puede limitar la innovación?",
+      "options": [
+        "Porque ignora completamente el pasado",
+        "Porque asume que lo que funcionó antes siempre funcionará",
+        "Porque es muy difícil de aplicar",
+        "Porque no usa matemáticas"
+      ],
+      "answerIndex": 1,
+      "explanation": "El razonamiento analógico asume que el pasado es la mejor guía, limitando soluciones verdaderamente nuevas."
+    }
+  ]
+}

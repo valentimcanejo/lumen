@@ -1,0 +1,59 @@
+{
+  "id": "critical_thinking_fallacies",
+  "version": 1,
+  "lang": "en",
+  "estimatedMinutes": 9,
+  "difficulty": 2,
+  "tags": ["fallacies", "logic", "argumentation", "rhetoric"],
+  "source": "local",
+  "lesson": {
+    "title": "Logical Fallacies",
+    "summary": "The most common reasoning errors and how to identify them in arguments — and in your own thinking.",
+    "audioUrl": null,
+    "blocks": [
+      { "type": "h2", "text": "What is a fallacy?" },
+      { "type": "p", "text": "A logical fallacy is an error in reasoning that makes an argument invalid, even if it seems convincing. Recognizing fallacies is essential for critical thinking." },
+      { "type": "h2", "text": "Most common fallacies" },
+      { "type": "bullets", "items": [
+        "Ad hominem: attacking the person instead of the argument",
+        "Straw man: distorting the opponent's position to refute it more easily",
+        "Appeal to authority: accepting something as true because an authority said so",
+        "False dichotomy: presenting only two options when more exist"
+      ]},
+      { "type": "quote", "text": "An argument that sounds good is not always a good argument." },
+      { "type": "h2", "text": "Why it matters" },
+      { "type": "p", "text": "Fallacies appear in political speeches, advertising, public debates, and everyday conversations. Identifying them protects you from manipulation and improves the quality of your own arguments." }
+    ]
+  },
+  "cards": [
+    { "id": "c1", "front": "What is the ad hominem fallacy?", "back": "Attacking the character or circumstances of the person making the argument, rather than responding to the argument itself." },
+    { "id": "c2", "front": "What is the straw man fallacy?", "back": "Distorting or exaggerating the opponent's position to refute it more easily, rather than attacking the actual argument." },
+    { "id": "c3", "front": "What is a false dichotomy?", "back": "Presenting a situation as if only two opposite options exist, when in reality more alternatives are available." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question": "Which of the following is an example of ad hominem?",
+      "options": [
+        "Your proposal doesn't work because it ignores factor X",
+        "Don't listen to him — he was never a good student",
+        "This solution is too expensive to implement",
+        "The data shows a different result than expected"
+      ],
+      "answerIndex": 1,
+      "explanation": "Ad hominem attacks the person (never a good student) instead of responding to the argument being made."
+    },
+    {
+      "id": "q2",
+      "question": "What is the problem with the straw man fallacy?",
+      "options": [
+        "It uses false data to support an argument",
+        "It refutes a distorted version of the original argument",
+        "It appeals to emotions instead of reason",
+        "It uses authority to validate an idea"
+      ],
+      "answerIndex": 1,
+      "explanation": "The straw man creates an easier-to-refute version of the opponent's argument, avoiding the actual debate."
+    }
+  ]
+}

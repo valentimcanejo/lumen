@@ -1,0 +1,58 @@
+{
+  "id": "economics_interest_rates",
+  "version": 1,
+  "lang": "en",
+  "estimatedMinutes": 9,
+  "difficulty": 3,
+  "tags": ["interest rates", "central bank", "monetary policy", "Fed"],
+  "source": "local",
+  "lesson": {
+    "title": "Interest Rates and Central Banks",
+    "summary": "How central banks use interest rates to control the economy and what that means for you.",
+    "audioUrl": null,
+    "blocks": [
+      { "type": "h2", "text": "What is an interest rate?" },
+      { "type": "p", "text": "An interest rate is the cost of money over time. When you borrow, you pay interest. When you save, you earn interest. Central banks control the economy's base rate." },
+      { "type": "h2", "text": "The role of the central bank" },
+      { "type": "p", "text": "In the US, the Federal Reserve controls the Fed Funds rate. In the EU, the European Central Bank sets its key rates. These base rates influence the entire financial system: credit, savings, and exchange rates." },
+      { "type": "h2", "text": "How rates control the economy" },
+      { "type": "bullets", "items": [
+        "High rates: credit becomes expensive, consumption falls, inflation retreats",
+        "Low rates: credit becomes cheap, consumption rises, economy accelerates",
+        "The challenge: calibrating without causing recession or runaway inflation"
+      ]},
+      { "type": "quote", "text": "The central bank has only one instrument, which is the short-term interest rate. — Ben Bernanke" }
+    ]
+  },
+  "cards": [
+    { "id": "c1", "front": "What is the Federal Reserve's main policy tool?", "back": "The federal funds rate — the interest rate at which banks lend to each other overnight. It influences all other rates in the financial system." },
+    { "id": "c2", "front": "Why does a central bank raise interest rates?", "back": "To reduce inflation: higher rates make credit more expensive, reduce consumption, and decrease demand for goods and services." },
+    { "id": "c3", "front": "What is the risk of cutting rates too much?", "back": "It can generate excessive inflation by stimulating demand beyond the economy's productive capacity." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question": "When a central bank wants to reduce inflation, it typically:",
+      "options": [
+        "Lowers interest rates to stimulate growth",
+        "Raises interest rates to make credit more expensive",
+        "Prints more money to cover expenses",
+        "Cuts taxes to boost consumption"
+      ],
+      "answerIndex": 1,
+      "explanation": "Higher rates make credit more expensive, reduce consumption and demand, which tends to curb inflation."
+    },
+    {
+      "id": "q2",
+      "question": "What can happen when interest rates stay too low for too long?",
+      "options": [
+        "Inflation falls automatically",
+        "Unemployment rises sharply",
+        "Asset bubbles and excessive inflation can develop",
+        "The currency strengthens sharply"
+      ],
+      "answerIndex": 2,
+      "explanation": "Very low rates encourage excessive credit and speculation, which can create market bubbles and inflationary pressure."
+    }
+  ]
+}

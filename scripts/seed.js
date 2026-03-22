@@ -158,10 +158,18 @@ const TRACKS = [
 const ASSETS_PACKS_DIR = path.join(__dirname, "../mobile/assets/packs");
 
 const PACK_FILES = [
-  { id: "critical_thinking", version: 1, langs: ["pt", "en", "es"] },
-  { id: "foundations",       version: 1, langs: ["pt", "en", "es"] },
-  { id: "geopolitics",       version: 1, langs: ["pt", "en", "es"] },
-  { id: "economics",         version: 1, langs: ["pt", "en", "es"] },
+  { id: "critical_thinking",          version: 1, langs: ["pt", "en", "es"] },
+  { id: "critical_thinking_fallacies", version: 1, langs: ["pt", "en", "es"] },
+  { id: "critical_thinking_bias",      version: 1, langs: ["pt", "en", "es"] },
+  { id: "foundations",                 version: 1, langs: ["pt", "en", "es"] },
+  { id: "foundations_mental_models",   version: 1, langs: ["pt", "en", "es"] },
+  { id: "foundations_first_principles", version: 1, langs: ["pt", "en", "es"] },
+  { id: "geopolitics",                 version: 1, langs: ["pt", "en", "es"] },
+  { id: "geopolitics_nato",            version: 1, langs: ["pt", "en", "es"] },
+  { id: "geopolitics_brics",           version: 1, langs: ["pt", "en", "es"] },
+  { id: "economics",                   version: 1, langs: ["pt", "en", "es"] },
+  { id: "economics_inflation",         version: 1, langs: ["pt", "en", "es"] },
+  { id: "economics_interest_rates",    version: 1, langs: ["pt", "en", "es"] },
 ];
 
 const PACKS = PACK_FILES.flatMap(({ id, version, langs }) =>

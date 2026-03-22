@@ -1,0 +1,58 @@
+{
+  "id": "economics_interest_rates",
+  "version": 1,
+  "lang": "pt",
+  "estimatedMinutes": 9,
+  "difficulty": 3,
+  "tags": ["juros", "banco central", "política monetária", "Selic"],
+  "source": "local",
+  "lesson": {
+    "title": "Juros e Bancos Centrais",
+    "summary": "Como os bancos centrais usam as taxas de juros para controlar a economia e o que isso significa para você.",
+    "audioUrl": null,
+    "blocks": [
+      { "type": "h2", "text": "O que é a taxa de juros?" },
+      { "type": "p", "text": "A taxa de juros é o custo do dinheiro ao longo do tempo. Quando você pega emprestado, paga juros. Quando você poupa, recebe juros. Os bancos centrais controlam a taxa básica da economia." },
+      { "type": "h2", "text": "O papel do banco central" },
+      { "type": "p", "text": "No Brasil, o Banco Central define a Selic — a taxa básica de juros. Nos EUA, o Federal Reserve controla os Fed Funds. Essas taxas influenciam todo o sistema financeiro: crédito, poupança, câmbio." },
+      { "type": "h2", "text": "Como os juros controlam a economia" },
+      { "type": "bullets", "items": [
+        "Juros altos: crédito fica caro, consumo cai, inflação recua",
+        "Juros baixos: crédito fica barato, consumo sobe, economia acelera",
+        "O desafio: calibrar sem causar recessão ou inflação descontrolada"
+      ]},
+      { "type": "quote", "text": "O banco central tem apenas um instrumento, que é a taxa de juros de curto prazo. — Ben Bernanke" }
+    ]
+  },
+  "cards": [
+    { "id": "c1", "front": "O que é a taxa Selic?", "back": "A taxa básica de juros da economia brasileira, definida pelo Banco Central do Brasil. Influencia todas as outras taxas do sistema financeiro." },
+    { "id": "c2", "front": "Por que um banco central aumenta a taxa de juros?", "back": "Para reduzir a inflação: juros mais altos encarecem o crédito, diminuem o consumo e a demanda por bens e serviços." },
+    { "id": "c3", "front": "Qual é o risco de reduzir juros demais?", "back": "Pode gerar inflação excessiva ao estimular demanda além da capacidade produtiva da economia." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question": "Quando um banco central quer reduzir a inflação, ele tipicamente:",
+      "options": [
+        "Reduz a taxa de juros para estimular o crescimento",
+        "Aumenta a taxa de juros para encarecer o crédito",
+        "Imprime mais dinheiro para cobrir despesas",
+        "Reduz impostos para aumentar o consumo"
+      ],
+      "answerIndex": 1,
+      "explanation": "Juros mais altos encarecem o crédito, reduzem o consumo e a demanda, o que tende a frear a inflação."
+    },
+    {
+      "id": "q2",
+      "question": "O que acontece quando os juros estão muito baixos por muito tempo?",
+      "options": [
+        "A inflação cai automaticamente",
+        "O desemprego sobe bruscamente",
+        "Pode gerar bolhas de ativos e inflação excessiva",
+        "O câmbio se valoriza fortemente"
+      ],
+      "answerIndex": 2,
+      "explanation": "Juros muito baixos estimulam crédito excessivo, especulação e podem criar bolhas nos mercados e pressão inflacionária."
+    }
+  ]
+}

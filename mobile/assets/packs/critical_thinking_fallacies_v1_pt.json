@@ -1,0 +1,59 @@
+{
+  "id": "critical_thinking_fallacies",
+  "version": 1,
+  "lang": "pt",
+  "estimatedMinutes": 9,
+  "difficulty": 2,
+  "tags": ["falácias", "lógica", "argumentação", "retórica"],
+  "source": "local",
+  "lesson": {
+    "title": "Falácias Lógicas",
+    "summary": "Os erros mais comuns de raciocínio e como identificá-los em argumentos — e no seu próprio pensamento.",
+    "audioUrl": null,
+    "blocks": [
+      { "type": "h2", "text": "O que é uma falácia?" },
+      { "type": "p", "text": "Uma falácia lógica é um erro no raciocínio que torna um argumento inválido, mesmo que pareça convincente. Reconhecer falácias é essencial para pensar criticamente." },
+      { "type": "h2", "text": "Falácias mais comuns" },
+      { "type": "bullets", "items": [
+        "Ad hominem: atacar a pessoa em vez do argumento",
+        "Homem de palha: distorcer a posição do oponente para refutá-la mais facilmente",
+        "Apelo à autoridade: aceitar algo como verdade porque uma autoridade disse",
+        "Falsa dicotomia: apresentar apenas duas opções quando há mais"
+      ]},
+      { "type": "quote", "text": "Um argumento que parece bom nem sempre é um bom argumento." },
+      { "type": "h2", "text": "Por que isso importa" },
+      { "type": "p", "text": "Falácias aparecem em discursos políticos, publicidade, debates públicos e até conversas cotidianas. Identificá-las protege você de ser manipulado e melhora a qualidade dos seus próprios argumentos." }
+    ]
+  },
+  "cards": [
+    { "id": "c1", "front": "O que é a falácia ad hominem?", "back": "Atacar o caráter ou as circunstâncias de quem faz o argumento, em vez de responder ao argumento em si." },
+    { "id": "c2", "front": "O que é o homem de palha?", "back": "Distorcer ou exagerar a posição do oponente para refutá-la mais facilmente, em vez de atacar o argumento real." },
+    { "id": "c3", "front": "O que é falsa dicotomia?", "back": "Apresentar uma situação como se houvesse apenas duas opções opostas, quando na verdade existem mais alternativas." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question": "Qual das afirmações a seguir é um exemplo de ad hominem?",
+      "options": [
+        "Sua proposta não funciona porque ignora o fator X",
+        "Não dê ouvidos a ele — ele nunca foi bom aluno",
+        "Essa solução é muito cara para implementar",
+        "Os dados mostram resultado diferente do esperado"
+      ],
+      "answerIndex": 1,
+      "explanation": "Ad hominem ataca a pessoa (nunca foi bom aluno) em vez de responder ao argumento apresentado."
+    },
+    {
+      "id": "q2",
+      "question": "Qual é o problema da falácia 'homem de palha'?",
+      "options": [
+        "Usa dados falsos para apoiar um argumento",
+        "Refuta uma versão distorcida do argumento original",
+        "Apela às emoções em vez da razão",
+        "Usa autoridade para validar uma ideia"
+      ],
+      "answerIndex": 1,
+      "explanation": "O homem de palha cria uma versão mais fácil de refutar do argumento do oponente, evitando o debate real."
+    }
+  ]
+}

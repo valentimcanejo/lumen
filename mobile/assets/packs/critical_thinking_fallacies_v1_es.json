@@ -1,0 +1,59 @@
+{
+  "id": "critical_thinking_fallacies",
+  "version": 1,
+  "lang": "es",
+  "estimatedMinutes": 9,
+  "difficulty": 2,
+  "tags": ["falacias", "lógica", "argumentación", "retórica"],
+  "source": "local",
+  "lesson": {
+    "title": "Falacias Lógicas",
+    "summary": "Los errores de razonamiento más comunes y cómo identificarlos en argumentos — y en tu propio pensamiento.",
+    "audioUrl": null,
+    "blocks": [
+      { "type": "h2", "text": "¿Qué es una falacia?" },
+      { "type": "p", "text": "Una falacia lógica es un error en el razonamiento que hace inválido un argumento, aunque parezca convincente. Reconocer falacias es esencial para el pensamiento crítico." },
+      { "type": "h2", "text": "Falacias más comunes" },
+      { "type": "bullets", "items": [
+        "Ad hominem: atacar a la persona en vez del argumento",
+        "Hombre de paja: distorsionar la posición del oponente para refutarla más fácilmente",
+        "Apelación a la autoridad: aceptar algo como verdad porque lo dijo una autoridad",
+        "Falsa dicotomía: presentar solo dos opciones cuando existen más"
+      ]},
+      { "type": "quote", "text": "Un argumento que suena bien no siempre es un buen argumento." },
+      { "type": "h2", "text": "Por qué importa" },
+      { "type": "p", "text": "Las falacias aparecen en discursos políticos, publicidad, debates públicos y conversaciones cotidianas. Identificarlas te protege de la manipulación y mejora la calidad de tus propios argumentos." }
+    ]
+  },
+  "cards": [
+    { "id": "c1", "front": "¿Qué es la falacia ad hominem?", "back": "Atacar el carácter o las circunstancias de quien hace el argumento, en vez de responder al argumento mismo." },
+    { "id": "c2", "front": "¿Qué es el hombre de paja?", "back": "Distorsionar o exagerar la posición del oponente para refutarla más fácilmente, en vez de atacar el argumento real." },
+    { "id": "c3", "front": "¿Qué es una falsa dicotomía?", "back": "Presentar una situación como si solo existieran dos opciones opuestas, cuando en realidad hay más alternativas." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question": "¿Cuál de las siguientes es un ejemplo de ad hominem?",
+      "options": [
+        "Tu propuesta no funciona porque ignora el factor X",
+        "No le hagas caso — nunca fue buen estudiante",
+        "Esta solución es demasiado cara de implementar",
+        "Los datos muestran un resultado diferente al esperado"
+      ],
+      "answerIndex": 1,
+      "explanation": "El ad hominem ataca a la persona (nunca fue buen estudiante) en vez de responder al argumento presentado."
+    },
+    {
+      "id": "q2",
+      "question": "¿Cuál es el problema de la falacia del hombre de paja?",
+      "options": [
+        "Usa datos falsos para apoyar un argumento",
+        "Refuta una versión distorsionada del argumento original",
+        "Apela a las emociones en vez de la razón",
+        "Usa la autoridad para validar una idea"
+      ],
+      "answerIndex": 1,
+      "explanation": "El hombre de paja crea una versión más fácil de refutar del argumento del oponente, evitando el debate real."
+    }
+  ]
+}

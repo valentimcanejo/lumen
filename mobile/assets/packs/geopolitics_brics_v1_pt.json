@@ -1,0 +1,59 @@
+{
+  "id": "geopolitics_brics",
+  "version": 1,
+  "lang": "pt",
+  "estimatedMinutes": 9,
+  "difficulty": 2,
+  "tags": ["BRICS", "sul global", "multipolaridade", "emergentes"],
+  "source": "local",
+  "lesson": {
+    "title": "BRICS e o Sul Global",
+    "summary": "Como as economias emergentes estão desafiando a ordem ocidental e redesenhando o poder global.",
+    "audioUrl": null,
+    "blocks": [
+      { "type": "h2", "text": "O que é o BRICS?" },
+      { "type": "p", "text": "BRICS é o acrônimo para Brasil, Rússia, Índia, China e África do Sul — um grupo de grandes economias emergentes que buscam maior representação na ordem global." },
+      { "type": "h2", "text": "A expansão de 2024" },
+      { "type": "p", "text": "Em 2024, o bloco se expandiu para incluir Egito, Etiópia, Irã e Emirados Árabes Unidos, dobrando quase sua representação geográfica e sinalizando uma crescente rejeição à hegemonia ocidental." },
+      { "type": "h2", "text": "O que o BRICS representa?" },
+      { "type": "bullets", "items": [
+        "Alternativa ao FMI e ao Banco Mundial",
+        "Uso de moedas locais para evitar o dólar",
+        "Voz coletiva do Sul Global nas negociações internacionais"
+      ]},
+      { "type": "quote", "text": "O BRICS não é anti-Ocidente, mas pró-Sul Global. — Cyril Ramaphosa" },
+      { "type": "p", "text": "O bloco representa cerca de 40% da população mundial e mais de 30% do PIB global, mas ainda enfrenta divisões internas — especialmente entre China e Índia." }
+    ]
+  },
+  "cards": [
+    { "id": "c1", "front": "O que significa a sigla BRICS?", "back": "Brasil, Rússia, Índia, China e África do Sul (South Africa). Em 2024 foi expandido com Egito, Etiópia, Irã e EAU." },
+    { "id": "c2", "front": "Por que o BRICS quer reduzir o uso do dólar?", "back": "Para diminuir a dependência de uma única moeda e reduzir a vulnerabilidade a sanções econômicas ocidentais." },
+    { "id": "c3", "front": "Qual é a principal tensão interna do BRICS?", "back": "A rivalidade entre China e Índia, que competem por influência regional e têm disputas territoriais não resolvidas." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question": "Qual é um dos principais objetivos do BRICS?",
+      "options": [
+        "Criar uma aliança militar rival à OTAN",
+        "Reduzir a influência do dólar e do FMI",
+        "Unificar as moedas dos países membros",
+        "Substituir a ONU como fórum global"
+      ],
+      "answerIndex": 1,
+      "explanation": "O BRICS busca criar alternativas ao sistema financeiro liderado pelo Ocidente, incluindo o uso de moedas locais e instituições próprias."
+    },
+    {
+      "id": "q2",
+      "question": "Por que a expansão do BRICS em 2024 é geopoliticamente significativa?",
+      "options": [
+        "Porque incluiu países europeus pela primeira vez",
+        "Porque aumentou a presença militar combinada do bloco",
+        "Porque ampliou a representação do Sul Global e sinalizou desafio à hegemonia ocidental",
+        "Porque criou uma moeda única para o comércio internacional"
+      ],
+      "answerIndex": 2,
+      "explanation": "A inclusão de Egito, Etiópia, Irã e EAU ampliou o alcance geográfico e político do bloco, reforçando sua posição como alternativa ao Ocidente."
+    }
+  ]
+}

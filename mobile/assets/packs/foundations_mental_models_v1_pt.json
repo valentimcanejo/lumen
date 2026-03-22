@@ -1,0 +1,58 @@
+{
+  "id": "foundations_mental_models",
+  "version": 1,
+  "lang": "pt",
+  "estimatedMinutes": 8,
+  "difficulty": 1,
+  "tags": ["mental models", "decisão", "raciocínio"],
+  "source": "local",
+  "lesson": {
+    "title": "Modelos Mentais",
+    "summary": "Frameworks que ajudam a enxergar o mundo com mais clareza e tomar decisões melhores.",
+    "audioUrl": null,
+    "blocks": [
+      { "type": "h2", "text": "O que são modelos mentais?" },
+      { "type": "p", "text": "Modelos mentais são representações simplificadas da realidade que usamos para entender e navegar pelo mundo. Nenhum modelo é perfeito — mas os melhores modelos são os mais úteis." },
+      { "type": "h2", "text": "Modelos essenciais" },
+      { "type": "p", "text": "Navalhão de Occam: entre explicações igualmente válidas, prefira a mais simples. Mapa vs. território: nossas percepções são o mapa, não a realidade em si. Pensamento de segunda ordem: analise as consequências das consequências." },
+      { "type": "quote", "text": "Todos os modelos são errados, mas alguns são úteis. — George Box" },
+      { "type": "h2", "text": "Como usar modelos mentais" },
+      { "type": "bullets", "items": [
+        "Identifique qual modelo se aplica à situação",
+        "Combine múltiplos modelos para ter perspectivas diferentes",
+        "Questione os modelos que usa automaticamente"
+      ]}
+    ]
+  },
+  "cards": [
+    { "id": "c1", "front": "O que é o Navalha de Occam?", "back": "Princípio que prefere a explicação mais simples quando duas são igualmente válidas. Evita complexidade desnecessária." },
+    { "id": "c2", "front": "O que significa 'mapa não é território'?", "back": "Nossas percepções e modelos representam a realidade, mas não são a própria realidade. Sempre há informações que o mapa omite." },
+    { "id": "c3", "front": "O que é pensamento de segunda ordem?", "back": "Analisar não só os efeitos imediatos de uma ação, mas os efeitos dos efeitos — consequências de longo prazo e reações do sistema." }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question": "Qual o propósito principal dos modelos mentais?",
+      "options": [
+        "Memorizar fatos e informações",
+        "Simplificar e navegar a realidade com mais eficácia",
+        "Criar teorias científicas complexas",
+        "Substituir a intuição humana"
+      ],
+      "answerIndex": 1,
+      "explanation": "Modelos mentais são ferramentas para pensar melhor — eles simplificam a realidade para tornar decisões e análises mais eficazes."
+    },
+    {
+      "id": "q2",
+      "question": "Por que combinar múltiplos modelos mentais é útil?",
+      "options": [
+        "Para tornar o raciocínio mais complicado",
+        "Porque nenhum modelo captura a realidade completa",
+        "Para impressionar outras pessoas",
+        "Porque modelos individuais nunca funcionam"
+      ],
+      "answerIndex": 1,
+      "explanation": "Cada modelo captura um aspecto da realidade. Combiná-los oferece perspectivas complementares e reduz pontos cegos."
+    }
+  ]
+}
