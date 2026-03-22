@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, View, StyleSheet, Modal, Pressable } from "react-native";
+import { ScrollView, View, StyleSheet, Modal, Pressable, TouchableOpacity } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -38,7 +38,7 @@ import type { Lang } from "../../models/lang";
 // Streak pill with pulsing animation
 // ---------------------------------------------------------------------------
 
-function StreakPill({ streak }: { streak: number }) {
+function StreakCard({ streak }: { streak: number }) {
   const { t } = useTranslation();
   const scale = useSharedValue(1);
 
@@ -46,8 +46,8 @@ function StreakPill({ streak }: { streak: number }) {
     if (streak > 0) {
       scale.value = withRepeat(
         withSequence(
-          withTiming(1.2, { duration: 600 }),
-          withTiming(1, { duration: 600 }),
+          withTiming(1.25, { duration: 700 }),
+          withTiming(1, { duration: 700 }),
         ),
         -1,
         true,
@@ -56,19 +56,40 @@ function StreakPill({ streak }: { streak: number }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [streak]);
 
-  const animStyle = useAnimatedStyle(() => ({
+  const flameStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
   }));
 
+  if (streak === 0) return null;
+
   return (
-    <HStack className="items-center bg-[#1A2233] rounded-full px-3 py-1.5" space="xs">
-      <Animated.Text style={animStyle}>🔥</Animated.Text>
-      <Text className="text-[#E6EAF2] text-[13px]">
-        {t("tabs.home.streak")}: {streak}
-      </Text>
-    </HStack>
+    <View style={sk.card}>
+      <Animated.Text style={[sk.flame, flameStyle]}>🔥</Animated.Text>
+      <View style={sk.textCol}>
+        <Text style={sk.num}>{streak}</Text>
+        <Text style={sk.label}>{t("tabs.home.streak")}</Text>
+      </View>
+    </View>
   );
 }
+
+const sk = StyleSheet.create({
+  card: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#1A120A",
+    borderWidth: 1.5,
+    borderColor: "#F5C77A44",
+    borderRadius: 20,
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    gap: 12,
+  },
+  flame: { fontSize: 32 },
+  textCol: { gap: 1 },
+  num: { color: "#F5C77A", fontSize: 28, fontWeight: "800", lineHeight: 32 },
+  label: { color: "#AAB0C0", fontSize: 12, fontWeight: "500" },
+});
 
 // ---------------------------------------------------------------------------
 // Weekly bar chart
@@ -406,9 +427,11 @@ export default function Home() {
         <Text className="text-[#E6EAF2] text-[22px] font-semibold">
           {t("tabs.home.title")}
         </Text>
-        <HStack className="mt-3" space="sm">
-          <StreakPill streak={streak} />
-        </HStack>
+        {streak > 0 && (
+          <Box className="mt-3">
+            <StreakCard streak={streak} />
+          </Box>
+        )}
       </Box>
 
       {/* Pack of the day */}
