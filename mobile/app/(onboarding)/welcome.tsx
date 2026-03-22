@@ -1,5 +1,6 @@
 import React from "react";
 import { ImageBackground } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Box } from "../../components/ui/box";
 import { Center } from "../../components/ui/center";
 import { Text } from "../../components/ui/text";
@@ -10,6 +11,11 @@ import { useTranslation } from "react-i18next";
 
 export default function Welcome() {
   const { t } = useTranslation();
+
+  async function handleSkip() {
+    await AsyncStorage.setItem("hasOnboarded", "true");
+    router.replace("/(tabs)/home");
+  }
 
   return (
     <ImageBackground
@@ -42,7 +48,7 @@ export default function Welcome() {
             <Box className="w-full">
               <LumenButton
                 variant="ghost"
-                onPress={() => router.replace("/(tabs)/home")}
+                onPress={handleSkip}
               >
                 {t("onboarding.welcome.skip")}
               </LumenButton>
