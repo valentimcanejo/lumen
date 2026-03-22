@@ -66,11 +66,10 @@ function TrackCard({ track, lang }: { track: Track; lang: Lang }) {
 export default function Tracks() {
   const { uid } = useAuth();
   const { getUserData } = useUser();
-  const { generate, loading: generating } = useAiPack();
+  const { generate, loading: generating, error: aiPackError } = useAiPack(uid);
   const [tracks, setTracks] = useState<Track[]>([]);
   const [lang, setLang] = useState<Lang>("pt");
   const [loading, setLoading] = useState(true);
-  const [aiError, setAiError] = useState<string | null>(null);
 
   useEffect(() => {
     getTracks()
@@ -88,19 +87,25 @@ export default function Tracks() {
   }, [uid]);
 
   async function handleGenerate() {
-    setAiError(null);
-    try {
-      const pack = await generate({ lang, minutes: 10 });
-      if (pack) {
-        router.push({
-          pathname: "/(session)/lesson",
-          params: { contentId: pack.id, version: String(pack.version), lang },
-        });
-      }
-    } catch {
-      setAiError("Não foi possível gerar o conteúdo. Tente novamente.");
+    const pack = await generate({ lang, minutes: 10 });
+    if (pack) {
+      router.push({
+        pathname: "/(session)/lesson",
+        params: { contentId: pack.id, version: String(pack.version), lang },
+      });
     }
   }
+
+  const aiErrorMessage =
+    aiPackError === "not-premium"
+      ? "Este recurso é exclusivo para assinantes Premium."
+      : aiPackError === "premium-expired"
+        ? "Sua assinatura Premium expirou. Renove para continuar."
+        : aiPackError === "rate-limited"
+          ? "Limite diário de sessões IA atingido. Tente amanhã."
+          : aiPackError === "unknown"
+            ? "Não foi possível gerar o conteúdo. Tente novamente."
+            : null;
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
@@ -130,8 +135,8 @@ export default function Tracks() {
             Crie uma sessão personalizada no seu idioma com conteúdo gerado sob
             demanda.
           </Text>
-          {aiError ? (
-            <Text className="text-[#E26D6D] text-[12px] mt-3">{aiError}</Text>
+          {aiErrorMessage ? (
+            <Text className="text-[#E26D6D] text-[12px] mt-3">{aiErrorMessage}</Text>
           ) : null}
           <Pressable
             onPress={handleGenerate}

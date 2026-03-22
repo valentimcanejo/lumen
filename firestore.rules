@@ -1,0 +1,32 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Public content — read-only, never writable by clients
+    match /tracks/{doc} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /lessons/{doc} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /goals/{doc} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /daily_sessions/{doc} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Private user data — only the authenticated owner
+    match /users/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+
+      match /{collection}/{document=**} {
+        allow read, write: if request.auth != null && request.auth.uid == uid;
+      }
+    }
+  }
+}
