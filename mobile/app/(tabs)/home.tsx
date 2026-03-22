@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, View, StyleSheet } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -78,6 +78,61 @@ const DAY_LABELS: Record<string, string[]> = {
   es: ["L", "M", "X", "J", "V", "S", "D"],
 };
 
+const wk = StyleSheet.create({
+  card: {
+    backgroundColor: "#121826",
+    borderWidth: 1,
+    borderColor: "#1A2233",
+    borderRadius: 22,
+    padding: 20,
+  },
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+    marginBottom: 20,
+  },
+  minutesNum: { color: "#F5C77A", fontSize: 28, fontWeight: "700" },
+  minutesLabel: { color: "#AAB0C0", fontSize: 13, marginBottom: 3, marginLeft: 4 },
+  badge: {
+    backgroundColor: "#F5C77A22",
+    borderWidth: 1,
+    borderColor: "#F5C77A44",
+    borderRadius: 100,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  badgeText: { color: "#F5C77A", fontSize: 11, fontWeight: "600" },
+  daysRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 16,
+  },
+  dayCol: { alignItems: "center", gap: 4 },
+  circle: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  dot: { width: 7, height: 7, borderRadius: 4 },
+  dayLabel: { fontSize: 11, fontWeight: "600" },
+  barTrack: {
+    height: 5,
+    backgroundColor: "#1A2233",
+    borderRadius: 3,
+    overflow: "hidden",
+  },
+  barFill: { height: "100%", borderRadius: 3 },
+  statsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 4,
+  },
+  statsText: { color: "#4A5568", fontSize: 11 },
+});
+
 function WeeklyCard({
   data,
   goalMin,
@@ -90,7 +145,7 @@ function WeeklyCard({
   studiedLabel: string;
 }) {
   const today = new Date().getDay();
-  const todayIndex = today === 0 ? 6 : today - 1; // Mon=0 … Sun=6
+  const todayIndex = today === 0 ? 6 : today - 1;
   const labels = DAY_LABELS[lang] ?? DAY_LABELS.en;
   const totalMinutes = data.reduce((s, d) => s + d.minutes, 0);
   const weekGoal = goalMin * 7;
@@ -98,79 +153,72 @@ function WeeklyCard({
   const weekDone = weekPct >= 1;
 
   return (
-    <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
-      {/* Header row */}
-      <HStack className="items-end justify-between mb-5">
-        <HStack className="items-baseline" space="xs">
-          <Text className="text-[#F5C77A] text-[28px] font-bold">{totalMinutes}</Text>
-          <Text className="text-[#AAB0C0] text-[13px]">min {studiedLabel}</Text>
-        </HStack>
+    <View style={wk.card}>
+      {/* Header */}
+      <View style={wk.headerRow}>
+        <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
+          <Text style={wk.minutesNum}>{totalMinutes}</Text>
+          <Text style={wk.minutesLabel}>min {studiedLabel}</Text>
+        </View>
         {weekDone && (
-          <Box className="bg-[#F5C77A]/15 border border-[#F5C77A]/30 rounded-full px-3 py-1">
-            <Text className="text-[#F5C77A] text-[11px] font-semibold">🏆 Meta!</Text>
-          </Box>
+          <View style={wk.badge}>
+            <Text style={wk.badgeText}>🏆 Meta!</Text>
+          </View>
         )}
-      </HStack>
+      </View>
 
       {/* Day circles */}
-      <HStack className="justify-between mb-4">
+      <View style={wk.daysRow}>
         {data.map((d, i) => {
           const done = d.minutes >= goalMin;
           const isToday = i === todayIndex;
           const isFuture = i > todayIndex;
 
           return (
-            <VStack key={d.date} className="items-center" space="xs">
-              <Box
-                className="w-[38px] h-[38px] rounded-full items-center justify-center"
-                style={{
-                  backgroundColor: done
-                    ? "#F5C77A"
-                    : isToday
-                      ? "transparent"
-                      : "#1A2233",
-                  borderWidth: isToday && !done ? 2 : 0,
-                  borderColor: "#F5C77A99",
-                }}
+            <View key={d.date} style={wk.dayCol}>
+              <View
+                style={[
+                  wk.circle,
+                  {
+                    backgroundColor: done ? "#F5C77A" : isToday ? "transparent" : "#1A2233",
+                    borderWidth: isToday && !done ? 2 : 0,
+                    borderColor: "#F5C77A88",
+                  },
+                ]}
               >
                 {done ? (
-                  <Ionicons name="checkmark" size={20} color="#0B0F14" />
+                  <Ionicons name="checkmark" size={18} color="#0B0F14" />
                 ) : isToday ? (
-                  <Box className="w-[7px] h-[7px] rounded-full bg-[#F5C77A]" />
+                  <View style={[wk.dot, { backgroundColor: "#F5C77A" }]} />
                 ) : isFuture ? null : (
-                  <Box className="w-[5px] h-[5px] rounded-full bg-[#3A4458]" />
+                  <View style={[wk.dot, { backgroundColor: "#3A4458", width: 5, height: 5, borderRadius: 3 }]} />
                 )}
-              </Box>
-              <Text
-                className="text-[11px] font-semibold"
-                style={{ color: isToday ? "#F5C77A" : "#4A5568" }}
-              >
+              </View>
+              <Text style={[wk.dayLabel, { color: isToday ? "#F5C77A" : "#4A5568" }]}>
                 {labels[i]}
               </Text>
-            </VStack>
+            </View>
           );
         })}
-      </HStack>
+      </View>
 
       {/* Progress bar */}
-      <Box className="h-[5px] bg-[#1A2233] rounded-full overflow-hidden">
-        <Box
-          className="h-full rounded-full"
-          style={{
-            width: `${weekPct * 100}%`,
-            backgroundColor: weekDone ? "#5ED19A" : "#F5C77A",
-          }}
+      <View style={wk.barTrack}>
+        <View
+          style={[
+            wk.barFill,
+            {
+              width: `${weekPct * 100}%`,
+              backgroundColor: weekDone ? "#5ED19A" : "#F5C77A",
+            },
+          ]}
         />
-      </Box>
-      <HStack className="justify-between mt-1">
-        <Text className="text-[#4A5568] text-[11px]">
-          {Math.round(weekPct * 100)}% da semana
-        </Text>
-        <Text className="text-[#4A5568] text-[11px]">
-          {totalMinutes} / {weekGoal} min
-        </Text>
-      </HStack>
-    </Box>
+      </View>
+      <View style={wk.statsRow}>
+        <Text style={wk.statsText}>{Math.round(weekPct * 100)}%</Text>
+        <Text style={wk.statsText}>{totalMinutes} / {weekGoal} min</Text>
+      </View>
+    </View>
   );
 }
 

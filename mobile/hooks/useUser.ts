@@ -19,14 +19,16 @@ export function useUser() {
   }) {
     setLoading(true);
     try {
-      await setDoc(doc(userCollection, args.userId), {
-        ...args,
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-        hasOnboarded: true,
-        streak: { current: 0, best: 0, shields: 0, lastStudyDate: null },
-        selectedGoalIds: args.selectedGoalIds || [],
-      });
+      await setDoc(
+        doc(userCollection, args.userId),
+        {
+          ...args,
+          updatedAt: Date.now(),
+          hasOnboarded: true,
+          selectedGoalIds: args.selectedGoalIds || [],
+        },
+        { merge: true }, // never overwrite xp/level/achievements/streak
+      );
 
       await AsyncStorage.setItem("hasOnboarded", "true");
     } catch (error) {
