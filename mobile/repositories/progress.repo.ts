@@ -28,6 +28,13 @@ export type DayData = {
   minutes: number;
 };
 
+export async function getTodaySession(uid: string): Promise<CompletedSession | null> {
+  const today = ymd(new Date());
+  const data = await getDocData<Omit<CompletedSession, "date">>(userDailyPath(uid, today));
+  if (!data) return null;
+  return { date: today, ...data };
+}
+
 export async function getRecentSessions(
   uid: string,
   count = 20,

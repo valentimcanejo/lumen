@@ -60,7 +60,9 @@
       "welcome_back_title": "Bem-vindo de volta! 👋",
       "welcome_back_streak": "Você está em uma sequência de {{streak}} dia(s). Não perca o ritmo!",
       "welcome_back_no_streak": "Pronto para aprender algo novo hoje?",
-      "welcome_back_cta": "Começar sessão"
+      "welcome_back_cta": "Começar sessão",
+      "done_today": "Concluído hoje",
+      "redo": "Refazer"
     },
     "tracks": {
       "title": "Trilhas",

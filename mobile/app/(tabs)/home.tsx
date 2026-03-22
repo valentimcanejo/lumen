@@ -24,7 +24,7 @@ import { SkeletonCard } from "../../components/ui/lumen/Skeleton";
 import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
 import { getActiveGoals, type Goal } from "../../repositories/goals.repo";
-import { getWeeklyData, type DayData } from "../../repositories/progress.repo";
+import { getWeeklyData, getTodaySession, type DayData } from "../../repositories/progress.repo";
 import { todayYmd } from "../../repositories/session.repo";
 import {
   type UserProfile,
@@ -326,6 +326,7 @@ export default function Home() {
   const [weeklyData, setWeeklyData] = useState<DayData[]>([]);
   const [showWelcomeBack, setShowWelcomeBack] = useState(false);
   const [loadingUser, setLoadingUser] = useState(true);
+  const [todayCompletedId, setTodayCompletedId] = useState<string | null>(null);
 
   useEffect(() => {
     if (!currentUserId) return;
@@ -334,6 +335,9 @@ export default function Home() {
       .then((u) => setUser(u ?? null))
       .finally(() => setLoadingUser(false));
     getWeeklyData(currentUserId).then(setWeeklyData).catch(() => {});
+    getTodaySession(currentUserId)
+      .then((s) => setTodayCompletedId(s?.contentId ?? null))
+      .catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUserId]);
 
@@ -413,28 +417,50 @@ export default function Home() {
           <SkeletonCard />
         </Box>
       )}
-      {!loadingUser && todayGoal && (
-        <Box className="px-6 mt-5">
-          <Text className="text-[#AAB0C0] text-[11px] font-semibold tracking-widest mb-2">
-            {t("tabs.home.pack_of_day").toUpperCase()}
-          </Text>
-          <LumenCard>
-            <VStack space="md">
-              <Text className="text-[#E6EAF2] text-[20px] font-semibold">
-                {todayGoal.title[lang]}
+      {!loadingUser && todayGoal && (() => {
+        const isDone = todayCompletedId === todayGoal.id;
+        return (
+          <Box className="px-6 mt-5">
+            <HStack className="items-center justify-between mb-2">
+              <Text className="text-[#AAB0C0] text-[11px] font-semibold tracking-widest">
+                {t("tabs.home.pack_of_day").toUpperCase()}
               </Text>
-              {todayGoal.description?.[lang] ? (
-                <Text className="text-[#AAB0C0]">
-                  {todayGoal.description[lang]}
+              {isDone && (
+                <HStack className="items-center" space="xs">
+                  <Ionicons name="checkmark-circle" size={14} color="#5ED19A" />
+                  <Text className="text-[#5ED19A] text-[11px] font-semibold">
+                    {t("tabs.home.done_today")}
+                  </Text>
+                </HStack>
+              )}
+            </HStack>
+            <LumenCard>
+              <VStack space="md">
+                <Text className="text-[#E6EAF2] text-[20px] font-semibold">
+                  {todayGoal.title[lang]}
                 </Text>
-              ) : null}
-              <LumenButton onPress={() => startSession(todayGoal.id)}>
-                {t("tabs.home.start")}
-              </LumenButton>
-            </VStack>
-          </LumenCard>
-        </Box>
-      )}
+                {todayGoal.description?.[lang] ? (
+                  <Text className="text-[#AAB0C0]">
+                    {todayGoal.description[lang]}
+                  </Text>
+                ) : null}
+                {isDone ? (
+                  <LumenButton
+                    onPress={() => startSession(todayGoal.id)}
+                    variant="ghost"
+                  >
+                    {t("tabs.home.redo")}
+                  </LumenButton>
+                ) : (
+                  <LumenButton onPress={() => startSession(todayGoal.id)}>
+                    {t("tabs.home.start")}
+                  </LumenButton>
+                )}
+              </VStack>
+            </LumenCard>
+          </Box>
+        );
+      })()}
 
       {/* Other selected goals */}
       {!loadingUser && goals

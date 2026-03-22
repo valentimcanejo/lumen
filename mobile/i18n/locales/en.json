@@ -60,7 +60,9 @@
       "welcome_back_title": "Welcome back! 👋",
       "welcome_back_streak": "You're on a {{streak}}-day streak. Keep it up!",
       "welcome_back_no_streak": "Ready to learn something new today?",
-      "welcome_back_cta": "Start session"
+      "welcome_back_cta": "Start session",
+      "done_today": "Done today",
+      "redo": "Do again"
     },
     "tracks": {
       "title": "Tracks",

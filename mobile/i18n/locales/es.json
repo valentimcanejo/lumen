@@ -60,7 +60,9 @@
       "welcome_back_title": "¡Bienvenido de vuelta! 👋",
       "welcome_back_streak": "Llevas {{streak}} día(s) seguidos. ¡No te detengas!",
       "welcome_back_no_streak": "¿Listo para aprender algo nuevo hoy?",
-      "welcome_back_cta": "Comenzar sesión"
+      "welcome_back_cta": "Comenzar sesión",
+      "done_today": "Completado hoy",
+      "redo": "Repetir"
     },
     "tracks": {
       "title": "Rutas",
