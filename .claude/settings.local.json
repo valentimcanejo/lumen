@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npx expo:*)",
+      "Bash(git push:*)",
+      "Bash(node seed.js)",
+      "Bash(npx tsc:*)",
+      "Bash(xargs grep:*)",
+      "Bash(head:*)",
+      "Bash(find /c/Users/valen/lumen -name *.rules -o -name *firestore*rules*)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)"
+    ]
+  }
+}

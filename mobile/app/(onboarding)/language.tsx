@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box } from "../../components/ui/box";
 import { VStack } from "../../components/ui/vstack";
 import { Text } from "../../components/ui/text";
@@ -21,6 +22,7 @@ const LANGS = [
 export default function Language() {
   const [lang, setLang] = useState<(typeof LANGS)[number]["key"]>("pt");
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
 
   const handleNext = async () => {
     try {
@@ -72,7 +74,7 @@ export default function Language() {
         })}
       </VStack>
 
-      <Box className="pb-6 mt-auto">
+      <Box className="mt-auto" style={{ paddingBottom: Math.max(insets.bottom, 24) }}>
         <LumenButton onPress={handleNext}>
           {t("onboarding.language.continue")}
         </LumenButton>

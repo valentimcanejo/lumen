@@ -4,6 +4,7 @@ import { ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as Speech from "expo-speech";
 import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Box } from "@/components/ui/box";
 import { Pressable } from "@/components/ui/pressable";
@@ -78,6 +79,7 @@ function Waveform({ progress = 0 }: { progress?: number }) {
 
 export default function LessonScreen() {
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
   const { contentId, version, lang } = useLocalSearchParams() as {
     contentId: string;
     version: string;
@@ -205,7 +207,7 @@ export default function LessonScreen() {
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
-      <Box className="px-5 pt-14">
+      <Box className="px-5" style={{ paddingTop: insets.top + 8 }}>
         <HStack className="items-center" space="md">
           <Pressable onPress={() => router.back()}>
             <Ionicons name="chevron-back" size={22} color="#AAB0C0" />
@@ -221,7 +223,7 @@ export default function LessonScreen() {
 
       <ScrollView
         className="flex-1"
-        contentContainerStyle={{ paddingBottom: 28 }}
+        contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
       >
         <Box className="px-5 pt-6">
           <Text className="text-[#E6EAF2] text-[22px] font-semibold">

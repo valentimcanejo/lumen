@@ -3,6 +3,7 @@ import { ScrollView } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box } from "../../components/ui/box";
 import { HStack } from "../../components/ui/hstack";
 import { Text } from "../../components/ui/text";
@@ -76,6 +77,7 @@ function TrackCard({ track, lang }: { track: Track; lang: Lang }) {
 
 export default function Tracks() {
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
   const { uid } = useAuth();
   const { getUserData } = useUser();
   const { generate, loading: generating, error: aiPackError } = useAiPack(uid);
@@ -121,7 +123,7 @@ export default function Tracks() {
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
-      <Box className="px-6 pt-14 pb-4">
+      <Box className="px-6 pb-4" style={{ paddingTop: insets.top + 8 }}>
         <Text className="text-[#E6EAF2] text-[22px] font-bold">
           {t("tabs.tracks.title")}
         </Text>

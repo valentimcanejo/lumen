@@ -9,6 +9,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { router } from "expo-router";
 import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Box } from "../../components/ui/box";
 import { HStack } from "../../components/ui/hstack";
@@ -129,6 +130,7 @@ function packOfDay(goalIds: string[], dateStr: string): string | null {
 
 export default function Home() {
   const { t, i18n } = useTranslation();
+  const insets = useSafeAreaInsets();
   const { uid: currentUserId } = useAuth();
   const { getUserData } = useUser();
 
@@ -173,7 +175,7 @@ export default function Home() {
       contentContainerStyle={{ paddingBottom: 40 }}
     >
       {/* Header with level + XP bar */}
-      <Box className="px-6 pt-14">
+      <Box className="px-6" style={{ paddingTop: insets.top + 8 }}>
         <HStack className="items-center justify-between">
           <Text className="text-[#E6EAF2] text-[22px] font-bold">Lumen</Text>
           <Text className="text-[#F5C77A] text-[13px] font-semibold">

@@ -15,6 +15,7 @@ import {
   getLessonsByTrack,
   type LessonMeta,
 } from "../../repositories/lessons.repo";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
 import type { Track } from "../../models/track";
@@ -71,6 +72,7 @@ function LessonCard({
 
 export default function TrackDetailScreen() {
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { uid } = useAuth();
   const { getUserData } = useUser();
@@ -112,7 +114,7 @@ export default function TrackDetailScreen() {
   return (
     <Box className="flex-1 bg-[#0B0F14]">
       {/* Header */}
-      <Box className="px-5 pt-14 pb-4">
+      <Box className="px-5 pb-4" style={{ paddingTop: insets.top + 8 }}>
         <HStack className="items-center" space="md">
           <Pressable onPress={() => router.back()}>
             <Ionicons name="chevron-back" size={22} color="#AAB0C0" />
@@ -133,7 +135,7 @@ export default function TrackDetailScreen() {
 
       <ScrollView
         className="flex-1 px-5"
-        contentContainerStyle={{ paddingBottom: 32 }}
+        contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
       >
         {loading ? (
           <Text className="text-[#AAB0C0] text-center mt-10">

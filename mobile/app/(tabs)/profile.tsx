@@ -3,6 +3,7 @@ import { Platform, ScrollView, ActivityIndicator } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
@@ -197,6 +198,7 @@ export default function ProfileScreen() {
   const { loading, getUserData } = useUser();
   const { uid, user, isAnonymous, signInWithGoogle, signInWithApple, signOut } =
     useAuth();
+  const insets = useSafeAreaInsets();
   const [language, setLanguage] = useState<Lang>("pt");
   const [saving, setSaving] = useState(false);
   const [profileData, setProfileData] = useState<UserProfile | null>(null);
@@ -237,7 +239,7 @@ export default function ProfileScreen() {
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
-      <Box className="px-5 pt-14">
+      <Box className="px-5" style={{ paddingTop: insets.top + 8 }}>
         <HStack className="items-center" space="md">
           <Pressable onPress={() => router.push("/(tabs)/home")}>
             <Ionicons name="chevron-back" size={22} color="#AAB0C0" />

@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box } from "../../components/ui/box";
 import { HStack } from "../../components/ui/hstack";
 import { Text } from "../../components/ui/text";
@@ -12,6 +13,7 @@ import { Lang } from "../../models/lang";
 import { getActiveGoals, type Goal } from "../../repositories/goals.repo";
 
 export default function Goals() {
+  const insets = useSafeAreaInsets();
   const [selected, setSelected] = useState<string[]>([]);
   const [goals, setGoals] = useState<Goal[]>([]);
   const canContinue = useMemo(
@@ -74,7 +76,7 @@ export default function Goals() {
         })}
       </VStack>
 
-      <Box className="pb-6 mt-auto">
+      <Box className="mt-auto" style={{ paddingBottom: Math.max(insets.bottom, 24) }}>
         <LumenButton disabled={!canContinue} onPress={handleNext}>
           {t("onboarding.goals.continue")}
         </LumenButton>

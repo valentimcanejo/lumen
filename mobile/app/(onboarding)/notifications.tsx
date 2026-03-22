@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box } from "../../components/ui/box";
 import { Text } from "../../components/ui/text";
 import { VStack } from "../../components/ui/vstack";
@@ -13,6 +14,7 @@ import {
 
 export default function NotificationsOnboarding() {
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
   const [loading, setLoading] = useState(false);
 
   async function handleAllow() {
@@ -38,7 +40,10 @@ export default function NotificationsOnboarding() {
   }
 
   return (
-    <Box className="flex-1 bg-[#0B0F14] px-6 pt-16 pb-10">
+    <Box
+      className="flex-1 bg-[#0B0F14] px-6"
+      style={{ paddingTop: insets.top + 24, paddingBottom: Math.max(insets.bottom, 24) }}
+    >
       <VStack className="flex-1 items-center justify-center" space="lg">
         <Text className="text-[64px]">🔔</Text>
         <Text className="text-[#E6EAF2] text-[26px] font-semibold text-center">

@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -110,6 +111,7 @@ export default function SummaryScreen() {
   const scorePct = totalN > 0 ? clamp(correctN / totalN, 0, 1) : 0;
   const quizScore = totalN > 0 ? correctN / totalN : 1;
 
+  const insets = useSafeAreaInsets();
   const { uid } = useAuth();
   const { getUserData } = useUser();
   const [saving, setSaving] = useState(false);
@@ -201,7 +203,7 @@ export default function SummaryScreen() {
     <Box className="flex-1 bg-[#0B0F14]">
       <AchievementToast achievements={newAchievements} />
 
-      <Box className="px-5 pt-14">
+      <Box className="px-5" style={{ paddingTop: insets.top + 8 }}>
         <HStack className="items-center" space="md">
           <Pressable onPress={() => router.back()}>
             <Ionicons name="chevron-back" size={22} color="#AAB0C0" />
@@ -291,7 +293,7 @@ export default function SummaryScreen() {
           </HStack>
         </Box>
 
-        <VStack space="sm" className="pb-6 mt-auto">
+        <VStack space="sm" className="mt-auto" style={{ paddingBottom: Math.max(insets.bottom, 24) }}>
           <Pressable
             onPress={onFinish}
             disabled={saving || saved}

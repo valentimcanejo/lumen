@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
 import { router } from "expo-router";
 import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Box } from "../../components/ui/box";
 import { HStack } from "../../components/ui/hstack";
@@ -120,6 +121,7 @@ type Tab = "history" | "saved";
 
 export default function Library() {
   const { t, i18n } = useTranslation();
+  const insets = useSafeAreaInsets();
   const { uid } = useAuth();
   const { getUserData } = useUser();
   const locale = DATE_LOCALE[i18n.language] ?? "en-US";
@@ -168,7 +170,7 @@ export default function Library() {
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
-      <Box className="px-6 pt-14 pb-4">
+      <Box className="px-6 pb-4" style={{ paddingTop: insets.top + 8 }}>
         <Text className="text-[#E6EAF2] text-[22px] font-bold">
           {t("tabs.library.title")}
         </Text>

@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 import { HStack } from "@/components/ui/hstack";
@@ -25,6 +26,7 @@ type Grade = "know" | "dont";
 
 export default function CardsScreen() {
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
   const { contentId, version, lang } = useLocalSearchParams() as {
     contentId: string;
     version: string;
@@ -86,7 +88,7 @@ export default function CardsScreen() {
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
-      <Box className="px-5 pt-14">
+      <Box className="px-5" style={{ paddingTop: insets.top + 8 }}>
         <HStack className="items-center" space="md">
           <Pressable onPress={() => router.back()}>
             <Ionicons name="chevron-back" size={22} color="#AAB0C0" />
@@ -157,7 +159,7 @@ export default function CardsScreen() {
               )}
             </Box>
 
-            <VStack space="sm" className="mt-4 pb-6">
+            <VStack space="sm" className="mt-4" style={{ paddingBottom: Math.max(insets.bottom, 24) }}>
               {!revealed ? (
                 <Pressable
                   onPress={() => setRevealed(true)}

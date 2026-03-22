@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box } from "../../components/ui/box";
 import { Text } from "../../components/ui/text";
 import { VStack } from "../../components/ui/vstack";
@@ -19,6 +20,7 @@ const OPTIONS = [
 export default function DailyTime() {
   const [minutes, setMinutes] = useState<number>(10);
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
   const { setUserPreferences } = useUser();
 
   const { selectedLanguage, selectedGoals, userId } =
@@ -84,7 +86,7 @@ export default function DailyTime() {
         })}
       </VStack>
 
-      <Box className="pb-6 mt-auto">
+      <Box className="mt-auto" style={{ paddingBottom: Math.max(insets.bottom, 24) }}>
         <LumenButton onPress={handleNext}>
           {t("onboarding.daily-time.continue")}
         </LumenButton>
