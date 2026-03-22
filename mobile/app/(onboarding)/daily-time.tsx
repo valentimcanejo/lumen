@@ -38,13 +38,8 @@ export default function DailyTime() {
       });
 
       router.push({
-        pathname: `/(tabs)/home`,
-        params: {
-          selectedLanguage,
-          selectedMinutes: minutes,
-          selectedGoals,
-          userId,
-        },
+        pathname: `/(onboarding)/notifications`,
+        params: { selectedLanguage, selectedMinutes: minutes, selectedGoals, userId },
       });
     } catch (error) {
       console.log(error);

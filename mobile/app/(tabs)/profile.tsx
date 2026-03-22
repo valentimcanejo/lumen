@@ -15,6 +15,14 @@ import { useAuth } from "../../hooks/useAuth";
 import { setUserLanguage } from "../../repositories/user.repo";
 import { setLanguage as setI18nLanguage } from "../../i18n/setLanguage";
 import type { Lang } from "../../models/lang";
+import {
+  LEVEL_XP_THRESHOLDS,
+  xpToLevel,
+  xpForNextLevel,
+  type AchievementId,
+  type UserProfile,
+} from "../../models/user";
+import { ACHIEVEMENTS } from "../../repositories/achievements.repo";
 
 // ---------------------------------------------------------------------------
 // Account card
@@ -154,34 +162,6 @@ function AccountCard({
 // Sub-components
 // ---------------------------------------------------------------------------
 
-function StreakInfo({ streak }: { streak: number }) {
-  const { t } = useTranslation();
-  return (
-    <VStack className="items-center space-y-1">
-      <Text className="text-[#E6EAF2] text-[16px] font-semibold">
-        {t("tabs.profile.streak")}
-      </Text>
-      <Text className="text-[#F5C77A] text-[32px] font-semibold">
-        {streak} {t("tabs.profile.streak_unit")}
-      </Text>
-    </VStack>
-  );
-}
-
-function DailyGoal({ goal }: { goal: number }) {
-  const { t } = useTranslation();
-  return (
-    <VStack className="items-center space-y-1">
-      <Text className="text-[#E6EAF2] text-[16px] font-semibold">
-        {t("tabs.profile.daily_goal")}
-      </Text>
-      <Text className="text-[#F5C77A] text-[32px] font-semibold">
-        {goal} {t("tabs.profile.daily_goal_unit")}
-      </Text>
-    </VStack>
-  );
-}
-
 function LanguageSelector({
   lang,
   onChange,
@@ -219,19 +199,28 @@ export default function ProfileScreen() {
     useAuth();
   const [language, setLanguage] = useState<Lang>("pt");
   const [saving, setSaving] = useState(false);
-  const [streak, setStreak] = useState(0);
-  const [dailyGoal, setDailyGoal] = useState(10);
+  const [profileData, setProfileData] = useState<UserProfile | null>(null);
 
   useEffect(() => {
     if (!uid) return;
     getUserData({ userId: uid }).then((u) => {
       if (!u) return;
+      setProfileData(u);
       setLanguage(u.lang);
-      setStreak(u.streak?.current ?? 0);
-      setDailyGoal(u.dailyGoalMin ?? 10);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
+
+  const streak = profileData?.streak?.current ?? 0;
+  const dailyGoal = profileData?.dailyGoalMin ?? 10;
+  const xp = profileData?.xp ?? 0;
+  const level = xpToLevel(xp);
+  const xpFloor = LEVEL_XP_THRESHOLDS[level - 1] ?? 0;
+  const xpCeil = xpForNextLevel(level);
+  const xpPct = xpCeil > xpFloor ? (xp - xpFloor) / (xpCeil - xpFloor) : 1;
+  const unlockedAchievements = ACHIEVEMENTS.filter(
+    (a) => !!profileData?.achievements?.[a.id as AchievementId],
+  );
 
   const handleSaveChanges = async () => {
     if (!uid) return;
@@ -276,14 +265,88 @@ export default function ProfileScreen() {
           <Text className="text-[#AAB0C0]">{t("tabs.profile.loading")}</Text>
         ) : (
           <>
+            {/* Stats row */}
+            <HStack className="bg-[#111827] rounded-2xl p-4 mb-6" space="md">
+              <VStack className="flex-1 items-center" space="xs">
+                <Text className="text-[#7B8193] text-[11px]">
+                  {t("tabs.profile.streak")}
+                </Text>
+                <Text className="text-[#F5C77A] text-[24px] font-semibold">
+                  {streak}
+                </Text>
+                <Text className="text-[#7B8193] text-[11px]">
+                  {t("tabs.profile.streak_unit")}
+                </Text>
+              </VStack>
+              <Box className="w-[1px] bg-[#1A2233]" />
+              <VStack className="flex-1 items-center" space="xs">
+                <Text className="text-[#7B8193] text-[11px]">
+                  {t("tabs.profile.daily_goal")}
+                </Text>
+                <Text className="text-[#F5C77A] text-[24px] font-semibold">
+                  {dailyGoal}
+                </Text>
+                <Text className="text-[#7B8193] text-[11px]">
+                  {t("tabs.profile.daily_goal_unit")}
+                </Text>
+              </VStack>
+              <Box className="w-[1px] bg-[#1A2233]" />
+              <VStack className="flex-1 items-center" space="xs">
+                <Text className="text-[#7B8193] text-[11px]">
+                  {t("tabs.profile.xp")}
+                </Text>
+                <Text className="text-[#F5C77A] text-[24px] font-semibold">
+                  {xp}
+                </Text>
+                <Text className="text-[#7B8193] text-[11px]">
+                  {t("tabs.profile.level")} {level}
+                </Text>
+              </VStack>
+            </HStack>
+
+            {/* XP progress bar */}
             <Box className="mb-6">
-              <StreakInfo streak={streak} />
+              <HStack className="items-center justify-between mb-2">
+                <Text className="text-[#AAB0C0] text-[12px]">
+                  {t("tabs.profile.level")} {level}
+                </Text>
+                <Text className="text-[#7B8193] text-[12px]">
+                  {xp} / {xpCeil} XP
+                </Text>
+              </HStack>
+              <Box className="h-[6px] bg-[#1A2233] rounded-full overflow-hidden">
+                <Box
+                  className="h-full bg-[#F5C77A]"
+                  style={{ width: `${Math.min(xpPct * 100, 100)}%` }}
+                />
+              </Box>
             </Box>
 
-            <Box className="mb-6">
-              <DailyGoal goal={dailyGoal} />
-            </Box>
+            {/* Achievements */}
+            {unlockedAchievements.length > 0 && (
+              <Box className="mb-6">
+                <Text className="text-[#E6EAF2] text-[16px] font-semibold mb-3">
+                  {t("tabs.profile.achievements")}
+                </Text>
+                <HStack className="flex-wrap" space="sm">
+                  {unlockedAchievements.map((a) => (
+                    <VStack
+                      key={a.id}
+                      className="bg-[#111827] border border-[#1A2233] rounded-2xl px-3 py-3 items-center mb-2"
+                      space="xs"
+                      style={{ minWidth: 80 }}
+                    >
+                      <Text className="text-[22px]">{a.icon}</Text>
+                      <Text className="text-[#AAB0C0] text-[10px] text-center">
+                        {t(a.titleKey)}
+                      </Text>
+                    </VStack>
+                  ))}
+                </HStack>
+              </Box>
+            )}
 
+            {/* Language */}
             <Box className="mb-6">
               <Text className="text-[#E6EAF2] text-[16px] font-semibold mb-3">
                 {t("tabs.profile.language")}

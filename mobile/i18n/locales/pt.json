@@ -37,6 +37,14 @@
       "title": "Quanto tempo por dia?",
       "subtitle": "Voce pode fazer mais se quiser.",
       "continue": "Continuar"
+    },
+    "notifications": {
+      "title": "Não perca o ritmo",
+      "subtitle": "Ative os lembretes para estudar todos os dias e manter sua sequência.",
+      "allow": "Ativar lembretes",
+      "skip": "Agora não",
+      "reminder_title": "Hora de estudar! 📚",
+      "reminder_body": "Sua sessão diária te espera. Só 5 minutos fazem a diferença."
     }
   },
   "tabs": {
@@ -46,7 +54,9 @@
       "start": "Iniciar",
       "seeTrail": "Ver Trilha",
       "thisWeek": "Esta semana",
-      "studied": "estudados"
+      "studied": "estudados",
+      "level": "Nível {{level}}",
+      "pack_of_day": "Sugerido para hoje"
     },
     "tracks": {
       "title": "Trilhas",
@@ -68,8 +78,13 @@
     "library": {
       "title": "Biblioteca",
       "subtitle": "Seu histórico de sessões",
+      "tab_history": "Histórico",
+      "tab_saved": "Salvos",
       "empty_title": "Nenhuma sessão concluída ainda",
-      "empty_subtitle": "Complete sua primeira sessão para ver o histórico aqui."
+      "empty_subtitle": "Complete sua primeira sessão para ver o histórico aqui.",
+      "saved_empty_title": "Nenhum conteúdo salvo",
+      "saved_empty_subtitle": "Salve um conteúdo durante a lição para encontrá-lo aqui.",
+      "start": "Iniciar"
     },
     "profile": {
       "title": "Perfil",
@@ -87,8 +102,17 @@
       "daily_goal_unit": "minutos",
       "language": "Idioma",
       "save": "Salvar alterações",
-      "saving": "Salvando..."
+      "saving": "Salvando...",
+      "xp": "XP",
+      "level": "Nível",
+      "achievements": "Conquistas"
     }
+  },
+  "track": {
+    "lessons": "Lições",
+    "start": "Iniciar",
+    "empty": "Nenhuma lição disponível.",
+    "min": "min"
   },
   "session": {
     "lesson": {
@@ -139,7 +163,19 @@
       "insight_excellent": "Excelente! Você dominou os conceitos principais. Uma revisão rápida amanhã vai consolidar ainda mais.",
       "insight_good": "Bom trabalho! Você está no caminho certo. Revise os cards para fixar os pontos que faltaram.",
       "insight_start": "Bom começo! Alguns conceitos ainda precisam de atenção. Releia o conteúdo e tente novamente.",
-      "insight_keep_going": "Não desanime! Cada sessão é aprendizado. Revise o conteúdo e tente o quiz de novo."
+      "insight_keep_going": "Não desanime! Cada sessão é aprendizado. Revise o conteúdo e tente o quiz de novo.",
+      "xp_gained": "+{{xp}} XP",
+      "new_achievement": "Nova conquista!"
     }
+  },
+  "achievements": {
+    "first_session": "Primeira sessão",
+    "streak_3": "3 dias seguidos",
+    "streak_7": "1 semana seguida",
+    "streak_30": "30 dias seguidos",
+    "perfect_quiz": "Quiz perfeito",
+    "sessions_10": "10 sessões",
+    "sessions_50": "50 sessões",
+    "level_5": "Nível 5"
   }
 }

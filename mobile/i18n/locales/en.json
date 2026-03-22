@@ -37,6 +37,14 @@
       "title": "How much time per day?",
       "subtitle": "You can do more if you want.",
       "continue": "Continue"
+    },
+    "notifications": {
+      "title": "Don't break the habit",
+      "subtitle": "Enable reminders to study every day and keep your streak alive.",
+      "allow": "Enable reminders",
+      "skip": "Not now",
+      "reminder_title": "Time to study! 📚",
+      "reminder_body": "Your daily session is waiting. Just 5 minutes makes a difference."
     }
   },
   "tabs": {
@@ -46,7 +54,9 @@
       "start": "Start",
       "seeTrail": "See Trail",
       "thisWeek": "This Week",
-      "studied": "studied"
+      "studied": "studied",
+      "level": "Level {{level}}",
+      "pack_of_day": "Suggested for today"
     },
     "tracks": {
       "title": "Tracks",
@@ -68,8 +78,13 @@
     "library": {
       "title": "Library",
       "subtitle": "Your session history",
+      "tab_history": "History",
+      "tab_saved": "Saved",
       "empty_title": "No completed sessions yet",
-      "empty_subtitle": "Complete your first session to see the history here."
+      "empty_subtitle": "Complete your first session to see the history here.",
+      "saved_empty_title": "No saved content",
+      "saved_empty_subtitle": "Save a lesson to find it here later.",
+      "start": "Start"
     },
     "profile": {
       "title": "Profile",
@@ -87,8 +102,17 @@
       "daily_goal_unit": "minutes",
       "language": "Language",
       "save": "Save changes",
-      "saving": "Saving..."
+      "saving": "Saving...",
+      "xp": "XP",
+      "level": "Level",
+      "achievements": "Achievements"
     }
+  },
+  "track": {
+    "lessons": "Lessons",
+    "start": "Start",
+    "empty": "No lessons available.",
+    "min": "min"
   },
   "session": {
     "lesson": {
@@ -139,7 +163,19 @@
       "insight_excellent": "Excellent! You mastered the key concepts. A quick review tomorrow will consolidate it even more.",
       "insight_good": "Good work! You're on the right track. Review the cards to lock in the missing points.",
       "insight_start": "Good start! Some concepts still need attention. Re-read the content and try again.",
-      "insight_keep_going": "Don't give up! Every session is learning. Review the content and try the quiz again."
+      "insight_keep_going": "Don't give up! Every session is learning. Review the content and try the quiz again.",
+      "xp_gained": "+{{xp}} XP",
+      "new_achievement": "New achievement!"
     }
+  },
+  "achievements": {
+    "first_session": "First session",
+    "streak_3": "3-day streak",
+    "streak_7": "1-week streak",
+    "streak_30": "30-day streak",
+    "perfect_quiz": "Perfect quiz",
+    "sessions_10": "10 sessions",
+    "sessions_50": "50 sessions",
+    "level_5": "Level 5"
   }
 }

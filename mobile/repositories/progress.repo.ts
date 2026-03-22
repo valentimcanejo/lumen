@@ -12,6 +12,7 @@ import {
   updateDocData,
 } from "../services/firestore.service";
 import type { UserProfile } from "../models/user";
+import { xpToLevel } from "../models/user";
 
 export type CompletedSession = {
   date: string; // YYYY-MM-DD (document ID)
@@ -20,6 +21,11 @@ export type CompletedSession = {
   minutes: number;
   quizScore: number;
   completedAt: number;
+};
+
+export type DayData = {
+  date: string; // YYYY-MM-DD
+  minutes: number;
 };
 
 export async function getRecentSessions(
@@ -42,22 +48,36 @@ function userDailyPath(uid: string, date: string) {
   return `users/${uid}/daily_sessions/${date}`;
 }
 
+function ymd(d: Date): string {
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
 export async function getWeeklyMinutes(uid: string): Promise<number> {
+  const data = await getWeeklyData(uid);
+  return data.reduce((sum, d) => sum + d.minutes, 0);
+}
+
+/** Returns Mon–Sun data for the current week */
+export async function getWeeklyData(uid: string): Promise<DayData[]> {
   const today = new Date();
+  const dow = today.getDay(); // 0=Sun
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - (dow === 0 ? 6 : dow - 1));
+
   const dates = Array.from({ length: 7 }, (_, i) => {
-    const d = new Date(today);
-    d.setDate(today.getDate() - i);
-    const yyyy = d.getFullYear();
-    const mm = String(d.getMonth() + 1).padStart(2, "0");
-    const dd = String(d.getDate()).padStart(2, "0");
-    return `${yyyy}-${mm}-${dd}`;
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    return ymd(d);
   });
 
   const sessions = await Promise.all(
     dates.map((date) => getDocData<{ minutes: number }>(userDailyPath(uid, date))),
   );
 
-  return sessions.reduce((sum, s) => sum + (s?.minutes ?? 0), 0);
+  return dates.map((date, i) => ({ date, minutes: sessions[i]?.minutes ?? 0 }));
 }
 
 type CardGrade = "know" | "almost" | "dont";
@@ -95,7 +115,6 @@ export async function updateStreak(uid: string, date: string) {
 
   const last = user.streak.lastStudyDate;
 
-  // helper compare YYYY-MM-DD
   const toNum = (d: string) => Number(d.replaceAll("-", ""));
   const todayN = toNum(date);
   const lastN = last ? toNum(last) : 0;
@@ -119,4 +138,26 @@ export async function updateStreak(uid: string, date: string) {
     streak: { current, best, shields, lastStudyDate: date },
     updatedAt: Date.now(),
   });
+}
+
+/** Awards XP for a completed session. Returns new xp and level. */
+export async function grantSessionXP(
+  uid: string,
+  quizScore: number,
+): Promise<{ xp: number; level: number; gained: number }> {
+  const gained = 10 + Math.round(quizScore * 10); // 10–20 XP per session
+  const user = await getDocData<UserProfile>(`users/${uid}`);
+  const currentXp = user?.xp ?? 0;
+  const newXp = currentXp + gained;
+  const newLevel = xpToLevel(newXp);
+  const totalSessions = (user?.totalSessions ?? 0) + 1;
+
+  await updateDocData<UserProfile>(`users/${uid}`, {
+    xp: newXp,
+    level: newLevel,
+    totalSessions,
+    updatedAt: Date.now(),
+  });
+
+  return { xp: newXp, level: newLevel, gained };
 }
