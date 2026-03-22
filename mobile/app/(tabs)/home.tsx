@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, View, StyleSheet } from "react-native";
+import { ScrollView, View, StyleSheet, Modal, Pressable } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -11,6 +11,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Box } from "../../components/ui/box";
 import { HStack } from "../../components/ui/hstack";
@@ -236,6 +237,80 @@ function packOfDay(goalIds: string[], dateStr: string): string | null {
 }
 
 // ---------------------------------------------------------------------------
+// Welcome back modal
+// ---------------------------------------------------------------------------
+
+function WelcomeBackModal({
+  visible,
+  streak,
+  onDismiss,
+}: {
+  visible: boolean;
+  streak: number;
+  onDismiss: () => void;
+}) {
+  const { t } = useTranslation();
+
+  return (
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={onDismiss}>
+      <View style={wb.overlay}>
+        <View style={wb.card}>
+          <Text style={wb.title}>{t("tabs.home.welcome_back_title")}</Text>
+          <Text style={wb.subtitle}>
+            {streak > 0
+              ? t("tabs.home.welcome_back_streak", { streak })
+              : t("tabs.home.welcome_back_no_streak")}
+          </Text>
+          {streak > 0 && (
+            <View style={wb.streakRow}>
+              <Text style={wb.streakNum}>{streak}</Text>
+              <Text style={wb.streakLabel}>🔥</Text>
+            </View>
+          )}
+          <Pressable style={wb.btn} onPress={onDismiss}>
+            <Text style={wb.btnText}>{t("tabs.home.welcome_back_cta")}</Text>
+          </Pressable>
+        </View>
+      </View>
+    </Modal>
+  );
+}
+
+const wb = StyleSheet.create({
+  overlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.72)",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 24,
+  },
+  card: {
+    backgroundColor: "#121826",
+    borderWidth: 1,
+    borderColor: "#1A2233",
+    borderRadius: 24,
+    padding: 28,
+    width: "100%",
+    alignItems: "center",
+  },
+  title: { color: "#E6EAF2", fontSize: 22, fontWeight: "700", textAlign: "center" },
+  subtitle: { color: "#AAB0C0", fontSize: 14, textAlign: "center", marginTop: 10, lineHeight: 20 },
+  streakRow: { flexDirection: "row", alignItems: "center", marginTop: 20, gap: 6 },
+  streakNum: { color: "#F5C77A", fontSize: 48, fontWeight: "800" },
+  streakLabel: { fontSize: 36 },
+  btn: {
+    marginTop: 24,
+    backgroundColor: "#F5C77A",
+    borderRadius: 16,
+    paddingVertical: 14,
+    paddingHorizontal: 32,
+    width: "100%",
+    alignItems: "center",
+  },
+  btnText: { color: "#0B0F14", fontSize: 16, fontWeight: "700" },
+});
+
+// ---------------------------------------------------------------------------
 // Home screen
 // ---------------------------------------------------------------------------
 
@@ -248,6 +323,7 @@ export default function Home() {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [goals, setGoals] = useState<Goal[]>([]);
   const [weeklyData, setWeeklyData] = useState<DayData[]>([]);
+  const [showWelcomeBack, setShowWelcomeBack] = useState(false);
 
   useEffect(() => {
     if (!currentUserId) return;
@@ -255,6 +331,16 @@ export default function Home() {
     getWeeklyData(currentUserId).then(setWeeklyData).catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUserId]);
+
+  useEffect(() => {
+    const today = todayYmd();
+    AsyncStorage.getItem("lastOpenDate").then((last) => {
+      if (last && last !== today) {
+        setShowWelcomeBack(true);
+      }
+      AsyncStorage.setItem("lastOpenDate", today);
+    });
+  }, []);
 
   useEffect(() => {
     getActiveGoals().then(setGoals).catch(() => setGoals([]));
@@ -280,6 +366,12 @@ export default function Home() {
   }
 
   return (
+    <>
+    <WelcomeBackModal
+      visible={showWelcomeBack}
+      streak={streak}
+      onDismiss={() => setShowWelcomeBack(false)}
+    />
     <ScrollView
       className="flex-1 bg-[#0B0F14]"
       contentContainerStyle={{ paddingBottom: 40 }}
@@ -369,5 +461,6 @@ export default function Home() {
         </Box>
       )}
     </ScrollView>
+    </>
   );
 }

@@ -56,7 +56,11 @@
       "thisWeek": "This Week",
       "studied": "studied",
       "level": "Level {{level}}",
-      "pack_of_day": "Suggested for today"
+      "pack_of_day": "Suggested for today",
+      "welcome_back_title": "Welcome back! 👋",
+      "welcome_back_streak": "You're on a {{streak}}-day streak. Keep it up!",
+      "welcome_back_no_streak": "Ready to learn something new today?",
+      "welcome_back_cta": "Start session"
     },
     "tracks": {
       "title": "Tracks",

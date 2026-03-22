@@ -56,7 +56,11 @@
       "thisWeek": "Esta semana",
       "studied": "Estudiado",
       "level": "Nivel {{level}}",
-      "pack_of_day": "Sugerido para hoy"
+      "pack_of_day": "Sugerido para hoy",
+      "welcome_back_title": "¡Bienvenido de vuelta! 👋",
+      "welcome_back_streak": "Llevas {{streak}} día(s) seguidos. ¡No te detengas!",
+      "welcome_back_no_streak": "¿Listo para aprender algo nuevo hoy?",
+      "welcome_back_cta": "Comenzar sesión"
     },
     "tracks": {
       "title": "Rutas",
