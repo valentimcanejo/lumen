@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
@@ -28,6 +29,7 @@ function clamp(n: number, min: number, max: number) {
 }
 
 export default function SummaryScreen() {
+  const { t } = useTranslation();
   const { contentId, version, lang, correct, total } = useLocalSearchParams() as {
     contentId: string;
     version: string;
@@ -65,24 +67,20 @@ export default function SummaryScreen() {
   }, [uid, contentId]);
 
   const scoreLabel = useMemo(() => {
-    if (totalN === 0) return "Sessão concluída";
-    if (scorePct >= 0.85) return "Excelente";
-    if (scorePct >= 0.6) return "Muito bom";
-    if (scorePct >= 0.35) return "Bom começo";
-    return "Continue";
-  }, [scorePct, totalN]);
+    if (totalN === 0) return t("session.summary.score_completed");
+    if (scorePct >= 0.85) return t("session.summary.score_excellent");
+    if (scorePct >= 0.6) return t("session.summary.score_good");
+    if (scorePct >= 0.35) return t("session.summary.score_start");
+    return t("session.summary.score_keep_going");
+  }, [scorePct, totalN, t]);
 
   const insight = useMemo(() => {
-    if (totalN === 0)
-      return "Você leu o conteúdo com atenção. Fazer o quiz na próxima vez vai ajudar a fixar melhor.";
-    if (scorePct >= 0.85)
-      return "Excelente! Você dominou os conceitos principais. Uma revisão rápida amanhã vai consolidar ainda mais.";
-    if (scorePct >= 0.6)
-      return "Bom trabalho! Você está no caminho certo. Revise os cards para fixar os pontos que faltaram.";
-    if (scorePct >= 0.35)
-      return "Bom começo! Alguns conceitos ainda precisam de atenção. Releia o conteúdo e tente novamente.";
-    return "Não desanime! Cada sessão é aprendizado. Revise o conteúdo e tente o quiz de novo.";
-  }, [scorePct, totalN]);
+    if (totalN === 0) return t("session.summary.insight_no_quiz");
+    if (scorePct >= 0.85) return t("session.summary.insight_excellent");
+    if (scorePct >= 0.6) return t("session.summary.insight_good");
+    if (scorePct >= 0.35) return t("session.summary.insight_start");
+    return t("session.summary.insight_keep_going");
+  }, [scorePct, totalN, t]);
 
   async function onFinish() {
     setSaving(true);
@@ -129,15 +127,17 @@ export default function SummaryScreen() {
           <TopProgress value={0.95} />
 
           <Text className="text-[#AAB0C0] text-[12px] w-[54px] text-right">
-            4 / 4
+            {t("session.summary.step")}
           </Text>
         </HStack>
       </Box>
 
       <Box className="px-5 pt-6">
-        <Text className="text-[#E6EAF2] text-[22px] font-semibold">Resumo</Text>
+        <Text className="text-[#E6EAF2] text-[22px] font-semibold">
+          {t("session.summary.title")}
+        </Text>
         <Text className="text-[#AAB0C0] text-[13px] mt-1">
-          {pack?.lesson?.title ?? "Sessão"} • {pack?.estimatedMinutes ?? 0} min
+          {pack?.lesson?.title ?? t("common.content")} • {pack?.estimatedMinutes ?? 0} min
         </Text>
 
         <Box className="h-[1px] bg-[#1A2233] mt-4" />
@@ -147,17 +147,19 @@ export default function SummaryScreen() {
         <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
           <HStack className="items-center justify-between">
             <VStack space="xs">
-              <Text className="text-[#AAB0C0] text-[12px]">DESEMPENHO</Text>
+              <Text className="text-[#AAB0C0] text-[12px]">
+                {t("session.summary.performance")}
+              </Text>
               <Text className="text-[#E6EAF2] text-[18px] font-semibold">
                 {scoreLabel}
               </Text>
               {totalN > 0 ? (
                 <Text className="text-[#7B8193] text-[13px] mt-1">
-                  {correctN} / {totalN} corretas
+                  {correctN} / {totalN} {t("session.summary.correct_answers")}
                 </Text>
               ) : (
                 <Text className="text-[#7B8193] text-[13px] mt-1">
-                  Quiz pulado
+                  {t("session.summary.quiz_skipped")}
                 </Text>
               )}
             </VStack>
@@ -177,7 +179,9 @@ export default function SummaryScreen() {
           </Box>
 
           <Box className="mt-4">
-            <Text className="text-[#AAB0C0] text-[12px]">INSIGHT</Text>
+            <Text className="text-[#AAB0C0] text-[12px]">
+              {t("session.summary.insight_label")}
+            </Text>
             <Text className="text-[#E6EAF2] text-[14px] leading-[22px] mt-2">
               {insight}
             </Text>
@@ -206,13 +210,12 @@ export default function SummaryScreen() {
               saved ? "bg-[#5ED19A]" : "bg-[#F5C77A]",
             ].join(" ")}
           >
-            <Text
-              className={[
-                "text-[16px] font-semibold",
-                saved ? "text-[#0B0F14]" : "text-[#0B0F14]",
-              ].join(" ")}
-            >
-              {saved ? "Concluído" : saving ? "Salvando…" : "Concluir"}
+            <Text className="text-[#0B0F14] text-[16px] font-semibold">
+              {saved
+                ? t("session.summary.finished")
+                : saving
+                  ? t("session.summary.saving")
+                  : t("session.summary.finish")}
             </Text>
           </Pressable>
 
@@ -222,7 +225,7 @@ export default function SummaryScreen() {
               className="h-[52px] rounded-2xl border border-[#1A2233] items-center justify-center"
             >
               <Text className="text-[#AAB0C0] text-[16px] font-semibold">
-                Próximo conteúdo
+                {t("session.summary.next_content")}
               </Text>
             </Pressable>
           )}
@@ -232,7 +235,7 @@ export default function SummaryScreen() {
             className="h-[52px] rounded-2xl border border-[#1A2233] items-center justify-center"
           >
             <Text className="text-[#AAB0C0] text-[16px] font-semibold">
-              Voltar para Home
+              {t("session.summary.go_home")}
             </Text>
           </Pressable>
         </VStack>

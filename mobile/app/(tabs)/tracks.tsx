@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 import { Box } from "../../components/ui/box";
 import { HStack } from "../../components/ui/hstack";
 import { Text } from "../../components/ui/text";
@@ -14,7 +15,12 @@ import type { Track } from "../../models/track";
 import type { Lang } from "../../models/lang";
 
 function DifficultyBadge({ level }: { level: 1 | 2 | 3 }) {
-  const labels = { 1: "Iniciante", 2: "Intermediário", 3: "Avançado" };
+  const { t } = useTranslation();
+  const labels = {
+    1: t("tabs.tracks.difficulty_1"),
+    2: t("tabs.tracks.difficulty_2"),
+    3: t("tabs.tracks.difficulty_3"),
+  };
   const colors = { 1: "#5ED19A", 2: "#F5C77A", 3: "#E26D6D" };
   return (
     <Box
@@ -50,10 +56,7 @@ function TrackCard({ track, lang }: { track: Track; lang: Lang }) {
       {track.tags?.length > 0 && (
         <HStack className="mt-3 flex-wrap" space="xs">
           {track.tags.map((tag) => (
-            <Box
-              key={tag}
-              className="px-2 py-1 rounded-full bg-[#1A2233]"
-            >
+            <Box key={tag} className="px-2 py-1 rounded-full bg-[#1A2233]">
               <Text className="text-[#7B8193] text-[11px]">{tag}</Text>
             </Box>
           ))}
@@ -64,6 +67,7 @@ function TrackCard({ track, lang }: { track: Track; lang: Lang }) {
 }
 
 export default function Tracks() {
+  const { t } = useTranslation();
   const { uid } = useAuth();
   const { getUserData } = useUser();
   const { generate, loading: generating, error: aiPackError } = useAiPack(uid);
@@ -98,21 +102,23 @@ export default function Tracks() {
 
   const aiErrorMessage =
     aiPackError === "not-premium"
-      ? "Este recurso é exclusivo para assinantes Premium."
+      ? t("tabs.tracks.ai_error_not_premium")
       : aiPackError === "premium-expired"
-        ? "Sua assinatura Premium expirou. Renove para continuar."
+        ? t("tabs.tracks.ai_error_expired")
         : aiPackError === "rate-limited"
-          ? "Limite diário de sessões IA atingido. Tente amanhã."
+          ? t("tabs.tracks.ai_error_rate_limited")
           : aiPackError === "unknown"
-            ? "Não foi possível gerar o conteúdo. Tente novamente."
+            ? t("tabs.tracks.ai_error_unknown")
             : null;
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
       <Box className="px-6 pt-14 pb-4">
-        <Text className="text-[#E6EAF2] text-[22px] font-bold">Trilhas</Text>
+        <Text className="text-[#E6EAF2] text-[22px] font-bold">
+          {t("tabs.tracks.title")}
+        </Text>
         <Text className="text-[#AAB0C0] text-[13px] mt-1">
-          Explore os temas disponíveis
+          {t("tabs.tracks.subtitle")}
         </Text>
       </Box>
 
@@ -125,15 +131,14 @@ export default function Tracks() {
           <HStack className="items-center mb-2" space="sm">
             <Ionicons name="sparkles" size={16} color="#F5C77A" />
             <Text className="text-[#F5C77A] text-[12px] font-semibold">
-              PREMIUM · IA
+              {t("tabs.tracks.ai_badge")}
             </Text>
           </HStack>
           <Text className="text-[#E6EAF2] text-[16px] font-semibold">
-            Gerar conteúdo com IA
+            {t("tabs.tracks.ai_title")}
           </Text>
           <Text className="text-[#AAB0C0] text-[13px] mt-1 leading-[20px]">
-            Crie uma sessão personalizada no seu idioma com conteúdo gerado sob
-            demanda.
+            {t("tabs.tracks.ai_description")}
           </Text>
           {aiErrorMessage ? (
             <Text className="text-[#E26D6D] text-[12px] mt-3">{aiErrorMessage}</Text>
@@ -145,17 +150,17 @@ export default function Tracks() {
             style={{ opacity: generating ? 0.6 : 1 }}
           >
             <Text className="text-[#0B0F14] text-[15px] font-semibold">
-              {generating ? "Gerando…" : "Gerar sessão"}
+              {generating ? t("tabs.tracks.ai_generating") : t("tabs.tracks.ai_generate")}
             </Text>
           </Pressable>
         </Box>
 
         {/* Track list */}
         {loading ? (
-          <Text className="text-[#AAB0C0] text-center mt-6">Carregando…</Text>
+          <Text className="text-[#AAB0C0] text-center mt-6">{t("common.loading")}</Text>
         ) : tracks.length === 0 ? (
           <Text className="text-[#AAB0C0] text-center mt-6">
-            Nenhuma trilha disponível.
+            {t("tabs.tracks.empty")}
           </Text>
         ) : (
           tracks.map((track) => (

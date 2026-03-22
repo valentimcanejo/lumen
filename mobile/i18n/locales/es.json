@@ -2,7 +2,19 @@
   "common": {
     "continue": "Continuar",
     "start": "Iniciar",
-    "skipDemo": "Saltar (demo)"
+    "skipDemo": "Saltar (demo)",
+    "loading": "Cargando…",
+    "back": "Volver",
+    "next": "Siguiente",
+    "skip": "Saltar",
+    "save": "Guardar",
+    "saved": "Guardado",
+    "saving": "Guardando…",
+    "finish": "Finalizar",
+    "finished": "Listo",
+    "content": "Contenido",
+    "error_not_found": "Contenido no encontrado.",
+    "error_connect": "No se pudo conectar. Inténtalo de nuevo."
   },
   "onboarding": {
     "welcome": {
@@ -35,6 +47,99 @@
       "seeTrail": "Ver trilha",
       "thisWeek": "Esta semana",
       "studied": "Estudiado"
+    },
+    "tracks": {
+      "title": "Rutas",
+      "subtitle": "Explora los temas disponibles",
+      "ai_badge": "PREMIUM · IA",
+      "ai_title": "Generar contenido con IA",
+      "ai_description": "Crea una sesión personalizada en tu idioma con contenido generado bajo demanda.",
+      "ai_generating": "Generando…",
+      "ai_generate": "Generar sesión",
+      "ai_error_not_premium": "Esta función es exclusiva para suscriptores Premium.",
+      "ai_error_expired": "Tu suscripción Premium ha expirado. Renuévala para continuar.",
+      "ai_error_rate_limited": "Límite diario de sesiones IA alcanzado. Inténtalo mañana.",
+      "ai_error_unknown": "No se pudo generar el contenido. Inténtalo de nuevo.",
+      "empty": "No hay rutas disponibles.",
+      "difficulty_1": "Principiante",
+      "difficulty_2": "Intermedio",
+      "difficulty_3": "Avanzado"
+    },
+    "library": {
+      "title": "Biblioteca",
+      "subtitle": "Tu historial de sesiones",
+      "empty_title": "Ninguna sesión completada aún",
+      "empty_subtitle": "Completa tu primera sesión para ver el historial aquí."
+    },
+    "profile": {
+      "title": "Perfil",
+      "loading": "Cargando datos del perfil...",
+      "account_save_progress": "Guarda tu progreso",
+      "account_save_description": "Vincula una cuenta para no perder tu racha e historial al cambiar de dispositivo.",
+      "account_google": "Continuar con Google",
+      "account_apple": "Continuar con Apple",
+      "account_linked": "Cuenta vinculada",
+      "account_synced": "Progreso sincronizado",
+      "account_sign_out": "Cerrar sesión",
+      "streak": "Racha actual",
+      "streak_unit": "días",
+      "daily_goal": "Meta diaria",
+      "daily_goal_unit": "minutos",
+      "language": "Idioma",
+      "save": "Guardar cambios",
+      "saving": "Guardando..."
+    }
+  },
+  "session": {
+    "lesson": {
+      "step": "1 / 4"
+    },
+    "cards": {
+      "step": "2 / 4",
+      "title": "Tarjetas",
+      "empty": "No hay tarjetas en este contenido.",
+      "go_to_quiz": "Ir al Quiz",
+      "question": "PREGUNTA",
+      "answer": "RESPUESTA",
+      "reveal": "Revelar respuesta",
+      "correct": "Lo supe",
+      "wrong": "No lo supe",
+      "skip": "Saltar"
+    },
+    "quiz": {
+      "step": "3 / 4",
+      "title": "Quiz",
+      "empty": "No hay quiz en este contenido.",
+      "go_to_summary": "Ir al Resumen",
+      "question": "PREGUNTA",
+      "select": "Selecciona una opción",
+      "correct_count": "correctas",
+      "explanation": "EXPLICACIÓN",
+      "finish": "Finalizar",
+      "skip": "Saltar quiz"
+    },
+    "summary": {
+      "step": "4 / 4",
+      "title": "Resumen",
+      "performance": "DESEMPEÑO",
+      "quiz_skipped": "Quiz omitido",
+      "correct_answers": "correctas",
+      "insight_label": "CONSEJO",
+      "finish": "Finalizar",
+      "saving": "Guardando…",
+      "finished": "Listo",
+      "next_content": "Siguiente contenido",
+      "go_home": "Volver al Inicio",
+      "score_completed": "Sesión completada",
+      "score_excellent": "Excelente",
+      "score_good": "Muy bien",
+      "score_start": "Buen comienzo",
+      "score_keep_going": "Sigue adelante",
+      "insight_no_quiz": "Leíste el contenido con atención. Hacer el quiz la próxima vez te ayudará a fijar mejor los conceptos.",
+      "insight_excellent": "¡Excelente! Dominaste los conceptos clave. Un repaso rápido mañana lo consolidará aún más.",
+      "insight_good": "¡Buen trabajo! Vas por buen camino. Repasa las tarjetas para afianzar los puntos que faltaron.",
+      "insight_start": "¡Buen comienzo! Algunos conceptos todavía necesitan atención. Relee el contenido e inténtalo de nuevo.",
+      "insight_keep_going": "¡No te rindas! Cada sesión es aprendizaje. Repasa el contenido e intenta el quiz de nuevo."
     }
   }
 }

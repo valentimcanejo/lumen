@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 import { HStack } from "@/components/ui/hstack";
@@ -23,6 +24,7 @@ function TopProgress({ value }: { value: number }) {
 type Grade = "know" | "dont";
 
 export default function CardsScreen() {
+  const { t } = useTranslation();
   const { contentId, version, lang } = useLocalSearchParams() as {
     contentId: string;
     version: string;
@@ -77,7 +79,7 @@ export default function CardsScreen() {
   if (loading) {
     return (
       <Box className="flex-1 bg-[#0B0F14] items-center justify-center">
-        <Text className="text-[#AAB0C0]">Carregando…</Text>
+        <Text className="text-[#AAB0C0]">{t("common.loading")}</Text>
       </Box>
     );
   }
@@ -93,15 +95,17 @@ export default function CardsScreen() {
           <TopProgress value={progressValue} />
 
           <Text className="text-[#AAB0C0] text-[12px] w-[54px] text-right">
-            2 / 4
+            {t("session.cards.step")}
           </Text>
         </HStack>
       </Box>
 
       <Box className="px-5 pt-6">
-        <Text className="text-[#E6EAF2] text-[22px] font-semibold">Cards</Text>
+        <Text className="text-[#E6EAF2] text-[22px] font-semibold">
+          {t("session.cards.title")}
+        </Text>
         <Text className="text-[#AAB0C0] text-[13px] mt-1">
-          {pack?.lesson?.title ?? "Conteúdo"} •{" "}
+          {pack?.lesson?.title ?? t("common.content")} •{" "}
           {total ? `${index + 1} / ${total}` : ""}
         </Text>
 
@@ -111,7 +115,7 @@ export default function CardsScreen() {
       <Box className="flex-1 px-5 pt-5">
         {!pack || total === 0 ? (
           <VStack space="md" className="mt-3">
-            <Text className="text-[#AAB0C0]">Não há cards nesse conteúdo.</Text>
+            <Text className="text-[#AAB0C0]">{t("session.cards.empty")}</Text>
             <Pressable
               onPress={() =>
                 router.push({
@@ -122,16 +126,17 @@ export default function CardsScreen() {
               className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
             >
               <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                Ir para Quiz
+                {t("session.cards.go_to_quiz")}
               </Text>
             </Pressable>
           </VStack>
         ) : (
           <>
-            {/* Card */}
             <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5 flex-1">
               <VStack space="sm">
-                <Text className="text-[#AAB0C0] text-[12px]">PERGUNTA</Text>
+                <Text className="text-[#AAB0C0] text-[12px]">
+                  {t("session.cards.question")}
+                </Text>
                 <Text className="text-[#E6EAF2] text-[18px] font-semibold leading-[26px]">
                   {current.front}
                 </Text>
@@ -141,7 +146,9 @@ export default function CardsScreen() {
                 <>
                   <Box className="h-[1px] bg-[#1A2233] my-5" />
                   <VStack space="sm">
-                    <Text className="text-[#AAB0C0] text-[12px]">RESPOSTA</Text>
+                    <Text className="text-[#AAB0C0] text-[12px]">
+                      {t("session.cards.answer")}
+                    </Text>
                     <Text className="text-[#E6EAF2] text-[16px] leading-[24px]">
                       {current.back}
                     </Text>
@@ -150,7 +157,6 @@ export default function CardsScreen() {
               )}
             </Box>
 
-            {/* Buttons */}
             <VStack space="sm" className="mt-4 pb-6">
               {!revealed ? (
                 <Pressable
@@ -158,7 +164,7 @@ export default function CardsScreen() {
                   className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
                 >
                   <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                    Revelar resposta
+                    {t("session.cards.reveal")}
                   </Text>
                 </Pressable>
               ) : (
@@ -169,7 +175,7 @@ export default function CardsScreen() {
                     style={{ backgroundColor: "#5ED19A" }}
                   >
                     <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                      Acertei
+                      {t("session.cards.correct")}
                     </Text>
                   </Pressable>
 
@@ -179,7 +185,7 @@ export default function CardsScreen() {
                     style={{ backgroundColor: "#E26D6D" }}
                   >
                     <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                      Errei
+                      {t("session.cards.wrong")}
                     </Text>
                   </Pressable>
                 </HStack>
@@ -190,7 +196,7 @@ export default function CardsScreen() {
                 className="h-[52px] rounded-2xl border border-[#1A2233] items-center justify-center"
               >
                 <Text className="text-[#AAB0C0] text-[16px] font-semibold">
-                  Pular
+                  {t("session.cards.skip")}
                 </Text>
               </Pressable>
             </VStack>

@@ -3,6 +3,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import { ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as Speech from "expo-speech";
+import { useTranslation } from "react-i18next";
 
 import { Box } from "@/components/ui/box";
 import { Pressable } from "@/components/ui/pressable";
@@ -29,7 +30,6 @@ function extractText(blocks: LessonBlock[]): string {
     .join(" ");
 }
 
-// Estimate duration in ms at ~140 words per minute
 function estimateDurationMs(text: string): number {
   const words = text.trim().split(/\s+/).length;
   return Math.round((words / 140) * 60 * 1000);
@@ -77,6 +77,7 @@ function Waveform({ progress = 0 }: { progress?: number }) {
 }
 
 export default function LessonScreen() {
+  const { t } = useTranslation();
   const { contentId, version, lang } = useLocalSearchParams() as {
     contentId: string;
     version: string;
@@ -91,7 +92,6 @@ export default function LessonScreen() {
     lang: lang ?? "pt",
   });
 
-  // TTS state
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [playing, setPlaying] = useState(false);
   const [positionMs, setPositionMs] = useState(0);
@@ -104,7 +104,6 @@ export default function LessonScreen() {
   const durationMs = useMemo(() => estimateDurationMs(ttsText), [ttsText]);
   const audioProgress = durationMs > 0 ? Math.min(1, positionMs / durationMs) : 0;
 
-  // Save
   const [saved, setSaved] = useState(false);
   const [savingContent, setSavingContent] = useState(false);
 
@@ -116,7 +115,6 @@ export default function LessonScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid, contentId]);
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       Speech.stop();
@@ -140,7 +138,6 @@ export default function LessonScreen() {
       setPositionMs(0);
       setPlaying(true);
 
-      // Poll isSpeakingAsync so position only advances when audio is actually playing
       const tickMs = 250;
       const id = setInterval(() => {
         Speech.isSpeakingAsync().then((speaking) => {
@@ -185,13 +182,10 @@ export default function LessonScreen() {
     }
   }
 
-  const stepLabel = "1 / 4";
-  const progressValue = 0.22;
-
   if (loading) {
     return (
       <Box className="flex-1 bg-[#0B0F14] items-center justify-center">
-        <Text className="text-[#AAB0C0]">Carregando…</Text>
+        <Text className="text-[#AAB0C0]">{t("common.loading")}</Text>
       </Box>
     );
   }
@@ -200,10 +194,10 @@ export default function LessonScreen() {
     return (
       <Box className="flex-1 bg-[#0B0F14] items-center justify-center px-6">
         <Text className="text-[#E26D6D] text-center">
-          {error ?? "Conteúdo não encontrado."}
+          {error ?? t("common.error_not_found")}
         </Text>
         <Pressable onPress={() => router.back()} className="mt-4">
-          <Text className="text-[#AAB0C0]">Voltar</Text>
+          <Text className="text-[#AAB0C0]">{t("common.back")}</Text>
         </Pressable>
       </Box>
     );
@@ -217,10 +211,10 @@ export default function LessonScreen() {
             <Ionicons name="chevron-back" size={22} color="#AAB0C0" />
           </Pressable>
 
-          <TopProgress value={progressValue} />
+          <TopProgress value={0.22} />
 
           <Text className="text-[#AAB0C0] text-[12px] w-[54px] text-right">
-            {stepLabel}
+            {t("session.lesson.step")}
           </Text>
         </HStack>
       </Box>
@@ -235,7 +229,7 @@ export default function LessonScreen() {
           </Text>
 
           <Text className="text-[#AAB0C0] text-[13px] mt-1">
-            {pack.tags?.[0] ?? "Lição"} • {pack.estimatedMinutes} min
+            {pack.tags?.[0] ?? t("common.content")} • {pack.estimatedMinutes} min
           </Text>
 
           <Box className="h-[1px] bg-[#1A2233] mt-4" />
@@ -309,7 +303,7 @@ export default function LessonScreen() {
               className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
             >
               <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                Próximo
+                {t("common.next")}
               </Text>
             </Pressable>
 
@@ -329,7 +323,7 @@ export default function LessonScreen() {
                   className="text-[16px] font-semibold"
                   style={{ color: saved ? "#F5C77A" : "#AAB0C0" }}
                 >
-                  {saved ? "Salvo" : "Salvar"}
+                  {saved ? t("common.saved") : t("common.save")}
                 </Text>
               </HStack>
             </Pressable>

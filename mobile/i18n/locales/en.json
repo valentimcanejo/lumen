@@ -2,7 +2,19 @@
   "common": {
     "continue": "Continue",
     "start": "Start",
-    "skipDemo": "Skip (demo)"
+    "skipDemo": "Skip (demo)",
+    "loading": "Loading…",
+    "back": "Back",
+    "next": "Next",
+    "skip": "Skip",
+    "save": "Save",
+    "saved": "Saved",
+    "saving": "Saving…",
+    "finish": "Finish",
+    "finished": "Done",
+    "content": "Content",
+    "error_not_found": "Content not found.",
+    "error_connect": "Could not connect. Please try again."
   },
   "onboarding": {
     "welcome": {
@@ -35,6 +47,99 @@
       "seeTrail": "See Trail",
       "thisWeek": "This Week",
       "studied": "studied"
+    },
+    "tracks": {
+      "title": "Tracks",
+      "subtitle": "Explore available topics",
+      "ai_badge": "PREMIUM · AI",
+      "ai_title": "Generate content with AI",
+      "ai_description": "Create a personalized session in your language with on-demand generated content.",
+      "ai_generating": "Generating…",
+      "ai_generate": "Generate session",
+      "ai_error_not_premium": "This feature is exclusive to Premium subscribers.",
+      "ai_error_expired": "Your Premium subscription has expired. Renew to continue.",
+      "ai_error_rate_limited": "Daily AI session limit reached. Try again tomorrow.",
+      "ai_error_unknown": "Could not generate the content. Please try again.",
+      "empty": "No tracks available.",
+      "difficulty_1": "Beginner",
+      "difficulty_2": "Intermediate",
+      "difficulty_3": "Advanced"
+    },
+    "library": {
+      "title": "Library",
+      "subtitle": "Your session history",
+      "empty_title": "No completed sessions yet",
+      "empty_subtitle": "Complete your first session to see the history here."
+    },
+    "profile": {
+      "title": "Profile",
+      "loading": "Loading profile data...",
+      "account_save_progress": "Save your progress",
+      "account_save_description": "Link an account so you don't lose your streak and history when switching devices.",
+      "account_google": "Continue with Google",
+      "account_apple": "Continue with Apple",
+      "account_linked": "Account linked",
+      "account_synced": "Progress synced",
+      "account_sign_out": "Sign out",
+      "streak": "Current Streak",
+      "streak_unit": "days",
+      "daily_goal": "Daily goal",
+      "daily_goal_unit": "minutes",
+      "language": "Language",
+      "save": "Save changes",
+      "saving": "Saving..."
+    }
+  },
+  "session": {
+    "lesson": {
+      "step": "1 / 4"
+    },
+    "cards": {
+      "step": "2 / 4",
+      "title": "Cards",
+      "empty": "No cards in this content.",
+      "go_to_quiz": "Go to Quiz",
+      "question": "QUESTION",
+      "answer": "ANSWER",
+      "reveal": "Reveal answer",
+      "correct": "Got it",
+      "wrong": "Missed it",
+      "skip": "Skip"
+    },
+    "quiz": {
+      "step": "3 / 4",
+      "title": "Quiz",
+      "empty": "No quiz in this content.",
+      "go_to_summary": "Go to Summary",
+      "question": "QUESTION",
+      "select": "Select an option",
+      "correct_count": "correct",
+      "explanation": "EXPLANATION",
+      "finish": "Finish",
+      "skip": "Skip quiz"
+    },
+    "summary": {
+      "step": "4 / 4",
+      "title": "Summary",
+      "performance": "PERFORMANCE",
+      "quiz_skipped": "Quiz skipped",
+      "correct_answers": "correct",
+      "insight_label": "INSIGHT",
+      "finish": "Finish",
+      "saving": "Saving…",
+      "finished": "Done",
+      "next_content": "Next content",
+      "go_home": "Back to Home",
+      "score_completed": "Session complete",
+      "score_excellent": "Excellent",
+      "score_good": "Very good",
+      "score_start": "Good start",
+      "score_keep_going": "Keep going",
+      "insight_no_quiz": "You read the content carefully. Doing the quiz next time will help reinforce it.",
+      "insight_excellent": "Excellent! You mastered the key concepts. A quick review tomorrow will consolidate it even more.",
+      "insight_good": "Good work! You're on the right track. Review the cards to lock in the missing points.",
+      "insight_start": "Good start! Some concepts still need attention. Re-read the content and try again.",
+      "insight_keep_going": "Don't give up! Every session is learning. Review the content and try the quiz again."
     }
   }
 }

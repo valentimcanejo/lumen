@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Platform, ScrollView, ActivityIndicator } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
@@ -16,7 +17,7 @@ import { setLanguage as setI18nLanguage } from "../../i18n/setLanguage";
 import type { Lang } from "../../models/lang";
 
 // ---------------------------------------------------------------------------
-// Account card — shown at the top of the profile
+// Account card
 // ---------------------------------------------------------------------------
 
 function AccountCard({
@@ -32,9 +33,8 @@ function AccountCard({
   onSignInWithApple: () => Promise<void>;
   onSignOut: () => Promise<void>;
 }) {
-  const [loading, setLoading] = useState<"google" | "apple" | "signout" | null>(
-    null
-  );
+  const { t } = useTranslation();
+  const [loading, setLoading] = useState<"google" | "apple" | "signout" | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   async function handle(
@@ -51,7 +51,7 @@ function AccountCard({
         e.code !== "ERR_REQUEST_CANCELED" &&
         e.message !== "Google sign-in was cancelled or failed."
       ) {
-        setError("Não foi possível conectar. Tente novamente.");
+        setError(t("common.error_connect"));
       }
     } finally {
       setLoading(null);
@@ -62,14 +62,12 @@ function AccountCard({
     return (
       <Box className="bg-[#111827] rounded-2xl p-5 mb-6">
         <Text className="text-[#E6EAF2] text-[16px] font-semibold mb-1">
-          Salve seu progresso
+          {t("tabs.profile.account_save_progress")}
         </Text>
         <Text className="text-[#AAB0C0] text-[13px] mb-5">
-          Vincule uma conta para não perder streak e histórico ao trocar de
-          dispositivo.
+          {t("tabs.profile.account_save_description")}
         </Text>
 
-        {/* Google */}
         <Pressable
           onPress={() => handle("google", onSignInWithGoogle)}
           disabled={loading !== null}
@@ -81,13 +79,12 @@ function AccountCard({
             <>
               <Ionicons name="logo-google" size={20} color="#0B0F14" />
               <Text className="text-[#0B0F14] text-[15px] font-semibold ml-2">
-                Continuar com Google
+                {t("tabs.profile.account_google")}
               </Text>
             </>
           )}
         </Pressable>
 
-        {/* Apple — iOS only */}
         {Platform.OS === "ios" && (
           <Pressable
             onPress={() => handle("apple", onSignInWithApple)}
@@ -100,7 +97,7 @@ function AccountCard({
               <>
                 <Ionicons name="logo-apple" size={20} color="#E6EAF2" />
                 <Text className="text-[#E6EAF2] text-[15px] font-semibold ml-2">
-                  Continuar com Apple
+                  {t("tabs.profile.account_apple")}
                 </Text>
               </>
             )}
@@ -124,13 +121,13 @@ function AccountCard({
         </Box>
         <VStack>
           <Text className="text-[#E6EAF2] text-[14px] font-semibold">
-            Conta vinculada
+            {t("tabs.profile.account_linked")}
           </Text>
           {email ? (
             <Text className="text-[#AAB0C0] text-[12px]">{email}</Text>
           ) : (
             <Text className="text-[#AAB0C0] text-[12px]">
-              Progresso sincronizado
+              {t("tabs.profile.account_synced")}
             </Text>
           )}
         </VStack>
@@ -144,7 +141,9 @@ function AccountCard({
         {loading === "signout" ? (
           <ActivityIndicator size="small" color="#AAB0C0" />
         ) : (
-          <Text className="text-[#AAB0C0] text-[14px]">Sair da conta</Text>
+          <Text className="text-[#AAB0C0] text-[14px]">
+            {t("tabs.profile.account_sign_out")}
+          </Text>
         )}
       </Pressable>
     </Box>
@@ -152,30 +151,32 @@ function AccountCard({
 }
 
 // ---------------------------------------------------------------------------
-// Minor sub-components
+// Sub-components
 // ---------------------------------------------------------------------------
 
 function StreakInfo({ streak }: { streak: number }) {
+  const { t } = useTranslation();
   return (
     <VStack className="items-center space-y-1">
       <Text className="text-[#E6EAF2] text-[16px] font-semibold">
-        Streak Atual
+        {t("tabs.profile.streak")}
       </Text>
       <Text className="text-[#F5C77A] text-[32px] font-semibold">
-        {streak} dias
+        {streak} {t("tabs.profile.streak_unit")}
       </Text>
     </VStack>
   );
 }
 
 function DailyGoal({ goal }: { goal: number }) {
+  const { t } = useTranslation();
   return (
     <VStack className="items-center space-y-1">
       <Text className="text-[#E6EAF2] text-[16px] font-semibold">
-        Meta diária
+        {t("tabs.profile.daily_goal")}
       </Text>
       <Text className="text-[#F5C77A] text-[32px] font-semibold">
-        {goal} minutos
+        {goal} {t("tabs.profile.daily_goal_unit")}
       </Text>
     </VStack>
   );
@@ -212,6 +213,7 @@ function LanguageSelector({
 // ---------------------------------------------------------------------------
 
 export default function ProfileScreen() {
+  const { t } = useTranslation();
   const { loading, getUserData } = useUser();
   const { uid, user, isAnonymous, signInWithGoogle, signInWithApple, signOut } =
     useAuth();
@@ -252,7 +254,7 @@ export default function ProfileScreen() {
             <Ionicons name="chevron-back" size={22} color="#AAB0C0" />
           </Pressable>
           <Text className="text-[#E6EAF2] text-[20px] font-semibold">
-            Perfil
+            {t("tabs.profile.title")}
           </Text>
         </HStack>
       </Box>
@@ -271,7 +273,7 @@ export default function ProfileScreen() {
         />
 
         {loading ? (
-          <Text className="text-[#AAB0C0]">Carregando dados do perfil...</Text>
+          <Text className="text-[#AAB0C0]">{t("tabs.profile.loading")}</Text>
         ) : (
           <>
             <Box className="mb-6">
@@ -284,7 +286,7 @@ export default function ProfileScreen() {
 
             <Box className="mb-6">
               <Text className="text-[#E6EAF2] text-[16px] font-semibold mb-3">
-                Idioma
+                {t("tabs.profile.language")}
               </Text>
               <LanguageSelector
                 lang={language}
@@ -297,7 +299,7 @@ export default function ProfileScreen() {
               className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
             >
               <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                {saving ? "Salvando..." : "Salvar alterações"}
+                {saving ? t("tabs.profile.saving") : t("tabs.profile.save")}
               </Text>
             </Pressable>
           </>

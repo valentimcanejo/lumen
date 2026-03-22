@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 import { HStack } from "@/components/ui/hstack";
@@ -102,16 +103,13 @@ function getOptionState(args: {
 }): "idle" | "correct" | "wrong" {
   const { answered, optionIndex, selectedIndex, correctIndex } = args;
   if (!answered) return "idle";
-
   if (optionIndex === correctIndex) return "correct";
-
-  if (selectedIndex === optionIndex && selectedIndex !== correctIndex)
-    return "wrong";
-
+  if (selectedIndex === optionIndex && selectedIndex !== correctIndex) return "wrong";
   return "idle";
 }
 
 export default function QuizScreen() {
+  const { t } = useTranslation();
   const { contentId, version, lang } = useLocalSearchParams() as {
     contentId: string;
     version: string;
@@ -146,7 +144,6 @@ export default function QuizScreen() {
     if (!current || answered) return;
     setSelectedIndex(optionIdx);
     setAnswered(true);
-
     if (optionIdx === current.answerIndex) {
       setCorrectCount((v) => v + 1);
     }
@@ -154,7 +151,6 @@ export default function QuizScreen() {
 
   function onNext() {
     if (!current) return;
-
     const next = qIndex + 1;
     if (next >= total) {
       router.push({
@@ -169,7 +165,6 @@ export default function QuizScreen() {
       });
       return;
     }
-
     setQIndex(next);
     setSelectedIndex(null);
     setAnswered(false);
@@ -186,15 +181,17 @@ export default function QuizScreen() {
           <TopProgress value={progressValue} />
 
           <Text className="text-[#AAB0C0] text-[12px] w-[54px] text-right">
-            3 / 4
+            {t("session.quiz.step")}
           </Text>
         </HStack>
       </Box>
 
       <Box className="px-5 pt-6">
-        <Text className="text-[#E6EAF2] text-[22px] font-semibold">Quiz</Text>
+        <Text className="text-[#E6EAF2] text-[22px] font-semibold">
+          {t("session.quiz.title")}
+        </Text>
         <Text className="text-[#AAB0C0] text-[13px] mt-1">
-          {pack?.lesson?.title ?? "Conteúdo"} •{" "}
+          {pack?.lesson?.title ?? t("common.content")} •{" "}
           {total ? `${qIndex + 1}/${total}` : ""}
         </Text>
 
@@ -204,11 +201,11 @@ export default function QuizScreen() {
       <Box className="flex-1 px-5 pt-5">
         {loading ? (
           <Box className="flex-1 items-center justify-center">
-            <Text className="text-[#AAB0C0]">Carregando…</Text>
+            <Text className="text-[#AAB0C0]">{t("common.loading")}</Text>
           </Box>
         ) : !pack || total === 0 || !current ? (
           <VStack space="md" className="mt-3">
-            <Text className="text-[#AAB0C0]">Não há quiz nesse conteúdo.</Text>
+            <Text className="text-[#AAB0C0]">{t("session.quiz.empty")}</Text>
 
             <Pressable
               onPress={() =>
@@ -220,24 +217,26 @@ export default function QuizScreen() {
               className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
             >
               <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                Ir para Resumo
+                {t("session.quiz.go_to_summary")}
               </Text>
             </Pressable>
           </VStack>
         ) : (
           <>
             <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
-              <Text className="text-[#AAB0C0] text-[12px]">PERGUNTA</Text>
+              <Text className="text-[#AAB0C0] text-[12px]">
+                {t("session.quiz.question")}
+              </Text>
               <Text className="text-[#E6EAF2] text-[18px] font-semibold leading-[26px] mt-2">
                 {current.question}
               </Text>
 
               <HStack className="items-center justify-between mt-4">
                 <Text className="text-[#7B8193] text-[12px]">
-                  Selecione uma alternativa
+                  {t("session.quiz.select")}
                 </Text>
                 <Text className="text-[#7B8193] text-[12px]">
-                  {correctCount} acertos
+                  {correctCount} {t("session.quiz.correct_count")}
                 </Text>
               </HStack>
             </Box>
@@ -266,7 +265,9 @@ export default function QuizScreen() {
 
             {answered ? (
               <Box className="mt-4 bg-[#0E141E] border border-[#1A2233] rounded-[18px] p-4">
-                <Text className="text-[#AAB0C0] text-[12px]">EXPLICAÇÃO</Text>
+                <Text className="text-[#AAB0C0] text-[12px]">
+                  {t("session.quiz.explanation")}
+                </Text>
                 <Text className="text-[#E6EAF2] text-[14px] leading-[22px] mt-2">
                   {current.explanation}
                 </Text>
@@ -288,7 +289,7 @@ export default function QuizScreen() {
                     answered ? "text-[#0B0F14]" : "text-[#7B8193]",
                   ].join(" ")}
                 >
-                  {qIndex + 1 >= total ? "Finalizar" : "Próximo"}
+                  {qIndex + 1 >= total ? t("session.quiz.finish") : t("common.next")}
                 </Text>
               </Pressable>
 
@@ -308,7 +309,7 @@ export default function QuizScreen() {
                 className="h-[52px] rounded-2xl mt-3 border border-[#1A2233] items-center justify-center"
               >
                 <Text className="text-[#AAB0C0] text-[16px] font-semibold">
-                  Pular quiz
+                  {t("session.quiz.skip")}
                 </Text>
               </Pressable>
             </Box>

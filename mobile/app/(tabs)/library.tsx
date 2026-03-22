@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
+import { useTranslation } from "react-i18next";
 import { Box } from "../../components/ui/box";
 import { HStack } from "../../components/ui/hstack";
 import { VStack } from "../../components/ui/vstack";
@@ -9,6 +10,12 @@ import {
   getRecentSessions,
   type CompletedSession,
 } from "../../repositories/progress.repo";
+
+const DATE_LOCALE: Record<string, string> = {
+  pt: "pt-BR",
+  en: "en-US",
+  es: "es-ES",
+};
 
 function ScoreBadge({ score }: { score: number }) {
   const pct = Math.round(score * 100);
@@ -25,9 +32,9 @@ function ScoreBadge({ score }: { score: number }) {
   );
 }
 
-function SessionRow({ session }: { session: CompletedSession }) {
+function SessionRow({ session, locale }: { session: CompletedSession; locale: string }) {
   const date = new Date(session.completedAt);
-  const dateLabel = date.toLocaleDateString("pt-BR", {
+  const dateLabel = date.toLocaleDateString(locale, {
     day: "2-digit",
     month: "short",
   });
@@ -53,9 +60,11 @@ function SessionRow({ session }: { session: CompletedSession }) {
 }
 
 export default function Library() {
+  const { t, i18n } = useTranslation();
   const { uid } = useAuth();
   const [sessions, setSessions] = useState<CompletedSession[]>([]);
   const [loading, setLoading] = useState(true);
+  const locale = DATE_LOCALE[i18n.language] ?? "en-US";
 
   useEffect(() => {
     if (!uid) return;
@@ -68,9 +77,11 @@ export default function Library() {
   return (
     <Box className="flex-1 bg-[#0B0F14]">
       <Box className="px-6 pt-14 pb-4">
-        <Text className="text-[#E6EAF2] text-[22px] font-bold">Biblioteca</Text>
+        <Text className="text-[#E6EAF2] text-[22px] font-bold">
+          {t("tabs.library.title")}
+        </Text>
         <Text className="text-[#AAB0C0] text-[13px] mt-1">
-          Seu histórico de sessões
+          {t("tabs.library.subtitle")}
         </Text>
       </Box>
 
@@ -80,19 +91,19 @@ export default function Library() {
       >
         {loading ? (
           <Text className="text-[#AAB0C0] text-center mt-10">
-            Carregando…
+            {t("common.loading")}
           </Text>
         ) : sessions.length === 0 ? (
           <VStack className="items-center mt-10" space="sm">
             <Text className="text-[#E6EAF2] text-[16px] font-semibold">
-              Nenhuma sessão concluída ainda
+              {t("tabs.library.empty_title")}
             </Text>
             <Text className="text-[#7B8193] text-[13px] text-center">
-              Complete sua primeira sessão para ver o histórico aqui.
+              {t("tabs.library.empty_subtitle")}
             </Text>
           </VStack>
         ) : (
-          sessions.map((s) => <SessionRow key={s.date} session={s} />)
+          sessions.map((s) => <SessionRow key={s.date} session={s} locale={locale} />)
         )}
       </ScrollView>
     </Box>
