@@ -10,6 +10,7 @@ import { LumenCard } from "../../components/ui/lumen/Card";
 import { Pressable } from "../../components/ui/pressable";
 import { useTranslation } from "react-i18next";
 import { ensureAnonymousAuth } from "../../services/auth.service";
+import { setLanguage } from "../../i18n/setLanguage";
 
 const LANGS = [
   { key: "pt", label: "Português", flag: "🇧🇷" },
@@ -23,6 +24,7 @@ export default function Language() {
 
   const handleNext = async () => {
     try {
+      await setLanguage(lang);
       const userCredentials = await ensureAnonymousAuth();
 
       router.push({

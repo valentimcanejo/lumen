@@ -12,6 +12,7 @@ import { VStack } from "@/components/ui/vstack";
 import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
 import { setUserLanguage } from "../../repositories/user.repo";
+import { setLanguage as setI18nLanguage } from "../../i18n/setLanguage";
 import type { Lang } from "../../models/lang";
 
 // ---------------------------------------------------------------------------
@@ -234,7 +235,10 @@ export default function ProfileScreen() {
     if (!uid) return;
     setSaving(true);
     try {
-      await setUserLanguage(uid, language);
+      await Promise.all([
+        setUserLanguage(uid, language),
+        setI18nLanguage(language),
+      ]);
     } finally {
       setSaving(false);
     }
