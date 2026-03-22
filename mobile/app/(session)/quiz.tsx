@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { ScrollView } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -200,15 +201,14 @@ export default function QuizScreen() {
         <Box className="h-[1px] bg-[#1A2233] mt-4" />
       </Box>
 
-      <Box className="flex-1 px-5 pt-5">
-        {loading ? (
-          <Box className="flex-1 items-center justify-center">
-            <Text className="text-[#AAB0C0]">{t("common.loading")}</Text>
-          </Box>
-        ) : !pack || total === 0 || !current ? (
-          <VStack space="md" className="mt-3">
+      {loading ? (
+        <Box className="flex-1 items-center justify-center">
+          <Text className="text-[#AAB0C0]">{t("common.loading")}</Text>
+        </Box>
+      ) : !pack || total === 0 || !current ? (
+        <Box className="px-5 pt-5">
+          <VStack space="md">
             <Text className="text-[#AAB0C0]">{t("session.quiz.empty")}</Text>
-
             <Pressable
               onPress={() =>
                 router.push({
@@ -223,8 +223,15 @@ export default function QuizScreen() {
               </Text>
             </Pressable>
           </VStack>
-        ) : (
-          <>
+        </Box>
+      ) : (
+        <>
+          {/* Scrollable: question + options + explanation */}
+          <ScrollView
+            className="flex-1 px-5"
+            contentContainerStyle={{ paddingTop: 20, paddingBottom: 16 }}
+            showsVerticalScrollIndicator={false}
+          >
             <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
               <Text className="text-[#AAB0C0] text-[12px]">
                 {t("session.quiz.question")}
@@ -232,7 +239,6 @@ export default function QuizScreen() {
               <Text className="text-[#E6EAF2] text-[18px] font-semibold leading-[26px] mt-2">
                 {current.question}
               </Text>
-
               <HStack className="items-center justify-between mt-4">
                 <Text className="text-[#7B8193] text-[12px]">
                   {t("session.quiz.select")}
@@ -251,7 +257,6 @@ export default function QuizScreen() {
                   selectedIndex,
                   correctIndex: current.answerIndex,
                 });
-
                 return (
                   <OptionRow
                     key={idx}
@@ -275,49 +280,53 @@ export default function QuizScreen() {
                 </Text>
               </Box>
             ) : null}
+          </ScrollView>
 
-            <Box className="mt-auto" style={{ paddingBottom: Math.max(insets.bottom, 24) }}>
-              <Pressable
-                onPress={onNext}
-                disabled={!answered}
+          {/* Fixed bottom buttons — always visible */}
+          <Box
+            className="px-5 pt-3 border-t border-[#1A2233]"
+            style={{ paddingBottom: Math.max(insets.bottom, 24) }}
+          >
+            <Pressable
+              onPress={onNext}
+              disabled={!answered}
+              className={[
+                "h-[52px] rounded-2xl items-center justify-center",
+                answered ? "bg-[#F5C77A]" : "bg-[#1A2233]",
+              ].join(" ")}
+            >
+              <Text
                 className={[
-                  "h-[52px] rounded-2xl items-center justify-center",
-                  answered ? "bg-[#F5C77A]" : "bg-[#1A2233]",
+                  "text-[16px] font-semibold",
+                  answered ? "text-[#0B0F14]" : "text-[#7B8193]",
                 ].join(" ")}
               >
-                <Text
-                  className={[
-                    "text-[16px] font-semibold",
-                    answered ? "text-[#0B0F14]" : "text-[#7B8193]",
-                  ].join(" ")}
-                >
-                  {qIndex + 1 >= total ? t("session.quiz.finish") : t("common.next")}
-                </Text>
-              </Pressable>
+                {qIndex + 1 >= total ? t("session.quiz.finish") : t("common.next")}
+              </Text>
+            </Pressable>
 
-              <Pressable
-                onPress={() =>
-                  router.push({
-                    pathname: "/(session)/summary",
-                    params: {
-                      contentId,
-                      version,
-                      lang,
-                      correct: String(correctCount),
-                      total: String(total),
-                    },
-                  })
-                }
-                className="h-[52px] rounded-2xl mt-3 border border-[#1A2233] items-center justify-center"
-              >
-                <Text className="text-[#AAB0C0] text-[16px] font-semibold">
-                  {t("session.quiz.skip")}
-                </Text>
-              </Pressable>
-            </Box>
-          </>
-        )}
-      </Box>
+            <Pressable
+              onPress={() =>
+                router.push({
+                  pathname: "/(session)/summary",
+                  params: {
+                    contentId,
+                    version,
+                    lang,
+                    correct: String(correctCount),
+                    total: String(total),
+                  },
+                })
+              }
+              className="h-[52px] rounded-2xl mt-3 border border-[#1A2233] items-center justify-center"
+            >
+              <Text className="text-[#AAB0C0] text-[16px] font-semibold">
+                {t("session.quiz.skip")}
+              </Text>
+            </Pressable>
+          </Box>
+        </>
+      )}
     </Box>
   );
 }

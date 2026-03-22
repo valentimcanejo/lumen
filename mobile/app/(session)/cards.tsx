@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { ScrollView } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -114,9 +115,9 @@ export default function CardsScreen() {
         <Box className="h-[1px] bg-[#1A2233] mt-4" />
       </Box>
 
-      <Box className="flex-1 px-5 pt-5">
-        {!pack || total === 0 ? (
-          <VStack space="md" className="mt-3">
+      {!pack || total === 0 ? (
+        <Box className="px-5 pt-5">
+          <VStack space="md">
             <Text className="text-[#AAB0C0]">{t("session.cards.empty")}</Text>
             <Pressable
               onPress={() =>
@@ -132,9 +133,16 @@ export default function CardsScreen() {
               </Text>
             </Pressable>
           </VStack>
-        ) : (
-          <>
-            <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5 flex-1">
+        </Box>
+      ) : (
+        <>
+          {/* Scrollable card content */}
+          <ScrollView
+            className="flex-1 px-5"
+            contentContainerStyle={{ paddingTop: 20, paddingBottom: 16 }}
+            showsVerticalScrollIndicator={false}
+          >
+            <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
               <VStack space="sm">
                 <Text className="text-[#AAB0C0] text-[12px]">
                   {t("session.cards.question")}
@@ -158,53 +166,57 @@ export default function CardsScreen() {
                 </>
               )}
             </Box>
+          </ScrollView>
 
-            <VStack space="sm" className="mt-4" style={{ paddingBottom: Math.max(insets.bottom, 24) }}>
-              {!revealed ? (
-                <Pressable
-                  onPress={() => setRevealed(true)}
-                  className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
-                >
-                  <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                    {t("session.cards.reveal")}
-                  </Text>
-                </Pressable>
-              ) : (
-                <HStack space="sm">
-                  <Pressable
-                    onPress={() => onGrade("know")}
-                    className="flex-1 h-[52px] rounded-2xl items-center justify-center"
-                    style={{ backgroundColor: "#5ED19A" }}
-                  >
-                    <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                      {t("session.cards.correct")}
-                    </Text>
-                  </Pressable>
-
-                  <Pressable
-                    onPress={() => onGrade("dont")}
-                    className="flex-1 h-[52px] rounded-2xl items-center justify-center"
-                    style={{ backgroundColor: "#E26D6D" }}
-                  >
-                    <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                      {t("session.cards.wrong")}
-                    </Text>
-                  </Pressable>
-                </HStack>
-              )}
-
+          {/* Fixed bottom buttons — always visible */}
+          <Box
+            className="px-5 pt-3 border-t border-[#1A2233]"
+            style={{ paddingBottom: Math.max(insets.bottom, 24) }}
+          >
+            {!revealed ? (
               <Pressable
-                onPress={goNext}
-                className="h-[52px] rounded-2xl border border-[#1A2233] items-center justify-center"
+                onPress={() => setRevealed(true)}
+                className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
               >
-                <Text className="text-[#AAB0C0] text-[16px] font-semibold">
-                  {t("session.cards.skip")}
+                <Text className="text-[#0B0F14] text-[16px] font-semibold">
+                  {t("session.cards.reveal")}
                 </Text>
               </Pressable>
-            </VStack>
-          </>
-        )}
-      </Box>
+            ) : (
+              <HStack space="sm">
+                <Pressable
+                  onPress={() => onGrade("know")}
+                  className="flex-1 h-[52px] rounded-2xl items-center justify-center"
+                  style={{ backgroundColor: "#5ED19A" }}
+                >
+                  <Text className="text-[#0B0F14] text-[16px] font-semibold">
+                    {t("session.cards.correct")}
+                  </Text>
+                </Pressable>
+
+                <Pressable
+                  onPress={() => onGrade("dont")}
+                  className="flex-1 h-[52px] rounded-2xl items-center justify-center"
+                  style={{ backgroundColor: "#E26D6D" }}
+                >
+                  <Text className="text-[#0B0F14] text-[16px] font-semibold">
+                    {t("session.cards.wrong")}
+                  </Text>
+                </Pressable>
+              </HStack>
+            )}
+
+            <Pressable
+              onPress={goNext}
+              className="h-[52px] rounded-2xl mt-3 border border-[#1A2233] items-center justify-center"
+            >
+              <Text className="text-[#AAB0C0] text-[16px] font-semibold">
+                {t("session.cards.skip")}
+              </Text>
+            </Pressable>
+          </Box>
+        </>
+      )}
     </Box>
   );
 }
