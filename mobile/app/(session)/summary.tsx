@@ -7,7 +7,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  useDerivedValue,
   withSequence,
   withTiming,
   withDelay,
@@ -201,18 +200,25 @@ function AchievementToast({
 // ---------------------------------------------------------------------------
 
 function XpCounter({ gained }: { gained: number }) {
-  const count = useSharedValue(0);
+  const [count, setCount] = useState(0);
   const scale = useSharedValue(0.5);
   const opacity = useSharedValue(0);
 
   useEffect(() => {
     opacity.value = withTiming(1, { duration: 200 });
     scale.value = withSpring(1, { damping: 8, stiffness: 200 });
-    count.value = withTiming(gained, { duration: 900 });
+
+    const duration = 900;
+    const start = Date.now();
+    const id = setInterval(() => {
+      const elapsed = Date.now() - start;
+      const progress = Math.min(elapsed / duration, 1);
+      setCount(Math.round(gained * progress));
+      if (progress >= 1) clearInterval(id);
+    }, 16);
+    return () => clearInterval(id);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gained]);
-
-  const displayed = useDerivedValue(() => `+${Math.round(count.value)} XP`);
 
   const containerStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
@@ -221,7 +227,7 @@ function XpCounter({ gained }: { gained: number }) {
 
   return (
     <Animated.View style={[xpS.badge, containerStyle]}>
-      <Animated.Text style={xpS.text}>{displayed}</Animated.Text>
+      <Text style={xpS.text}>+{count} XP</Text>
     </Animated.View>
   );
 }
