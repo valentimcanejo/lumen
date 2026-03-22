@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Dimensions, View } from "react-native";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Dimensions, StyleSheet, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -7,10 +7,12 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
+  useDerivedValue,
   withSequence,
   withTiming,
   withDelay,
   withRepeat,
+  withSpring,
 } from "react-native-reanimated";
 
 import { Box } from "@/components/ui/box";
@@ -194,6 +196,54 @@ function AchievementToast({
   );
 }
 
+// ---------------------------------------------------------------------------
+// Animated XP counter
+// ---------------------------------------------------------------------------
+
+function XpCounter({ gained }: { gained: number }) {
+  const count = useSharedValue(0);
+  const scale = useSharedValue(0.5);
+  const opacity = useSharedValue(0);
+
+  useEffect(() => {
+    opacity.value = withTiming(1, { duration: 200 });
+    scale.value = withSpring(1, { damping: 8, stiffness: 200 });
+    count.value = withTiming(gained, { duration: 900 });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gained]);
+
+  const displayed = useDerivedValue(() => `+${Math.round(count.value)} XP`);
+
+  const containerStyle = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+    transform: [{ scale: scale.value }],
+  }));
+
+  return (
+    <Animated.View style={[xpS.badge, containerStyle]}>
+      <Animated.Text style={xpS.text}>{displayed}</Animated.Text>
+    </Animated.View>
+  );
+}
+
+const xpS = StyleSheet.create({
+  badge: {
+    backgroundColor: "#0F2218",
+    borderWidth: 1.5,
+    borderColor: "#5ED19A",
+    borderRadius: 100,
+    paddingHorizontal: 16,
+    paddingVertical: 6,
+    alignSelf: "center",
+    marginTop: 10,
+  },
+  text: {
+    color: "#5ED19A",
+    fontSize: 16,
+    fontWeight: "800",
+  },
+});
+
 export default function SummaryScreen() {
   const { t } = useTranslation();
   const { contentId, version, lang, correct, total } = useLocalSearchParams() as {
@@ -366,11 +416,7 @@ export default function SummaryScreen() {
                   {totalN > 0 ? Math.round(scorePct * 100) : 100}%
                 </Text>
               </Box>
-              {gainedXp !== null && (
-                <Text className="text-[#5ED19A] text-[12px] font-semibold">
-                  {t("session.summary.xp_gained", { xp: gainedXp })}
-                </Text>
-              )}
+              {gainedXp !== null && <XpCounter gained={gainedXp} />}
             </VStack>
           </HStack>
 
