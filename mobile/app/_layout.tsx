@@ -11,8 +11,8 @@ import "../i18n";
 import { loadLanguage } from "../i18n/setLanguage";
 import "@/global.css";
 import { auth } from "../firebase/firebaseConfig";
-import { getUser } from "../repositories/user.repo";
-import { getLessonMeta } from "../repositories/lessons.repo";
+import { getUser, getCompletedContentIds } from "../repositories/user.repo";
+import { getLessonMeta, pickNextLesson } from "../repositories/lessons.repo";
 import { todayYmd } from "../repositories/session.repo";
 
 Notifications.setNotificationHandler({
@@ -53,16 +53,16 @@ export default function RootLayout() {
           const uid = auth.currentUser?.uid;
           if (!uid) return;
 
-          const user = await getUser(uid);
-          const goalIds = user?.selectedGoalIds ?? [];
-          if (!goalIds.length) return;
+          const [user, completedIds] = await Promise.all([
+            getUser(uid),
+            getCompletedContentIds(uid),
+          ]);
+          const trackIds = user?.selectedTrackIds ?? user?.selectedGoalIds ?? [];
+          if (!trackIds.length) return;
 
           const today = todayYmd();
-          const n = today
-            .replace(/-/g, "")
-            .split("")
-            .reduce((a, c) => a * 10 + Number(c), 0);
-          const contentId = goalIds[n % goalIds.length];
+          const contentId = pickNextLesson(trackIds, completedIds, today);
+          if (!contentId) return;
           const meta = getLessonMeta(contentId);
           const lang = user?.lang ?? "pt";
 

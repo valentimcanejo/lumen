@@ -2,31 +2,70 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Public content — read-only, never writable by clients
+    // ─── Public content — read-only by authenticated users ───────────────────
+    // Never writable by clients. Managed via Firebase Console or Cloud Functions.
     match /tracks/{doc} {
-      allow read: if true;
+      allow read: if request.auth != null;
       allow write: if false;
     }
     match /lessons/{doc} {
-      allow read: if true;
+      allow read: if request.auth != null;
       allow write: if false;
     }
     match /goals/{doc} {
-      allow read: if true;
-      allow write: if false;
-    }
-    match /daily_sessions/{doc} {
-      allow read: if true;
+      allow read: if request.auth != null;
       allow write: if false;
     }
 
-    // Private user data — only the authenticated owner
+    // ─── Content stats — authenticated read, validated client writes ──────────
+    // Written atomically via Firestore increment from the client.
+    // Validated to only allow known stat fields — prevents arbitrary overwrites.
+    // TODO: migrate writes to Cloud Functions before public launch.
+    match /content_stats/{contentId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null
+        && request.resource.data.keys().hasOnly(
+             ['starts', 'completions', 'totalScore', 'totalMinutes', 'updatedAt']
+           );
+    }
+
+    // ─── Private user data — owner only ──────────────────────────────────────
     match /users/{uid} {
-      allow read, write: if request.auth != null && request.auth.uid == uid;
+      allow read: if isOwner(uid);
 
-      match /{collection}/{document=**} {
-        allow read, write: if request.auth != null && request.auth.uid == uid;
+      // Prevent clients from self-granting premium on creation.
+      allow create: if isOwner(uid) && !grantingPremium();
+
+      // Prevent clients from upgrading their own premium status.
+      // Only Cloud Functions (service account) can set premium.isActive = true.
+      allow update: if isOwner(uid) && !upgradingPremium();
+
+      // All user subcollections (daily_sessions, card_progress,
+      // completed_content, saved_content, stats) — owner only.
+      match /{subcollection}/{document=**} {
+        allow read, write: if isOwner(uid);
       }
+    }
+
+    // ─── Helper functions ─────────────────────────────────────────────────────
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // Returns true if the write attempt sets premium.isActive to true.
+    function grantingPremium() {
+      let premium = request.resource.data.get('premium', null);
+      return premium != null && premium.get('isActive', false) == true;
+    }
+
+    // Returns true if the update changes premium.isActive from false → true.
+    // Allows Cloud Functions to update other premium fields (e.g. expiry date)
+    // without triggering this block — those writes use the service account
+    // which bypasses security rules entirely.
+    function upgradingPremium() {
+      let wasActive = resource.data.get('premium', {}).get('isActive', false);
+      let willBeActive = request.resource.data.get('premium', {}).get('isActive', false);
+      return wasActive == false && willBeActive == true;
     }
   }
 }

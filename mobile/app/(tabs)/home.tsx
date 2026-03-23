@@ -30,14 +30,18 @@ import { SkeletonCard } from "../../components/ui/lumen/Skeleton";
 
 import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
-import { getActiveGoals, type Goal } from "../../repositories/goals.repo";
-import { getLessonMeta } from "../../repositories/lessons.repo";
+import {
+  getLessonMeta,
+  pickNextLesson,
+  getNextLessonPerTrack,
+} from "../../repositories/lessons.repo";
 import {
   getWeeklyData,
   getTodaySession,
   getDueCardCount,
   type DayData,
 } from "../../repositories/progress.repo";
+import { getCompletedContentIds } from "../../repositories/user.repo";
 import { todayYmd } from "../../repositories/session.repo";
 import {
   type UserProfile,
@@ -287,19 +291,6 @@ function WeeklyCard({
 }
 
 // ---------------------------------------------------------------------------
-// Pack of the day: deterministic from date + selectedGoalIds
-// ---------------------------------------------------------------------------
-
-function packOfDay(goalIds: string[], dateStr: string): string | null {
-  if (!goalIds.length) return null;
-  const n = dateStr
-    .replace(/-/g, "")
-    .split("")
-    .reduce((a, c) => a * 10 + Number(c), 0);
-  return goalIds[n % goalIds.length];
-}
-
-// ---------------------------------------------------------------------------
 // Welcome back modal
 // ---------------------------------------------------------------------------
 
@@ -406,7 +397,7 @@ export default function Home() {
   const { getUserData } = useUser();
 
   const [user, setUser] = useState<UserProfile | null>(null);
-  const [goals, setGoals] = useState<Goal[]>([]);
+  const [completedIds, setCompletedIds] = useState<string[]>([]);
   const [weeklyData, setWeeklyData] = useState<DayData[]>([]);
   const [showWelcomeBack, setShowWelcomeBack] = useState(false);
   const [loadingUser, setLoadingUser] = useState(true);
@@ -419,32 +410,20 @@ export default function Home() {
     getUserData({ userId: currentUserId })
       .then((u) => setUser(u ?? null))
       .finally(() => setLoadingUser(false));
-    getWeeklyData(currentUserId)
-      .then(setWeeklyData)
-      .catch(() => {});
+    getWeeklyData(currentUserId).then(setWeeklyData).catch(() => {});
     getTodaySession(currentUserId)
       .then((s) => setTodayCompletedId(s?.contentId ?? null))
       .catch(() => {});
-    getDueCardCount(currentUserId)
-      .then(setDueCardCount)
-      .catch(() => {});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    getDueCardCount(currentUserId).then(setDueCardCount).catch(() => {});
+    getCompletedContentIds(currentUserId).then(setCompletedIds).catch(() => {});
   }, [currentUserId]);
 
   useEffect(() => {
     const today = todayYmd();
     AsyncStorage.getItem("lastOpenDate").then((last) => {
-      if (last && last !== today) {
-        setShowWelcomeBack(true);
-      }
+      if (last && last !== today) setShowWelcomeBack(true);
       AsyncStorage.setItem("lastOpenDate", today);
     });
-  }, []);
-
-  useEffect(() => {
-    getActiveGoals()
-      .then(setGoals)
-      .catch(() => setGoals([]));
   }, []);
 
   const lang = (user?.lang ?? i18n.language ?? "pt") as Lang;
@@ -456,9 +435,12 @@ export default function Home() {
   const xpCeil = xpForNextLevel(level);
   const xpPct = xpCeil > xpFloor ? (xp - xpFloor) / (xpCeil - xpFloor) : 1;
 
-  const selectedGoals = user?.selectedGoalIds ?? [];
-  const todayPackId = packOfDay(selectedGoals, todayYmd());
-  const todayGoal = goals.find((g) => g.id === todayPackId);
+  // Backward-compat: fall back to selectedGoalIds for users who haven't migrated
+  const selectedTrackIds = user?.selectedTrackIds ?? user?.selectedGoalIds ?? [];
+  const today = todayYmd();
+  const todayLessonId = pickNextLesson(selectedTrackIds, completedIds, today);
+  const todayLesson = todayLessonId ? getLessonMeta(todayLessonId) : null;
+  const nextPerTrack = getNextLessonPerTrack(selectedTrackIds, completedIds);
 
   function startSession(contentId: string) {
     const meta = getLessonMeta(contentId);
@@ -569,81 +551,76 @@ export default function Home() {
           </Box>
         )}
 
-        {/* Pack of the day */}
+        {/* Today's lesson */}
         {loadingUser && (
           <Box className="px-6 mt-5">
             <SkeletonCard />
           </Box>
         )}
-        {!loadingUser &&
-          todayGoal &&
-          (() => {
-            const isDone = todayCompletedId === todayGoal.id;
-            return (
-              <Box className="px-6 mt-5">
-                <HStack className="items-center justify-between mb-2">
-                  <Text className="text-[#AAB0C0] text-[11px] font-semibold tracking-widest">
-                    {t("tabs.home.pack_of_day").toUpperCase()}
+        {!loadingUser && todayLesson && todayLessonId && (() => {
+          const isDone = todayCompletedId === todayLessonId;
+          return (
+            <Box className="px-6 mt-5">
+              <HStack className="items-center justify-between mb-2">
+                <Text className="text-[#AAB0C0] text-[11px] font-semibold tracking-widest">
+                  {t("tabs.home.pack_of_day").toUpperCase()}
+                </Text>
+                {isDone && (
+                  <HStack className="items-center" space="xs">
+                    <Ionicons name="checkmark-circle" size={14} color="#5ED19A" />
+                    <Text className="text-[#5ED19A] text-[11px] font-semibold">
+                      {t("tabs.home.done_today")}
+                    </Text>
+                  </HStack>
+                )}
+              </HStack>
+              <LumenCard>
+                <VStack space="md">
+                  <Text className="text-[#E6EAF2] text-[20px] font-semibold">
+                    {todayLesson.title[lang] ?? todayLesson.title.en}
                   </Text>
-                  {isDone && (
-                    <HStack className="items-center" space="xs">
-                      <Ionicons
-                        name="checkmark-circle"
-                        size={14}
-                        color="#5ED19A"
-                      />
-                      <Text className="text-[#5ED19A] text-[11px] font-semibold">
-                        {t("tabs.home.done_today")}
-                      </Text>
-                    </HStack>
-                  )}
-                </HStack>
-                <LumenCard>
-                  <VStack space="md">
-                    <Text className="text-[#E6EAF2] text-[20px] font-semibold">
-                      {todayGoal.title[lang]}
-                    </Text>
-                    {todayGoal.description?.[lang] ? (
-                      <Text className="text-[#AAB0C0]">
-                        {todayGoal.description[lang]}
-                      </Text>
-                    ) : null}
-                    {isDone ? (
-                      <LumenButton
-                        onPress={() => startSession(todayGoal.id)}
-                        variant="ghost"
-                      >
-                        {t("tabs.home.redo")}
-                      </LumenButton>
-                    ) : (
-                      <LumenButton onPress={() => startSession(todayGoal.id)}>
-                        {t("tabs.home.start")}
-                      </LumenButton>
-                    )}
-                  </VStack>
-                </LumenCard>
-              </Box>
-            );
-          })()}
-
-        {/* Other selected goals */}
-        {!loadingUser &&
-          goals
-            .filter((g) => selectedGoals.includes(g.id) && g.id !== todayPackId)
-            .map((goal) => (
-              <Box key={goal.id} className="px-6 mt-3">
-                <LumenCard>
-                  <VStack space="md">
-                    <Text className="text-[#E6EAF2] text-[18px] font-semibold">
-                      {goal.title[lang]}
-                    </Text>
-                    <LumenButton onPress={() => startSession(goal.id)}>
+                  <Text className="text-[#AAB0C0] text-[13px]">
+                    {todayLesson.estimatedMinutes} min
+                  </Text>
+                  {isDone ? (
+                    <LumenButton onPress={() => startSession(todayLessonId)} variant="ghost">
+                      {t("tabs.home.redo")}
+                    </LumenButton>
+                  ) : (
+                    <LumenButton onPress={() => startSession(todayLessonId)}>
                       {t("tabs.home.start")}
                     </LumenButton>
-                  </VStack>
-                </LumenCard>
-              </Box>
-            ))}
+                  )}
+                </VStack>
+              </LumenCard>
+            </Box>
+          );
+        })()}
+
+        {/* Next lesson per other selected track */}
+        {!loadingUser &&
+          selectedTrackIds
+            .filter((trackId) => trackId !== todayLesson?.trackId)
+            .map((trackId) => {
+              const lessonId = nextPerTrack[trackId];
+              if (!lessonId) return null;
+              const meta = getLessonMeta(lessonId);
+              if (!meta) return null;
+              return (
+                <Box key={trackId} className="px-6 mt-3">
+                  <LumenCard>
+                    <VStack space="md">
+                      <Text className="text-[#E6EAF2] text-[18px] font-semibold">
+                        {meta.title[lang] ?? meta.title.en}
+                      </Text>
+                      <LumenButton onPress={() => startSession(lessonId)}>
+                        {t("tabs.home.start")}
+                      </LumenButton>
+                    </VStack>
+                  </LumenCard>
+                </Box>
+              );
+            })}
 
         {/* Weekly progress */}
         {weeklyData.length > 0 && (

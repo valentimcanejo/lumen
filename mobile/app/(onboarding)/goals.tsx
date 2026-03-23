@@ -40,7 +40,7 @@ export default function Goals() {
   const handleNext = () =>
     router.push({
       pathname: `/(onboarding)/daily-time`,
-      params: { selectedLanguage, selectedGoals: selected.join(","), userId },
+      params: { selectedLanguage, selectedTracks: selected.join(","), userId },
     });
 
   return (

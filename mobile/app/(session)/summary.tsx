@@ -37,6 +37,10 @@ import {
 } from "../../repositories/achievements.repo";
 import { todayYmd } from "../../repositories/session.repo";
 import { usePack } from "../../hooks/usePack";
+import {
+  pickNextLesson,
+} from "../../repositories/lessons.repo";
+import { getCompletedContentIds, getSavedContentIds } from "../../repositories/user.repo";
 import type { Lang } from "../../models/lang";
 import type { AchievementId } from "../../models/user";
 
@@ -287,14 +291,18 @@ export default function SummaryScreen() {
 
   useEffect(() => {
     if (!uid) return;
-    getUserData({ userId: uid }).then((user) => {
-      const ids = user?.selectedGoalIds ?? [];
-      const idx = ids.indexOf(contentId);
-      if (idx !== -1 && ids.length > 1) {
-        const nextId = ids[(idx + 1) % ids.length];
-        if (nextId !== contentId) setNextGoalId(nextId);
-      }
-      setBookmarked(user?.savedContentIds?.includes(contentId) ?? false);
+    Promise.all([
+      getUserData({ userId: uid }),
+      getCompletedContentIds(uid),
+      getSavedContentIds(uid),
+    ]).then(([user, completed, saved]) => {
+      const trackIds = user?.selectedTrackIds ?? user?.selectedGoalIds ?? [];
+      const today = new Date().toISOString().slice(0, 10);
+      // Include current lesson as completed for the "next" calculation
+      const withCurrent = Array.from(new Set([...completed, contentId]));
+      const nextId = pickNextLesson(trackIds, withCurrent, today);
+      if (nextId && nextId !== contentId) setNextGoalId(nextId);
+      setBookmarked(saved.includes(contentId));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid, contentId]);

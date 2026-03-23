@@ -15,7 +15,7 @@ export function useUser() {
     lang: Lang;
     topicHint?: string;
     minutes?: number;
-    selectedGoalIds?: string[];
+    selectedTrackIds?: string[];
   }) {
     setLoading(true);
     try {
@@ -25,7 +25,7 @@ export function useUser() {
           lang: args.lang,
           ...(args.topicHint !== undefined && { topicHint: args.topicHint }),
           ...(args.minutes !== undefined && { dailyGoalMin: args.minutes }),
-          selectedGoalIds: args.selectedGoalIds ?? [],
+          selectedTrackIds: args.selectedTrackIds ?? [],
           updatedAt: Date.now(),
           hasOnboarded: true,
         },

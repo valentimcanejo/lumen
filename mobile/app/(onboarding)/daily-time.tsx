@@ -23,10 +23,10 @@ export default function DailyTime() {
   const insets = useSafeAreaInsets();
   const { setUserPreferences } = useUser();
 
-  const { selectedLanguage, selectedGoals, userId } =
+  const { selectedLanguage, selectedTracks, userId } =
     useLocalSearchParams() as {
       selectedLanguage: Lang;
-      selectedGoals: string;
+      selectedTracks: string;
       userId: string;
     };
 
@@ -36,12 +36,12 @@ export default function DailyTime() {
         userId: userId as string,
         lang: selectedLanguage as Lang,
         minutes,
-        selectedGoalIds: selectedGoals?.split(",") || [],
+        selectedTrackIds: selectedTracks?.split(",") || [],
       });
 
       router.push({
         pathname: `/(onboarding)/notifications`,
-        params: { selectedLanguage, selectedMinutes: minutes, selectedGoals, userId },
+        params: { selectedLanguage, selectedMinutes: minutes, selectedTracks, userId },
       });
     } catch (error) {
       console.log(error);

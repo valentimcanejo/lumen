@@ -26,12 +26,12 @@ export type UserProfile = {
   uid: string;
   lang: Lang;
   dailyGoalMin: 5 | 10 | 15;
+  /** Tracks the user is actively studying. Primary field post-migration. */
   selectedTrackIds: string[];
+  /** @deprecated use selectedTrackIds */
+  selectedGoalIds?: string[];
   premium: PremiumInfo;
   streak: StreakInfo;
-  selectedGoalIds: string[];
-  savedContentIds?: string[];
-  completedContentIds?: string[];
   hasOnboarded: boolean;
   xp?: number;
   level?: number;

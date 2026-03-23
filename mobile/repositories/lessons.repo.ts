@@ -56,6 +56,57 @@ export function getLessonMeta(contentId: string): LessonMeta | undefined {
   return BUNDLED_LESSONS.find((l) => l.id === contentId);
 }
 
+/** All published free lessons for the given tracks, sorted by track order
+ *  then lesson order within track. */
+function availableLessons(trackIds: string[]): LessonMeta[] {
+  return BUNDLED_LESSONS
+    .filter((l) => trackIds.includes(l.trackId) && l.status === "published" && l.tier === "free")
+    .sort((a, b) => {
+      const tA = trackIds.indexOf(a.trackId);
+      const tB = trackIds.indexOf(b.trackId);
+      return tA !== tB ? tA - tB : a.order - b.order;
+    });
+}
+
+/** Returns the contentId of the next lesson the user should study.
+ *  - Picks the first uncompleted lesson whose prerequisites are all met.
+ *  - Falls back to date-based rotation when everything is done (for review). */
+export function pickNextLesson(
+  trackIds: string[],
+  completedIds: string[],
+  dateStr: string,
+): string | null {
+  const lessons = availableLessons(trackIds);
+  if (!lessons.length) return null;
+  const next = lessons.find(
+    (l) => !completedIds.includes(l.id) &&
+           l.prerequisites.every((p) => completedIds.includes(p)),
+  );
+  if (next) return next.id;
+  // All done — date-rotation for spaced review
+  const n = dateStr.replace(/-/g, "").split("").reduce((a, c) => a * 10 + Number(c), 0);
+  return lessons[n % lessons.length].id;
+}
+
+/** Returns the next available lesson ID per track (for secondary home cards). */
+export function getNextLessonPerTrack(
+  trackIds: string[],
+  completedIds: string[],
+): Record<string, string | null> {
+  const result: Record<string, string | null> = {};
+  for (const trackId of trackIds) {
+    const lessons = BUNDLED_LESSONS
+      .filter((l) => l.trackId === trackId && l.status === "published" && l.tier === "free")
+      .sort((a, b) => a.order - b.order);
+    const next = lessons.find(
+      (l) => !completedIds.includes(l.id) &&
+             l.prerequisites.every((p) => completedIds.includes(p)),
+    ) ?? lessons[0] ?? null;
+    result[trackId] = next?.id ?? null;
+  }
+  return result;
+}
+
 export function getLessonCountForTrack(trackId: string): number {
   return BUNDLED_LESSONS.filter((l) => l.trackId === trackId).length;
 }
