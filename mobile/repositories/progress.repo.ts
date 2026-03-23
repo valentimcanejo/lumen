@@ -5,6 +5,9 @@ import {
   orderBy,
   where,
   limit as fbLimit,
+  doc,
+  setDoc,
+  increment,
 } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import {
@@ -229,6 +232,20 @@ export async function markDayCompleted(
     ...payload,
     completedAt: Date.now(),
   });
+
+  // Monthly rollup — users/{uid}/stats/monthly_{YYYY-MM}
+  // Lets profile/analytics show "X minutes this month" without scanning daily_sessions.
+  const month = date.slice(0, 7); // "YYYY-MM"
+  await setDoc(
+    doc(db, "users", uid, "stats", `monthly_${month}`),
+    {
+      month,
+      minutes: increment(payload.minutes),
+      sessions: increment(1),
+      updatedAt: Date.now(),
+    },
+    { merge: true },
+  );
 }
 
 export async function updateStreak(uid: string, date: string) {

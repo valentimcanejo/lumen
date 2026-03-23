@@ -1,4 +1,6 @@
-import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import {
+  doc, collection, getDocs, setDoc, deleteDoc, orderBy, query,
+} from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import type { UserProfile } from "../models/user";
 import type { Lang } from "../models/lang";
@@ -42,20 +44,46 @@ export async function setDailyGoal(uid: string, minutes: 5 | 10 | 15) {
   });
 }
 
+// ---------------------------------------------------------------------------
+// Completed content — subcollection (replaces completedContentIds array on user doc)
+// Path: users/{uid}/completed_content/{contentId}
+// ---------------------------------------------------------------------------
+
 export async function markContentCompleted(uid: string, contentId: string) {
-  await updateDoc(doc(db, userPath(uid)), {
-    completedContentIds: arrayUnion(contentId),
-    updatedAt: Date.now(),
-  });
+  await setDoc(
+    doc(db, "users", uid, "completed_content", contentId),
+    { contentId, completedAt: Date.now() },
+  );
 }
+
+export async function getCompletedContentIds(uid: string): Promise<string[]> {
+  const snap = await getDocs(collection(db, "users", uid, "completed_content"));
+  return snap.docs.map((d) => d.id);
+}
+
+// ---------------------------------------------------------------------------
+// Saved content — subcollection (replaces savedContentIds array on user doc)
+// Path: users/{uid}/saved_content/{contentId}
+// ---------------------------------------------------------------------------
 
 export async function toggleSaveContent(
   uid: string,
   contentId: string,
   save: boolean,
 ) {
-  await updateDoc(doc(db, userPath(uid)), {
-    savedContentIds: save ? arrayUnion(contentId) : arrayRemove(contentId),
-    updatedAt: Date.now(),
-  });
+  const ref = doc(db, "users", uid, "saved_content", contentId);
+  if (save) {
+    await setDoc(ref, { contentId, savedAt: Date.now() });
+  } else {
+    await deleteDoc(ref);
+  }
+}
+
+export async function getSavedContentIds(uid: string): Promise<string[]> {
+  const q = query(
+    collection(db, "users", uid, "saved_content"),
+    orderBy("savedAt", "desc"),
+  );
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => d.id);
 }

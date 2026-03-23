@@ -495,7 +495,10 @@ export default function ProfileScreen() {
                         if (!uid) return;
                         try {
                           // Delete all subcollection docs
-                          const subcollections = ["daily_sessions", "card_progress"];
+                          const subcollections = [
+                            "daily_sessions", "card_progress",
+                            "completed_content", "saved_content", "stats",
+                          ];
                           for (const sub of subcollections) {
                             const snap = await getDocs(collection(db, "users", uid, sub));
                             await Promise.all(snap.docs.map((d) => deleteDoc(d.ref)));

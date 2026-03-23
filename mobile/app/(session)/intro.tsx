@@ -12,6 +12,7 @@ import { VStack } from "@/components/ui/vstack";
 
 import { LumenButton } from "../../components/ui/lumen/Button";
 import { trackColor, trackBg } from "../../constants/tracks";
+import { incrementContentStart } from "../../repositories/content_stats.repo";
 import type { Lang } from "../../models/lang";
 
 const DIFFICULTY_LABELS: Record<string, Record<Lang, string>> = {
@@ -45,6 +46,7 @@ export default function LessonIntroScreen() {
   const diffColor = DIFFICULTY_COLORS[difficulty] ?? "#AAB0C0";
 
   function startLesson() {
+    incrementContentStart(contentId).catch(() => {});
     router.push({
       pathname: "/(session)/lesson",
       params: { contentId, version, lang },

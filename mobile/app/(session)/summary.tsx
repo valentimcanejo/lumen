@@ -29,6 +29,7 @@ import {
 } from "../../repositories/progress.repo";
 import { scheduleReviewReminder } from "../../services/notifications.service";
 import { toggleSaveContent, markContentCompleted } from "../../repositories/user.repo";
+import { incrementContentCompletion } from "../../repositories/content_stats.repo";
 import {
   checkAndGrantAchievements,
   ACHIEVEMENTS,
@@ -336,6 +337,7 @@ export default function SummaryScreen() {
         const { gained } = await grantSessionXP(uid, quizScore);
         setGainedXp(gained);
         await markContentCompleted(uid, contentId);
+        incrementContentCompletion(contentId, quizScore, pack?.estimatedMinutes ?? 0).catch(() => {});
         const unlockedIds = await checkAndGrantAchievements(uid, { quizScore });
         const defs = unlockedIds
           .map((id) => ACHIEVEMENTS.find((a) => a.id === id))

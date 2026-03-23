@@ -11,11 +11,11 @@ import { Text } from "../../components/ui/text";
 import { Pressable } from "../../components/ui/pressable";
 
 import { useAuth } from "../../hooks/useAuth";
-import { useUser } from "../../hooks/useUser";
 import {
   getRecentSessions,
   type CompletedSession,
 } from "../../repositories/progress.repo";
+import { getSavedContentIds } from "../../repositories/user.repo";
 import { getLessonMeta } from "../../repositories/lessons.repo";
 import { trackColor } from "../../constants/tracks";
 import type { Lang } from "../../models/lang";
@@ -147,7 +147,6 @@ export default function Library() {
   const { t, i18n } = useTranslation();
   const insets = useSafeAreaInsets();
   const { uid } = useAuth();
-  const { getUserData } = useUser();
   const locale = DATE_LOCALE[i18n.language] ?? "en-US";
   const lang = (i18n.language ?? "pt") as Lang;
 
@@ -161,13 +160,12 @@ export default function Library() {
     setLoading(true);
     Promise.all([
       getRecentSessions(uid).catch(() => [] as CompletedSession[]),
-      getUserData({ userId: uid }).catch(() => null),
-    ]).then(([s, user]) => {
+      getSavedContentIds(uid).catch(() => [] as string[]),
+    ]).then(([s, saved]) => {
       setSessions(s);
-      setSavedIds(user?.savedContentIds ?? []);
+      setSavedIds(saved);
       setLoading(false);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
 
   function TabButton({ id, label }: { id: Tab; label: string }) {
