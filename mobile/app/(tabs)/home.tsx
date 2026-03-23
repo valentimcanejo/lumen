@@ -35,6 +35,7 @@ import { getLessonMeta } from "../../repositories/lessons.repo";
 import {
   getWeeklyData,
   getTodaySession,
+  getDueCardCount,
   type DayData,
 } from "../../repositories/progress.repo";
 import { todayYmd } from "../../repositories/session.repo";
@@ -410,6 +411,7 @@ export default function Home() {
   const [showWelcomeBack, setShowWelcomeBack] = useState(false);
   const [loadingUser, setLoadingUser] = useState(true);
   const [todayCompletedId, setTodayCompletedId] = useState<string | null>(null);
+  const [dueCardCount, setDueCardCount] = useState(0);
 
   useEffect(() => {
     if (!currentUserId) return;
@@ -422,6 +424,9 @@ export default function Home() {
       .catch(() => {});
     getTodaySession(currentUserId)
       .then((s) => setTodayCompletedId(s?.contentId ?? null))
+      .catch(() => {});
+    getDueCardCount(currentUserId)
+      .then(setDueCardCount)
       .catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUserId]);
@@ -531,6 +536,38 @@ export default function Home() {
             </Box>
           )}
         </Box>
+
+        {/* Due cards badge */}
+        {dueCardCount > 0 && (
+          <Box className="px-6 mt-4">
+            <TouchableOpacity
+              onPress={() => router.push("/(session)/review")}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                backgroundColor: "#0D1025",
+                borderWidth: 1,
+                borderColor: "#7B8FE044",
+                borderRadius: 16,
+                paddingHorizontal: 16,
+                paddingVertical: 12,
+              }}
+            >
+              <HStack className="items-center" space="sm">
+                <Text style={{ fontSize: 20 }}>🧠</Text>
+                <VStack>
+                  <Text style={{ color: "#7B8FE0", fontSize: 13, fontWeight: "700" }}>
+                    {t("tabs.home.review_due", { count: dueCardCount })}
+                  </Text>
+                </VStack>
+              </HStack>
+              <Text style={{ color: "#7B8FE0", fontSize: 13, fontWeight: "600" }}>
+                {t("tabs.home.start_review")} →
+              </Text>
+            </TouchableOpacity>
+          </Box>
+        )}
 
         {/* Pack of the day */}
         {loadingUser && (

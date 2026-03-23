@@ -37,3 +37,18 @@ export async function scheduleDailyReminder(
 export async function cancelReminders(): Promise<void> {
   await Notifications.cancelAllScheduledNotificationsAsync();
 }
+
+export async function scheduleReviewReminder(
+  title: string,
+  body: string,
+): Promise<void> {
+  // Schedule a one-time notification in 1 hour without cancelling existing reminders
+  await Notifications.scheduleNotificationAsync({
+    content: { title, body, data: { type: "review" } },
+    trigger: {
+      type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+      seconds: 60 * 60, // 1 hour
+      repeats: false,
+    },
+  });
+}

@@ -40,8 +40,16 @@ export default function RootLayout() {
 
   useEffect(() => {
     const sub = Notifications.addNotificationResponseReceivedListener(
-      async () => {
+      async (response) => {
         try {
+          const notifData = response.notification.request.content.data as Record<string, unknown> | null;
+
+          // Review notification → go to review screen
+          if (notifData?.type === "review") {
+            router.push("/(session)/review");
+            return;
+          }
+
           const uid = auth.currentUser?.uid;
           if (!uid) return;
 
@@ -113,6 +121,10 @@ export default function RootLayout() {
         />
         <Stack.Screen
           name="(session)/summary"
+          options={{ animation: "slide_from_right" }}
+        />
+        <Stack.Screen
+          name="(session)/review"
           options={{ animation: "slide_from_right" }}
         />
       </Stack>

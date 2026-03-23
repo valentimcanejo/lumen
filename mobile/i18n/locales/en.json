@@ -62,7 +62,9 @@
       "welcome_back_no_streak": "Ready to learn something new today?",
       "welcome_back_cta": "Start session",
       "done_today": "Done today",
-      "redo": "Do again"
+      "redo": "Do again",
+      "review_due": "{{count}} card(s) to review",
+      "start_review": "Review now"
     },
     "tracks": {
       "title": "Tracks",
@@ -160,6 +162,22 @@
       "explanation": "EXPLANATION",
       "finish": "Finish",
       "skip": "Skip quiz"
+    },
+    "review": {
+      "title": "Review",
+      "subtitle": "{{count}} card(s) to review",
+      "empty_title": "All caught up!",
+      "empty_subtitle": "No cards to review right now. Keep studying to build your queue.",
+      "done_title": "Review complete!",
+      "done_subtitle": "You reviewed {{count}} card(s). Keep it up!",
+      "go_home": "Back to Home",
+      "question": "QUESTION",
+      "answer": "ANSWER",
+      "reveal": "Reveal answer",
+      "correct": "Got it",
+      "wrong": "Missed it",
+      "notification_title": "Cards to review 🧠",
+      "notification_body": "You have {{count}} card(s) to review. Don't break the habit!"
     },
     "summary": {
       "step": "4 / 4",

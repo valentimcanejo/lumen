@@ -14,6 +14,7 @@ import {
 } from "../services/firestore.service";
 import type { UserProfile } from "../models/user";
 import { xpToLevel } from "../models/user";
+import type { Lang } from "../models/lang";
 
 export type CompletedSession = {
   date: string; // YYYY-MM-DD
@@ -102,15 +103,107 @@ export async function getWeeklyData(uid: string): Promise<DayData[]> {
 
 type CardGrade = "know" | "almost" | "dont";
 
+type CardProgressEntry = {
+  grade: CardGrade;
+  updatedAt: number;
+  interval: number;      // days until next review
+  easeFactor: number;    // SM-2 ease factor (starts at 2.5)
+  nextReviewAt: number;  // timestamp ms
+  reviewCount: number;
+  version: number;
+  lang: string;
+};
+
+export type DueCard = {
+  contentId: string;
+  cardId: string;
+  version: number;
+  lang: Lang;
+  nextReviewAt: number;
+};
+
+function computeSM2(
+  grade: CardGrade,
+  prev: Partial<CardProgressEntry>,
+): Pick<CardProgressEntry, "interval" | "easeFactor" | "nextReviewAt" | "reviewCount"> {
+  const quality = grade === "know" ? 5 : grade === "almost" ? 3 : 1;
+  const prevInterval = prev.interval ?? 1;
+  const prevEF = prev.easeFactor ?? 2.5;
+  const prevReviewCount = prev.reviewCount ?? 0;
+
+  let interval: number;
+  let easeFactor: number;
+
+  if (quality < 3) {
+    interval = 1;
+    easeFactor = prevEF;
+  } else {
+    if (prevReviewCount === 0) interval = 1;
+    else if (prevReviewCount === 1) interval = 6;
+    else interval = Math.round(prevInterval * prevEF);
+    easeFactor = Math.max(
+      1.3,
+      prevEF + 0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02),
+    );
+  }
+
+  return {
+    interval,
+    easeFactor,
+    reviewCount: prevReviewCount + 1,
+    nextReviewAt: Date.now() + interval * 24 * 60 * 60 * 1000,
+  };
+}
+
 export async function gradeCard(
   uid: string,
   contentId: string,
   cardId: string,
   grade: CardGrade,
+  meta?: { version: number; lang: Lang },
 ) {
+  const doc = await getDocData<Record<string, CardProgressEntry>>(
+    `users/${uid}/card_progress/${contentId}`,
+  );
+  const prev = doc?.[cardId] ?? {};
+  const sm2 = computeSM2(grade, prev);
+
   await setDocData(`users/${uid}/card_progress/${contentId}`, {
-    [cardId]: { grade, updatedAt: Date.now() },
+    [cardId]: {
+      grade,
+      updatedAt: Date.now(),
+      ...sm2,
+      version: meta?.version ?? (prev as CardProgressEntry).version ?? 1,
+      lang: meta?.lang ?? (prev as CardProgressEntry).lang ?? "pt",
+    },
   });
+}
+
+export async function getDueCards(uid: string): Promise<DueCard[]> {
+  const snap = await getDocs(collection(db, "users", uid, "card_progress"));
+  const due: DueCard[] = [];
+  const now = Date.now();
+  for (const docSnap of snap.docs) {
+    const contentId = docSnap.id;
+    const data = docSnap.data() as Record<string, CardProgressEntry>;
+    for (const [cardId, entry] of Object.entries(data)) {
+      if (entry.nextReviewAt && entry.nextReviewAt <= now) {
+        due.push({
+          contentId,
+          cardId,
+          version: entry.version ?? 1,
+          lang: (entry.lang ?? "pt") as Lang,
+          nextReviewAt: entry.nextReviewAt,
+        });
+      }
+    }
+  }
+  return due.sort((a, b) => a.nextReviewAt - b.nextReviewAt);
+}
+
+export async function getDueCardCount(uid: string): Promise<number> {
+  const due = await getDueCards(uid);
+  return due.length;
 }
 
 export async function markDayCompleted(

@@ -62,7 +62,9 @@
       "welcome_back_no_streak": "Pronto para aprender algo novo hoje?",
       "welcome_back_cta": "Começar sessão",
       "done_today": "Concluído hoje",
-      "redo": "Refazer"
+      "redo": "Refazer",
+      "review_due": "{{count}} card(s) para revisar",
+      "start_review": "Revisar agora"
     },
     "tracks": {
       "title": "Trilhas",
@@ -160,6 +162,22 @@
       "explanation": "EXPLICAÇÃO",
       "finish": "Finalizar",
       "skip": "Pular quiz"
+    },
+    "review": {
+      "title": "Revisão",
+      "subtitle": "{{count}} card(s) para revisar",
+      "empty_title": "Tudo em dia!",
+      "empty_subtitle": "Nenhum card para revisar agora. Continue estudando para construir sua fila.",
+      "done_title": "Revisão concluída!",
+      "done_subtitle": "Você revisou {{count}} card(s). Continue assim!",
+      "go_home": "Voltar para Home",
+      "question": "PERGUNTA",
+      "answer": "RESPOSTA",
+      "reveal": "Revelar resposta",
+      "correct": "Acertei",
+      "wrong": "Errei",
+      "notification_title": "Cards para revisar 🧠",
+      "notification_body": "Você tem {{count}} card(s) para revisar. Não perca o ritmo!"
     },
     "summary": {
       "step": "4 / 4",

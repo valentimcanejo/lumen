@@ -25,7 +25,9 @@ import {
   markDayCompleted,
   updateStreak,
   grantSessionXP,
+  getDueCardCount,
 } from "../../repositories/progress.repo";
+import { scheduleReviewReminder } from "../../services/notifications.service";
 import { toggleSaveContent, markContentCompleted } from "../../repositories/user.repo";
 import {
   checkAndGrantAchievements,
@@ -339,6 +341,15 @@ export default function SummaryScreen() {
           .map((id) => ACHIEVEMENTS.find((a) => a.id === id))
           .filter(Boolean) as AchievementDef[];
         setNewAchievements(defs);
+
+        // Schedule review notification if there are due cards
+        const dueCount = await getDueCardCount(uid);
+        if (dueCount > 0) {
+          scheduleReviewReminder(
+            "Cards para revisar 🧠",
+            `Você tem ${dueCount} card(s) para revisar. Não perca o ritmo!`,
+          ).catch(() => {});
+        }
       }
       setSaved(true);
       if (scorePct >= 0.6) setConfettiActive(true);

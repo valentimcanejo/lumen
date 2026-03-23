@@ -108,7 +108,10 @@ export default function CardsScreen() {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
     }
     if (uid && current) {
-      gradeCard(uid, contentId, current.id, g).catch(() => {});
+      gradeCard(uid, contentId, current.id, g, {
+        version: Number(version),
+        lang: lang ?? "pt",
+      }).catch(() => {});
     }
     goNext();
   }

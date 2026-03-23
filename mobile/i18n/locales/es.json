@@ -62,7 +62,9 @@
       "welcome_back_no_streak": "¿Listo para aprender algo nuevo hoy?",
       "welcome_back_cta": "Comenzar sesión",
       "done_today": "Completado hoy",
-      "redo": "Repetir"
+      "redo": "Repetir",
+      "review_due": "{{count}} tarjeta(s) para repasar",
+      "start_review": "Repasar ahora"
     },
     "tracks": {
       "title": "Rutas",
@@ -160,6 +162,22 @@
       "explanation": "EXPLICACIÓN",
       "finish": "Finalizar",
       "skip": "Saltar quiz"
+    },
+    "review": {
+      "title": "Repaso",
+      "subtitle": "{{count}} tarjeta(s) para repasar",
+      "empty_title": "¡Todo al día!",
+      "empty_subtitle": "No hay tarjetas para repasar ahora. Sigue estudiando para llenar tu cola.",
+      "done_title": "¡Repaso completado!",
+      "done_subtitle": "Repasaste {{count}} tarjeta(s). ¡Sigue así!",
+      "go_home": "Volver al Inicio",
+      "question": "PREGUNTA",
+      "answer": "RESPUESTA",
+      "reveal": "Revelar respuesta",
+      "correct": "Lo supe",
+      "wrong": "No lo supe",
+      "notification_title": "Tarjetas para repasar 🧠",
+      "notification_body": "Tienes {{count}} tarjeta(s) para repasar. ¡No pierdas el ritmo!"
     },
     "summary": {
       "step": "4 / 4",
