@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Platform, ScrollView, ActivityIndicator, Linking, DevSettings } from "react-native";
+import { Platform, ScrollView, ActivityIndicator, Linking, DevSettings, Alert } from "react-native";
 import * as Notifications from "expo-notifications";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -31,6 +31,8 @@ import {
 } from "../../models/user";
 import { ACHIEVEMENTS } from "../../repositories/achievements.repo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase/firebaseConfig";
 
 // ---------------------------------------------------------------------------
 // Account card
@@ -480,14 +482,40 @@ export default function ProfileScreen() {
 
             {/* DEV ONLY */}
             <Pressable
-              onPress={async () => {
-                await AsyncStorage.removeItem("hasOnboarded");
-                DevSettings.reload();
+              onPress={() => {
+                Alert.alert(
+                  "[DEV] Reset completo",
+                  "Apaga todos os dados do usuário no Firestore e reinicia o app. Não há volta.",
+                  [
+                    { text: "Cancelar", style: "cancel" },
+                    {
+                      text: "Resetar tudo",
+                      style: "destructive",
+                      onPress: async () => {
+                        if (!uid) return;
+                        try {
+                          // Delete all subcollection docs
+                          const subcollections = ["daily_sessions", "card_progress"];
+                          for (const sub of subcollections) {
+                            const snap = await getDocs(collection(db, "users", uid, sub));
+                            await Promise.all(snap.docs.map((d) => deleteDoc(d.ref)));
+                          }
+                          // Delete user doc
+                          await deleteDoc(doc(db, "users", uid));
+                        } catch {
+                          // ignore — proceed to clear local state anyway
+                        }
+                        await AsyncStorage.clear();
+                        DevSettings.reload();
+                      },
+                    },
+                  ],
+                );
               }}
               className="h-[44px] rounded-xl border border-[#E26D6D]/40 items-center justify-center mt-2"
             >
               <Text className="text-[#E26D6D] text-[13px] font-semibold">
-                [DEV] Reset onboarding
+                [DEV] Reset completo
               </Text>
             </Pressable>
           </>
