@@ -103,7 +103,13 @@ export async function getWeeklyData(uid: string): Promise<DayData[]> {
 
 type CardGrade = "know" | "almost" | "dont";
 
-type CardProgressEntry = {
+// Each graded card is its own document.
+// Path: users/{uid}/card_progress/{contentId}_{cardId}
+// This allows server-side queries (nextReviewAt <= now) and avoids the
+// 1MB per-doc limit that the old map structure would hit at scale.
+type CardProgressDoc = {
+  contentId: string;
+  cardId: string;
   grade: CardGrade;
   updatedAt: number;
   interval: number;      // days until next review
@@ -111,7 +117,7 @@ type CardProgressEntry = {
   nextReviewAt: number;  // timestamp ms
   reviewCount: number;
   version: number;
-  lang: string;
+  lang: Lang;
 };
 
 export type DueCard = {
@@ -122,10 +128,14 @@ export type DueCard = {
   nextReviewAt: number;
 };
 
+function cardProgressPath(uid: string, contentId: string, cardId: string) {
+  return `users/${uid}/card_progress/${contentId}_${cardId}`;
+}
+
 function computeSM2(
   grade: CardGrade,
-  prev: Partial<CardProgressEntry>,
-): Pick<CardProgressEntry, "interval" | "easeFactor" | "nextReviewAt" | "reviewCount"> {
+  prev: Partial<CardProgressDoc>,
+): Pick<CardProgressDoc, "interval" | "easeFactor" | "nextReviewAt" | "reviewCount"> {
   const quality = grade === "know" ? 5 : grade === "almost" ? 3 : 1;
   const prevInterval = prev.interval ?? 1;
   const prevEF = prev.easeFactor ?? 2.5;
@@ -162,43 +172,41 @@ export async function gradeCard(
   grade: CardGrade,
   meta?: { version: number; lang: Lang },
 ) {
-  const doc = await getDocData<Record<string, CardProgressEntry>>(
-    `users/${uid}/card_progress/${contentId}`,
-  );
-  const prev = doc?.[cardId] ?? {};
+  const path = cardProgressPath(uid, contentId, cardId);
+  const prev = (await getDocData<CardProgressDoc>(path)) ?? {};
   const sm2 = computeSM2(grade, prev);
 
-  await setDocData(`users/${uid}/card_progress/${contentId}`, {
-    [cardId]: {
-      grade,
-      updatedAt: Date.now(),
-      ...sm2,
-      version: meta?.version ?? (prev as CardProgressEntry).version ?? 1,
-      lang: meta?.lang ?? (prev as CardProgressEntry).lang ?? "pt",
-    },
+  await setDocData<CardProgressDoc>(path, {
+    contentId,
+    cardId,
+    grade,
+    updatedAt: Date.now(),
+    ...sm2,
+    version: meta?.version ?? prev.version ?? 1,
+    lang: meta?.lang ?? prev.lang ?? "pt",
   });
 }
 
+// Server-side query — single round-trip regardless of how many packs exist.
+// Requires the Firestore single-field index on nextReviewAt (auto-created).
 export async function getDueCards(uid: string): Promise<DueCard[]> {
-  const snap = await getDocs(collection(db, "users", uid, "card_progress"));
-  const due: DueCard[] = [];
   const now = Date.now();
-  for (const docSnap of snap.docs) {
-    const contentId = docSnap.id;
-    const data = docSnap.data() as Record<string, CardProgressEntry>;
-    for (const [cardId, entry] of Object.entries(data)) {
-      if (entry.nextReviewAt && entry.nextReviewAt <= now) {
-        due.push({
-          contentId,
-          cardId,
-          version: entry.version ?? 1,
-          lang: (entry.lang ?? "pt") as Lang,
-          nextReviewAt: entry.nextReviewAt,
-        });
-      }
-    }
-  }
-  return due.sort((a, b) => a.nextReviewAt - b.nextReviewAt);
+  const q = query(
+    collection(db, "users", uid, "card_progress"),
+    where("nextReviewAt", "<=", now),
+    orderBy("nextReviewAt", "asc"),
+  );
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => {
+    const data = d.data() as CardProgressDoc;
+    return {
+      contentId: data.contentId,
+      cardId: data.cardId,
+      version: data.version ?? 1,
+      lang: data.lang ?? "pt",
+      nextReviewAt: data.nextReviewAt,
+    };
+  });
 }
 
 export async function getDueCardCount(uid: string): Promise<number> {
