@@ -1,25 +1,23 @@
-export const TRACK_COLORS: Record<string, string> = {
-  foundations:      "#7B8FE0", // blue-purple
-  geopolitics:      "#5ED19A", // green
-  economics:        "#F5C77A", // yellow
-  critical_thinking: "#C47AE0", // purple
-};
+const COLOR_PALETTE = [
+  "#7B8FE0", "#5ED19A", "#F5C77A", "#C47AE0",
+  "#E26D6D", "#5BB8D4", "#F09A5A", "#9DE08A",
+];
 
-export const TRACK_BG: Record<string, string> = {
-  foundations:      "#0D1025",
-  geopolitics:      "#0B1C14",
-  economics:        "#1A1408",
-  critical_thinking: "#160D20",
-};
+const BG_PALETTE = [
+  "#0D1025", "#0B1C14", "#1A1408", "#160D20",
+  "#1C0D0D", "#0B1820", "#1A1108", "#0E1C0B",
+];
+
+function hash(id: string): number {
+  let h = 0;
+  for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
+  return h;
+}
 
 export function trackColor(id: string): string {
-  if (TRACK_COLORS[id]) return TRACK_COLORS[id];
-  const prefix = Object.keys(TRACK_COLORS).find((k) => id.startsWith(k));
-  return prefix ? TRACK_COLORS[prefix] : "#AAB0C0";
+  return COLOR_PALETTE[hash(id) % COLOR_PALETTE.length];
 }
 
 export function trackBg(id: string): string {
-  if (TRACK_BG[id]) return TRACK_BG[id];
-  const prefix = Object.keys(TRACK_BG).find((k) => id.startsWith(k));
-  return prefix ? TRACK_BG[prefix] : "#121826";
+  return BG_PALETTE[hash(id) % BG_PALETTE.length];
 }

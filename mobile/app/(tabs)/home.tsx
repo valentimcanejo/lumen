@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, View, StyleSheet, Modal, Pressable, TouchableOpacity } from "react-native";
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  Modal,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -25,7 +32,11 @@ import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
 import { getActiveGoals, type Goal } from "../../repositories/goals.repo";
 import { getLessonMeta } from "../../repositories/lessons.repo";
-import { getWeeklyData, getTodaySession, type DayData } from "../../repositories/progress.repo";
+import {
+  getWeeklyData,
+  getTodaySession,
+  type DayData,
+} from "../../repositories/progress.repo";
 import { todayYmd } from "../../repositories/session.repo";
 import {
   type UserProfile,
@@ -55,7 +66,7 @@ function StreakCard({ streak }: { streak: number }) {
         true,
       );
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [streak]);
 
   const flameStyle = useAnimatedStyle(() => ({
@@ -118,7 +129,12 @@ const wk = StyleSheet.create({
     marginBottom: 20,
   },
   minutesNum: { color: "#F5C77A", fontSize: 28, fontWeight: "700" },
-  minutesLabel: { color: "#AAB0C0", fontSize: 13, marginBottom: 3, marginLeft: 4 },
+  minutesLabel: {
+    color: "#AAB0C0",
+    fontSize: 13,
+    marginBottom: 3,
+    marginLeft: 4,
+  },
   badge: {
     backgroundColor: "#F5C77A22",
     borderWidth: 1,
@@ -180,6 +196,7 @@ function WeeklyCard({
   return (
     <View style={wk.card}>
       {/* Header */}
+
       <View style={wk.headerRow}>
         <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
           <Text style={wk.minutesNum}>{totalMinutes}</Text>
@@ -205,7 +222,11 @@ function WeeklyCard({
                 style={[
                   wk.circle,
                   {
-                    backgroundColor: done ? "#F5C77A" : isToday ? "transparent" : "#1A2233",
+                    backgroundColor: done
+                      ? "#F5C77A"
+                      : isToday
+                        ? "transparent"
+                        : "#1A2233",
                     borderWidth: isToday && !done ? 2 : 0,
                     borderColor: "#F5C77A88",
                   },
@@ -216,10 +237,25 @@ function WeeklyCard({
                 ) : isToday ? (
                   <View style={[wk.dot, { backgroundColor: "#F5C77A" }]} />
                 ) : isFuture ? null : (
-                  <View style={[wk.dot, { backgroundColor: "#3A4458", width: 5, height: 5, borderRadius: 3 }]} />
+                  <View
+                    style={[
+                      wk.dot,
+                      {
+                        backgroundColor: "#3A4458",
+                        width: 5,
+                        height: 5,
+                        borderRadius: 3,
+                      },
+                    ]}
+                  />
                 )}
               </View>
-              <Text style={[wk.dayLabel, { color: isToday ? "#F5C77A" : "#4A5568" }]}>
+              <Text
+                style={[
+                  wk.dayLabel,
+                  { color: isToday ? "#F5C77A" : "#4A5568" },
+                ]}
+              >
                 {labels[i]}
               </Text>
             </View>
@@ -241,7 +277,9 @@ function WeeklyCard({
       </View>
       <View style={wk.statsRow}>
         <Text style={wk.statsText}>{Math.round(weekPct * 100)}%</Text>
-        <Text style={wk.statsText}>{totalMinutes} / {weekGoal} min</Text>
+        <Text style={wk.statsText}>
+          {totalMinutes} / {weekGoal} min
+        </Text>
       </View>
     </View>
   );
@@ -276,7 +314,12 @@ function WelcomeBackModal({
   const { t } = useTranslation();
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onDismiss}>
+    <Modal
+      visible={visible}
+      transparent
+      animationType="fade"
+      onRequestClose={onDismiss}
+    >
       <View style={wb.overlay}>
         <View style={wb.card}>
           <Text style={wb.title}>{t("tabs.home.welcome_back_title")}</Text>
@@ -285,6 +328,7 @@ function WelcomeBackModal({
               ? t("tabs.home.welcome_back_streak", { streak })
               : t("tabs.home.welcome_back_no_streak")}
           </Text>
+
           {streak > 0 && (
             <View style={wb.streakRow}>
               <Text style={wb.streakNum}>{streak}</Text>
@@ -317,9 +361,25 @@ const wb = StyleSheet.create({
     width: "100%",
     alignItems: "center",
   },
-  title: { color: "#E6EAF2", fontSize: 22, fontWeight: "700", textAlign: "center" },
-  subtitle: { color: "#AAB0C0", fontSize: 14, textAlign: "center", marginTop: 10, lineHeight: 20 },
-  streakRow: { flexDirection: "row", alignItems: "center", marginTop: 20, gap: 6 },
+  title: {
+    color: "#E6EAF2",
+    fontSize: 22,
+    fontWeight: "700",
+    textAlign: "center",
+  },
+  subtitle: {
+    color: "#AAB0C0",
+    fontSize: 14,
+    textAlign: "center",
+    marginTop: 10,
+    lineHeight: 20,
+  },
+  streakRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 20,
+    gap: 6,
+  },
   streakNum: { color: "#F5C77A", fontSize: 48, fontWeight: "800" },
   streakLabel: { fontSize: 36 },
   btn: {
@@ -357,7 +417,9 @@ export default function Home() {
     getUserData({ userId: currentUserId })
       .then((u) => setUser(u ?? null))
       .finally(() => setLoadingUser(false));
-    getWeeklyData(currentUserId).then(setWeeklyData).catch(() => {});
+    getWeeklyData(currentUserId)
+      .then(setWeeklyData)
+      .catch(() => {});
     getTodaySession(currentUserId)
       .then((s) => setTodayCompletedId(s?.contentId ?? null))
       .catch(() => {});
@@ -375,7 +437,9 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    getActiveGoals().then(setGoals).catch(() => setGoals([]));
+    getActiveGoals()
+      .then(setGoals)
+      .catch(() => setGoals([]));
   }, []);
 
   const lang = (user?.lang ?? i18n.language ?? "pt") as Lang;
@@ -408,148 +472,157 @@ export default function Home() {
 
   return (
     <>
-    <WelcomeBackModal
-      visible={showWelcomeBack}
-      streak={streak}
-      onDismiss={() => setShowWelcomeBack(false)}
-    />
-    <ScrollView
-      className="flex-1 bg-[#0B0F14]"
-      contentContainerStyle={{ paddingBottom: 40 }}
-    >
-      {/* Header with level + tier + XP bar */}
-      <Box className="px-6" style={{ paddingTop: insets.top + 8 }}>
-        <HStack className="items-center justify-between">
-          <Text className="text-[#E6EAF2] text-[22px] font-bold">Lumen</Text>
-          <HStack className="items-center" space="sm">
-            <Box
-              style={{
-                paddingHorizontal: 8,
-                paddingVertical: 3,
-                borderRadius: 100,
-                backgroundColor: `${tier.color}22`,
-                borderWidth: 1,
-                borderColor: `${tier.color}66`,
-              }}
-            >
-              <Text style={{ color: tier.color, fontSize: 11, fontWeight: "700" }}>
-                {tier.name}
-              </Text>
-            </Box>
-            <Text className="text-[#AAB0C0] text-[13px]">
-              {t("tabs.home.level", { level })}
-            </Text>
+      <WelcomeBackModal
+        visible={showWelcomeBack}
+        streak={streak}
+        onDismiss={() => setShowWelcomeBack(false)}
+      />
+      <ScrollView
+        className="flex-1 bg-[#0B0F14]"
+        contentContainerStyle={{ paddingBottom: 40 }}
+      >
+        {/* Header with level + tier + XP bar */}
+        <Box className="px-6" style={{ paddingTop: insets.top + 8 }}>
+          <HStack className="items-center justify-between">
+            <Text className="text-[#E6EAF2] text-[22px] font-bold">Lumen</Text>
+            <Pressable onPress={() => router.push("/(tabs)/profile")}>
+              <HStack className="items-center" space="sm">
+                <Box
+                  style={{
+                    paddingHorizontal: 8,
+                    paddingVertical: 3,
+                    borderRadius: 100,
+                    backgroundColor: `${tier.color}22`,
+                    borderWidth: 1,
+                    borderColor: `${tier.color}66`,
+                  }}
+                >
+                  <Text
+                    style={{ color: tier.color, fontSize: 11, fontWeight: "700" }}
+                  >
+                    {tier.name}
+                  </Text>
+                </Box>
+                <Text className="text-[#AAB0C0] text-[13px]">
+                  {t("tabs.home.level", { level })}
+                </Text>
+              </HStack>
+            </Pressable>
           </HStack>
-        </HStack>
-        <Box className="h-[3px] bg-[#1A2233] rounded-full mt-2 overflow-hidden">
-          <Box
-            className="h-full"
-            style={{
-              width: `${Math.min(xpPct * 100, 100)}%`,
-              backgroundColor: tier.color,
-            }}
-          />
+          <Box className="h-[3px] bg-[#1A2233] rounded-full mt-2 overflow-hidden">
+            <Box
+              className="h-full"
+              style={{
+                width: `${Math.min(xpPct * 100, 100)}%`,
+                backgroundColor: tier.color,
+              }}
+            />
+          </Box>
         </Box>
-      </Box>
 
-      {/* Title + streak */}
-      <Box className="px-6 pt-5">
-        <Text className="text-[#E6EAF2] text-[22px] font-semibold">
-          {t("tabs.home.title")}
-        </Text>
-        {streak > 0 && (
-          <Box className="mt-3">
-            <StreakCard streak={streak} />
+        {/* Title + streak */}
+        <Box className="px-6 pt-5">
+          <Text className="text-[#E6EAF2] text-[22px] font-semibold">
+            {t("tabs.home.title")}
+          </Text>
+          {streak > 0 && (
+            <Box className="mt-3">
+              <StreakCard streak={streak} />
+            </Box>
+          )}
+        </Box>
+
+        {/* Pack of the day */}
+        {loadingUser && (
+          <Box className="px-6 mt-5">
+            <SkeletonCard />
           </Box>
         )}
-      </Box>
-
-      {/* Pack of the day */}
-      {loadingUser && (
-        <Box className="px-6 mt-5">
-          <SkeletonCard />
-        </Box>
-      )}
-      {!loadingUser && todayGoal && (() => {
-        const isDone = todayCompletedId === todayGoal.id;
-        return (
-          <Box className="px-6 mt-5">
-            <HStack className="items-center justify-between mb-2">
-              <Text className="text-[#AAB0C0] text-[11px] font-semibold tracking-widest">
-                {t("tabs.home.pack_of_day").toUpperCase()}
-              </Text>
-              {isDone && (
-                <HStack className="items-center" space="xs">
-                  <Ionicons name="checkmark-circle" size={14} color="#5ED19A" />
-                  <Text className="text-[#5ED19A] text-[11px] font-semibold">
-                    {t("tabs.home.done_today")}
+        {!loadingUser &&
+          todayGoal &&
+          (() => {
+            const isDone = todayCompletedId === todayGoal.id;
+            return (
+              <Box className="px-6 mt-5">
+                <HStack className="items-center justify-between mb-2">
+                  <Text className="text-[#AAB0C0] text-[11px] font-semibold tracking-widest">
+                    {t("tabs.home.pack_of_day").toUpperCase()}
                   </Text>
+                  {isDone && (
+                    <HStack className="items-center" space="xs">
+                      <Ionicons
+                        name="checkmark-circle"
+                        size={14}
+                        color="#5ED19A"
+                      />
+                      <Text className="text-[#5ED19A] text-[11px] font-semibold">
+                        {t("tabs.home.done_today")}
+                      </Text>
+                    </HStack>
+                  )}
                 </HStack>
-              )}
-            </HStack>
-            <LumenCard>
-              <VStack space="md">
-                <Text className="text-[#E6EAF2] text-[20px] font-semibold">
-                  {todayGoal.title[lang]}
-                </Text>
-                {todayGoal.description?.[lang] ? (
-                  <Text className="text-[#AAB0C0]">
-                    {todayGoal.description[lang]}
-                  </Text>
-                ) : null}
-                {isDone ? (
-                  <LumenButton
-                    onPress={() => startSession(todayGoal.id)}
-                    variant="ghost"
-                  >
-                    {t("tabs.home.redo")}
-                  </LumenButton>
-                ) : (
-                  <LumenButton onPress={() => startSession(todayGoal.id)}>
-                    {t("tabs.home.start")}
-                  </LumenButton>
-                )}
-              </VStack>
-            </LumenCard>
-          </Box>
-        );
-      })()}
+                <LumenCard>
+                  <VStack space="md">
+                    <Text className="text-[#E6EAF2] text-[20px] font-semibold">
+                      {todayGoal.title[lang]}
+                    </Text>
+                    {todayGoal.description?.[lang] ? (
+                      <Text className="text-[#AAB0C0]">
+                        {todayGoal.description[lang]}
+                      </Text>
+                    ) : null}
+                    {isDone ? (
+                      <LumenButton
+                        onPress={() => startSession(todayGoal.id)}
+                        variant="ghost"
+                      >
+                        {t("tabs.home.redo")}
+                      </LumenButton>
+                    ) : (
+                      <LumenButton onPress={() => startSession(todayGoal.id)}>
+                        {t("tabs.home.start")}
+                      </LumenButton>
+                    )}
+                  </VStack>
+                </LumenCard>
+              </Box>
+            );
+          })()}
 
-      {/* Other selected goals */}
-      {!loadingUser && goals
-        .filter(
-          (g) => selectedGoals.includes(g.id) && g.id !== todayPackId,
-        )
-        .map((goal) => (
-          <Box key={goal.id} className="px-6 mt-3">
-            <LumenCard>
-              <VStack space="md">
-                <Text className="text-[#E6EAF2] text-[18px] font-semibold">
-                  {goal.title[lang]}
-                </Text>
-                <LumenButton onPress={() => startSession(goal.id)}>
-                  {t("tabs.home.start")}
-                </LumenButton>
-              </VStack>
-            </LumenCard>
-          </Box>
-        ))}
+        {/* Other selected goals */}
+        {!loadingUser &&
+          goals
+            .filter((g) => selectedGoals.includes(g.id) && g.id !== todayPackId)
+            .map((goal) => (
+              <Box key={goal.id} className="px-6 mt-3">
+                <LumenCard>
+                  <VStack space="md">
+                    <Text className="text-[#E6EAF2] text-[18px] font-semibold">
+                      {goal.title[lang]}
+                    </Text>
+                    <LumenButton onPress={() => startSession(goal.id)}>
+                      {t("tabs.home.start")}
+                    </LumenButton>
+                  </VStack>
+                </LumenCard>
+              </Box>
+            ))}
 
-      {/* Weekly progress */}
-      {weeklyData.length > 0 && (
-        <Box className="px-6 mt-6">
-          <Text className="text-[#E6EAF2] text-[16px] font-semibold mb-3">
-            {t("tabs.home.thisWeek")}
-          </Text>
-          <WeeklyCard
-            data={weeklyData}
-            goalMin={user?.dailyGoalMin ?? 10}
-            lang={lang}
-            studiedLabel={t("tabs.home.studied")}
-          />
-        </Box>
-      )}
-    </ScrollView>
+        {/* Weekly progress */}
+        {weeklyData.length > 0 && (
+          <Box className="px-6 mt-6">
+            <Text className="text-[#E6EAF2] text-[16px] font-semibold mb-3">
+              {t("tabs.home.thisWeek")}
+            </Text>
+            <WeeklyCard
+              data={weeklyData}
+              goalMin={user?.dailyGoalMin ?? 10}
+              lang={lang}
+              studiedLabel={t("tabs.home.studied")}
+            />
+          </Box>
+        )}
+      </ScrollView>
     </>
   );
 }

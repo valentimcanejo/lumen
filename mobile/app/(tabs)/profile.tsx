@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Platform, ScrollView, ActivityIndicator, Linking } from "react-native";
+import { Platform, ScrollView, ActivityIndicator, Linking, DevSettings } from "react-native";
 import * as Notifications from "expo-notifications";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -30,6 +30,7 @@ import {
   type UserProfile,
 } from "../../models/user";
 import { ACHIEVEMENTS } from "../../repositories/achievements.repo";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // ---------------------------------------------------------------------------
 // Account card
@@ -49,12 +50,14 @@ function AccountCard({
   onSignOut: () => Promise<void>;
 }) {
   const { t } = useTranslation();
-  const [loading, setLoading] = useState<"google" | "apple" | "signout" | null>(null);
+  const [loading, setLoading] = useState<"google" | "apple" | "signout" | null>(
+    null,
+  );
   const [error, setError] = useState<string | null>(null);
 
   async function handle(
     action: "google" | "apple" | "signout",
-    fn: () => Promise<void>
+    fn: () => Promise<void>,
   ) {
     setLoading(action);
     setError(null);
@@ -187,7 +190,11 @@ function LanguageSelector({
           <Text
             className={`text-[16px] ${lang === code ? "text-[#F5C77A]" : "text-[#AAB0C0]"}`}
           >
-            {code === "pt" ? "Português" : code === "en" ? "English" : "Español"}
+            {code === "pt"
+              ? "Português"
+              : code === "en"
+                ? "English"
+                : "Español"}
           </Text>
         </Pressable>
       ))}
@@ -301,7 +308,7 @@ export default function ProfileScreen() {
           <>
             {/* Stats row */}
             <HStack className="bg-[#111827] rounded-2xl p-4 mb-6" space="md">
-              <VStack className="flex-1 items-center" space="xs">
+              <VStack className="items-center flex-1" space="xs">
                 <Text className="text-[#7B8193] text-[11px]">
                   {t("tabs.profile.streak")}
                 </Text>
@@ -313,7 +320,7 @@ export default function ProfileScreen() {
                 </Text>
               </VStack>
               <Box className="w-[1px] bg-[#1A2233]" />
-              <VStack className="flex-1 items-center" space="xs">
+              <VStack className="items-center flex-1" space="xs">
                 <Text className="text-[#7B8193] text-[11px]">
                   {t("tabs.profile.daily_goal")}
                 </Text>
@@ -325,7 +332,7 @@ export default function ProfileScreen() {
                 </Text>
               </VStack>
               <Box className="w-[1px] bg-[#1A2233]" />
-              <VStack className="flex-1 items-center" space="xs">
+              <VStack className="items-center flex-1" space="xs">
                 <Text className="text-[#7B8193] text-[11px]">
                   {t("tabs.profile.xp")}
                 </Text>
@@ -352,7 +359,13 @@ export default function ProfileScreen() {
                       borderColor: `${tier.color}66`,
                     }}
                   >
-                    <Text style={{ color: tier.color, fontSize: 12, fontWeight: "700" }}>
+                    <Text
+                      style={{
+                        color: tier.color,
+                        fontSize: 12,
+                        fontWeight: "700",
+                      }}
+                    >
                       {tier.name}
                     </Text>
                   </Box>
@@ -421,7 +434,11 @@ export default function ProfileScreen() {
                 </Text>
                 {notifGranted ? (
                   <HStack className="items-center" space="sm">
-                    <Ionicons name="checkmark-circle" size={18} color="#5ED19A" />
+                    <Ionicons
+                      name="checkmark-circle"
+                      size={18}
+                      color="#5ED19A"
+                    />
                     <Text className="text-[#5ED19A] text-[14px] font-semibold">
                       {t("tabs.profile.notifications_active")}
                     </Text>
@@ -437,7 +454,11 @@ export default function ProfileScreen() {
                       <ActivityIndicator size="small" color="#F5C77A" />
                     ) : (
                       <HStack className="items-center" space="sm">
-                        <Ionicons name="notifications-outline" size={17} color="#F5C77A" />
+                        <Ionicons
+                          name="notifications-outline"
+                          size={17}
+                          color="#F5C77A"
+                        />
                         <Text className="text-[#F5C77A] text-[14px] font-semibold">
                           {t("tabs.profile.notifications_enable")}
                         </Text>
@@ -454,6 +475,19 @@ export default function ProfileScreen() {
             >
               <Text className="text-[#0B0F14] text-[16px] font-semibold">
                 {saving ? t("tabs.profile.saving") : t("tabs.profile.save")}
+              </Text>
+            </Pressable>
+
+            {/* DEV ONLY */}
+            <Pressable
+              onPress={async () => {
+                await AsyncStorage.removeItem("hasOnboarded");
+                DevSettings.reload();
+              }}
+              className="h-[44px] rounded-xl border border-[#E26D6D]/40 items-center justify-center mt-2"
+            >
+              <Text className="text-[#E26D6D] text-[13px] font-semibold">
+                [DEV] Reset onboarding
               </Text>
             </Pressable>
           </>

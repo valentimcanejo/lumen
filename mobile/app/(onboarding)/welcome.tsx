@@ -46,10 +46,7 @@ export default function Welcome() {
             </Box>
 
             <Box className="w-full">
-              <LumenButton
-                variant="ghost"
-                onPress={handleSkip}
-              >
+              <LumenButton variant="ghost" onPress={handleSkip}>
                 {t("onboarding.welcome.skip")}
               </LumenButton>
             </Box>

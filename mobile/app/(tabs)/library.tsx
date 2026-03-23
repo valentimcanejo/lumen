@@ -232,7 +232,7 @@ export default function Library() {
             </VStack>
           ) : (
             sessions.map((s) => (
-              <SessionRow key={s.date} session={s} locale={locale} lang={lang} />
+              <SessionRow key={`${s.date}_${s.contentId}`} session={s} locale={locale} lang={lang} />
             ))
           )
         ) : savedIds.length === 0 ? (

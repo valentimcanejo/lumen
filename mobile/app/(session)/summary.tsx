@@ -341,7 +341,7 @@ export default function SummaryScreen() {
         setNewAchievements(defs);
       }
       setSaved(true);
-      setConfettiActive(true);
+      if (scorePct >= 0.6) setConfettiActive(true);
     } finally {
       setSaving(false);
     }

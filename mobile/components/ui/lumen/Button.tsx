@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Pressable } from "../pressable";
 import { Text } from "../text";
-import { cn } from "../../../lib/cn";
 
 type Props = {
   children: React.ReactNode;
@@ -18,29 +17,23 @@ export function LumenButton({
   onPress,
   variant = "primary",
   disabled,
-  className,
   color,
 }: Props) {
+  const [pressed, setPressed] = useState(false);
   const primary = variant === "primary";
   const bg = primary ? (color ?? "#F5C77A") : "transparent";
-  const borderBottom = primary
-    ? color
-      ? darken(color)
-      : "#C49B4A"
-    : "#1A2233";
+  const borderBottom = primary ? (color ? darken(color) : "#C49B4A") : "#1A2233";
 
   return (
     <Pressable
       onPress={onPress}
       disabled={disabled}
-      style={({ pressed }: { pressed: boolean }) => [
+      onPressIn={() => setPressed(true)}
+      onPressOut={() => setPressed(false)}
+      style={[
         s.base,
         primary
-          ? {
-              backgroundColor: bg,
-              borderBottomColor: borderBottom,
-              borderBottomWidth: 4,
-            }
+          ? { backgroundColor: bg, borderBottomColor: borderBottom, borderBottomWidth: 4 }
           : s.ghost,
         disabled && s.disabled,
         pressed && s.pressed,

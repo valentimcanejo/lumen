@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Stack } from "expo-router";
 import { router } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 import * as Notifications from "expo-notifications";
@@ -30,42 +31,49 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    const sub = Notifications.addNotificationResponseReceivedListener(async () => {
-      try {
-        const uid = auth.currentUser?.uid;
-        if (!uid) {
-          router.push("/(tabs)/home");
-          return;
-        }
-
-        const user = await getUser(uid);
-        const goalIds = user?.selectedGoalIds ?? [];
-        if (!goalIds.length) {
-          router.push("/(tabs)/home");
-          return;
-        }
-
-        const today = todayYmd();
-        const n = today.replace(/-/g, "").split("").reduce((a, c) => a * 10 + Number(c), 0);
-        const contentId = goalIds[n % goalIds.length];
-        const meta = getLessonMeta(contentId);
-        const lang = user?.lang ?? "pt";
-
-        router.push({
-          pathname: "/(session)/intro",
-          params: {
-            contentId,
-            version: String(meta?.version ?? 1),
-            lang,
-            title: meta?.title[lang] ?? meta?.title.en ?? contentId,
-            difficulty: String(meta?.difficulty ?? 1),
-            estimatedMinutes: String(meta?.estimatedMinutes ?? 0),
-          },
-        });
-      } catch {
-        router.push("/(tabs)/home");
+    AsyncStorage.getItem("hasOnboarded").then((val) => {
+      if (val !== "true") {
+        router.replace("/(onboarding)/welcome");
       }
     });
+  }, []);
+
+  useEffect(() => {
+    const sub = Notifications.addNotificationResponseReceivedListener(
+      async () => {
+        try {
+          const uid = auth.currentUser?.uid;
+          if (!uid) return;
+
+          const user = await getUser(uid);
+          const goalIds = user?.selectedGoalIds ?? [];
+          if (!goalIds.length) return;
+
+          const today = todayYmd();
+          const n = today
+            .replace(/-/g, "")
+            .split("")
+            .reduce((a, c) => a * 10 + Number(c), 0);
+          const contentId = goalIds[n % goalIds.length];
+          const meta = getLessonMeta(contentId);
+          const lang = user?.lang ?? "pt";
+
+          router.push({
+            pathname: "/(session)/intro",
+            params: {
+              contentId,
+              version: String(meta?.version ?? 1),
+              lang,
+              title: meta?.title[lang] ?? meta?.title.en ?? contentId,
+              difficulty: String(meta?.difficulty ?? 1),
+              estimatedMinutes: String(meta?.estimatedMinutes ?? 0),
+            },
+          });
+        } catch {
+          // silently ignore errors in notification handler
+        }
+      },
+    );
     return () => sub.remove();
   }, []);
 
@@ -79,13 +87,34 @@ export default function RootLayout() {
         }}
       >
         <Stack.Screen name="(tabs)" options={{ animation: "none" }} />
-        <Stack.Screen name="(onboarding)" options={{ animation: "slide_from_right" }} />
-        <Stack.Screen name="track/[id]" options={{ animation: "slide_from_right" }} />
-        <Stack.Screen name="(session)/intro" options={{ animation: "slide_from_right" }} />
-        <Stack.Screen name="(session)/lesson" options={{ animation: "slide_from_right" }} />
-        <Stack.Screen name="(session)/cards" options={{ animation: "slide_from_right" }} />
-        <Stack.Screen name="(session)/quiz" options={{ animation: "slide_from_right" }} />
-        <Stack.Screen name="(session)/summary" options={{ animation: "slide_from_right" }} />
+        <Stack.Screen
+          name="(onboarding)"
+          options={{ animation: "slide_from_right" }}
+        />
+        <Stack.Screen
+          name="track/[id]"
+          options={{ animation: "slide_from_right" }}
+        />
+        <Stack.Screen
+          name="(session)/intro"
+          options={{ animation: "slide_from_right" }}
+        />
+        <Stack.Screen
+          name="(session)/lesson"
+          options={{ animation: "slide_from_right" }}
+        />
+        <Stack.Screen
+          name="(session)/cards"
+          options={{ animation: "slide_from_right" }}
+        />
+        <Stack.Screen
+          name="(session)/quiz"
+          options={{ animation: "slide_from_right" }}
+        />
+        <Stack.Screen
+          name="(session)/summary"
+          options={{ animation: "slide_from_right" }}
+        />
       </Stack>
       <OfflineBanner />
       <StatusBar style="auto" />

@@ -134,15 +134,15 @@ export async function updateStreak(uid: string, date: string) {
   const user = await getDocData<UserProfile>(`users/${uid}`);
   if (!user) return;
 
-  const last = user.streak.lastStudyDate;
+  const last = user.streak?.lastStudyDate;
 
   const toNum = (d: string) => Number(d.replaceAll("-", ""));
   const todayN = toNum(date);
   const lastN = last ? toNum(last) : 0;
 
-  let current = user.streak.current ?? 0;
-  let best = user.streak.best ?? 0;
-  let shields = user.streak.shields ?? 0;
+  let current = user.streak?.current ?? 0;
+  let best = user.streak?.best ?? 0;
+  let shields = user.streak?.shields ?? 0;
 
   if (last === date) {
     // nada

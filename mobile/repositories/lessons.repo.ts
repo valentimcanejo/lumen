@@ -30,6 +30,13 @@ const BUNDLED_LESSONS: LessonMeta[] = [
   { id: "critical_thinking", trackId: "critical_thinking", version: 1, order: 1, title: { pt: "O Equilíbrio de Poder", en: "The Balance of Power", es: "El Equilibrio de Poder" }, estimatedMinutes: 8, difficulty: 2 },
   { id: "critical_thinking_fallacies", trackId: "critical_thinking", version: 1, order: 2, title: { pt: "Falácias Lógicas", en: "Logical Fallacies", es: "Falacias Lógicas" }, estimatedMinutes: 9, difficulty: 2 },
   { id: "critical_thinking_bias", trackId: "critical_thinking", version: 1, order: 3, title: { pt: "Vieses Cognitivos", en: "Cognitive Biases", es: "Sesgos Cognitivos" }, estimatedMinutes: 10, difficulty: 3 },
+  // geopolitics (remote)
+  { id: "geopolitics_middle_east", trackId: "geopolitics", version: 1, order: 4, title: { pt: "O Oriente Médio em Disputa", en: "The Contested Middle East", es: "El Oriente Medio en Disputa" }, estimatedMinutes: 10, difficulty: 3 },
+  { id: "geopolitics_china_usa", trackId: "geopolitics", version: 1, order: 5, title: { pt: "China vs EUA: A Nova Guerra Fria", en: "China vs USA: The New Cold War", es: "China vs EE.UU.: La Nueva Guerra Fría" }, estimatedMinutes: 10, difficulty: 3 },
+  // economics (remote)
+  { id: "economics_fiscal_policy", trackId: "economics", version: 1, order: 4, title: { pt: "Política Fiscal: O Governo e o Dinheiro", en: "Fiscal Policy: Government and Money", es: "Política Fiscal: El Gobierno y el Dinero" }, estimatedMinutes: 9, difficulty: 2 },
+  // foundations (remote)
+  { id: "foundations_decision_making", trackId: "foundations", version: 1, order: 4, title: { pt: "Tomada de Decisão sob Incerteza", en: "Decision Making Under Uncertainty", es: "Toma de Decisiones bajo Incertidumbre" }, estimatedMinutes: 8, difficulty: 2 },
 ];
 
 export function getLessonMeta(contentId: string): LessonMeta | undefined {
