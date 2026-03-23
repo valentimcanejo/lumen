@@ -31,11 +31,16 @@
     "goals": {
       "title": "What do you want to develop?",
       "subtitle": "Select 1 to 3 areas.",
+      "hint": "You can change this later in your profile.",
       "continue": "Continue"
     },
     "daily-time": {
       "title": "How much time per day?",
-      "subtitle": "You can do more if you want.",
+      "subtitle": "Consistency matters more than quantity.",
+      "per_day": "per day",
+      "desc_5": "Perfect for busy days. A quick lesson still makes a difference.",
+      "desc_10": "The ideal balance between learning and routine.",
+      "desc_15": "For those who want to go deeper. Full lesson + review.",
       "continue": "Continue"
     },
     "notifications": {
