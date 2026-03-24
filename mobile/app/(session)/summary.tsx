@@ -457,17 +457,21 @@ export default function SummaryScreen() {
         const completedTrackCount = getCompletedTracks(withCurrent).length;
         const totalTrackCount = getAllTrackIds().length;
 
+        // estimatedMinutes: prefer loaded pack, fall back to bundled meta (always available)
+        const estimatedMinutes =
+          pack?.estimatedMinutes ?? getLessonMeta(contentId)?.estimatedMinutes ?? 0;
+
         // Parallel: writes that touch different Firestore paths
         const [sessionResult] = await Promise.all([
           finishSession(uid, { date, quizScore, quizDone, completedTrackCount, totalTrackCount }),
           markDayCompleted(uid, date, {
             contentId,
             contentVersion: Number(version),
-            minutes: pack?.estimatedMinutes ?? 0,
+            minutes: estimatedMinutes,
             quizScore,
           }),
           markContentCompleted(uid, contentId),
-          incrementContentCompletion(contentId, quizScore, pack?.estimatedMinutes ?? 0).catch(() => {}),
+          incrementContentCompletion(contentId, quizScore, estimatedMinutes).catch(() => {}),
         ]);
 
         const { gained, base, quizBonus, missionBonus, newAchievementIds, leveledUp, newLevel, shieldEarned } = sessionResult;
