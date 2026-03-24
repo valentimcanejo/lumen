@@ -215,9 +215,33 @@
     "streak_3": "3 días seguidos",
     "streak_7": "1 semana seguida",
     "streak_30": "30 días seguidos",
+    "streak_60": "60 días seguidos",
+    "streak_100": "100 días seguidos",
+    "streak_365": "1 año seguido",
     "perfect_quiz": "Quiz perfecto",
+    "perfect_quiz_3": "3 perfectos seguidos",
+    "perfect_quiz_10": "10 quizzes perfectos",
     "sessions_10": "10 sesiones",
     "sessions_50": "50 sesiones",
-    "level_5": "Nivel 5"
+    "sessions_100": "100 sesiones",
+    "sessions_250": "250 sesiones",
+    "sessions_500": "500 sesiones",
+    "level_5": "Nivel 5",
+    "level_10": "Nivel 10",
+    "level_20": "Nivel 20",
+    "level_30": "Nivel 30",
+    "level_50": "Nivel 50",
+    "reviews_first": "Primera revisión",
+    "reviews_50": "50 revisiones",
+    "reviews_500": "500 revisiones"
+  },
+  "missions": {
+    "title": "Misiones de hoy",
+    "complete_session": "Completa una sesión",
+    "quiz_score_80": "Acierta 80%+ en el quiz",
+    "quiz_score_100": "Quiz perfecto",
+    "review_cards": "Repasa 3 tarjetas",
+    "xp_reward": "+{{xp}} XP",
+    "completed": "Completada"
   }
 }

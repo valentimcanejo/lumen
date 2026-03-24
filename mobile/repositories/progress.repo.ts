@@ -7,6 +7,7 @@ import {
   limit as fbLimit,
   doc,
   setDoc,
+  updateDoc,
   increment,
 } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
@@ -279,24 +280,50 @@ export async function updateStreak(uid: string, date: string) {
   });
 }
 
-/** Awards XP for a completed session. Returns new xp and level. */
+/**
+ * Awards XP for a completed session. Returns new xp, level, and XP breakdown.
+ * quizDone: false means quiz was skipped — does not affect perfect quiz streak.
+ */
 export async function grantSessionXP(
   uid: string,
   quizScore: number,
-): Promise<{ xp: number; level: number; gained: number }> {
-  const gained = 10 + Math.round(quizScore * 10); // 10–20 XP per session
+  options: { quizDone?: boolean } = {},
+): Promise<{ xp: number; level: number; gained: number; base: number; quizBonus: number }> {
+  const { quizDone = true } = options;
+  const base = 10;
+  const quizBonus = Math.round(quizScore * 10); // 0–10 XP
+  const gained = base + quizBonus;
+
   const user = await getDocData<UserProfile>(`users/${uid}`);
   const currentXp = user?.xp ?? 0;
   const newXp = currentXp + gained;
   const newLevel = xpToLevel(newXp);
   const totalSessions = (user?.totalSessions ?? 0) + 1;
 
+  // Track perfect quiz streaks (only when quiz was actually done)
+  const isPerfect = quizDone && quizScore >= 1.0;
+  const prevConsecutive = user?.consecutivePerfectQuizzes ?? 0;
+  const prevTotalPerfect = user?.totalPerfectQuizzes ?? 0;
+  const newConsecutive = quizDone ? (isPerfect ? prevConsecutive + 1 : 0) : prevConsecutive;
+  const newTotalPerfect = isPerfect ? prevTotalPerfect + 1 : prevTotalPerfect;
+
   await updateDocData<UserProfile>(`users/${uid}`, {
     xp: newXp,
     level: newLevel,
     totalSessions,
+    consecutivePerfectQuizzes: newConsecutive,
+    totalPerfectQuizzes: newTotalPerfect,
     updatedAt: Date.now(),
   });
 
-  return { xp: newXp, level: newLevel, gained };
+  return { xp: newXp, level: newLevel, gained, base, quizBonus };
+}
+
+/** Increments the total SM-2 cards reviewed counter on the user doc. */
+export async function incrementCardsReviewed(uid: string, count: number): Promise<void> {
+  if (count <= 0) return;
+  await updateDoc(doc(db, "users", uid), {
+    totalCardsReviewed: increment(count),
+    updatedAt: Date.now(),
+  });
 }

@@ -14,13 +14,11 @@ export type StreakInfo = {
 
 export type AchievementId =
   | "first_session"
-  | "streak_3"
-  | "streak_7"
-  | "streak_30"
-  | "perfect_quiz"
-  | "sessions_10"
-  | "sessions_50"
-  | "level_5";
+  | "streak_3" | "streak_7" | "streak_30" | "streak_60" | "streak_100" | "streak_365"
+  | "perfect_quiz" | "perfect_quiz_3" | "perfect_quiz_10"
+  | "sessions_10" | "sessions_50" | "sessions_100" | "sessions_250" | "sessions_500"
+  | "level_5" | "level_10" | "level_20" | "level_30" | "level_50"
+  | "reviews_first" | "reviews_50" | "reviews_500";
 
 export type UserProfile = {
   uid: string;
@@ -37,8 +35,33 @@ export type UserProfile = {
   level?: number;
   totalSessions?: number;
   achievements?: Partial<Record<AchievementId, number>>; // achievementId → unlockedAt ms
+  totalPerfectQuizzes?: number;
+  consecutivePerfectQuizzes?: number;
+  totalCardsReviewed?: number;
+  currentMissions?: CurrentMissions;
   createdAt: number; // ms
   updatedAt: number; // ms
+};
+
+// ---------------------------------------------------------------------------
+// Daily missions
+// ---------------------------------------------------------------------------
+
+export type MissionId =
+  | "complete_session"
+  | "quiz_score_80"
+  | "quiz_score_100"
+  | "review_cards";
+
+export type DailyMission = {
+  id: MissionId;
+  xpReward: number;
+  completed: boolean;
+};
+
+export type CurrentMissions = {
+  date: string; // YYYY-MM-DD
+  list: DailyMission[];
 };
 
 // ---------------------------------------------------------------------------
