@@ -207,7 +207,10 @@
       "insight_start": "¡Buen comienzo! Algunos conceptos todavía necesitan atención. Relee el contenido e inténtalo de nuevo.",
       "insight_keep_going": "¡No te rindas! Cada sesión es aprendizaje. Repasa el contenido e intenta el quiz de nuevo.",
       "xp_gained": "+{{xp}} XP",
-      "new_achievement": "¡Nuevo logro!"
+      "new_achievement": "¡Nuevo logro!",
+      "xp_row_session": "Sesión completada",
+      "xp_row_quiz": "Quiz: {{pct}}%",
+      "xp_row_mission": "Misión diaria"
     }
   },
   "achievements": {

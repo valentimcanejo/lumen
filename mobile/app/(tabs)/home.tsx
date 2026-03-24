@@ -42,6 +42,8 @@ import {
   type DayData,
 } from "../../repositories/progress.repo";
 import { getCompletedContentIds } from "../../repositories/user.repo";
+import { getTodayMissions } from "../../repositories/missions.repo";
+import type { DailyMission } from "../../models/user";
 import { todayYmd } from "../../repositories/session.repo";
 import {
   type UserProfile,
@@ -56,7 +58,7 @@ import type { Lang } from "../../models/lang";
 // Streak pill with pulsing animation
 // ---------------------------------------------------------------------------
 
-function StreakCard({ streak }: { streak: number }) {
+function StreakCard({ streak, shields }: { streak: number; shields: number }) {
   const { t } = useTranslation();
   const scale = useSharedValue(1);
 
@@ -87,6 +89,11 @@ function StreakCard({ streak }: { streak: number }) {
         <Text style={sk.num}>{streak}</Text>
         <Text style={sk.label}>{t("tabs.home.streak")}</Text>
       </View>
+      {shields > 0 && (
+        <View style={sk.shieldBadge}>
+          <Text style={sk.shieldText}>🛡️ {shields}</Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -104,9 +111,101 @@ const sk = StyleSheet.create({
     gap: 12,
   },
   flame: { fontSize: 32 },
-  textCol: { gap: 1 },
+  textCol: { gap: 1, flex: 1 },
   num: { color: "#F5C77A", fontSize: 28, fontWeight: "800", lineHeight: 32 },
   label: { color: "#AAB0C0", fontSize: 12, fontWeight: "500" },
+  shieldBadge: {
+    backgroundColor: "#0D1A2E",
+    borderWidth: 1,
+    borderColor: "#7B8FE044",
+    borderRadius: 100,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  shieldText: { color: "#7B8FE0", fontSize: 13, fontWeight: "700" },
+});
+
+// ---------------------------------------------------------------------------
+// Daily missions card
+// ---------------------------------------------------------------------------
+
+function MissionsCard({ missions }: { missions: DailyMission[] }) {
+  const { t } = useTranslation();
+
+  return (
+    <View style={ms.card}>
+      <Text style={ms.title}>{t("missions.title")}</Text>
+      {missions.map((m) => (
+        <View key={m.id} style={ms.row}>
+          <View style={[ms.check, m.completed && ms.checkDone]}>
+            {m.completed && (
+              <Ionicons name="checkmark" size={12} color="#0B0F14" />
+            )}
+          </View>
+          <Text style={[ms.missionLabel, m.completed && ms.missionLabelDone]}>
+            {t(`missions.${m.id}`)}
+          </Text>
+          <Text style={[ms.xpPill, m.completed && ms.xpPillDone]}>
+            +{m.xpReward} XP
+          </Text>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+const ms = StyleSheet.create({
+  card: {
+    backgroundColor: "#121826",
+    borderWidth: 1,
+    borderColor: "#1A2233",
+    borderRadius: 22,
+    padding: 18,
+    gap: 10,
+  },
+  title: {
+    color: "#AAB0C0",
+    fontSize: 11,
+    fontWeight: "600",
+    letterSpacing: 1,
+    textTransform: "uppercase",
+    marginBottom: 2,
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  check: {
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    borderWidth: 1.5,
+    borderColor: "#2A3448",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  checkDone: {
+    backgroundColor: "#5ED19A",
+    borderColor: "#5ED19A",
+  },
+  missionLabel: {
+    flex: 1,
+    color: "#AAB0C0",
+    fontSize: 13,
+  },
+  missionLabelDone: {
+    color: "#4A5568",
+    textDecorationLine: "line-through",
+  },
+  xpPill: {
+    color: "#5ED19A",
+    fontSize: 12,
+    fontWeight: "700",
+  },
+  xpPillDone: {
+    color: "#2A4030",
+  },
 });
 
 // ---------------------------------------------------------------------------
@@ -403,6 +502,7 @@ export default function Home() {
   const [loadingUser, setLoadingUser] = useState(true);
   const [todayCompletedId, setTodayCompletedId] = useState<string | null>(null);
   const [dueCardCount, setDueCardCount] = useState(0);
+  const [missions, setMissions] = useState<DailyMission[]>([]);
 
   useEffect(() => {
     if (!currentUserId) return;
@@ -416,6 +516,7 @@ export default function Home() {
       .catch(() => {});
     getDueCardCount(currentUserId).then(setDueCardCount).catch(() => {});
     getCompletedContentIds(currentUserId).then(setCompletedIds).catch(() => {});
+    getTodayMissions(currentUserId).then(setMissions).catch(() => {});
   }, [currentUserId]);
 
   useEffect(() => {
@@ -428,6 +529,7 @@ export default function Home() {
 
   const lang = (user?.lang ?? i18n.language ?? "pt") as Lang;
   const streak = user?.streak?.current ?? 0;
+  const shields = user?.streak?.shields ?? 0;
   const xp = user?.xp ?? 0;
   const level = xpToLevel(xp);
   const tier = getLevelTier(level);
@@ -514,7 +616,7 @@ export default function Home() {
           </Text>
           {streak > 0 && (
             <Box className="mt-3">
-              <StreakCard streak={streak} />
+              <StreakCard streak={streak} shields={shields} />
             </Box>
           )}
         </Box>
@@ -548,6 +650,13 @@ export default function Home() {
                 {t("tabs.home.start_review")} →
               </Text>
             </TouchableOpacity>
+          </Box>
+        )}
+
+        {/* Daily missions */}
+        {missions.length > 0 && (
+          <Box className="px-6 mt-4">
+            <MissionsCard missions={missions} />
           </Box>
         )}
 

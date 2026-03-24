@@ -17,7 +17,9 @@ import { HStack } from "@/components/ui/hstack";
 import { VStack } from "@/components/ui/vstack";
 import { Pressable } from "@/components/ui/pressable";
 import { useAuth } from "../../hooks/useAuth";
-import { getDueCards, gradeCard, type DueCard } from "../../repositories/progress.repo";
+import { getDueCards, gradeCard, incrementCardsReviewed, type DueCard } from "../../repositories/progress.repo";
+import { checkAndGrantAchievements } from "../../repositories/achievements.repo";
+import { checkAndCompleteDailyMissions } from "../../repositories/missions.repo";
 import { getPack } from "../../repositories/packs.repo";
 import type { PackCard } from "../../models/pack";
 
@@ -44,6 +46,7 @@ export default function ReviewScreen() {
   const [showBack, setShowBack] = useState(false);
   const [done, setDone] = useState(false);
   const [gradedCount, setGradedCount] = useState(0);
+  const [missionXpGained, setMissionXpGained] = useState(0);
 
   const flipScale = useSharedValue(1);
   const flipAnimStyle = useAnimatedStyle(() => ({
@@ -123,13 +126,21 @@ export default function ReviewScreen() {
     }
   }, [showBack]);
 
-  function goNext() {
+  function goNext(finalGradedCount?: number) {
     setRevealed(false);
     setShowBack(false);
     flipScale.value = 1;
     const next = index + 1;
     if (next >= total) {
       setDone(true);
+      const count = finalGradedCount ?? gradedCount;
+      if (uid && count > 0) {
+        incrementCardsReviewed(uid, count).catch(() => {});
+        checkAndGrantAchievements(uid, { quizScore: 0 }).catch(() => {});
+        checkAndCompleteDailyMissions(uid, { cardsReviewed: count })
+          .then(({ xpGranted }) => { if (xpGranted > 0) setMissionXpGained(xpGranted); })
+          .catch(() => {});
+      }
     } else {
       setIndex(next);
     }
@@ -147,8 +158,9 @@ export default function ReviewScreen() {
         lang: current.lang,
       }).catch(() => {});
     }
-    setGradedCount((n) => n + 1);
-    goNext();
+    const newCount = gradedCount + 1;
+    setGradedCount(newCount);
+    goNext(newCount);
   }
 
   if (loading) {
@@ -193,6 +205,13 @@ export default function ReviewScreen() {
           <Text style={s.doneSubtitle}>
             {t("session.review.done_subtitle", { count: gradedCount })}
           </Text>
+          {missionXpGained > 0 && (
+            <View style={s.missionBadge}>
+              <Text style={s.missionBadgeText}>
+                ⚡ {t("missions.completed")} · +{missionXpGained} XP
+              </Text>
+            </View>
+          )}
           <Pressable
             style={s.homeBtn}
             onPress={() => router.replace("/(tabs)/home")}
@@ -309,7 +328,21 @@ const s = StyleSheet.create({
     fontSize: 14,
     textAlign: "center",
     lineHeight: 20,
-    marginBottom: 32,
+    marginBottom: 16,
+  },
+  missionBadge: {
+    backgroundColor: "#0D1A12",
+    borderWidth: 1,
+    borderColor: "#5ED19A44",
+    borderRadius: 100,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    marginBottom: 24,
+  },
+  missionBadgeText: {
+    color: "#5ED19A",
+    fontSize: 13,
+    fontWeight: "700",
   },
   homeBtn: {
     backgroundColor: "#7B8FE0",

@@ -35,6 +35,7 @@ import {
   ACHIEVEMENTS,
   type AchievementDef,
 } from "../../repositories/achievements.repo";
+import { checkAndCompleteDailyMissions } from "../../repositories/missions.repo";
 import { todayYmd } from "../../repositories/session.repo";
 import { usePack } from "../../hooks/usePack";
 import {
@@ -203,7 +204,7 @@ function AchievementToast({
 }
 
 // ---------------------------------------------------------------------------
-// Animated XP counter
+// Animated XP counter (total)
 // ---------------------------------------------------------------------------
 
 function XpCounter({ gained }: { gained: number }) {
@@ -235,6 +236,51 @@ function XpCounter({ gained }: { gained: number }) {
   return (
     <Animated.View style={[xpS.badge, containerStyle]}>
       <Text style={xpS.text}>+{count} XP</Text>
+    </Animated.View>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// XP breakdown rows shown below the progress bar
+// ---------------------------------------------------------------------------
+
+function XpBreakdown({
+  base, quizBonus, missionBonus, quizPct,
+}: {
+  base: number; quizBonus: number; missionBonus: number; quizPct: number;
+}) {
+  const { t } = useTranslation();
+  const opacity = useSharedValue(0);
+
+  useEffect(() => {
+    opacity.value = withDelay(600, withTiming(1, { duration: 400 }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const style = useAnimatedStyle(() => ({ opacity: opacity.value }));
+
+  const rows: { label: string; xp: number }[] = [
+    { label: t("session.summary.xp_row_session"), xp: base },
+    { label: t("session.summary.xp_row_quiz", { pct: Math.round(quizPct * 100) }), xp: quizBonus },
+    ...(missionBonus > 0
+      ? [{ label: t("session.summary.xp_row_mission"), xp: missionBonus }]
+      : []),
+  ];
+
+  return (
+    <Animated.View style={[style, { marginTop: 12 }]}>
+      <View style={{ height: 1, backgroundColor: "#1A2233", marginBottom: 10 }} />
+      {rows.map((row) => (
+        <View
+          key={row.label}
+          style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 4 }}
+        >
+          <Text style={{ color: "#7B8193", fontSize: 11 }}>{row.label}</Text>
+          <Text style={{ color: "#5ED19A", fontSize: 11, fontWeight: "700" }}>
+            +{row.xp} XP
+          </Text>
+        </View>
+      ))}
     </Animated.View>
   );
 }
@@ -285,6 +331,9 @@ export default function SummaryScreen() {
   const [saved, setSaved] = useState(false);
   const [nextGoalId, setNextGoalId] = useState<string | null>(null);
   const [gainedXp, setGainedXp] = useState<number | null>(null);
+  const [xpBreakdown, setXpBreakdown] = useState<{
+    base: number; quizBonus: number; missionBonus: number;
+  } | null>(null);
   const [newAchievements, setNewAchievements] = useState<AchievementDef[]>([]);
   const [bookmarked, setBookmarked] = useState(false);
   const [confettiActive, setConfettiActive] = useState(false);
@@ -342,10 +391,17 @@ export default function SummaryScreen() {
           quizScore,
         });
         await updateStreak(uid, date);
-        const { gained } = await grantSessionXP(uid, quizScore);
-        setGainedXp(gained);
+        const quizDone = Number(total ?? 0) > 0;
+        const { gained, base, quizBonus } = await grantSessionXP(uid, quizScore, { quizDone });
         await markContentCompleted(uid, contentId);
         incrementContentCompletion(contentId, quizScore, pack?.estimatedMinutes ?? 0).catch(() => {});
+        const { xpGranted: missionBonus } = await checkAndCompleteDailyMissions(uid, {
+          sessionCompleted: true,
+          quizScore,
+          quizDone,
+        });
+        setGainedXp(gained + missionBonus);
+        setXpBreakdown({ base, quizBonus, missionBonus });
         const unlockedIds = await checkAndGrantAchievements(uid, { quizScore });
         const defs = unlockedIds
           .map((id) => ACHIEVEMENTS.find((a) => a.id === id))
@@ -454,6 +510,15 @@ export default function SummaryScreen() {
               style={{ width: `${(totalN > 0 ? scorePct : 1) * 100}%` }}
             />
           </Box>
+
+          {gainedXp !== null && xpBreakdown !== null && (
+            <XpBreakdown
+              base={xpBreakdown.base}
+              quizBonus={xpBreakdown.quizBonus}
+              missionBonus={xpBreakdown.missionBonus}
+              quizPct={totalN > 0 ? scorePct : 0}
+            />
+          )}
 
           <Box className="mt-4">
             <Text className="text-[#AAB0C0] text-[12px]">
