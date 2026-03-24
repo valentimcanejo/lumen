@@ -10,6 +10,7 @@ import { Text } from "../../components/ui/text";
 import { Pressable } from "../../components/ui/pressable";
 import { getTracks } from "../../repositories/tracks.repo";
 import { getLessonCountForTrack } from "../../repositories/lessons.repo";
+import { getCompletedContentIds } from "../../repositories/user.repo";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import { useAiPack } from "../../hooks/useAiPack";
@@ -146,8 +147,8 @@ export default function Tracks() {
     if (!uid) return;
     getUserData({ userId: uid }).then((user) => {
       if (user?.lang) setLang(user.lang);
-      setCompletedIds(user?.completedContentIds ?? []);
     });
+    getCompletedContentIds(uid).then(setCompletedIds).catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
 
