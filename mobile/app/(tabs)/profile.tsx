@@ -12,7 +12,7 @@ import { HStack } from "@/components/ui/hstack";
 import { Pressable } from "@/components/ui/pressable";
 import { VStack } from "@/components/ui/vstack";
 
-import { useUser } from "../../hooks/useUser";
+import { useUser, invalidateUserCache } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
 import { setUserLanguage } from "../../repositories/user.repo";
 import {
@@ -508,6 +508,7 @@ export default function ProfileScreen() {
                         } catch {
                           // ignore — proceed to clear local state anyway
                         }
+                        invalidateUserCache(uid);
                         await AsyncStorage.clear();
                         DevSettings.reload();
                       },

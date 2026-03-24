@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   ScrollView,
   View,
@@ -14,7 +14,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -343,32 +343,34 @@ export default function Home() {
   const flameScale = useSharedValue(1);
   const flameStyle = useAnimatedStyle(() => ({ transform: [{ scale: flameScale.value }] }));
 
-  useEffect(() => {
-    if (!currentUserId) return;
-    setLoadingUser(true);
-    getUserData({ userId: currentUserId })
-      .then((u) => setUser(u ?? null))
-      .finally(() => setLoadingUser(false));
-    getWeeklyData(currentUserId).then(setWeeklyData).catch(() => {});
-    getTodaySession(currentUserId)
-      .then((s) => setTodayCompletedId(s?.contentId ?? null))
-      .catch(() => {});
-    getDueCardCount(currentUserId).then(setDueCardCount).catch(() => {});
-    getCompletedContentIds(currentUserId).then(setCompletedIds).catch(() => {});
-    getTodayMissions(currentUserId).then(setMissions).catch(() => {});
-    getRecentSessions(currentUserId).then((sessions) => {
-      const seen = new Set<string>();
-      for (const s of sessions) {
-        if (!seen.has(s.contentId)) {
-          seen.add(s.contentId);
-          if (s.quizScore < 0.6) {
-            setRetryRecommendation({ contentId: s.contentId, quizScore: s.quizScore });
-            break;
+  useFocusEffect(
+    useCallback(() => {
+      if (!currentUserId) return;
+      setLoadingUser(true);
+      getUserData({ userId: currentUserId })
+        .then((u) => setUser(u ?? null))
+        .finally(() => setLoadingUser(false));
+      getWeeklyData(currentUserId).then(setWeeklyData).catch(() => {});
+      getTodaySession(currentUserId)
+        .then((s) => setTodayCompletedId(s?.contentId ?? null))
+        .catch(() => {});
+      getDueCardCount(currentUserId).then(setDueCardCount).catch(() => {});
+      getCompletedContentIds(currentUserId).then(setCompletedIds).catch(() => {});
+      getTodayMissions(currentUserId).then(setMissions).catch(() => {});
+      getRecentSessions(currentUserId).then((sessions) => {
+        const seen = new Set<string>();
+        for (const s of sessions) {
+          if (!seen.has(s.contentId)) {
+            seen.add(s.contentId);
+            if (s.quizScore < 0.6) {
+              setRetryRecommendation({ contentId: s.contentId, quizScore: s.quizScore });
+              break;
+            }
           }
         }
-      }
-    }).catch(() => {});
-  }, [currentUserId]);
+      }).catch(() => {});
+    }, [currentUserId]),
+  );
 
   const lang = (user?.lang ?? i18n.language ?? "pt") as Lang;
   const streak = user?.streak?.current ?? 0;
