@@ -530,15 +530,6 @@ export default function SummaryScreen() {
           </Box>
         </Box>
 
-        <Box className="mt-5 h-[100px] rounded-[18px] bg-[#0E141E] border border-[#141C2A] overflow-hidden">
-          <Box className="absolute inset-0 bg-black/10" />
-          <HStack className="absolute bottom-4 left-5" space="xs">
-            {Array.from({ length: 22 }).map((_, i) => (
-              <Box key={i} className="w-[3px] h-[3px] rounded-full bg-[#AAB0C0]/20" />
-            ))}
-          </HStack>
-        </Box>
-
         <VStack space="sm" className="mt-auto" style={{ paddingBottom: Math.max(insets.bottom, 24) }}>
           <Pressable
             onPress={onFinish}

@@ -287,19 +287,6 @@ export default function LessonScreen() {
 
           <LessonBlocks blocks={pack.lesson.blocks} />
 
-          <Box className="mt-6 h-[140px] rounded-[18px] bg-[#0E141E] border border-[#141C2A] overflow-hidden">
-            <Box className="absolute inset-0 bg-black/10" />
-            <Box className="absolute -bottom-10 left-0 right-0 h-[120px] bg-black/35" />
-            <HStack className="absolute bottom-10 left-5" space="xs">
-              {Array.from({ length: 18 }).map((_, i) => (
-                <Box
-                  key={i}
-                  className="w-[3px] h-[3px] rounded-full bg-[#AAB0C0]/20"
-                />
-              ))}
-            </HStack>
-          </Box>
-
           <Box className="mt-6">
             <Pressable
               onPress={() =>
