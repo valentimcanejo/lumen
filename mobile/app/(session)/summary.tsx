@@ -35,10 +35,13 @@ import { todayYmd } from "../../repositories/session.repo";
 import { usePack } from "../../hooks/usePack";
 import {
   pickNextLesson,
+  getCompletedTracks,
+  getAllTrackIds,
 } from "../../repositories/lessons.repo";
 import { getCompletedContentIds, getSavedContentIds } from "../../repositories/user.repo";
 import type { Lang } from "../../models/lang";
 import type { AchievementId } from "../../models/user";
+import { getLevelTier, xpToLevel, type TierInfo } from "../../models/user";
 
 // ---------------------------------------------------------------------------
 // Confetti
@@ -199,6 +202,60 @@ function AchievementToast({
 }
 
 // ---------------------------------------------------------------------------
+// Level-up toast
+// ---------------------------------------------------------------------------
+
+function LevelUpToast({ level, tier }: { level: number; tier: TierInfo }) {
+  const { t } = useTranslation();
+  const opacity = useSharedValue(0);
+  const scale = useSharedValue(0.8);
+
+  useEffect(() => {
+    opacity.value = withDelay(900, withSequence(
+      withTiming(1, { duration: 300 }),
+      withDelay(2800, withTiming(0, { duration: 400 })),
+    ));
+    scale.value = withDelay(900, withSpring(1, { damping: 8, stiffness: 200 }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const style = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+    transform: [{ scale: scale.value }],
+  }));
+
+  return (
+    <Animated.View
+      style={[style, { position: "absolute", top: 160, left: 20, right: 20, zIndex: 98 }]}
+    >
+      <View style={{
+        backgroundColor: tier.color + "22",
+        borderWidth: 1,
+        borderColor: tier.color + "66",
+        borderRadius: 16,
+        paddingHorizontal: 20,
+        paddingVertical: 14,
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 12,
+      }}>
+        <View style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: tier.color + "33", alignItems: "center", justifyContent: "center" }}>
+          <Text style={{ fontSize: 20 }}>⬆️</Text>
+        </View>
+        <View>
+          <Text style={{ color: tier.color, fontSize: 11, fontWeight: "700", letterSpacing: 0.8, textTransform: "uppercase" }}>
+            {t("session.summary.level_up")}
+          </Text>
+          <Text style={{ color: "#E6EAF2", fontSize: 15, fontWeight: "700", marginTop: 1 }}>
+            {tier.name} · {t("tabs.home.level", { level })}
+          </Text>
+        </View>
+      </View>
+    </Animated.View>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Animated XP counter (total)
 // ---------------------------------------------------------------------------
 
@@ -333,6 +390,8 @@ export default function SummaryScreen() {
   const [newAchievements, setNewAchievements] = useState<AchievementDef[]>([]);
   const [bookmarked, setBookmarked] = useState(false);
   const [confettiActive, setConfettiActive] = useState(false);
+  const [levelUpInfo, setLevelUpInfo] = useState<{ level: number; tier: TierInfo } | null>(null);
+  const completedIdsRef = useRef<string[]>([]);
 
   // Auto-save on mount
   useEffect(() => {
@@ -349,6 +408,7 @@ export default function SummaryScreen() {
       getCompletedContentIds(uid),
       getSavedContentIds(uid),
     ]).then(([user, completed, saved]) => {
+      completedIdsRef.current = completed;
       const trackIds = user?.selectedTrackIds ?? user?.selectedGoalIds ?? [];
       const today = new Date().toISOString().slice(0, 10);
       // Include current lesson as completed for the "next" calculation
@@ -390,9 +450,14 @@ export default function SummaryScreen() {
         const date = todayYmd();
         const quizDone = Number(total ?? 0) > 0;
 
+        // Compute track completion (include current contentId as it's being completed)
+        const withCurrent = [...new Set([...completedIdsRef.current, contentId])];
+        const completedTrackCount = getCompletedTracks(withCurrent).length;
+        const totalTrackCount = getAllTrackIds().length;
+
         // Parallel: writes that touch different Firestore paths
         const [sessionResult] = await Promise.all([
-          finishSession(uid, { date, quizScore, quizDone }),
+          finishSession(uid, { date, quizScore, quizDone, completedTrackCount, totalTrackCount }),
           markDayCompleted(uid, date, {
             contentId,
             contentVersion: Number(version),
@@ -403,13 +468,14 @@ export default function SummaryScreen() {
           incrementContentCompletion(contentId, quizScore, pack?.estimatedMinutes ?? 0).catch(() => {}),
         ]);
 
-        const { gained, base, quizBonus, missionBonus, newAchievementIds } = sessionResult;
+        const { gained, base, quizBonus, missionBonus, newAchievementIds, leveledUp, newLevel, shieldEarned } = sessionResult;
         setGainedXp(gained + missionBonus);
         setXpBreakdown({ base, quizBonus, missionBonus });
         const defs = newAchievementIds
           .map((id) => ACHIEVEMENTS.find((a) => a.id === id))
           .filter(Boolean) as AchievementDef[];
         setNewAchievements(defs);
+        if (leveledUp) setLevelUpInfo({ level: newLevel, tier: getLevelTier(newLevel) });
 
         // Invalidate cache so next home load gets fresh user data
         invalidateUserCache(uid);
@@ -449,6 +515,7 @@ export default function SummaryScreen() {
     <Box className="flex-1 bg-[#0B0F14]">
       <ConfettiOverlay active={confettiActive} />
       <AchievementToast achievements={newAchievements} />
+      {levelUpInfo && <LevelUpToast level={levelUpInfo.level} tier={levelUpInfo.tier} />}
 
       <Box className="px-5" style={{ paddingTop: insets.top + 8 }}>
         <HStack className="items-center" space="md">

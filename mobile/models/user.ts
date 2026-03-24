@@ -13,12 +13,27 @@ export type StreakInfo = {
 };
 
 export type AchievementId =
+  // Sessões
   | "first_session"
-  | "streak_3" | "streak_7" | "streak_30" | "streak_60" | "streak_100" | "streak_365"
-  | "perfect_quiz" | "perfect_quiz_3" | "perfect_quiz_10"
-  | "sessions_10" | "sessions_50" | "sessions_100" | "sessions_250" | "sessions_500"
-  | "level_5" | "level_10" | "level_20" | "level_30" | "level_50"
-  | "reviews_first" | "reviews_50" | "reviews_500";
+  | "sessions_10" | "sessions_50" | "sessions_100" | "sessions_250" | "sessions_500" | "sessions_1000"
+  // Streak
+  | "streak_3" | "streak_7" | "streak_30" | "streak_60" | "streak_100" | "streak_200" | "streak_365"
+  // Quiz perfeito (consecutivos)
+  | "perfect_quiz" | "perfect_quiz_3" | "perfect_quiz_5" | "perfect_quiz_10"
+  // Quiz streak (dias consecutivos ≥ 80%)
+  | "quiz_streak_3" | "quiz_streak_7" | "quiz_streak_14" | "quiz_streak_30"
+  // Nível
+  | "level_5" | "level_10" | "level_20" | "level_30" | "level_50" | "level_75" | "level_100"
+  // Revisão SM-2
+  | "reviews_first" | "reviews_50" | "reviews_200" | "reviews_500" | "reviews_1000"
+  // Trilhas
+  | "track_complete" | "tracks_3" | "tracks_all"
+  // XP
+  | "xp_100" | "xp_500" | "xp_1000" | "xp_5000"
+  // Shield
+  | "first_shield"
+  // Especial
+  | "iluminado";
 
 export type UserProfile = {
   uid: string;
@@ -38,6 +53,8 @@ export type UserProfile = {
   totalPerfectQuizzes?: number;
   consecutivePerfectQuizzes?: number;
   totalCardsReviewed?: number;
+  consecutiveGoodQuizDays?: number;  // dias consecutivos com quiz ≥ 80%
+  lastGoodQuizDate?: string;         // YYYY-MM-DD
   currentMissions?: CurrentMissions;
   createdAt: number; // ms
   updatedAt: number; // ms

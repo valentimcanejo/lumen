@@ -3,7 +3,6 @@ import {
   ScrollView,
   View,
   StyleSheet,
-  Modal,
   Pressable,
   TouchableOpacity,
 } from "react-native";
@@ -18,7 +17,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Box } from "../../components/ui/box";
 import { HStack } from "../../components/ui/hstack";
@@ -54,76 +52,6 @@ import {
 } from "../../models/user";
 import type { Lang } from "../../models/lang";
 
-// ---------------------------------------------------------------------------
-// Streak pill with pulsing animation
-// ---------------------------------------------------------------------------
-
-function StreakCard({ streak, shields }: { streak: number; shields: number }) {
-  const { t } = useTranslation();
-  const scale = useSharedValue(1);
-
-  useEffect(() => {
-    if (streak > 0) {
-      scale.value = withRepeat(
-        withSequence(
-          withTiming(1.25, { duration: 700 }),
-          withTiming(1, { duration: 700 }),
-        ),
-        -1,
-        true,
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [streak]);
-
-  const flameStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: scale.value }],
-  }));
-
-  if (streak === 0) return null;
-
-  return (
-    <View style={sk.card}>
-      <Animated.Text style={[sk.flame, flameStyle]}>🔥</Animated.Text>
-      <View style={sk.textCol}>
-        <Text style={sk.num}>{streak}</Text>
-        <Text style={sk.label}>{t("tabs.home.streak")}</Text>
-      </View>
-      {shields > 0 && (
-        <View style={sk.shieldBadge}>
-          <Text style={sk.shieldText}>🛡️ {shields}</Text>
-        </View>
-      )}
-    </View>
-  );
-}
-
-const sk = StyleSheet.create({
-  card: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#1A120A",
-    borderWidth: 1.5,
-    borderColor: "#F5C77A44",
-    borderRadius: 20,
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    gap: 12,
-  },
-  flame: { fontSize: 32 },
-  textCol: { gap: 1, flex: 1 },
-  num: { color: "#F5C77A", fontSize: 28, fontWeight: "800", lineHeight: 32 },
-  label: { color: "#AAB0C0", fontSize: 12, fontWeight: "500" },
-  shieldBadge: {
-    backgroundColor: "#0D1A2E",
-    borderWidth: 1,
-    borderColor: "#7B8FE044",
-    borderRadius: 100,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-  },
-  shieldText: { color: "#7B8FE0", fontSize: 13, fontWeight: "700" },
-});
 
 // ---------------------------------------------------------------------------
 // Daily missions card
@@ -389,101 +317,6 @@ function WeeklyCard({
   );
 }
 
-// ---------------------------------------------------------------------------
-// Welcome back modal
-// ---------------------------------------------------------------------------
-
-function WelcomeBackModal({
-  visible,
-  streak,
-  onDismiss,
-}: {
-  visible: boolean;
-  streak: number;
-  onDismiss: () => void;
-}) {
-  const { t } = useTranslation();
-
-  return (
-    <Modal
-      visible={visible}
-      transparent
-      animationType="fade"
-      onRequestClose={onDismiss}
-    >
-      <View style={wb.overlay}>
-        <View style={wb.card}>
-          <Text style={wb.title}>{t("tabs.home.welcome_back_title")}</Text>
-          <Text style={wb.subtitle}>
-            {streak > 0
-              ? t("tabs.home.welcome_back_streak", { streak })
-              : t("tabs.home.welcome_back_no_streak")}
-          </Text>
-
-          {streak > 0 && (
-            <View style={wb.streakRow}>
-              <Text style={wb.streakNum}>{streak}</Text>
-              <Text style={wb.streakLabel}>🔥</Text>
-            </View>
-          )}
-          <Pressable style={wb.btn} onPress={onDismiss}>
-            <Text style={wb.btnText}>{t("tabs.home.welcome_back_cta")}</Text>
-          </Pressable>
-        </View>
-      </View>
-    </Modal>
-  );
-}
-
-const wb = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.72)",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 24,
-  },
-  card: {
-    backgroundColor: "#121826",
-    borderWidth: 1,
-    borderColor: "#1A2233",
-    borderRadius: 24,
-    padding: 28,
-    width: "100%",
-    alignItems: "center",
-  },
-  title: {
-    color: "#E6EAF2",
-    fontSize: 22,
-    fontWeight: "700",
-    textAlign: "center",
-  },
-  subtitle: {
-    color: "#AAB0C0",
-    fontSize: 14,
-    textAlign: "center",
-    marginTop: 10,
-    lineHeight: 20,
-  },
-  streakRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 20,
-    gap: 6,
-  },
-  streakNum: { color: "#F5C77A", fontSize: 48, fontWeight: "800" },
-  streakLabel: { fontSize: 36 },
-  btn: {
-    marginTop: 24,
-    backgroundColor: "#F5C77A",
-    borderRadius: 16,
-    paddingVertical: 14,
-    paddingHorizontal: 32,
-    width: "100%",
-    alignItems: "center",
-  },
-  btnText: { color: "#0B0F14", fontSize: 16, fontWeight: "700" },
-});
 
 // ---------------------------------------------------------------------------
 // Home screen
@@ -498,7 +331,6 @@ export default function Home() {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [completedIds, setCompletedIds] = useState<string[]>([]);
   const [weeklyData, setWeeklyData] = useState<DayData[]>([]);
-  const [showWelcomeBack, setShowWelcomeBack] = useState(false);
   const [loadingUser, setLoadingUser] = useState(true);
   const [todayCompletedId, setTodayCompletedId] = useState<string | null>(null);
   const [dueCardCount, setDueCardCount] = useState(0);
@@ -506,6 +338,10 @@ export default function Home() {
   const [retryRecommendation, setRetryRecommendation] = useState<{
     contentId: string; quizScore: number;
   } | null>(null);
+
+  // Flame pulse animation for streak pill
+  const flameScale = useSharedValue(1);
+  const flameStyle = useAnimatedStyle(() => ({ transform: [{ scale: flameScale.value }] }));
 
   useEffect(() => {
     if (!currentUserId) return;
@@ -520,7 +356,7 @@ export default function Home() {
     getDueCardCount(currentUserId).then(setDueCardCount).catch(() => {});
     getCompletedContentIds(currentUserId).then(setCompletedIds).catch(() => {});
     getTodayMissions(currentUserId).then(setMissions).catch(() => {});
-    getRecentSessions(currentUserId, 20).then((sessions) => {
+    getRecentSessions(currentUserId).then((sessions) => {
       const seen = new Set<string>();
       for (const s of sessions) {
         if (!seen.has(s.contentId)) {
@@ -534,16 +370,19 @@ export default function Home() {
     }).catch(() => {});
   }, [currentUserId]);
 
-  useEffect(() => {
-    const today = todayYmd();
-    AsyncStorage.getItem("lastOpenDate").then((last) => {
-      if (last && last !== today) setShowWelcomeBack(true);
-      AsyncStorage.setItem("lastOpenDate", today);
-    });
-  }, []);
-
   const lang = (user?.lang ?? i18n.language ?? "pt") as Lang;
   const streak = user?.streak?.current ?? 0;
+
+  useEffect(() => {
+    if (streak > 0) {
+      flameScale.value = withRepeat(
+        withSequence(withTiming(1.3, { duration: 700 }), withTiming(1, { duration: 700 })),
+        -1,
+        true,
+      );
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [streak]);
   const shields = user?.streak?.shields ?? 0;
   const xp = user?.xp ?? 0;
   const level = xpToLevel(xp);
@@ -575,269 +414,231 @@ export default function Home() {
   }
 
   return (
-    <>
-      <WelcomeBackModal
-        visible={showWelcomeBack}
-        streak={streak}
-        onDismiss={() => setShowWelcomeBack(false)}
-      />
-      <ScrollView
-        className="flex-1 bg-[#0B0F14]"
-        contentContainerStyle={{ paddingBottom: 40 }}
-      >
-        {/* Header with level + tier + XP bar */}
-        <Box className="px-6" style={{ paddingTop: insets.top + 8 }}>
-          <HStack className="items-center justify-between">
+    <ScrollView
+      className="flex-1 bg-[#0B0F14]"
+      contentContainerStyle={{ paddingBottom: 40 }}
+    >
+      {/* Header: logo + streak pill | tier + level */}
+      <Box className="px-6" style={{ paddingTop: insets.top + 8 }}>
+        <HStack className="items-center justify-between">
+          <HStack className="items-center" style={{ gap: 10 }}>
             <Text className="text-[#E6EAF2] text-[22px] font-bold">Lumen</Text>
-            <Pressable onPress={() => router.push("/(tabs)/profile")}>
-              <HStack className="items-center" space="sm">
-                <Box
-                  style={{
-                    paddingHorizontal: 8,
-                    paddingVertical: 3,
-                    borderRadius: 100,
-                    backgroundColor: `${tier.color}22`,
-                    borderWidth: 1,
-                    borderColor: `${tier.color}66`,
-                  }}
-                >
-                  <Text
-                    style={{ color: tier.color, fontSize: 11, fontWeight: "700" }}
-                  >
-                    {tier.name}
-                  </Text>
-                </Box>
-                <Text className="text-[#AAB0C0] text-[13px]">
-                  {t("tabs.home.level", { level })}
-                </Text>
-              </HStack>
-            </Pressable>
+            {streak > 0 && (
+              <View style={hd.streakPill}>
+                <Animated.Text style={[{ fontSize: 14 }, flameStyle]}>🔥</Animated.Text>
+                <Text style={hd.streakNum}>{streak}</Text>
+                {shields > 0 && <Text style={hd.streakShield}>🛡️{shields}</Text>}
+              </View>
+            )}
           </HStack>
-          <Box className="h-[3px] bg-[#1A2233] rounded-full mt-2 overflow-hidden">
-            <Box
-              className="h-full"
-              style={{
-                width: `${Math.min(xpPct * 100, 100)}%`,
-                backgroundColor: tier.color,
-              }}
-            />
-          </Box>
-        </Box>
+          <Pressable onPress={() => router.push("/(tabs)/profile")}>
+            <HStack className="items-center" space="sm">
+              <View style={{ paddingHorizontal: 8, paddingVertical: 3, borderRadius: 100, backgroundColor: `${tier.color}22`, borderWidth: 1, borderColor: `${tier.color}66` }}>
+                <Text style={{ color: tier.color, fontSize: 11, fontWeight: "700" }}>{tier.name}</Text>
+              </View>
+              <Text className="text-[#AAB0C0] text-[13px]">{t("tabs.home.level", { level })}</Text>
+            </HStack>
+          </Pressable>
+        </HStack>
+        <View style={{ height: 3, backgroundColor: "#1A2233", borderRadius: 99, marginTop: 10, overflow: "hidden" }}>
+          <View style={{ height: "100%", width: `${Math.min(xpPct * 100, 100)}%`, backgroundColor: tier.color, borderRadius: 99 }} />
+        </View>
+      </Box>
 
-        {/* Title + streak */}
-        <Box className="px-6 pt-5">
-          <Text className="text-[#E6EAF2] text-[22px] font-semibold">
-            {t("tabs.home.title")}
-          </Text>
-          {streak > 0 && (
-            <Box className="mt-3">
-              <StreakCard streak={streak} shields={shields} />
-            </Box>
-          )}
+      {/* ── Lições ─────────────────────────────────────────────── */}
+      {loadingUser && (
+        <Box className="px-6 mt-5">
+          <SkeletonCard />
         </Box>
+      )}
 
-        {/* Due cards badge */}
-        {dueCardCount > 0 && (
-          <Box className="px-6 mt-4">
-            <TouchableOpacity
-              onPress={() => router.push("/(session)/review")}
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-                backgroundColor: "#0D1025",
-                borderWidth: 1,
-                borderColor: "#7B8FE044",
-                borderRadius: 16,
-                paddingHorizontal: 16,
-                paddingVertical: 12,
-              }}
-            >
-              <HStack className="items-center" space="sm">
-                <Text style={{ fontSize: 20 }}>🧠</Text>
-                <VStack>
-                  <Text style={{ color: "#7B8FE0", fontSize: 13, fontWeight: "700" }}>
-                    {t("tabs.home.review_due", { count: dueCardCount })}
-                  </Text>
-                </VStack>
-              </HStack>
-              <Text style={{ color: "#7B8FE0", fontSize: 13, fontWeight: "600" }}>
-                {t("tabs.home.start_review")} →
+      {!loadingUser && todayLesson && todayLessonId && (() => {
+        const isDone = todayCompletedId === todayLessonId;
+        const color = trackColor(todayLesson.trackId);
+        return (
+          <Box className="px-6 mt-5">
+            <HStack className="items-center justify-between mb-2">
+              <Text className="text-[#AAB0C0] text-[11px] font-semibold tracking-widest">
+                {t("tabs.home.pack_of_day").toUpperCase()}
               </Text>
-            </TouchableOpacity>
-          </Box>
-        )}
-
-        {/* Retry recommendation — low quiz score */}
-        {retryRecommendation && (() => {
-          const meta = getLessonMeta(retryRecommendation.contentId);
-          if (!meta || retryRecommendation.contentId === todayLessonId) return null;
-          const pct = Math.round(retryRecommendation.quizScore * 100);
-          return (
-            <Box className="px-6 mt-4">
-              <TouchableOpacity
-                onPress={() => startSession(retryRecommendation.contentId)}
-                style={{
-                  backgroundColor: "#0E1A12",
-                  borderWidth: 1,
-                  borderColor: "#5ED19A33",
-                  borderRadius: 16,
-                  paddingHorizontal: 16,
-                  paddingVertical: 14,
-                }}
-              >
-                <Text style={{ color: "#5ED19A", fontSize: 10, fontWeight: "700", letterSpacing: 1, textTransform: "uppercase", marginBottom: 6 }}>
-                  {t("tabs.home.retry_title")}
-                </Text>
-                <HStack className="items-center justify-between">
-                  <VStack style={{ flex: 1 }}>
-                    <Text style={{ color: "#E6EAF2", fontSize: 14, fontWeight: "600" }} numberOfLines={1}>
-                      {meta.title[lang] ?? meta.title.en}
-                    </Text>
-                    <Text style={{ color: "#7B8193", fontSize: 12, marginTop: 2 }}>
-                      {t("tabs.home.retry_score", { pct })}
-                    </Text>
-                  </VStack>
-                  <Text style={{ color: "#5ED19A", fontSize: 13, fontWeight: "700", marginLeft: 12 }}>
-                    {t("tabs.home.retry_cta")} →
+              {isDone && (
+                <HStack className="items-center" space="xs">
+                  <Ionicons name="checkmark-circle" size={14} color="#5ED19A" />
+                  <Text className="text-[#5ED19A] text-[11px] font-semibold">
+                    {t("tabs.home.done_today")}
                   </Text>
                 </HStack>
-              </TouchableOpacity>
-            </Box>
-          );
-        })()}
-
-        {/* Daily missions */}
-        {missions.length > 0 && (
-          <Box className="px-6 mt-4">
-            <MissionsCard missions={missions} />
-          </Box>
-        )}
-
-        {/* Today's lesson */}
-        {loadingUser && (
-          <Box className="px-6 mt-5">
-            <SkeletonCard />
-          </Box>
-        )}
-        {!loadingUser && todayLesson && todayLessonId && (() => {
-          const isDone = todayCompletedId === todayLessonId;
-          const color = trackColor(todayLesson.trackId);
-          return (
-            <Box className="px-6 mt-5">
-              <HStack className="items-center justify-between mb-2">
-                <Text className="text-[#AAB0C0] text-[11px] font-semibold tracking-widest">
-                  {t("tabs.home.pack_of_day").toUpperCase()}
+              )}
+            </HStack>
+            <TouchableOpacity onPress={() => startSession(todayLessonId)} style={lc.card} activeOpacity={0.75}>
+              <View style={[lc.trackAccent, { backgroundColor: color }]} />
+              <VStack style={{ flex: 1, marginRight: 12 }}>
+                <Text style={lc.cardTitle} numberOfLines={2}>
+                  {todayLesson.title[lang] ?? todayLesson.title.en}
                 </Text>
-                {isDone && (
-                  <HStack className="items-center" space="xs">
-                    <Ionicons name="checkmark-circle" size={14} color="#5ED19A" />
-                    <Text className="text-[#5ED19A] text-[11px] font-semibold">
-                      {t("tabs.home.done_today")}
-                    </Text>
-                  </HStack>
-                )}
-              </HStack>
-              <TouchableOpacity
-                onPress={() => startSession(todayLessonId)}
-                style={lc.card}
-                activeOpacity={0.75}
-              >
-                <View style={[lc.trackAccent, { backgroundColor: color }]} />
-                <VStack style={{ flex: 1, marginRight: 12 }}>
-                  <Text style={lc.cardTitle} numberOfLines={2}>
-                    {todayLesson.title[lang] ?? todayLesson.title.en}
-                  </Text>
-                  <Text style={lc.cardDuration}>{todayLesson.estimatedMinutes} min</Text>
-                </VStack>
-                <View style={[lc.startBtn, isDone && lc.startBtnDone]}>
-                  <Text style={[lc.startBtnText, isDone && lc.startBtnTextDone]}>
-                    {isDone ? t("tabs.home.redo") : t("tabs.home.start")}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </Box>
-          );
-        })()}
-
-        {/* Next lesson per other selected track — compact rows */}
-        {!loadingUser && (() => {
-          const otherRows = selectedTrackIds
-            .filter((trackId) => trackId !== todayLesson?.trackId)
-            .map((trackId) => {
-              const lessonId = nextPerTrack[trackId];
-              if (!lessonId) return null;
-              const meta = getLessonMeta(lessonId);
-              if (!meta) return null;
-              return { trackId, lessonId, meta };
-            })
-            .filter(Boolean) as { trackId: string; lessonId: string; meta: ReturnType<typeof getLessonMeta> & {} }[];
-
-          if (otherRows.length === 0) return null;
-          return (
-            <Box className="px-6 mt-3">
-              <View style={lc.listContainer}>
-                {otherRows.map(({ trackId, lessonId, meta }, index) => {
-                  const color = trackColor(trackId);
-                  return (
-                    <React.Fragment key={trackId}>
-                      {index > 0 && <View style={lc.divider} />}
-                      <TouchableOpacity
-                        onPress={() => startSession(lessonId)}
-                        style={lc.row}
-                        activeOpacity={0.7}
-                      >
-                        <View style={[lc.trackDot, { backgroundColor: color }]} />
-                        <VStack style={{ flex: 1 }}>
-                          <Text style={lc.rowTitle} numberOfLines={1}>
-                            {meta!.title[lang] ?? meta!.title.en}
-                          </Text>
-                          <Text style={lc.rowDuration}>{meta!.estimatedMinutes} min</Text>
-                        </VStack>
-                        <Ionicons name="chevron-forward" size={16} color="#4A5568" />
-                      </TouchableOpacity>
-                    </React.Fragment>
-                  );
-                })}
+                <Text style={lc.cardDuration}>{todayLesson.estimatedMinutes} min</Text>
+              </VStack>
+              <View style={[lc.startBtn, isDone && lc.startBtnDone]}>
+                <Text style={[lc.startBtnText, isDone && lc.startBtnTextDone]}>
+                  {isDone ? t("tabs.home.redo") : t("tabs.home.start")}
+                </Text>
               </View>
-            </Box>
-          );
-        })()}
-
-        {/* Manage tracks shortcut */}
-        {!loadingUser && (
-          <Box className="px-6 mt-3">
-            <TouchableOpacity
-              onPress={() => router.push("/(tabs)/tracks")}
-              style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", paddingVertical: 10, gap: 6 }}
-              activeOpacity={0.6}
-            >
-              <Ionicons name="add-circle-outline" size={15} color="#4A5568" />
-              <Text style={{ color: "#4A5568", fontSize: 12, fontWeight: "600" }}>
-                {t("tabs.home.manage_tracks")}
-              </Text>
             </TouchableOpacity>
           </Box>
-        )}
+        );
+      })()}
 
-        {/* Weekly progress */}
-        {weeklyData.length > 0 && (
-          <Box className="px-6 mt-6">
-            <Text className="text-[#E6EAF2] text-[16px] font-semibold mb-3">
-              {t("tabs.home.thisWeek")}
-            </Text>
-            <WeeklyCard
-              data={weeklyData}
-              goalMin={user?.dailyGoalMin ?? 10}
-              lang={lang}
-              studiedLabel={t("tabs.home.studied")}
-            />
+      {!loadingUser && (() => {
+        const otherRows = selectedTrackIds
+          .filter((trackId) => trackId !== todayLesson?.trackId)
+          .map((trackId) => {
+            const lessonId = nextPerTrack[trackId];
+            if (!lessonId) return null;
+            const meta = getLessonMeta(lessonId);
+            if (!meta) return null;
+            return { trackId, lessonId, meta };
+          })
+          .filter(Boolean) as { trackId: string; lessonId: string; meta: ReturnType<typeof getLessonMeta> & {} }[];
+
+        if (otherRows.length === 0) return null;
+        return (
+          <Box className="px-6 mt-3">
+            <View style={lc.listContainer}>
+              {otherRows.map(({ trackId, lessonId, meta }, index) => {
+                const color = trackColor(trackId);
+                return (
+                  <React.Fragment key={trackId}>
+                    {index > 0 && <View style={lc.divider} />}
+                    <TouchableOpacity onPress={() => startSession(lessonId)} style={lc.row} activeOpacity={0.7}>
+                      <View style={[lc.trackDot, { backgroundColor: color }]} />
+                      <VStack style={{ flex: 1 }}>
+                        <Text style={lc.rowTitle} numberOfLines={1}>{meta!.title[lang] ?? meta!.title.en}</Text>
+                        <Text style={lc.rowDuration}>{meta!.estimatedMinutes} min</Text>
+                      </VStack>
+                      <Ionicons name="chevron-forward" size={16} color="#4A5568" />
+                    </TouchableOpacity>
+                  </React.Fragment>
+                );
+              })}
+            </View>
           </Box>
-        )}
-      </ScrollView>
-    </>
+        );
+      })()}
+
+      {!loadingUser && (
+        <Box className="px-6 mt-2">
+          <TouchableOpacity
+            onPress={() => router.push("/(tabs)/tracks")}
+            style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", paddingVertical: 10, gap: 6 }}
+            activeOpacity={0.6}
+          >
+            <Ionicons name="add-circle-outline" size={15} color="#4A5568" />
+            <Text style={{ color: "#4A5568", fontSize: 12, fontWeight: "600" }}>
+              {t("tabs.home.manage_tracks")}
+            </Text>
+          </TouchableOpacity>
+        </Box>
+      )}
+
+      {/* ── Ações secundárias ──────────────────────────────────── */}
+      {dueCardCount > 0 && (
+        <Box className="px-6 mt-4">
+          <TouchableOpacity
+            onPress={() => router.push("/(session)/review")}
+            style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", backgroundColor: "#0D1025", borderWidth: 1, borderColor: "#7B8FE044", borderRadius: 16, paddingHorizontal: 16, paddingVertical: 12 }}
+          >
+            <HStack className="items-center" space="sm">
+              <Text style={{ fontSize: 18 }}>🧠</Text>
+              <VStack>
+                <Text style={{ color: "#7B8FE0", fontSize: 13, fontWeight: "700" }}>
+                  {t("tabs.home.review_due", { count: dueCardCount })}
+                </Text>
+                {missions.some((m) => m.id === "review_cards" && !m.completed) && (
+                  <Text style={{ color: "#7B8FE077", fontSize: 11, marginTop: 1 }}>
+                    {t("missions.review_cards")} · +{missions.find((m) => m.id === "review_cards")?.xpReward} XP
+                  </Text>
+                )}
+              </VStack>
+            </HStack>
+            <Text style={{ color: "#7B8FE0", fontSize: 13, fontWeight: "600" }}>
+              {t("tabs.home.start_review")} →
+            </Text>
+          </TouchableOpacity>
+        </Box>
+      )}
+
+      {retryRecommendation && (() => {
+        const meta = getLessonMeta(retryRecommendation.contentId);
+        if (!meta || retryRecommendation.contentId === todayLessonId) return null;
+        const pct = Math.round(retryRecommendation.quizScore * 100);
+        return (
+          <Box className="px-6 mt-3">
+            <TouchableOpacity
+              onPress={() => startSession(retryRecommendation.contentId)}
+              style={{ backgroundColor: "#0E1A12", borderWidth: 1, borderColor: "#5ED19A33", borderRadius: 16, paddingHorizontal: 16, paddingVertical: 13 }}
+            >
+              <Text style={{ color: "#5ED19A", fontSize: 10, fontWeight: "700", letterSpacing: 1, textTransform: "uppercase", marginBottom: 5 }}>
+                {t("tabs.home.retry_title")}
+              </Text>
+              <HStack className="items-center justify-between">
+                <VStack style={{ flex: 1 }}>
+                  <Text style={{ color: "#E6EAF2", fontSize: 14, fontWeight: "600" }} numberOfLines={1}>
+                    {meta.title[lang] ?? meta.title.en}
+                  </Text>
+                  <Text style={{ color: "#7B8193", fontSize: 12, marginTop: 2 }}>
+                    {t("tabs.home.retry_score", { pct })}
+                  </Text>
+                </VStack>
+                <Text style={{ color: "#5ED19A", fontSize: 13, fontWeight: "700", marginLeft: 12 }}>
+                  {t("tabs.home.retry_cta")} →
+                </Text>
+              </HStack>
+            </TouchableOpacity>
+          </Box>
+        );
+      })()}
+
+      {/* ── Missões ────────────────────────────────────────────── */}
+      {missions.length > 0 && (
+        <Box className="px-6 mt-4">
+          <MissionsCard missions={missions} />
+        </Box>
+      )}
+
+      {/* ── Semana ─────────────────────────────────────────────── */}
+      {weeklyData.length > 0 && (
+        <Box className="px-6 mt-5">
+          <WeeklyCard
+            data={weeklyData}
+            goalMin={user?.dailyGoalMin ?? 10}
+            lang={lang}
+            studiedLabel={t("tabs.home.studied")}
+          />
+        </Box>
+      )}
+    </ScrollView>
   );
 }
+
+// ---------------------------------------------------------------------------
+// Header streak pill styles
+// ---------------------------------------------------------------------------
+
+const hd = StyleSheet.create({
+  streakPill: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#1A120A",
+    borderWidth: 1,
+    borderColor: "#F5C77A33",
+    borderRadius: 100,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    gap: 4,
+  },
+  streakNum: { color: "#F5C77A", fontSize: 13, fontWeight: "800" },
+  streakShield: { color: "#7B8FE0", fontSize: 12, fontWeight: "700" },
+});
 
 // ---------------------------------------------------------------------------
 // Lesson card styles

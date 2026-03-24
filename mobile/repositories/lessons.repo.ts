@@ -125,6 +125,16 @@ export function getAllTrackIds(): string[] {
   return [...new Set(BUNDLED_LESSONS.filter((l) => l.status === "published").map((l) => l.trackId))];
 }
 
+/** Returns trackIds where every published free lesson has been completed. */
+export function getCompletedTracks(completedIds: string[]): string[] {
+  return getAllTrackIds().filter((trackId) => {
+    const lessons = BUNDLED_LESSONS.filter(
+      (l) => l.trackId === trackId && l.status === "published" && l.tier === "free",
+    );
+    return lessons.length > 0 && lessons.every((l) => completedIds.includes(l.id));
+  });
+}
+
 export async function getLessonsByTrack(trackId: string): Promise<LessonMeta[]> {
   try {
     const q = query(

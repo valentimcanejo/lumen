@@ -336,6 +336,10 @@ export type FinishSessionResult = {
   quizBonus: number;
   missionBonus: number;
   newAchievementIds: AchievementId[];
+  leveledUp: boolean;
+  newLevel: number;
+  prevLevel: number;
+  shieldEarned: boolean;
 };
 
 /**
@@ -346,19 +350,22 @@ export type FinishSessionResult = {
  */
 export async function finishSession(
   uid: string,
-  context: { date: string; quizScore: number; quizDone: boolean },
+  context: { date: string; quizScore: number; quizDone: boolean; completedTrackCount?: number; totalTrackCount?: number },
 ): Promise<FinishSessionResult> {
-  const { date, quizScore, quizDone } = context;
+  const { date, quizScore, quizDone, completedTrackCount = 0, totalTrackCount = Infinity } = context;
 
   const user = await getDocData<UserProfile>(`users/${uid}`);
-  if (!user) return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, newAchievementIds: [] };
+  if (!user) return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, newAchievementIds: [], leveledUp: false, newLevel: 1, prevLevel: 1, shieldEarned: false };
+
+  const prevLevel = user.level ?? 1;
 
   // ── Streak ──────────────────────────────────────────────────────────────
   const last = user.streak?.lastStudyDate;
   const toNum = (d: string) => Number(d.replaceAll("-", ""));
   const todayN = toNum(date);
   const lastN = last ? toNum(last) : 0;
-  let streakCurrent = user.streak?.current ?? 0;
+  const prevStreakCurrent = user.streak?.current ?? 0;
+  let streakCurrent = prevStreakCurrent;
   let shields = user.streak?.shields ?? 0;
 
   if (last === date) { /* already counted today */ }
@@ -366,7 +373,37 @@ export async function finishSession(
   else if (shields > 0) { shields -= 1; }
   else { streakCurrent = 1; }
 
+  // Award a shield on every 7-day milestone (max 3)
+  let shieldEarned = false;
+  if (last !== date && streakCurrent > prevStreakCurrent && streakCurrent % 7 === 0) {
+    shields = Math.min(shields + 1, 3);
+    shieldEarned = true;
+  }
+
   const streakBest = Math.max(user.streak?.best ?? 0, streakCurrent);
+
+  // ── Quiz streak (dias consecutivos com score ≥ 80%) ─────────────────────
+  const toNumQ = toNum; // reuse helper
+  const lastGoodQuizDate = user.lastGoodQuizDate;
+  let consecutiveGoodQuizDays = user.consecutiveGoodQuizDays ?? 0;
+  let newLastGoodQuizDate = lastGoodQuizDate;
+
+  if (quizDone) {
+    if (quizScore >= 0.8) {
+      if (lastGoodQuizDate === date) {
+        // same day — no change
+      } else if (!lastGoodQuizDate || toNumQ(date) === toNumQ(lastGoodQuizDate) + 1) {
+        consecutiveGoodQuizDays += 1;
+      } else {
+        consecutiveGoodQuizDays = 1;
+      }
+      newLastGoodQuizDate = date;
+    } else {
+      // quiz done but < 80% — reset streak
+      consecutiveGoodQuizDays = 0;
+    }
+  }
+  // quiz skipped — preserve streak unchanged
 
   // ── XP ──────────────────────────────────────────────────────────────────
   const base = 10;
@@ -409,9 +446,10 @@ export async function finishSession(
     totalSessions,
     consecutivePerfectQuizzes: newConsecutive,
     totalPerfectQuizzes: newTotalPerfect,
+    consecutiveGoodQuizDays,
   };
   const { ids: newAchievementIds, entries: achievementEntries } =
-    computeNewAchievements(updatedUser, quizScore);
+    computeNewAchievements(updatedUser, quizScore, { completedTrackCount, totalTrackCount, shieldEarned });
 
   // ── Single write ─────────────────────────────────────────────────────────
   await updateDocData<UserProfile>(`users/${uid}`, {
@@ -421,6 +459,8 @@ export async function finishSession(
     totalSessions,
     consecutivePerfectQuizzes: newConsecutive,
     totalPerfectQuizzes: newTotalPerfect,
+    consecutiveGoodQuizDays,
+    ...(newLastGoodQuizDate !== undefined && { lastGoodQuizDate: newLastGoodQuizDate }),
     currentMissions: { date, list: missionList },
     ...(newAchievementIds.length > 0 && {
       achievements: { ...(user.achievements ?? {}), ...achievementEntries },
@@ -428,5 +468,5 @@ export async function finishSession(
     updatedAt: Date.now(),
   });
 
-  return { gained, base, quizBonus, missionBonus, newAchievementIds };
+  return { gained, base, quizBonus, missionBonus, newAchievementIds, leveledUp: newLevel > prevLevel, newLevel, prevLevel, shieldEarned };
 }
