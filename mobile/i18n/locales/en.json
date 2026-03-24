@@ -72,7 +72,10 @@
       "start_review": "Review now",
       "explore_tracks_title": "All content done!",
       "explore_tracks_subtitle": "Add new tracks to keep learning",
-      "explore_tracks_cta": "Explore →"
+      "explore_tracks_cta": "Explore →",
+      "retry_title": "Recommended to redo",
+      "retry_score": "{{pct}}% on your last quiz",
+      "retry_cta": "Redo"
     },
     "tracks": {
       "title": "Tracks",

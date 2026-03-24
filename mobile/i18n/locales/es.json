@@ -72,7 +72,10 @@
       "start_review": "Repasar ahora",
       "explore_tracks_title": "¡Todo el contenido completado!",
       "explore_tracks_subtitle": "Agrega nuevas rutas para seguir aprendiendo",
-      "explore_tracks_cta": "Explorar →"
+      "explore_tracks_cta": "Explorar →",
+      "retry_title": "Recomendado para rehacer",
+      "retry_score": "{{pct}}% en tu último quiz",
+      "retry_cta": "Rehacer"
     },
     "tracks": {
       "title": "Rutas",

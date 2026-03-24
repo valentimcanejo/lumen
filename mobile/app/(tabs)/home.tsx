@@ -41,6 +41,7 @@ import {
   getWeeklyData,
   getTodaySession,
   getDueCardCount,
+  getRecentSessions,
   type DayData,
 } from "../../repositories/progress.repo";
 import { getCompletedContentIds } from "../../repositories/user.repo";
@@ -505,6 +506,9 @@ export default function Home() {
   const [todayCompletedId, setTodayCompletedId] = useState<string | null>(null);
   const [dueCardCount, setDueCardCount] = useState(0);
   const [missions, setMissions] = useState<DailyMission[]>([]);
+  const [retryRecommendation, setRetryRecommendation] = useState<{
+    contentId: string; quizScore: number;
+  } | null>(null);
 
   useEffect(() => {
     if (!currentUserId) return;
@@ -519,6 +523,18 @@ export default function Home() {
     getDueCardCount(currentUserId).then(setDueCardCount).catch(() => {});
     getCompletedContentIds(currentUserId).then(setCompletedIds).catch(() => {});
     getTodayMissions(currentUserId).then(setMissions).catch(() => {});
+    getRecentSessions(currentUserId, 20).then((sessions) => {
+      const seen = new Set<string>();
+      for (const s of sessions) {
+        if (!seen.has(s.contentId)) {
+          seen.add(s.contentId);
+          if (s.quizScore < 0.6) {
+            setRetryRecommendation({ contentId: s.contentId, quizScore: s.quizScore });
+            break;
+          }
+        }
+      }
+    }).catch(() => {});
   }, [currentUserId]);
 
   useEffect(() => {
@@ -693,6 +709,45 @@ export default function Home() {
             </TouchableOpacity>
           </Box>
         )}
+
+        {/* Retry recommendation — low quiz score */}
+        {retryRecommendation && (() => {
+          const meta = getLessonMeta(retryRecommendation.contentId);
+          if (!meta || retryRecommendation.contentId === todayLessonId) return null;
+          const pct = Math.round(retryRecommendation.quizScore * 100);
+          return (
+            <Box className="px-6 mt-4">
+              <TouchableOpacity
+                onPress={() => startSession(retryRecommendation.contentId)}
+                style={{
+                  backgroundColor: "#0E1A12",
+                  borderWidth: 1,
+                  borderColor: "#5ED19A33",
+                  borderRadius: 16,
+                  paddingHorizontal: 16,
+                  paddingVertical: 14,
+                }}
+              >
+                <Text style={{ color: "#5ED19A", fontSize: 10, fontWeight: "700", letterSpacing: 1, textTransform: "uppercase", marginBottom: 6 }}>
+                  {t("tabs.home.retry_title")}
+                </Text>
+                <HStack className="items-center justify-between">
+                  <VStack style={{ flex: 1 }}>
+                    <Text style={{ color: "#E6EAF2", fontSize: 14, fontWeight: "600" }} numberOfLines={1}>
+                      {meta.title[lang] ?? meta.title.en}
+                    </Text>
+                    <Text style={{ color: "#7B8193", fontSize: 12, marginTop: 2 }}>
+                      {t("tabs.home.retry_score", { pct })}
+                    </Text>
+                  </VStack>
+                  <Text style={{ color: "#5ED19A", fontSize: 13, fontWeight: "700", marginLeft: 12 }}>
+                    {t("tabs.home.retry_cta")} →
+                  </Text>
+                </HStack>
+              </TouchableOpacity>
+            </Box>
+          );
+        })()}
 
         {/* Daily missions */}
         {missions.length > 0 && (
