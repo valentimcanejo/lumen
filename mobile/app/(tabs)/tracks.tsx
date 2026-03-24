@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -10,7 +10,7 @@ import { Text } from "../../components/ui/text";
 import { Pressable } from "../../components/ui/pressable";
 import { getTracks } from "../../repositories/tracks.repo";
 import { getLessonCountForTrack } from "../../repositories/lessons.repo";
-import { getCompletedContentIds } from "../../repositories/user.repo";
+import { getCompletedContentIds, setSelectedTracks } from "../../repositories/user.repo";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import { useAiPack } from "../../hooks/useAiPack";
@@ -43,10 +43,16 @@ function TrackCard({
   track,
   lang,
   completedIds,
+  isFollowing,
+  canUnfollow,
+  onToggleFollow,
 }: {
   track: Track;
   lang: Lang;
   completedIds: string[];
+  isFollowing: boolean;
+  canUnfollow: boolean;
+  onToggleFollow: () => void;
 }) {
   const { t } = useTranslation();
   const title = track.title[lang] ?? track.title.en ?? track.id;
@@ -74,7 +80,21 @@ function TrackCard({
               {title}
             </Text>
           </HStack>
-          <DifficultyBadge level={track.difficulty} />
+          <HStack className="items-center" space="sm">
+            <DifficultyBadge level={track.difficulty} />
+            <TouchableOpacity
+              onPress={onToggleFollow}
+              disabled={isFollowing && !canUnfollow}
+              hitSlop={10}
+              style={{ opacity: isFollowing && !canUnfollow ? 0.35 : 1 }}
+            >
+              <Ionicons
+                name={isFollowing ? "checkmark-circle" : "add-circle-outline"}
+                size={22}
+                color={isFollowing ? color : "#4A5568"}
+              />
+            </TouchableOpacity>
+          </HStack>
         </HStack>
 
         {description ? (
@@ -135,6 +155,7 @@ export default function Tracks() {
   const [lang, setLang] = useState<Lang>("pt");
   const [loading, setLoading] = useState(true);
   const [completedIds, setCompletedIds] = useState<string[]>([]);
+  const [selectedTrackIds, setSelectedTrackIds] = useState<string[]>([]);
 
   useEffect(() => {
     getTracks()
@@ -147,10 +168,22 @@ export default function Tracks() {
     if (!uid) return;
     getUserData({ userId: uid }).then((user) => {
       if (user?.lang) setLang(user.lang);
+      setSelectedTrackIds(user?.selectedTrackIds ?? user?.selectedGoalIds ?? []);
     });
     getCompletedContentIds(uid).then(setCompletedIds).catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
+
+  async function handleToggleFollow(trackId: string) {
+    if (!uid) return;
+    const isFollowing = selectedTrackIds.includes(trackId);
+    if (isFollowing && selectedTrackIds.length <= 1) return; // mínimo 1
+    const next = isFollowing
+      ? selectedTrackIds.filter((id) => id !== trackId)
+      : [...selectedTrackIds, trackId];
+    setSelectedTrackIds(next);
+    await setSelectedTracks(uid, next);
+  }
 
   async function handleGenerate() {
     const pack = await generate({ lang, minutes: 10 });
@@ -226,7 +259,15 @@ export default function Tracks() {
           </Text>
         ) : (
           tracks.map((track) => (
-            <TrackCard key={track.id} track={track} lang={lang} completedIds={completedIds} />
+            <TrackCard
+              key={track.id}
+              track={track}
+              lang={lang}
+              completedIds={completedIds}
+              isFollowing={selectedTrackIds.includes(track.id)}
+              canUnfollow={selectedTrackIds.length > 1}
+              onToggleFollow={() => handleToggleFollow(track.id)}
+            />
           ))
         )}
       </ScrollView>

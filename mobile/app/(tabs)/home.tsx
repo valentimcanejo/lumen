@@ -33,8 +33,6 @@ import {
   getLessonMeta,
   pickNextLesson,
   getNextLessonPerTrack,
-  isAllContentCompleted,
-  getAllTrackIds,
 } from "../../repositories/lessons.repo";
 import {
   getWeeklyData,
@@ -556,10 +554,6 @@ export default function Home() {
 
   // Backward-compat: fall back to selectedGoalIds for users who haven't migrated
   const selectedTrackIds = user?.selectedTrackIds ?? user?.selectedGoalIds ?? [];
-  const allContentDone =
-    !loadingUser &&
-    isAllContentCompleted(selectedTrackIds, completedIds) &&
-    selectedTrackIds.length < getAllTrackIds().length;
   const today = todayYmd();
   const todayLessonId = pickNextLesson(selectedTrackIds, completedIds, today);
   const todayLesson = todayLessonId ? getLessonMeta(todayLessonId) : null;
@@ -669,41 +663,6 @@ export default function Home() {
               </HStack>
               <Text style={{ color: "#7B8FE0", fontSize: 13, fontWeight: "600" }}>
                 {t("tabs.home.start_review")} →
-              </Text>
-            </TouchableOpacity>
-          </Box>
-        )}
-
-        {/* Explore new tracks — shown when all selected content is done */}
-        {allContentDone && (
-          <Box className="px-6 mt-4">
-            <TouchableOpacity
-              onPress={() => router.push("/(tabs)/profile")}
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-                backgroundColor: "#160D20",
-                borderWidth: 1,
-                borderColor: "#C47AE044",
-                borderRadius: 16,
-                paddingHorizontal: 16,
-                paddingVertical: 14,
-              }}
-            >
-              <HStack className="items-center" space="sm">
-                <Text style={{ fontSize: 20 }}>🗺️</Text>
-                <VStack>
-                  <Text style={{ color: "#C47AE0", fontSize: 13, fontWeight: "700" }}>
-                    {t("tabs.home.explore_tracks_title")}
-                  </Text>
-                  <Text style={{ color: "#7B8193", fontSize: 12, marginTop: 1 }}>
-                    {t("tabs.home.explore_tracks_subtitle")}
-                  </Text>
-                </VStack>
-              </HStack>
-              <Text style={{ color: "#C47AE0", fontSize: 13, fontWeight: "600" }}>
-                {t("tabs.home.explore_tracks_cta")}
               </Text>
             </TouchableOpacity>
           </Box>
@@ -844,6 +803,22 @@ export default function Home() {
             </Box>
           );
         })()}
+
+        {/* Manage tracks shortcut */}
+        {!loadingUser && (
+          <Box className="px-6 mt-3">
+            <TouchableOpacity
+              onPress={() => router.push("/(tabs)/tracks")}
+              style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", paddingVertical: 10, gap: 6 }}
+              activeOpacity={0.6}
+            >
+              <Ionicons name="add-circle-outline" size={15} color="#4A5568" />
+              <Text style={{ color: "#4A5568", fontSize: 12, fontWeight: "600" }}>
+                {t("tabs.home.manage_tracks")}
+              </Text>
+            </TouchableOpacity>
+          </Box>
+        )}
 
         {/* Weekly progress */}
         {weeklyData.length > 0 && (

@@ -70,9 +70,7 @@
       "redo": "Do again",
       "review_due": "{{count}} card(s) to review",
       "start_review": "Review now",
-      "explore_tracks_title": "All content done!",
-      "explore_tracks_subtitle": "Add new tracks to keep learning",
-      "explore_tracks_cta": "Explore →",
+      "manage_tracks": "Manage tracks",
       "retry_title": "Recommended to redo",
       "retry_score": "{{pct}}% on your last quiz",
       "retry_cta": "Redo"

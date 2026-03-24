@@ -70,9 +70,7 @@
       "redo": "Refazer",
       "review_due": "{{count}} card(s) para revisar",
       "start_review": "Revisar agora",
-      "explore_tracks_title": "Conteúdo concluído!",
-      "explore_tracks_subtitle": "Adicione novas trilhas para continuar",
-      "explore_tracks_cta": "Explorar →",
+      "manage_tracks": "Gerenciar trilhas",
       "retry_title": "Recomendado para refazer",
       "retry_score": "{{pct}}% no último quiz",
       "retry_cta": "Refazer"
