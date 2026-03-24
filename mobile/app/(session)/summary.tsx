@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Dimensions, StyleSheet, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -329,6 +329,7 @@ export default function SummaryScreen() {
   const { getUserData } = useUser();
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const hasStartedRef = useRef(false);
   const [nextGoalId, setNextGoalId] = useState<string | null>(null);
   const [gainedXp, setGainedXp] = useState<number | null>(null);
   const [xpBreakdown, setXpBreakdown] = useState<{
@@ -337,6 +338,14 @@ export default function SummaryScreen() {
   const [newAchievements, setNewAchievements] = useState<AchievementDef[]>([]);
   const [bookmarked, setBookmarked] = useState(false);
   const [confettiActive, setConfettiActive] = useState(false);
+
+  // Auto-save on mount
+  useEffect(() => {
+    if (hasStartedRef.current) return;
+    hasStartedRef.current = true;
+    onFinish();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!uid) return;
@@ -531,42 +540,33 @@ export default function SummaryScreen() {
         </Box>
 
         <VStack space="sm" className="mt-auto" style={{ paddingBottom: Math.max(insets.bottom, 24) }}>
-          <Pressable
-            onPress={onFinish}
-            disabled={saving || saved}
-            className={[
-              "h-[52px] rounded-2xl items-center justify-center",
-              saved ? "bg-[#5ED19A]" : "bg-[#F5C77A]",
-            ].join(" ")}
-          >
-            <Text className="text-[#0B0F14] text-[16px] font-semibold">
-              {saved
-                ? t("session.summary.finished")
-                : saving
-                  ? t("session.summary.saving")
-                  : t("session.summary.finish")}
-            </Text>
-          </Pressable>
+          {!saved ? (
+            <Box className="h-[52px] items-center justify-center">
+              <ActivityIndicator color="#F5C77A" />
+            </Box>
+          ) : (
+            <>
+              {nextGoalId && (
+                <Pressable
+                  onPress={nextContent}
+                  className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
+                >
+                  <Text className="text-[#0B0F14] text-[16px] font-semibold">
+                    {t("session.summary.next_content")}
+                  </Text>
+                </Pressable>
+              )}
 
-          {nextGoalId && (
-            <Pressable
-              onPress={nextContent}
-              className="h-[52px] rounded-2xl border border-[#1A2233] items-center justify-center"
-            >
-              <Text className="text-[#AAB0C0] text-[16px] font-semibold">
-                {t("session.summary.next_content")}
-              </Text>
-            </Pressable>
+              <Pressable
+                onPress={goHome}
+                className="h-[52px] rounded-2xl border border-[#1A2233] items-center justify-center"
+              >
+                <Text className="text-[#AAB0C0] text-[16px] font-semibold">
+                  {t("session.summary.go_home")}
+                </Text>
+              </Pressable>
+            </>
           )}
-
-          <Pressable
-            onPress={goHome}
-            className="h-[52px] rounded-2xl border border-[#1A2233] items-center justify-center"
-          >
-            <Text className="text-[#AAB0C0] text-[16px] font-semibold">
-              {t("session.summary.go_home")}
-            </Text>
-          </Pressable>
         </VStack>
       </Box>
     </Box>
