@@ -111,6 +111,20 @@ export function getLessonCountForTrack(trackId: string): number {
   return BUNDLED_LESSONS.filter((l) => l.trackId === trackId).length;
 }
 
+/** Returns true when every published free lesson in the selected tracks is completed. */
+export function isAllContentCompleted(trackIds: string[], completedIds: string[]): boolean {
+  if (!trackIds.length) return false;
+  const lessons = BUNDLED_LESSONS.filter(
+    (l) => trackIds.includes(l.trackId) && l.status === "published" && l.tier === "free",
+  );
+  return lessons.length > 0 && lessons.every((l) => completedIds.includes(l.id));
+}
+
+/** All distinct trackIds that have at least one published lesson. */
+export function getAllTrackIds(): string[] {
+  return [...new Set(BUNDLED_LESSONS.filter((l) => l.status === "published").map((l) => l.trackId))];
+}
+
 export async function getLessonsByTrack(trackId: string): Promise<LessonMeta[]> {
   try {
     const q = query(

@@ -69,7 +69,10 @@
       "done_today": "Done today",
       "redo": "Do again",
       "review_due": "{{count}} card(s) to review",
-      "start_review": "Review now"
+      "start_review": "Review now",
+      "explore_tracks_title": "All content done!",
+      "explore_tracks_subtitle": "Add new tracks to keep learning",
+      "explore_tracks_cta": "Explore →"
     },
     "tracks": {
       "title": "Tracks",
@@ -123,7 +126,9 @@
       "notifications_active": "Daily reminders are active",
       "notifications_enable": "Enable daily reminders",
       "notifications_hint": "Get a daily nudge to keep your streak alive.",
-      "notifications_open_settings": "Open settings"
+      "notifications_open_settings": "Open settings",
+      "tracks": "My tracks",
+      "tracks_hint": "Select the tracks that appear on your home (min. 1)"
     }
   },
   "track": {

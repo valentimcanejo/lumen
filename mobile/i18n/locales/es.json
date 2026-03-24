@@ -69,7 +69,10 @@
       "done_today": "Completado hoy",
       "redo": "Repetir",
       "review_due": "{{count}} tarjeta(s) para repasar",
-      "start_review": "Repasar ahora"
+      "start_review": "Repasar ahora",
+      "explore_tracks_title": "¡Todo el contenido completado!",
+      "explore_tracks_subtitle": "Agrega nuevas rutas para seguir aprendiendo",
+      "explore_tracks_cta": "Explorar →"
     },
     "tracks": {
       "title": "Rutas",
@@ -123,7 +126,9 @@
       "notifications_active": "Recordatorios diarios activos",
       "notifications_enable": "Activar recordatorios diarios",
       "notifications_hint": "Recibe un aviso diario para mantener tu racha.",
-      "notifications_open_settings": "Abrir ajustes"
+      "notifications_open_settings": "Abrir ajustes",
+      "tracks": "Mis rutas",
+      "tracks_hint": "Selecciona las rutas que aparecen en tu inicio (mín. 1)"
     }
   },
   "track": {

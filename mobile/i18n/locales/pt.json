@@ -69,7 +69,10 @@
       "done_today": "Concluído hoje",
       "redo": "Refazer",
       "review_due": "{{count}} card(s) para revisar",
-      "start_review": "Revisar agora"
+      "start_review": "Revisar agora",
+      "explore_tracks_title": "Conteúdo concluído!",
+      "explore_tracks_subtitle": "Adicione novas trilhas para continuar",
+      "explore_tracks_cta": "Explorar →"
     },
     "tracks": {
       "title": "Trilhas",
@@ -123,7 +126,9 @@
       "notifications_active": "Lembretes diários ativos",
       "notifications_enable": "Ativar lembretes diários",
       "notifications_hint": "Receba um aviso todo dia para não perder o ritmo.",
-      "notifications_open_settings": "Abrir configurações"
+      "notifications_open_settings": "Abrir configurações",
+      "tracks": "Minhas trilhas",
+      "tracks_hint": "Selecione as trilhas que aparecem na sua home (mín. 1)"
     }
   },
   "track": {

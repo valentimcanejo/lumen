@@ -13,6 +13,7 @@ import { Lang } from "../../models/lang";
 import { getActiveGoals, type Goal } from "../../repositories/goals.repo";
 
 const ICON_MAP: Record<string, keyof typeof Ionicons.glyphMap> = {
+  book:  "book-outline",
   brain: "bulb-outline",
   globe: "globe-outline",
   chart: "bar-chart-outline",

@@ -37,6 +37,13 @@ export async function setUserLanguage(uid: string, lang: Lang) {
   });
 }
 
+export async function setSelectedTracks(uid: string, trackIds: string[]) {
+  await updateDocData<UserProfile>(userPath(uid), {
+    selectedTrackIds: trackIds,
+    updatedAt: Date.now(),
+  });
+}
+
 export async function setDailyGoal(uid: string, minutes: 5 | 10 | 15) {
   await updateDocData<UserProfile>(userPath(uid), {
     dailyGoalMin: minutes,

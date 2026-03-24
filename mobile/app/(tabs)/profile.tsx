@@ -14,7 +14,9 @@ import { VStack } from "@/components/ui/vstack";
 
 import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
-import { setUserLanguage } from "../../repositories/user.repo";
+import { setUserLanguage, setSelectedTracks } from "../../repositories/user.repo";
+import { getActiveGoals, type Goal } from "../../repositories/goals.repo";
+import { trackColor } from "../../constants/tracks";
 import {
   requestNotificationPermission,
   scheduleDailyReminder,
@@ -174,6 +176,103 @@ function AccountCard({
 // Sub-components
 // ---------------------------------------------------------------------------
 
+const TRACK_ICON_MAP: Record<string, keyof typeof Ionicons.glyphMap> = {
+  book:  "book-outline",
+  brain: "bulb-outline",
+  globe: "globe-outline",
+  chart: "bar-chart-outline",
+};
+
+function TrackSelector({
+  goals,
+  selected,
+  onChange,
+  lang,
+}: {
+  goals: Goal[];
+  selected: string[];
+  onChange: (ids: string[]) => void;
+  lang: string;
+}) {
+  const { t } = useTranslation();
+
+  function toggle(id: string) {
+    const has = selected.includes(id);
+    if (has) {
+      if (selected.length <= 1) return; // mínimo 1
+      onChange(selected.filter((k) => k !== id));
+    } else {
+      onChange([...selected, id]);
+    }
+  }
+
+  return (
+    <VStack space="sm">
+      <Text className="text-[#7B8193] text-[12px] mb-1">
+        {t("tabs.profile.tracks_hint")}
+      </Text>
+      {goals.map((g) => {
+        const active = selected.includes(g.id);
+        const color = trackColor(g.id);
+        const iconName = TRACK_ICON_MAP[g.icon] ?? "ellipse-outline";
+
+        return (
+          <Pressable key={g.id} onPress={() => toggle(g.id)}>
+            <Box
+              style={{
+                borderRadius: 16,
+                borderWidth: 1.5,
+                borderColor: active ? color : "#1A2233",
+                backgroundColor: active ? `${color}12` : "#111827",
+                padding: 14,
+              }}
+            >
+              <HStack className="items-center" style={{ gap: 12 }}>
+                <Box
+                  style={{
+                    width: 38,
+                    height: 38,
+                    borderRadius: 10,
+                    backgroundColor: `${color}20`,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Ionicons name={iconName} size={20} color={color} />
+                </Box>
+                <VStack style={{ flex: 1 }} space="xs">
+                  <Text className="text-[#E6EAF2] text-[14px] font-semibold">
+                    {g.title[lang as keyof typeof g.title] ?? g.title.en}
+                  </Text>
+                  {g.description?.[lang as keyof typeof g.description] && (
+                    <Text className="text-[#7B8193] text-[12px]" numberOfLines={1}>
+                      {g.description[lang as keyof typeof g.description]}
+                    </Text>
+                  )}
+                </VStack>
+                <Box
+                  style={{
+                    width: 22,
+                    height: 22,
+                    borderRadius: 11,
+                    borderWidth: 1.5,
+                    borderColor: active ? color : "#2A2F3E",
+                    backgroundColor: active ? color : "transparent",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {active && <Ionicons name="checkmark" size={12} color="#0B0F14" />}
+                </Box>
+              </HStack>
+            </Box>
+          </Pressable>
+        );
+      })}
+    </VStack>
+  );
+}
+
 function LanguageSelector({
   lang,
   onChange,
@@ -215,6 +314,8 @@ export default function ProfileScreen() {
     useAuth();
   const insets = useSafeAreaInsets();
   const [language, setLanguage] = useState<Lang>("pt");
+  const [selectedTracks, setSelectedTracks] = useState<string[]>([]);
+  const [goals, setGoals] = useState<Goal[]>([]);
   const [saving, setSaving] = useState(false);
   const [profileData, setProfileData] = useState<UserProfile | null>(null);
   const [notifGranted, setNotifGranted] = useState<boolean | null>(null);
@@ -226,7 +327,9 @@ export default function ProfileScreen() {
       if (!u) return;
       setProfileData(u);
       setLanguage(u.lang);
+      setSelectedTracks(u.selectedTrackIds ?? u.selectedGoalIds ?? []);
     });
+    getActiveGoals().then(setGoals).catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
 
@@ -272,6 +375,7 @@ export default function ProfileScreen() {
       await Promise.all([
         setUserLanguage(uid, language),
         setI18nLanguage(language),
+        setSelectedTracks(uid, selectedTracks),
       ]);
     } finally {
       setSaving(false);
@@ -411,6 +515,21 @@ export default function ProfileScreen() {
                     </VStack>
                   ))}
                 </HStack>
+              </Box>
+            )}
+
+            {/* Tracks */}
+            {goals.length > 0 && (
+              <Box className="mb-6">
+                <Text className="text-[#E6EAF2] text-[16px] font-semibold mb-3">
+                  {t("tabs.profile.tracks")}
+                </Text>
+                <TrackSelector
+                  goals={goals}
+                  selected={selectedTracks}
+                  onChange={setSelectedTracks}
+                  lang={language}
+                />
               </Box>
             )}
 

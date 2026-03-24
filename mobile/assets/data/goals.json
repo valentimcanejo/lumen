@@ -1,5 +1,23 @@
 [
   {
+    "id": "foundations",
+    "order": 0,
+    "icon": "book",
+    "color": "#7B8FE0",
+    "isActive": true,
+    "title": {
+      "pt": "Fundamentos",
+      "en": "Foundations",
+      "es": "Fundamentos"
+    },
+    "description": {
+      "pt": "Construir uma base sólida de pensamento e raciocínio",
+      "en": "Build a solid foundation of thinking and reasoning",
+      "es": "Construir una base sólida de pensamiento y razonamiento"
+    },
+    "tags": ["thinking", "reasoning", "models"]
+  },
+  {
     "id": "critical_thinking",
     "order": 1,
     "icon": "brain",
