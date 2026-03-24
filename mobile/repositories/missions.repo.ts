@@ -20,7 +20,7 @@ const MISSION_POOL: MissionTemplate[] = [
 ];
 
 /** Deterministic selection of 3 missions from pool, seeded by date string. */
-function getMissionsForDate(date: string): DailyMission[] {
+export function getMissionsForDate(date: string): DailyMission[] {
   let seed = 0;
   for (const c of date) seed = ((seed * 31 + c.charCodeAt(0)) >>> 0);
 

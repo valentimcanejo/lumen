@@ -7,6 +7,7 @@ import {
   signInWithApple,
   signOut,
 } from "../services/auth.service";
+import { invalidateUserCache } from "./useUser";
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
@@ -38,9 +39,9 @@ export function useAuth() {
   }, []);
 
   const handleSignOut = useCallback(async () => {
+    if (user?.uid) invalidateUserCache(user.uid);
     await signOut();
-    // listenAuth will fire and reset user state
-  }, []);
+  }, [user?.uid]);
 
   return {
     user,

@@ -16,8 +16,10 @@ import {
   getDocData,
   updateDocData,
 } from "../services/firestore.service";
-import type { UserProfile } from "../models/user";
+import type { UserProfile, AchievementId } from "../models/user";
 import { xpToLevel } from "../models/user";
+import { getMissionsForDate } from "./missions.repo";
+import { computeNewAchievements } from "./achievements.repo";
 import type { Lang } from "../models/lang";
 
 export type CompletedSession = {
@@ -53,7 +55,7 @@ export async function getTodaySession(uid: string): Promise<CompletedSession | n
 
 export async function getRecentSessions(
   uid: string,
-  count = 20,
+  count = 5,
 ): Promise<CompletedSession[]> {
   const q = query(
     collection(db, "users", uid, "daily_sessions"),
@@ -326,4 +328,105 @@ export async function incrementCardsReviewed(uid: string, count: number): Promis
     totalCardsReviewed: increment(count),
     updatedAt: Date.now(),
   });
+}
+
+export type FinishSessionResult = {
+  gained: number;
+  base: number;
+  quizBonus: number;
+  missionBonus: number;
+  newAchievementIds: AchievementId[];
+};
+
+/**
+ * Completes a session with a single Firestore read + single write on users/{uid}.
+ * Computes streak, XP, missions and achievements in memory, then flushes all at once.
+ * Use this in summary.tsx instead of calling updateStreak / grantSessionXP /
+ * checkAndCompleteDailyMissions / checkAndGrantAchievements individually.
+ */
+export async function finishSession(
+  uid: string,
+  context: { date: string; quizScore: number; quizDone: boolean },
+): Promise<FinishSessionResult> {
+  const { date, quizScore, quizDone } = context;
+
+  const user = await getDocData<UserProfile>(`users/${uid}`);
+  if (!user) return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, newAchievementIds: [] };
+
+  // ── Streak ──────────────────────────────────────────────────────────────
+  const last = user.streak?.lastStudyDate;
+  const toNum = (d: string) => Number(d.replaceAll("-", ""));
+  const todayN = toNum(date);
+  const lastN = last ? toNum(last) : 0;
+  let streakCurrent = user.streak?.current ?? 0;
+  let shields = user.streak?.shields ?? 0;
+
+  if (last === date) { /* already counted today */ }
+  else if (!last || todayN === lastN + 1) { streakCurrent += 1; }
+  else if (shields > 0) { shields -= 1; }
+  else { streakCurrent = 1; }
+
+  const streakBest = Math.max(user.streak?.best ?? 0, streakCurrent);
+
+  // ── XP ──────────────────────────────────────────────────────────────────
+  const base = 10;
+  const quizBonus = Math.round(quizScore * 10);
+  const isPerfect = quizDone && quizScore >= 1.0;
+  const prevConsecutive = user.consecutivePerfectQuizzes ?? 0;
+  const newConsecutive = quizDone ? (isPerfect ? prevConsecutive + 1 : 0) : prevConsecutive;
+  const newTotalPerfect = (user.totalPerfectQuizzes ?? 0) + (isPerfect ? 1 : 0);
+  const totalSessions = (user.totalSessions ?? 0) + 1;
+
+  // ── Missions ─────────────────────────────────────────────────────────────
+  const cm = user.currentMissions;
+  const missionList = cm?.date === date
+    ? cm.list.map((m) => ({ ...m }))
+    : getMissionsForDate(date);
+
+  let missionBonus = 0;
+  for (const mission of missionList) {
+    if (mission.completed) continue;
+    let done = false;
+    switch (mission.id) {
+      case "complete_session": done = true; break;
+      case "quiz_score_80":    done = quizDone && quizScore >= 0.8; break;
+      case "quiz_score_100":   done = quizDone && quizScore >= 1.0; break;
+    }
+    if (done) { mission.completed = true; missionBonus += mission.xpReward; }
+  }
+
+  // ── Total XP + level ─────────────────────────────────────────────────────
+  const gained = base + quizBonus;
+  const newXp = (user.xp ?? 0) + gained + missionBonus;
+  const newLevel = xpToLevel(newXp);
+
+  // ── Achievements (computed against updated state) ─────────────────────────
+  const updatedUser: UserProfile = {
+    ...user,
+    streak: { current: streakCurrent, best: streakBest, shields, lastStudyDate: date },
+    xp: newXp,
+    level: newLevel,
+    totalSessions,
+    consecutivePerfectQuizzes: newConsecutive,
+    totalPerfectQuizzes: newTotalPerfect,
+  };
+  const { ids: newAchievementIds, entries: achievementEntries } =
+    computeNewAchievements(updatedUser, quizScore);
+
+  // ── Single write ─────────────────────────────────────────────────────────
+  await updateDocData<UserProfile>(`users/${uid}`, {
+    streak: { current: streakCurrent, best: streakBest, shields, lastStudyDate: date },
+    xp: newXp,
+    level: newLevel,
+    totalSessions,
+    consecutivePerfectQuizzes: newConsecutive,
+    totalPerfectQuizzes: newTotalPerfect,
+    currentMissions: { date, list: missionList },
+    ...(newAchievementIds.length > 0 && {
+      achievements: { ...(user.achievements ?? {}), ...achievementEntries },
+    }),
+    updatedAt: Date.now(),
+  });
+
+  return { gained, base, quizBonus, missionBonus, newAchievementIds };
 }

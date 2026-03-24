@@ -40,16 +40,13 @@ export const ACHIEVEMENTS: AchievementDef[] = [
 ];
 
 /**
- * Checks which achievements were newly unlocked after a session or review.
- * Returns list of newly unlocked achievement IDs.
+ * Pure function — computes newly unlocked achievements given a user snapshot.
+ * Does not read or write Firestore.
  */
-export async function checkAndGrantAchievements(
-  uid: string,
-  sessionContext: { quizScore: number },
-): Promise<AchievementId[]> {
-  const user = await getDocData<UserProfile>(`users/${uid}`);
-  if (!user) return [];
-
+export function computeNewAchievements(
+  user: UserProfile,
+  quizScore: number,
+): { ids: AchievementId[]; entries: Partial<Record<AchievementId, number>> } {
   const existing = user.achievements ?? {};
   const streak = user.streak?.current ?? 0;
   const totalSessions = user.totalSessions ?? 0;
@@ -60,50 +57,59 @@ export async function checkAndGrantAchievements(
 
   const candidates: { id: AchievementId; condition: boolean }[] = [
     { id: "first_session",   condition: true },
-    // Streak
     { id: "streak_3",        condition: streak >= 3 },
     { id: "streak_7",        condition: streak >= 7 },
     { id: "streak_30",       condition: streak >= 30 },
     { id: "streak_60",       condition: streak >= 60 },
     { id: "streak_100",      condition: streak >= 100 },
     { id: "streak_365",      condition: streak >= 365 },
-    // Perfect quiz
-    { id: "perfect_quiz",    condition: sessionContext.quizScore >= 1 },
+    { id: "perfect_quiz",    condition: quizScore >= 1 },
     { id: "perfect_quiz_3",  condition: consecutivePerfectQuizzes >= 3 },
     { id: "perfect_quiz_10", condition: totalPerfectQuizzes >= 10 },
-    // Sessions
     { id: "sessions_10",     condition: totalSessions >= 10 },
     { id: "sessions_50",     condition: totalSessions >= 50 },
     { id: "sessions_100",    condition: totalSessions >= 100 },
     { id: "sessions_250",    condition: totalSessions >= 250 },
     { id: "sessions_500",    condition: totalSessions >= 500 },
-    // Level
     { id: "level_5",         condition: level >= 5 },
     { id: "level_10",        condition: level >= 10 },
     { id: "level_20",        condition: level >= 20 },
     { id: "level_30",        condition: level >= 30 },
     { id: "level_50",        condition: level >= 50 },
-    // SM-2 reviews
     { id: "reviews_first",   condition: totalCardsReviewed >= 1 },
     { id: "reviews_50",      condition: totalCardsReviewed >= 50 },
     { id: "reviews_500",     condition: totalCardsReviewed >= 500 },
   ];
 
-  const unlocked: AchievementId[] = [];
-  const newEntries: Partial<Record<AchievementId, number>> = {};
-
+  const ids: AchievementId[] = [];
+  const entries: Partial<Record<AchievementId, number>> = {};
   for (const { id, condition } of candidates) {
     if (condition && !existing[id]) {
-      unlocked.push(id);
-      newEntries[id] = Date.now();
+      ids.push(id);
+      entries[id] = Date.now();
     }
   }
+  return { ids, entries };
+}
 
-  if (unlocked.length > 0) {
+/**
+ * Checks which achievements were newly unlocked after a session or review.
+ * Returns list of newly unlocked achievement IDs.
+ */
+export async function checkAndGrantAchievements(
+  uid: string,
+  sessionContext: { quizScore: number },
+): Promise<AchievementId[]> {
+  const user = await getDocData<UserProfile>(`users/${uid}`);
+  if (!user) return [];
+
+  const { ids, entries } = computeNewAchievements(user, sessionContext.quizScore);
+
+  if (ids.length > 0) {
     await updateDocData<UserProfile>(`users/${uid}`, {
-      achievements: { ...existing, ...newEntries },
+      achievements: { ...(user.achievements ?? {}), ...entries },
     });
   }
 
-  return unlocked;
+  return ids;
 }

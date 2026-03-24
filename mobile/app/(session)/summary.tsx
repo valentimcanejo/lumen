@@ -23,19 +23,14 @@ import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import {
   markDayCompleted,
-  updateStreak,
-  grantSessionXP,
   getDueCardCount,
+  finishSession,
 } from "../../repositories/progress.repo";
 import { scheduleReviewReminder } from "../../services/notifications.service";
 import { toggleSaveContent, markContentCompleted } from "../../repositories/user.repo";
+import { invalidateUserCache } from "../../hooks/useUser";
 import { incrementContentCompletion } from "../../repositories/content_stats.repo";
-import {
-  checkAndGrantAchievements,
-  ACHIEVEMENTS,
-  type AchievementDef,
-} from "../../repositories/achievements.repo";
-import { checkAndCompleteDailyMissions } from "../../repositories/missions.repo";
+import { ACHIEVEMENTS, type AchievementDef } from "../../repositories/achievements.repo";
 import { todayYmd } from "../../repositories/session.repo";
 import { usePack } from "../../hooks/usePack";
 import {
@@ -393,29 +388,31 @@ export default function SummaryScreen() {
     try {
       if (uid) {
         const date = todayYmd();
-        await markDayCompleted(uid, date, {
-          contentId,
-          contentVersion: Number(version),
-          minutes: pack?.estimatedMinutes ?? 0,
-          quizScore,
-        });
-        await updateStreak(uid, date);
         const quizDone = Number(total ?? 0) > 0;
-        const { gained, base, quizBonus } = await grantSessionXP(uid, quizScore, { quizDone });
-        await markContentCompleted(uid, contentId);
-        incrementContentCompletion(contentId, quizScore, pack?.estimatedMinutes ?? 0).catch(() => {});
-        const { xpGranted: missionBonus } = await checkAndCompleteDailyMissions(uid, {
-          sessionCompleted: true,
-          quizScore,
-          quizDone,
-        });
+
+        // Parallel: writes that touch different Firestore paths
+        const [sessionResult] = await Promise.all([
+          finishSession(uid, { date, quizScore, quizDone }),
+          markDayCompleted(uid, date, {
+            contentId,
+            contentVersion: Number(version),
+            minutes: pack?.estimatedMinutes ?? 0,
+            quizScore,
+          }),
+          markContentCompleted(uid, contentId),
+          incrementContentCompletion(contentId, quizScore, pack?.estimatedMinutes ?? 0).catch(() => {}),
+        ]);
+
+        const { gained, base, quizBonus, missionBonus, newAchievementIds } = sessionResult;
         setGainedXp(gained + missionBonus);
         setXpBreakdown({ base, quizBonus, missionBonus });
-        const unlockedIds = await checkAndGrantAchievements(uid, { quizScore });
-        const defs = unlockedIds
+        const defs = newAchievementIds
           .map((id) => ACHIEVEMENTS.find((a) => a.id === id))
           .filter(Boolean) as AchievementDef[];
         setNewAchievements(defs);
+
+        // Invalidate cache so next home load gets fresh user data
+        invalidateUserCache(uid);
 
         // Schedule review notification if there are due cards
         const dueCount = await getDueCardCount(uid);

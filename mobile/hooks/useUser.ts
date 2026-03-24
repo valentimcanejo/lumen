@@ -6,6 +6,16 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getDocData } from "../services/firestore.service";
 import { UserProfile } from "../models/user";
 
+// ---------------------------------------------------------------------------
+// Module-level cache — survives re-renders, cleared on sign-out or after TTL
+// ---------------------------------------------------------------------------
+const CACHE_TTL_MS = 60_000; // 60 s
+const cache = new Map<string, { data: UserProfile; expiresAt: number }>();
+
+export function invalidateUserCache(uid: string) {
+  cache.delete(uid);
+}
+
 export function useUser() {
   const [loading, setLoading] = useState(false);
   const userCollection = collection(db, "users");
@@ -43,8 +53,12 @@ export function useUser() {
   const getUserData = async ({ userId }: { userId: string }) => {
     try {
       setLoading(true);
-      const user = await getDocData<UserProfile>(`users/${userId}`);
 
+      const cached = cache.get(userId);
+      if (cached && Date.now() < cached.expiresAt) return cached.data;
+
+      const user = await getDocData<UserProfile>(`users/${userId}`);
+      if (user) cache.set(userId, { data: user, expiresAt: Date.now() + CACHE_TTL_MS });
       return user;
     } catch (error) {
       console.log(error);
