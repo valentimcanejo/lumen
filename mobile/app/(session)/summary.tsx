@@ -37,6 +37,7 @@ import {
   pickNextLesson,
   getCompletedTracks,
   getAllTrackIds,
+  getLessonMeta,
 } from "../../repositories/lessons.repo";
 import { getCompletedContentIds, getSavedContentIds } from "../../repositories/user.repo";
 import type { Lang } from "../../models/lang";
