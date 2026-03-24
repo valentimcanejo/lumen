@@ -393,13 +393,15 @@ export default function SummaryScreen() {
   const [levelUpInfo, setLevelUpInfo] = useState<{ level: number; tier: TierInfo } | null>(null);
   const completedIdsRef = useRef<string[]>([]);
 
-  // Auto-save on mount
+  // Auto-save once uid is available (uid may be null on first render if auth
+  // state was cleared — e.g. after a full DEV reset with AsyncStorage.clear())
   useEffect(() => {
+    if (!uid) return;
     if (hasStartedRef.current) return;
     hasStartedRef.current = true;
     onFinish();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [uid]);
 
   useEffect(() => {
     if (!uid) return;
