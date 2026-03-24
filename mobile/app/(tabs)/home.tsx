@@ -24,9 +24,8 @@ import { Box } from "../../components/ui/box";
 import { HStack } from "../../components/ui/hstack";
 import { Text } from "../../components/ui/text";
 import { VStack } from "../../components/ui/vstack";
-import { LumenCard } from "../../components/ui/lumen/Card";
-import { LumenButton } from "../../components/ui/lumen/Button";
 import { SkeletonCard } from "../../components/ui/lumen/Skeleton";
+import { trackColor } from "../../constants/tracks";
 
 import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
@@ -764,6 +763,7 @@ export default function Home() {
         )}
         {!loadingUser && todayLesson && todayLessonId && (() => {
           const isDone = todayCompletedId === todayLessonId;
+          const color = trackColor(todayLesson.trackId);
           return (
             <Box className="px-6 mt-5">
               <HStack className="items-center justify-between mb-2">
@@ -779,53 +779,71 @@ export default function Home() {
                   </HStack>
                 )}
               </HStack>
-              <LumenCard>
-                <VStack space="md">
-                  <Text className="text-[#E6EAF2] text-[20px] font-semibold">
+              <TouchableOpacity
+                onPress={() => startSession(todayLessonId)}
+                style={lc.card}
+                activeOpacity={0.75}
+              >
+                <View style={[lc.trackAccent, { backgroundColor: color }]} />
+                <VStack style={{ flex: 1, marginRight: 12 }}>
+                  <Text style={lc.cardTitle} numberOfLines={2}>
                     {todayLesson.title[lang] ?? todayLesson.title.en}
                   </Text>
-                  <Text className="text-[#AAB0C0] text-[13px]">
-                    {todayLesson.estimatedMinutes} min
-                  </Text>
-                  {isDone ? (
-                    <LumenButton onPress={() => startSession(todayLessonId)} variant="ghost">
-                      {t("tabs.home.redo")}
-                    </LumenButton>
-                  ) : (
-                    <LumenButton onPress={() => startSession(todayLessonId)}>
-                      {t("tabs.home.start")}
-                    </LumenButton>
-                  )}
+                  <Text style={lc.cardDuration}>{todayLesson.estimatedMinutes} min</Text>
                 </VStack>
-              </LumenCard>
+                <View style={[lc.startBtn, isDone && lc.startBtnDone]}>
+                  <Text style={[lc.startBtnText, isDone && lc.startBtnTextDone]}>
+                    {isDone ? t("tabs.home.redo") : t("tabs.home.start")}
+                  </Text>
+                </View>
+              </TouchableOpacity>
             </Box>
           );
         })()}
 
-        {/* Next lesson per other selected track */}
-        {!loadingUser &&
-          selectedTrackIds
+        {/* Next lesson per other selected track — compact rows */}
+        {!loadingUser && (() => {
+          const otherRows = selectedTrackIds
             .filter((trackId) => trackId !== todayLesson?.trackId)
             .map((trackId) => {
               const lessonId = nextPerTrack[trackId];
               if (!lessonId) return null;
               const meta = getLessonMeta(lessonId);
               if (!meta) return null;
-              return (
-                <Box key={trackId} className="px-6 mt-3">
-                  <LumenCard>
-                    <VStack space="md">
-                      <Text className="text-[#E6EAF2] text-[18px] font-semibold">
-                        {meta.title[lang] ?? meta.title.en}
-                      </Text>
-                      <LumenButton onPress={() => startSession(lessonId)}>
-                        {t("tabs.home.start")}
-                      </LumenButton>
-                    </VStack>
-                  </LumenCard>
-                </Box>
-              );
-            })}
+              return { trackId, lessonId, meta };
+            })
+            .filter(Boolean) as { trackId: string; lessonId: string; meta: ReturnType<typeof getLessonMeta> & {} }[];
+
+          if (otherRows.length === 0) return null;
+          return (
+            <Box className="px-6 mt-3">
+              <View style={lc.listContainer}>
+                {otherRows.map(({ trackId, lessonId, meta }, index) => {
+                  const color = trackColor(trackId);
+                  return (
+                    <React.Fragment key={trackId}>
+                      {index > 0 && <View style={lc.divider} />}
+                      <TouchableOpacity
+                        onPress={() => startSession(lessonId)}
+                        style={lc.row}
+                        activeOpacity={0.7}
+                      >
+                        <View style={[lc.trackDot, { backgroundColor: color }]} />
+                        <VStack style={{ flex: 1 }}>
+                          <Text style={lc.rowTitle} numberOfLines={1}>
+                            {meta!.title[lang] ?? meta!.title.en}
+                          </Text>
+                          <Text style={lc.rowDuration}>{meta!.estimatedMinutes} min</Text>
+                        </VStack>
+                        <Ionicons name="chevron-forward" size={16} color="#4A5568" />
+                      </TouchableOpacity>
+                    </React.Fragment>
+                  );
+                })}
+              </View>
+            </Box>
+          );
+        })()}
 
         {/* Weekly progress */}
         {weeklyData.length > 0 && (
@@ -845,3 +863,91 @@ export default function Home() {
     </>
   );
 }
+
+// ---------------------------------------------------------------------------
+// Lesson card styles
+// ---------------------------------------------------------------------------
+
+const lc = StyleSheet.create({
+  card: {
+    backgroundColor: "#121826",
+    borderWidth: 1,
+    borderColor: "#1A2233",
+    borderRadius: 18,
+    padding: 16,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  trackAccent: {
+    width: 3,
+    height: 40,
+    borderRadius: 2,
+    marginRight: 14,
+  },
+  cardTitle: {
+    color: "#E6EAF2",
+    fontSize: 15,
+    fontWeight: "600",
+    lineHeight: 21,
+    marginBottom: 4,
+  },
+  cardDuration: {
+    color: "#7B8193",
+    fontSize: 12,
+  },
+  startBtn: {
+    backgroundColor: "#F5C77A",
+    borderRadius: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  startBtnDone: {
+    backgroundColor: "transparent",
+    borderWidth: 1,
+    borderColor: "#2A3448",
+  },
+  startBtnText: {
+    color: "#0B0F14",
+    fontSize: 13,
+    fontWeight: "700",
+  },
+  startBtnTextDone: {
+    color: "#7B8193",
+  },
+  listContainer: {
+    backgroundColor: "#121826",
+    borderWidth: 1,
+    borderColor: "#1A2233",
+    borderRadius: 18,
+    overflow: "hidden",
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    gap: 12,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: "#1A2233",
+    marginHorizontal: 16,
+  },
+  trackDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+  },
+  rowTitle: {
+    color: "#E6EAF2",
+    fontSize: 14,
+    fontWeight: "600",
+    marginBottom: 2,
+  },
+  rowDuration: {
+    color: "#7B8193",
+    fontSize: 12,
+  },
+});
