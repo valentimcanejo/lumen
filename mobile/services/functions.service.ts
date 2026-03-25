@@ -19,6 +19,7 @@ type GenerateAudioInput = {
   contentId: string;
   version: number;
   lang: Lang;
+  text: string;
 };
 
 export async function generateAudio(input: GenerateAudioInput): Promise<void> {

@@ -21,6 +21,13 @@ import { trackColor } from "../../constants/tracks";
 import { getStorageDownloadUrl } from "../../services/storage.service";
 import { generateAudio } from "../../services/functions.service";
 import type { Lang } from "../../models/lang";
+import type { LessonBlock } from "../../models/pack";
+
+function extractText(blocks: LessonBlock[]): string {
+  return blocks
+    .map((b) => (b.type === "bullets" ? b.items.join(". ") : b.text))
+    .join(" ");
+}
 
 function formatMs(ms: number) {
   const s = Math.floor(ms / 1000);
@@ -127,8 +134,9 @@ export default function LessonScreen() {
         try {
           url = await getStorageDownloadUrl(storagePath);
         } catch {
-          // Audio not yet generated — call Cloud Function then retry
-          await generateAudio({ contentId, version: Number(version), lang });
+          // Audio not yet generated — call Cloud Function with extracted text, then retry
+          const text = extractText(pack.lesson.blocks);
+          await generateAudio({ contentId, version: Number(version), lang, text });
           url = await getStorageDownloadUrl(storagePath);
         }
 

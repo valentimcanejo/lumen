@@ -139,19 +139,14 @@ const TTS_VOICES = {
     en: { languageCode: "en-US", name: "en-US-Neural2-F" },
     es: { languageCode: "es-ES", name: "es-ES-Neural2-F" },
 };
-function extractText(blocks) {
-    return blocks
-        .map((b) => (b.type === "bullets" ? b.items.join(". ") : b.text))
-        .join(" ");
-}
 exports.generateAudio = (0, https_1.onCall)({ enforceAppCheck: false, memory: "512MiB" }, async (request) => {
-    var _a, _b;
+    var _a;
     if (!request.auth) {
         throw new https_1.HttpsError("unauthenticated", "Authentication required.");
     }
-    const { contentId, version, lang } = (_a = request.data) !== null && _a !== void 0 ? _a : {};
-    if (!contentId || !version || !["pt", "en", "es"].includes(lang)) {
-        throw new https_1.HttpsError("invalid-argument", "contentId, version and lang are required.");
+    const { contentId, version, lang, text } = (_a = request.data) !== null && _a !== void 0 ? _a : {};
+    if (!contentId || !version || !["pt", "en", "es"].includes(lang) || !(text === null || text === void 0 ? void 0 : text.trim())) {
+        throw new https_1.HttpsError("invalid-argument", "contentId, version, lang and text are required.");
     }
     const audioPath = `packs/${contentId}/v${version}/audio/${lang}.mp3`;
     const bucket = admin.storage().bucket();
@@ -160,18 +155,6 @@ exports.generateAudio = (0, https_1.onCall)({ enforceAppCheck: false, memory: "5
     const [exists] = await audioFile.exists();
     if (exists)
         return { storagePath: audioPath };
-    // Read pack JSON from Storage
-    const packPath = `packs/${contentId}/v${version}/${lang}.json`;
-    const packFile = bucket.file(packPath);
-    const [packBuffer] = await packFile.download();
-    const pack = JSON.parse(packBuffer.toString("utf-8"));
-    if (!((_b = pack === null || pack === void 0 ? void 0 : pack.lesson) === null || _b === void 0 ? void 0 : _b.blocks)) {
-        throw new https_1.HttpsError("not-found", "Pack not found or has no lesson blocks.");
-    }
-    const text = extractText(pack.lesson.blocks);
-    if (!text.trim()) {
-        throw new https_1.HttpsError("invalid-argument", "No text to synthesize.");
-    }
     // Call Google Cloud TTS Neural2
     const ttsClient = new text_to_speech_1.TextToSpeechClient();
     const voice = TTS_VOICES[lang];
