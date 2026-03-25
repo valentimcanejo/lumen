@@ -36,11 +36,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generatePack = void 0;
+exports.generatePack = exports.generateAudio = void 0;
 const https_1 = require("firebase-functions/v2/https");
 const v2_1 = require("firebase-functions/v2");
 const admin = __importStar(require("firebase-admin"));
 const sdk_1 = __importDefault(require("@anthropic-ai/sdk"));
+const text_to_speech_1 = require("@google-cloud/text-to-speech");
 admin.initializeApp();
 (0, v2_1.setGlobalOptions)({ region: "us-central1" });
 // ---------------------------------------------------------------------------
@@ -130,6 +131,65 @@ Rules:
 - All text in ${langName}
 - Return ONLY the JSON object, nothing else`;
 }
+// ---------------------------------------------------------------------------
+// generateAudio — Google Cloud TTS Neural2
+// ---------------------------------------------------------------------------
+const TTS_VOICES = {
+    pt: { languageCode: "pt-BR", name: "pt-BR-Neural2-C" },
+    en: { languageCode: "en-US", name: "en-US-Neural2-F" },
+    es: { languageCode: "es-ES", name: "es-ES-Neural2-F" },
+};
+function extractText(blocks) {
+    return blocks
+        .map((b) => (b.type === "bullets" ? b.items.join(". ") : b.text))
+        .join(" ");
+}
+exports.generateAudio = (0, https_1.onCall)({ enforceAppCheck: false, memory: "512MiB" }, async (request) => {
+    var _a, _b;
+    if (!request.auth) {
+        throw new https_1.HttpsError("unauthenticated", "Authentication required.");
+    }
+    const { contentId, version, lang } = (_a = request.data) !== null && _a !== void 0 ? _a : {};
+    if (!contentId || !version || !["pt", "en", "es"].includes(lang)) {
+        throw new https_1.HttpsError("invalid-argument", "contentId, version and lang are required.");
+    }
+    const audioPath = `packs/${contentId}/v${version}/audio/${lang}.mp3`;
+    const bucket = admin.storage().bucket();
+    const audioFile = bucket.file(audioPath);
+    // Idempotent: if audio already exists, return immediately
+    const [exists] = await audioFile.exists();
+    if (exists)
+        return { storagePath: audioPath };
+    // Read pack JSON from Storage
+    const packPath = `packs/${contentId}/v${version}/${lang}.json`;
+    const packFile = bucket.file(packPath);
+    const [packBuffer] = await packFile.download();
+    const pack = JSON.parse(packBuffer.toString("utf-8"));
+    if (!((_b = pack === null || pack === void 0 ? void 0 : pack.lesson) === null || _b === void 0 ? void 0 : _b.blocks)) {
+        throw new https_1.HttpsError("not-found", "Pack not found or has no lesson blocks.");
+    }
+    const text = extractText(pack.lesson.blocks);
+    if (!text.trim()) {
+        throw new https_1.HttpsError("invalid-argument", "No text to synthesize.");
+    }
+    // Call Google Cloud TTS Neural2
+    const ttsClient = new text_to_speech_1.TextToSpeechClient();
+    const voice = TTS_VOICES[lang];
+    const [ttsResponse] = await ttsClient.synthesizeSpeech({
+        input: { text },
+        voice: { languageCode: voice.languageCode, name: voice.name },
+        audioConfig: { audioEncoding: "MP3", speakingRate: 0.9 },
+    });
+    if (!ttsResponse.audioContent) {
+        throw new https_1.HttpsError("internal", "TTS returned no audio content.");
+    }
+    // Save MP3 to Firebase Storage
+    await audioFile.save(Buffer.from(ttsResponse.audioContent), {
+        contentType: "audio/mpeg",
+        metadata: { cacheControl: "public, max-age=31536000" },
+    });
+    return { storagePath: audioPath };
+});
 // ---------------------------------------------------------------------------
 // Cloud Function
 // ---------------------------------------------------------------------------

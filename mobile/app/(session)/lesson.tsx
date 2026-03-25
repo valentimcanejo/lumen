@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import * as Speech from "expo-speech";
+import { Audio } from "expo-av";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -18,25 +18,9 @@ import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import { toggleSaveContent } from "../../repositories/user.repo";
 import { trackColor } from "../../constants/tracks";
+import { getStorageDownloadUrl } from "../../services/storage.service";
+import { generateAudio } from "../../services/functions.service";
 import type { Lang } from "../../models/lang";
-import type { LessonBlock } from "../../models/pack";
-
-const LANG_LOCALE: Record<Lang, string> = {
-  pt: "pt-BR",
-  en: "en-US",
-  es: "es-ES",
-};
-
-function extractText(blocks: LessonBlock[]): string {
-  return blocks
-    .map((b) => (b.type === "bullets" ? b.items.join(". ") : b.text))
-    .join(" ");
-}
-
-function estimateDurationMs(text: string): number {
-  const words = text.trim().split(/\s+/).length;
-  return Math.round((words / 140) * 60 * 1000);
-}
 
 function formatMs(ms: number) {
   const s = Math.floor(ms / 1000);
@@ -98,21 +82,19 @@ export default function LessonScreen() {
     lang: lang ?? "pt",
   });
 
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const soundRef = useRef<Audio.Sound | null>(null);
+  const [audioReady, setAudioReady] = useState(false);
+  const [audioLoading, setAudioLoading] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [positionMs, setPositionMs] = useState(0);
+  const [durationMs, setDurationMs] = useState(0);
 
-  const ttsText = useMemo(
-    () => (pack ? extractText(pack.lesson.blocks) : ""),
-    [pack],
-  );
-
-  const durationMs = useMemo(() => estimateDurationMs(ttsText), [ttsText]);
   const audioProgress = durationMs > 0 ? Math.min(1, positionMs / durationMs) : 0;
 
   const [saved, setSaved] = useState(false);
   const [savingContent, setSavingContent] = useState(false);
 
+  // Load bookmarked state
   useEffect(() => {
     if (!uid || !contentId) return;
     getUserData({ userId: uid }).then((user) => {
@@ -121,77 +103,91 @@ export default function LessonScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid, contentId]);
 
+  // Set audio mode once on mount
+  useEffect(() => {
+    Audio.setAudioModeAsync({
+      allowsRecordingIOS: false,
+      playsInSilentModeIOS: true,
+      staysActiveInBackground: false,
+      shouldDuckAndroid: true,
+    }).catch(() => {});
+  }, []);
+
+  // Prepare audio when pack is ready
+  useEffect(() => {
+    if (!pack || !uid) return;
+    let cancelled = false;
+
+    async function prepareAudio() {
+      setAudioLoading(true);
+      const storagePath = `packs/${contentId}/v${version}/audio/${lang}.mp3`;
+
+      try {
+        let url: string;
+        try {
+          url = await getStorageDownloadUrl(storagePath);
+        } catch {
+          // Audio not yet generated — call Cloud Function then retry
+          await generateAudio({ contentId, version: Number(version), lang });
+          url = await getStorageDownloadUrl(storagePath);
+        }
+
+        if (cancelled) return;
+
+        const { sound } = await Audio.Sound.createAsync({ uri: url }, { shouldPlay: false });
+
+        if (cancelled) {
+          sound.unloadAsync();
+          return;
+        }
+
+        soundRef.current = sound;
+
+        sound.setOnPlaybackStatusUpdate((status) => {
+          if (!status.isLoaded) return;
+          setPositionMs(status.positionMillis);
+          if (status.durationMillis) setDurationMs(status.durationMillis);
+          if (status.didJustFinish) {
+            setPlaying(false);
+            setPositionMs(0);
+          }
+        });
+
+        const status = await sound.getStatusAsync();
+        if (status.isLoaded && status.durationMillis) {
+          setDurationMs(status.durationMillis);
+        }
+
+        setAudioReady(true);
+      } catch (e) {
+        console.warn("[lesson] Audio preparation failed:", e);
+      } finally {
+        if (!cancelled) setAudioLoading(false);
+      }
+    }
+
+    prepareAudio();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [pack, uid]);
+
+  // Cleanup sound on unmount
   useEffect(() => {
     return () => {
-      Speech.stop();
-      if (intervalRef.current) clearInterval(intervalRef.current);
+      soundRef.current?.unloadAsync();
     };
   }, []);
 
-  function stopSpeech() {
-    Speech.stop();
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-    setPlaying(false);
-  }
-
   async function handlePlayPause() {
+    if (!soundRef.current || !audioReady) return;
     if (playing) {
-      stopSpeech();
+      await soundRef.current.pauseAsync();
+      setPlaying(false);
     } else {
-      setPositionMs(0);
+      await soundRef.current.playAsync();
       setPlaying(true);
-
-      const locale = LANG_LOCALE[lang ?? "pt"];
-
-      // Pick the best available voice for the locale (Enhanced/Premium first)
-      let voiceId: string | undefined;
-      try {
-        const voices = await Speech.getAvailableVoicesAsync();
-        const forLocale = voices.filter((v) => v.language === locale || v.language.startsWith(locale.split("-")[0]));
-        const best =
-          forLocale.find((v) => v.quality === "Enhanced") ??
-          forLocale.find((v) => v.quality === "Default") ??
-          forLocale[0];
-        voiceId = best?.identifier;
-      } catch {
-        // ignore — fall back to system default
-      }
-
-      const tickMs = 250;
-      const id = setInterval(() => {
-        Speech.isSpeakingAsync().then((speaking) => {
-          if (speaking) {
-            setPositionMs((prev) => Math.min(prev + tickMs, durationMs));
-          }
-        });
-      }, tickMs);
-      intervalRef.current = id;
-
-      Speech.speak(ttsText, {
-        language: locale,
-        voice: voiceId,
-        rate: 0.88,
-        pitch: 1.0,
-        onDone: () => {
-          clearInterval(id);
-          intervalRef.current = null;
-          setPositionMs(durationMs);
-          setPlaying(false);
-        },
-        onStopped: () => {
-          clearInterval(id);
-          intervalRef.current = null;
-          setPlaying(false);
-        },
-        onError: () => {
-          clearInterval(id);
-          intervalRef.current = null;
-          setPlaying(false);
-        },
-      });
     }
   }
 
@@ -218,6 +214,9 @@ export default function LessonScreen() {
   if (error || !pack) {
     return <SessionError message={error ?? undefined} />;
   }
+
+  const playIconName = playing ? "pause" : "play";
+  const showLoadingIcon = audioLoading;
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
@@ -255,20 +254,29 @@ export default function LessonScreen() {
               <TouchableOpacity
                 onPress={handlePlayPause}
                 activeOpacity={0.65}
-                style={[as.playBtn, { borderColor: `${color}55` }]}
+                disabled={!audioReady}
+                style={[as.playBtn, { borderColor: `${color}55`, opacity: audioReady ? 1 : 0.4 }]}
               >
-                <Ionicons
-                  name={playing ? "pause" : "play"}
-                  size={18}
-                  color={color}
-                  style={{ marginLeft: playing ? 0 : 2 }}
-                />
+                {showLoadingIcon ? (
+                  <Ionicons name="hourglass-outline" size={18} color={color} />
+                ) : (
+                  <Ionicons
+                    name={playIconName}
+                    size={18}
+                    color={color}
+                    style={{ marginLeft: playing ? 0 : 2 }}
+                  />
+                )}
               </TouchableOpacity>
 
               <Waveform progress={audioProgress} />
 
               <Text className="text-[#7B8193] text-[11px] w-[68px] text-right">
-                {`${formatMs(positionMs)} / ${formatMs(durationMs)}`}
+                {audioReady
+                  ? `${formatMs(positionMs)} / ${formatMs(durationMs)}`
+                  : audioLoading
+                    ? t("common.loading")
+                    : "--:-- / --:--"}
               </Text>
             </HStack>
 

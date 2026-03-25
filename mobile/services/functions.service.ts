@@ -14,3 +14,14 @@ export async function generateAiPack(input: GeneratePackInput): Promise<Pack> {
   const result = await fn(input);
   return result.data;
 }
+
+type GenerateAudioInput = {
+  contentId: string;
+  version: number;
+  lang: Lang;
+};
+
+export async function generateAudio(input: GenerateAudioInput): Promise<void> {
+  const fn = httpsCallable<GenerateAudioInput, { storagePath: string }>(functions, "generateAudio");
+  await fn(input);
+}
