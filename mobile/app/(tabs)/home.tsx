@@ -32,6 +32,7 @@ import {
   getLessonMeta,
   pickNextLesson,
   getNextLessonPerTrack,
+  getLessonCountForTrack,
 } from "../../repositories/lessons.repo";
 import {
   getWeeklyData,
@@ -650,9 +651,21 @@ export default function Home() {
                       <View style={[lc.trackDot, { backgroundColor: color }]} />
                       <VStack style={{ flex: 1 }}>
                         <Text style={lc.rowTitle} numberOfLines={1}>{meta!.title[lang] ?? meta!.title.en}</Text>
-                        <Text style={lc.rowDuration}>{meta!.estimatedMinutes} min</Text>
+                        {(() => {
+                          const total = getLessonCountForTrack(trackId);
+                          const done = completedIds.filter((id) => id.startsWith(trackId)).length;
+                          const pct = total > 0 ? done / total : 0;
+                          return (
+                            <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginTop: 3 }}>
+                              <View style={{ flex: 1, height: 2, backgroundColor: "#1A2233", borderRadius: 1, overflow: "hidden" }}>
+                                <View style={{ height: "100%", width: `${pct * 100}%`, backgroundColor: color, borderRadius: 1 }} />
+                              </View>
+                              <Text style={{ color: done > 0 ? color : "#4A5568", fontSize: 10, fontWeight: "600" }}>{done}/{total}</Text>
+                            </View>
+                          );
+                        })()}
                       </VStack>
-                      <Ionicons name="chevron-forward" size={16} color="#4A5568" />
+                      <Ionicons name="chevron-forward" size={16} color="#4A5568" style={{ marginLeft: 8 }} />
                     </TouchableOpacity>
                   </React.Fragment>
                 );
