@@ -6,7 +6,11 @@ import {
   Pressable,
   TouchableOpacity,
   Image,
+  Modal,
 } from "react-native";
+import ViewShot from "react-native-view-shot";
+import * as Sharing from "expo-sharing";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -49,6 +53,8 @@ import {
   scheduleDailyMissionNotification,
 } from "../../services/notifications.service";
 import { getCompletedContentIds } from "../../repositories/user.repo";
+import { getCurrentWeekId } from "../../repositories/leaderboard.repo";
+import { WeeklyShareCard } from "../../components/WeeklyShareCard";
 import { getTodayMissions, getWeeklyMissions } from "../../repositories/missions.repo";
 import type { DailyMission, WeeklyMission } from "../../models/user";
 import { todayYmd } from "../../repositories/session.repo";
@@ -517,6 +523,10 @@ export default function Home() {
   const [comebackShield, setComebackShield] = useState(false);
   const comebackCheckedRef = useRef(false);
   const notifScheduledRef = useRef(false);
+  const [showShareModal, setShowShareModal] = useState(false);
+  const shareCheckedRef = useRef(false);
+  const viewShotRef = useRef<ViewShot>(null);
+  const [sharing, setSharing] = useState(false);
 
   // Flame pulse animation for streak pill
   const flameScale = useSharedValue(1);
@@ -557,7 +567,19 @@ export default function Home() {
           }
         });
       }
-      getWeeklyData(currentUserId).then(setWeeklyData).catch(() => {});
+      getWeeklyData(currentUserId).then((data) => {
+        setWeeklyData(data);
+        if (!shareCheckedRef.current && new Date().getDay() === 0) {
+          shareCheckedRef.current = true;
+          const daysStudied = data.filter((d) => d.minutes > 0).length;
+          if (daysStudied >= 3) {
+            const weekId = getCurrentWeekId();
+            AsyncStorage.getItem(`weeklyShareShown_${weekId}`).then((shown) => {
+              if (!shown) setShowShareModal(true);
+            }).catch(() => {});
+          }
+        }
+      }).catch(() => {});
       getTodaySession(currentUserId)
         .then((s) => setTodayCompletedId(s?.contentId ?? null))
         .catch(() => {});
@@ -608,6 +630,31 @@ export default function Home() {
   const todayLesson = todayLessonId ? getLessonMeta(todayLessonId) : null;
   const nextPerTrack = getNextLessonPerTrack(selectedTrackIds, completedIds);
 
+  async function handleShare() {
+    if (!viewShotRef.current) return;
+    setSharing(true);
+    try {
+      const uri = await (viewShotRef.current as any).capture();
+      const available = await Sharing.isAvailableAsync();
+      if (available) {
+        await Sharing.shareAsync(uri, { mimeType: "image/png", dialogTitle: "Compartilhar resultado semanal" });
+        const weekId = getCurrentWeekId();
+        await AsyncStorage.setItem(`weeklyShareShown_${weekId}`, "1");
+        setShowShareModal(false);
+      }
+    } catch {
+      // user cancelled or error — silent
+    } finally {
+      setSharing(false);
+    }
+  }
+
+  function dismissShareModal() {
+    const weekId = getCurrentWeekId();
+    AsyncStorage.setItem(`weeklyShareShown_${weekId}`, "1").catch(() => {});
+    setShowShareModal(false);
+  }
+
   function startSession(contentId: string) {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     const meta = getLessonMeta(contentId);
@@ -625,6 +672,35 @@ export default function Home() {
   }
 
   return (
+    <>
+    {/* Weekly share modal */}
+    <Modal visible={showShareModal} transparent animationType="fade" onRequestClose={dismissShareModal}>
+      <View style={sh.overlay}>
+        <View style={sh.sheet}>
+          <Text style={sh.sheetTitle}>Sua semana em resumo 🎉</Text>
+          <Text style={sh.sheetSub}>Compartilhe seu resultado com quem você conhece.</Text>
+
+          <ViewShot ref={viewShotRef} options={{ format: "png", quality: 1 }}>
+            <WeeklyShareCard data={weeklyData} streak={streak} lang={lang} />
+          </ViewShot>
+
+          <TouchableOpacity
+            style={[sh.shareBtn, sharing && { opacity: 0.6 }]}
+            onPress={handleShare}
+            disabled={sharing}
+            activeOpacity={0.8}
+          >
+            <Ionicons name="share-social-outline" size={18} color="#0B0F14" />
+            <Text style={sh.shareBtnText}>{sharing ? "Preparando…" : "Compartilhar"}</Text>
+          </TouchableOpacity>
+
+          <Pressable onPress={dismissShareModal}>
+            <Text style={sh.dismiss}>Agora não</Text>
+          </Pressable>
+        </View>
+      </View>
+    </Modal>
+
     <ScrollView
       className="flex-1 bg-[#0B0F14]"
       contentContainerStyle={{ paddingBottom: 40 }}
@@ -911,6 +987,7 @@ export default function Home() {
         </TouchableOpacity>
       </Box>
     </ScrollView>
+    </>
   );
 }
 
@@ -1052,5 +1129,57 @@ const lc = StyleSheet.create({
   rowDuration: {
     color: "#7B8193",
     fontSize: 12,
+  },
+});
+
+const sh = StyleSheet.create({
+  overlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.85)",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 24,
+  },
+  sheet: {
+    backgroundColor: "#111827",
+    borderRadius: 28,
+    padding: 24,
+    alignItems: "center",
+    width: "100%",
+    borderWidth: 1,
+    borderColor: "#1A2233",
+    gap: 16,
+  },
+  sheetTitle: {
+    color: "#E6EAF2",
+    fontSize: 20,
+    fontWeight: "700",
+    textAlign: "center",
+  },
+  sheetSub: {
+    color: "#7B8193",
+    fontSize: 13,
+    textAlign: "center",
+    lineHeight: 20,
+  },
+  shareBtn: {
+    backgroundColor: "#F5C77A",
+    borderRadius: 18,
+    height: 52,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    width: "100%",
+  },
+  shareBtnText: {
+    color: "#0B0F14",
+    fontSize: 16,
+    fontWeight: "700",
+  },
+  dismiss: {
+    color: "#4A5568",
+    fontSize: 14,
+    paddingVertical: 4,
   },
 });
