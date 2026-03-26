@@ -340,6 +340,7 @@ export type FinishSessionResult = {
   newLevel: number;
   prevLevel: number;
   shieldEarned: boolean;
+  newStreak: number;
 };
 
 /**
@@ -468,5 +469,20 @@ export async function finishSession(
     updatedAt: Date.now(),
   });
 
-  return { gained, base, quizBonus, missionBonus, newAchievementIds, leveledUp: newLevel > prevLevel, newLevel, prevLevel, shieldEarned };
+  return { gained, base, quizBonus, missionBonus, newAchievementIds, leveledUp: newLevel > prevLevel, newLevel, prevLevel, shieldEarned, newStreak: streakCurrent };
+}
+
+// ---------------------------------------------------------------------------
+// Comeback mechanic — grants +1 streak shield (max 3) when returning after 3+ days
+// ---------------------------------------------------------------------------
+
+export async function grantComebackShield(uid: string): Promise<void> {
+  const user = await getDocData<UserProfile>(`users/${uid}`);
+  if (!user) return;
+  const current = user.streak?.shields ?? 0;
+  if (current >= 3) return;
+  await updateDoc(doc(db, "users", uid), {
+    "streak.shields": Math.min(current + 1, 3),
+    updatedAt: Date.now(),
+  });
 }

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   ScrollView,
   View,
@@ -37,8 +37,14 @@ import {
   getTodaySession,
   getDueCardCount,
   getRecentSessions,
+  grantComebackShield,
   type DayData,
 } from "../../repositories/progress.repo";
+import { invalidateUserCache } from "../../hooks/useUser";
+import {
+  requestNotificationPermission,
+  scheduleDailyMissionNotification,
+} from "../../services/notifications.service";
 import { getCompletedContentIds } from "../../repositories/user.repo";
 import { getTodayMissions } from "../../repositories/missions.repo";
 import type { DailyMission } from "../../models/user";
@@ -338,6 +344,9 @@ export default function Home() {
   const [retryRecommendation, setRetryRecommendation] = useState<{
     contentId: string; quizScore: number;
   } | null>(null);
+  const [comebackShield, setComebackShield] = useState(false);
+  const comebackCheckedRef = useRef(false);
+  const notifScheduledRef = useRef(false);
 
   // Flame pulse animation for streak pill
   const flameScale = useSharedValue(1);
@@ -348,8 +357,36 @@ export default function Home() {
       if (!currentUserId) return;
       setLoadingUser(true);
       getUserData({ userId: currentUserId })
-        .then((u) => setUser(u ?? null))
+        .then((u) => {
+          setUser(u ?? null);
+          // Comeback mechanic — 3+ days absent → grant shield once per app session
+          if (!comebackCheckedRef.current && u?.streak?.lastStudyDate) {
+            const today = new Date().toISOString().slice(0, 10);
+            const last = new Date(u.streak.lastStudyDate).getTime();
+            const daysSince = Math.floor((Date.now() - last) / 86_400_000);
+            if (daysSince >= 3 && today !== u.streak.lastStudyDate) {
+              comebackCheckedRef.current = true;
+              setComebackShield(true);
+              grantComebackShield(currentUserId)
+                .then(() => invalidateUserCache(currentUserId))
+                .catch(() => {});
+            }
+          }
+        })
         .finally(() => setLoadingUser(false));
+
+      // Schedule daily mission notification (idempotent — replaces itself daily)
+      if (!notifScheduledRef.current) {
+        notifScheduledRef.current = true;
+        requestNotificationPermission().then((granted) => {
+          if (granted) {
+            scheduleDailyMissionNotification(
+              "📋 Suas missões de hoje estão prontas!",
+              "Complete suas missões diárias e ganhe XP bônus.",
+            ).catch(() => {});
+          }
+        });
+      }
       getWeeklyData(currentUserId).then(setWeeklyData).catch(() => {});
       getTodaySession(currentUserId)
         .then((s) => setTodayCompletedId(s?.contentId ?? null))
@@ -446,6 +483,26 @@ export default function Home() {
           <View style={{ height: "100%", width: `${Math.min(xpPct * 100, 100)}%`, backgroundColor: tier.color, borderRadius: 99 }} />
         </View>
       </Box>
+
+      {/* ── Comeback banner ────────────────────────────────────── */}
+      {comebackShield && (
+        <Box className="px-6 mt-4">
+          <View style={cb.card}>
+            <View style={cb.iconWrap}>
+              <Text style={{ fontSize: 22 }}>🛡️</Text>
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={cb.title}>Bem-vindo de volta!</Text>
+              <Text style={cb.body}>
+                Sentimos sua falta. Ganhamos um shield para proteger sua sequência.
+              </Text>
+            </View>
+            <TouchableOpacity onPress={() => setComebackShield(false)} style={cb.close}>
+              <Ionicons name="close" size={16} color="#7B8193" />
+            </TouchableOpacity>
+          </View>
+        </Box>
+      )}
 
       {/* ── Lições ─────────────────────────────────────────────── */}
       {loadingUser && (
@@ -618,6 +675,36 @@ export default function Home() {
           />
         </Box>
       )}
+
+      {/* ── Leaderboard ────────────────────────────────────────── */}
+      <Box className="px-6 mt-4 mb-6">
+        <TouchableOpacity
+          onPress={() => router.push("/(tabs)/leaderboard")}
+          style={{
+            backgroundColor: "#121826",
+            borderWidth: 1,
+            borderColor: "#7B8FE033",
+            borderRadius: 18,
+            padding: 16,
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 12,
+          }}
+        >
+          <View style={{ width: 38, height: 38, borderRadius: 19, backgroundColor: "#7B8FE022", alignItems: "center", justifyContent: "center" }}>
+            <Text style={{ fontSize: 18 }}>🏆</Text>
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: "#E6EAF2", fontSize: 14, fontWeight: "700" }}>
+              {t("leaderboard.title")}
+            </Text>
+            <Text style={{ color: "#7B8193", fontSize: 12, marginTop: 1 }}>
+              {t("leaderboard.home_sub")}
+            </Text>
+          </View>
+          <Ionicons name="chevron-forward" size={16} color="#4A5568" />
+        </TouchableOpacity>
+      </Box>
     </ScrollView>
   );
 }
@@ -625,6 +712,39 @@ export default function Home() {
 // ---------------------------------------------------------------------------
 // Header streak pill styles
 // ---------------------------------------------------------------------------
+
+const cb = StyleSheet.create({
+  card: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#121826",
+    borderWidth: 1,
+    borderColor: "#7B8FE044",
+    borderRadius: 18,
+    padding: 14,
+    gap: 12,
+  },
+  iconWrap: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#7B8FE018",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  title: {
+    color: "#E6EAF2",
+    fontSize: 14,
+    fontWeight: "700",
+    marginBottom: 2,
+  },
+  body: {
+    color: "#7B8193",
+    fontSize: 12,
+    lineHeight: 17,
+  },
+  close: { padding: 4 },
+});
 
 const hd = StyleSheet.create({
   streakPill: {

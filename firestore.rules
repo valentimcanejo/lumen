@@ -47,6 +47,12 @@ service cloud.firestore {
       }
     }
 
+    // ─── Leaderboard — authenticated read; write only to own entry ───────────
+    match /leaderboard/{weekId}/{tierId}/entries/{uid} {
+      allow read: if request.auth != null;
+      allow write: if isOwner(uid);
+    }
+
     // ─── Helper functions ─────────────────────────────────────────────────────
     function isOwner(uid) {
       return request.auth != null && request.auth.uid == uid;

@@ -273,5 +273,12 @@
     "review_cards": "Repasa 3 tarjetas",
     "xp_reward": "+{{xp}} XP",
     "completed": "Completada"
+  },
+  "leaderboard": {
+    "title": "Ranking Semanal",
+    "home_sub": "Ve tu posición entre todos los usuarios",
+    "your_position": "TU POSICIÓN",
+    "outside_top": "Fuera del top 30",
+    "empty": "¡Completa una sesión para aparecer en el ranking!"
   }
 }

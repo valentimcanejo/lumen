@@ -72,6 +72,10 @@ export default function TabsLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="leaderboard"
+        options={{ href: null, title: "Ranking" }}
+      />
     </Tabs>
   );
 }

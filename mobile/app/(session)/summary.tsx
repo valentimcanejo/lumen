@@ -26,7 +26,12 @@ import {
   getDueCardCount,
   finishSession,
 } from "../../repositories/progress.repo";
-import { scheduleReviewReminder } from "../../services/notifications.service";
+import {
+  scheduleReviewReminder,
+  scheduleStreakRiskNotification,
+} from "../../services/notifications.service";
+import { upsertLeaderboardEntry } from "../../repositories/leaderboard.repo";
+import { auth } from "../../firebase/firebaseConfig";
 import { toggleSaveContent, markContentCompleted } from "../../repositories/user.repo";
 import { invalidateUserCache } from "../../hooks/useUser";
 import { incrementContentCompletion } from "../../repositories/content_stats.repo";
@@ -475,7 +480,13 @@ export default function SummaryScreen() {
           incrementContentCompletion(contentId, quizScore, estimatedMinutes).catch(() => {}),
         ]);
 
-        const { gained, base, quizBonus, missionBonus, newAchievementIds, leveledUp, newLevel, shieldEarned } = sessionResult;
+        const { gained, base, quizBonus, missionBonus, newAchievementIds, leveledUp, newLevel, shieldEarned, newStreak } = sessionResult;
+
+        // Leaderboard — fire-and-forget, does not block UI
+        const displayName = auth.currentUser?.displayName
+          ?? `Jogador #${uid.slice(-4).toUpperCase()}`;
+        const newTier = getLevelTier(newLevel);
+        upsertLeaderboardEntry(uid, displayName, gained + missionBonus, newLevel, newTier.id).catch(() => {});
         setGainedXp(gained + missionBonus);
         setXpBreakdown({ base, quizBonus, missionBonus });
         const defs = newAchievementIds
@@ -486,6 +497,13 @@ export default function SummaryScreen() {
 
         // Invalidate cache so next home load gets fresh user data
         invalidateUserCache(uid);
+
+        // Streak at-risk notification for tomorrow 8 pm
+        scheduleStreakRiskNotification(
+          newStreak,
+          "🔥 Não quebre sua sequência!",
+          `Sua sequência de ${newStreak} dia${newStreak !== 1 ? "s" : ""} termina esta noite. Complete uma lição!`,
+        ).catch(() => {});
 
         // Schedule review notification if there are due cards
         const dueCount = await getDueCardCount(uid);

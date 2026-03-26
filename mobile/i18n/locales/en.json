@@ -273,5 +273,12 @@
     "review_cards": "Review 3 cards",
     "xp_reward": "+{{xp}} XP",
     "completed": "Done"
+  },
+  "leaderboard": {
+    "title": "Weekly Ranking",
+    "home_sub": "See your position among all users",
+    "your_position": "YOUR POSITION",
+    "outside_top": "Outside top 30",
+    "empty": "Complete a session to appear on the leaderboard!"
   }
 }

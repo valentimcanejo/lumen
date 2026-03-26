@@ -273,5 +273,12 @@
     "review_cards": "Revise 3 cards",
     "xp_reward": "+{{xp}} XP",
     "completed": "Concluída"
+  },
+  "leaderboard": {
+    "title": "Ranking da Semana",
+    "home_sub": "Veja sua posição entre todos os usuários",
+    "your_position": "SUA POSIÇÃO",
+    "outside_top": "Fora do top 30",
+    "empty": "Complete uma sessão para aparecer no ranking!"
   }
 }
