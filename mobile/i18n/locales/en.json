@@ -129,7 +129,11 @@
       "notifications_hint": "Get a daily nudge to keep your streak alive.",
       "notifications_open_settings": "Open settings",
       "tracks": "My tracks",
-      "tracks_hint": "Select the tracks that appear on your home (min. 1)"
+      "tracks_hint": "Select the tracks that appear on your home (min. 1)",
+      "heatmap_title": "Activity",
+      "heatmap_less": "Less",
+      "heatmap_more": "More",
+      "heatmap_days": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     }
   },
   "track": {

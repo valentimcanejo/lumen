@@ -107,6 +107,39 @@ export async function getWeeklyData(uid: string): Promise<DayData[]> {
   return dates.map((date) => ({ date, minutes: minutesByDate[date] ?? 0 }));
 }
 
+/**
+ * Returns a map of { [YYYY-MM-DD]: totalMinutes } for the last `weeks` weeks.
+ * Used to render the activity heatmap on the profile screen.
+ */
+export async function getStudyHeatmap(
+  uid: string,
+  weeks = 16,
+): Promise<Record<string, number>> {
+  const today = new Date();
+  // Anchor start to the Monday of the week `weeks` ago
+  const dow = today.getDay(); // 0=Sun
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - (dow === 0 ? 6 : dow - 1) - (weeks - 1) * 7);
+  monday.setHours(0, 0, 0, 0);
+
+  const startDate = ymd(monday);
+  const endDate = ymd(today);
+
+  const q = query(
+    collection(db, "users", uid, "daily_sessions"),
+    where("date", ">=", startDate),
+    where("date", "<=", endDate),
+  );
+  const snap = await getDocs(q);
+
+  const result: Record<string, number> = {};
+  for (const d of snap.docs) {
+    const s = d.data() as CompletedSession;
+    result[s.date] = (result[s.date] ?? 0) + s.minutes;
+  }
+  return result;
+}
+
 type CardGrade = "know" | "almost" | "dont";
 
 // Each graded card is its own document.

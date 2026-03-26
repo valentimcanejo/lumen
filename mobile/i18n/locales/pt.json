@@ -129,7 +129,11 @@
       "notifications_hint": "Receba um aviso todo dia para não perder o ritmo.",
       "notifications_open_settings": "Abrir configurações",
       "tracks": "Minhas trilhas",
-      "tracks_hint": "Selecione as trilhas que aparecem na sua home (mín. 1)"
+      "tracks_hint": "Selecione as trilhas que aparecem na sua home (mín. 1)",
+      "heatmap_title": "Atividade",
+      "heatmap_less": "Menos",
+      "heatmap_more": "Mais",
+      "heatmap_days": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"]
     }
   },
   "track": {

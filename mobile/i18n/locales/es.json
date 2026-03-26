@@ -129,7 +129,11 @@
       "notifications_hint": "Recibe un aviso diario para mantener tu racha.",
       "notifications_open_settings": "Abrir ajustes",
       "tracks": "Mis rutas",
-      "tracks_hint": "Selecciona las rutas que aparecen en tu inicio (mín. 1)"
+      "tracks_hint": "Selecciona las rutas que aparecen en tu inicio (mín. 1)",
+      "heatmap_title": "Actividad",
+      "heatmap_less": "Menos",
+      "heatmap_more": "Más",
+      "heatmap_days": ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"]
     }
   },
   "track": {

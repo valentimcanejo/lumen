@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Platform, ScrollView, ActivityIndicator, Linking, DevSettings, Alert } from "react-native";
+import { Platform, ScrollView, ActivityIndicator, Linking, DevSettings, Alert, useWindowDimensions } from "react-native";
 import * as Notifications from "expo-notifications";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -15,6 +15,7 @@ import { VStack } from "@/components/ui/vstack";
 import { useUser, invalidateUserCache } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
 import { setUserLanguage } from "../../repositories/user.repo";
+import { getStudyHeatmap } from "../../repositories/progress.repo";
 import {
   requestNotificationPermission,
   scheduleDailyReminder,
@@ -33,6 +34,179 @@ import { ACHIEVEMENTS } from "../../repositories/achievements.repo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
+
+// ---------------------------------------------------------------------------
+// Heatmap helpers
+// ---------------------------------------------------------------------------
+
+const HEATMAP_WEEKS = 16;
+const CELL_GAP = 3;
+
+// Returns the Monday of the week that was `weeksAgo` weeks before today
+function startMonday(weeksAgo: number): Date {
+  const today = new Date();
+  const dow = today.getDay(); // 0=Sun
+  const d = new Date(today);
+  d.setDate(today.getDate() - (dow === 0 ? 6 : dow - 1) - (weeksAgo - 1) * 7);
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+function ymd(d: Date): string {
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+function minutesToColor(minutes: number): string {
+  if (minutes <= 0) return "#1A2233";
+  if (minutes < 10) return "#1B4332";
+  if (minutes < 20) return "#2D6A4F";
+  if (minutes < 30) return "#40916C";
+  return "#52B788";
+}
+
+// ---------------------------------------------------------------------------
+// StudyHeatmap component
+// ---------------------------------------------------------------------------
+
+function StudyHeatmap({ heatmap }: { heatmap: Record<string, number> }) {
+  const { t } = useTranslation();
+  const { width: screenWidth } = useWindowDimensions();
+
+  // Available width = screenWidth - px-5*2 (40px) - card padding (32px)
+  const availableWidth = screenWidth - 40 - 32;
+  // day labels column ~20px
+  const gridWidth = availableWidth - 24;
+  const cellSize = Math.floor((gridWidth - CELL_GAP * (HEATMAP_WEEKS - 1)) / HEATMAP_WEEKS);
+
+  const start = startMonday(HEATMAP_WEEKS);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Build columns: each column = one week (Mon=0 … Sun=6)
+  // columns[col][row] = date string or null (future)
+  const columns: (string | null)[][] = [];
+  const monthLabels: { col: number; label: string }[] = [];
+  const MONTHS_SHORT = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+
+  let lastMonth = -1;
+  for (let col = 0; col < HEATMAP_WEEKS; col++) {
+    const week: (string | null)[] = [];
+    for (let row = 0; row < 7; row++) {
+      const d = new Date(start);
+      d.setDate(start.getDate() + col * 7 + row);
+      if (d > today) {
+        week.push(null);
+      } else {
+        const dateStr = ymd(d);
+        week.push(dateStr);
+        // Track month label at first Monday of that month
+        if (row === 0 && d.getMonth() !== lastMonth) {
+          monthLabels.push({ col, label: MONTHS_SHORT[d.getMonth()] });
+          lastMonth = d.getMonth();
+        }
+      }
+    }
+    columns.push(week);
+  }
+
+  const dayLabels = (t("tabs.profile.heatmap_days", { returnObjects: true }) as string[]);
+
+  return (
+    <Box className="mb-6">
+      <Text className="text-[#E6EAF2] text-[16px] font-semibold mb-3">
+        {t("tabs.profile.heatmap_title")}
+      </Text>
+      <Box className="bg-[#111827] rounded-2xl p-4">
+        {/* Month labels */}
+        <Box style={{ flexDirection: "row", marginLeft: 24, marginBottom: 4 }}>
+          {monthLabels.map(({ col, label }) => (
+            <Box
+              key={col}
+              style={{
+                position: "absolute",
+                left: col * (cellSize + CELL_GAP),
+              }}
+            >
+              <Text style={{ color: "#7B8193", fontSize: 10 }}>{label}</Text>
+            </Box>
+          ))}
+          {/* Spacer to give month row a height */}
+          <Box style={{ height: 14 }} />
+        </Box>
+
+        {/* Day labels + grid */}
+        <Box style={{ flexDirection: "row" }}>
+          {/* Day-of-week labels: Mon, Wed, Fri */}
+          <Box style={{ width: 20, marginRight: 4 }}>
+            {[0, 1, 2, 3, 4, 5, 6].map((row) => (
+              <Box
+                key={row}
+                style={{ height: cellSize, marginBottom: row < 6 ? CELL_GAP : 0, justifyContent: "center" }}
+              >
+                {(row === 1 || row === 3 || row === 5) && (
+                  <Text style={{ color: "#7B8193", fontSize: 9 }}>
+                    {dayLabels[row] ?? ""}
+                  </Text>
+                )}
+              </Box>
+            ))}
+          </Box>
+
+          {/* Cells */}
+          <Box style={{ flexDirection: "row" }}>
+            {columns.map((week, col) => (
+              <Box
+                key={col}
+                style={{ marginRight: col < HEATMAP_WEEKS - 1 ? CELL_GAP : 0 }}
+              >
+                {week.map((dateStr, row) => {
+                  const minutes = dateStr ? (heatmap[dateStr] ?? 0) : 0;
+                  const bg = dateStr === null ? "transparent" : minutesToColor(minutes);
+                  return (
+                    <Box
+                      key={row}
+                      style={{
+                        width: cellSize,
+                        height: cellSize,
+                        borderRadius: 2,
+                        backgroundColor: bg,
+                        marginBottom: row < 6 ? CELL_GAP : 0,
+                      }}
+                    />
+                  );
+                })}
+              </Box>
+            ))}
+          </Box>
+        </Box>
+
+        {/* Legend */}
+        <Box style={{ flexDirection: "row", alignItems: "center", justifyContent: "flex-end", marginTop: 8, gap: 4 }}>
+          <Text style={{ color: "#7B8193", fontSize: 10, marginRight: 4 }}>
+            {t("tabs.profile.heatmap_less")}
+          </Text>
+          {[0, 8, 15, 22, 30].map((m) => (
+            <Box
+              key={m}
+              style={{
+                width: 10,
+                height: 10,
+                borderRadius: 2,
+                backgroundColor: minutesToColor(m),
+              }}
+            />
+          ))}
+          <Text style={{ color: "#7B8193", fontSize: 10, marginLeft: 4 }}>
+            {t("tabs.profile.heatmap_more")}
+          </Text>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
 
 // ---------------------------------------------------------------------------
 // Account card
@@ -219,6 +393,7 @@ export default function ProfileScreen() {
   const [profileData, setProfileData] = useState<UserProfile | null>(null);
   const [notifGranted, setNotifGranted] = useState<boolean | null>(null);
   const [enablingNotif, setEnablingNotif] = useState(false);
+  const [heatmap, setHeatmap] = useState<Record<string, number>>({});
 
   useEffect(() => {
     if (!uid) return;
@@ -227,6 +402,7 @@ export default function ProfileScreen() {
       setProfileData(u);
       setLanguage(u.lang);
     });
+    getStudyHeatmap(uid).then(setHeatmap);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
 
@@ -413,6 +589,9 @@ export default function ProfileScreen() {
                 </HStack>
               </Box>
             )}
+
+            {/* Activity heatmap */}
+            <StudyHeatmap heatmap={heatmap} />
 
             {/* Language */}
             <Box className="mb-6">
