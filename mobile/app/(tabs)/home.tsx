@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Pressable,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import Animated, {
   useSharedValue,
@@ -534,6 +535,10 @@ export default function Home() {
       <Box className="px-6" style={{ paddingTop: insets.top + 8 }}>
         <HStack className="items-center justify-between">
           <HStack className="items-center" style={{ gap: 10 }}>
+            <Image
+              source={require("../../assets/images/icon.png")}
+              style={{ width: 28, height: 28, borderRadius: 6 }}
+            />
             <Text className="text-[#E6EAF2] text-[22px] font-bold">Lumen</Text>
             {streak > 0 && (
               <View style={hd.streakPill}>
