@@ -394,13 +394,53 @@ export async function finishSession(
 ): Promise<FinishSessionResult> {
   const { date, contentId, quizScore, quizDone, completedTrackCount = 0, totalTrackCount = Infinity } = context;
 
-  // ── Idempotency guard ─────────────────────────────────────────────────────
+  // ── Idempotency / replay guard ────────────────────────────────────────────
   // IMPORTANT: summary.tsx must await finishSession BEFORE calling markDayCompleted
   // so this read happens before markDayCompleted writes to the same path.
   const existingSession = await getDocData<CompletedSession>(userDailyPath(uid, date, contentId));
   if (existingSession) {
-    const level = (await getDocData<UserProfile>(`users/${uid}`))?.level ?? 1;
-    return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, weeklyMissionBonus: 0, starterBonus: 0, starterDaysCompleted: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: false, newLevel: level, prevLevel: level, shieldEarned: false, newStreak: 0 };
+    // Session already counted. Only grant incremental quiz bonus if score improved.
+    const prevScore = existingSession.quizScore ?? 0;
+    const prevQuizBonus = Math.round(prevScore * 10);
+    const newQuizBonus = quizDone ? Math.round(quizScore * 10) : 0;
+    const deltaQuizBonus = Math.max(0, newQuizBonus - prevQuizBonus);
+
+    if (deltaQuizBonus === 0) {
+      const level = (await getDocData<UserProfile>(`users/${uid}`))?.level ?? 1;
+      return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, weeklyMissionBonus: 0, starterBonus: 0, starterDaysCompleted: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: false, newLevel: level, prevLevel: level, shieldEarned: false, newStreak: 0 };
+    }
+
+    // Score improved — grant delta and check still-incomplete quiz missions
+    const user = await getDocData<UserProfile>(`users/${uid}`);
+    if (!user) return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, weeklyMissionBonus: 0, starterBonus: 0, starterDaysCompleted: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: false, newLevel: 1, prevLevel: 1, shieldEarned: false, newStreak: 0 };
+
+    const prevLevel = user.level ?? 1;
+    const cm = user.currentMissions;
+    const missionList = cm?.date === date ? cm.list.map((m) => ({ ...m })) : getMissionsForDate(date);
+
+    let missionBonus = 0;
+    for (const mission of missionList) {
+      if (mission.completed) continue;
+      let done = false;
+      switch (mission.id) {
+        case "quiz_score_80":  done = quizDone && quizScore >= 0.8; break;
+        case "quiz_score_100": done = quizDone && quizScore >= 1.0; break;
+      }
+      if (done) { mission.completed = true; missionBonus += mission.xpReward; }
+    }
+
+    const gained = deltaQuizBonus;
+    const newXp = (user.xp ?? 0) + gained + missionBonus;
+    const newLevel = xpToLevel(newXp);
+
+    await updateDocData<UserProfile>(`users/${uid}`, {
+      xp: newXp,
+      level: newLevel,
+      currentMissions: { date, list: missionList },
+      updatedAt: Date.now(),
+    });
+
+    return { gained, base: 0, quizBonus: deltaQuizBonus, missionBonus, weeklyMissionBonus: 0, starterBonus: 0, starterDaysCompleted: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: newLevel > prevLevel, newLevel, prevLevel, shieldEarned: false, newStreak: user.streak?.current ?? 0 };
   }
 
   const user = await getDocData<UserProfile>(`users/${uid}`);
