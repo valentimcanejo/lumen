@@ -177,6 +177,28 @@ export default function QuizScreen() {
   const [answered, setAnswered] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
 
+  const scrollRef = useRef<ScrollView>(null);
+  const scrollContentH = useRef(0);
+  const scrollViewH = useRef(0);
+  const currentScrollY = useRef(0);
+  const arrowOpacity = useSharedValue(0);
+  const arrowAnimStyle = useAnimatedStyle(() => ({ opacity: arrowOpacity.value }));
+
+  function updateScrollHint(y: number) {
+    currentScrollY.current = y;
+    const maxScroll = scrollContentH.current - scrollViewH.current;
+    const canScroll = maxScroll > 10;
+    const nearBottom = y >= maxScroll - 40;
+    arrowOpacity.value = withTiming(canScroll && !nearBottom ? 1 : 0, { duration: 200 });
+  }
+
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ y: 0, animated: false });
+    currentScrollY.current = 0;
+    arrowOpacity.value = 0;
+    scrollContentH.current = 0;
+  }, [qIndex]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const current: PackQuizQuestion | undefined = quiz[qIndex];
 
   const progressValue = useMemo(() => {
@@ -276,10 +298,16 @@ export default function QuizScreen() {
       ) : (
         <>
           {/* Scrollable: question + options + explanation */}
+          <Box style={{ flex: 1 }}>
           <ScrollView
+            ref={scrollRef}
             className="flex-1 px-5"
             contentContainerStyle={{ paddingTop: 20, paddingBottom: 16 }}
             showsVerticalScrollIndicator={false}
+            scrollEventThrottle={16}
+            onScroll={(e) => updateScrollHint(e.nativeEvent.contentOffset.y)}
+            onContentSizeChange={(_, h) => { scrollContentH.current = h; updateScrollHint(currentScrollY.current); }}
+            onLayout={(e) => { scrollViewH.current = e.nativeEvent.layout.height; updateScrollHint(currentScrollY.current); }}
           >
             <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
               <Text className="text-[#AAB0C0] text-[12px]">
@@ -330,6 +358,21 @@ export default function QuizScreen() {
               </Box>
             ) : null}
           </ScrollView>
+
+          <Animated.View
+            pointerEvents="none"
+            style={[{
+              position: "absolute",
+              bottom: 10,
+              alignSelf: "center",
+              backgroundColor: "#1A2233",
+              borderRadius: 20,
+              padding: 7,
+            }, arrowAnimStyle]}
+          >
+            <Ionicons name="chevron-down" size={16} color="#AAB0C0" />
+          </Animated.View>
+          </Box>
 
           {/* Fixed bottom buttons — always visible */}
           <Box
