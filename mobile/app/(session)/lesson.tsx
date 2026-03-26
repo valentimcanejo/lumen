@@ -128,7 +128,7 @@ export default function LessonScreen() {
     Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
       playsInSilentModeIOS: true,
-      staysActiveInBackground: false,
+      staysActiveInBackground: true,
       shouldDuckAndroid: true,
     }).catch(() => {});
   }, []);
@@ -331,6 +331,15 @@ export default function LessonScreen() {
                 {pack.lesson.summary}
               </Text>
             ) : null}
+
+            {audioReady && (
+              <HStack className="items-center justify-center mt-3" space="xs">
+                <Ionicons name="headset-outline" size={13} color="#4A5568" />
+                <Text className="text-[#4A5568] text-[12px]">
+                  {t("session.lesson.audio_hint")}
+                </Text>
+              </HStack>
+            )}
           </Box>
 
           <LessonBlocks blocks={pack.lesson.blocks} />

@@ -169,7 +169,8 @@
       "includes_quiz": "Knowledge quiz"
     },
     "lesson": {
-      "step": "1 / 4"
+      "step": "1 / 4",
+      "audio_hint": "You can lock the screen — audio keeps playing."
     },
     "cards": {
       "step": "2 / 4",
