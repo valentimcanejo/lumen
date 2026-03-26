@@ -17,6 +17,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { setUserLanguage, getCompletedContentIds } from "../../repositories/user.repo";
 import { getStudyHeatmap } from "../../repositories/progress.repo";
 import { getTracks } from "../../repositories/tracks.repo";
+import { getCurrentWeekId } from "../../repositories/leaderboard.repo";
 import { getLessonCountForTrack } from "../../repositories/lessons.repo";
 import { trackColor, trackBg } from "../../constants/tracks";
 import type { Track } from "../../models/track";
@@ -900,6 +901,17 @@ export default function ProfileScreen() {
                           }
                           // Delete user doc
                           await deleteDoc(doc(db, "users", uid));
+                          // Delete leaderboard entries for current week across all tiers
+                          const weekId = getCurrentWeekId();
+                          const allTiers = [
+                            "bronze","prata","ouro","platina",
+                            "safira","esmeralda","ametista","rubi","diamante","lumen",
+                          ];
+                          await Promise.all(
+                            allTiers.map((tier) =>
+                              deleteDoc(doc(db, `leaderboard/${weekId}/${tier}/entries/${uid}`)).catch(() => {})
+                            )
+                          );
                         } catch {
                           // ignore — proceed to clear local state anyway
                         }
