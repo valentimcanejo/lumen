@@ -276,7 +276,12 @@
     "quiz_score_100": "Quiz perfecto",
     "review_cards": "Repasa 3 tarjetas",
     "xp_reward": "+{{xp}} XP",
-    "completed": "Completada"
+    "completed": "Completada",
+    "weekly_title": "Misiones de la semana",
+    "weekly_complete_5_sessions": "Completa 5 lecciones",
+    "weekly_earn_300_xp": "Gana 300 XP",
+    "weekly_perfect_quiz": "Quiz 100% en una sesión",
+    "weekly_study_3_days": "Estudia en 3 días distintos"
   },
   "leaderboard": {
     "title": "Ranking Semanal",

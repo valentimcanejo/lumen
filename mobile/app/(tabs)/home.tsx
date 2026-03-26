@@ -46,8 +46,8 @@ import {
   scheduleDailyMissionNotification,
 } from "../../services/notifications.service";
 import { getCompletedContentIds } from "../../repositories/user.repo";
-import { getTodayMissions } from "../../repositories/missions.repo";
-import type { DailyMission } from "../../models/user";
+import { getTodayMissions, getWeeklyMissions } from "../../repositories/missions.repo";
+import type { DailyMission, WeeklyMission } from "../../models/user";
 import { todayYmd } from "../../repositories/session.repo";
 import {
   type UserProfile,
@@ -140,6 +140,77 @@ const ms = StyleSheet.create({
   xpPillDone: {
     color: "#2A4030",
   },
+});
+
+// ---------------------------------------------------------------------------
+// Weekly missions card
+// ---------------------------------------------------------------------------
+
+function WeeklyMissionsCard({ missions }: { missions: WeeklyMission[] }) {
+  const { t } = useTranslation();
+  return (
+    <View style={wm.card}>
+      <Text style={wm.title}>{t("missions.weekly_title")}</Text>
+      {missions.map((m) => {
+        const pct = m.target > 0 ? Math.min(m.progress / m.target, 1) : 0;
+        return (
+          <View key={m.id} style={wm.row}>
+            <View style={wm.labelRow}>
+              <Text style={[wm.label, m.completed && wm.labelDone]}>
+                {t(`missions.weekly_${m.id}`)}
+              </Text>
+              <Text style={[wm.xpPill, m.completed && wm.xpPillDone]}>
+                +{m.xpReward} XP
+              </Text>
+            </View>
+            <View style={wm.barBg}>
+              <View style={[wm.barFill, { width: `${pct * 100}%`, backgroundColor: m.completed ? "#5ED19A" : "#F5C77A" }]} />
+            </View>
+            <Text style={wm.progress}>
+              {m.completed ? "✓" : `${m.progress}/${m.target}`}
+            </Text>
+          </View>
+        );
+      })}
+    </View>
+  );
+}
+
+const wm = StyleSheet.create({
+  card: {
+    backgroundColor: "#121826",
+    borderWidth: 1,
+    borderColor: "#1A2233",
+    borderRadius: 22,
+    padding: 18,
+    gap: 12,
+  },
+  title: {
+    color: "#AAB0C0",
+    fontSize: 11,
+    fontWeight: "600",
+    letterSpacing: 1,
+    textTransform: "uppercase",
+    marginBottom: 2,
+  },
+  row: { gap: 6 },
+  labelRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  label: { color: "#AAB0C0", fontSize: 13, flex: 1, marginRight: 8 },
+  labelDone: { color: "#4A5568", textDecorationLine: "line-through" },
+  xpPill: { color: "#F5C77A", fontSize: 12, fontWeight: "700" },
+  xpPillDone: { color: "#2A4030" },
+  barBg: {
+    height: 4,
+    backgroundColor: "#1A2233",
+    borderRadius: 2,
+    overflow: "hidden",
+  },
+  barFill: { height: "100%", borderRadius: 2 },
+  progress: { color: "#7B8193", fontSize: 11, textAlign: "right" },
 });
 
 // ---------------------------------------------------------------------------
@@ -341,6 +412,7 @@ export default function Home() {
   const [todayCompletedId, setTodayCompletedId] = useState<string | null>(null);
   const [dueCardCount, setDueCardCount] = useState(0);
   const [missions, setMissions] = useState<DailyMission[]>([]);
+  const [weeklyMissions, setWeeklyMissions] = useState<WeeklyMission[]>([]);
   const [retryRecommendation, setRetryRecommendation] = useState<{
     contentId: string; quizScore: number;
   } | null>(null);
@@ -394,6 +466,7 @@ export default function Home() {
       getDueCardCount(currentUserId).then(setDueCardCount).catch(() => {});
       getCompletedContentIds(currentUserId).then(setCompletedIds).catch(() => {});
       getTodayMissions(currentUserId).then(setMissions).catch(() => {});
+      getWeeklyMissions(currentUserId).then(setWeeklyMissions).catch(() => {});
       getRecentSessions(currentUserId).then((sessions) => {
         const seen = new Set<string>();
         for (const s of sessions) {
@@ -661,6 +734,13 @@ export default function Home() {
       {missions.length > 0 && (
         <Box className="px-6 mt-4">
           <MissionsCard missions={missions} />
+        </Box>
+      )}
+
+      {/* ── Missões semanais ───────────────────────────────────── */}
+      {weeklyMissions.length > 0 && (
+        <Box className="px-6 mt-4">
+          <WeeklyMissionsCard missions={weeklyMissions} />
         </Box>
       )}
 

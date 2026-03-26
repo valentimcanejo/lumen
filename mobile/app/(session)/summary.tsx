@@ -208,56 +208,94 @@ function AchievementToast({
 }
 
 // ---------------------------------------------------------------------------
-// Level-up toast
+// Level-up modal (full-screen celebration)
 // ---------------------------------------------------------------------------
 
-function LevelUpToast({ level, tier }: { level: number; tier: TierInfo }) {
+function LevelUpModal({
+  info,
+  onDismiss,
+}: {
+  info: { level: number; tier: TierInfo };
+  onDismiss: () => void;
+}) {
   const { t } = useTranslation();
-  const opacity = useSharedValue(0);
-  const scale = useSharedValue(0.8);
+  const backdropOpacity = useSharedValue(0);
+  const scale = useSharedValue(0.5);
+  const contentOpacity = useSharedValue(0);
+  const badgePulse = useSharedValue(1);
 
   useEffect(() => {
-    opacity.value = withDelay(900, withSequence(
-      withTiming(1, { duration: 300 }),
-      withDelay(2800, withTiming(0, { duration: 400 })),
+    backdropOpacity.value = withTiming(1, { duration: 300 });
+    contentOpacity.value = withDelay(150, withTiming(1, { duration: 300 }));
+    scale.value = withDelay(150, withSpring(1, { damping: 10, stiffness: 160 }));
+    badgePulse.value = withDelay(600, withRepeat(
+      withSequence(withTiming(1.08, { duration: 600 }), withTiming(1, { duration: 600 })),
+      -1, true,
     ));
-    scale.value = withDelay(900, withSpring(1, { damping: 8, stiffness: 200 }));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const style = useAnimatedStyle(() => ({
-    opacity: opacity.value,
+  const backdropStyle = useAnimatedStyle(() => ({ opacity: backdropOpacity.value }));
+  const cardStyle = useAnimatedStyle(() => ({
+    opacity: contentOpacity.value,
     transform: [{ scale: scale.value }],
+  }));
+  const badgeStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: badgePulse.value }],
   }));
 
   return (
-    <Animated.View
-      style={[style, { position: "absolute", top: 160, left: 20, right: 20, zIndex: 98 }]}
-    >
-      <View style={{
-        backgroundColor: tier.color + "22",
-        borderWidth: 1,
-        borderColor: tier.color + "66",
-        borderRadius: 16,
-        paddingHorizontal: 20,
-        paddingVertical: 14,
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 12,
-      }}>
-        <View style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: tier.color + "33", alignItems: "center", justifyContent: "center" }}>
-          <Text style={{ fontSize: 20 }}>⬆️</Text>
-        </View>
-        <View>
-          <Text style={{ color: tier.color, fontSize: 11, fontWeight: "700", letterSpacing: 0.8, textTransform: "uppercase" }}>
-            {t("session.summary.level_up")}
+    <View style={[StyleSheet.absoluteFill, { zIndex: 300 }]} pointerEvents="auto">
+      <Animated.View
+        style={[backdropStyle, StyleSheet.absoluteFill, { backgroundColor: "rgba(0,0,0,0.88)" }]}
+      />
+      <Animated.View style={[cardStyle, { flex: 1, alignItems: "center", justifyContent: "center", padding: 32 }]}>
+        {/* Tier badge */}
+        <Animated.View style={[badgeStyle, {
+          width: 110, height: 110, borderRadius: 55,
+          backgroundColor: info.tier.color + "22",
+          borderWidth: 3, borderColor: info.tier.color + "88",
+          alignItems: "center", justifyContent: "center",
+          marginBottom: 28,
+        }]}>
+          <Text style={{ fontSize: 48 }}>⬆️</Text>
+        </Animated.View>
+
+        {/* Labels */}
+        <Text style={{ color: info.tier.color, fontSize: 13, fontWeight: "800", letterSpacing: 2, textTransform: "uppercase", marginBottom: 6 }}>
+          {t("session.summary.level_up")}
+        </Text>
+        <Text style={{ color: "#E6EAF2", fontSize: 72, fontWeight: "900", lineHeight: 80, marginBottom: 4 }}>
+          {info.level}
+        </Text>
+        <View style={{
+          backgroundColor: info.tier.color + "22",
+          borderWidth: 1, borderColor: info.tier.color + "66",
+          borderRadius: 20, paddingHorizontal: 16, paddingVertical: 6,
+          marginBottom: 48,
+        }}>
+          <Text style={{ color: info.tier.color, fontSize: 15, fontWeight: "700" }}>
+            {info.tier.name}
           </Text>
-          <Text style={{ color: "#E6EAF2", fontSize: 15, fontWeight: "700", marginTop: 1 }}>
-            {tier.name} · {t("tabs.home.level", { level })}
+        </View>
+
+        {/* Dismiss button */}
+        <View
+          style={{
+            backgroundColor: info.tier.color,
+            paddingHorizontal: 48, paddingVertical: 16,
+            borderRadius: 32,
+          }}
+        >
+          <Text
+            onPress={onDismiss}
+            style={{ color: "#0B0F14", fontSize: 16, fontWeight: "800" }}
+          >
+            {t("common.continue")}
           </Text>
         </View>
-      </View>
-    </Animated.View>
+      </Animated.View>
+    </View>
   );
 }
 
@@ -493,7 +531,10 @@ export default function SummaryScreen() {
           .map((id) => ACHIEVEMENTS.find((a) => a.id === id))
           .filter(Boolean) as AchievementDef[];
         setNewAchievements(defs);
-        if (leveledUp) setLevelUpInfo({ level: newLevel, tier: getLevelTier(newLevel) });
+        if (leveledUp) {
+          setLevelUpInfo({ level: newLevel, tier: getLevelTier(newLevel) });
+          setConfettiActive(true);
+        }
 
         // Invalidate cache so next home load gets fresh user data
         invalidateUserCache(uid);
@@ -540,7 +581,9 @@ export default function SummaryScreen() {
     <Box className="flex-1 bg-[#0B0F14]">
       <ConfettiOverlay active={confettiActive} />
       <AchievementToast achievements={newAchievements} />
-      {levelUpInfo && <LevelUpToast level={levelUpInfo.level} tier={levelUpInfo.tier} />}
+      {levelUpInfo && (
+        <LevelUpModal info={levelUpInfo} onDismiss={() => setLevelUpInfo(null)} />
+      )}
 
       <Box className="px-5" style={{ paddingTop: insets.top + 8 }}>
         <HStack className="items-center" space="md">

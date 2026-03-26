@@ -3,8 +3,11 @@ import type {
   UserProfile,
   MissionId,
   DailyMission,
+  WeeklyMissionId,
+  WeeklyMission,
 } from "../models/user";
 import { xpToLevel } from "../models/user";
+import { getCurrentWeekId } from "./leaderboard.repo";
 
 // ---------------------------------------------------------------------------
 // Mission pool — 4 missions, 3 selected per day deterministically
@@ -129,3 +132,33 @@ export async function checkAndCompleteDailyMissions(
 
   return { xpGranted, completedMissionIds: newlyCompleted };
 }
+
+// ---------------------------------------------------------------------------
+// Weekly missions — reset every Monday, progress tracked cumulatively
+// ---------------------------------------------------------------------------
+
+export const WEEKLY_MISSIONS_DEFAULT: WeeklyMission[] = [
+  { id: "complete_5_sessions", progress: 0, target: 5,   xpReward: 30, completed: false },
+  { id: "earn_300_xp",         progress: 0, target: 300, xpReward: 40, completed: false },
+  { id: "perfect_quiz",        progress: 0, target: 1,   xpReward: 25, completed: false },
+  { id: "study_3_days",        progress: 0, target: 3,   xpReward: 20, completed: false },
+];
+
+/**
+ * Returns the current week's missions for a user (initializes if new week).
+ * Used by the home screen to display mission state.
+ */
+export async function getWeeklyMissions(uid: string): Promise<WeeklyMission[]> {
+  const weekId = getCurrentWeekId();
+  const user = await getDocData<UserProfile>(`users/${uid}`);
+  const cwm = user?.currentWeeklyMissions;
+  if (cwm?.weekId === weekId) return cwm.list;
+
+  const list = WEEKLY_MISSIONS_DEFAULT.map((m) => ({ ...m }));
+  await updateDocData<UserProfile>(`users/${uid}`, {
+    currentWeeklyMissions: { weekId, list, studyDates: [] },
+  });
+  return list;
+}
+
+export type { WeeklyMissionId, WeeklyMission };

@@ -18,7 +18,9 @@ import {
 } from "../services/firestore.service";
 import type { UserProfile, AchievementId } from "../models/user";
 import { xpToLevel } from "../models/user";
-import { getMissionsForDate } from "./missions.repo";
+import { getMissionsForDate, WEEKLY_MISSIONS_DEFAULT } from "./missions.repo";
+import { getCurrentWeekId } from "./leaderboard.repo";
+import type { WeeklyMission, WeeklyMissionId } from "../models/user";
 import { computeNewAchievements } from "./achievements.repo";
 import type { Lang } from "../models/lang";
 
@@ -368,6 +370,8 @@ export type FinishSessionResult = {
   base: number;
   quizBonus: number;
   missionBonus: number;
+  weeklyMissionBonus: number;
+  newWeeklyMissionIds: WeeklyMissionId[];
   newAchievementIds: AchievementId[];
   leveledUp: boolean;
   newLevel: number;
@@ -389,7 +393,7 @@ export async function finishSession(
   const { date, quizScore, quizDone, completedTrackCount = 0, totalTrackCount = Infinity } = context;
 
   const user = await getDocData<UserProfile>(`users/${uid}`);
-  if (!user) return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, newAchievementIds: [], leveledUp: false, newLevel: 1, prevLevel: 1, shieldEarned: false };
+  if (!user) return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, weeklyMissionBonus: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: false, newLevel: 1, prevLevel: 1, shieldEarned: false, newStreak: 0 };
 
   const prevLevel = user.level ?? 1;
 
@@ -466,9 +470,49 @@ export async function finishSession(
     if (done) { mission.completed = true; missionBonus += mission.xpReward; }
   }
 
+  // ── Weekly missions ───────────────────────────────────────────────────────
+  const weekId = getCurrentWeekId();
+  const cwm = user.currentWeeklyMissions;
+  const weeklyList: WeeklyMission[] = cwm?.weekId === weekId
+    ? cwm.list.map((m) => ({ ...m }))
+    : WEEKLY_MISSIONS_DEFAULT.map((m) => ({ ...m }));
+
+  // Track unique study days this week to power the "study_3_days" mission
+  const weeklyStudyDates: string[] = cwm?.weekId === weekId
+    ? [...(cwm.studyDates ?? [])]
+    : [];
+  if (!weeklyStudyDates.includes(date)) weeklyStudyDates.push(date);
+
+  let weeklyMissionBonus = 0;
+  const newWeeklyMissionIds: WeeklyMissionId[] = [];
+
+  for (const m of weeklyList) {
+    if (m.completed) continue;
+    switch (m.id) {
+      case "complete_5_sessions":
+        m.progress = Math.min(m.progress + 1, m.target);
+        break;
+      case "earn_300_xp":
+        m.progress = Math.min(m.progress + base + quizBonus + missionBonus, m.target);
+        break;
+      case "perfect_quiz":
+        if (isPerfect) m.progress = 1;
+        break;
+      case "study_3_days":
+        m.progress = Math.min(weeklyStudyDates.length, m.target);
+        break;
+    }
+    if (m.progress >= m.target) {
+      m.completed = true;
+      m.progress = m.target;
+      newWeeklyMissionIds.push(m.id);
+      weeklyMissionBonus += m.xpReward;
+    }
+  }
+
   // ── Total XP + level ─────────────────────────────────────────────────────
   const gained = base + quizBonus;
-  const newXp = (user.xp ?? 0) + gained + missionBonus;
+  const newXp = (user.xp ?? 0) + gained + missionBonus + weeklyMissionBonus;
   const newLevel = xpToLevel(newXp);
 
   // ── Achievements (computed against updated state) ─────────────────────────
@@ -496,13 +540,14 @@ export async function finishSession(
     consecutiveGoodQuizDays,
     ...(newLastGoodQuizDate !== undefined && { lastGoodQuizDate: newLastGoodQuizDate }),
     currentMissions: { date, list: missionList },
+    currentWeeklyMissions: { weekId, list: weeklyList, studyDates: weeklyStudyDates },
     ...(newAchievementIds.length > 0 && {
       achievements: { ...(user.achievements ?? {}), ...achievementEntries },
     }),
     updatedAt: Date.now(),
   });
 
-  return { gained, base, quizBonus, missionBonus, newAchievementIds, leveledUp: newLevel > prevLevel, newLevel, prevLevel, shieldEarned, newStreak: streakCurrent };
+  return { gained, base, quizBonus, missionBonus, weeklyMissionBonus, newWeeklyMissionIds, newAchievementIds, leveledUp: newLevel > prevLevel, newLevel, prevLevel, shieldEarned, newStreak: streakCurrent };
 }
 
 // ---------------------------------------------------------------------------

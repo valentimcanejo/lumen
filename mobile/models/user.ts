@@ -56,6 +56,7 @@ export type UserProfile = {
   consecutiveGoodQuizDays?: number;  // dias consecutivos com quiz ≥ 80%
   lastGoodQuizDate?: string;         // YYYY-MM-DD
   currentMissions?: CurrentMissions;
+  currentWeeklyMissions?: CurrentWeeklyMissions;
   createdAt: number; // ms
   updatedAt: number; // ms
 };
@@ -79,6 +80,30 @@ export type DailyMission = {
 export type CurrentMissions = {
   date: string; // YYYY-MM-DD
   list: DailyMission[];
+};
+
+// ---------------------------------------------------------------------------
+// Weekly missions
+// ---------------------------------------------------------------------------
+
+export type WeeklyMissionId =
+  | "complete_5_sessions"
+  | "earn_300_xp"
+  | "perfect_quiz"
+  | "study_3_days";
+
+export type WeeklyMission = {
+  id: WeeklyMissionId;
+  progress: number;
+  target: number;
+  xpReward: number;
+  completed: boolean;
+};
+
+export type CurrentWeeklyMissions = {
+  weekId: string; // YYYY-WNN
+  list: WeeklyMission[];
+  studyDates: string[]; // unique YYYY-MM-DD dates studied this week
 };
 
 // ---------------------------------------------------------------------------
