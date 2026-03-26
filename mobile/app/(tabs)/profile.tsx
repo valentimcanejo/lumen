@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Platform, ScrollView, ActivityIndicator, Linking, DevSettings, Alert, useWindowDimensions } from "react-native";
+import { Platform, ScrollView, ActivityIndicator, Linking, DevSettings, Alert, useWindowDimensions, View, StyleSheet } from "react-native";
 import * as Notifications from "expo-notifications";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -30,10 +30,97 @@ import {
   type AchievementId,
   type UserProfile,
 } from "../../models/user";
-import { ACHIEVEMENTS } from "../../repositories/achievements.repo";
+import { ACHIEVEMENTS, type AchievementDef } from "../../repositories/achievements.repo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
+
+// ---------------------------------------------------------------------------
+// Achievements grid — compact 5-column layout, expandable
+// ---------------------------------------------------------------------------
+
+const COLS = 5;
+const BADGE_GAP = 8;
+
+function AchievementsGrid({ achievements }: { achievements: AchievementDef[] }) {
+  const { t } = useTranslation();
+  const { width: screenWidth } = useWindowDimensions();
+  const [expanded, setExpanded] = useState(false);
+
+  const COLLAPSED_MAX = 10;
+  const visible = expanded ? achievements : achievements.slice(0, COLLAPSED_MAX);
+  const hasMore = achievements.length > COLLAPSED_MAX;
+
+  // Cell size: fill available width (screen - px-5*2 - card padding*2) across 5 cols
+  const totalGaps = (COLS - 1) * BADGE_GAP;
+  const cellSize = Math.floor((screenWidth - 40 - 32 - totalGaps) / COLS);
+
+  // Group into rows of COLS
+  const rows: AchievementDef[][] = [];
+  for (let i = 0; i < visible.length; i += COLS) {
+    rows.push(visible.slice(i, i + COLS));
+  }
+
+  return (
+    <View style={ag.container}>
+      <View style={ag.header}>
+        <Text style={ag.title}>{t("tabs.profile.achievements")}</Text>
+        <Text style={ag.count}>{achievements.length}</Text>
+      </View>
+
+      <View style={ag.card}>
+        {rows.map((row, ri) => (
+          <View key={ri} style={[ag.row, ri > 0 && { marginTop: BADGE_GAP }]}>
+            {row.map((a) => (
+              <View
+                key={a.id}
+                style={[ag.badge, { width: cellSize, height: cellSize }]}
+              >
+                <Text style={{ fontSize: cellSize * 0.42 }}>{a.icon}</Text>
+              </View>
+            ))}
+            {/* Fill empty cells in last row so alignment stays left */}
+            {row.length < COLS &&
+              Array.from({ length: COLS - row.length }).map((_, i) => (
+                <View key={`empty-${i}`} style={{ width: cellSize }} />
+              ))}
+          </View>
+        ))}
+
+        {hasMore && (
+          <Pressable onPress={() => setExpanded((v) => !v)} style={ag.expandBtn}>
+            <Text style={ag.expandLabel}>
+              {expanded
+                ? t("tabs.profile.achievements_collapse")
+                : t("tabs.profile.achievements_show_all", { count: achievements.length - COLLAPSED_MAX })}
+            </Text>
+          </Pressable>
+        )}
+      </View>
+    </View>
+  );
+}
+
+const ag = StyleSheet.create({
+  container: { marginBottom: 24 },
+  header: { flexDirection: "row", alignItems: "center", marginBottom: 12, gap: 8 },
+  title: { color: "#E6EAF2", fontSize: 16, fontWeight: "600" },
+  count: {
+    color: "#AAB0C0", fontSize: 12, fontWeight: "600",
+    backgroundColor: "#1A2233", paddingHorizontal: 7, paddingVertical: 2,
+    borderRadius: 10,
+  },
+  card: { backgroundColor: "#111827", borderRadius: 16, padding: 16 },
+  row: { flexDirection: "row", gap: BADGE_GAP },
+  badge: {
+    backgroundColor: "#1A2233",
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  expandBtn: { marginTop: 12, alignItems: "center" },
+  expandLabel: { color: "#AAB0C0", fontSize: 13 },
+});
 
 // ---------------------------------------------------------------------------
 // Heatmap helpers
@@ -568,26 +655,7 @@ export default function ProfileScreen() {
 
             {/* Achievements */}
             {unlockedAchievements.length > 0 && (
-              <Box className="mb-6">
-                <Text className="text-[#E6EAF2] text-[16px] font-semibold mb-3">
-                  {t("tabs.profile.achievements")}
-                </Text>
-                <HStack className="flex-wrap" space="sm">
-                  {unlockedAchievements.map((a) => (
-                    <VStack
-                      key={a.id}
-                      className="bg-[#111827] border border-[#1A2233] rounded-2xl px-3 py-3 items-center mb-2"
-                      space="xs"
-                      style={{ minWidth: 80 }}
-                    >
-                      <Text className="text-[22px]">{a.icon}</Text>
-                      <Text className="text-[#AAB0C0] text-[10px] text-center">
-                        {t(a.titleKey)}
-                      </Text>
-                    </VStack>
-                  ))}
-                </HStack>
-              </Box>
+              <AchievementsGrid achievements={unlockedAchievements} />
             )}
 
             {/* Activity heatmap */}

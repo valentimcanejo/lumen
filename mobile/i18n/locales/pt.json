@@ -128,6 +128,8 @@
       "notifications_enable": "Ativar lembretes diários",
       "notifications_hint": "Receba um aviso todo dia para não perder o ritmo.",
       "notifications_open_settings": "Abrir configurações",
+      "achievements_show_all": "+{{count}} mais",
+      "achievements_collapse": "Mostrar menos",
       "tracks": "Minhas trilhas",
       "tracks_hint": "Selecione as trilhas que aparecem na sua home (mín. 1)",
       "heatmap_title": "Atividade",

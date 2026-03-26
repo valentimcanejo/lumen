@@ -128,6 +128,8 @@
       "notifications_enable": "Enable daily reminders",
       "notifications_hint": "Get a daily nudge to keep your streak alive.",
       "notifications_open_settings": "Open settings",
+      "achievements_show_all": "+{{count}} more",
+      "achievements_collapse": "Show less",
       "tracks": "My tracks",
       "tracks_hint": "Select the tracks that appear on your home (min. 1)",
       "heatmap_title": "Activity",
