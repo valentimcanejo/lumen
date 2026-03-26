@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { ActivityIndicator, Dimensions, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Dimensions, ScrollView, StyleSheet, View } from "react-native";
 import * as Haptics from "expo-haptics";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -493,6 +493,14 @@ export default function SummaryScreen() {
     return t("session.summary.insight_keep_going");
   }, [scorePct, totalN, t]);
 
+  const highlightCard = useMemo(() => {
+    if (!pack) return null;
+    const quote = pack.lesson.blocks.find((b) => b.type === "quote");
+    if (quote && "text" in quote) return `"${quote.text}"`;
+    if (pack.cards.length > 0) return pack.cards[0].back;
+    return null;
+  }, [pack]);
+
   async function onFinish() {
     setSaving(true);
     try {
@@ -628,8 +636,14 @@ export default function SummaryScreen() {
         <Box className="h-[1px] bg-[#1A2233] mt-4" />
       </Box>
 
-      <Box className="flex-1 px-5 pt-5">
+      {/* Scrollable content */}
+      <ScrollView
+        className="flex-1 px-5 pt-5"
+        contentContainerStyle={{ paddingBottom: 16 }}
+        showsVerticalScrollIndicator={false}
+      >
         <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
+          {/* Score + XP */}
           <HStack className="items-center justify-between">
             <VStack space="xs">
               <Text className="text-[#AAB0C0] text-[12px]">
@@ -675,17 +689,43 @@ export default function SummaryScreen() {
             />
           )}
 
-          <Box className="mt-4">
-            <Text className="text-[#AAB0C0] text-[12px]">
+          {/* What you learned — content-specific takeaway */}
+          <Box className="mt-4 pt-4" style={{ borderTopWidth: 1, borderTopColor: "#1A2233" }}>
+            <Text className="text-[#AAB0C0] text-[11px] font-semibold tracking-widest uppercase mb-2">
               {t("session.summary.insight_label")}
             </Text>
-            <Text className="text-[#E6EAF2] text-[14px] leading-[22px] mt-2">
-              {insight}
+            <Text className="text-[#E6EAF2] text-[15px] leading-[24px] font-medium">
+              {pack?.lesson?.summary ?? insight}
             </Text>
           </Box>
-        </Box>
 
-        <VStack space="sm" className="mt-auto" style={{ paddingBottom: Math.max(insets.bottom, 24) }}>
+          {/* Key concept — quote from lesson or first card */}
+          {highlightCard && (
+            <Box
+              className="mt-3 rounded-[14px] p-4"
+              style={{ backgroundColor: "#0E141E", borderWidth: 1, borderColor: "#1A2233" }}
+            >
+              <HStack space="sm" className="items-start">
+                <Ionicons name="bulb-outline" size={15} color="#F5C77A" style={{ marginTop: 2 }} />
+                <Text className="text-[#C8CDD8] text-[13px] leading-[20px] flex-1">
+                  {highlightCard}
+                </Text>
+              </HStack>
+            </Box>
+          )}
+
+          {/* Score-based coaching note — subtle, only when pack summary is available */}
+          {pack?.lesson?.summary && (
+            <Text className="text-[#7B8193] text-[12px] leading-[18px] mt-3">
+              {insight}
+            </Text>
+          )}
+        </Box>
+      </ScrollView>
+
+      {/* Fixed buttons */}
+      <Box className="px-5" style={{ paddingBottom: Math.max(insets.bottom, 24), paddingTop: 12 }}>
+        <VStack space="sm">
           {!saved ? (
             <Box className="h-[52px] items-center justify-center">
               <ActivityIndicator color="#F5C77A" />
