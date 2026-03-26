@@ -13,6 +13,10 @@ export type Goal = {
 
 const bundledGoals: (Goal & { isActive: boolean })[] = require("../assets/data/goals.json");
 
+export function getBundledGoals(): Goal[] {
+  return bundledGoals.filter((g) => g.isActive).sort((a, b) => a.order - b.order);
+}
+
 export async function getActiveGoals(): Promise<Goal[]> {
   try {
     const q = query(collection(db, "goals"), where("isActive", "==", true));
@@ -25,5 +29,5 @@ export async function getActiveGoals(): Promise<Goal[]> {
   } catch {
     // offline or error — fall through to bundled
   }
-  return bundledGoals.filter((g) => g.isActive).sort((a, b) => a.order - b.order);
+  return getBundledGoals();
 }

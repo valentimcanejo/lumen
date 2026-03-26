@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import * as Localization from "expo-localization";
 import { Box } from "../../components/ui/box";
 import { VStack } from "../../components/ui/vstack";
 import { Text } from "../../components/ui/text";
@@ -19,8 +20,16 @@ const LANGS = [
   { key: "es", label: "Español", flag: "🇪🇸" },
 ] as const;
 
+type SupportedLang = (typeof LANGS)[number]["key"];
+const SUPPORTED: SupportedLang[] = ["pt", "en", "es"];
+
+function detectDeviceLang(): SupportedLang {
+  const code = Localization.getLocales()?.[0]?.languageCode ?? "";
+  return SUPPORTED.includes(code as SupportedLang) ? (code as SupportedLang) : "pt";
+}
+
 export default function Language() {
-  const [lang, setLang] = useState<(typeof LANGS)[number]["key"]>("pt");
+  const [lang, setLang] = useState<SupportedLang>(detectDeviceLang);
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
 

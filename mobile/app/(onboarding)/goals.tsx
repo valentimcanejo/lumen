@@ -10,7 +10,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import { LumenButton } from "../../components/ui/lumen/Button";
 import { useTranslation } from "react-i18next";
 import { Lang } from "../../models/lang";
-import { getActiveGoals, type Goal } from "../../repositories/goals.repo";
+import { getActiveGoals, getBundledGoals, type Goal } from "../../repositories/goals.repo";
 
 const ICON_MAP: Record<string, keyof typeof Ionicons.glyphMap> = {
   book:  "book-outline",
@@ -22,7 +22,7 @@ const ICON_MAP: Record<string, keyof typeof Ionicons.glyphMap> = {
 export default function Goals() {
   const insets = useSafeAreaInsets();
   const [selected, setSelected] = useState<string[]>([]);
-  const [goals, setGoals] = useState<Goal[]>([]);
+  const [goals, setGoals] = useState<Goal[]>(getBundledGoals);
   const canContinue = useMemo(
     () => selected.length >= 1 && selected.length <= 3,
     [selected],
@@ -30,7 +30,7 @@ export default function Goals() {
   const { t } = useTranslation();
 
   useEffect(() => {
-    getActiveGoals().then(setGoals).catch(() => setGoals([]));
+    getActiveGoals().then(setGoals).catch(() => {});
   }, []);
 
   const { selectedLanguage, userId } = useLocalSearchParams();
