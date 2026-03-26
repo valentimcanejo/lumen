@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
