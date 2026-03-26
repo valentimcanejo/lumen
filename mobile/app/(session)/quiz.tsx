@@ -201,6 +201,19 @@ export default function QuizScreen() {
 
   const current: PackQuizQuestion | undefined = quiz[qIndex];
 
+  const shuffled = useMemo(() => {
+    if (!current) return null;
+    const indices = current.options.map((_, i) => i);
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+    return {
+      options: indices.map((i) => current.options[i]),
+      answerIndex: indices.indexOf(current.answerIndex),
+    };
+  }, [qIndex]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const progressValue = useMemo(() => {
     if (!total) return 0.62;
     const stepStart = 0.5;
@@ -213,7 +226,7 @@ export default function QuizScreen() {
     if (!current || answered) return;
     setSelectedIndex(optionIdx);
     setAnswered(true);
-    if (optionIdx === current.answerIndex) {
+    if (optionIdx === shuffled?.answerIndex) {
       setCorrectCount((v) => v + 1);
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     } else {
@@ -327,12 +340,12 @@ export default function QuizScreen() {
             </Box>
 
             <VStack space="sm" className="mt-4">
-              {current.options.map((opt, idx) => {
+              {(shuffled?.options ?? current.options).map((opt, idx) => {
                 const state = getOptionState({
                   answered,
                   optionIndex: idx,
                   selectedIndex,
-                  correctIndex: current.answerIndex,
+                  correctIndex: shuffled?.answerIndex ?? current.answerIndex,
                 });
                 return (
                   <OptionRow
