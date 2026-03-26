@@ -2,7 +2,6 @@ import { onCall, HttpsError } from "firebase-functions/v2/https";
 import { setGlobalOptions } from "firebase-functions/v2";
 import * as admin from "firebase-admin";
 import Anthropic from "@anthropic-ai/sdk";
-import { TextToSpeechClient } from "@google-cloud/text-to-speech";
 
 admin.initializeApp();
 
@@ -150,16 +149,16 @@ interface GenerateAudioInput {
 }
 
 export const generateAudio = onCall(
-  { enforceAppCheck: false, memory: "512MiB" },
+  { enforceAppCheck: false, memory: "512MiB", invoker: "public" },
   async (request) => {
-    if (!request.auth) {
-      throw new HttpsError("unauthenticated", "Authentication required.");
-    }
-
     const { contentId, version, lang, text } = (request.data as GenerateAudioInput) ?? {};
 
     if (!contentId || !version || !["pt", "en", "es"].includes(lang) || !text?.trim()) {
       throw new HttpsError("invalid-argument", "contentId, version, lang and text are required.");
+    }
+
+    if (text.length > 10_000) {
+      throw new HttpsError("invalid-argument", "text exceeds maximum length of 10,000 characters.");
     }
 
     const audioPath = `packs/${contentId}/v${version}/audio/${lang}.mp3`;
@@ -171,6 +170,7 @@ export const generateAudio = onCall(
     if (exists) return { storagePath: audioPath };
 
     // Call Google Cloud TTS Neural2
+    const { TextToSpeechClient } = await import("@google-cloud/text-to-speech");
     const ttsClient = new TextToSpeechClient();
     const voice = TTS_VOICES[lang];
     const [ttsResponse] = await ttsClient.synthesizeSpeech({

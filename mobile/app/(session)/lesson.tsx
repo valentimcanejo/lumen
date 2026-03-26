@@ -35,11 +35,23 @@ function formatMs(ms: number) {
   return `${String(m).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 }
 
-function TopProgress({ value, color = "#F5C77A" }: { value: number; color?: string }) {
+function TopProgress({
+  value,
+  color = "#F5C77A",
+}: {
+  value: number;
+  color?: string;
+}) {
   const pct = Math.max(0, Math.min(1, value));
   return (
     <Box className="flex-1 h-[6px] rounded-full bg-[#1A2233] overflow-hidden">
-      <Box style={{ width: `${pct * 100}%`, height: "100%", backgroundColor: color }} />
+      <Box
+        style={{
+          width: `${pct * 100}%`,
+          height: "100%",
+          backgroundColor: color,
+        }}
+      />
     </Box>
   );
 }
@@ -96,7 +108,8 @@ export default function LessonScreen() {
   const [positionMs, setPositionMs] = useState(0);
   const [durationMs, setDurationMs] = useState(0);
 
-  const audioProgress = durationMs > 0 ? Math.min(1, positionMs / durationMs) : 0;
+  const audioProgress =
+    durationMs > 0 ? Math.min(1, positionMs / durationMs) : 0;
 
   const [saved, setSaved] = useState(false);
   const [savingContent, setSavingContent] = useState(false);
@@ -133,16 +146,25 @@ export default function LessonScreen() {
         let url: string;
         try {
           url = await getStorageDownloadUrl(storagePath);
-        } catch {
+        } catch (e) {
           // Audio not yet generated — call Cloud Function with extracted text, then retry
           const text = extractText(pack.lesson.blocks);
-          await generateAudio({ contentId, version: Number(version), lang, text });
+          console.log(text);
+          await generateAudio({
+            contentId,
+            version: Number(version),
+            lang,
+            text,
+          });
           url = await getStorageDownloadUrl(storagePath);
         }
 
         if (cancelled) return;
 
-        const { sound } = await Audio.Sound.createAsync({ uri: url }, { shouldPlay: false });
+        const { sound } = await Audio.Sound.createAsync(
+          { uri: url },
+          { shouldPlay: false },
+        );
 
         if (cancelled) {
           sound.unloadAsync();
@@ -244,7 +266,9 @@ export default function LessonScreen() {
 
       <ScrollView
         className="flex-1"
-        contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
+        contentContainerStyle={{
+          paddingBottom: Math.max(insets.bottom + 16, 32),
+        }}
       >
         <Box className="px-5 pt-6">
           <Text className="text-[#E6EAF2] text-[22px] font-semibold">
@@ -252,7 +276,8 @@ export default function LessonScreen() {
           </Text>
 
           <Text className="text-[#AAB0C0] text-[13px] mt-1">
-            {pack.tags?.[0] ?? t("common.content")} • {pack.estimatedMinutes} min
+            {pack.tags?.[0] ?? t("common.content")} • {pack.estimatedMinutes}{" "}
+            min
           </Text>
 
           <Box className="h-[1px] bg-[#1A2233] mt-4" />
@@ -263,7 +288,10 @@ export default function LessonScreen() {
                 onPress={handlePlayPause}
                 activeOpacity={0.65}
                 disabled={!audioReady}
-                style={[as.playBtn, { borderColor: `${color}55`, opacity: audioReady ? 1 : 0.4 }]}
+                style={[
+                  as.playBtn,
+                  { borderColor: `${color}55`, opacity: audioReady ? 1 : 0.4 },
+                ]}
               >
                 {showLoadingIcon ? (
                   <Ionicons name="hourglass-outline" size={18} color={color} />
@@ -290,7 +318,11 @@ export default function LessonScreen() {
 
             <Box className="h-[4px] rounded-full bg-[#1A2233] overflow-hidden mt-3">
               <Box
-                style={{ height: "100%", width: `${audioProgress * 100}%`, backgroundColor: color }}
+                style={{
+                  height: "100%",
+                  width: `${audioProgress * 100}%`,
+                  backgroundColor: color,
+                }}
               />
             </Box>
 
@@ -315,7 +347,13 @@ export default function LessonScreen() {
                   },
                 })
               }
-              style={{ height: 52, borderRadius: 18, backgroundColor: color, alignItems: "center", justifyContent: "center" }}
+              style={{
+                height: 52,
+                borderRadius: 18,
+                backgroundColor: color,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
             >
               <Text className="text-[#0B0F14] text-[16px] font-semibold">
                 {t("common.next")}

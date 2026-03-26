@@ -24,10 +24,11 @@ const firebaseConfig = {
   appId: "1:304073115831:web:868b3ac0601801ac2e2532",
   measurementId: "G-SQ06LBMECX",
 };
-export const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-export const auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(ReactNativeAsyncStorage),
-});
+const isNew = !getApps().length;
+export const app = isNew ? initializeApp(firebaseConfig) : getApp();
+export const auth = isNew
+  ? initializeAuth(app, { persistence: getReactNativePersistence(ReactNativeAsyncStorage) })
+  : getAuth(app);
 export const db = initializeFirestore(app, {
   localCache: persistentLocalCache(),
 });
