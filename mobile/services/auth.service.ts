@@ -69,7 +69,7 @@ export async function signInWithGoogle(): Promise<User> {
     );
   }
 
-  const redirectUri = AuthSession.makeRedirectUri({ useProxy: true });
+  const redirectUri = AuthSession.makeRedirectUri({ scheme: "mobile" });
   const discovery = await GOOGLE_DISCOVERY;
 
   const request = new AuthSession.AuthRequest({
@@ -78,7 +78,7 @@ export async function signInWithGoogle(): Promise<User> {
     redirectUri,
   });
 
-  const result = await request.promptAsync(discovery, { useProxy: true });
+  const result = await request.promptAsync(discovery);
   if (result.type !== "success") {
     throw new Error("Google sign-in was cancelled or failed.");
   }
