@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { ScrollView, TouchableOpacity } from "react-native";
+import React, { useEffect, useState, useMemo } from "react";
+import { FlatList, TextInput, TouchableOpacity, ScrollView as HScrollView } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -18,6 +18,8 @@ import { SkeletonTrackCard } from "../../components/ui/lumen/Skeleton";
 import { trackColor, trackBg } from "../../constants/tracks";
 import type { Track } from "../../models/track";
 import type { Lang } from "../../models/lang";
+
+type FilterKey = "all" | "following" | "easy" | "medium" | "hard";
 
 function DifficultyBadge({ level }: { level: 1 | 2 | 3 }) {
   const { t } = useTranslation();
@@ -54,9 +56,7 @@ function TrackCard({
   canUnfollow: boolean;
   onToggleFollow: () => void;
 }) {
-  const { t } = useTranslation();
   const title = track.title[lang] ?? track.title.en ?? track.id;
-  const description = track.description?.[lang] ?? track.description?.en ?? "";
   const color = trackColor(track.id);
   const bg = trackBg(track.id);
   const total = getLessonCountForTrack(track.id);
@@ -65,22 +65,25 @@ function TrackCard({
   return (
     <Pressable onPress={() => router.push(`/track/${track.id}`)}>
       <Box
-        className="rounded-[22px] p-5 mb-3"
-        style={{ backgroundColor: bg, borderWidth: 1.5, borderColor: `${color}44` }}
+        className="rounded-[18px] p-3 mb-2"
+        style={{ backgroundColor: bg, borderWidth: 1, borderColor: `${color}44` }}
       >
-        <HStack className="items-start justify-between mb-2">
-          <HStack className="items-center flex-1 mr-3" space="sm">
+        <HStack className="items-center justify-between">
+          <HStack className="items-center flex-1 mr-2" space="sm">
             <Box
               style={{
-                width: 10, height: 10, borderRadius: 5,
-                backgroundColor: color, marginTop: 3,
+                width: 8, height: 8, borderRadius: 4,
+                backgroundColor: color, flexShrink: 0,
               }}
             />
-            <Text className="text-[#E6EAF2] text-[17px] font-semibold flex-1">
+            <Text
+              className="text-[#E6EAF2] text-[15px] font-semibold flex-1"
+              numberOfLines={1}
+            >
               {title}
             </Text>
           </HStack>
-          <HStack className="items-center" space="sm">
+          <HStack className="items-center" space="xs">
             <DifficultyBadge level={track.difficulty} />
             <TouchableOpacity
               onPress={onToggleFollow}
@@ -90,45 +93,16 @@ function TrackCard({
             >
               <Ionicons
                 name={isFollowing ? "checkmark-circle" : "add-circle-outline"}
-                size={22}
+                size={20}
                 color={isFollowing ? color : "#4A5568"}
               />
             </TouchableOpacity>
           </HStack>
         </HStack>
 
-        {description ? (
-          <Text className="text-[#AAB0C0] text-[13px] leading-[20px]">
-            {description}
-          </Text>
-        ) : null}
-
-        {track.tags?.length > 0 && (
-          <HStack className="mt-3 flex-wrap" space="xs">
-            {track.tags.map((tag) => (
-              <Box
-                key={tag}
-                className="px-2 py-1 rounded-full"
-                style={{ backgroundColor: `${color}18` }}
-              >
-                <Text style={{ color, fontSize: 11 }}>{tag}</Text>
-              </Box>
-            ))}
-          </HStack>
-        )}
-
         {total > 0 && (
-          <Box className="mt-3">
-            <HStack className="items-center justify-between mb-1">
-              <HStack className="items-center" space="xs">
-                <Text style={{ color, fontSize: 12, fontWeight: "600" }}>{t("track.lessons")}</Text>
-                <Ionicons name="chevron-forward" size={12} color={color} />
-              </HStack>
-              <Text style={{ color: done > 0 ? color : "#7B8193", fontSize: 11, fontWeight: "600" }}>
-                {done}/{total}
-              </Text>
-            </HStack>
-            <Box className="h-[3px] rounded-full bg-[#1A2233] overflow-hidden">
+          <HStack className="items-center mt-2" space="sm">
+            <Box className="flex-1 h-[2px] rounded-full bg-[#1A2233] overflow-hidden">
               <Box
                 style={{
                   height: "100%",
@@ -138,7 +112,18 @@ function TrackCard({
                 }}
               />
             </Box>
-          </Box>
+            <Text
+              style={{
+                color: done > 0 ? color : "#7B8193",
+                fontSize: 11,
+                fontWeight: "600",
+                minWidth: 28,
+                textAlign: "right",
+              }}
+            >
+              {done}/{total}
+            </Text>
+          </HStack>
         )}
       </Box>
     </Pressable>
@@ -156,6 +141,8 @@ export default function Tracks() {
   const [loading, setLoading] = useState(true);
   const [completedIds, setCompletedIds] = useState<string[]>([]);
   const [selectedTrackIds, setSelectedTrackIds] = useState<string[]>([]);
+  const [search, setSearch] = useState("");
+  const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
 
   useEffect(() => {
     getTracks()
@@ -174,10 +161,32 @@ export default function Tracks() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
 
+  const filteredTracks = useMemo(() => {
+    let result = tracks;
+    if (activeFilter === "following") {
+      result = result.filter((t) => selectedTrackIds.includes(t.id));
+    } else if (activeFilter === "easy") {
+      result = result.filter((t) => t.difficulty === 1);
+    } else if (activeFilter === "medium") {
+      result = result.filter((t) => t.difficulty === 2);
+    } else if (activeFilter === "hard") {
+      result = result.filter((t) => t.difficulty === 3);
+    }
+    if (search.trim()) {
+      const q = search.toLowerCase().trim();
+      result = result.filter((t) => {
+        const title = (t.title[lang] ?? t.title.en ?? "").toLowerCase();
+        const tags = (t.tags ?? []).join(" ").toLowerCase();
+        return title.includes(q) || tags.includes(q);
+      });
+    }
+    return result;
+  }, [tracks, activeFilter, selectedTrackIds, search, lang]);
+
   async function handleToggleFollow(trackId: string) {
     if (!uid) return;
     const isFollowing = selectedTrackIds.includes(trackId);
-    if (isFollowing && selectedTrackIds.length <= 1) return; // mínimo 1
+    if (isFollowing && selectedTrackIds.length <= 1) return;
     const next = isFollowing
       ? selectedTrackIds.filter((id) => id !== trackId)
       : [...selectedTrackIds, trackId];
@@ -206,61 +215,119 @@ export default function Tracks() {
             ? t("tabs.tracks.ai_error_unknown")
             : null;
 
+  const FILTERS: { key: FilterKey; label: string }[] = [
+    { key: "all", label: t("tabs.tracks.filter_all") },
+    { key: "following", label: t("tabs.tracks.filter_following") },
+    { key: "easy", label: t("tabs.tracks.difficulty_1") },
+    { key: "medium", label: t("tabs.tracks.difficulty_2") },
+    { key: "hard", label: t("tabs.tracks.difficulty_3") },
+  ];
+
+  const aiPackCard = (
+    <Box className="bg-[#121826] border border-[#F5C77A]/30 rounded-[22px] p-5 mb-4">
+      <HStack className="items-center mb-2" space="sm">
+        <Ionicons name="sparkles" size={16} color="#F5C77A" />
+        <Text className="text-[#F5C77A] text-[12px] font-semibold">
+          {t("tabs.tracks.ai_badge")}
+        </Text>
+      </HStack>
+      <Text className="text-[#E6EAF2] text-[16px] font-semibold">
+        {t("tabs.tracks.ai_title")}
+      </Text>
+      <Text className="text-[#AAB0C0] text-[13px] mt-1 leading-[20px]">
+        {t("tabs.tracks.ai_description")}
+      </Text>
+      {aiErrorMessage ? (
+        <Text className="text-[#E26D6D] text-[12px] mt-3">{aiErrorMessage}</Text>
+      ) : null}
+      <Pressable
+        onPress={handleGenerate}
+        disabled={generating}
+        className="mt-4 h-[44px] rounded-2xl bg-[#F5C77A] items-center justify-center"
+        style={{ opacity: generating ? 0.6 : 1 }}
+      >
+        <Text className="text-[#0B0F14] text-[15px] font-semibold">
+          {generating ? t("tabs.tracks.ai_generating") : t("tabs.tracks.ai_generate")}
+        </Text>
+      </Pressable>
+    </Box>
+  );
+
   return (
     <Box className="flex-1 bg-[#0B0F14]">
-      <Box className="px-6 pb-4" style={{ paddingTop: insets.top + 8 }}>
+      {/* Static header */}
+      <Box className="px-6 pb-3" style={{ paddingTop: insets.top + 8 }}>
         <Text className="text-[#E6EAF2] text-[22px] font-bold">
           {t("tabs.tracks.title")}
         </Text>
         <Text className="text-[#AAB0C0] text-[13px] mt-1">
           {t("tabs.tracks.subtitle")}
         </Text>
+
+        {/* Search bar */}
+        <HStack
+          className="mt-3 bg-[#121826] border border-[#1A2233] rounded-[14px] px-3 h-[40px] items-center"
+          space="sm"
+        >
+          <Ionicons name="search" size={16} color="#4A5568" />
+          <TextInput
+            value={search}
+            onChangeText={setSearch}
+            placeholder={t("tabs.tracks.search_placeholder")}
+            placeholderTextColor="#4A5568"
+            style={{ flex: 1, color: "#E6EAF2", fontSize: 14 }}
+          />
+          {search ? (
+            <TouchableOpacity onPress={() => setSearch("")} hitSlop={8}>
+              <Ionicons name="close-circle" size={16} color="#4A5568" />
+            </TouchableOpacity>
+          ) : null}
+        </HStack>
       </Box>
 
-      <ScrollView
-        className="flex-1 px-6"
-        contentContainerStyle={{ paddingBottom: 32 }}
+      {/* Filter pills */}
+      <HScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 10 }}
       >
-        {/* AI Pack */}
-        <Box className="bg-[#121826] border border-[#F5C77A]/30 rounded-[22px] p-5 mb-5">
-          <HStack className="items-center mb-2" space="sm">
-            <Ionicons name="sparkles" size={16} color="#F5C77A" />
-            <Text className="text-[#F5C77A] text-[12px] font-semibold">
-              {t("tabs.tracks.ai_badge")}
-            </Text>
-          </HStack>
-          <Text className="text-[#E6EAF2] text-[16px] font-semibold">
-            {t("tabs.tracks.ai_title")}
-          </Text>
-          <Text className="text-[#AAB0C0] text-[13px] mt-1 leading-[20px]">
-            {t("tabs.tracks.ai_description")}
-          </Text>
-          {aiErrorMessage ? (
-            <Text className="text-[#E26D6D] text-[12px] mt-3">{aiErrorMessage}</Text>
-          ) : null}
-          <Pressable
-            onPress={handleGenerate}
-            disabled={generating}
-            className="mt-4 h-[44px] rounded-2xl bg-[#F5C77A] items-center justify-center"
-            style={{ opacity: generating ? 0.6 : 1 }}
-          >
-            <Text className="text-[#0B0F14] text-[15px] font-semibold">
-              {generating ? t("tabs.tracks.ai_generating") : t("tabs.tracks.ai_generate")}
-            </Text>
-          </Pressable>
-        </Box>
+        <HStack space="xs">
+          {FILTERS.map(({ key, label }) => {
+            const active = activeFilter === key;
+            return (
+              <Pressable
+                key={key}
+                onPress={() => setActiveFilter(key)}
+                className="h-[30px] px-3 rounded-full items-center justify-center"
+                style={{
+                  backgroundColor: active ? "#7B8FE0" : "#121826",
+                  borderWidth: 1,
+                  borderColor: active ? "#7B8FE0" : "#1A2233",
+                }}
+              >
+                <Text
+                  className="text-[12px] font-semibold"
+                  style={{ color: active ? "#0B0F14" : "#7B8193" }}
+                >
+                  {label}
+                </Text>
+              </Pressable>
+            );
+          })}
+        </HStack>
+      </HScrollView>
 
-        {/* Track list */}
-        {loading ? (
-          [0, 1, 2, 3].map((i) => <SkeletonTrackCard key={i} />)
-        ) : tracks.length === 0 ? (
-          <Text className="text-[#AAB0C0] text-center mt-6">
-            {t("tabs.tracks.empty")}
-          </Text>
-        ) : (
-          tracks.map((track) => (
+      {/* Track list */}
+      {loading ? (
+        <Box className="px-6">
+          {[0, 1, 2, 3, 4].map((i) => <SkeletonTrackCard key={i} />)}
+        </Box>
+      ) : (
+        <FlatList
+          data={filteredTracks}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item: track }) => (
             <TrackCard
-              key={track.id}
               track={track}
               lang={lang}
               completedIds={completedIds}
@@ -268,9 +335,19 @@ export default function Tracks() {
               canUnfollow={selectedTrackIds.length > 1}
               onToggleFollow={() => handleToggleFollow(track.id)}
             />
-          ))
-        )}
-      </ScrollView>
+          )}
+          ListHeaderComponent={aiPackCard}
+          ListEmptyComponent={
+            <Text className="text-[#AAB0C0] text-center mt-6">
+              {tracks.length === 0
+                ? t("tabs.tracks.empty")
+                : t("tabs.tracks.no_results")}
+            </Text>
+          }
+          contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 32 }}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
     </Box>
   );
 }

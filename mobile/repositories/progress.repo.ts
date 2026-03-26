@@ -5,10 +5,12 @@ import {
   orderBy,
   where,
   limit as fbLimit,
+  startAfter,
   doc,
   setDoc,
   updateDoc,
   increment,
+  type DocumentSnapshot,
 } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import {
@@ -66,6 +68,26 @@ export async function getRecentSessions(
   );
   const snap = await getDocs(q);
   return snap.docs.map((d) => d.data() as CompletedSession);
+}
+
+/** Cursor-based paginated version of getRecentSessions. */
+export async function getSessionsPage(
+  uid: string,
+  count = 10,
+  after?: DocumentSnapshot,
+): Promise<{ sessions: CompletedSession[]; lastDoc: DocumentSnapshot | null; hasMore: boolean }> {
+  const col = collection(db, "users", uid, "daily_sessions");
+  const q = after
+    ? query(col, orderBy("completedAt", "desc"), fbLimit(count + 1), startAfter(after))
+    : query(col, orderBy("completedAt", "desc"), fbLimit(count + 1));
+  const snap = await getDocs(q);
+  const hasMore = snap.docs.length > count;
+  const docs = hasMore ? snap.docs.slice(0, count) : snap.docs;
+  return {
+    sessions: docs.map((d) => d.data() as CompletedSession),
+    lastDoc: docs[docs.length - 1] ?? null,
+    hasMore,
+  };
 }
 
 function ymd(d: Date): string {

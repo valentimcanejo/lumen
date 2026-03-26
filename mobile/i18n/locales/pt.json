@@ -88,6 +88,10 @@
       "ai_error_rate_limited": "Limite diário de sessões IA atingido. Tente amanhã.",
       "ai_error_unknown": "Não foi possível gerar o conteúdo. Tente novamente.",
       "empty": "Nenhuma trilha disponível.",
+      "no_results": "Nenhuma trilha encontrada.",
+      "search_placeholder": "Buscar trilhas…",
+      "filter_all": "Todas",
+      "filter_following": "Seguindo",
       "difficulty_1": "Iniciante",
       "difficulty_2": "Intermediário",
       "difficulty_3": "Avançado"
@@ -101,7 +105,9 @@
       "empty_subtitle": "Complete sua primeira sessão para ver o histórico aqui.",
       "saved_empty_title": "Nenhum conteúdo salvo",
       "saved_empty_subtitle": "Salve um conteúdo durante a lição para encontrá-lo aqui.",
-      "start": "Iniciar"
+      "start": "Iniciar",
+      "load_more": "Carregar mais",
+      "loading_more": "Carregando…"
     },
     "profile": {
       "title": "Perfil",

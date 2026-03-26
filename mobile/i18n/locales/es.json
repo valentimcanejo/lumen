@@ -88,6 +88,10 @@
       "ai_error_rate_limited": "Límite diario de sesiones IA alcanzado. Inténtalo mañana.",
       "ai_error_unknown": "No se pudo generar el contenido. Inténtalo de nuevo.",
       "empty": "No hay rutas disponibles.",
+      "no_results": "No se encontraron rutas.",
+      "search_placeholder": "Buscar rutas…",
+      "filter_all": "Todas",
+      "filter_following": "Siguiendo",
       "difficulty_1": "Principiante",
       "difficulty_2": "Intermedio",
       "difficulty_3": "Avanzado"
@@ -101,7 +105,9 @@
       "empty_subtitle": "Completa tu primera sesión para ver el historial aquí.",
       "saved_empty_title": "Sin contenido guardado",
       "saved_empty_subtitle": "Guarda una lección para encontrarla aquí después.",
-      "start": "Iniciar"
+      "start": "Iniciar",
+      "load_more": "Cargar más",
+      "loading_more": "Cargando…"
     },
     "profile": {
       "title": "Perfil",

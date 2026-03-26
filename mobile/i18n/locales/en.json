@@ -88,6 +88,10 @@
       "ai_error_rate_limited": "Daily AI session limit reached. Try again tomorrow.",
       "ai_error_unknown": "Could not generate the content. Please try again.",
       "empty": "No tracks available.",
+      "no_results": "No tracks found.",
+      "search_placeholder": "Search tracks…",
+      "filter_all": "All",
+      "filter_following": "Following",
       "difficulty_1": "Beginner",
       "difficulty_2": "Intermediate",
       "difficulty_3": "Advanced"
@@ -101,7 +105,9 @@
       "empty_subtitle": "Complete your first session to see the history here.",
       "saved_empty_title": "No saved content",
       "saved_empty_subtitle": "Save a lesson to find it here later.",
-      "start": "Start"
+      "start": "Start",
+      "load_more": "Load more",
+      "loading_more": "Loading…"
     },
     "profile": {
       "title": "Profile",

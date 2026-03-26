@@ -3,6 +3,7 @@ import { ScrollView } from "react-native";
 import { router } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import type { DocumentSnapshot } from "firebase/firestore";
 
 import { Box } from "../../components/ui/box";
 import { HStack } from "../../components/ui/hstack";
@@ -12,7 +13,7 @@ import { Pressable } from "../../components/ui/pressable";
 
 import { useAuth } from "../../hooks/useAuth";
 import {
-  getRecentSessions,
+  getSessionsPage,
   type CompletedSession,
 } from "../../repositories/progress.repo";
 import { getSavedContentIds } from "../../repositories/user.repo";
@@ -143,6 +144,8 @@ function SavedCard({
 
 type Tab = "history" | "saved";
 
+const PAGE_SIZE = 10;
+
 export default function Library() {
   const { t, i18n } = useTranslation();
   const insets = useSafeAreaInsets();
@@ -152,21 +155,45 @@ export default function Library() {
 
   const [activeTab, setActiveTab] = useState<Tab>("history");
   const [sessions, setSessions] = useState<CompletedSession[]>([]);
+  const [lastDoc, setLastDoc] = useState<DocumentSnapshot | null>(null);
+  const [hasMore, setHasMore] = useState(false);
   const [savedIds, setSavedIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   useEffect(() => {
     if (!uid) return;
     setLoading(true);
     Promise.all([
-      getRecentSessions(uid).catch(() => [] as CompletedSession[]),
+      getSessionsPage(uid, PAGE_SIZE).catch(() => ({
+        sessions: [] as CompletedSession[],
+        lastDoc: null,
+        hasMore: false,
+      })),
       getSavedContentIds(uid).catch(() => [] as string[]),
-    ]).then(([s, saved]) => {
-      setSessions(s);
+    ]).then(([page, saved]) => {
+      setSessions(page.sessions);
+      setLastDoc(page.lastDoc);
+      setHasMore(page.hasMore);
       setSavedIds(saved);
       setLoading(false);
     });
   }, [uid]);
+
+  async function loadMore() {
+    if (!uid || !lastDoc || loadingMore) return;
+    setLoadingMore(true);
+    try {
+      const page = await getSessionsPage(uid, PAGE_SIZE, lastDoc);
+      setSessions((prev) => [...prev, ...page.sessions]);
+      setLastDoc(page.lastDoc);
+      setHasMore(page.hasMore);
+    } catch {
+      // silently ignore
+    } finally {
+      setLoadingMore(false);
+    }
+  }
 
   function TabButton({ id, label }: { id: Tab; label: string }) {
     const active = activeTab === id;
@@ -229,9 +256,25 @@ export default function Library() {
               </Text>
             </VStack>
           ) : (
-            sessions.map((s) => (
-              <SessionRow key={`${s.date}_${s.contentId}`} session={s} locale={locale} lang={lang} />
-            ))
+            <>
+              {sessions.map((s) => (
+                <SessionRow key={`${s.date}_${s.contentId}`} session={s} locale={locale} lang={lang} />
+              ))}
+              {hasMore && (
+                <Pressable
+                  onPress={loadMore}
+                  disabled={loadingMore}
+                  className="h-[44px] rounded-2xl border border-[#1A2233] items-center justify-center mt-1"
+                  style={{ opacity: loadingMore ? 0.5 : 1 }}
+                >
+                  <Text className="text-[#7B8FE0] text-[14px] font-semibold">
+                    {loadingMore
+                      ? t("tabs.library.loading_more")
+                      : t("tabs.library.load_more")}
+                  </Text>
+                </Pressable>
+              )}
+            </>
           )
         ) : savedIds.length === 0 ? (
           <VStack className="items-center mt-10" space="sm">
