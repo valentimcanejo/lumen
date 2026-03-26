@@ -69,23 +69,43 @@ function availableLessons(trackIds: string[]): LessonMeta[] {
 }
 
 /** Returns the contentId of the next lesson the user should study.
- *  - Picks the first uncompleted lesson whose prerequisites are all met.
- *  - Falls back to date-based rotation when everything is done (for review). */
+ *  - Prefers the next uncompleted lesson in the same track as currentContentId.
+ *  - Falls back to any uncompleted lesson across selected tracks.
+ *  - Falls back to date-based rotation within the same track when all done. */
 export function pickNextLesson(
   trackIds: string[],
   completedIds: string[],
   dateStr: string,
+  currentContentId?: string,
 ): string | null {
   const lessons = availableLessons(trackIds);
   if (!lessons.length) return null;
-  const next = lessons.find(
-    (l) => !completedIds.includes(l.id) &&
-           l.prerequisites.every((p) => completedIds.includes(p)),
-  );
-  if (next) return next.id;
-  // All done — date-rotation for spaced review
+
+  const currentTrackId = currentContentId
+    ? BUNDLED_LESSONS.find((l) => l.id === currentContentId)?.trackId
+    : undefined;
+
+  const isReady = (l: LessonMeta) =>
+    !completedIds.includes(l.id) &&
+    l.prerequisites.every((p) => completedIds.includes(p));
+
+  // 1. Next uncompleted in same track
+  if (currentTrackId) {
+    const sameTrackNext = lessons.find((l) => l.trackId === currentTrackId && isReady(l));
+    if (sameTrackNext) return sameTrackNext.id;
+  }
+
+  // 2. Next uncompleted in any selected track
+  const anyNext = lessons.find(isReady);
+  if (anyNext) return anyNext.id;
+
+  // 3. All done — rotate within same track for review, else full pool
+  const pool = currentTrackId
+    ? lessons.filter((l) => l.trackId === currentTrackId)
+    : lessons;
+  const reviewPool = pool.length > 0 ? pool : lessons;
   const n = dateStr.replace(/-/g, "").split("").reduce((a, c) => a * 10 + Number(c), 0);
-  return lessons[n % lessons.length].id;
+  return reviewPool[n % reviewPool.length].id;
 }
 
 /** Returns the next available lesson ID per track (for secondary home cards). */

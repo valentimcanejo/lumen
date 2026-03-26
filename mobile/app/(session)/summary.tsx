@@ -459,7 +459,7 @@ export default function SummaryScreen() {
       const today = new Date().toISOString().slice(0, 10);
       // Include current lesson as completed for the "next" calculation
       const withCurrent = Array.from(new Set([...completed, contentId]));
-      const nextId = pickNextLesson(trackIds, withCurrent, today);
+      const nextId = pickNextLesson(trackIds, withCurrent, today, contentId);
       if (nextId && nextId !== contentId) setNextGoalId(nextId);
       setBookmarked(saved.includes(contentId));
     });
@@ -507,7 +507,7 @@ export default function SummaryScreen() {
 
         // Parallel: writes that touch different Firestore paths
         const [sessionResult] = await Promise.all([
-          finishSession(uid, { date, quizScore, quizDone, completedTrackCount, totalTrackCount }),
+          finishSession(uid, { date, contentId, quizScore, quizDone, completedTrackCount, totalTrackCount }),
           markDayCompleted(uid, date, {
             contentId,
             contentVersion: Number(version),

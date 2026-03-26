@@ -388,9 +388,16 @@ export type FinishSessionResult = {
  */
 export async function finishSession(
   uid: string,
-  context: { date: string; quizScore: number; quizDone: boolean; completedTrackCount?: number; totalTrackCount?: number },
+  context: { date: string; contentId: string; quizScore: number; quizDone: boolean; completedTrackCount?: number; totalTrackCount?: number },
 ): Promise<FinishSessionResult> {
-  const { date, quizScore, quizDone, completedTrackCount = 0, totalTrackCount = Infinity } = context;
+  const { date, contentId, quizScore, quizDone, completedTrackCount = 0, totalTrackCount = Infinity } = context;
+
+  // ── Idempotency guard — prevent double XP if summary screen mounts twice ──
+  const existingSession = await getDocData<CompletedSession>(userDailyPath(uid, date, contentId));
+  if (existingSession) {
+    const level = await getDocData<UserProfile>(`users/${uid}`).then(u => u?.level ?? 1);
+    return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, weeklyMissionBonus: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: false, newLevel: level, prevLevel: level, shieldEarned: false, newStreak: 0 };
+  }
 
   const user = await getDocData<UserProfile>(`users/${uid}`);
   if (!user) return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, weeklyMissionBonus: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: false, newLevel: 1, prevLevel: 1, shieldEarned: false, newStreak: 0 };

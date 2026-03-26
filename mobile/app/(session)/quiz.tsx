@@ -203,7 +203,7 @@ export default function QuizScreen() {
     if (!current) return;
     const next = qIndex + 1;
     if (next >= total) {
-      router.push({
+      router.replace({
         pathname: "/(session)/summary",
         params: {
           contentId,
@@ -260,7 +260,7 @@ export default function QuizScreen() {
             <Text className="text-[#AAB0C0]">{t("session.quiz.empty")}</Text>
             <Pressable
               onPress={() =>
-                router.push({
+                router.replace({
                   pathname: "/(session)/summary",
                   params: { contentId, version, lang },
                 })
