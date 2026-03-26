@@ -285,6 +285,12 @@
     "weekly_perfect_quiz": "100% quiz in a session",
     "weekly_study_3_days": "Study on 3 different days"
   },
+  "starter": {
+    "title": "3-day challenge",
+    "subtitle": "Study on 3 different days and earn 50 bonus XP",
+    "day": "Day {{n}}",
+    "completed_toast": "🎉 Challenge complete! +50 XP"
+  },
   "leaderboard": {
     "title": "Weekly Ranking",
     "home_sub": "See your position among all users",

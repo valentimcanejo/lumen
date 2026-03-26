@@ -54,6 +54,7 @@ import type { DailyMission, WeeklyMission } from "../../models/user";
 import { todayYmd } from "../../repositories/session.repo";
 import {
   type UserProfile,
+  type StarterChallenge,
   levelXpThreshold,
   xpToLevel,
   xpForNextLevel,
@@ -214,6 +215,100 @@ const wm = StyleSheet.create({
   },
   barFill: { height: "100%", borderRadius: 2 },
   progress: { color: "#7B8193", fontSize: 11, textAlign: "right" },
+});
+
+// ---------------------------------------------------------------------------
+// Starter challenge card — shown to new users until 3 study days completed
+// ---------------------------------------------------------------------------
+
+const STARTER_WINDOW_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
+
+function StarterChallengeCard({
+  challenge,
+  createdAt,
+}: {
+  challenge: StarterChallenge | undefined;
+  createdAt: number;
+}) {
+  const { t } = useTranslation();
+  const daysCompleted = challenge?.studyDates.length ?? 0;
+  const bonusGranted = challenge?.bonusGranted ?? false;
+
+  // Only show for accounts < 30 days old that haven't completed yet
+  if (bonusGranted) return null;
+  if (Date.now() - createdAt > STARTER_WINDOW_MS) return null;
+
+  const days = [
+    t("starter.day", { n: 1 }),
+    t("starter.day", { n: 2 }),
+    t("starter.day", { n: 3 }),
+  ];
+
+  return (
+    <View style={sc.card}>
+      <View style={sc.headerRow}>
+        <Text style={sc.title}>{t("starter.title")}</Text>
+        <View style={sc.bonusPill}>
+          <Text style={sc.bonusText}>+50 XP</Text>
+        </View>
+      </View>
+      <Text style={sc.subtitle}>{t("starter.subtitle")}</Text>
+      <View style={sc.daysRow}>
+        {days.map((label, i) => {
+          const done = i < daysCompleted;
+          const current = i === daysCompleted;
+          return (
+            <View key={i} style={sc.dayItem}>
+              <View style={[sc.dayCircle, done && sc.dayCircleDone, current && sc.dayCircleCurrent]}>
+                {done
+                  ? <Ionicons name="checkmark" size={16} color="#0B0F14" />
+                  : <Text style={[sc.dayNum, current && sc.dayNumCurrent]}>{i + 1}</Text>
+                }
+              </View>
+              <Text style={[sc.dayLabel, done && sc.dayLabelDone]}>{label}</Text>
+            </View>
+          );
+        })}
+      </View>
+    </View>
+  );
+}
+
+const sc = StyleSheet.create({
+  card: {
+    backgroundColor: "#121826",
+    borderWidth: 1,
+    borderColor: "#F5C77A33",
+    borderRadius: 22,
+    padding: 18,
+    gap: 10,
+  },
+  headerRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
+  title: { color: "#E6EAF2", fontSize: 15, fontWeight: "700" },
+  bonusPill: {
+    backgroundColor: "#F5C77A22",
+    borderWidth: 1,
+    borderColor: "#F5C77A66",
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 3,
+  },
+  bonusText: { color: "#F5C77A", fontSize: 12, fontWeight: "700" },
+  subtitle: { color: "#7B8193", fontSize: 12 },
+  daysRow: { flexDirection: "row", justifyContent: "space-around", marginTop: 4 },
+  dayItem: { alignItems: "center", gap: 6 },
+  dayCircle: {
+    width: 44, height: 44, borderRadius: 22,
+    backgroundColor: "#1A2233",
+    borderWidth: 2, borderColor: "#2A3448",
+    alignItems: "center", justifyContent: "center",
+  },
+  dayCircleDone: { backgroundColor: "#5ED19A", borderColor: "#5ED19A" },
+  dayCircleCurrent: { borderColor: "#F5C77A" },
+  dayNum: { color: "#4A5568", fontSize: 16, fontWeight: "700" },
+  dayNumCurrent: { color: "#F5C77A" },
+  dayLabel: { color: "#7B8193", fontSize: 11 },
+  dayLabelDone: { color: "#5ED19A" },
 });
 
 // ---------------------------------------------------------------------------
@@ -749,6 +844,16 @@ export default function Home() {
           </Box>
         );
       })()}
+
+      {/* ── Desafio inicial ────────────────────────────────────── */}
+      {!loadingUser && user?.createdAt && (
+        <Box className="px-6 mt-4">
+          <StarterChallengeCard
+            challenge={user.starterChallenge}
+            createdAt={user.createdAt}
+          />
+        </Box>
+      )}
 
       {/* ── Missões ────────────────────────────────────────────── */}
       {missions.length > 0 && (

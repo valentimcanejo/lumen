@@ -371,6 +371,8 @@ export type FinishSessionResult = {
   quizBonus: number;
   missionBonus: number;
   weeklyMissionBonus: number;
+  starterBonus: number;
+  starterDaysCompleted: number; // 0-3
   newWeeklyMissionIds: WeeklyMissionId[];
   newAchievementIds: AchievementId[];
   leveledUp: boolean;
@@ -396,11 +398,11 @@ export async function finishSession(
   const existingSession = await getDocData<CompletedSession>(userDailyPath(uid, date, contentId));
   if (existingSession) {
     const level = await getDocData<UserProfile>(`users/${uid}`).then(u => u?.level ?? 1);
-    return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, weeklyMissionBonus: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: false, newLevel: level, prevLevel: level, shieldEarned: false, newStreak: 0 };
+    return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, weeklyMissionBonus: 0, starterBonus: 0, starterDaysCompleted: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: false, newLevel: level, prevLevel: level, shieldEarned: false, newStreak: 0 };
   }
 
   const user = await getDocData<UserProfile>(`users/${uid}`);
-  if (!user) return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, weeklyMissionBonus: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: false, newLevel: 1, prevLevel: 1, shieldEarned: false, newStreak: 0 };
+  if (!user) return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, weeklyMissionBonus: 0, starterBonus: 0, starterDaysCompleted: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: false, newLevel: 1, prevLevel: 1, shieldEarned: false, newStreak: 0 };
 
   const prevLevel = user.level ?? 1;
 
@@ -517,9 +519,22 @@ export async function finishSession(
     }
   }
 
+  // ── Starter challenge — first 3 unique study days ────────────────────────
+  const STARTER_BONUS_XP = 50;
+  const STARTER_WINDOW_DAYS = 30; // show challenge for up to 30 days after account creation
+  const accountAgeDays = (Date.now() - (user.createdAt ?? 0)) / 86_400_000;
+  const sc = user.starterChallenge ?? { studyDates: [], bonusGranted: false };
+  const scDates = sc.studyDates.includes(date) ? sc.studyDates : [...sc.studyDates, date];
+  const scDatesLimited = scDates.slice(0, 3); // cap at 3
+  const starterDaysCompleted = scDatesLimited.length;
+  let starterBonus = 0;
+  const justCompletedChallenge =
+    starterDaysCompleted >= 3 && !sc.bonusGranted && accountAgeDays <= STARTER_WINDOW_DAYS;
+  if (justCompletedChallenge) starterBonus = STARTER_BONUS_XP;
+
   // ── Total XP + level ─────────────────────────────────────────────────────
   const gained = base + quizBonus;
-  const newXp = (user.xp ?? 0) + gained + missionBonus + weeklyMissionBonus;
+  const newXp = (user.xp ?? 0) + gained + missionBonus + weeklyMissionBonus + starterBonus;
   const newLevel = xpToLevel(newXp);
 
   // ── Achievements (computed against updated state) ─────────────────────────
@@ -548,13 +563,14 @@ export async function finishSession(
     ...(newLastGoodQuizDate !== undefined && { lastGoodQuizDate: newLastGoodQuizDate }),
     currentMissions: { date, list: missionList },
     currentWeeklyMissions: { weekId, list: weeklyList, studyDates: weeklyStudyDates },
+    starterChallenge: { studyDates: scDatesLimited, bonusGranted: sc.bonusGranted || justCompletedChallenge },
     ...(newAchievementIds.length > 0 && {
       achievements: { ...(user.achievements ?? {}), ...achievementEntries },
     }),
     updatedAt: Date.now(),
   });
 
-  return { gained, base, quizBonus, missionBonus, weeklyMissionBonus, newWeeklyMissionIds, newAchievementIds, leveledUp: newLevel > prevLevel, newLevel, prevLevel, shieldEarned, newStreak: streakCurrent };
+  return { gained, base, quizBonus, missionBonus, weeklyMissionBonus, starterBonus, starterDaysCompleted, newWeeklyMissionIds, newAchievementIds, leveledUp: newLevel > prevLevel, newLevel, prevLevel, shieldEarned, newStreak: streakCurrent };
 }
 
 // ---------------------------------------------------------------------------

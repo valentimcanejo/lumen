@@ -522,14 +522,14 @@ export default function SummaryScreen() {
           incrementContentCompletion(contentId, quizScore, estimatedMinutes).catch(() => {}),
         ]);
 
-        const { gained, base, quizBonus, missionBonus, newAchievementIds, leveledUp, newLevel, shieldEarned, newStreak } = sessionResult;
+        const { gained, base, quizBonus, missionBonus, weeklyMissionBonus, starterBonus, newAchievementIds, leveledUp, newLevel, shieldEarned, newStreak } = sessionResult;
 
         // Leaderboard — fire-and-forget, does not block UI
         const displayName = auth.currentUser?.displayName
           ?? `Jogador #${uid.slice(-4).toUpperCase()}`;
         const newTier = getLevelTier(newLevel);
         upsertLeaderboardEntry(uid, displayName, gained + missionBonus, newLevel, newTier.id).catch(() => {});
-        setGainedXp(gained + missionBonus);
+        setGainedXp(gained + missionBonus + weeklyMissionBonus + starterBonus);
         setXpBreakdown({ base, quizBonus, missionBonus });
         const defs = newAchievementIds
           .map((id) => ACHIEVEMENTS.find((a) => a.id === id))

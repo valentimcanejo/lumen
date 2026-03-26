@@ -285,6 +285,12 @@
     "weekly_perfect_quiz": "Quiz 100% en una sesión",
     "weekly_study_3_days": "Estudia en 3 días distintos"
   },
+  "starter": {
+    "title": "Desafío de 3 días",
+    "subtitle": "Estudia 3 días seguidos y gana 50 XP extra",
+    "day": "Día {{n}}",
+    "completed_toast": "🎉 ¡Desafío completado! +50 XP"
+  },
   "leaderboard": {
     "title": "Ranking Semanal",
     "home_sub": "Ve tu posición entre todos los usuarios",

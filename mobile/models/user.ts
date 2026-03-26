@@ -57,6 +57,7 @@ export type UserProfile = {
   lastGoodQuizDate?: string;         // YYYY-MM-DD
   currentMissions?: CurrentMissions;
   currentWeeklyMissions?: CurrentWeeklyMissions;
+  starterChallenge?: StarterChallenge;
   createdAt: number; // ms
   updatedAt: number; // ms
 };
@@ -80,6 +81,15 @@ export type DailyMission = {
 export type CurrentMissions = {
   date: string; // YYYY-MM-DD
   list: DailyMission[];
+};
+
+// ---------------------------------------------------------------------------
+// Starter challenge — first 3 study days for new users
+// ---------------------------------------------------------------------------
+
+export type StarterChallenge = {
+  studyDates: string[]; // unique YYYY-MM-DD dates studied, up to 3
+  bonusGranted: boolean; // true once the 50 XP bonus was awarded
 };
 
 // ---------------------------------------------------------------------------
