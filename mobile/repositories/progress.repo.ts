@@ -394,6 +394,15 @@ export async function finishSession(
 ): Promise<FinishSessionResult> {
   const { date, contentId, quizScore, quizDone, completedTrackCount = 0, totalTrackCount = Infinity } = context;
 
+  // ── Idempotency guard ─────────────────────────────────────────────────────
+  // IMPORTANT: summary.tsx must await finishSession BEFORE calling markDayCompleted
+  // so this read happens before markDayCompleted writes to the same path.
+  const existingSession = await getDocData<CompletedSession>(userDailyPath(uid, date, contentId));
+  if (existingSession) {
+    const level = (await getDocData<UserProfile>(`users/${uid}`))?.level ?? 1;
+    return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, weeklyMissionBonus: 0, starterBonus: 0, starterDaysCompleted: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: false, newLevel: level, prevLevel: level, shieldEarned: false, newStreak: 0 };
+  }
+
   const user = await getDocData<UserProfile>(`users/${uid}`);
   if (!user) return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, weeklyMissionBonus: 0, starterBonus: 0, starterDaysCompleted: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: false, newLevel: 1, prevLevel: 1, shieldEarned: false, newStreak: 0 };
 

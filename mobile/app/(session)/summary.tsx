@@ -509,9 +509,12 @@ export default function SummaryScreen() {
         const estimatedMinutes =
           pack?.estimatedMinutes ?? getLessonMeta(contentId)?.estimatedMinutes ?? 0;
 
-        // Parallel: writes that touch different Firestore paths
-        const [sessionResult] = await Promise.all([
-          finishSession(uid, { date, contentId, quizScore, quizDone, completedTrackCount, totalTrackCount }),
+        // finishSession must run FIRST — its idempotency guard reads the daily_sessions
+        // doc that markDayCompleted writes. Running them in parallel would cause a race.
+        const sessionResult = await finishSession(uid, { date, contentId, quizScore, quizDone, completedTrackCount, totalTrackCount });
+
+        // After finishSession, the remaining writes touch different paths — safe to parallelize.
+        await Promise.all([
           markDayCompleted(uid, date, {
             contentId,
             contentVersion: Number(version),
