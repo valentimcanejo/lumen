@@ -18,9 +18,12 @@
   },
   "onboarding": {
     "welcome": {
-      "title": "Welcome to Lumen",
-      "subtitle": "Clarity in 5 minutes per day",
-      "start": "Start",
+      "headline": "Trade scrolling for real growth.",
+      "tagline": "10 minutes a day. A habit that changes everything.",
+      "prop_1": "Learn something new every day",
+      "prop_2": "Build a habit that actually lasts",
+      "prop_3": "Feel the difference in weeks",
+      "start": "Get started",
       "skip": "Skip"
     },
     "language": {
@@ -38,9 +41,9 @@
       "title": "How much time per day?",
       "subtitle": "Consistency matters more than quantity.",
       "per_day": "per day",
-      "desc_5": "Perfect for busy days. A quick lesson still makes a difference.",
-      "desc_10": "The ideal balance between learning and routine.",
-      "desc_15": "For those who want to go deeper. Full lesson + review.",
+      "desc_5": "Less time than a story. Enough to build a habit that changes everything.",
+      "desc_10": "Trade 10 minutes of scrolling for real learning. In 30 days, you'll feel the difference.",
+      "desc_15": "For those who want to go deeper. In weeks, you'll master topics that once felt out of reach.",
       "continue": "Continue"
     },
     "notifications": {

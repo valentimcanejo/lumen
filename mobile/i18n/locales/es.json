@@ -18,9 +18,12 @@
   },
   "onboarding": {
     "welcome": {
-      "title": "Bienvenido a Lumen",
-      "subtitle": "Clareza en 5 minutos por dia",
-      "start": "Comenzar",
+      "headline": "Cambia el scroll por crecimiento real.",
+      "tagline": "10 minutos al día. Un hábito que lo cambia todo.",
+      "prop_1": "Aprende algo nuevo cada día",
+      "prop_2": "Crea un hábito que de verdad dura",
+      "prop_3": "Siente la diferencia en semanas",
+      "start": "Empezar ahora",
       "skip": "Saltar"
     },
     "language": {
@@ -38,9 +41,9 @@
       "title": "Cuanto tiempo por dia?",
       "subtitle": "La consistencia importa más que la cantidad.",
       "per_day": "por día",
-      "desc_5": "Perfecto para días ocupados. Una lección rápida igual hace la diferencia.",
-      "desc_10": "El equilibrio ideal entre aprendizaje y rutina.",
-      "desc_15": "Para quienes quieren ir más lejos. Lección completa + revisión.",
+      "desc_5": "Menos tiempo que un story. Ya es suficiente para crear un hábito que lo cambia todo.",
+      "desc_10": "Cambia 10 minutos de scroll por aprendizaje real. En 30 días, vas a sentir la diferencia.",
+      "desc_15": "Para quienes quieren ir más lejos. En semanas, dominarás temas que antes parecían difíciles.",
       "continue": "Continuar"
     },
     "notifications": {
