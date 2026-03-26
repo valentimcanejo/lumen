@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ActivityIndicator, Dimensions, StyleSheet, View } from "react-native";
+import * as Haptics from "expo-haptics";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -288,7 +289,10 @@ function LevelUpModal({
           }}
         >
           <Text
-            onPress={onDismiss}
+            onPress={() => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              onDismiss();
+            }}
             style={{ color: "#0B0F14", fontSize: 16, fontWeight: "800" }}
           >
             {t("common.continue")}
@@ -534,6 +538,13 @@ export default function SummaryScreen() {
         if (leveledUp) {
           setLevelUpInfo({ level: newLevel, tier: getLevelTier(newLevel) });
           setConfettiActive(true);
+          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        } else if (defs.length > 0) {
+          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        } else if (missionBonus > 0) {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+        } else {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
         }
 
         // Invalidate cache so next home load gets fresh user data

@@ -16,6 +16,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons";
 import { router, useFocusEffect } from "expo-router";
+import * as Haptics from "expo-haptics";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -513,6 +514,7 @@ export default function Home() {
   const nextPerTrack = getNextLessonPerTrack(selectedTrackIds, completedIds);
 
   function startSession(contentId: string) {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     const meta = getLessonMeta(contentId);
     router.push({
       pathname: "/(session)/intro",
