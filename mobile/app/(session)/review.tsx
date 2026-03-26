@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import Animated, {
   useSharedValue,
@@ -47,6 +47,7 @@ export default function ReviewScreen() {
   const [done, setDone] = useState(false);
   const [gradedCount, setGradedCount] = useState(0);
   const [missionXpGained, setMissionXpGained] = useState(0);
+  const missionCheckedRef = useRef(false);
 
   const flipScale = useSharedValue(1);
   const flipAnimStyle = useAnimatedStyle(() => ({
@@ -130,16 +131,22 @@ export default function ReviewScreen() {
     setRevealed(false);
     setShowBack(false);
     flipScale.value = 1;
+    const count = finalGradedCount ?? gradedCount;
     const next = index + 1;
+
+    // Fire mission as soon as threshold is reached — don't wait for all cards
+    if (uid && count >= 3 && !missionCheckedRef.current) {
+      missionCheckedRef.current = true;
+      checkAndCompleteDailyMissions(uid, { cardsReviewed: count })
+        .then(({ xpGranted }) => { if (xpGranted > 0) setMissionXpGained(xpGranted); })
+        .catch(() => {});
+    }
+
     if (next >= total) {
       setDone(true);
-      const count = finalGradedCount ?? gradedCount;
       if (uid && count > 0) {
         incrementCardsReviewed(uid, count).catch(() => {});
         checkAndGrantAchievements(uid, { quizScore: 0 }).catch(() => {});
-        checkAndCompleteDailyMissions(uid, { cardsReviewed: count })
-          .then(({ xpGranted }) => { if (xpGranted > 0) setMissionXpGained(xpGranted); })
-          .catch(() => {});
       }
     } else {
       setIndex(next);
