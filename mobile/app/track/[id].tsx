@@ -149,6 +149,8 @@ export default function TrackDetailScreen() {
   const title = track?.title[lang] ?? track?.title.en ?? id;
   const color = trackColor(id as string);
   const bg = trackBg(id as string);
+  const doneLessons = completedIds.filter((c) => c.startsWith(id as string)).length;
+  const isTrackMastered = !loading && lessons.length > 0 && doneLessons >= lessons.length;
 
   function startLesson(lesson: LessonMeta) {
     router.push({
@@ -191,6 +193,28 @@ export default function TrackDetailScreen() {
           {lessons.length} {t("track.lessons")}
         </Text>
       </Box>
+
+      {/* Mastery banner */}
+      {isTrackMastered && (
+        <Box className="px-5 pt-4">
+          <Box
+            className="rounded-[18px] p-4"
+            style={{ backgroundColor: `${color}18`, borderWidth: 1.5, borderColor: `${color}55` }}
+          >
+            <HStack className="items-start" space="sm">
+              <Ionicons name="trophy" size={20} color={color} style={{ marginTop: 1 }} />
+              <VStack space="xs" className="flex-1">
+                <Text className="text-[#E6EAF2] text-[15px] font-semibold">
+                  {t("track.mastered_title")}
+                </Text>
+                <Text className="text-[13px] leading-[19px]" style={{ color: `${color}CC` }}>
+                  {track?.description?.[lang] ?? track?.description?.en ?? t("track.mastered_fallback")}
+                </Text>
+              </VStack>
+            </HStack>
+          </Box>
+        </Box>
+      )}
 
       <ScrollView
         className="flex-1 px-5"

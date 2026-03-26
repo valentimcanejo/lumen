@@ -144,7 +144,11 @@
       "heatmap_title": "Activity",
       "heatmap_less": "Less",
       "heatmap_more": "More",
-      "heatmap_days": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+      "heatmap_days": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+      "mastery_title": "What you've mastered",
+      "mastery_completed": "Completed",
+      "mastery_in_progress": "In progress",
+      "mastery_lessons": "{{done}}/{{total}} lessons"
     }
   },
   "track": {
@@ -153,7 +157,9 @@
     "review": "Review",
     "completed": "Completed",
     "empty": "No lessons available.",
-    "min": "min"
+    "min": "min",
+    "mastered_title": "Track completed!",
+    "mastered_fallback": "You've mastered all content in this track."
   },
   "session": {
     "intro": {

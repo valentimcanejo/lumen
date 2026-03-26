@@ -144,7 +144,11 @@
       "heatmap_title": "Actividad",
       "heatmap_less": "Menos",
       "heatmap_more": "Más",
-      "heatmap_days": ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"]
+      "heatmap_days": ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+      "mastery_title": "Lo que dominas",
+      "mastery_completed": "Completado",
+      "mastery_in_progress": "En curso",
+      "mastery_lessons": "{{done}}/{{total}} lecciones"
     }
   },
   "track": {
@@ -153,7 +157,9 @@
     "review": "Repasar",
     "completed": "Completado",
     "empty": "No hay lecciones disponibles.",
-    "min": "min"
+    "min": "min",
+    "mastered_title": "¡Ruta completada!",
+    "mastered_fallback": "Ya dominas todos los contenidos de esta ruta."
   },
   "session": {
     "intro": {

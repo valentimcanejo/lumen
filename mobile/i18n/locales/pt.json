@@ -144,7 +144,11 @@
       "heatmap_title": "Atividade",
       "heatmap_less": "Menos",
       "heatmap_more": "Mais",
-      "heatmap_days": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"]
+      "heatmap_days": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+      "mastery_title": "O que você domina",
+      "mastery_completed": "Concluído",
+      "mastery_in_progress": "Em andamento",
+      "mastery_lessons": "{{done}}/{{total}} lições"
     }
   },
   "track": {
@@ -153,7 +157,9 @@
     "review": "Rever",
     "completed": "Concluído",
     "empty": "Nenhuma lição disponível.",
-    "min": "min"
+    "min": "min",
+    "mastered_title": "Trilha concluída!",
+    "mastered_fallback": "Você domina todos os conteúdos desta trilha."
   },
   "session": {
     "intro": {

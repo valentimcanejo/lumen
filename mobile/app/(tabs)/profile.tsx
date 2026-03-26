@@ -14,8 +14,12 @@ import { VStack } from "@/components/ui/vstack";
 
 import { useUser, invalidateUserCache } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
-import { setUserLanguage } from "../../repositories/user.repo";
+import { setUserLanguage, getCompletedContentIds } from "../../repositories/user.repo";
 import { getStudyHeatmap } from "../../repositories/progress.repo";
+import { getTracks } from "../../repositories/tracks.repo";
+import { getLessonCountForTrack } from "../../repositories/lessons.repo";
+import { trackColor, trackBg } from "../../constants/tracks";
+import type { Track } from "../../models/track";
 import {
   requestNotificationPermission,
   scheduleDailyReminder,
@@ -466,6 +470,139 @@ function LanguageSelector({
 }
 
 // ---------------------------------------------------------------------------
+// Mastery section — tracks with at least one completed lesson
+// ---------------------------------------------------------------------------
+
+function MasterySection({
+  tracks,
+  completedIds,
+  lang,
+}: {
+  tracks: Track[];
+  completedIds: string[];
+  lang: Lang;
+}) {
+  const { t } = useTranslation();
+
+  const withProgress = tracks
+    .map((track) => {
+      const total = getLessonCountForTrack(track.id);
+      const done = completedIds.filter((id) => id.startsWith(track.id)).length;
+      return { track, total, done };
+    })
+    .filter(({ done }) => done > 0)
+    .sort((a, b) => b.done / (b.total || 1) - a.done / (a.total || 1));
+
+  if (withProgress.length === 0) return null;
+
+  const mastered = withProgress.filter(({ done, total }) => total > 0 && done >= total);
+  const inProgress = withProgress.filter(({ done, total }) => total > 0 && done < total);
+
+  return (
+    <View style={{ marginBottom: 24 }}>
+      <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 12, gap: 8 }}>
+        <Text style={{ color: "#E6EAF2", fontSize: 16, fontWeight: "600" }}>
+          {t("tabs.profile.mastery_title")}
+        </Text>
+        {mastered.length > 0 && (
+          <View style={{
+            backgroundColor: "#1A2233", paddingHorizontal: 7, paddingVertical: 2, borderRadius: 10,
+          }}>
+            <Text style={{ color: "#AAB0C0", fontSize: 12, fontWeight: "600" }}>
+              {mastered.length}
+            </Text>
+          </View>
+        )}
+      </View>
+
+      {/* Mastered tracks — certificate style */}
+      {mastered.map(({ track, done, total }) => {
+        const title = track.title[lang] ?? track.title.en ?? track.id;
+        const desc = track.description?.[lang] ?? track.description?.en ?? "";
+        const color = trackColor(track.id);
+        const bg = trackBg(track.id);
+        return (
+          <View
+            key={track.id}
+            style={{
+              backgroundColor: bg,
+              borderWidth: 1.5,
+              borderColor: `${color}55`,
+              borderRadius: 18,
+              padding: 16,
+              marginBottom: 10,
+            }}
+          >
+            <View style={{ flexDirection: "row", alignItems: "flex-start", justifyContent: "space-between" }}>
+              <View style={{ flexDirection: "row", alignItems: "center", flex: 1, marginRight: 8, gap: 8 }}>
+                <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: color, marginTop: 3, flexShrink: 0 }} />
+                <Text style={{ color: "#E6EAF2", fontSize: 15, fontWeight: "700", flex: 1 }}>
+                  {title}
+                </Text>
+              </View>
+              <View style={{ backgroundColor: `${color}22`, paddingHorizontal: 8, paddingVertical: 3, borderRadius: 100 }}>
+                <Text style={{ color, fontSize: 11, fontWeight: "700" }}>
+                  {t("tabs.profile.mastery_completed")}
+                </Text>
+              </View>
+            </View>
+            {desc ? (
+              <Text style={{ color: "#AAB0C0", fontSize: 13, lineHeight: 19, marginTop: 8, marginLeft: 16 }}>
+                {desc}
+              </Text>
+            ) : null}
+            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 8, marginLeft: 16, gap: 4 }}>
+              <Ionicons name="checkmark-circle" size={13} color={color} />
+              <Text style={{ color, fontSize: 12, fontWeight: "600" }}>
+                {t("tabs.profile.mastery_lessons", { done, total })}
+              </Text>
+            </View>
+          </View>
+        );
+      })}
+
+      {/* In-progress tracks */}
+      {inProgress.map(({ track, done, total }) => {
+        const title = track.title[lang] ?? track.title.en ?? track.id;
+        const color = trackColor(track.id);
+        const pct = total > 0 ? done / total : 0;
+        return (
+          <View
+            key={track.id}
+            style={{
+              backgroundColor: "#111827",
+              borderWidth: 1,
+              borderColor: "#1A2233",
+              borderRadius: 18,
+              padding: 14,
+              marginBottom: 10,
+            }}
+          >
+            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+              <View style={{ flexDirection: "row", alignItems: "center", flex: 1, marginRight: 8, gap: 8 }}>
+                <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: color, flexShrink: 0 }} />
+                <Text style={{ color: "#E6EAF2", fontSize: 15, fontWeight: "600", flex: 1 }} numberOfLines={1}>
+                  {title}
+                </Text>
+              </View>
+              <Text style={{ color: "#7B8193", fontSize: 12, fontWeight: "600" }}>
+                {done}/{total}
+              </Text>
+            </View>
+            <View style={{ height: 3, backgroundColor: "#1A2233", borderRadius: 99, overflow: "hidden" }}>
+              <View style={{ height: "100%", width: `${pct * 100}%`, backgroundColor: color, borderRadius: 99 }} />
+            </View>
+            <Text style={{ color: "#7B8193", fontSize: 11, marginTop: 5 }}>
+              {t("tabs.profile.mastery_in_progress")}
+            </Text>
+          </View>
+        );
+      })}
+    </View>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Screen
 // ---------------------------------------------------------------------------
 
@@ -481,6 +618,8 @@ export default function ProfileScreen() {
   const [notifGranted, setNotifGranted] = useState<boolean | null>(null);
   const [enablingNotif, setEnablingNotif] = useState(false);
   const [heatmap, setHeatmap] = useState<Record<string, number>>({});
+  const [tracks, setTracks] = useState<Track[]>([]);
+  const [completedIds, setCompletedIds] = useState<string[]>([]);
 
   useEffect(() => {
     if (!uid) return;
@@ -490,6 +629,8 @@ export default function ProfileScreen() {
       setLanguage(u.lang);
     });
     getStudyHeatmap(uid).then(setHeatmap);
+    getTracks().then(setTracks).catch(() => {});
+    getCompletedContentIds(uid).then(setCompletedIds).catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
 
@@ -652,6 +793,13 @@ export default function ProfileScreen() {
                 />
               </Box>
             </Box>
+
+            {/* Mastery — tracks with progress */}
+            <MasterySection
+              tracks={tracks}
+              completedIds={completedIds}
+              lang={language}
+            />
 
             {/* Achievements */}
             {unlockedAchievements.length > 0 && (
