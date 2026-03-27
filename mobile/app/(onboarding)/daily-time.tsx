@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box } from "../../components/ui/box";
 import { Text } from "../../components/ui/text";
-import { HStack } from "../../components/ui/hstack";
 import { Pressable } from "../../components/ui/pressable";
 import { router, useLocalSearchParams } from "expo-router";
 import { LumenButton } from "../../components/ui/lumen/Button";
@@ -11,9 +10,10 @@ import { useUser } from "../../hooks/useUser";
 import { Lang } from "../../models/lang";
 
 const OPTIONS = [
-  { key: 5, label: "5 min", desc: "onboarding.daily-time.desc_5" },
-  { key: 10, label: "10 min", desc: "onboarding.daily-time.desc_10" },
-  { key: 15, label: "15 min", desc: "onboarding.daily-time.desc_15" },
+  { key: 5,  nameKey: "onboarding.daily-time.name_5",  desc: "onboarding.daily-time.desc_5" },
+  { key: 10, nameKey: "onboarding.daily-time.name_10", desc: "onboarding.daily-time.desc_10" },
+  { key: 15, nameKey: "onboarding.daily-time.name_15", desc: "onboarding.daily-time.desc_15" },
+  { key: 20, nameKey: "onboarding.daily-time.name_20", desc: "onboarding.daily-time.desc_20" },
 ] as const;
 
 export default function DailyTime() {
@@ -58,47 +58,54 @@ export default function DailyTime() {
         {t("onboarding.daily-time.subtitle")}
       </Text>
 
-      {/* Pill selector */}
-      <HStack className="mt-8 bg-[#111827] rounded-2xl p-1" space="xs">
+      {/* Option cards */}
+      <Box className="mt-8 gap-3">
         {OPTIONS.map((o) => {
           const active = o.key === minutes;
           return (
-            <Pressable
-              key={o.key}
-              onPress={() => setMinutes(o.key)}
-              style={{ flex: 1 }}
-            >
+            <Pressable key={o.key} onPress={() => setMinutes(o.key)}>
               <Box
                 style={{
-                  paddingVertical: 12,
-                  borderRadius: 14,
-                  backgroundColor: active ? "#F5C77A" : "transparent",
+                  flexDirection: "row",
                   alignItems: "center",
+                  justifyContent: "space-between",
+                  paddingVertical: 16,
+                  paddingHorizontal: 20,
+                  borderRadius: 16,
+                  backgroundColor: active ? "#1C2030" : "#111827",
+                  borderWidth: 1.5,
+                  borderColor: active ? "#F5C77A" : "transparent",
                 }}
               >
                 <Text
                   style={{
-                    color: active ? "#0B0F14" : "#AAB0C0",
-                    fontSize: 15,
+                    color: active ? "#F5C77A" : "#E6EAF2",
+                    fontSize: 16,
                     fontWeight: active ? "700" : "500",
                   }}
                 >
-                  {o.label}
+                  {t(o.nameKey)}
+                </Text>
+                <Text
+                  style={{
+                    color: active ? "#F5C77A99" : "#AAB0C0",
+                    fontSize: 14,
+                    fontWeight: "500",
+                  }}
+                >
+                  {o.key} {t("onboarding.daily-time.per_day")}
                 </Text>
               </Box>
             </Pressable>
           );
         })}
-      </HStack>
+      </Box>
 
       {/* Description card */}
       <Box
-        className="mt-6 bg-[#111827] rounded-2xl p-5"
+        className="mt-4 bg-[#111827] rounded-2xl p-5"
         style={{ borderWidth: 1, borderColor: "#F5C77A33" }}
       >
-        <Text className="text-[#F5C77A] text-[13px] font-semibold mb-1">
-          {selected.label} {t("onboarding.daily-time.per_day")}
-        </Text>
         <Text className="text-[#AAB0C0] text-[14px] leading-5">
           {t(selected.desc)}
         </Text>

@@ -30,6 +30,7 @@ import { Text } from "../../components/ui/text";
 import { VStack } from "../../components/ui/vstack";
 import { SkeletonCard } from "../../components/ui/lumen/Skeleton";
 import { trackColor } from "../../constants/tracks";
+import { getCoverImage } from "../../constants/covers";
 
 import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
@@ -781,18 +782,29 @@ export default function Home() {
                 </HStack>
               )}
             </HStack>
-            <TouchableOpacity onPress={() => startSession(todayLessonId)} style={lc.card} activeOpacity={0.75}>
-              <View style={[lc.trackAccent, { backgroundColor: color }]} />
-              <VStack style={{ flex: 1, marginRight: 12 }}>
-                <Text style={lc.cardTitle} numberOfLines={2}>
-                  {todayLesson.title[lang] ?? todayLesson.title.en}
-                </Text>
-                <Text style={lc.cardDuration}>{todayLesson.estimatedMinutes} min</Text>
-              </VStack>
-              <View style={[lc.startBtn, isDone && lc.startBtnDone]}>
-                <Text style={[lc.startBtnText, isDone && lc.startBtnTextDone]}>
-                  {isDone ? t("tabs.home.redo") : t("tabs.home.start")}
-                </Text>
+            <TouchableOpacity onPress={() => startSession(todayLessonId)} style={lc.card} activeOpacity={0.85}>
+              {(() => {
+                const cover = getCoverImage(todayLessonId);
+                return cover ? (
+                  <Image source={cover} style={lc.coverImage} resizeMode="cover" />
+                ) : (
+                  <View style={[lc.coverFallback, { backgroundColor: color + "33" }]}>
+                    <View style={[lc.coverAccent, { backgroundColor: color }]} />
+                  </View>
+                );
+              })()}
+              <View style={lc.cardBody}>
+                <VStack style={{ flex: 1, marginRight: 12 }}>
+                  <Text style={lc.cardTitle} numberOfLines={2}>
+                    {todayLesson.title[lang] ?? todayLesson.title.en}
+                  </Text>
+                  <Text style={lc.cardDuration}>{todayLesson.estimatedMinutes} min</Text>
+                </VStack>
+                <View style={[lc.startBtn, isDone && lc.startBtnDone]}>
+                  <Text style={[lc.startBtnText, isDone && lc.startBtnTextDone]}>
+                    {isDone ? t("tabs.home.redo") : t("tabs.home.start")}
+                  </Text>
+                </View>
               </View>
             </TouchableOpacity>
           </Box>
@@ -1054,15 +1066,27 @@ const lc = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#1A2233",
     borderRadius: 18,
-    padding: 16,
-    flexDirection: "row",
-    alignItems: "center",
+    overflow: "hidden",
   },
-  trackAccent: {
+  coverImage: {
+    width: "100%",
+    height: 160,
+  },
+  coverFallback: {
+    width: "100%",
+    height: 160,
+    justifyContent: "center",
+    paddingLeft: 16,
+  },
+  coverAccent: {
     width: 3,
     height: 40,
     borderRadius: 2,
-    marginRight: 14,
+  },
+  cardBody: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 16,
   },
   cardTitle: {
     color: "#E6EAF2",

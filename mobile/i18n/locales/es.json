@@ -37,13 +37,24 @@
       "hint": "Puedes cambiar esto luego en tu perfil.",
       "continue": "Continuar"
     },
+    "social-proof": {
+      "stat": "9 de cada 10 usuarios se sienten más informados después de la primera semana.",
+      "question": "¿Quieres ser uno de ellos?",
+      "cta_ready": "Sí, estoy listo",
+      "cta_curious": "Sorpréndeme"
+    },
     "daily-time": {
-      "title": "Cuanto tiempo por dia?",
+      "title": "¿Cuánto tiempo por día?",
       "subtitle": "La consistencia importa más que la cantidad.",
       "per_day": "por día",
+      "name_5": "Casual",
+      "name_10": "Regular",
+      "name_15": "Dedicado",
+      "name_20": "Determinado",
       "desc_5": "Menos tiempo que un story. Ya es suficiente para crear un hábito que lo cambia todo.",
       "desc_10": "Cambia 10 minutos de scroll por aprendizaje real. En 30 días, vas a sentir la diferencia.",
       "desc_15": "Para quienes quieren ir más lejos. En semanas, dominarás temas que antes parecían difíciles.",
+      "desc_20": "Modo serio. Te sorprenderás de cuánto aprendes en un mes.",
       "continue": "Continuar"
     },
     "notifications": {

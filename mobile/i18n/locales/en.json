@@ -37,13 +37,24 @@
       "hint": "You can change this later in your profile.",
       "continue": "Continue"
     },
+    "social-proof": {
+      "stat": "9 out of 10 users feel more informed after the first week.",
+      "question": "Want to become one of them?",
+      "cta_ready": "Yes, I'm ready",
+      "cta_curious": "Surprise me"
+    },
     "daily-time": {
       "title": "How much time per day?",
       "subtitle": "Consistency matters more than quantity.",
       "per_day": "per day",
+      "name_5": "Casual",
+      "name_10": "Regular",
+      "name_15": "Dedicated",
+      "name_20": "Determined",
       "desc_5": "Less time than a story. Enough to build a habit that changes everything.",
       "desc_10": "Trade 10 minutes of scrolling for real learning. In 30 days, you'll feel the difference.",
       "desc_15": "For those who want to go deeper. In weeks, you'll master topics that once felt out of reach.",
+      "desc_20": "Serious mode. You'll surprise yourself with how much you learn in a month.",
       "continue": "Continue"
     },
     "notifications": {
