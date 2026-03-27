@@ -143,6 +143,7 @@ export default function Tracks() {
   const [selectedTrackIds, setSelectedTrackIds] = useState<string[]>([]);
   const [search, setSearch] = useState("");
   const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
+  const [isPremium, setIsPremium] = useState(false);
 
   useEffect(() => {
     getTracks()
@@ -156,6 +157,7 @@ export default function Tracks() {
     getUserData({ userId: uid }).then((user) => {
       if (user?.lang) setLang(user.lang);
       setSelectedTrackIds(user?.selectedTrackIds ?? user?.selectedGoalIds ?? []);
+      setIsPremium(user?.premium?.isActive === true);
     });
     getCompletedContentIds(uid).then(setCompletedIds).catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -204,16 +206,14 @@ export default function Tracks() {
     }
   }
 
+  const isNotPremium = !isPremium || aiPackError === "not-premium" || aiPackError === "premium-expired";
+
   const aiErrorMessage =
-    aiPackError === "not-premium"
-      ? t("tabs.tracks.ai_error_not_premium")
-      : aiPackError === "premium-expired"
-        ? t("tabs.tracks.ai_error_expired")
-        : aiPackError === "rate-limited"
-          ? t("tabs.tracks.ai_error_rate_limited")
-          : aiPackError === "unknown"
-            ? t("tabs.tracks.ai_error_unknown")
-            : null;
+    aiPackError === "rate-limited"
+      ? t("tabs.tracks.ai_error_rate_limited")
+      : aiPackError === "unknown"
+        ? t("tabs.tracks.ai_error_unknown")
+        : null;
 
   const FILTERS: { key: FilterKey; label: string }[] = [
     { key: "all", label: t("tabs.tracks.filter_all") },
@@ -241,13 +241,23 @@ export default function Tracks() {
         <Text className="text-[#E26D6D] text-[12px] mt-3">{aiErrorMessage}</Text>
       ) : null}
       <Pressable
-        onPress={handleGenerate}
+        onPress={() => {
+          if (isNotPremium) {
+            router.push("/(premium)/paywall");
+          } else {
+            handleGenerate();
+          }
+        }}
         disabled={generating}
         className="mt-4 h-[44px] rounded-2xl bg-[#F5C77A] items-center justify-center"
         style={{ opacity: generating ? 0.6 : 1 }}
       >
         <Text className="text-[#0B0F14] text-[15px] font-semibold">
-          {generating ? t("tabs.tracks.ai_generating") : t("tabs.tracks.ai_generate")}
+          {generating
+            ? t("tabs.tracks.ai_generating")
+            : isNotPremium
+              ? t("tabs.tracks.ai_unlock")
+              : t("tabs.tracks.ai_generate")}
         </Text>
       </Pressable>
     </Box>

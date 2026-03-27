@@ -66,6 +66,25 @@
       "reminder_body": "Sua sessão diária te espera. Só 5 minutos fazem a diferença."
     }
   },
+  "premium": {
+    "badge": "LUMEN PREMIUM",
+    "headline": "Aprenda sem limites",
+    "subtitle": "Desbloqueie o potencial completo do Lumen",
+    "feature_1_title": "IA sob demanda",
+    "feature_1_desc": "Digite qualquer tema e receba uma sessão completa gerada na hora.",
+    "feature_2_title": "Conteúdo atualizado",
+    "feature_2_desc": "Packs sobre eventos recentes — eleições, crises, tendências.",
+    "feature_3_title": "Trilhas personalizadas",
+    "feature_3_desc": "A IA monta sua sequência de aprendizado com base no seu progresso.",
+    "plan_annual_label": "MAIS POPULAR",
+    "plan_annual_price": "R$99/ano",
+    "plan_annual_monthly": "equivale a R$8,25/mês",
+    "plan_monthly_price": "R$19,90/mês",
+    "plan_monthly_label": "Mensal",
+    "cta": "Começar trial grátis — 7 dias",
+    "fine_print": "Cancele quando quiser. Sem compromisso.",
+    "coming_soon": "Pagamentos em breve disponíveis"
+  },
   "tabs": {
     "home": {
       "title": "Sua sessão de hoje",
@@ -97,6 +116,7 @@
       "ai_description": "Crie uma sessão personalizada no seu idioma com conteúdo gerado sob demanda.",
       "ai_generating": "Gerando…",
       "ai_generate": "Gerar sessão",
+      "ai_unlock": "Desbloquear com Premium",
       "ai_error_not_premium": "Este recurso é exclusivo para assinantes Premium.",
       "ai_error_expired": "Sua assinatura Premium expirou. Renove para continuar.",
       "ai_error_rate_limited": "Limite diário de sessões IA atingido. Tente amanhã.",

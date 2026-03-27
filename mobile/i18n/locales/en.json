@@ -66,6 +66,25 @@
       "reminder_body": "Your daily session is waiting. Just 5 minutes makes a difference."
     }
   },
+  "premium": {
+    "badge": "LUMEN PREMIUM",
+    "headline": "Learn without limits",
+    "subtitle": "Unlock the full potential of Lumen",
+    "feature_1_title": "AI on demand",
+    "feature_1_desc": "Type any topic and get a complete session generated instantly.",
+    "feature_2_title": "Updated content",
+    "feature_2_desc": "Packs on recent events — elections, crises, trends.",
+    "feature_3_title": "Personalized tracks",
+    "feature_3_desc": "AI builds your learning sequence based on your progress.",
+    "plan_annual_label": "MOST POPULAR",
+    "plan_annual_price": "R$99/year",
+    "plan_annual_monthly": "equals R$8.25/month",
+    "plan_monthly_price": "R$19.90/month",
+    "plan_monthly_label": "Monthly",
+    "cta": "Start free trial — 7 days",
+    "fine_print": "Cancel anytime. No commitment.",
+    "coming_soon": "Payments coming soon"
+  },
   "tabs": {
     "home": {
       "title": "Your Today's Session",
@@ -97,6 +116,7 @@
       "ai_description": "Create a personalized session in your language with on-demand generated content.",
       "ai_generating": "Generating…",
       "ai_generate": "Generate session",
+      "ai_unlock": "Unlock with Premium",
       "ai_error_not_premium": "This feature is exclusive to Premium subscribers.",
       "ai_error_expired": "Your Premium subscription has expired. Renew to continue.",
       "ai_error_rate_limited": "Daily AI session limit reached. Try again tomorrow.",
