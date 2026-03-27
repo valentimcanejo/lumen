@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
-import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import { Image, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Audio } from "expo-av";
 import { useTranslation } from "react-i18next";
@@ -18,6 +18,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import { toggleSaveContent } from "../../repositories/user.repo";
 import { trackColor } from "../../constants/tracks";
+import { getCoverImage } from "../../constants/covers";
 import { getStorageDownloadUrl } from "../../services/storage.service";
 import { generateAudio } from "../../services/functions.service";
 import type { Lang } from "../../models/lang";
@@ -270,6 +271,13 @@ export default function LessonScreen() {
           paddingBottom: Math.max(insets.bottom + 16, 32),
         }}
       >
+        {(() => {
+          const cover = getCoverImage(contentId);
+          return cover ? (
+            <Image source={cover} style={{ width: "100%", height: 200 }} resizeMode="cover" />
+          ) : null;
+        })()}
+
         <Box className="px-5 pt-6">
           <Text className="text-[#E6EAF2] text-[22px] font-semibold">
             {pack.lesson.title}
