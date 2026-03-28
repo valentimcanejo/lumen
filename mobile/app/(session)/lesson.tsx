@@ -1,6 +1,13 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { Image, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  withSequence,
+  Easing,
+} from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons";
 import { Audio } from "expo-av";
 import { useTranslation } from "react-i18next";
@@ -79,6 +86,100 @@ function Waveform({ progress = 0 }: { progress?: number }) {
     </View>
   );
 }
+
+function PackLoadingScreen({ color }: { color: string }) {
+  const { t } = useTranslation();
+  const progress = useSharedValue(0);
+
+  useEffect(() => {
+    // Simulate loading: ramp to 80% quickly, then slow crawl to 93%
+    progress.value = withSequence(
+      withTiming(0.8, { duration: 900, easing: Easing.out(Easing.cubic) }),
+      withTiming(0.93, { duration: 3000, easing: Easing.out(Easing.quad) }),
+    );
+  }, []);
+
+  const barStyle = useAnimatedStyle(() => ({
+    width: `${progress.value * 100}%`,
+  }));
+
+  return (
+    <View style={ld.screen}>
+      <View style={ld.center}>
+        {/* Icon badge */}
+        <View style={[ld.iconBadge, { borderColor: color + "40", backgroundColor: color + "12" }]}>
+          <Ionicons name="book-outline" size={28} color={color} />
+        </View>
+
+        <Text style={ld.label}>{t("session.lesson.loading")}</Text>
+
+        {/* Progress bar */}
+        <View style={ld.barTrack}>
+          <Animated.View style={[ld.barFill, barStyle, { backgroundColor: color }]} />
+          {/* Shimmer head */}
+          <Animated.View style={[ld.barHead, barStyle, { shadowColor: color }]} />
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const ld = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: "#0B0F14",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  center: {
+    alignItems: "center",
+    gap: 20,
+    paddingHorizontal: 48,
+  },
+  iconBadge: {
+    width: 72,
+    height: 72,
+    borderRadius: 22,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 4,
+  },
+  label: {
+    color: "#7B8193",
+    fontSize: 13,
+    fontWeight: "500",
+    letterSpacing: 0.3,
+  },
+  barTrack: {
+    width: "100%",
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: "#1A2233",
+    overflow: "hidden",
+    position: "relative",
+  },
+  barFill: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    height: "100%",
+    borderRadius: 2,
+  },
+  barHead: {
+    position: "absolute",
+    right: 0,
+    top: -2,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: "transparent",
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 6,
+    shadowOpacity: 0.8,
+    elevation: 4,
+  },
+});
 
 export default function LessonScreen() {
   const { t } = useTranslation();
@@ -232,11 +333,7 @@ export default function LessonScreen() {
   }
 
   if (loading) {
-    return (
-      <Box className="flex-1 bg-[#0B0F14] items-center justify-center">
-        <Text className="text-[#AAB0C0]">{t("common.loading")}</Text>
-      </Box>
-    );
+    return <PackLoadingScreen color={color} />;
   }
 
   if (error || !pack) {

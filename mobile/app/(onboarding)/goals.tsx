@@ -105,7 +105,7 @@ export default function Goals() {
 
       <Box
         className="px-6"
-        style={{ paddingBottom: Math.max(insets.bottom, 24), paddingTop: 12 }}
+        style={{ paddingBottom: Math.max(insets.bottom + 12, 24), paddingTop: 12 }}
       >
         <LumenButton disabled={!canContinue} onPress={handleNext}>
           {t("onboarding.goals.continue")}

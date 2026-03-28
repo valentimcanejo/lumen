@@ -778,10 +778,6 @@ export default function SummaryScreen() {
           scorePct >= 0.85 ? "#5ED19A" :
           scorePct >= 0.6  ? "#F5C77A" :
                              "#7B8193";
-        const scoreEmoji =
-          scorePct >= 0.85 ? "🏆" :
-          scorePct >= 0.6  ? "⚡" :
-          scorePct >= 0.35 ? "📈" : "💪";
 
         return (
           <ScrollView
@@ -809,9 +805,8 @@ export default function SummaryScreen() {
                     )}
                   </View>
 
-                  {/* Right: emoji + circle + XP */}
+                  {/* Right: circle + XP */}
                   <View style={sr.scoreRight}>
-                    <Text style={sr.scoreEmoji}>{scoreEmoji}</Text>
                     <View style={[sr.scoreCircle, { borderColor: scoreColor }]}>
                       <Text style={[sr.scoreCircleText, { color: scoreColor }]}>
                         {totalN > 0 ? Math.round(scorePct * 100) : 100}%
@@ -872,7 +867,7 @@ export default function SummaryScreen() {
       })()}
 
       {/* Fixed buttons */}
-      <Box className="px-5" style={{ paddingBottom: Math.max(insets.bottom, 24), paddingTop: 12 }}>
+      <Box className="px-5" style={{ paddingBottom: Math.max(insets.bottom + 12, 24), paddingTop: 12 }}>
         <VStack space="sm">
           {!saved ? (
             <Box className="h-[52px] items-center justify-center">

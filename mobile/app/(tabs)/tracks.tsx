@@ -73,52 +73,42 @@ function TrackCard({
           },
         ]}
       >
-        {/* Top row */}
-        <RNView style={tc.topRow}>
-          {/* Icon badge + title */}
-          <RNView style={tc.left}>
-            <RNView style={[tc.iconBadge, { backgroundColor: color + "20", borderColor: color + "40" }]}>
-              <RNView style={[tc.iconDot, { backgroundColor: color }]} />
-            </RNView>
-            <Text style={tc.title} numberOfLines={1}>{title}</Text>
+        {/* Header row: icon badge + title + follow */}
+        <RNView style={tc.headerRow}>
+          <RNView style={[tc.iconBadge, { backgroundColor: color + "20", borderColor: color + "40" }]}>
+            <RNView style={[tc.iconDot, { backgroundColor: color }]} />
           </RNView>
-
-          {/* Right: difficulty + follow */}
-          <RNView style={tc.right}>
-            <DifficultyBadge level={track.difficulty} />
-            <TouchableOpacity
-              onPress={onToggleFollow}
-              disabled={isFollowing && !canUnfollow}
-              hitSlop={10}
-              style={{ opacity: isFollowing && !canUnfollow ? 0.35 : 1 }}
-            >
-              {isFollowing ? (
-                <RNView style={[tc.followingPill, { backgroundColor: color + "18", borderColor: color + "40" }]}>
-                  <Text style={[tc.followingText, { color }]}>Seguindo</Text>
-                </RNView>
-              ) : (
-                <Ionicons name="add-circle-outline" size={20} color="#4A5568" />
-              )}
-            </TouchableOpacity>
-          </RNView>
+          <Text style={tc.title} numberOfLines={2}>{title}</Text>
+          <TouchableOpacity
+            onPress={onToggleFollow}
+            disabled={isFollowing && !canUnfollow}
+            hitSlop={10}
+            style={{ opacity: isFollowing && !canUnfollow ? 0.35 : 1, flexShrink: 0 }}
+          >
+            {isFollowing ? (
+              <RNView style={[tc.followingPill, { backgroundColor: color + "18", borderColor: color + "40" }]}>
+                <Text style={[tc.followingText, { color }]}>Seguindo</Text>
+              </RNView>
+            ) : (
+              <Ionicons name="add-circle-outline" size={20} color="#4A5568" />
+            )}
+          </TouchableOpacity>
         </RNView>
 
-        {/* Progress bar */}
-        {total > 0 && (
-          <RNView style={tc.progressRow}>
-            <RNView style={tc.progressTrack}>
-              <RNView
-                style={[
-                  tc.progressFill,
-                  { width: `${pct}%`, backgroundColor: color },
-                ]}
-              />
+        {/* Meta row: difficulty + progress */}
+        <RNView style={tc.metaRow}>
+          <DifficultyBadge level={track.difficulty} />
+          {total > 0 && (
+            <RNView style={tc.progressRow}>
+              <RNView style={tc.progressTrack}>
+                <RNView style={[tc.progressFill, { width: `${pct}%`, backgroundColor: color }]} />
+              </RNView>
+              <Text style={[tc.progressLabel, { color: done > 0 ? color : "#4A5568" }]}>
+                {done}/{total}
+              </Text>
             </RNView>
-            <Text style={[tc.progressLabel, { color: done > 0 ? color : "#4A5568" }]}>
-              {done}/{total}
-            </Text>
-          </RNView>
-        )}
+          )}
+        </RNView>
       </RNView>
     </Pressable>
   );
@@ -132,17 +122,16 @@ const tc = StyleSheet.create({
     padding: 16,
     marginBottom: 8,
   },
-  topRow: {
+  headerRow: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  left: {
-    flexDirection: "row",
-    alignItems: "center",
-    flex: 1,
-    marginRight: 10,
+    alignItems: "flex-start",
     gap: 10,
+  },
+  metaRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginTop: 12,
   },
   iconBadge: {
     width: 36,
@@ -160,15 +149,10 @@ const tc = StyleSheet.create({
   },
   title: {
     color: "#E6EAF2",
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: "700",
     flex: 1,
-  },
-  right: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    flexShrink: 0,
+    lineHeight: 21,
   },
   followingPill: {
     borderWidth: 1,
@@ -201,7 +185,7 @@ const tc = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    marginTop: 12,
+    flex: 1,
   },
   progressTrack: {
     flex: 1,

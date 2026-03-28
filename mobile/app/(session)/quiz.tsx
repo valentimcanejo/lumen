@@ -429,7 +429,7 @@ export default function QuizScreen() {
 
           {/* Fixed bottom buttons */}
           <RNView
-            style={[q.bottomBar, { paddingBottom: Math.max(insets.bottom, 24) }]}
+            style={[q.bottomBar, { paddingBottom: Math.max(insets.bottom + 12, 24) }]}
           >
             {(() => {
               const wasCorrect = answered && selectedIndex === (shuffled?.answerIndex ?? current.answerIndex);

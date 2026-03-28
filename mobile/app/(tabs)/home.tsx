@@ -860,59 +860,65 @@ export default function Home() {
               )}
             </View>
 
-            {/* Hero card — image with overlaid content */}
-            <View style={[lc.heroCard, { borderColor: isDone ? "#1E2A3E" : color + "50" }]}>
-              {cover ? (
-                <Image source={cover} style={lc.heroImage} resizeMode="cover" />
-              ) : (
-                <View style={[lc.heroImage, { backgroundColor: color + "18", alignItems: "center", justifyContent: "center" }]}>
-                  <View style={{ width: 3, height: 48, backgroundColor: color, borderRadius: 2 }} />
-                </View>
-              )}
+            {/* Hero card + CTA — unified container */}
+            <View style={[lc.heroWrap, { borderColor: isDone ? "#1E2A3E" : color + "50" }]}>
+              {/* Image */}
+              <View style={lc.heroCard}>
+                {cover ? (
+                  <Image source={cover} style={lc.heroImage} resizeMode="cover" />
+                ) : (
+                  <View style={[lc.heroImage, { backgroundColor: color + "18", alignItems: "center", justifyContent: "center" }]}>
+                    <View style={{ width: 3, height: 48, backgroundColor: color, borderRadius: 2 }} />
+                  </View>
+                )}
 
-              {/* Multi-layer scrim — simulates gradient */}
-              <View style={lc.heroScrimMid} />
-              <View style={lc.heroScrimBot} />
+                {/* Multi-layer scrim — simulates gradient */}
+                <View style={lc.heroScrimMid} />
+                <View style={lc.heroScrimBot} />
 
-              {/* Done dim overlay */}
-              {isDone && <View style={lc.doneDimOverlay} />}
+                {/* Done dim overlay */}
+                {isDone && <View style={lc.doneDimOverlay} />}
 
-              {/* Overlaid content */}
-              <View style={lc.heroOverlay}>
-                <View style={[lc.trackPill, { backgroundColor: color + "25", borderColor: color + "55" }]}>
-                  <Text style={[lc.trackPillText, { color }]}>
-                    {todayLesson.trackId.replace(/_/g, " ")}
+                {/* Overlaid content */}
+                <View style={lc.heroOverlay}>
+                  <View style={[lc.trackPill, { backgroundColor: color + "25", borderColor: color + "55" }]}>
+                    <Text style={[lc.trackPillText, { color }]}>
+                      {todayLesson.trackId.replace(/_/g, " ")}
+                    </Text>
+                  </View>
+                  <Text style={lc.heroTitle} numberOfLines={2}>
+                    {todayLesson.title[lang] ?? todayLesson.title.en}
                   </Text>
-                </View>
-                <Text style={lc.heroTitle} numberOfLines={2}>
-                  {todayLesson.title[lang] ?? todayLesson.title.en}
-                </Text>
-                <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginTop: 4 }}>
-                  <Ionicons name="time-outline" size={12} color="#AAB0C0" />
-                  <Text style={lc.heroDuration}>{todayLesson.estimatedMinutes} min</Text>
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginTop: 4 }}>
+                    <Ionicons name="time-outline" size={12} color="#AAB0C0" />
+                    <Text style={lc.heroDuration}>{todayLesson.estimatedMinutes} min</Text>
+                  </View>
                 </View>
               </View>
-            </View>
 
-            {/* CTA — full-width standalone button */}
-            <TouchableOpacity
-              onPress={() => startSession(todayLessonId)}
-              activeOpacity={0.82}
-              style={[
-                lc.heroCta,
-                isDone ? lc.heroCtaDone : { backgroundColor: color },
-              ]}
-            >
-              {!isDone && (
-                <Ionicons name="play" size={14} color="#0B0F14" style={{ marginRight: 7 }} />
-              )}
-              <Text style={[lc.heroCtaText, isDone && lc.heroCtaTextDone]}>
-                {isDone ? t("tabs.home.redo") : t("tabs.home.start")}
-              </Text>
-              {isDone && (
-                <Ionicons name="refresh" size={14} color="#4A5568" style={{ marginLeft: 7 }} />
-              )}
-            </TouchableOpacity>
+              {/* Divider */}
+              <View style={[lc.heroCtaDivider, { backgroundColor: isDone ? "#1E2A3E" : color + "30" }]} />
+
+              {/* CTA — attached to bottom of card */}
+              <TouchableOpacity
+                onPress={() => startSession(todayLessonId)}
+                activeOpacity={0.82}
+                style={[
+                  lc.heroCta,
+                  isDone ? lc.heroCtaDone : { backgroundColor: color + "18" },
+                ]}
+              >
+                {!isDone && (
+                  <Ionicons name="play" size={14} color={color} style={{ marginRight: 7 }} />
+                )}
+                <Text style={[lc.heroCtaText, { color: isDone ? "#4A5568" : color }]}>
+                  {isDone ? t("tabs.home.redo") : t("tabs.home.start")}
+                </Text>
+                {isDone && (
+                  <Ionicons name="refresh" size={14} color="#4A5568" style={{ marginLeft: 7 }} />
+                )}
+              </TouchableOpacity>
+            </View>
           </View>
         );
       })()}
@@ -1253,11 +1259,14 @@ const lc = StyleSheet.create({
   },
 
   // ── Hero card ──────────────────────────────────────────────
-  heroCard: {
+  heroWrap: {
     borderRadius: 24,
     borderWidth: 1,
     overflow: "hidden",
     backgroundColor: "#121826",
+  },
+  heroCard: {
+    overflow: "hidden",
   },
   heroImage: {
     width: "100%",
@@ -1323,28 +1332,23 @@ const lc = StyleSheet.create({
     fontWeight: "500",
   },
 
-  // ── Standalone CTA button ──────────────────────────────────
+  // ── Attached CTA button ────────────────────────────────────
+  heroCtaDivider: {
+    height: 1,
+  },
   heroCta: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    height: 52,
-    borderRadius: 16,
-    marginTop: 10,
+    height: 50,
   },
   heroCtaDone: {
     backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: "#2A3448",
   },
   heroCtaText: {
-    color: "#0B0F14",
     fontSize: 15,
     fontWeight: "800",
     letterSpacing: 0.1,
-  },
-  heroCtaTextDone: {
-    color: "#4A5568",
   },
 
   // ── Other tracks list card ─────────────────────────────────

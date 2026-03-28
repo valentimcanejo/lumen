@@ -202,6 +202,7 @@
     },
     "lesson": {
       "step": "1 / 4",
+      "loading": "Preparando conteúdo…",
       "audio_hint": "Pode fechar a tela — o áudio continua reproduzindo."
     },
     "cards": {
