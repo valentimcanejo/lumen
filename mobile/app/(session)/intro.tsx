@@ -53,90 +53,63 @@ export default function LessonIntroScreen() {
     });
   }
 
+  const STEPS = [
+    { icon: "book-outline" as const,         labelKey: "session.intro.includes_lesson" },
+    { icon: "layers-outline" as const,       labelKey: "session.intro.includes_cards" },
+    { icon: "help-circle-outline" as const,  labelKey: "session.intro.includes_quiz" },
+  ];
+
   return (
     <Box className="flex-1 bg-[#0B0F14]">
-      {/* Colored header block */}
-      <Box
-        style={[
-          s.header,
-          {
-            backgroundColor: bg,
-            borderBottomColor: `${color}33`,
-            paddingTop: insets.top + 8,
-          },
-        ]}
+      {/* Tall colored header — title lives here */}
+      <View
+        style={[s.header, { backgroundColor: bg, paddingTop: insets.top + 8, borderBottomColor: color + "30" }]}
       >
-        <Box style={[s.circle1, { borderColor: `${color}22` }]} />
-        <Box style={[s.circle2, { borderColor: `${color}11` }]} />
+        {/* Decorative rings */}
+        <View style={[s.circle1, { borderColor: color + "20" }]} />
+        <View style={[s.circle2, { borderColor: color + "0E" }]} />
 
-        <TouchableOpacity
-          onPress={() => router.back()}
-          style={s.back}
-          activeOpacity={0.7}
-        >
+        {/* Back button */}
+        <TouchableOpacity onPress={() => router.back()} style={s.back} activeOpacity={0.7}>
           <Ionicons name="chevron-back" size={22} color={color} />
         </TouchableOpacity>
-      </Box>
+
+        {/* Meta row */}
+        <View style={s.metaRow}>
+          <View style={[s.diffBadge, { backgroundColor: diffColor + "25", borderColor: diffColor + "55" }]}>
+            <Text style={[s.diffText, { color: diffColor }]}>{diffLabel}</Text>
+          </View>
+          <View style={s.timeBadge}>
+            <Ionicons name="time-outline" size={12} color="#7B8193" />
+            <Text style={s.timeText}>{estimatedMinutes} min</Text>
+          </View>
+        </View>
+
+        {/* Title inside header */}
+        <Text style={s.headerTitle} numberOfLines={3}>{title}</Text>
+      </View>
 
       {/* Scrollable content */}
       <ScrollView
-        className="flex-1 px-6"
-        contentContainerStyle={{ paddingTop: 32, paddingBottom: 16 }}
+        style={{ flex: 1, paddingHorizontal: 24 }}
+        contentContainerStyle={{ paddingTop: 28, paddingBottom: 16 }}
         showsVerticalScrollIndicator={false}
       >
-        {/* Difficulty + time row */}
-        <HStack className="items-center mb-4" space="sm">
-          <Box style={[s.badge, { backgroundColor: `${diffColor}18` }]}>
-            <Text style={{ color: diffColor, fontSize: 12, fontWeight: "600" }}>
-              {diffLabel}
-            </Text>
-          </Box>
-          <HStack className="items-center" space="xs">
-            <Ionicons name="time-outline" size={13} color="#7B8193" />
-            <Text className="text-[#7B8193] text-[12px]">
-              {estimatedMinutes} min
-            </Text>
-          </HStack>
-        </HStack>
-
-        {/* Title */}
-        <Text className="text-[#E6EAF2] text-[28px] font-bold leading-[34px] mb-6">
-          {title}
-        </Text>
-
         {/* What's included */}
-        <VStack space="md">
-          {[
-            {
-              icon: "book-outline" as const,
-              labelKey: "session.intro.includes_lesson",
-            },
-            {
-              icon: "layers-outline" as const,
-              labelKey: "session.intro.includes_cards",
-            },
-            {
-              icon: "help-circle-outline" as const,
-              labelKey: "session.intro.includes_quiz",
-            },
-          ].map(({ icon, labelKey }) => (
-            <HStack key={labelKey} className="items-center" space="sm">
-              <Box
-                style={{
-                  width: 36,
-                  height: 36,
-                  borderRadius: 10,
-                  backgroundColor: `${color}18`,
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Ionicons name={icon} size={18} color={color} />
-              </Box>
-              <Text className="text-[#AAB0C0] text-[14px]">{t(labelKey)}</Text>
-            </HStack>
+        <View style={s.stepsCard}>
+          {STEPS.map(({ icon, labelKey }, i) => (
+            <View key={labelKey}>
+              {i > 0 && <View style={s.stepDivider} />}
+              <View style={s.stepRow}>
+                <View style={[s.stepIcon, { backgroundColor: color + "18" }]}>
+                  <Ionicons name={icon} size={18} color={color} />
+                </View>
+                <Text style={s.stepLabel}>{t(labelKey)}</Text>
+                <Ionicons name="checkmark" size={16} color={color + "80"} />
+              </View>
+            </View>
           ))}
-        </VStack>
+        </View>
       </ScrollView>
 
       {/* Fixed CTA */}
@@ -154,38 +127,100 @@ export default function LessonIntroScreen() {
 
 const s = StyleSheet.create({
   header: {
-    paddingBottom: 20,
-    borderBottomWidth: 1,
     paddingHorizontal: 20,
+    paddingBottom: 28,
+    borderBottomWidth: 1,
     overflow: "hidden",
+  },
+  circle1: {
+    position: "absolute",
+    width: 220,
+    height: 220,
+    borderRadius: 110,
+    borderWidth: 1,
+    bottom: -90,
+    right: -50,
+  },
+  circle2: {
+    position: "absolute",
+    width: 340,
+    height: 340,
+    borderRadius: 170,
+    borderWidth: 1,
+    bottom: -160,
+    right: -110,
   },
   back: {
     width: 36,
     height: 36,
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: 16,
   },
-  circle1: {
-    position: "absolute",
-    width: 200,
-    height: 200,
+  metaRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginBottom: 14,
+  },
+  diffBadge: {
+    borderWidth: 1,
     borderRadius: 100,
-    borderWidth: 1,
-    bottom: -80,
-    right: -40,
-  },
-  circle2: {
-    position: "absolute",
-    width: 300,
-    height: 300,
-    borderRadius: 150,
-    borderWidth: 1,
-    bottom: -140,
-    right: -100,
-  },
-  badge: {
     paddingHorizontal: 10,
     paddingVertical: 4,
-    borderRadius: 100,
+  },
+  diffText: {
+    fontSize: 12,
+    fontWeight: "700",
+  },
+  timeBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+  },
+  timeText: {
+    color: "#7B8193",
+    fontSize: 12,
+    fontWeight: "500",
+  },
+  headerTitle: {
+    color: "#E6EAF2",
+    fontSize: 26,
+    fontWeight: "800",
+    lineHeight: 33,
+    letterSpacing: -0.3,
+  },
+  stepsCard: {
+    backgroundColor: "#121826",
+    borderWidth: 1,
+    borderColor: "#1E2A3E",
+    borderRadius: 20,
+    overflow: "hidden",
+  },
+  stepRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 18,
+    paddingVertical: 16,
+    gap: 14,
+  },
+  stepIcon: {
+    width: 38,
+    height: 38,
+    borderRadius: 11,
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  stepLabel: {
+    color: "#C8CDD8",
+    fontSize: 14,
+    fontWeight: "500",
+    flex: 1,
+  },
+  stepDivider: {
+    height: 1,
+    backgroundColor: "#1A2233",
+    marginHorizontal: 18,
   },
 });
