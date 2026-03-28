@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { FlatList, TextInput, TouchableOpacity, ScrollView as HScrollView } from "react-native";
+import { FlatList, StyleSheet, TextInput, TouchableOpacity, View as RNView, ScrollView as HScrollView } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -21,6 +21,8 @@ import type { Lang } from "../../models/lang";
 
 type FilterKey = "all" | "following" | "easy" | "medium" | "hard";
 
+const DIFF_COLORS = { 1: "#5ED19A", 2: "#F5C77A", 3: "#E26D6D" } as const;
+
 function DifficultyBadge({ level }: { level: 1 | 2 | 3 }) {
   const { t } = useTranslation();
   const labels = {
@@ -28,16 +30,12 @@ function DifficultyBadge({ level }: { level: 1 | 2 | 3 }) {
     2: t("tabs.tracks.difficulty_2"),
     3: t("tabs.tracks.difficulty_3"),
   };
-  const colors = { 1: "#5ED19A", 2: "#F5C77A", 3: "#E26D6D" };
+  const color = DIFF_COLORS[level];
   return (
-    <Box
-      className="px-2 py-1 rounded-full"
-      style={{ backgroundColor: `${colors[level]}22` }}
-    >
-      <Text className="text-[11px] font-medium" style={{ color: colors[level] }}>
-        {labels[level]}
-      </Text>
-    </Box>
+    <RNView style={[tc.diffBadge, { backgroundColor: color + "22" }]}>
+      <RNView style={[tc.diffDot, { backgroundColor: color }]} />
+      <Text style={[tc.diffText, { color }]}>{labels[level]}</Text>
+    </RNView>
   );
 }
 
@@ -61,29 +59,32 @@ function TrackCard({
   const bg = trackBg(track.id);
   const total = getLessonCountForTrack(track.id);
   const done = completedIds.filter((id) => id.startsWith(track.id)).length;
+  const pct = total > 0 ? (done / total) * 100 : 0;
 
   return (
     <Pressable onPress={() => router.push(`/track/${track.id}`)}>
-      <Box
-        className="rounded-[18px] p-3 mb-2"
-        style={{ backgroundColor: bg, borderWidth: 1, borderColor: `${color}44` }}
+      <RNView
+        style={[
+          tc.card,
+          {
+            backgroundColor: bg,
+            borderColor: color + "44",
+            borderLeftColor: color + "80",
+          },
+        ]}
       >
-        <HStack className="items-center justify-between">
-          <HStack className="items-center flex-1 mr-2" space="sm">
-            <Box
-              style={{
-                width: 8, height: 8, borderRadius: 4,
-                backgroundColor: color, flexShrink: 0,
-              }}
-            />
-            <Text
-              className="text-[#E6EAF2] text-[15px] font-semibold flex-1"
-              numberOfLines={1}
-            >
-              {title}
-            </Text>
-          </HStack>
-          <HStack className="items-center" space="xs">
+        {/* Top row */}
+        <RNView style={tc.topRow}>
+          {/* Icon badge + title */}
+          <RNView style={tc.left}>
+            <RNView style={[tc.iconBadge, { backgroundColor: color + "20", borderColor: color + "40" }]}>
+              <RNView style={[tc.iconDot, { backgroundColor: color }]} />
+            </RNView>
+            <Text style={tc.title} numberOfLines={1}>{title}</Text>
+          </RNView>
+
+          {/* Right: difficulty + follow */}
+          <RNView style={tc.right}>
             <DifficultyBadge level={track.difficulty} />
             <TouchableOpacity
               onPress={onToggleFollow}
@@ -91,44 +92,135 @@ function TrackCard({
               hitSlop={10}
               style={{ opacity: isFollowing && !canUnfollow ? 0.35 : 1 }}
             >
-              <Ionicons
-                name={isFollowing ? "checkmark-circle" : "add-circle-outline"}
-                size={20}
-                color={isFollowing ? color : "#4A5568"}
-              />
+              {isFollowing ? (
+                <RNView style={[tc.followingPill, { backgroundColor: color + "18", borderColor: color + "40" }]}>
+                  <Text style={[tc.followingText, { color }]}>Seguindo</Text>
+                </RNView>
+              ) : (
+                <Ionicons name="add-circle-outline" size={20} color="#4A5568" />
+              )}
             </TouchableOpacity>
-          </HStack>
-        </HStack>
+          </RNView>
+        </RNView>
 
+        {/* Progress bar */}
         {total > 0 && (
-          <HStack className="items-center mt-2" space="sm">
-            <Box className="flex-1 h-[2px] rounded-full bg-[#1A2233] overflow-hidden">
-              <Box
-                style={{
-                  height: "100%",
-                  width: total > 0 ? `${(done / total) * 100}%` : "0%",
-                  backgroundColor: color,
-                  borderRadius: 99,
-                }}
+          <RNView style={tc.progressRow}>
+            <RNView style={tc.progressTrack}>
+              <RNView
+                style={[
+                  tc.progressFill,
+                  { width: `${pct}%`, backgroundColor: color },
+                ]}
               />
-            </Box>
-            <Text
-              style={{
-                color: done > 0 ? color : "#7B8193",
-                fontSize: 11,
-                fontWeight: "600",
-                minWidth: 28,
-                textAlign: "right",
-              }}
-            >
+            </RNView>
+            <Text style={[tc.progressLabel, { color: done > 0 ? color : "#4A5568" }]}>
               {done}/{total}
             </Text>
-          </HStack>
+          </RNView>
         )}
-      </Box>
+      </RNView>
     </Pressable>
   );
 }
+
+const tc = StyleSheet.create({
+  card: {
+    borderRadius: 18,
+    borderWidth: 1,
+    borderLeftWidth: 3,
+    padding: 16,
+    marginBottom: 8,
+  },
+  topRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  left: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+    marginRight: 10,
+    gap: 10,
+  },
+  iconBadge: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  iconDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+  },
+  title: {
+    color: "#E6EAF2",
+    fontSize: 16,
+    fontWeight: "700",
+    flex: 1,
+  },
+  right: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    flexShrink: 0,
+  },
+  followingPill: {
+    borderWidth: 1,
+    borderRadius: 100,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  followingText: {
+    fontSize: 11,
+    fontWeight: "700",
+  },
+  diffBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    paddingHorizontal: 9,
+    paddingVertical: 4,
+    borderRadius: 100,
+  },
+  diffDot: {
+    width: 5,
+    height: 5,
+    borderRadius: 3,
+  },
+  diffText: {
+    fontSize: 12,
+    fontWeight: "600",
+  },
+  progressRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginTop: 12,
+  },
+  progressTrack: {
+    flex: 1,
+    height: 4,
+    backgroundColor: "#1A2233",
+    borderRadius: 99,
+    overflow: "hidden",
+  },
+  progressFill: {
+    height: "100%",
+    borderRadius: 99,
+  },
+  progressLabel: {
+    fontSize: 11,
+    fontWeight: "700",
+    minWidth: 28,
+    textAlign: "right",
+  },
+});
 
 export default function Tracks() {
   const { t } = useTranslation();
