@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, View as RNView } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -32,16 +32,20 @@ function TopProgress({ value }: { value: number }) {
   );
 }
 
+const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
+
 type OptionState = "idle" | "correct" | "wrong";
 
 function OptionRow({
   label,
+  index,
   selected,
   disabled,
   state,
   onPress,
 }: {
   label: string;
+  index: number;
   selected: boolean;
   disabled: boolean;
   state: OptionState;
@@ -57,7 +61,7 @@ function OptionRow({
 
     if (state === "correct") {
       scale.value = withSequence(
-        withSpring(1.04, { damping: 4, stiffness: 300 }),
+        withSpring(1.03, { damping: 4, stiffness: 300 }),
         withSpring(1, { damping: 10, stiffness: 200 }),
       );
     } else if (state === "wrong") {
@@ -84,41 +88,46 @@ function OptionRow({
   const border =
     state === "correct" ? "#5ED19A" :
     state === "wrong"   ? "#E26D6D" :
-    selected            ? "#F5C77A" : "#1A2233";
+    selected            ? "#F5C77A" : "#1E2A3E";
 
   const textColor =
     state === "correct" ? "#DFF7EC" :
     state === "wrong"   ? "#F7E0E0" : "#E6EAF2";
 
-  const dotColor =
+  const badgeBg =
+    state === "correct" ? "#5ED19A22" :
+    state === "wrong"   ? "#E26D6D22" :
+    selected            ? "#F5C77A22" : "#1A2233";
+
+  const badgeColor =
     state === "correct" ? "#5ED19A" :
     state === "wrong"   ? "#E26D6D" :
-    selected            ? "#F5C77A" : "#2A3448";
+    selected            ? "#F5C77A" : "#4A5568";
 
   return (
     <Animated.View style={[s.optionWrap, { backgroundColor: bg, borderColor: border }, animStyle]}>
-      <Pressable
-        onPress={onPress}
-        disabled={disabled}
-        style={s.optionInner}
-      >
-        <HStack className="items-center flex-1" space="md">
-          <Box style={[s.dot, { backgroundColor: dotColor }]} />
-          <Text style={[s.optionText, { color: textColor, flex: 1 }]}>
-            {label}
+      <Pressable onPress={onPress} disabled={disabled} style={s.optionInner}>
+        {/* Letter badge */}
+        <RNView style={[s.letterBadge, { backgroundColor: badgeBg }]}>
+          <Text style={[s.letterText, { color: badgeColor }]}>
+            {OPTION_LETTERS[index] ?? String(index + 1)}
           </Text>
-        </HStack>
-        <Box className="ml-3">
+        </RNView>
+
+        <Text style={[s.optionText, { color: textColor }]}>
+          {label}
+        </Text>
+
+        {/* State icon */}
+        <RNView style={s.stateIcon}>
           {state === "correct" ? (
             <Ionicons name="checkmark-circle" size={20} color="#5ED19A" />
           ) : state === "wrong" ? (
             <Ionicons name="close-circle" size={20} color="#E26D6D" />
           ) : selected ? (
-            <Ionicons name="radio-button-on" size={20} color="#F5C77A" />
-          ) : (
-            <Ionicons name="radio-button-off" size={20} color="#3A4562" />
-          )}
-        </Box>
+            <Ionicons name="ellipse" size={10} color="#F5C77A" />
+          ) : null}
+        </RNView>
       </Pressable>
     </Animated.View>
   );
@@ -126,19 +135,32 @@ function OptionRow({
 
 const s = StyleSheet.create({
   optionWrap: {
-    borderRadius: 18,
+    borderRadius: 16,
     borderWidth: 1.5,
     overflow: "hidden",
+    marginBottom: 2,
   },
   optionInner: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
-    paddingVertical: 16,
+    paddingHorizontal: 14,
+    paddingVertical: 15,
+    gap: 12,
   },
-  dot: { width: 10, height: 10, borderRadius: 5 },
-  optionText: { fontSize: 14, lineHeight: 20 },
+  letterBadge: {
+    width: 30,
+    height: 30,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  letterText: {
+    fontSize: 13,
+    fontWeight: "800",
+  },
+  optionText: { fontSize: 14, lineHeight: 20, flex: 1 },
+  stateIcon: { width: 20, alignItems: "center", flexShrink: 0 },
 });
 
 function getOptionState(args: {
@@ -324,24 +346,27 @@ export default function QuizScreen() {
             onContentSizeChange={(_, h) => { scrollContentH.current = h; updateScrollHint(currentScrollY.current); }}
             onLayout={(e) => { scrollViewH.current = e.nativeEvent.layout.height; updateScrollHint(currentScrollY.current); }}
           >
-            <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
-              <Text className="text-[#AAB0C0] text-[12px]">
-                {t("session.quiz.question")}
-              </Text>
-              <Text className="text-[#E6EAF2] text-[18px] font-semibold leading-[26px] mt-2">
-                {current.question}
-              </Text>
-              <HStack className="items-center justify-between mt-4">
-                <Text className="text-[#7B8193] text-[12px]">
-                  {t("session.quiz.select")}
-                </Text>
-                <Text className="text-[#7B8193] text-[12px]">
+            {/* Question card */}
+            <RNView style={q.questionCard}>
+              {/* Question number pill */}
+              <RNView style={q.qNumRow}>
+                <RNView style={q.qNumPill}>
+                  <Text style={q.qNumText}>
+                    {qIndex + 1}/{total}
+                  </Text>
+                </RNView>
+                <Text style={q.correctBadge}>
                   {correctCount} {t("session.quiz.correct_count")}
                 </Text>
-              </HStack>
-            </Box>
+              </RNView>
 
-            <VStack space="sm" className="mt-4">
+              <Text style={q.questionText}>{current.question}</Text>
+
+              <Text style={q.selectHint}>{t("session.quiz.select")}</Text>
+            </RNView>
+
+            {/* Options */}
+            <RNView style={{ gap: 8, marginTop: 16 }}>
               {(shuffled?.options ?? current.options).map((opt, idx) => {
                 const state = getOptionState({
                   answered,
@@ -353,6 +378,7 @@ export default function QuizScreen() {
                   <OptionRow
                     key={`${qIndex}-${idx}`}
                     label={opt}
+                    index={idx}
                     selected={selectedIndex === idx}
                     disabled={answered}
                     state={state}
@@ -360,18 +386,30 @@ export default function QuizScreen() {
                   />
                 );
               })}
-            </VStack>
+            </RNView>
 
-            {answered ? (
-              <Box className="mt-4 bg-[#0E141E] border border-[#1A2233] rounded-[18px] p-4">
-                <Text className="text-[#AAB0C0] text-[12px]">
-                  {t("session.quiz.explanation")}
-                </Text>
-                <Text className="text-[#E6EAF2] text-[14px] leading-[22px] mt-2">
-                  {current.explanation}
-                </Text>
-              </Box>
-            ) : null}
+            {/* Explanation */}
+            {answered && (() => {
+              const isCorrect = selectedIndex === (shuffled?.answerIndex ?? current.answerIndex);
+              return (
+                <RNView style={[
+                  q.explanationBox,
+                  isCorrect ? q.explanationCorrect : q.explanationWrong,
+                ]}>
+                  <RNView style={q.explanationHeader}>
+                    <Ionicons
+                      name={isCorrect ? "checkmark-circle" : "information-circle"}
+                      size={16}
+                      color={isCorrect ? "#5ED19A" : "#F5C77A"}
+                    />
+                    <Text style={[q.explanationLabel, { color: isCorrect ? "#5ED19A" : "#F5C77A" }]}>
+                      {t("session.quiz.explanation")}
+                    </Text>
+                  </RNView>
+                  <Text style={q.explanationText}>{current.explanation}</Text>
+                </RNView>
+              );
+            })()}
           </ScrollView>
 
           <Animated.View
@@ -389,28 +427,22 @@ export default function QuizScreen() {
           </Animated.View>
           </Box>
 
-          {/* Fixed bottom buttons — always visible */}
-          <Box
-            className="px-5 pt-3 border-t border-[#1A2233]"
-            style={{ paddingBottom: Math.max(insets.bottom, 24) }}
+          {/* Fixed bottom buttons */}
+          <RNView
+            style={[q.bottomBar, { paddingBottom: Math.max(insets.bottom, 24) }]}
           >
-            <Pressable
-              onPress={onNext}
-              disabled={!answered}
-              className={[
-                "h-[52px] rounded-2xl items-center justify-center",
-                answered ? "bg-[#F5C77A]" : "bg-[#1A2233]",
-              ].join(" ")}
-            >
-              <Text
-                className={[
-                  "text-[16px] font-semibold",
-                  answered ? "text-[#0B0F14]" : "text-[#7B8193]",
-                ].join(" ")}
-              >
-                {qIndex + 1 >= total ? t("session.quiz.finish") : t("common.next")}
-              </Text>
-            </Pressable>
+            {(() => {
+              const wasCorrect = answered && selectedIndex === (shuffled?.answerIndex ?? current.answerIndex);
+              const nextBg = !answered ? "#1A2233" : wasCorrect ? "#5ED19A" : "#F5C77A";
+              const nextTextColor = !answered ? "#4A5568" : "#0B0F14";
+              return (
+                <Pressable onPress={onNext} disabled={!answered} style={[q.nextBtn, { backgroundColor: nextBg }]}>
+                  <Text style={[q.nextBtnText, { color: nextTextColor }]}>
+                    {qIndex + 1 >= total ? t("session.quiz.finish") : t("common.next")}
+                  </Text>
+                </Pressable>
+              );
+            })()}
 
             <Pressable
               onPress={() =>
@@ -425,15 +457,125 @@ export default function QuizScreen() {
                   },
                 })
               }
-              className="h-[52px] rounded-2xl mt-3 border border-[#1A2233] items-center justify-center"
+              style={q.skipBtn}
             >
-              <Text className="text-[#AAB0C0] text-[16px] font-semibold">
-                {t("session.quiz.skip")}
-              </Text>
+              <Text style={q.skipBtnText}>{t("session.quiz.skip")}</Text>
             </Pressable>
-          </Box>
+          </RNView>
         </>
       )}
     </Box>
   );
 }
+
+const q = StyleSheet.create({
+  // Question card
+  questionCard: {
+    backgroundColor: "#121826",
+    borderWidth: 1,
+    borderColor: "#1E2A3E",
+    borderRadius: 22,
+    padding: 20,
+  },
+  qNumRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 14,
+  },
+  qNumPill: {
+    backgroundColor: "#F5C77A15",
+    borderWidth: 1,
+    borderColor: "#F5C77A30",
+    borderRadius: 100,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  qNumText: {
+    color: "#F5C77A",
+    fontSize: 11,
+    fontWeight: "800",
+    letterSpacing: 0.5,
+  },
+  correctBadge: {
+    color: "#4A5568",
+    fontSize: 12,
+    fontWeight: "600",
+  },
+  questionText: {
+    color: "#E6EAF2",
+    fontSize: 19,
+    fontWeight: "700",
+    lineHeight: 28,
+  },
+  selectHint: {
+    color: "#4A5568",
+    fontSize: 12,
+    marginTop: 14,
+  },
+
+  // Explanation box
+  explanationBox: {
+    borderRadius: 16,
+    borderWidth: 1,
+    padding: 16,
+    marginTop: 12,
+  },
+  explanationCorrect: {
+    backgroundColor: "#0B1C12",
+    borderColor: "#5ED19A30",
+  },
+  explanationWrong: {
+    backgroundColor: "#160C0C",
+    borderColor: "#F5C77A30",
+  },
+  explanationHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 7,
+    marginBottom: 8,
+  },
+  explanationLabel: {
+    fontSize: 11,
+    fontWeight: "700",
+    letterSpacing: 0.5,
+    textTransform: "uppercase",
+  },
+  explanationText: {
+    color: "#C8CDD8",
+    fontSize: 14,
+    lineHeight: 22,
+  },
+
+  // Bottom bar
+  bottomBar: {
+    paddingHorizontal: 20,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: "#1A2233",
+    gap: 10,
+  },
+  nextBtn: {
+    height: 52,
+    borderRadius: 16,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  nextBtnText: {
+    fontSize: 16,
+    fontWeight: "700",
+  },
+  skipBtn: {
+    height: 48,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#1E2A3E",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  skipBtnText: {
+    color: "#4A5568",
+    fontSize: 15,
+    fontWeight: "600",
+  },
+});
