@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageBackground } from "react-native";
+import { ImageBackground, StyleSheet, View as RNView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Box } from "../../components/ui/box";
 import { Text } from "../../components/ui/text";
@@ -15,6 +15,66 @@ const VALUE_PROPS = [
   { emoji: "🔥", key: "prop_2" },
   { emoji: "✨", key: "prop_3" },
 ] as const;
+
+const wl = StyleSheet.create({
+  brandPill: {
+    alignSelf: "flex-start",
+    backgroundColor: "rgba(245,199,122,0.15)",
+    borderWidth: 1,
+    borderColor: "rgba(245,199,122,0.35)",
+    borderRadius: 100,
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+  },
+  brandText: {
+    color: "#F5C77A",
+    fontSize: 13,
+    fontWeight: "800",
+    letterSpacing: 1.5,
+    textTransform: "uppercase",
+  },
+  propsCard: {
+    backgroundColor: "rgba(255,255,255,0.06)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.10)",
+    borderRadius: 18,
+    overflow: "hidden",
+    marginTop: 4,
+  },
+  propRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    gap: 14,
+  },
+  propDivider: {
+    height: 1,
+    backgroundColor: "rgba(255,255,255,0.07)",
+    marginHorizontal: 16,
+  },
+  propEmojiBadge: {
+    width: 38,
+    height: 38,
+    borderRadius: 11,
+    backgroundColor: "rgba(255,255,255,0.09)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.12)",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  propEmoji: {
+    fontSize: 18,
+    lineHeight: 22,
+  },
+  propLabel: {
+    color: "#C8CDD8",
+    fontSize: 14,
+    lineHeight: 20,
+    flex: 1,
+  },
+});
 
 export default function Welcome() {
   const { t } = useTranslation();
@@ -37,40 +97,40 @@ export default function Welcome() {
           style={{ paddingBottom: Math.max(insets.bottom + 24, 40) }}
         >
           <VStack space="lg">
-            {/* Brand */}
-            <Text className="text-[#F5C77A] text-[13px] font-semibold tracking-widest uppercase">
-              Lumen
-            </Text>
+            {/* Brand pill */}
+            <RNView style={wl.brandPill}>
+              <Text style={wl.brandText}>Lumen</Text>
+            </RNView>
 
             {/* Headline */}
-            <Text className="text-[#E6EAF2] text-[32px] font-bold leading-[40px]">
+            <Text className="text-[#E6EAF2] text-[34px] font-bold leading-[42px]">
               {t("onboarding.welcome.headline")}
             </Text>
 
             {/* Tagline */}
-            <Text className="text-[#AAB0C0] text-[15px] leading-[22px]">
+            <Text className="text-[#AAB0C0] text-[15px] leading-[23px]">
               {t("onboarding.welcome.tagline")}
             </Text>
 
             {/* Value props */}
-            <VStack space="sm" className="mt-2">
-              {VALUE_PROPS.map(({ emoji, key }) => (
-                <HStack key={key} className="items-center" space="md">
-                  <Box
-                    className="w-[36px] h-[36px] rounded-[10px] items-center justify-center"
-                    style={{ backgroundColor: "rgba(255,255,255,0.08)" }}
-                  >
-                    <Text className="text-[17px]">{emoji}</Text>
-                  </Box>
-                  <Text className="text-[#C8CDD8] text-[14px] flex-1">
-                    {t(`onboarding.welcome.${key}`)}
-                  </Text>
-                </HStack>
+            <RNView style={wl.propsCard}>
+              {VALUE_PROPS.map(({ emoji, key }, i) => (
+                <RNView key={key}>
+                  {i > 0 && <RNView style={wl.propDivider} />}
+                  <RNView style={wl.propRow}>
+                    <RNView style={wl.propEmojiBadge}>
+                      <Text style={wl.propEmoji}>{emoji}</Text>
+                    </RNView>
+                    <Text style={wl.propLabel}>
+                      {t(`onboarding.welcome.${key}`)}
+                    </Text>
+                  </RNView>
+                </RNView>
               ))}
-            </VStack>
+            </RNView>
 
             {/* CTAs */}
-            <VStack space="sm" className="mt-4">
+            <VStack space="sm" className="mt-2">
               <LumenButton onPress={() => router.push("/(onboarding)/language")}>
                 {t("onboarding.welcome.start")}
               </LumenButton>
