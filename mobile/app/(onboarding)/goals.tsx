@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
+import { FlatList } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { Box } from "../../components/ui/box";
@@ -10,38 +11,30 @@ import { router, useLocalSearchParams } from "expo-router";
 import { LumenButton } from "../../components/ui/lumen/Button";
 import { useTranslation } from "react-i18next";
 import { Lang } from "../../models/lang";
-import { getActiveGoals, getBundledGoals, type Goal } from "../../repositories/goals.repo";
+import { getActiveGoals, type Goal } from "../../repositories/goals.repo";
 
 const ICON_MAP: Record<string, keyof typeof Ionicons.glyphMap> = {
-  book:  "book-outline",
-  brain: "bulb-outline",
-  globe: "globe-outline",
-  chart: "bar-chart-outline",
+  book:      "book-outline",
+  brain:     "bulb-outline",
+  globe:     "globe-outline",
+  chart:     "bar-chart-outline",
+  hourglass: "hourglass-outline",
+  person:    "person-outline",
 };
+
+const goals = getActiveGoals();
 
 export default function Goals() {
   const insets = useSafeAreaInsets();
   const [selected, setSelected] = useState<string[]>([]);
-  const [goals, setGoals] = useState<Goal[]>(getBundledGoals);
-  const canContinue = useMemo(
-    () => selected.length >= 1 && selected.length <= 3,
-    [selected],
-  );
+  const canContinue = selected.length >= 1;
   const { t } = useTranslation();
-
-  useEffect(() => {
-    getActiveGoals().then(setGoals).catch(() => {});
-  }, []);
-
   const { selectedLanguage, userId } = useLocalSearchParams();
 
   function toggle(key: string) {
-    setSelected((prev) => {
-      const has = prev.includes(key);
-      if (has) return prev.filter((k) => k !== key);
-      if (prev.length >= 3) return prev;
-      return [...prev, key];
-    });
+    setSelected((prev) =>
+      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key],
+    );
   }
 
   const handleNext = () =>
@@ -51,64 +44,69 @@ export default function Goals() {
     });
 
   return (
-    <Box className="flex-1 bg-[#0B0F14] px-6 pt-6">
-      <Text className="text-[#E6EAF2] text-[26px] font-semibold">
-        {t("onboarding.goals.title")}
-      </Text>
-      <Text className="text-[#AAB0C0] mt-2">
-        {t("onboarding.goals.subtitle")}
-      </Text>
-
-      <VStack className="mt-6" space="md">
-        {goals.map((g) => {
+    <Box className="flex-1 bg-[#0B0F14]">
+      <FlatList
+        data={goals}
+        keyExtractor={(g) => g.id}
+        contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 24, paddingBottom: 16 }}
+        ListHeaderComponent={
+          <Box className="mb-5">
+            <Text className="text-[#E6EAF2] text-[26px] font-semibold">
+              {t("onboarding.goals.title")}
+            </Text>
+            <Text className="text-[#AAB0C0] mt-2">
+              {t("onboarding.goals.subtitle")}
+            </Text>
+          </Box>
+        }
+        ItemSeparatorComponent={() => <Box style={{ height: 10 }} />}
+        renderItem={({ item: g }) => {
           const active = selected.includes(g.id);
           const color = g.color ?? "#AAB0C0";
           const iconName = ICON_MAP[g.icon] ?? "ellipse-outline";
 
           return (
-            <Pressable key={g.id} onPress={() => toggle(g.id)}>
+            <Pressable onPress={() => toggle(g.id)}>
               <Box
                 style={{
-                  borderRadius: 16,
+                  borderRadius: 14,
                   borderWidth: 1.5,
                   borderColor: active ? color : "#1A2233",
                   backgroundColor: active ? `${color}12` : "#111827",
-                  padding: 16,
+                  paddingHorizontal: 14,
+                  paddingVertical: 12,
                 }}
               >
-                <HStack className="items-center" style={{ gap: 14 }}>
-                  {/* Icon circle */}
+                <HStack className="items-center" style={{ gap: 12 }}>
                   <Box
                     style={{
-                      width: 44,
-                      height: 44,
-                      borderRadius: 12,
+                      width: 40,
+                      height: 40,
+                      borderRadius: 10,
                       backgroundColor: `${color}20`,
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    <Ionicons name={iconName} size={22} color={color} />
+                    <Ionicons name={iconName} size={20} color={color} />
                   </Box>
 
-                  {/* Text */}
                   <VStack style={{ flex: 1 }} space="xs">
-                    <Text className="text-[#E6EAF2] text-[16px] font-semibold">
+                    <Text className="text-[#E6EAF2] text-[15px] font-semibold">
                       {g.title[selectedLanguage as Lang]}
                     </Text>
                     {g.description?.[selectedLanguage as Lang] && (
-                      <Text className="text-[#7B8193] text-[13px]" numberOfLines={2}>
+                      <Text className="text-[#7B8193] text-[12px]" numberOfLines={1}>
                         {g.description[selectedLanguage as Lang]}
                       </Text>
                     )}
                   </VStack>
 
-                  {/* Checkmark */}
                   <Box
                     style={{
-                      width: 24,
-                      height: 24,
-                      borderRadius: 12,
+                      width: 22,
+                      height: 22,
+                      borderRadius: 11,
                       borderWidth: 1.5,
                       borderColor: active ? color : "#2A2F3E",
                       backgroundColor: active ? color : "transparent",
@@ -117,20 +115,20 @@ export default function Goals() {
                     }}
                   >
                     {active && (
-                      <Ionicons name="checkmark" size={14} color="#0B0F14" />
+                      <Ionicons name="checkmark" size={13} color="#0B0F14" />
                     )}
                   </Box>
                 </HStack>
               </Box>
             </Pressable>
           );
-        })}
-      </VStack>
+        }}
+      />
 
-      <Box className="mt-auto" style={{ paddingBottom: Math.max(insets.bottom, 24) }}>
-        <Text className="text-[#7B8193] text-[12px] text-center mb-3">
-          {t("onboarding.goals.hint")}
-        </Text>
+      <Box
+        className="px-6"
+        style={{ paddingBottom: Math.max(insets.bottom, 24), paddingTop: 12 }}
+      >
         <LumenButton disabled={!canContinue} onPress={handleNext}>
           {t("onboarding.goals.continue")}
         </LumenButton>
