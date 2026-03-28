@@ -183,6 +183,7 @@
     }
   },
   "track": {
+    "track_label": "Track",
     "lessons": "Lessons",
     "start": "Start",
     "review": "Review",

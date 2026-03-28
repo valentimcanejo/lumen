@@ -183,6 +183,7 @@
     }
   },
   "track": {
+    "track_label": "Ruta",
     "lessons": "Lecciones",
     "start": "Iniciar",
     "review": "Repasar",

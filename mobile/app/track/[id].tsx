@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, StyleSheet, View as RNView } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
-import { HStack } from "@/components/ui/hstack";
-import { VStack } from "@/components/ui/vstack";
 import { Pressable } from "@/components/ui/pressable";
 
 import { getTracks } from "../../repositories/tracks.repo";
@@ -23,15 +21,7 @@ import { trackColor, trackBg } from "../../constants/tracks";
 import type { Track } from "../../models/track";
 import type { Lang } from "../../models/lang";
 
-function DifficultyDot({ level }: { level: 1 | 2 | 3 }) {
-  const colors = { 1: "#5ED19A", 2: "#F5C77A", 3: "#E26D6D" };
-  return (
-    <Box
-      className="w-[8px] h-[8px] rounded-full"
-      style={{ backgroundColor: colors[level] }}
-    />
-  );
-}
+const DIFF_COLORS: Record<number, string> = { 1: "#5ED19A", 2: "#F5C77A", 3: "#E26D6D" };
 
 function LessonCard({
   lesson,
@@ -50,68 +40,71 @@ function LessonCard({
 }) {
   const { t } = useTranslation();
   const title = lesson.title[lang] ?? lesson.title.en ?? lesson.id;
+  const diffColor = DIFF_COLORS[lesson.difficulty] ?? "#AAB0C0";
+
+  const cardBg = locked ? "#0B0F14" : completed ? "#0D1A10" : "#121826";
+  const borderColor = locked ? "#1A2233" : completed ? color + "44" : "#1A2233";
+  const accentColor = locked ? "#1A2233" : completed ? color + "70" : color + "50";
+
+  const iconBg = locked ? "#1A2233" : completed ? color + "20" : color + "15";
+  const iconBorderColor = locked ? "#2A3448" : completed ? color + "40" : color + "30";
 
   return (
-    <Box
-      className="rounded-[18px] p-4 mb-3"
-      style={{
-        backgroundColor: locked ? "#0B0F14" : completed ? "#0D1A10" : "#121826",
-        borderWidth: 1,
-        borderColor: locked ? "#1A2233" : completed ? `${color}44` : "#1A2233",
-        opacity: locked ? 0.6 : 1,
-      }}
+    <RNView
+      style={[
+        lc.card,
+        {
+          backgroundColor: cardBg,
+          borderColor,
+          borderLeftColor: accentColor,
+          opacity: locked ? 0.55 : 1,
+        },
+      ]}
     >
-      <HStack className="items-center justify-between">
-        <VStack space="xs" className="flex-1 mr-3">
-          <HStack className="items-center" space="sm">
-            {locked
-              ? <Ionicons name="lock-closed" size={13} color="#4A5568" />
-              : <DifficultyDot level={lesson.difficulty} />
-            }
-            <Text className="text-[#E6EAF2] text-[15px] font-semibold flex-1">
-              {title}
-            </Text>
-          </HStack>
-          <HStack className="items-center" space="xs">
-            <Text className="text-[#7B8193] text-[12px]">
-              {lesson.estimatedMinutes} {t("track.min")}
-            </Text>
-            {completed && !locked && (
-              <>
-                <Text className="text-[#7B8193] text-[12px]">·</Text>
-                <Ionicons name="checkmark-circle" size={13} color={color} />
-                <Text style={{ color, fontSize: 12 }}>{t("track.completed")}</Text>
-              </>
-            )}
-          </HStack>
-        </VStack>
-        {!locked && (
-          <Pressable
-            onPress={onStart}
-            style={{
-              paddingHorizontal: 14,
-              height: 36,
-              borderRadius: 12,
+      {/* Icon badge */}
+      <RNView style={[lc.iconBadge, { backgroundColor: iconBg, borderColor: iconBorderColor }]}>
+        {locked
+          ? <Ionicons name="lock-closed" size={15} color="#4A5568" />
+          : completed
+            ? <Ionicons name="checkmark" size={16} color={color} />
+            : <Ionicons name="book-outline" size={16} color={color} />
+        }
+      </RNView>
+
+      {/* Text */}
+      <RNView style={lc.textCol}>
+        <Text style={lc.cardTitle}>{title}</Text>
+        <RNView style={lc.metaRow}>
+          <RNView style={[lc.diffDot, { backgroundColor: diffColor }]} />
+          <Text style={lc.metaText}>{lesson.estimatedMinutes} {t("track.min")}</Text>
+          {completed && !locked && (
+            <>
+              <RNView style={lc.metaDivider} />
+              <Text style={[lc.metaText, { color }]}>{t("track.completed")}</Text>
+            </>
+          )}
+        </RNView>
+      </RNView>
+
+      {/* Action */}
+      {!locked && (
+        <Pressable
+          onPress={onStart}
+          style={[
+            lc.actionBtn,
+            {
               backgroundColor: completed ? "transparent" : color,
-              borderWidth: completed ? 1 : 0,
               borderColor: color,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Text
-              style={{
-                color: completed ? color : "#0B0F14",
-                fontSize: 13,
-                fontWeight: "600",
-              }}
-            >
-              {completed ? t("track.review") : t("track.start")}
-            </Text>
-          </Pressable>
-        )}
-      </HStack>
-    </Box>
+              borderWidth: completed ? 1 : 0,
+            },
+          ]}
+        >
+          <Text style={[lc.actionText, { color: completed ? color : "#0B0F14" }]}>
+            {completed ? t("track.review") : t("track.start")}
+          </Text>
+        </Pressable>
+      )}
+    </RNView>
   );
 }
 
@@ -169,56 +162,55 @@ export default function TrackDetailScreen() {
   return (
     <Box className="flex-1 bg-[#0B0F14]">
       {/* Header */}
-      <Box
-        className="px-5 pb-5"
-        style={{ paddingTop: insets.top + 8, backgroundColor: bg, borderBottomWidth: 1, borderBottomColor: `${color}33` }}
+      <RNView
+        style={[
+          th.header,
+          { paddingTop: insets.top + 8, backgroundColor: bg, borderBottomColor: color + "30" },
+        ]}
       >
-        <HStack className="items-center" space="md">
-          <Pressable onPress={() => router.back()}>
+        {/* Decorative ring */}
+        <RNView style={[th.ring, { borderColor: color + "18" }]} />
+
+        <RNView style={th.backRow}>
+          <Pressable onPress={() => router.back()} style={th.backBtn}>
             <Ionicons name="chevron-back" size={22} color={color} />
           </Pressable>
-          <HStack className="items-center flex-1" space="sm">
-            <Box style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: color }} />
-            <Text className="text-[#E6EAF2] text-[20px] font-semibold flex-1">
-              {title}
-            </Text>
-          </HStack>
-        </HStack>
+        </RNView>
+
+        <RNView style={[th.trackBadge, { backgroundColor: color + "20", borderColor: color + "40" }]}>
+          <RNView style={[th.trackDot, { backgroundColor: color }]} />
+          <Text style={[th.trackBadgeText, { color }]}>{t("track.track_label")}</Text>
+        </RNView>
+
+        <Text style={th.headerTitle} numberOfLines={2}>{title}</Text>
+
         {track?.description?.[lang] ? (
-          <Text className="text-[#AAB0C0] text-[13px] mt-3 ml-8">
-            {track.description[lang]}
-          </Text>
+          <Text style={th.headerDesc} numberOfLines={2}>{track.description[lang]}</Text>
         ) : null}
-        <Text className="text-[12px] font-semibold mt-3 ml-8" style={{ color }}>
+
+        <Text style={[th.lessonCount, { color }]}>
           {lessons.length} {t("track.lessons")}
         </Text>
-      </Box>
+      </RNView>
 
       {/* Mastery banner */}
       {isTrackMastered && (
-        <Box className="px-5 pt-4">
-          <Box
-            className="rounded-[18px] p-4"
-            style={{ backgroundColor: `${color}18`, borderWidth: 1.5, borderColor: `${color}55` }}
-          >
-            <HStack className="items-start" space="sm">
-              <Ionicons name="trophy" size={20} color={color} style={{ marginTop: 1 }} />
-              <VStack space="xs" className="flex-1">
-                <Text className="text-[#E6EAF2] text-[15px] font-semibold">
-                  {t("track.mastered_title")}
-                </Text>
-                <Text className="text-[13px] leading-[19px]" style={{ color: `${color}CC` }}>
-                  {track?.description?.[lang] ?? track?.description?.en ?? t("track.mastered_fallback")}
-                </Text>
-              </VStack>
-            </HStack>
-          </Box>
-        </Box>
+        <RNView style={th.masteryWrap}>
+          <RNView style={[th.masteryCard, { backgroundColor: color + "15", borderColor: color + "50" }]}>
+            <Ionicons name="trophy" size={20} color={color} style={{ marginTop: 1 }} />
+            <RNView style={{ flex: 1, gap: 3 }}>
+              <Text style={th.masteryTitle}>{t("track.mastered_title")}</Text>
+              <Text style={[th.masteryDesc, { color: color + "CC" }]}>
+                {track?.description?.[lang] ?? track?.description?.en ?? t("track.mastered_fallback")}
+              </Text>
+            </RNView>
+          </RNView>
+        </RNView>
       )}
 
       <ScrollView
-        className="flex-1 px-5"
-        contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 16, 32) }}
+        style={{ flex: 1, paddingHorizontal: 20 }}
+        contentContainerStyle={{ paddingTop: 16, paddingBottom: Math.max(insets.bottom + 16, 32) }}
       >
         {loading ? (
           [0, 1, 2].map((i) => (
@@ -250,3 +242,156 @@ export default function TrackDetailScreen() {
     </Box>
   );
 }
+
+const th = StyleSheet.create({
+  header: {
+    paddingHorizontal: 20,
+    paddingBottom: 24,
+    borderBottomWidth: 1,
+    overflow: "hidden",
+  },
+  ring: {
+    position: "absolute",
+    width: 260,
+    height: 260,
+    borderRadius: 130,
+    borderWidth: 1,
+    bottom: -130,
+    right: -80,
+  },
+  backRow: { marginBottom: 16 },
+  backBtn: {
+    width: 36,
+    height: 36,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  trackBadge: {
+    alignSelf: "flex-start",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 100,
+    borderWidth: 1,
+    marginBottom: 12,
+  },
+  trackDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+  },
+  trackBadgeText: {
+    fontSize: 11,
+    fontWeight: "700",
+    letterSpacing: 0.5,
+    textTransform: "uppercase",
+  },
+  headerTitle: {
+    color: "#E6EAF2",
+    fontSize: 24,
+    fontWeight: "800",
+    lineHeight: 30,
+    letterSpacing: -0.3,
+  },
+  headerDesc: {
+    color: "#AAB0C0",
+    fontSize: 13,
+    lineHeight: 19,
+    marginTop: 8,
+  },
+  lessonCount: {
+    fontSize: 12,
+    fontWeight: "700",
+    marginTop: 12,
+    letterSpacing: 0.3,
+  },
+  masteryWrap: {
+    paddingHorizontal: 20,
+    paddingTop: 16,
+  },
+  masteryCard: {
+    borderRadius: 18,
+    borderWidth: 1.5,
+    padding: 14,
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 12,
+  },
+  masteryTitle: {
+    color: "#E6EAF2",
+    fontSize: 15,
+    fontWeight: "700",
+  },
+  masteryDesc: {
+    fontSize: 13,
+    lineHeight: 19,
+  },
+});
+
+const lc = StyleSheet.create({
+  card: {
+    borderRadius: 18,
+    borderWidth: 1,
+    borderLeftWidth: 3,
+    padding: 14,
+    marginBottom: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  iconBadge: {
+    width: 38,
+    height: 38,
+    borderRadius: 11,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  textCol: {
+    flex: 1,
+    gap: 5,
+  },
+  cardTitle: {
+    color: "#E6EAF2",
+    fontSize: 14,
+    fontWeight: "700",
+    lineHeight: 19,
+  },
+  metaRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+  diffDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    flexShrink: 0,
+  },
+  metaText: {
+    color: "#7B8193",
+    fontSize: 12,
+    fontWeight: "500",
+  },
+  metaDivider: {
+    width: 3,
+    height: 3,
+    borderRadius: 2,
+    backgroundColor: "#2A3448",
+  },
+  actionBtn: {
+    paddingHorizontal: 14,
+    height: 34,
+    borderRadius: 11,
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  actionText: {
+    fontSize: 13,
+    fontWeight: "700",
+  },
+});

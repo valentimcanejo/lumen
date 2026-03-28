@@ -40,22 +40,24 @@ function weekLabel(weekId: string): string {
 function EntryRow({ entry, rank, isMe }: { entry: LeaderboardEntry; rank: number; isMe: boolean }) {
   const tier = getLevelTier(entry.level);
   return (
-    <View style={[s.row, isMe && s.rowMe]}>
+    <View style={[s.row, isMe && { backgroundColor: tier.color + "0A", borderRadius: 14 }]}>
       <View style={s.rankBox}>
         {rank <= 3 ? (
           <Text style={s.medal}>{MEDALS[rank - 1]}</Text>
         ) : (
-          <Text style={[s.rankNum, isMe && s.rankNumMe]}>#{rank}</Text>
+          <Text style={[s.rankNum, isMe && { color: tier.color }]}>#{rank}</Text>
         )}
       </View>
 
-      <View style={[s.dot, { backgroundColor: tier.color }]} />
+      <View style={[s.tierBadge, { backgroundColor: tier.color + "20", borderColor: tier.color + "50" }]}>
+        <Text style={[s.tierBadgeText, { color: tier.color }]}>{tier.name.slice(0, 2).toUpperCase()}</Text>
+      </View>
 
       <Text style={[s.name, isMe && s.nameMe]} numberOfLines={1}>
         {entry.displayName}
       </Text>
 
-      <Text style={[s.xp, isMe && s.xpMe]}>{entry.weekXp} XP</Text>
+      <Text style={[s.xp, isMe && { color: tier.color }]}>{entry.weekXp} XP</Text>
     </View>
   );
 }
@@ -116,9 +118,14 @@ export default function LeaderboardScreen() {
         <>
           {/* Current user card */}
           {state.currentUserEntry && (
-            <View style={[s.myCard, { borderColor: tier.color + "55" }]}>
-              <Text style={s.myCardLabel}>{t("leaderboard.your_position")}</Text>
-              <View style={{ flexDirection: "row", alignItems: "baseline", gap: 8, marginTop: 4 }}>
+            <View style={[s.myCard, { borderColor: tier.color + "44", borderLeftColor: tier.color + "80", backgroundColor: tier.color + "0C" }]}>
+              <View style={s.myCardTop}>
+                <Text style={s.myCardLabel}>{t("leaderboard.your_position")}</Text>
+                <View style={[s.myTierPill, { backgroundColor: tier.color + "22", borderColor: tier.color + "55" }]}>
+                  <Text style={[s.myTierText, { color: tier.color }]}>{tier.name}</Text>
+                </View>
+              </View>
+              <View style={{ flexDirection: "row", alignItems: "baseline", gap: 8, marginTop: 6 }}>
                 <Text style={[s.myCardRank, { color: tier.color }]}>
                   {state.currentUserRank ? `#${state.currentUserRank}` : t("leaderboard.outside_top")}
                 </Text>
@@ -169,10 +176,15 @@ const s = StyleSheet.create({
   myCard: {
     marginHorizontal: 16,
     marginBottom: 12,
-    backgroundColor: "#121826",
     borderWidth: 1,
+    borderLeftWidth: 3,
     borderRadius: 16,
     padding: 14,
+  },
+  myCardTop: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   myCardLabel: {
     color: "#AAB0C0",
@@ -181,26 +193,35 @@ const s = StyleSheet.create({
     letterSpacing: 1,
     textTransform: "uppercase",
   },
+  myTierPill: {
+    paddingHorizontal: 10,
+    paddingVertical: 3,
+    borderRadius: 100,
+    borderWidth: 1,
+  },
+  myTierText: { fontSize: 11, fontWeight: "800" },
   myCardRank: { fontSize: 24, fontWeight: "800" },
   myCardXp: { color: "#7B8193", fontSize: 14 },
   row: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 4,
+    paddingVertical: 11,
+    paddingHorizontal: 6,
     gap: 10,
-    borderRadius: 12,
   },
-  rowMe: { backgroundColor: "#F5C77A08" },
   rankBox: { width: 36, alignItems: "center" },
   medal: { fontSize: 20 },
   rankNum: { color: "#4A5568", fontSize: 13, fontWeight: "700" },
-  rankNumMe: { color: "#F5C77A" },
-  dot: { width: 8, height: 8, borderRadius: 4 },
+  tierBadge: {
+    paddingHorizontal: 7,
+    paddingVertical: 3,
+    borderRadius: 8,
+    borderWidth: 1,
+  },
+  tierBadgeText: { fontSize: 10, fontWeight: "800", letterSpacing: 0.3 },
   name: { flex: 1, color: "#AAB0C0", fontSize: 14 },
   nameMe: { color: "#E6EAF2", fontWeight: "700" },
   xp: { color: "#5ED19A", fontSize: 13, fontWeight: "700", minWidth: 64, textAlign: "right" },
-  xpMe: { color: "#F5C77A" },
   separator: { height: 1, backgroundColor: "#1A223360", marginLeft: 50 },
   empty: { flex: 1, alignItems: "center", justifyContent: "center", gap: 12 },
   emptyIcon: { fontSize: 48 },

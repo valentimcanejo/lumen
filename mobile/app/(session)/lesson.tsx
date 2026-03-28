@@ -271,131 +271,91 @@ export default function LessonScreen() {
         {(() => {
           const cover = getCoverImage(contentId);
           return cover ? (
-            <Image source={cover} style={{ width: "100%", height: 200 }} resizeMode="cover" />
+            <View style={ls.coverWrap}>
+              <Image source={cover} style={ls.coverImage} resizeMode="cover" />
+              <View style={ls.coverFade} />
+            </View>
           ) : null;
         })()}
 
-        <Box className="px-5 pt-6">
-          <Text className="text-[#E6EAF2] text-[22px] font-semibold">
-            {pack.lesson.title}
+        <View style={ls.content}>
+          <Text style={ls.lessonTitle}>{pack.lesson.title}</Text>
+          <Text style={ls.lessonMeta}>
+            {pack.tags?.[0] ?? t("common.content")} • {pack.estimatedMinutes} min
           </Text>
 
-          <Text className="text-[#AAB0C0] text-[13px] mt-1">
-            {pack.tags?.[0] ?? t("common.content")} • {pack.estimatedMinutes}{" "}
-            min
-          </Text>
+          <View style={ls.divider} />
 
-          <Box className="h-[1px] bg-[#1A2233] mt-4" />
-
-          <Box className="mt-5 bg-[#121826] border border-[#1A2233] rounded-[18px] p-4">
-            <HStack className="items-center">
+          {/* Audio player */}
+          <View style={[ls.playerCard, { borderColor: color + "30", borderLeftColor: color + "70" }]}>
+            <View style={ls.playerRow}>
               <TouchableOpacity
                 onPress={handlePlayPause}
                 activeOpacity={0.65}
                 disabled={!audioReady}
-                style={[
-                  as.playBtn,
-                  { borderColor: `${color}55`, opacity: audioReady ? 1 : 0.4 },
-                ]}
+                style={[as.playBtn, { borderColor: color + "55", backgroundColor: color + "15", opacity: audioReady ? 1 : 0.4 }]}
               >
                 {showLoadingIcon ? (
                   <Ionicons name="hourglass-outline" size={18} color={color} />
                 ) : (
-                  <Ionicons
-                    name={playIconName}
-                    size={18}
-                    color={color}
-                    style={{ marginLeft: playing ? 0 : 2 }}
-                  />
+                  <Ionicons name={playIconName} size={18} color={color} style={{ marginLeft: playing ? 0 : 2 }} />
                 )}
               </TouchableOpacity>
 
               <Waveform progress={audioProgress} />
 
-              <Text className="text-[#7B8193] text-[11px] w-[68px] text-right">
+              <Text style={ls.timeLabel}>
                 {audioReady
                   ? `${formatMs(positionMs)} / ${formatMs(durationMs)}`
                   : audioLoading
                     ? t("common.loading")
                     : "--:-- / --:--"}
               </Text>
-            </HStack>
+            </View>
 
-            <Box className="h-[4px] rounded-full bg-[#1A2233] overflow-hidden mt-3">
-              <Box
-                style={{
-                  height: "100%",
-                  width: `${audioProgress * 100}%`,
-                  backgroundColor: color,
-                }}
-              />
-            </Box>
+            <View style={ls.progressTrack}>
+              <View style={[ls.progressFill, { width: `${audioProgress * 100}%`, backgroundColor: color }]} />
+            </View>
 
             {pack.lesson.summary ? (
-              <Text className="text-[#7B8193] text-[12px] mt-3">
-                {pack.lesson.summary}
-              </Text>
+              <Text style={ls.summaryText}>{pack.lesson.summary}</Text>
             ) : null}
 
             {audioReady && (
-              <HStack className="items-center justify-center mt-3" space="xs">
+              <View style={ls.audioHint}>
                 <Ionicons name="headset-outline" size={13} color="#4A5568" />
-                <Text className="text-[#4A5568] text-[12px]">
-                  {t("session.lesson.audio_hint")}
-                </Text>
-              </HStack>
+                <Text style={ls.audioHintText}>{t("session.lesson.audio_hint")}</Text>
+              </View>
             )}
-          </Box>
+          </View>
 
           <LessonBlocks blocks={pack.lesson.blocks} />
 
-          <Box className="mt-6">
+          <View style={ls.actions}>
             <Pressable
               onPress={() =>
                 router.push({
                   pathname: "/(session)/cards",
-                  params: {
-                    contentId: pack.id,
-                    version: String(pack.version),
-                    lang,
-                  },
+                  params: { contentId: pack.id, version: String(pack.version), lang },
                 })
               }
-              style={{
-                height: 52,
-                borderRadius: 18,
-                backgroundColor: color,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              style={[ls.nextBtn, { backgroundColor: color }]}
             >
-              <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                {t("common.next")}
-              </Text>
+              <Text style={ls.nextBtnText}>{t("common.next")}</Text>
             </Pressable>
 
             <Pressable
               onPress={handleSave}
               disabled={savingContent}
-              className="h-[52px] rounded-2xl mt-3 border border-[#1A2233] items-center justify-center"
-              style={{ opacity: savingContent ? 0.6 : 1 }}
+              style={[ls.saveBtn, { opacity: savingContent ? 0.6 : 1 }]}
             >
-              <HStack className="items-center" space="sm">
-                <Ionicons
-                  name={saved ? "bookmark" : "bookmark-outline"}
-                  size={18}
-                  color={saved ? color : "#AAB0C0"}
-                />
-                <Text
-                  className="text-[16px] font-semibold"
-                  style={{ color: saved ? color : "#AAB0C0" }}
-                >
-                  {saved ? t("common.saved") : t("common.save")}
-                </Text>
-              </HStack>
+              <Ionicons name={saved ? "bookmark" : "bookmark-outline"} size={18} color={saved ? color : "#AAB0C0"} />
+              <Text style={[ls.saveBtnText, { color: saved ? color : "#AAB0C0" }]}>
+                {saved ? t("common.saved") : t("common.save")}
+              </Text>
             </Pressable>
-          </Box>
-        </Box>
+          </View>
+        </View>
       </ScrollView>
     </Box>
   );
@@ -406,9 +366,125 @@ const as = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: "#1A2233",
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+});
+
+const ls = StyleSheet.create({
+  coverWrap: {
+    width: "100%",
+    height: 200,
+    position: "relative",
+  },
+  coverImage: {
+    width: "100%",
+    height: 200,
+  },
+  coverFade: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 80,
+    backgroundColor: "#0B0F1490",
+  },
+  content: {
+    paddingHorizontal: 20,
+    paddingTop: 24,
+  },
+  lessonTitle: {
+    color: "#E6EAF2",
+    fontSize: 22,
+    fontWeight: "700",
+    lineHeight: 28,
+    letterSpacing: -0.2,
+  },
+  lessonMeta: {
+    color: "#AAB0C0",
+    fontSize: 13,
+    marginTop: 4,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: "#1A2233",
+    marginTop: 16,
+  },
+  playerCard: {
+    marginTop: 20,
+    backgroundColor: "#121826",
+    borderWidth: 1,
+    borderLeftWidth: 3,
+    borderRadius: 18,
+    padding: 16,
+  },
+  playerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  timeLabel: {
+    color: "#7B8193",
+    fontSize: 11,
+    width: 68,
+    textAlign: "right",
+  },
+  progressTrack: {
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: "#1A2233",
+    overflow: "hidden",
+    marginTop: 12,
+  },
+  progressFill: {
+    height: "100%",
+    borderRadius: 2,
+  },
+  summaryText: {
+    color: "#7B8193",
+    fontSize: 12,
+    marginTop: 12,
+    lineHeight: 18,
+  },
+  audioHint: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 6,
+    marginTop: 10,
+  },
+  audioHintText: {
+    color: "#4A5568",
+    fontSize: 12,
+  },
+  actions: {
+    marginTop: 24,
+    gap: 10,
+    marginBottom: 8,
+  },
+  nextBtn: {
+    height: 52,
+    borderRadius: 18,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  nextBtnText: {
+    color: "#0B0F14",
+    fontSize: 16,
+    fontWeight: "700",
+  },
+  saveBtn: {
+    height: 52,
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: "#1A2233",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    gap: 8,
+  },
+  saveBtnText: {
+    fontSize: 16,
+    fontWeight: "600",
   },
 });

@@ -183,6 +183,7 @@
     }
   },
   "track": {
+    "track_label": "Trilha",
     "lessons": "Lições",
     "start": "Iniciar",
     "review": "Rever",
