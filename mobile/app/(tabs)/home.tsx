@@ -79,20 +79,22 @@ function MissionsCard({ missions }: { missions: DailyMission[] }) {
 
   return (
     <View style={ms.card}>
-      <Text style={ms.title}>{t("missions.title")}</Text>
+      <Text style={ms.eyebrow}>{t("missions.title")}</Text>
       {missions.map((m) => (
-        <View key={m.id} style={ms.row}>
+        <View key={m.id} style={[ms.row, m.completed && ms.rowDone]}>
           <View style={[ms.check, m.completed && ms.checkDone]}>
             {m.completed && (
-              <Ionicons name="checkmark" size={12} color="#0B0F14" />
+              <Ionicons name="checkmark" size={11} color="#0B0F14" />
             )}
           </View>
           <Text style={[ms.missionLabel, m.completed && ms.missionLabelDone]}>
             {t(`missions.${m.id}`)}
           </Text>
-          <Text style={[ms.xpPill, m.completed && ms.xpPillDone]}>
-            +{m.xpReward} XP
-          </Text>
+          <View style={[ms.xpBadge, m.completed && ms.xpBadgeDone]}>
+            <Text style={[ms.xpText, m.completed && ms.xpTextDone]}>
+              +{m.xpReward} XP
+            </Text>
+          </View>
         </View>
       ))}
     </View>
@@ -103,23 +105,30 @@ const ms = StyleSheet.create({
   card: {
     backgroundColor: "#121826",
     borderWidth: 1,
-    borderColor: "#1A2233",
-    borderRadius: 22,
-    padding: 18,
-    gap: 10,
+    borderColor: "#1E2A3E",
+    borderRadius: 24,
+    padding: 20,
+    gap: 8,
   },
-  title: {
-    color: "#AAB0C0",
-    fontSize: 11,
-    fontWeight: "600",
-    letterSpacing: 1,
+  eyebrow: {
+    color: "#4A5568",
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 1.5,
     textTransform: "uppercase",
-    marginBottom: 2,
+    marginBottom: 6,
   },
   row: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
+    gap: 12,
+    backgroundColor: "#0E1420",
+    borderRadius: 14,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+  },
+  rowDone: {
+    backgroundColor: "transparent",
   },
   check: {
     width: 22,
@@ -129,6 +138,7 @@ const ms = StyleSheet.create({
     borderColor: "#2A3448",
     alignItems: "center",
     justifyContent: "center",
+    flexShrink: 0,
   },
   checkDone: {
     backgroundColor: "#5ED19A",
@@ -136,20 +146,34 @@ const ms = StyleSheet.create({
   },
   missionLabel: {
     flex: 1,
-    color: "#AAB0C0",
+    color: "#C8CDD8",
     fontSize: 13,
+    fontWeight: "500",
   },
   missionLabelDone: {
-    color: "#4A5568",
+    color: "#3A4558",
     textDecorationLine: "line-through",
   },
-  xpPill: {
+  xpBadge: {
+    backgroundColor: "#162618",
+    borderRadius: 10,
+    paddingHorizontal: 9,
+    paddingVertical: 4,
+    borderWidth: 1,
+    borderColor: "#5ED19A30",
+    flexShrink: 0,
+  },
+  xpBadgeDone: {
+    backgroundColor: "transparent",
+    borderColor: "transparent",
+  },
+  xpText: {
     color: "#5ED19A",
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: "700",
   },
-  xpPillDone: {
-    color: "#2A4030",
+  xpTextDone: {
+    color: "#273327",
   },
 });
 
@@ -161,24 +185,34 @@ function WeeklyMissionsCard({ missions }: { missions: WeeklyMission[] }) {
   const { t } = useTranslation();
   return (
     <View style={wm.card}>
-      <Text style={wm.title}>{t("missions.weekly_title")}</Text>
+      <Text style={wm.eyebrow}>{t("missions.weekly_title")}</Text>
       {missions.map((m) => {
         const pct = m.target > 0 ? Math.min(m.progress / m.target, 1) : 0;
         return (
-          <View key={m.id} style={wm.row}>
+          <View key={m.id} style={wm.item}>
             <View style={wm.labelRow}>
               <Text style={[wm.label, m.completed && wm.labelDone]}>
                 {t(`missions.weekly_${m.id}`)}
               </Text>
-              <Text style={[wm.xpPill, m.completed && wm.xpPillDone]}>
-                +{m.xpReward} XP
-              </Text>
+              <View style={[wm.xpBadge, m.completed && wm.xpBadgeDone]}>
+                <Text style={[wm.xpText, m.completed && wm.xpTextDone]}>
+                  +{m.xpReward} XP
+                </Text>
+              </View>
             </View>
             <View style={wm.barBg}>
-              <View style={[wm.barFill, { width: `${pct * 100}%`, backgroundColor: m.completed ? "#5ED19A" : "#F5C77A" }]} />
+              <View
+                style={[
+                  wm.barFill,
+                  {
+                    width: `${pct * 100}%`,
+                    backgroundColor: m.completed ? "#5ED19A" : "#F5C77A",
+                  },
+                ]}
+              />
             </View>
             <Text style={wm.progress}>
-              {m.completed ? "✓" : `${m.progress}/${m.target}`}
+              {m.completed ? "✓" : `${m.progress} / ${m.target}`}
             </Text>
           </View>
         );
@@ -191,37 +225,50 @@ const wm = StyleSheet.create({
   card: {
     backgroundColor: "#121826",
     borderWidth: 1,
-    borderColor: "#1A2233",
-    borderRadius: 22,
-    padding: 18,
-    gap: 12,
+    borderColor: "#1E2A3E",
+    borderRadius: 24,
+    padding: 20,
+    gap: 16,
   },
-  title: {
-    color: "#AAB0C0",
-    fontSize: 11,
-    fontWeight: "600",
-    letterSpacing: 1,
+  eyebrow: {
+    color: "#4A5568",
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 1.5,
     textTransform: "uppercase",
     marginBottom: 2,
   },
-  row: { gap: 6 },
+  item: { gap: 7 },
   labelRow: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },
-  label: { color: "#AAB0C0", fontSize: 13, flex: 1, marginRight: 8 },
-  labelDone: { color: "#4A5568", textDecorationLine: "line-through" },
-  xpPill: { color: "#F5C77A", fontSize: 12, fontWeight: "700" },
-  xpPillDone: { color: "#2A4030" },
+  label: { color: "#AAB0C0", fontSize: 13, fontWeight: "500", flex: 1, marginRight: 8 },
+  labelDone: { color: "#3A4558", textDecorationLine: "line-through" },
+  xpBadge: {
+    backgroundColor: "#1A2614",
+    borderRadius: 10,
+    paddingHorizontal: 9,
+    paddingVertical: 4,
+    borderWidth: 1,
+    borderColor: "#F5C77A30",
+    flexShrink: 0,
+  },
+  xpBadgeDone: {
+    backgroundColor: "transparent",
+    borderColor: "transparent",
+  },
+  xpText: { color: "#F5C77A", fontSize: 11, fontWeight: "700" },
+  xpTextDone: { color: "#2A3018" },
   barBg: {
     height: 4,
-    backgroundColor: "#1A2233",
-    borderRadius: 2,
+    backgroundColor: "#0E1420",
+    borderRadius: 3,
     overflow: "hidden",
   },
-  barFill: { height: "100%", borderRadius: 2 },
-  progress: { color: "#7B8193", fontSize: 11, textAlign: "right" },
+  barFill: { height: "100%", borderRadius: 3 },
+  progress: { color: "#3A4558", fontSize: 11, fontWeight: "600", textAlign: "right" },
 });
 
 // ---------------------------------------------------------------------------
@@ -254,12 +301,14 @@ function StarterChallengeCard({
   return (
     <View style={sc.card}>
       <View style={sc.headerRow}>
-        <Text style={sc.title}>{t("starter.title")}</Text>
+        <View style={{ flex: 1 }}>
+          <Text style={sc.eyebrow}>{t("starter.subtitle")}</Text>
+          <Text style={sc.title}>{t("starter.title")}</Text>
+        </View>
         <View style={sc.bonusPill}>
           <Text style={sc.bonusText}>+50 XP</Text>
         </View>
       </View>
-      <Text style={sc.subtitle}>{t("starter.subtitle")}</Text>
       <View style={sc.daysRow}>
         {days.map((label, i) => {
           const done = i < daysCompleted;
@@ -268,7 +317,7 @@ function StarterChallengeCard({
             <View key={i} style={sc.dayItem}>
               <View style={[sc.dayCircle, done && sc.dayCircleDone, current && sc.dayCircleCurrent]}>
                 {done
-                  ? <Ionicons name="checkmark" size={16} color="#0B0F14" />
+                  ? <Ionicons name="checkmark" size={20} color="#0B0F14" />
                   : <Text style={[sc.dayNum, current && sc.dayNumCurrent]}>{i + 1}</Text>
                 }
               </View>
@@ -285,36 +334,51 @@ const sc = StyleSheet.create({
   card: {
     backgroundColor: "#121826",
     borderWidth: 1,
-    borderColor: "#F5C77A33",
-    borderRadius: 22,
-    padding: 18,
-    gap: 10,
+    borderColor: "#F5C77A18",
+    borderRadius: 24,
+    padding: 20,
+    gap: 20,
   },
-  headerRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
-  title: { color: "#E6EAF2", fontSize: 15, fontWeight: "700" },
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+  },
+  eyebrow: {
+    color: "#4A5568",
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 1.5,
+    textTransform: "uppercase",
+    marginBottom: 5,
+  },
+  title: { color: "#E6EAF2", fontSize: 16, fontWeight: "700" },
   bonusPill: {
-    backgroundColor: "#F5C77A22",
+    backgroundColor: "#F5C77A15",
     borderWidth: 1,
-    borderColor: "#F5C77A66",
+    borderColor: "#F5C77A50",
     borderRadius: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 3,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
   },
-  bonusText: { color: "#F5C77A", fontSize: 12, fontWeight: "700" },
-  subtitle: { color: "#7B8193", fontSize: 12 },
-  daysRow: { flexDirection: "row", justifyContent: "space-around", marginTop: 4 },
-  dayItem: { alignItems: "center", gap: 6 },
+  bonusText: { color: "#F5C77A", fontSize: 12, fontWeight: "800" },
+  daysRow: { flexDirection: "row", justifyContent: "space-around" },
+  dayItem: { alignItems: "center", gap: 8 },
   dayCircle: {
-    width: 44, height: 44, borderRadius: 22,
-    backgroundColor: "#1A2233",
-    borderWidth: 2, borderColor: "#2A3448",
-    alignItems: "center", justifyContent: "center",
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+    backgroundColor: "#0E1420",
+    borderWidth: 2,
+    borderColor: "#1E2A3E",
+    alignItems: "center",
+    justifyContent: "center",
   },
   dayCircleDone: { backgroundColor: "#5ED19A", borderColor: "#5ED19A" },
-  dayCircleCurrent: { borderColor: "#F5C77A" },
-  dayNum: { color: "#4A5568", fontSize: 16, fontWeight: "700" },
+  dayCircleCurrent: { borderColor: "#F5C77A", backgroundColor: "#F5C77A0D" },
+  dayNum: { color: "#3A4558", fontSize: 18, fontWeight: "800" },
   dayNumCurrent: { color: "#F5C77A" },
-  dayLabel: { color: "#7B8193", fontSize: 11 },
+  dayLabel: { color: "#3A4558", fontSize: 11, fontWeight: "600" },
   dayLabelDone: { color: "#5ED19A" },
 });
 
@@ -332,60 +396,66 @@ const wk = StyleSheet.create({
   card: {
     backgroundColor: "#121826",
     borderWidth: 1,
-    borderColor: "#1A2233",
-    borderRadius: 22,
+    borderColor: "#1E2A3E",
+    borderRadius: 24,
     padding: 20,
   },
   headerRow: {
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
-    marginBottom: 20,
+    marginBottom: 24,
   },
-  minutesNum: { color: "#F5C77A", fontSize: 28, fontWeight: "700" },
-  minutesLabel: {
-    color: "#AAB0C0",
-    fontSize: 13,
-    marginBottom: 3,
-    marginLeft: 4,
+  eyebrow: {
+    color: "#4A5568",
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 1.5,
+    textTransform: "uppercase",
+    marginBottom: 4,
   },
+  minutesNum: { color: "#F5C77A", fontSize: 34, fontWeight: "800", lineHeight: 38 },
+  minutesUnit: { color: "#7B8193", fontSize: 15, marginBottom: 4 },
   badge: {
-    backgroundColor: "#F5C77A22",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    backgroundColor: "#F5C77A15",
     borderWidth: 1,
     borderColor: "#F5C77A44",
     borderRadius: 100,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
+    paddingHorizontal: 12,
+    paddingVertical: 7,
   },
-  badgeText: { color: "#F5C77A", fontSize: 11, fontWeight: "600" },
+  badgeText: { color: "#F5C77A", fontSize: 12, fontWeight: "700" },
   daysRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 16,
+    marginBottom: 22,
   },
-  dayCol: { alignItems: "center", gap: 4 },
+  dayCol: { alignItems: "center", gap: 8 },
   circle: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
   },
   dot: { width: 7, height: 7, borderRadius: 4 },
   dayLabel: { fontSize: 11, fontWeight: "600" },
   barTrack: {
-    height: 5,
-    backgroundColor: "#1A2233",
+    height: 4,
+    backgroundColor: "#0E1420",
     borderRadius: 3,
     overflow: "hidden",
+    marginBottom: 10,
   },
   barFill: { height: "100%", borderRadius: 3 },
   statsRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 4,
   },
-  statsText: { color: "#4A5568", fontSize: 11 },
+  statsText: { color: "#3A4558", fontSize: 11, fontWeight: "600" },
 });
 
 function WeeklyCard({
@@ -410,15 +480,18 @@ function WeeklyCard({
   return (
     <View style={wk.card}>
       {/* Header */}
-
       <View style={wk.headerRow}>
-        <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
-          <Text style={wk.minutesNum}>{totalMinutes}</Text>
-          <Text style={wk.minutesLabel}>min {studiedLabel}</Text>
+        <View>
+          <Text style={wk.eyebrow}>{studiedLabel}</Text>
+          <View style={{ flexDirection: "row", alignItems: "flex-end", gap: 5 }}>
+            <Text style={wk.minutesNum}>{totalMinutes}</Text>
+            <Text style={wk.minutesUnit}>min</Text>
+          </View>
         </View>
         {weekDone && (
           <View style={wk.badge}>
-            <Text style={wk.badgeText}>🏆 Meta!</Text>
+            <Ionicons name="trophy" size={12} color="#F5C77A" />
+            <Text style={wk.badgeText}>Meta!</Text>
           </View>
         )}
       </View>
@@ -439,35 +512,27 @@ function WeeklyCard({
                     backgroundColor: done
                       ? "#F5C77A"
                       : isToday
-                        ? "transparent"
-                        : "#1A2233",
-                    borderWidth: isToday && !done ? 2 : 0,
-                    borderColor: "#F5C77A88",
+                        ? "#F5C77A0E"
+                        : "#0E1420",
+                    borderWidth: isToday && !done ? 1.5 : 0,
+                    borderColor: "#F5C77A66",
                   },
                 ]}
               >
                 {done ? (
-                  <Ionicons name="checkmark" size={18} color="#0B0F14" />
+                  <Ionicons name="checkmark" size={16} color="#0B0F14" />
                 ) : isToday ? (
                   <View style={[wk.dot, { backgroundColor: "#F5C77A" }]} />
                 ) : isFuture ? null : (
                   <View
-                    style={[
-                      wk.dot,
-                      {
-                        backgroundColor: "#3A4458",
-                        width: 5,
-                        height: 5,
-                        borderRadius: 3,
-                      },
-                    ]}
+                    style={[wk.dot, { backgroundColor: "#2A3448", width: 5, height: 5, borderRadius: 3 }]}
                   />
                 )}
               </View>
               <Text
                 style={[
                   wk.dayLabel,
-                  { color: isToday ? "#F5C77A" : "#4A5568" },
+                  { color: isToday ? "#F5C77A" : done ? "#7B8193" : "#2A3448" },
                 ]}
               >
                 {labels[i]}
@@ -703,114 +768,156 @@ export default function Home() {
     </Modal>
 
     <ScrollView
-      className="flex-1 bg-[#0B0F14]"
-      contentContainerStyle={{ paddingBottom: 40 }}
+      style={{ flex: 1, backgroundColor: "#0B0F14" }}
+      contentContainerStyle={{ paddingBottom: 48 }}
+      showsVerticalScrollIndicator={false}
     >
-      {/* Header: logo + streak pill | tier + level */}
-      <Box className="px-6" style={{ paddingTop: insets.top + 8 }}>
-        <HStack className="items-center justify-between">
-          <HStack className="items-center" style={{ gap: 10 }}>
+      {/* ── Header ─────────────────────────────────────────────── */}
+      <View style={[hd.headerWrap, { paddingTop: insets.top + 10 }]}>
+        {/* Top row: logo + streak | tier + level */}
+        <View style={hd.topRow}>
+          <View style={hd.logoGroup}>
             <Image
               source={require("../../assets/images/icon.png")}
-              style={{ width: 28, height: 28, borderRadius: 6 }}
+              style={hd.logoImg}
             />
-            <Text className="text-[#E6EAF2] text-[22px] font-bold">Lumen</Text>
+            <Text style={hd.logoText}>Lumen</Text>
             {streak > 0 && (
               <View style={hd.streakPill}>
                 <Animated.Text style={[{ fontSize: 14 }, flameStyle]}>🔥</Animated.Text>
                 <Text style={hd.streakNum}>{streak}</Text>
-                {shields > 0 && <Text style={hd.streakShield}>🛡️{shields}</Text>}
+                {shields > 0 && (
+                  <View style={hd.shieldBadge}>
+                    <Ionicons name="shield" size={9} color="#7B8FE0" />
+                    <Text style={hd.shieldNum}>{shields}</Text>
+                  </View>
+                )}
               </View>
             )}
-          </HStack>
-          <Pressable onPress={() => router.push("/(tabs)/profile")}>
-            <HStack className="items-center" space="sm">
-              <View style={{ paddingHorizontal: 8, paddingVertical: 3, borderRadius: 100, backgroundColor: `${tier.color}22`, borderWidth: 1, borderColor: `${tier.color}66` }}>
-                <Text style={{ color: tier.color, fontSize: 11, fontWeight: "700" }}>{tier.name}</Text>
-              </View>
-              <Text className="text-[#AAB0C0] text-[13px]">{t("tabs.home.level", { level })}</Text>
-            </HStack>
+          </View>
+          <Pressable onPress={() => router.push("/(tabs)/profile")} style={hd.levelGroup}>
+            <View style={[hd.tierPill, { backgroundColor: `${tier.color}18`, borderColor: `${tier.color}50` }]}>
+              <Text style={[hd.tierText, { color: tier.color }]}>{tier.name}</Text>
+            </View>
+            <Text style={hd.levelText}>{t("tabs.home.level", { level })}</Text>
           </Pressable>
-        </HStack>
-        <View style={{ height: 3, backgroundColor: "#1A2233", borderRadius: 99, marginTop: 10, overflow: "hidden" }}>
-          <View style={{ height: "100%", width: `${Math.min(xpPct * 100, 100)}%`, backgroundColor: tier.color, borderRadius: 99 }} />
         </View>
-      </Box>
+
+        {/* XP progress bar */}
+        <View style={hd.xpBarTrack}>
+          <View
+            style={[
+              hd.xpBarFill,
+              { width: `${Math.min(xpPct * 100, 100)}%`, backgroundColor: tier.color },
+            ]}
+          />
+        </View>
+      </View>
 
       {/* ── Comeback banner ────────────────────────────────────── */}
       {comebackShield && (
-        <Box className="px-6 mt-4">
+        <View style={{ paddingHorizontal: 20, marginTop: 12 }}>
           <View style={cb.card}>
             <View style={cb.iconWrap}>
-              <Text style={{ fontSize: 22 }}>🛡️</Text>
+              <Ionicons name="shield" size={20} color="#7B8FE0" />
             </View>
             <View style={{ flex: 1 }}>
               <Text style={cb.title}>Bem-vindo de volta!</Text>
               <Text style={cb.body}>
-                Sentimos sua falta. Ganhamos um shield para proteger sua sequência.
+                Sentimos sua falta. Você ganhou um shield para proteger sua sequência.
               </Text>
             </View>
             <TouchableOpacity onPress={() => setComebackShield(false)} style={cb.close}>
-              <Ionicons name="close" size={16} color="#7B8193" />
+              <Ionicons name="close" size={16} color="#4A5568" />
             </TouchableOpacity>
           </View>
-        </Box>
+        </View>
       )}
 
-      {/* ── Lições ─────────────────────────────────────────────── */}
+      {/* ── Lição de hoje ──────────────────────────────────────── */}
       {loadingUser && (
-        <Box className="px-6 mt-5">
+        <View style={{ paddingHorizontal: 20, marginTop: 20 }}>
           <SkeletonCard />
-        </Box>
+        </View>
       )}
 
       {!loadingUser && todayLesson && todayLessonId && (() => {
         const isDone = todayCompletedId === todayLessonId;
         const color = trackColor(todayLesson.trackId);
+        const cover = getCoverImage(todayLessonId);
         return (
-          <Box className="px-6 mt-5">
-            <HStack className="items-center justify-between mb-2">
-              <Text className="text-[#AAB0C0] text-[11px] font-semibold tracking-widest">
+          <View style={{ paddingHorizontal: 20, marginTop: 20 }}>
+            {/* Section label */}
+            <View style={lc.sectionHeader}>
+              <Text style={lc.sectionLabel}>
                 {t("tabs.home.pack_of_day").toUpperCase()}
               </Text>
               {isDone && (
-                <HStack className="items-center" space="xs">
-                  <Ionicons name="checkmark-circle" size={14} color="#5ED19A" />
-                  <Text className="text-[#5ED19A] text-[11px] font-semibold">
-                    {t("tabs.home.done_today")}
-                  </Text>
-                </HStack>
+                <View style={lc.donePill}>
+                  <Ionicons name="checkmark-circle" size={12} color="#5ED19A" />
+                  <Text style={lc.doneText}>{t("tabs.home.done_today")}</Text>
+                </View>
               )}
-            </HStack>
-            <TouchableOpacity onPress={() => startSession(todayLessonId)} style={lc.card} activeOpacity={0.85}>
-              {(() => {
-                const cover = getCoverImage(todayLessonId);
-                return cover ? (
-                  <Image source={cover} style={lc.coverImage} resizeMode="cover" />
-                ) : (
-                  <View style={[lc.coverFallback, { backgroundColor: color + "33" }]}>
-                    <View style={[lc.coverAccent, { backgroundColor: color }]} />
-                  </View>
-                );
-              })()}
-              <View style={lc.cardBody}>
-                <VStack style={{ flex: 1, marginRight: 12 }}>
-                  <Text style={lc.cardTitle} numberOfLines={2}>
-                    {todayLesson.title[lang] ?? todayLesson.title.en}
-                  </Text>
-                  <Text style={lc.cardDuration}>{todayLesson.estimatedMinutes} min</Text>
-                </VStack>
-                <View style={[lc.startBtn, isDone && lc.startBtnDone]}>
-                  <Text style={[lc.startBtnText, isDone && lc.startBtnTextDone]}>
-                    {isDone ? t("tabs.home.redo") : t("tabs.home.start")}
+            </View>
+
+            {/* Hero card — image with overlaid content */}
+            <View style={[lc.heroCard, { borderColor: isDone ? "#1E2A3E" : color + "50" }]}>
+              {cover ? (
+                <Image source={cover} style={lc.heroImage} resizeMode="cover" />
+              ) : (
+                <View style={[lc.heroImage, { backgroundColor: color + "18", alignItems: "center", justifyContent: "center" }]}>
+                  <View style={{ width: 3, height: 48, backgroundColor: color, borderRadius: 2 }} />
+                </View>
+              )}
+
+              {/* Multi-layer scrim — simulates gradient */}
+              <View style={lc.heroScrimMid} />
+              <View style={lc.heroScrimBot} />
+
+              {/* Done dim overlay */}
+              {isDone && <View style={lc.doneDimOverlay} />}
+
+              {/* Overlaid content */}
+              <View style={lc.heroOverlay}>
+                <View style={[lc.trackPill, { backgroundColor: color + "25", borderColor: color + "55" }]}>
+                  <Text style={[lc.trackPillText, { color }]}>
+                    {todayLesson.trackId.replace(/_/g, " ")}
                   </Text>
                 </View>
+                <Text style={lc.heroTitle} numberOfLines={2}>
+                  {todayLesson.title[lang] ?? todayLesson.title.en}
+                </Text>
+                <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginTop: 4 }}>
+                  <Ionicons name="time-outline" size={12} color="#AAB0C0" />
+                  <Text style={lc.heroDuration}>{todayLesson.estimatedMinutes} min</Text>
+                </View>
               </View>
+            </View>
+
+            {/* CTA — full-width standalone button */}
+            <TouchableOpacity
+              onPress={() => startSession(todayLessonId)}
+              activeOpacity={0.82}
+              style={[
+                lc.heroCta,
+                isDone ? lc.heroCtaDone : { backgroundColor: color },
+              ]}
+            >
+              {!isDone && (
+                <Ionicons name="play" size={14} color="#0B0F14" style={{ marginRight: 7 }} />
+              )}
+              <Text style={[lc.heroCtaText, isDone && lc.heroCtaTextDone]}>
+                {isDone ? t("tabs.home.redo") : t("tabs.home.start")}
+              </Text>
+              {isDone && (
+                <Ionicons name="refresh" size={14} color="#4A5568" style={{ marginLeft: 7 }} />
+              )}
             </TouchableOpacity>
-          </Box>
+          </View>
         );
       })()}
 
+      {/* ── Outros tracks ──────────────────────────────────────── */}
       {!loadingUser && (() => {
         const otherRows = selectedTrackIds
           .filter((trackId) => trackId !== todayLesson?.trackId)
@@ -825,186 +932,262 @@ export default function Home() {
 
         if (otherRows.length === 0) return null;
         return (
-          <Box className="px-6 mt-3">
-            <View style={lc.listContainer}>
+          <View style={{ paddingHorizontal: 20, marginTop: 10 }}>
+            <View style={lc.listCard}>
               {otherRows.map(({ trackId, lessonId, meta }, index) => {
                 const color = trackColor(trackId);
                 return (
                   <React.Fragment key={trackId}>
-                    {index > 0 && <View style={lc.divider} />}
-                    <TouchableOpacity onPress={() => startSession(lessonId)} style={lc.row} activeOpacity={0.7}>
+                    {index > 0 && <View style={lc.listDivider} />}
+                    <TouchableOpacity
+                      onPress={() => startSession(lessonId)}
+                      style={lc.listRow}
+                      activeOpacity={0.7}
+                    >
                       <View style={[lc.trackDot, { backgroundColor: color }]} />
                       <VStack style={{ flex: 1 }}>
-                        <Text style={lc.rowTitle} numberOfLines={1}>{meta!.title[lang] ?? meta!.title.en}</Text>
+                        <Text style={lc.listRowTitle} numberOfLines={1}>
+                          {meta!.title[lang] ?? meta!.title.en}
+                        </Text>
                         {(() => {
                           const total = getLessonCountForTrack(trackId);
                           const done = completedIds.filter((id) => id.startsWith(trackId)).length;
                           const pct = total > 0 ? done / total : 0;
                           return (
-                            <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginTop: 3 }}>
-                              <View style={{ flex: 1, height: 2, backgroundColor: "#1A2233", borderRadius: 1, overflow: "hidden" }}>
-                                <View style={{ height: "100%", width: `${pct * 100}%`, backgroundColor: color, borderRadius: 1 }} />
+                            <View style={{ flexDirection: "row", alignItems: "center", gap: 7, marginTop: 5 }}>
+                              <View style={{ flex: 1, height: 3, backgroundColor: "#0E1420", borderRadius: 2, overflow: "hidden" }}>
+                                <View style={{ height: "100%", width: `${pct * 100}%`, backgroundColor: color, borderRadius: 2 }} />
                               </View>
-                              <Text style={{ color: done > 0 ? color : "#4A5568", fontSize: 10, fontWeight: "600" }}>{done}/{total}</Text>
+                              <Text style={{ color: done > 0 ? color : "#3A4558", fontSize: 10, fontWeight: "700" }}>
+                                {done}/{total}
+                              </Text>
                             </View>
                           );
                         })()}
                       </VStack>
-                      <Ionicons name="chevron-forward" size={16} color="#4A5568" style={{ marginLeft: 8 }} />
+                      <Ionicons name="chevron-forward" size={14} color="#3A4558" style={{ marginLeft: 8 }} />
                     </TouchableOpacity>
                   </React.Fragment>
                 );
               })}
             </View>
-          </Box>
+          </View>
         );
       })()}
 
       {!loadingUser && (
-        <Box className="px-6 mt-2">
+        <View style={{ paddingHorizontal: 20, marginTop: 4 }}>
           <TouchableOpacity
             onPress={() => router.push("/(tabs)/tracks")}
-            style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", paddingVertical: 10, gap: 6 }}
+            style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", paddingVertical: 12, gap: 6 }}
             activeOpacity={0.6}
           >
-            <Ionicons name="add-circle-outline" size={15} color="#4A5568" />
-            <Text style={{ color: "#4A5568", fontSize: 12, fontWeight: "600" }}>
+            <Ionicons name="add-circle-outline" size={14} color="#3A4558" />
+            <Text style={{ color: "#3A4558", fontSize: 12, fontWeight: "600" }}>
               {t("tabs.home.manage_tracks")}
             </Text>
           </TouchableOpacity>
-        </Box>
+        </View>
       )}
 
-      {/* ── Ações secundárias ──────────────────────────────────── */}
+      {/* ── Revisão de cards ───────────────────────────────────── */}
       {dueCardCount > 0 && (
-        <Box className="px-6 mt-4">
+        <View style={{ paddingHorizontal: 20, marginTop: 4 }}>
           <TouchableOpacity
             onPress={() => router.push("/(session)/review")}
-            style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", backgroundColor: "#0D1025", borderWidth: 1, borderColor: "#7B8FE044", borderRadius: 16, paddingHorizontal: 16, paddingVertical: 12 }}
+            style={ab.reviewCard}
+            activeOpacity={0.85}
           >
-            <HStack className="items-center" space="sm">
-              <Text style={{ fontSize: 18 }}>🧠</Text>
-              <VStack>
-                <Text style={{ color: "#7B8FE0", fontSize: 13, fontWeight: "700" }}>
-                  {t("tabs.home.review_due", { count: dueCardCount })}
+            <View style={ab.reviewIconWrap}>
+              <Ionicons name="brain" size={18} color="#7B8FE0" />
+            </View>
+            <VStack style={{ flex: 1 }}>
+              <Text style={ab.reviewTitle}>
+                {t("tabs.home.review_due", { count: dueCardCount })}
+              </Text>
+              {missions.some((m) => m.id === "review_cards" && !m.completed) && (
+                <Text style={ab.reviewSub}>
+                  {t("missions.review_cards")} · +{missions.find((m) => m.id === "review_cards")?.xpReward} XP
                 </Text>
-                {missions.some((m) => m.id === "review_cards" && !m.completed) && (
-                  <Text style={{ color: "#7B8FE077", fontSize: 11, marginTop: 1 }}>
-                    {t("missions.review_cards")} · +{missions.find((m) => m.id === "review_cards")?.xpReward} XP
-                  </Text>
-                )}
-              </VStack>
-            </HStack>
-            <Text style={{ color: "#7B8FE0", fontSize: 13, fontWeight: "600" }}>
-              {t("tabs.home.start_review")} →
-            </Text>
+              )}
+            </VStack>
+            <Text style={ab.reviewCta}>{t("tabs.home.start_review")} →</Text>
           </TouchableOpacity>
-        </Box>
+        </View>
       )}
 
+      {/* ── Retry recommendation ───────────────────────────────── */}
       {retryRecommendation && (() => {
         const meta = getLessonMeta(retryRecommendation.contentId);
         if (!meta || retryRecommendation.contentId === todayLessonId) return null;
         const pct = Math.round(retryRecommendation.quizScore * 100);
         return (
-          <Box className="px-6 mt-3">
+          <View style={{ paddingHorizontal: 20, marginTop: 10 }}>
             <TouchableOpacity
               onPress={() => startSession(retryRecommendation.contentId)}
-              style={{ backgroundColor: "#0E1A12", borderWidth: 1, borderColor: "#5ED19A33", borderRadius: 16, paddingHorizontal: 16, paddingVertical: 13 }}
+              style={ab.retryCard}
+              activeOpacity={0.85}
             >
-              <Text style={{ color: "#5ED19A", fontSize: 10, fontWeight: "700", letterSpacing: 1, textTransform: "uppercase", marginBottom: 5 }}>
-                {t("tabs.home.retry_title")}
-              </Text>
-              <HStack className="items-center justify-between">
+              <Text style={ab.retryEyebrow}>{t("tabs.home.retry_title")}</Text>
+              <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                 <VStack style={{ flex: 1 }}>
-                  <Text style={{ color: "#E6EAF2", fontSize: 14, fontWeight: "600" }} numberOfLines={1}>
+                  <Text style={ab.retryTitle} numberOfLines={1}>
                     {meta.title[lang] ?? meta.title.en}
                   </Text>
-                  <Text style={{ color: "#7B8193", fontSize: 12, marginTop: 2 }}>
-                    {t("tabs.home.retry_score", { pct })}
-                  </Text>
+                  <Text style={ab.retrySub}>{t("tabs.home.retry_score", { pct })}</Text>
                 </VStack>
-                <Text style={{ color: "#5ED19A", fontSize: 13, fontWeight: "700", marginLeft: 12 }}>
-                  {t("tabs.home.retry_cta")} →
-                </Text>
-              </HStack>
+                <Text style={ab.retryCta}>{t("tabs.home.retry_cta")} →</Text>
+              </View>
             </TouchableOpacity>
-          </Box>
+          </View>
         );
       })()}
 
       {/* ── Desafio inicial ────────────────────────────────────── */}
       {!loadingUser && user?.createdAt && (
-        <Box className="px-6 mt-4">
+        <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
           <StarterChallengeCard
             challenge={user.starterChallenge}
             createdAt={user.createdAt}
           />
-        </Box>
+        </View>
       )}
 
-      {/* ── Missões ────────────────────────────────────────────── */}
+      {/* ── Missões diárias ────────────────────────────────────── */}
       {missions.length > 0 && (
-        <Box className="px-6 mt-4">
+        <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
           <MissionsCard missions={missions} />
-        </Box>
+        </View>
       )}
 
       {/* ── Missões semanais ───────────────────────────────────── */}
       {weeklyMissions.length > 0 && (
-        <Box className="px-6 mt-4">
+        <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
           <WeeklyMissionsCard missions={weeklyMissions} />
-        </Box>
+        </View>
       )}
 
       {/* ── Semana ─────────────────────────────────────────────── */}
       {weeklyData.length > 0 && (
-        <Box className="px-6 mt-5">
+        <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
           <WeeklyCard
             data={weeklyData}
             goalMin={user?.dailyGoalMin ?? 10}
             lang={lang}
             studiedLabel={t("tabs.home.studied")}
           />
-        </Box>
+        </View>
       )}
 
       {/* ── Leaderboard ────────────────────────────────────────── */}
-      <Box className="px-6 mt-4 mb-6">
+      <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
         <TouchableOpacity
           onPress={() => router.push("/(tabs)/leaderboard")}
-          style={{
-            backgroundColor: "#121826",
-            borderWidth: 1,
-            borderColor: "#7B8FE033",
-            borderRadius: 18,
-            padding: 16,
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 12,
-          }}
+          style={lb.card}
+          activeOpacity={0.85}
         >
-          <View style={{ width: 38, height: 38, borderRadius: 19, backgroundColor: "#7B8FE022", alignItems: "center", justifyContent: "center" }}>
-            <Text style={{ fontSize: 18 }}>🏆</Text>
+          <View style={lb.iconWrap}>
+            <Ionicons name="trophy" size={18} color="#7B8FE0" />
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={{ color: "#E6EAF2", fontSize: 14, fontWeight: "700" }}>
-              {t("leaderboard.title")}
-            </Text>
-            <Text style={{ color: "#7B8193", fontSize: 12, marginTop: 1 }}>
-              {t("leaderboard.home_sub")}
-            </Text>
+            <Text style={lb.title}>{t("leaderboard.title")}</Text>
+            <Text style={lb.sub}>{t("leaderboard.home_sub")}</Text>
           </View>
-          <Ionicons name="chevron-forward" size={16} color="#4A5568" />
+          <Ionicons name="chevron-forward" size={15} color="#3A4558" />
         </TouchableOpacity>
-      </Box>
+      </View>
     </ScrollView>
     </>
   );
 }
 
 // ---------------------------------------------------------------------------
-// Header streak pill styles
+// Header styles
+// ---------------------------------------------------------------------------
+
+const hd = StyleSheet.create({
+  headerWrap: {
+    paddingHorizontal: 20,
+    paddingBottom: 6,
+  },
+  topRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 14,
+  },
+  logoGroup: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  logoImg: {
+    width: 32,
+    height: 32,
+    borderRadius: 9,
+  },
+  logoText: {
+    color: "#E6EAF2",
+    fontSize: 22,
+    fontWeight: "800",
+    letterSpacing: -0.3,
+  },
+  streakPill: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#1A130A",
+    borderWidth: 1,
+    borderColor: "#F5C77A28",
+    borderRadius: 100,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    gap: 5,
+  },
+  streakNum: { color: "#F5C77A", fontSize: 13, fontWeight: "800" },
+  shieldBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 3,
+    backgroundColor: "#7B8FE018",
+    borderRadius: 8,
+    paddingHorizontal: 5,
+    paddingVertical: 1,
+  },
+  shieldNum: { color: "#7B8FE0", fontSize: 10, fontWeight: "700" },
+  levelGroup: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  tierPill: {
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 100,
+    borderWidth: 1,
+  },
+  tierText: {
+    fontSize: 11,
+    fontWeight: "800",
+  },
+  levelText: {
+    color: "#4A5568",
+    fontSize: 13,
+    fontWeight: "600",
+  },
+  xpBarTrack: {
+    height: 4,
+    backgroundColor: "#1A2233",
+    borderRadius: 99,
+    overflow: "hidden",
+  },
+  xpBarFill: {
+    height: "100%",
+    borderRadius: 99,
+  },
+});
+
+// ---------------------------------------------------------------------------
+// Comeback banner styles
 // ---------------------------------------------------------------------------
 
 const cb = StyleSheet.create({
@@ -1013,47 +1196,32 @@ const cb = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#121826",
     borderWidth: 1,
-    borderColor: "#7B8FE044",
-    borderRadius: 18,
-    padding: 14,
+    borderColor: "#7B8FE030",
+    borderRadius: 20,
+    padding: 16,
     gap: 12,
   },
   iconWrap: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: "#7B8FE018",
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    backgroundColor: "#7B8FE015",
     alignItems: "center",
     justifyContent: "center",
+    flexShrink: 0,
   },
   title: {
     color: "#E6EAF2",
     fontSize: 14,
     fontWeight: "700",
-    marginBottom: 2,
+    marginBottom: 3,
   },
   body: {
     color: "#7B8193",
     fontSize: 12,
     lineHeight: 17,
   },
-  close: { padding: 4 },
-});
-
-const hd = StyleSheet.create({
-  streakPill: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#1A120A",
-    borderWidth: 1,
-    borderColor: "#F5C77A33",
-    borderRadius: 100,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    gap: 4,
-  },
-  streakNum: { color: "#F5C77A", fontSize: 13, fontWeight: "800" },
-  streakShield: { color: "#7B8FE0", fontSize: 12, fontWeight: "700" },
+  close: { padding: 4, flexShrink: 0 },
 });
 
 // ---------------------------------------------------------------------------
@@ -1061,105 +1229,277 @@ const hd = StyleSheet.create({
 // ---------------------------------------------------------------------------
 
 const lc = StyleSheet.create({
-  card: {
-    backgroundColor: "#121826",
-    borderWidth: 1,
-    borderColor: "#1A2233",
-    borderRadius: 18,
-    overflow: "hidden",
-  },
-  coverImage: {
-    width: "100%",
-    height: 160,
-  },
-  coverFallback: {
-    width: "100%",
-    height: 160,
-    justifyContent: "center",
-    paddingLeft: 16,
-  },
-  coverAccent: {
-    width: 3,
-    height: 40,
-    borderRadius: 2,
-  },
-  cardBody: {
+  sectionHeader: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 16,
+    justifyContent: "space-between",
+    marginBottom: 10,
   },
-  cardTitle: {
+  sectionLabel: {
+    color: "#4A5568",
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 1.5,
+  },
+  donePill: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+  },
+  doneText: {
+    color: "#5ED19A",
+    fontSize: 11,
+    fontWeight: "700",
+  },
+
+  // ── Hero card ──────────────────────────────────────────────
+  heroCard: {
+    borderRadius: 24,
+    borderWidth: 1,
+    overflow: "hidden",
+    backgroundColor: "#121826",
+  },
+  heroImage: {
+    width: "100%",
+    height: 210,
+  },
+  heroScrimMid: {
+    position: "absolute",
+    top: "30%",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(11,15,20,0.52)",
+  },
+  heroScrimBot: {
+    position: "absolute",
+    top: "55%",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(11,15,20,0.62)",
+  },
+  doneDimOverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(11,15,20,0.35)",
+  },
+  heroOverlay: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingHorizontal: 18,
+    paddingBottom: 20,
+    paddingTop: 12,
+  },
+  trackPill: {
+    alignSelf: "flex-start",
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    marginBottom: 8,
+  },
+  trackPillText: {
+    fontSize: 10,
+    fontWeight: "700",
+    textTransform: "capitalize",
+    letterSpacing: 0.5,
+  },
+  heroTitle: {
     color: "#E6EAF2",
-    fontSize: 15,
-    fontWeight: "600",
-    lineHeight: 21,
-    marginBottom: 4,
+    fontSize: 18,
+    fontWeight: "800",
+    lineHeight: 25,
+    letterSpacing: -0.2,
   },
-  cardDuration: {
-    color: "#7B8193",
+  heroDuration: {
+    color: "#AAB0C0",
     fontSize: 12,
+    fontWeight: "500",
   },
-  startBtn: {
-    backgroundColor: "#F5C77A",
-    borderRadius: 12,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
+
+  // ── Standalone CTA button ──────────────────────────────────
+  heroCta: {
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    height: 52,
+    borderRadius: 16,
+    marginTop: 10,
   },
-  startBtnDone: {
+  heroCtaDone: {
     backgroundColor: "transparent",
     borderWidth: 1,
     borderColor: "#2A3448",
   },
-  startBtnText: {
+  heroCtaText: {
     color: "#0B0F14",
-    fontSize: 13,
-    fontWeight: "700",
+    fontSize: 15,
+    fontWeight: "800",
+    letterSpacing: 0.1,
   },
-  startBtnTextDone: {
-    color: "#7B8193",
+  heroCtaTextDone: {
+    color: "#4A5568",
   },
-  listContainer: {
+
+  // ── Other tracks list card ─────────────────────────────────
+  listCard: {
     backgroundColor: "#121826",
     borderWidth: 1,
-    borderColor: "#1A2233",
-    borderRadius: 18,
+    borderColor: "#1E2A3E",
+    borderRadius: 24,
     overflow: "hidden",
   },
-  row: {
+  listRow: {
     flexDirection: "row",
     alignItems: "center",
+    paddingHorizontal: 18,
+    paddingVertical: 15,
+    gap: 12,
+  },
+  listDivider: {
+    height: 1,
+    backgroundColor: "#1A2233",
+    marginHorizontal: 18,
+  },
+  trackDot: {
+    width: 9,
+    height: 9,
+    borderRadius: 5,
+    flexShrink: 0,
+  },
+  listRowTitle: {
+    color: "#E6EAF2",
+    fontSize: 14,
+    fontWeight: "600",
+  },
+});
+
+// ---------------------------------------------------------------------------
+// Action banners (review + retry)
+// ---------------------------------------------------------------------------
+
+const ab = StyleSheet.create({
+  reviewCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#0D1220",
+    borderWidth: 1,
+    borderColor: "#7B8FE030",
+    borderRadius: 20,
     paddingHorizontal: 16,
     paddingVertical: 14,
     gap: 12,
   },
-  divider: {
-    height: 1,
-    backgroundColor: "#1A2233",
-    marginHorizontal: 16,
+  reviewIconWrap: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#7B8FE015",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
   },
-  trackDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
+  reviewTitle: {
+    color: "#7B8FE0",
+    fontSize: 13,
+    fontWeight: "700",
   },
-  rowTitle: {
+  reviewSub: {
+    color: "#7B8FE055",
+    fontSize: 11,
+    marginTop: 2,
+  },
+  reviewCta: {
+    color: "#7B8FE0",
+    fontSize: 13,
+    fontWeight: "700",
+    flexShrink: 0,
+  },
+  retryCard: {
+    backgroundColor: "#0C1810",
+    borderWidth: 1,
+    borderColor: "#5ED19A28",
+    borderRadius: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    gap: 8,
+  },
+  retryEyebrow: {
+    color: "#5ED19A",
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 1.2,
+    textTransform: "uppercase",
+  },
+  retryTitle: {
     color: "#E6EAF2",
     fontSize: 14,
-    fontWeight: "600",
+    fontWeight: "700",
+  },
+  retrySub: {
+    color: "#7B8193",
+    fontSize: 12,
+    marginTop: 2,
+  },
+  retryCta: {
+    color: "#5ED19A",
+    fontSize: 13,
+    fontWeight: "700",
+    flexShrink: 0,
+    marginLeft: 12,
+  },
+});
+
+// ---------------------------------------------------------------------------
+// Leaderboard entry
+// ---------------------------------------------------------------------------
+
+const lb = StyleSheet.create({
+  card: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#121826",
+    borderWidth: 1,
+    borderColor: "#7B8FE020",
+    borderRadius: 20,
+    padding: 16,
+    gap: 12,
+  },
+  iconWrap: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    backgroundColor: "#7B8FE015",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  title: {
+    color: "#E6EAF2",
+    fontSize: 14,
+    fontWeight: "700",
     marginBottom: 2,
   },
-  rowDuration: {
-    color: "#7B8193",
+  sub: {
+    color: "#4A5568",
     fontSize: 12,
   },
 });
 
+// ---------------------------------------------------------------------------
+// Share modal styles
+// ---------------------------------------------------------------------------
+
 const sh = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.85)",
+    backgroundColor: "rgba(0,0,0,0.88)",
     alignItems: "center",
     justifyContent: "center",
     padding: 24,
@@ -1171,14 +1511,15 @@ const sh = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     borderWidth: 1,
-    borderColor: "#1A2233",
+    borderColor: "#1E2A3E",
     gap: 16,
   },
   sheetTitle: {
     color: "#E6EAF2",
     fontSize: 20,
-    fontWeight: "700",
+    fontWeight: "800",
     textAlign: "center",
+    letterSpacing: -0.3,
   },
   sheetSub: {
     color: "#7B8193",
@@ -1199,10 +1540,10 @@ const sh = StyleSheet.create({
   shareBtnText: {
     color: "#0B0F14",
     fontSize: 16,
-    fontWeight: "700",
+    fontWeight: "800",
   },
   dismiss: {
-    color: "#4A5568",
+    color: "#3A4558",
     fontSize: 14,
     paddingVertical: 4,
   },
