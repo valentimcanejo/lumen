@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { FlatList } from "react-native";
+import { FlatList, StyleSheet, View as RNView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { Box } from "../../components/ui/box";
@@ -67,59 +67,37 @@ export default function Goals() {
 
           return (
             <Pressable onPress={() => toggle(g.id)}>
-              <Box
-                style={{
-                  borderRadius: 14,
-                  borderWidth: 1.5,
-                  borderColor: active ? color : "#1A2233",
-                  backgroundColor: active ? `${color}12` : "#111827",
-                  paddingHorizontal: 14,
-                  paddingVertical: 12,
-                }}
-              >
-                <HStack className="items-center" style={{ gap: 12 }}>
-                  <Box
-                    style={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: 10,
-                      backgroundColor: `${color}20`,
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Ionicons name={iconName} size={20} color={color} />
-                  </Box>
+              <RNView style={[
+                go.card,
+                {
+                  borderColor: active ? color : "#1E2A3E",
+                  borderLeftColor: active ? color : "#1E2A3E",
+                  backgroundColor: active ? color + "10" : "#111827",
+                },
+              ]}>
+                <RNView style={[go.iconBadge, { backgroundColor: color + "20" }]}>
+                  <Ionicons name={iconName} size={20} color={color} />
+                </RNView>
 
-                  <VStack style={{ flex: 1 }} space="xs">
-                    <Text className="text-[#E6EAF2] text-[15px] font-semibold">
-                      {g.title[selectedLanguage as Lang]}
+                <RNView style={go.textCol}>
+                  <Text style={go.goalTitle}>{g.title[selectedLanguage as Lang]}</Text>
+                  {g.description?.[selectedLanguage as Lang] && (
+                    <Text style={go.goalDesc} numberOfLines={2}>
+                      {g.description[selectedLanguage as Lang]}
                     </Text>
-                    {g.description?.[selectedLanguage as Lang] && (
-                      <Text className="text-[#7B8193] text-[12px]" numberOfLines={1}>
-                        {g.description[selectedLanguage as Lang]}
-                      </Text>
-                    )}
-                  </VStack>
+                  )}
+                </RNView>
 
-                  <Box
-                    style={{
-                      width: 22,
-                      height: 22,
-                      borderRadius: 11,
-                      borderWidth: 1.5,
-                      borderColor: active ? color : "#2A2F3E",
-                      backgroundColor: active ? color : "transparent",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    {active && (
-                      <Ionicons name="checkmark" size={13} color="#0B0F14" />
-                    )}
-                  </Box>
-                </HStack>
-              </Box>
+                <RNView style={[
+                  go.check,
+                  {
+                    borderColor: active ? color : "#2A2F3E",
+                    backgroundColor: active ? color : "transparent",
+                  },
+                ]}>
+                  {active && <Ionicons name="checkmark" size={13} color="#0B0F14" />}
+                </RNView>
+              </RNView>
             </Pressable>
           );
         }}
@@ -136,3 +114,47 @@ export default function Goals() {
     </Box>
   );
 }
+
+const go = StyleSheet.create({
+  card: {
+    borderRadius: 16,
+    borderWidth: 1,
+    borderLeftWidth: 3,
+    paddingHorizontal: 14,
+    paddingVertical: 14,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  iconBadge: {
+    width: 44,
+    height: 44,
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  textCol: {
+    flex: 1,
+    gap: 3,
+  },
+  goalTitle: {
+    color: "#E6EAF2",
+    fontSize: 15,
+    fontWeight: "700",
+  },
+  goalDesc: {
+    color: "#7B8193",
+    fontSize: 12,
+    lineHeight: 17,
+  },
+  check: {
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    borderWidth: 1.5,
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+});
