@@ -47,9 +47,27 @@ const BUNDLED_LESSONS: LessonMeta[] = [
   L("economics_interest_rates",  "economics",   3, { pt: "Juros e Bancos Centrais",          en: "Interest Rates and Central Banks",  es: "Tasas de Interés y Bancos Centrales"}, 9, 3, ["economics_inflation"]),
   L("economics_fiscal_policy",   "economics",   4, { pt: "Política Fiscal: O Governo e o Dinheiro", en: "Fiscal Policy: Government and Money", es: "Política Fiscal: El Gobierno y el Dinero"}, 9, 2, ["economics_inflation"]),
   // critical_thinking
-  L("critical_thinking",         "critical_thinking", 1, { pt: "O Equilíbrio de Poder",     en: "The Balance of Power",              es: "El Equilibrio de Poder"          }, 8,  2, []),
-  L("critical_thinking_fallacies","critical_thinking",2, { pt: "Falácias Lógicas",           en: "Logical Fallacies",                 es: "Falacias Lógicas"                }, 9,  2, ["critical_thinking"]),
-  L("critical_thinking_bias",    "critical_thinking", 3, { pt: "Vieses Cognitivos",          en: "Cognitive Biases",                  es: "Sesgos Cognitivos"               }, 10, 3, ["critical_thinking_fallacies"]),
+  L("critical_thinking",           "critical_thinking", 1, { pt: "O Equilíbrio de Poder",     en: "The Balance of Power",       es: "El Equilibrio de Poder"       }, 8,  2, []),
+  L("critical_thinking_fallacies", "critical_thinking", 2, { pt: "Falácias Lógicas",           en: "Logical Fallacies",          es: "Falacias Lógicas"             }, 9,  2, ["critical_thinking"]),
+  L("critical_thinking_bias",      "critical_thinking", 3, { pt: "Vieses Cognitivos",          en: "Cognitive Biases",           es: "Sesgos Cognitivos"            }, 10, 3, ["critical_thinking_fallacies"]),
+  L("critical_thinking_scientific","critical_thinking", 4, { pt: "Método Científico",          en: "Scientific Method",          es: "Método Científico"            }, 9,  2, ["critical_thinking_bias"]),
+  L("critical_thinking_rhetoric",  "critical_thinking", 5, { pt: "Retórica e Persuasão",       en: "Rhetoric and Persuasion",    es: "Retórica y Persuasión"        }, 9,  3, ["critical_thinking_scientific"]),
+  // foundations (lição 5)
+  L("foundations_probabilistic",   "foundations",       5, { pt: "Pensamento Probabilístico",  en: "Probabilistic Thinking",     es: "Pensamiento Probabilístico"   }, 8,  2, ["foundations_decision_making"]),
+  // economics (lição 5)
+  L("economics_trade",             "economics",         5, { pt: "Comércio Internacional",     en: "International Trade",        es: "Comercio Internacional"       }, 9,  2, ["economics_fiscal_policy"]),
+  // history
+  L("history",                     "history",           1, { pt: "O que a História Ensina",    en: "What History Teaches",       es: "Lo que la Historia Enseña"    }, 7,  1, []),
+  L("history_wwii",                "history",           2, { pt: "Segunda Guerra Mundial",     en: "World War II",               es: "Segunda Guerra Mundial"       }, 10, 2, ["history"]),
+  L("history_cold_war",            "history",           3, { pt: "A Guerra Fria",              en: "The Cold War",               es: "La Guerra Fría"               }, 9,  2, ["history"]),
+  L("history_colonialism",         "history",           4, { pt: "Colonialismo e Descolonização", en: "Colonialism and Decolonization", es: "Colonialismo y Descolonización" }, 10, 3, ["history_wwii", "history_cold_war"]),
+  L("history_industrial_revolution","history",          5, { pt: "A Revolução Industrial",     en: "The Industrial Revolution",  es: "La Revolución Industrial"     }, 9,  2, ["history_cold_war"]),
+  // psychology
+  L("psychology",                  "psychology",        1, { pt: "Como a Mente Funciona",      en: "How the Mind Works",         es: "Cómo Funciona la Mente"       }, 7,  1, []),
+  L("psychology_emotions",         "psychology",        2, { pt: "Emoções e Decisões",         en: "Emotions and Decisions",     es: "Emociones y Decisiones"       }, 8,  2, ["psychology"]),
+  L("psychology_habits",           "psychology",        3, { pt: "A Ciência dos Hábitos",      en: "The Science of Habits",      es: "La Ciencia de los Hábitos"    }, 9,  2, ["psychology"]),
+  L("psychology_social",           "psychology",        4, { pt: "Psicologia Social",          en: "Social Psychology",          es: "Psicología Social"            }, 9,  2, ["psychology_emotions", "psychology_habits"]),
+  L("psychology_resilience",       "psychology",        5, { pt: "Resiliência Mental",         en: "Mental Resilience",          es: "Resiliencia Mental"           }, 8,  2, ["psychology_social"]),
 ];
 
 export function getLessonMeta(contentId: string): LessonMeta | undefined {

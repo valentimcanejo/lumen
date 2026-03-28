@@ -252,14 +252,15 @@ function LevelUpModal({
       />
       <Animated.View style={[cardStyle, { flex: 1, alignItems: "center", justifyContent: "center", padding: 32 }]}>
         {/* Tier badge */}
-        <Animated.View style={[badgeStyle, {
-          width: 110, height: 110, borderRadius: 55,
-          backgroundColor: info.tier.color + "22",
-          borderWidth: 3, borderColor: info.tier.color + "88",
-          alignItems: "center", justifyContent: "center",
-          marginBottom: 28,
-        }]}>
-          <Text style={{ fontSize: 48 }}>⬆️</Text>
+        <Animated.View style={[badgeStyle, { marginBottom: 28 }]}>
+          <View style={{
+            width: 110, height: 110, borderRadius: 55,
+            backgroundColor: info.tier.color + "22",
+            borderWidth: 3, borderColor: info.tier.color + "88",
+            alignItems: "center", justifyContent: "center",
+          }}>
+            <Ionicons name="arrow-up" size={52} color={info.tier.color} />
+          </View>
         </Animated.View>
 
         {/* Labels */}
@@ -281,23 +282,22 @@ function LevelUpModal({
         </View>
 
         {/* Dismiss button */}
-        <View
+        <Pressable
+          onPress={() => {
+            badgePulse.value = withTiming(1, { duration: 100 });
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+            onDismiss();
+          }}
           style={{
             backgroundColor: info.tier.color,
             paddingHorizontal: 48, paddingVertical: 16,
             borderRadius: 32,
           }}
         >
-          <Text
-            onPress={() => {
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              onDismiss();
-            }}
-            style={{ color: "#0B0F14", fontSize: 16, fontWeight: "800" }}
-          >
+          <Text style={{ color: "#0B0F14", fontSize: 16, fontWeight: "800" }}>
             {t("common.continue")}
           </Text>
-        </View>
+        </Pressable>
       </Animated.View>
     </View>
   );
@@ -589,14 +589,7 @@ export default function SummaryScreen() {
   }
 
   function nextContent() {
-    if (nextGoalId) {
-      router.replace({
-        pathname: "/(session)/lesson",
-        params: { contentId: nextGoalId, version: "1", lang: lang ?? "pt" },
-      });
-    } else {
-      router.replace("/(tabs)/home");
-    }
+    router.replace("/(tabs)/home");
   }
 
   return (

@@ -93,7 +93,7 @@ export default function DailyTime() {
                     fontWeight: "500",
                   }}
                 >
-                  {o.key} {t("onboarding.daily-time.per_day")}
+                  {o.key} min {t("onboarding.daily-time.per_day")}
                 </Text>
               </Box>
             </Pressable>

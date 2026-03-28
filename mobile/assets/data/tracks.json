@@ -62,5 +62,29 @@
       "es": "Lógica, falacias y herramientas para razonar mejor"
     },
     "tags": ["logic", "bias", "argumentation"]
+  },
+  {
+    "id": "history",
+    "order": 5,
+    "difficulty": 2,
+    "title": { "pt": "História", "en": "History", "es": "Historia" },
+    "description": {
+      "pt": "Os eventos que moldaram o mundo em que vivemos",
+      "en": "The events that shaped the world we live in",
+      "es": "Los eventos que moldearon el mundo en que vivimos"
+    },
+    "tags": ["history", "events", "civilization"]
+  },
+  {
+    "id": "psychology",
+    "order": 6,
+    "difficulty": 2,
+    "title": { "pt": "Psicologia", "en": "Psychology", "es": "Psicología" },
+    "description": {
+      "pt": "Como a mente humana pensa, sente e se comporta",
+      "en": "How the human mind thinks, feels and behaves",
+      "es": "Cómo la mente humana piensa, siente y se comporta"
+    },
+    "tags": ["mind", "behavior", "emotions", "habits"]
   }
 ]

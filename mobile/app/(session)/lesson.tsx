@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
-import { Image, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import { Image, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Audio } from "expo-av";
 import { useTranslation } from "react-i18next";
@@ -59,27 +59,24 @@ function TopProgress({
 
 function Waveform({ progress = 0 }: { progress?: number }) {
   const bars = useMemo(
-    () =>
-      Array.from({ length: 36 }).map((_, i) => ({
-        h: 8 + ((i * 13) % 22),
-        i,
-      })),
+    () => Array.from({ length: 28 }).map((_, i) => ({ h: 8 + ((i * 13) % 22), i })),
     [],
   );
 
   return (
-    <HStack className="items-center justify-center flex-1 mx-3" space="xs">
+    <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center", marginHorizontal: 10, overflow: "hidden", gap: 3 }}>
       {bars.map((b) => (
-        <Box
+        <View
           key={b.i}
-          style={{ height: b.h }}
-          className={[
-            "w-[3px] rounded-full",
-            b.i / 36 < progress ? "bg-[#F5C77A]" : "bg-[#2A3448]",
-          ].join(" ")}
+          style={{
+            width: 3,
+            height: b.h,
+            borderRadius: 2,
+            backgroundColor: b.i / 28 < progress ? "#F5C77A" : "#2A3448",
+          }}
         />
       ))}
-    </HStack>
+    </View>
   );
 }
 
