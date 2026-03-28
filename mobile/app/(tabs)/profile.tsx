@@ -713,87 +713,51 @@ export default function ProfileScreen() {
           <Text className="text-[#AAB0C0]">{t("tabs.profile.loading")}</Text>
         ) : (
           <>
-            {/* Stats row */}
-            <HStack className="bg-[#111827] rounded-2xl p-4 mb-6" space="md">
-              <VStack className="items-center flex-1" space="xs">
-                <Text className="text-[#7B8193] text-[11px]">
-                  {t("tabs.profile.streak")}
-                </Text>
-                <Text className="text-[#F5C77A] text-[24px] font-semibold">
-                  {streak}
-                </Text>
-                <Text className="text-[#7B8193] text-[11px]">
-                  {t("tabs.profile.streak_unit")}
-                </Text>
-              </VStack>
-              <Box className="w-[1px] bg-[#1A2233]" />
-              <VStack className="items-center flex-1" space="xs">
-                <Text className="text-[#7B8193] text-[11px]">
-                  {t("tabs.profile.daily_goal")}
-                </Text>
-                <Text className="text-[#F5C77A] text-[24px] font-semibold">
-                  {dailyGoal}
-                </Text>
-                <Text className="text-[#7B8193] text-[11px]">
-                  {t("tabs.profile.daily_goal_unit")}
-                </Text>
-              </VStack>
-              <Box className="w-[1px] bg-[#1A2233]" />
-              <VStack className="items-center flex-1" space="xs">
-                <Text className="text-[#7B8193] text-[11px]">
-                  {t("tabs.profile.xp")}
-                </Text>
-                <Text className="text-[#F5C77A] text-[24px] font-semibold">
-                  {xp}
-                </Text>
-                <Text className="text-[#7B8193] text-[11px]">
-                  {t("tabs.profile.level")} {level}
-                </Text>
-              </VStack>
-            </HStack>
+            {/* Level card — unified stats + XP progress */}
+            <View style={[pf.levelCard, { borderColor: tier.color + "40" }]}>
+              {/* Top accent bar */}
+              <View style={[pf.levelAccentBar, { backgroundColor: tier.color }]} />
 
-            {/* Tier + XP progress */}
-            <Box className="mb-6">
-              <HStack className="items-center justify-between mb-3">
-                <HStack className="items-center" space="sm">
-                  <Box
-                    style={{
-                      paddingHorizontal: 10,
-                      paddingVertical: 4,
-                      borderRadius: 100,
-                      backgroundColor: `${tier.color}22`,
-                      borderWidth: 1,
-                      borderColor: `${tier.color}66`,
-                    }}
-                  >
-                    <Text
-                      style={{
-                        color: tier.color,
-                        fontSize: 12,
-                        fontWeight: "700",
-                      }}
-                    >
-                      {tier.name}
-                    </Text>
-                  </Box>
-                  <Text className="text-[#AAB0C0] text-[13px]">
-                    {t("tabs.profile.level")} {level}
-                  </Text>
-                </HStack>
-                <Text className="text-[#7B8193] text-[12px]">
-                  {xp} / {xpCeil} XP
-                </Text>
-              </HStack>
-              <Box className="h-[6px] bg-[#1A2233] rounded-full overflow-hidden">
-                <Box
-                  className="h-full"
-                  style={{
-                    width: `${Math.min(xpPct * 100, 100)}%`,
-                    backgroundColor: tier.color,
-                  }}
-                />
-              </Box>
-            </Box>
+              <View style={pf.levelCardInner}>
+                {/* Left: level number + tier pill */}
+                <View style={pf.levelLeft}>
+                  <Text style={[pf.levelNum, { color: tier.color }]}>{level}</Text>
+                  <View style={[pf.tierPill, { backgroundColor: tier.color + "18", borderColor: tier.color + "50" }]}>
+                    <Text style={[pf.tierName, { color: tier.color }]}>{tier.name}</Text>
+                  </View>
+                </View>
+
+                {/* Right: stats column */}
+                <View style={pf.statsCol}>
+                  <View style={pf.statRow}>
+                    <Text style={pf.statEmoji}>🔥</Text>
+                    <Text style={pf.statNum}>{streak}</Text>
+                    <Text style={pf.statUnit}>{t("tabs.profile.streak_unit")}</Text>
+                  </View>
+                  <View style={pf.statRow}>
+                    <Text style={pf.statEmoji}>⚡</Text>
+                    <Text style={pf.statNum}>{xp}</Text>
+                    <Text style={pf.statUnit}>XP</Text>
+                  </View>
+                  <View style={pf.statRow}>
+                    <Text style={pf.statEmoji}>⏱</Text>
+                    <Text style={pf.statNum}>{dailyGoal}</Text>
+                    <Text style={pf.statUnit}>{t("tabs.profile.daily_goal_unit")}</Text>
+                  </View>
+                </View>
+              </View>
+
+              {/* XP progress bar */}
+              <View style={pf.xpArea}>
+                <View style={pf.xpLabelRow}>
+                  <Text style={pf.xpLabel}>{t("tabs.profile.level")} {level}</Text>
+                  <Text style={pf.xpLabel}>{xp} / {xpCeil} XP</Text>
+                </View>
+                <View style={pf.xpTrack}>
+                  <View style={[pf.xpFill, { width: `${Math.min(xpPct * 100, 100)}%`, backgroundColor: tier.color }]} />
+                </View>
+              </View>
+            </View>
 
             {/* Mastery — tracks with progress */}
             <MasterySection
@@ -935,3 +899,100 @@ export default function ProfileScreen() {
     </Box>
   );
 }
+
+// ---------------------------------------------------------------------------
+// Profile level card styles
+// ---------------------------------------------------------------------------
+
+const pf = StyleSheet.create({
+  levelCard: {
+    backgroundColor: "#111827",
+    borderWidth: 1,
+    borderRadius: 24,
+    overflow: "hidden",
+    marginBottom: 24,
+  },
+  levelAccentBar: {
+    height: 3,
+    width: "100%",
+  },
+  levelCardInner: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingTop: 18,
+    paddingBottom: 16,
+  },
+  levelLeft: {
+    alignItems: "flex-start",
+    gap: 10,
+  },
+  levelNum: {
+    fontSize: 64,
+    fontWeight: "900",
+    lineHeight: 68,
+    letterSpacing: -2,
+  },
+  tierPill: {
+    borderWidth: 1,
+    borderRadius: 100,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+  },
+  tierName: {
+    fontSize: 12,
+    fontWeight: "800",
+    letterSpacing: 0.5,
+  },
+  statsCol: {
+    gap: 10,
+    alignItems: "flex-end",
+  },
+  statRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+  statEmoji: {
+    fontSize: 14,
+    lineHeight: 18,
+  },
+  statNum: {
+    color: "#E6EAF2",
+    fontSize: 16,
+    fontWeight: "800",
+    minWidth: 36,
+    textAlign: "right",
+  },
+  statUnit: {
+    color: "#4A5568",
+    fontSize: 12,
+    fontWeight: "500",
+    minWidth: 28,
+  },
+  xpArea: {
+    paddingHorizontal: 20,
+    paddingBottom: 16,
+    gap: 6,
+  },
+  xpLabelRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  xpLabel: {
+    color: "#4A5568",
+    fontSize: 11,
+    fontWeight: "600",
+  },
+  xpTrack: {
+    height: 6,
+    backgroundColor: "#1A2233",
+    borderRadius: 99,
+    overflow: "hidden",
+  },
+  xpFill: {
+    height: "100%",
+    borderRadius: 99,
+  },
+});
