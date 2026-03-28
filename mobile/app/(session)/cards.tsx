@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, StyleSheet, View as RNView, TouchableOpacity } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -175,78 +175,227 @@ export default function CardsScreen() {
         </Box>
       ) : (
         <>
-          {/* Scrollable card content */}
+          {/* Card area — tap to reveal */}
           <ScrollView
-            className="flex-1 px-5"
+            style={{ flex: 1, paddingHorizontal: 20 }}
             contentContainerStyle={{ paddingTop: 20, paddingBottom: 16 }}
             showsVerticalScrollIndicator={false}
           >
-            <Animated.View style={flipAnimStyle}>
-              <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
-                <VStack space="sm">
-                  <Text className="text-[#AAB0C0] text-[12px]">
-                    {showBack ? t("session.cards.answer") : t("session.cards.question")}
-                  </Text>
-                  <Text
-                    className="text-[#E6EAF2] font-semibold leading-[26px]"
-                    style={{ fontSize: showBack ? 16 : 18 }}
-                  >
-                    {showBack ? current.back : current.front}
-                  </Text>
-                </VStack>
-              </Box>
-            </Animated.View>
+            <TouchableOpacity
+              onPress={!revealed ? revealCard : undefined}
+              activeOpacity={revealed ? 1 : 0.88}
+            >
+              <Animated.View
+                style={[
+                  fc.card,
+                  showBack && fc.cardBack,
+                  flipAnimStyle,
+                ]}
+              >
+                {/* Side label + counter */}
+                <RNView style={fc.cardHeader}>
+                  <RNView style={[fc.sidePill, showBack && fc.sidePillBack]}>
+                    <Text style={[fc.sideLabel, showBack && fc.sideLabelBack]}>
+                      {showBack ? t("session.cards.answer") : t("session.cards.question")}
+                    </Text>
+                  </RNView>
+                  <Text style={fc.counter}>{index + 1}/{total}</Text>
+                </RNView>
+
+                {/* Content */}
+                <Text style={[fc.content, showBack && fc.contentBack]}>
+                  {showBack ? current.back : current.front}
+                </Text>
+
+                {/* Tap hint — only on front */}
+                {!revealed && (
+                  <RNView style={fc.tapHint}>
+                    <Ionicons name="eye-outline" size={13} color="#3A4558" />
+                    <Text style={fc.tapHintText}>{t("session.cards.reveal")}</Text>
+                  </RNView>
+                )}
+              </Animated.View>
+            </TouchableOpacity>
           </ScrollView>
 
-          {/* Fixed bottom buttons — always visible */}
-          <Box
-            className="px-5 pt-3 border-t border-[#1A2233]"
-            style={{ paddingBottom: Math.max(insets.bottom, 24) }}
-          >
+          {/* Fixed bottom buttons */}
+          <RNView style={[fc.bottomBar, { paddingBottom: Math.max(insets.bottom, 24) }]}>
             {!revealed ? (
-              <Pressable
-                onPress={revealCard}
-                className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
-              >
-                <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                  {t("session.cards.reveal")}
-                </Text>
-              </Pressable>
+              <TouchableOpacity onPress={revealCard} activeOpacity={0.85} style={fc.revealBtn}>
+                <Ionicons name="eye-outline" size={18} color="#0B0F14" style={{ marginRight: 8 }} />
+                <Text style={fc.revealBtnText}>{t("session.cards.reveal")}</Text>
+              </TouchableOpacity>
             ) : (
-              <HStack space="sm">
-                <Pressable
-                  onPress={() => onGrade("know")}
-                  className="flex-1 h-[52px] rounded-2xl items-center justify-center"
-                  style={{ backgroundColor: "#5ED19A" }}
-                >
-                  <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                    {t("session.cards.correct")}
-                  </Text>
-                </Pressable>
-
-                <Pressable
+              <RNView style={fc.gradeRow}>
+                <TouchableOpacity
                   onPress={() => onGrade("dont")}
-                  className="flex-1 h-[52px] rounded-2xl items-center justify-center"
-                  style={{ backgroundColor: "#E26D6D" }}
+                  activeOpacity={0.85}
+                  style={fc.gradeDont}
                 >
-                  <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                    {t("session.cards.wrong")}
-                  </Text>
-                </Pressable>
-              </HStack>
+                  <Ionicons name="close" size={20} color="#E26D6D" />
+                  <Text style={fc.gradeDontText}>{t("session.cards.wrong")}</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => onGrade("know")}
+                  activeOpacity={0.85}
+                  style={fc.gradeKnow}
+                >
+                  <Ionicons name="checkmark" size={20} color="#0B0F14" />
+                  <Text style={fc.gradeKnowText}>{t("session.cards.correct")}</Text>
+                </TouchableOpacity>
+              </RNView>
             )}
 
-            <Pressable
-              onPress={goNext}
-              className="h-[52px] rounded-2xl mt-3 border border-[#1A2233] items-center justify-center"
-            >
-              <Text className="text-[#AAB0C0] text-[16px] font-semibold">
-                {t("session.cards.skip")}
-              </Text>
-            </Pressable>
-          </Box>
+            <TouchableOpacity onPress={goNext} activeOpacity={0.7} style={fc.skipBtn}>
+              <Text style={fc.skipBtnText}>{t("session.cards.skip")}</Text>
+            </TouchableOpacity>
+          </RNView>
         </>
       )}
     </Box>
   );
 }
+
+const fc = StyleSheet.create({
+  // Card
+  card: {
+    backgroundColor: "#121826",
+    borderWidth: 1,
+    borderColor: "#1E2A3E",
+    borderRadius: 24,
+    padding: 22,
+    minHeight: 240,
+  },
+  cardBack: {
+    backgroundColor: "#0D1C14",
+    borderColor: "#5ED19A28",
+  },
+  cardHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 20,
+  },
+  sidePill: {
+    backgroundColor: "#F5C77A12",
+    borderWidth: 1,
+    borderColor: "#F5C77A28",
+    borderRadius: 100,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  sidePillBack: {
+    backgroundColor: "#5ED19A12",
+    borderColor: "#5ED19A28",
+  },
+  sideLabel: {
+    color: "#F5C77A",
+    fontSize: 11,
+    fontWeight: "700",
+    letterSpacing: 0.5,
+    textTransform: "uppercase",
+  },
+  sideLabelBack: {
+    color: "#5ED19A",
+  },
+  counter: {
+    color: "#3A4558",
+    fontSize: 12,
+    fontWeight: "700",
+  },
+  content: {
+    color: "#E6EAF2",
+    fontSize: 19,
+    fontWeight: "700",
+    lineHeight: 28,
+    flex: 1,
+  },
+  contentBack: {
+    fontSize: 17,
+    color: "#DFF7EC",
+  },
+  tapHint: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    marginTop: 24,
+    alignSelf: "center",
+  },
+  tapHintText: {
+    color: "#3A4558",
+    fontSize: 12,
+    fontWeight: "500",
+  },
+
+  // Bottom bar
+  bottomBar: {
+    paddingHorizontal: 20,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: "#1A2233",
+    gap: 10,
+  },
+  revealBtn: {
+    height: 52,
+    borderRadius: 16,
+    backgroundColor: "#F5C77A",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  revealBtnText: {
+    color: "#0B0F14",
+    fontSize: 16,
+    fontWeight: "700",
+  },
+  gradeRow: {
+    flexDirection: "row",
+    gap: 10,
+  },
+  gradeDont: {
+    flex: 1,
+    height: 52,
+    borderRadius: 16,
+    borderWidth: 1.5,
+    borderColor: "#E26D6D40",
+    backgroundColor: "#1C0D0F",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 7,
+  },
+  gradeDontText: {
+    color: "#E26D6D",
+    fontSize: 15,
+    fontWeight: "700",
+  },
+  gradeKnow: {
+    flex: 2,
+    height: 52,
+    borderRadius: 16,
+    backgroundColor: "#5ED19A",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 7,
+  },
+  gradeKnowText: {
+    color: "#0B0F14",
+    fontSize: 15,
+    fontWeight: "700",
+  },
+  skipBtn: {
+    height: 44,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#1E2A3E",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  skipBtnText: {
+    color: "#4A5568",
+    fontSize: 14,
+    fontWeight: "600",
+  },
+});
