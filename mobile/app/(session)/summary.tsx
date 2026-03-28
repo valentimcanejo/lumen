@@ -403,6 +403,149 @@ const xpS = StyleSheet.create({
   },
 });
 
+// ---------------------------------------------------------------------------
+// Summary result card styles
+// ---------------------------------------------------------------------------
+
+const sr = StyleSheet.create({
+  card: {
+    backgroundColor: "#121826",
+    borderWidth: 1,
+    borderColor: "#1A2233",
+    borderRadius: 26,
+    overflow: "hidden",
+  },
+  accentBar: {
+    height: 3,
+    width: "100%",
+    borderTopLeftRadius: 26,
+    borderTopRightRadius: 26,
+  },
+  cardInner: {
+    padding: 20,
+  },
+  scoreRow: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+  },
+  scoreLeft: {
+    flex: 1,
+    marginRight: 16,
+  },
+  perfLabel: {
+    color: "#AAB0C0",
+    fontSize: 11,
+    fontWeight: "600",
+    letterSpacing: 0.5,
+    marginBottom: 6,
+  },
+  scoreLabel: {
+    color: "#E6EAF2",
+    fontSize: 18,
+    fontWeight: "700",
+    marginBottom: 4,
+  },
+  scoreDetail: {
+    color: "#7B8193",
+    fontSize: 13,
+    marginTop: 2,
+  },
+  scoreRight: {
+    alignItems: "center",
+    gap: 6,
+  },
+  scoreEmoji: {
+    fontSize: 32,
+    lineHeight: 38,
+  },
+  scoreCircle: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: "#0E141E",
+    borderWidth: 3,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  scoreCircleText: {
+    fontSize: 20,
+    fontWeight: "900",
+  },
+  progressTrack: {
+    height: 6,
+    backgroundColor: "#1A2233",
+    borderRadius: 99,
+    overflow: "hidden",
+    marginTop: 16,
+  },
+  progressFill: {
+    height: "100%",
+    borderRadius: 99,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: "#1A2233",
+    marginTop: 16,
+    marginBottom: 14,
+  },
+  insightBox: {
+    borderLeftWidth: 3,
+    borderRadius: 10,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+  },
+  insightEyebrow: {
+    color: "#AAB0C0",
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 1.4,
+    textTransform: "uppercase",
+    marginBottom: 6,
+  },
+  insightText: {
+    color: "#E6EAF2",
+    fontSize: 15,
+    lineHeight: 24,
+    fontWeight: "500",
+  },
+  coachNote: {
+    color: "#7B8193",
+    fontSize: 12,
+    lineHeight: 18,
+    marginTop: 10,
+  },
+  conceptBox: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 12,
+    marginTop: 12,
+    backgroundColor: "#0D1525",
+    borderWidth: 1,
+    borderColor: "#1A2233",
+    borderRadius: 14,
+    padding: 16,
+  },
+  bulbBadge: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    backgroundColor: "#F5C77A15",
+    borderWidth: 1,
+    borderColor: "#F5C77A30",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    marginTop: 1,
+  },
+  conceptText: {
+    color: "#C8CDD8",
+    fontSize: 13,
+    lineHeight: 20,
+    flex: 1,
+  },
+});
+
 export default function SummaryScreen() {
   const { t } = useTranslation();
   const { contentId, version, lang, correct, total } = useLocalSearchParams() as {
@@ -630,91 +773,103 @@ export default function SummaryScreen() {
       </Box>
 
       {/* Scrollable content */}
-      <ScrollView
-        className="flex-1 px-5 pt-5"
-        contentContainerStyle={{ paddingBottom: 16 }}
-        showsVerticalScrollIndicator={false}
-      >
-        <Box className="bg-[#121826] border border-[#1A2233] rounded-[22px] p-5">
-          {/* Score + XP */}
-          <HStack className="items-center justify-between">
-            <VStack space="xs">
-              <Text className="text-[#AAB0C0] text-[12px]">
-                {t("session.summary.performance")}
-              </Text>
-              <Text className="text-[#E6EAF2] text-[18px] font-semibold">
-                {scoreLabel}
-              </Text>
-              {totalN > 0 ? (
-                <Text className="text-[#7B8193] text-[13px] mt-1">
-                  {correctN} / {totalN} {t("session.summary.correct_answers")}
-                </Text>
-              ) : (
-                <Text className="text-[#7B8193] text-[13px] mt-1">
-                  {t("session.summary.quiz_skipped")}
-                </Text>
-              )}
-            </VStack>
+      {(() => {
+        const scoreColor =
+          scorePct >= 0.85 ? "#5ED19A" :
+          scorePct >= 0.6  ? "#F5C77A" :
+                             "#7B8193";
+        const scoreEmoji =
+          scorePct >= 0.85 ? "🏆" :
+          scorePct >= 0.6  ? "⚡" :
+          scorePct >= 0.35 ? "📈" : "💪";
 
-            <VStack className="items-center" space="xs">
-              <Box className="w-[64px] h-[64px] rounded-full bg-[#0E141E] border border-[#1A2233] items-center justify-center">
-                <Text className="text-[#F5C77A] text-[18px] font-semibold">
-                  {totalN > 0 ? Math.round(scorePct * 100) : 100}%
-                </Text>
-              </Box>
-              {gainedXp !== null && <XpCounter gained={gainedXp} />}
-            </VStack>
-          </HStack>
+        return (
+          <ScrollView
+            style={{ flex: 1, paddingHorizontal: 20, paddingTop: 20 }}
+            contentContainerStyle={{ paddingBottom: 16 }}
+            showsVerticalScrollIndicator={false}
+          >
+            <View style={sr.card}>
+              {/* Top accent bar */}
+              <View style={[sr.accentBar, { backgroundColor: scoreColor }]} />
 
-          <Box className="h-[6px] rounded-full bg-[#1A2233] overflow-hidden mt-4">
-            <Box
-              className="h-full bg-[#F5C77A]"
-              style={{ width: `${(totalN > 0 ? scorePct : 1) * 100}%` }}
-            />
-          </Box>
+              <View style={sr.cardInner}>
+                {/* Score row */}
+                <View style={sr.scoreRow}>
+                  {/* Left: labels */}
+                  <View style={sr.scoreLeft}>
+                    <Text style={sr.perfLabel}>{t("session.summary.performance")}</Text>
+                    <Text style={sr.scoreLabel}>{scoreLabel}</Text>
+                    {totalN > 0 ? (
+                      <Text style={sr.scoreDetail}>
+                        {correctN} / {totalN} {t("session.summary.correct_answers")}
+                      </Text>
+                    ) : (
+                      <Text style={sr.scoreDetail}>{t("session.summary.quiz_skipped")}</Text>
+                    )}
+                  </View>
 
-          {gainedXp !== null && xpBreakdown !== null && (
-            <XpBreakdown
-              base={xpBreakdown.base}
-              quizBonus={xpBreakdown.quizBonus}
-              missionBonus={xpBreakdown.missionBonus}
-              quizPct={totalN > 0 ? scorePct : 0}
-            />
-          )}
+                  {/* Right: emoji + circle + XP */}
+                  <View style={sr.scoreRight}>
+                    <Text style={sr.scoreEmoji}>{scoreEmoji}</Text>
+                    <View style={[sr.scoreCircle, { borderColor: scoreColor }]}>
+                      <Text style={[sr.scoreCircleText, { color: scoreColor }]}>
+                        {totalN > 0 ? Math.round(scorePct * 100) : 100}%
+                      </Text>
+                    </View>
+                    {gainedXp !== null && <XpCounter gained={gainedXp} />}
+                  </View>
+                </View>
 
-          {/* What you learned — content-specific takeaway */}
-          <Box className="mt-4 pt-4" style={{ borderTopWidth: 1, borderTopColor: "#1A2233" }}>
-            <Text className="text-[#AAB0C0] text-[11px] font-semibold tracking-widest uppercase mb-2">
-              {t("session.summary.insight_label")}
-            </Text>
-            <Text className="text-[#E6EAF2] text-[15px] leading-[24px] font-medium">
-              {pack?.lesson?.summary ?? insight}
-            </Text>
-          </Box>
+                {/* Progress bar */}
+                <View style={sr.progressTrack}>
+                  <View
+                    style={[
+                      sr.progressFill,
+                      {
+                        width: `${(totalN > 0 ? scorePct : 1) * 100}%`,
+                        backgroundColor: scoreColor,
+                      },
+                    ]}
+                  />
+                </View>
 
-          {/* Key concept — quote from lesson or first card */}
-          {highlightCard && (
-            <Box
-              className="mt-3 rounded-[14px] p-4"
-              style={{ backgroundColor: "#0E141E", borderWidth: 1, borderColor: "#1A2233" }}
-            >
-              <HStack space="sm" className="items-start">
-                <Ionicons name="bulb-outline" size={15} color="#F5C77A" style={{ marginTop: 2 }} />
-                <Text className="text-[#C8CDD8] text-[13px] leading-[20px] flex-1">
-                  {highlightCard}
-                </Text>
-              </HStack>
-            </Box>
-          )}
+                {/* XP breakdown */}
+                {gainedXp !== null && xpBreakdown !== null && (
+                  <XpBreakdown
+                    base={xpBreakdown.base}
+                    quizBonus={xpBreakdown.quizBonus}
+                    missionBonus={xpBreakdown.missionBonus}
+                    quizPct={totalN > 0 ? scorePct : 0}
+                  />
+                )}
 
-          {/* Score-based coaching note — subtle, only when pack summary is available */}
-          {pack?.lesson?.summary && (
-            <Text className="text-[#7B8193] text-[12px] leading-[18px] mt-3">
-              {insight}
-            </Text>
-          )}
-        </Box>
-      </ScrollView>
+                {/* Insight section */}
+                <View style={sr.divider} />
+                <View style={[sr.insightBox, { borderLeftColor: scoreColor, backgroundColor: scoreColor + "0D" }]}>
+                  <Text style={sr.insightEyebrow}>{t("session.summary.insight_label")}</Text>
+                  <Text style={sr.insightText}>{pack?.lesson?.summary ?? insight}</Text>
+                </View>
+
+                {/* Coaching note */}
+                {pack?.lesson?.summary && (
+                  <Text style={sr.coachNote}>{insight}</Text>
+                )}
+
+                {/* Key concept */}
+                {highlightCard && (
+                  <View style={sr.conceptBox}>
+                    <View style={sr.bulbBadge}>
+                      <Ionicons name="bulb-outline" size={14} color="#F5C77A" />
+                    </View>
+                    <Text style={sr.conceptText}>{highlightCard}</Text>
+                  </View>
+                )}
+              </View>
+            </View>
+          </ScrollView>
+        );
+      })()}
 
       {/* Fixed buttons */}
       <Box className="px-5" style={{ paddingBottom: Math.max(insets.bottom, 24), paddingTop: 12 }}>
