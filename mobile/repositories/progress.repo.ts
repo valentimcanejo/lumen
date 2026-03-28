@@ -432,37 +432,23 @@ export async function finishSession(
       return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, weeklyMissionBonus: 0, starterBonus: 0, starterDaysCompleted: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: false, newLevel: level, prevLevel: level, shieldEarned: false, newStreak: 0 };
     }
 
-    // Score improved — grant delta and check still-incomplete quiz missions
+    // Score improved — grant only the delta XP. Missions are not re-evaluated
+    // on replays: quiz score missions require a first-attempt perfect score.
     const user = await getDocData<UserProfile>(`users/${uid}`);
     if (!user) return { gained: 0, base: 0, quizBonus: 0, missionBonus: 0, weeklyMissionBonus: 0, starterBonus: 0, starterDaysCompleted: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: false, newLevel: 1, prevLevel: 1, shieldEarned: false, newStreak: 0 };
 
     const prevLevel = user.level ?? 1;
-    const cm = user.currentMissions;
-    const missionList = cm?.date === date ? cm.list.map((m) => ({ ...m })) : getMissionsForDate(date);
-
-    let missionBonus = 0;
-    for (const mission of missionList) {
-      if (mission.completed) continue;
-      let done = false;
-      switch (mission.id) {
-        case "quiz_score_80":  done = quizDone && quizScore >= 0.8; break;
-        case "quiz_score_100": done = quizDone && quizScore >= 1.0; break;
-      }
-      if (done) { mission.completed = true; missionBonus += mission.xpReward; }
-    }
-
     const gained = deltaQuizBonus;
-    const newXp = (user.xp ?? 0) + gained + missionBonus;
+    const newXp = (user.xp ?? 0) + gained;
     const newLevel = xpToLevel(newXp);
 
     await updateDocData<UserProfile>(`users/${uid}`, {
       xp: newXp,
       level: newLevel,
-      currentMissions: { date, list: missionList },
       updatedAt: Date.now(),
     });
 
-    return { gained, base: 0, quizBonus: deltaQuizBonus, missionBonus, weeklyMissionBonus: 0, starterBonus: 0, starterDaysCompleted: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: newLevel > prevLevel, newLevel, prevLevel, shieldEarned: false, newStreak: user.streak?.current ?? 0 };
+    return { gained, base: 0, quizBonus: deltaQuizBonus, missionBonus: 0, weeklyMissionBonus: 0, starterBonus: 0, starterDaysCompleted: 0, newWeeklyMissionIds: [], newAchievementIds: [], leveledUp: newLevel > prevLevel, newLevel, prevLevel, shieldEarned: false, newStreak: user.streak?.current ?? 0 };
   }
 
   const user = await getDocData<UserProfile>(`users/${uid}`);

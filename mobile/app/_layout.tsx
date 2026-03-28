@@ -129,7 +129,7 @@ export default function RootLayout() {
         />
       </Stack>
       <OfflineBanner />
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </GluestackUIProvider>
   );
 }

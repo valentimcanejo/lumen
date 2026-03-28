@@ -176,6 +176,7 @@ export default function QuizScreen() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [answered, setAnswered] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
+  const correctCountRef = useRef(0);
 
   const scrollRef = useRef<ScrollView>(null);
   const scrollContentH = useRef(0);
@@ -212,7 +213,7 @@ export default function QuizScreen() {
       options: indices.map((i) => current.options[i]),
       answerIndex: indices.indexOf(current.answerIndex),
     };
-  }, [qIndex]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [current]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const progressValue = useMemo(() => {
     if (!total) return 0.62;
@@ -227,7 +228,8 @@ export default function QuizScreen() {
     setSelectedIndex(optionIdx);
     setAnswered(true);
     if (optionIdx === shuffled?.answerIndex) {
-      setCorrectCount((v) => v + 1);
+      correctCountRef.current += 1;
+      setCorrectCount(correctCountRef.current);
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     } else {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
@@ -244,7 +246,7 @@ export default function QuizScreen() {
           contentId,
           version,
           lang,
-          correct: String(correctCount),
+          correct: String(correctCountRef.current),
           total: String(total),
         },
       });
@@ -418,7 +420,7 @@ export default function QuizScreen() {
                     contentId,
                     version,
                     lang,
-                    correct: String(correctCount),
+                    correct: String(correctCountRef.current),
                     total: String(total),
                   },
                 })
