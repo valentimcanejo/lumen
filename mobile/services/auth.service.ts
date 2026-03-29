@@ -59,9 +59,16 @@ async function linkOrSignIn(credential: AuthCredential): Promise<User> {
 
 // ---------------------------------------------------------------------------
 // Google Sign-In
-// Uses Expo auth proxy — no per-platform client IDs needed.
-// Only requires the Web Client ID from Firebase Console.
+// Uses the Expo auth proxy (HTTPS) as redirect URI so Google accepts it.
+// Redirect URI registered in Google Cloud Console:
+//   https://auth.expo.io/@valentimcanejo/lumen
 // ---------------------------------------------------------------------------
+
+// Expo auth proxy redirect — HTTPS, accepted by Google's OAuth 2.0 policy.
+// Must also be registered in Google Cloud Console → Credentials →
+// your Web OAuth client → Authorized redirect URIs.
+const EXPO_REDIRECT_URI = "https://auth.expo.io/@valentimcanejo/lumen";
+
 export async function signInWithGoogle(): Promise<User> {
   if (!GOOGLE_WEB_CLIENT_ID) {
     throw new Error(
@@ -69,13 +76,14 @@ export async function signInWithGoogle(): Promise<User> {
     );
   }
 
-  const redirectUri = AuthSession.makeRedirectUri({ scheme: "mobile" });
   const discovery = await GOOGLE_DISCOVERY;
 
   const request = new AuthSession.AuthRequest({
     clientId: GOOGLE_WEB_CLIENT_ID,
     scopes: ["openid", "profile", "email"],
-    redirectUri,
+    redirectUri: EXPO_REDIRECT_URI,
+    responseType: AuthSession.ResponseType.IdToken,
+    extraParams: { nonce: Math.random().toString(36).slice(2) },
   });
 
   const result = await request.promptAsync(discovery);
