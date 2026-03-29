@@ -12,6 +12,7 @@ import {
 } from "firebase/auth";
 import * as AuthSession from "expo-auth-session";
 import * as AppleAuthentication from "expo-apple-authentication";
+import * as Linking from "expo-linking";
 import { Platform } from "react-native";
 import { GOOGLE_WEB_CLIENT_ID } from "../constants/auth";
 
@@ -78,13 +79,19 @@ export async function signInWithGoogle(): Promise<User> {
 
   const discovery = await GOOGLE_DISCOVERY;
 
+  const returnUrl = Linking.createURL("/");
+  const state = btoa(JSON.stringify({ returnUrl }));
+
   const request = new AuthSession.AuthRequest({
     clientId: GOOGLE_WEB_CLIENT_ID,
     scopes: ["openid", "profile", "email"],
     redirectUri: EXPO_REDIRECT_URI,
     responseType: AuthSession.ResponseType.IdToken,
     usePKCE: false,
-    extraParams: { nonce: Math.random().toString(36).slice(2) },
+    extraParams: {
+      nonce: Math.random().toString(36).slice(2),
+      state,
+    },
   });
 
   const result = await request.promptAsync(discovery);
