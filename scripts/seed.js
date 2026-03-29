@@ -150,15 +150,48 @@ const TRACKS = [
     },
     tags: ["logic", "bias", "argumentation"],
   },
+  {
+    id: "history",
+    order: 5,
+    difficulty: 2,
+    title: {
+      pt: "História",
+      en: "History",
+      es: "Historia",
+    },
+    description: {
+      pt: "Os eventos que moldaram o mundo em que vivemos",
+      en: "The events that shaped the world we live in",
+      es: "Los eventos que moldearon el mundo en que vivimos",
+    },
+    tags: ["history", "events", "civilization"],
+  },
+  {
+    id: "psychology",
+    order: 6,
+    difficulty: 2,
+    title: {
+      pt: "Psicologia",
+      en: "Psychology",
+      es: "Psicología",
+    },
+    description: {
+      pt: "Como a mente humana pensa, sente e se comporta",
+      en: "How the human mind thinks, feels and behaves",
+      es: "Cómo la mente humana piensa, siente y se comporta",
+    },
+    tags: ["mind", "behavior", "emotions", "habits"],
+  },
 ];
 
 // ─── PACKS (uploaded to Firebase Storage) ────────────────────────────────────
 // Loaded directly from the bundled assets to avoid maintaining two copies.
+// Files that don't exist locally are skipped (already on Storage).
 
 const ASSETS_PACKS_DIR = path.join(__dirname, "../mobile/assets/packs");
 
 const PACK_FILES = [
-  { id: "critical_thinking",          version: 1, langs: ["pt", "en", "es"] },
+  { id: "critical_thinking",           version: 1, langs: ["pt", "en", "es"] },
   { id: "critical_thinking_fallacies", version: 1, langs: ["pt", "en", "es"] },
   { id: "critical_thinking_bias",      version: 1, langs: ["pt", "en", "es"] },
   { id: "foundations",                 version: 1, langs: ["pt", "en", "es"] },
@@ -171,13 +204,6 @@ const PACK_FILES = [
   { id: "economics_inflation",         version: 1, langs: ["pt", "en", "es"] },
   { id: "economics_interest_rates",    version: 1, langs: ["pt", "en", "es"] },
 ];
-
-const PACKS = PACK_FILES.flatMap(({ id, version, langs }) =>
-  langs.map((lang) => ({
-    storagePath: `packs/${id}/v${version}/${lang}.json`,
-    data: require(path.join(ASSETS_PACKS_DIR, `${id}_v${version}_${lang}.json`)),
-  }))
-);
 
 // ─── LESSONS ──────────────────────────────────────────────────────────────────
 
@@ -209,6 +235,27 @@ const LESSONS = [
     title: { pt: "Primeiros Princípios", en: "First Principles", es: "Primeros Principios" },
     estimatedMinutes: 8,
     difficulty: 2,
+    prerequisites: ["foundations_mental_models"],
+  },
+  {
+    id: "foundations_decision_making",
+    trackId: "foundations",
+    version: 1,
+    order: 4,
+    title: { pt: "Tomada de Decisão sob Incerteza", en: "Decision Making Under Uncertainty", es: "Toma de Decisiones bajo Incertidumbre" },
+    estimatedMinutes: 8,
+    difficulty: 2,
+    prerequisites: ["foundations_first_principles"],
+  },
+  {
+    id: "foundations_probabilistic",
+    trackId: "foundations",
+    version: 1,
+    order: 5,
+    title: { pt: "Pensamento Probabilístico", en: "Probabilistic Thinking", es: "Pensamiento Probabilístico" },
+    estimatedMinutes: 8,
+    difficulty: 2,
+    prerequisites: ["foundations_decision_making"],
   },
   // geopolitics track
   {
@@ -237,6 +284,27 @@ const LESSONS = [
     title: { pt: "BRICS e o Sul Global", en: "BRICS and the Global South", es: "BRICS y el Sur Global" },
     estimatedMinutes: 9,
     difficulty: 2,
+    prerequisites: ["geopolitics"],
+  },
+  {
+    id: "geopolitics_middle_east",
+    trackId: "geopolitics",
+    version: 1,
+    order: 4,
+    title: { pt: "O Oriente Médio em Disputa", en: "The Contested Middle East", es: "El Oriente Medio en Disputa" },
+    estimatedMinutes: 10,
+    difficulty: 3,
+    prerequisites: ["geopolitics_nato", "geopolitics_brics"],
+  },
+  {
+    id: "geopolitics_china_usa",
+    trackId: "geopolitics",
+    version: 1,
+    order: 5,
+    title: { pt: "China vs EUA: A Nova Guerra Fria", en: "China vs USA: The New Cold War", es: "China vs EE.UU.: La Nueva Guerra Fría" },
+    estimatedMinutes: 10,
+    difficulty: 3,
+    prerequisites: ["geopolitics_nato", "geopolitics_brics"],
   },
   // economics track
   {
@@ -265,6 +333,27 @@ const LESSONS = [
     title: { pt: "Juros e Bancos Centrais", en: "Interest Rates and Central Banks", es: "Tasas de Interés y Bancos Centrales" },
     estimatedMinutes: 9,
     difficulty: 3,
+    prerequisites: ["economics_inflation"],
+  },
+  {
+    id: "economics_fiscal_policy",
+    trackId: "economics",
+    version: 1,
+    order: 4,
+    title: { pt: "Política Fiscal: O Governo e o Dinheiro", en: "Fiscal Policy: Government and Money", es: "Política Fiscal: El Gobierno y el Dinero" },
+    estimatedMinutes: 9,
+    difficulty: 2,
+    prerequisites: ["economics_inflation"],
+  },
+  {
+    id: "economics_trade",
+    trackId: "economics",
+    version: 1,
+    order: 5,
+    title: { pt: "Comércio Internacional", en: "International Trade", es: "Comercio Internacional" },
+    estimatedMinutes: 9,
+    difficulty: 2,
+    prerequisites: ["economics_fiscal_policy"],
   },
   // critical_thinking track
   {
@@ -293,6 +382,129 @@ const LESSONS = [
     title: { pt: "Vieses Cognitivos", en: "Cognitive Biases", es: "Sesgos Cognitivos" },
     estimatedMinutes: 10,
     difficulty: 3,
+    prerequisites: ["critical_thinking_fallacies"],
+  },
+  {
+    id: "critical_thinking_scientific",
+    trackId: "critical_thinking",
+    version: 1,
+    order: 4,
+    title: { pt: "Método Científico", en: "Scientific Method", es: "Método Científico" },
+    estimatedMinutes: 9,
+    difficulty: 2,
+    prerequisites: ["critical_thinking_bias"],
+  },
+  {
+    id: "critical_thinking_rhetoric",
+    trackId: "critical_thinking",
+    version: 1,
+    order: 5,
+    title: { pt: "Retórica e Persuasão", en: "Rhetoric and Persuasion", es: "Retórica y Persuasión" },
+    estimatedMinutes: 9,
+    difficulty: 3,
+    prerequisites: ["critical_thinking_scientific"],
+  },
+  // history track
+  {
+    id: "history",
+    trackId: "history",
+    version: 1,
+    order: 1,
+    title: { pt: "O que a História Ensina", en: "What History Teaches", es: "Lo que la Historia Enseña" },
+    estimatedMinutes: 7,
+    difficulty: 1,
+    prerequisites: [],
+  },
+  {
+    id: "history_wwii",
+    trackId: "history",
+    version: 1,
+    order: 2,
+    title: { pt: "Segunda Guerra Mundial", en: "World War II", es: "Segunda Guerra Mundial" },
+    estimatedMinutes: 10,
+    difficulty: 2,
+    prerequisites: ["history"],
+  },
+  {
+    id: "history_cold_war",
+    trackId: "history",
+    version: 1,
+    order: 3,
+    title: { pt: "A Guerra Fria", en: "The Cold War", es: "La Guerra Fría" },
+    estimatedMinutes: 9,
+    difficulty: 2,
+    prerequisites: ["history"],
+  },
+  {
+    id: "history_colonialism",
+    trackId: "history",
+    version: 1,
+    order: 4,
+    title: { pt: "Colonialismo e Descolonização", en: "Colonialism and Decolonization", es: "Colonialismo y Descolonización" },
+    estimatedMinutes: 10,
+    difficulty: 3,
+    prerequisites: ["history_wwii", "history_cold_war"],
+  },
+  {
+    id: "history_industrial_revolution",
+    trackId: "history",
+    version: 1,
+    order: 5,
+    title: { pt: "A Revolução Industrial", en: "The Industrial Revolution", es: "La Revolución Industrial" },
+    estimatedMinutes: 9,
+    difficulty: 2,
+    prerequisites: ["history_cold_war"],
+  },
+  // psychology track
+  {
+    id: "psychology",
+    trackId: "psychology",
+    version: 1,
+    order: 1,
+    title: { pt: "Como a Mente Funciona", en: "How the Mind Works", es: "Cómo Funciona la Mente" },
+    estimatedMinutes: 7,
+    difficulty: 1,
+    prerequisites: [],
+  },
+  {
+    id: "psychology_emotions",
+    trackId: "psychology",
+    version: 1,
+    order: 2,
+    title: { pt: "Emoções e Decisões", en: "Emotions and Decisions", es: "Emociones y Decisiones" },
+    estimatedMinutes: 8,
+    difficulty: 2,
+    prerequisites: ["psychology"],
+  },
+  {
+    id: "psychology_habits",
+    trackId: "psychology",
+    version: 1,
+    order: 3,
+    title: { pt: "A Ciência dos Hábitos", en: "The Science of Habits", es: "La Ciencia de los Hábitos" },
+    estimatedMinutes: 9,
+    difficulty: 2,
+    prerequisites: ["psychology"],
+  },
+  {
+    id: "psychology_social",
+    trackId: "psychology",
+    version: 1,
+    order: 4,
+    title: { pt: "Psicologia Social", en: "Social Psychology", es: "Psicología Social" },
+    estimatedMinutes: 9,
+    difficulty: 2,
+    prerequisites: ["psychology_emotions", "psychology_habits"],
+  },
+  {
+    id: "psychology_resilience",
+    trackId: "psychology",
+    version: 1,
+    order: 5,
+    title: { pt: "Resiliência Mental", en: "Mental Resilience", es: "Resiliencia Mental" },
+    estimatedMinutes: 8,
+    difficulty: 2,
+    prerequisites: ["psychology_social"],
   },
 ];
 
@@ -324,7 +536,21 @@ async function seedLessons() {
 
 async function seedPacks() {
   console.log("📦 Uploading packs to Storage...");
-  for (const pack of PACKS) {
+  const packs = PACK_FILES.flatMap(({ id, version, langs }) =>
+    langs.flatMap((lang) => {
+      const filePath = path.join(ASSETS_PACKS_DIR, `${id}_v${version}_${lang}.json`);
+      try {
+        return [{ storagePath: `packs/${id}/v${version}/${lang}.json`, data: require(filePath) }];
+      } catch {
+        return [];
+      }
+    })
+  );
+  if (packs.length === 0) {
+    console.log("  ⚠ Nenhum arquivo de pack encontrado localmente — pulando upload.");
+    return;
+  }
+  for (const pack of packs) {
     const file = bucket.file(pack.storagePath);
     await file.save(JSON.stringify(pack.data), {
       contentType: "application/json",

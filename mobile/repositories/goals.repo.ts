@@ -1,3 +1,5 @@
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 import type { Lang } from "../models/lang";
 
 export type Goal = {
@@ -9,12 +11,10 @@ export type Goal = {
   description?: Record<Lang, string>;
 };
 
-const bundledGoals: (Goal & { isActive: boolean })[] = require("../assets/data/goals.json");
-
-export function getBundledGoals(): Goal[] {
-  return bundledGoals.filter((g) => g.isActive).sort((a, b) => a.order - b.order);
-}
-
-export function getActiveGoals(): Goal[] {
-  return getBundledGoals();
+export async function getGoals(): Promise<Goal[]> {
+  const q = query(collection(db, "goals"), orderBy("order"));
+  const snap = await getDocs(q);
+  return snap.docs
+    .map((d) => ({ id: d.id, ...d.data() }) as Goal & { isActive?: boolean })
+    .filter((g) => g.isActive !== false);
 }

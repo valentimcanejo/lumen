@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -54,29 +54,57 @@ export default function LessonIntroScreen() {
   }
 
   const STEPS = [
-    { icon: "book-outline" as const,         labelKey: "session.intro.includes_lesson" },
-    { icon: "layers-outline" as const,       labelKey: "session.intro.includes_cards" },
-    { icon: "help-circle-outline" as const,  labelKey: "session.intro.includes_quiz" },
+    {
+      icon: "book-outline" as const,
+      labelKey: "session.intro.includes_lesson",
+    },
+    {
+      icon: "layers-outline" as const,
+      labelKey: "session.intro.includes_cards",
+    },
+    {
+      icon: "help-circle-outline" as const,
+      labelKey: "session.intro.includes_quiz",
+    },
   ];
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
       {/* Tall colored header — title lives here */}
       <View
-        style={[s.header, { backgroundColor: bg, paddingTop: insets.top + 8, borderBottomColor: color + "30" }]}
+        style={[
+          s.header,
+          {
+            backgroundColor: bg,
+            paddingTop: insets.top + 8,
+            borderBottomColor: color + "30",
+          },
+        ]}
       >
         {/* Decorative rings */}
         <View style={[s.circle1, { borderColor: color + "20" }]} />
         <View style={[s.circle2, { borderColor: color + "0E" }]} />
 
         {/* Back button */}
-        <TouchableOpacity onPress={() => router.back()} style={s.back} activeOpacity={0.7}>
+        <TouchableOpacity
+          onPress={() => router.back()}
+          style={s.back}
+          activeOpacity={0.7}
+        >
           <Ionicons name="chevron-back" size={22} color={color} />
         </TouchableOpacity>
 
         {/* Meta row */}
         <View style={s.metaRow}>
-          <View style={[s.diffBadge, { backgroundColor: diffColor + "25", borderColor: diffColor + "55" }]}>
+          <View
+            style={[
+              s.diffBadge,
+              {
+                backgroundColor: diffColor + "25",
+                borderColor: diffColor + "55",
+              },
+            ]}
+          >
             <Text style={[s.diffText, { color: diffColor }]}>{diffLabel}</Text>
           </View>
           <View style={s.timeBadge}>
@@ -86,7 +114,9 @@ export default function LessonIntroScreen() {
         </View>
 
         {/* Title inside header */}
-        <Text style={s.headerTitle} numberOfLines={3}>{title}</Text>
+        <Text style={s.headerTitle} numberOfLines={3}>
+          {title}
+        </Text>
       </View>
 
       {/* Scrollable content */}

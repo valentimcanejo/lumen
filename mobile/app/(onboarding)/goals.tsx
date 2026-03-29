@@ -1,17 +1,15 @@
-import React, { useMemo, useState } from "react";
-import { FlatList, StyleSheet, View as RNView } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, FlatList, StyleSheet, View as RNView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { Box } from "../../components/ui/box";
-import { HStack } from "../../components/ui/hstack";
 import { Text } from "../../components/ui/text";
-import { VStack } from "../../components/ui/vstack";
 import { Pressable } from "../../components/ui/pressable";
 import { router, useLocalSearchParams } from "expo-router";
 import { LumenButton } from "../../components/ui/lumen/Button";
 import { useTranslation } from "react-i18next";
 import { Lang } from "../../models/lang";
-import { getActiveGoals, type Goal } from "../../repositories/goals.repo";
+import { getGoals, type Goal } from "../../repositories/goals.repo";
 
 const ICON_MAP: Record<string, keyof typeof Ionicons.glyphMap> = {
   book:      "book-outline",
@@ -22,14 +20,20 @@ const ICON_MAP: Record<string, keyof typeof Ionicons.glyphMap> = {
   person:    "person-outline",
 };
 
-const goals = getActiveGoals();
-
 export default function Goals() {
   const insets = useSafeAreaInsets();
+  const [goals, setGoals] = useState<Goal[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<string[]>([]);
   const canContinue = selected.length >= 1;
   const { t } = useTranslation();
   const { selectedLanguage, userId } = useLocalSearchParams();
+
+  useEffect(() => {
+    getGoals()
+      .then(setGoals)
+      .finally(() => setLoading(false));
+  }, []);
 
   function toggle(key: string) {
     setSelected((prev) =>
@@ -42,6 +46,14 @@ export default function Goals() {
       pathname: `/(onboarding)/social-proof`,
       params: { selectedLanguage, selectedTracks: selected.join(","), userId },
     });
+
+  if (loading) {
+    return (
+      <Box className="flex-1 bg-[#0B0F14] items-center justify-center">
+        <ActivityIndicator color="#F5C77A" />
+      </Box>
+    );
+  }
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
