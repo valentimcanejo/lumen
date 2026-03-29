@@ -83,6 +83,7 @@ export async function signInWithGoogle(): Promise<User> {
     scopes: ["openid", "profile", "email"],
     redirectUri: EXPO_REDIRECT_URI,
     responseType: AuthSession.ResponseType.IdToken,
+    usePKCE: false,
     extraParams: { nonce: Math.random().toString(36).slice(2) },
   });
 
