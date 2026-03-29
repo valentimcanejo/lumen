@@ -131,7 +131,7 @@ export default function Welcome() {
 
             {/* CTAs */}
             <VStack space="sm" className="mt-2">
-              <LumenButton onPress={() => router.push("/(onboarding)/language")}>
+              <LumenButton onPress={() => router.push("/(onboarding)/goals")}>
                 {t("onboarding.welcome.start")}
               </LumenButton>
               <LumenButton variant="ghost" onPress={handleSkip}>

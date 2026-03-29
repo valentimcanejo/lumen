@@ -55,7 +55,24 @@
       "Bash(cmd.exe /c \"gcloud auth application-default print-access-token 2>&1\")",
       "Bash(cmd.exe /c \"gcloud auth application-default print-access-token\" 2>&1)",
       "Read(//c/Users/valen/lumen/$USERPROFILE/.config/configstore/**)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(find /c/Users/valen/lumen -type f -name *.json -path */packs/*)",
+      "Bash(grep -rn \"quiz\" /c/Users/valen/lumen --include=\"*.ts\" --include=\"*.tsx\" --include=\"*.js\" -not -path \"*/node_modules/*\" -not -path \"*/.git/*\")",
+      "Bash(grep -rn \"assets/data\\\\|assets/packs\\\\|bundled\\\\|BUNDLED\\\\|hardcoded\" mobile/repositories/ mobile/hooks/ mobile/app/ mobile/components/ --include=*.ts --include=*.tsx)",
+      "Bash(grep -rn \"require\\\\b\\\\|\\\\.json\\\\b\" mobile/repositories/ mobile/hooks/ --include=*.ts --include=*.tsx 2)",
+      "Bash(/dev/null grep:*)",
+      "Bash(find mobile/repositories mobile/hooks mobile/app -name *.ts -o -name *.tsx)",
+      "Bash(dir:*)",
+      "Bash(git rm:*)",
+      "Bash(del \"mobile\\\\assets\\\\data\\\\goals.json\")",
+      "Bash(grep -rn \"google\\\\|signIn\\\\|GoogleAuth\\\\|expo-auth\" app/ hooks/ services/ --include=*.ts --include=*.tsx)",
+      "Bash(find . -name auth.ts -not -path */node_modules/*)",
+      "Bash(\"/c/Program Files/Android/Android Studio/jbr/bin/keytool\" -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android 2>&1)",
+      "Bash(\"/c/Program Files/Android/Android Studio/jbr/bin/keytool\" \\\\\n  -genkeypair \\\\\n  -v \\\\\n  -keystore \"C:/Users/valen/.android/debug.keystore\" \\\\\n  -alias androiddebugkey \\\\\n  -storepass android \\\\\n  -keypass android \\\\\n  -keyalg RSA \\\\\n  -keysize 2048 \\\\\n  -validity 10000 \\\\\n  -dname \"CN=Android Debug, O=Android, C=US\" 2>&1)",
+      "Bash(java -version)",
+      "Bash(echo \"JAVA_HOME=$JAVA_HOME\")",
+      "Bash(JAVA_HOME=\"/c/Program Files/Android/Android Studio/jbr\")",
+      "Bash(\"$JAVA_HOME/bin/java\" -version)"
     ]
   }
 }

@@ -2,14 +2,24 @@ import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, StyleSheet, View as RNView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
+import * as Localization from "expo-localization";
 import { Box } from "../../components/ui/box";
 import { Text } from "../../components/ui/text";
 import { Pressable } from "../../components/ui/pressable";
-import { router, useLocalSearchParams } from "expo-router";
+import { router } from "expo-router";
 import { LumenButton } from "../../components/ui/lumen/Button";
 import { useTranslation } from "react-i18next";
 import { Lang } from "../../models/lang";
 import { getGoals, type Goal } from "../../repositories/goals.repo";
+import { ensureAnonymousAuth } from "../../services/auth.service";
+import { setLanguage } from "../../i18n/setLanguage";
+
+const SUPPORTED: Lang[] = ["pt", "en", "es"];
+
+function detectDeviceLang(): Lang {
+  const code = Localization.getLocales()?.[0]?.languageCode ?? "";
+  return SUPPORTED.includes(code as Lang) ? (code as Lang) : "pt";
+}
 
 const ICON_MAP: Record<string, keyof typeof Ionicons.glyphMap> = {
   book:      "book-outline",
@@ -25,11 +35,16 @@ export default function Goals() {
   const [goals, setGoals] = useState<Goal[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<string[]>([]);
+  const [selectedLanguage] = useState<Lang>(detectDeviceLang);
+  const [userId, setUserId] = useState<string>("");
   const canContinue = selected.length >= 1;
   const { t } = useTranslation();
-  const { selectedLanguage, userId } = useLocalSearchParams();
 
   useEffect(() => {
+    setLanguage(selectedLanguage).catch(console.error);
+    ensureAnonymousAuth()
+      .then((u) => setUserId(u.uid))
+      .catch(console.error);
     getGoals()
       .then(setGoals)
       .finally(() => setLoading(false));
