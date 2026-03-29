@@ -69,8 +69,8 @@ const s = StyleSheet.create({
   disabled: { opacity: 0.55 },
   pressed: { opacity: 0.82, transform: [{ scale: 0.975 }] },
   label: {
+    fontFamily: "Inter_700Bold",
     fontSize: 16,
-    fontWeight: "700",
     letterSpacing: 0.2,
   },
 });

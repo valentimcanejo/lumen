@@ -1,10 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Stack } from "expo-router";
 import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 import * as Notifications from "expo-notifications";
+import * as SplashScreen from "expo-splash-screen";
+import { useFonts } from "expo-font";
+import {
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_600SemiBold,
+  Inter_700Bold,
+} from "@expo-google-fonts/inter";
+import {
+  DMSans_500Medium,
+  DMSans_600SemiBold,
+  DMSans_700Bold,
+} from "@expo-google-fonts/dm-sans";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { OfflineBanner } from "../components/ui/lumen/OfflineBanner";
 import "../i18n";
@@ -12,8 +25,10 @@ import { loadLanguage } from "../i18n/setLanguage";
 import "@/global.css";
 import { auth } from "../firebase/firebaseConfig";
 import { getUser, getCompletedContentIds } from "../repositories/user.repo";
-import { getLessonMeta, pickNextLesson } from "../repositories/lessons.repo";
+import { getLessonMeta, pickNextLesson, initLessons } from "../repositories/lessons.repo";
 import { todayYmd } from "../repositories/session.repo";
+
+SplashScreen.preventAutoHideAsync();
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -26,6 +41,27 @@ Notifications.setNotificationHandler({
 });
 
 export default function RootLayout() {
+  const [fontsLoaded] = useFonts({
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    DMSans_500Medium,
+    DMSans_600SemiBold,
+    DMSans_700Bold,
+  });
+  const [lessonsReady, setLessonsReady] = useState(false);
+
+  useEffect(() => {
+    initLessons().finally(() => setLessonsReady(true));
+  }, []);
+
+  useEffect(() => {
+    if (fontsLoaded && lessonsReady) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, lessonsReady]);
+
   useEffect(() => {
     loadLanguage();
   }, []);

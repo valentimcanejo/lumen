@@ -175,13 +175,13 @@ module.exports = {
         },
       },
       fontFamily: {
-        heading: undefined,
-        body: undefined,
-        mono: undefined,
+        heading: ['DMSans_700Bold'],
+        body: ['Inter_400Regular'],
+        mono: ['SpaceMono_400Regular'],
         jakarta: ['var(--font-plus-jakarta-sans)'],
         roboto: ['var(--font-roboto)'],
         code: ['var(--font-source-code-pro)'],
-        inter: ['var(--font-inter)'],
+        inter: ['Inter_400Regular'],
         'space-mono': ['var(--font-space-mono)'],
       },
       fontWeight: {
