@@ -28,6 +28,24 @@ const bucket = admin.storage().bucket();
 
 const GOALS = [
   {
+    id: "foundations",
+    order: 0,
+    icon: "book",
+    color: "#7B8FE0",
+    isActive: true,
+    title: {
+      pt: "Fundamentos",
+      en: "Foundations",
+      es: "Fundamentos",
+    },
+    description: {
+      pt: "Construir uma base sólida de pensamento e raciocínio",
+      en: "Build a solid foundation of thinking and reasoning",
+      es: "Construir una base sólida de pensamiento y razonamiento",
+    },
+    tags: ["thinking", "reasoning", "fundamentals"],
+  },
+  {
     id: "critical_thinking",
     order: 1,
     icon: "brain",
@@ -80,6 +98,42 @@ const GOALS = [
       es: "Comprender cómo los mercados, el dinero y las decisiones moldean el mundo",
     },
     tags: ["markets", "finance", "policy"],
+  },
+  {
+    id: "history",
+    order: 4,
+    icon: "hourglass",
+    color: "#E0A87B",
+    isActive: true,
+    title: {
+      pt: "História",
+      en: "History",
+      es: "Historia",
+    },
+    description: {
+      pt: "Entender os eventos que moldaram o mundo em que vivemos",
+      en: "Understand the events that shaped the world we live in",
+      es: "Entender los eventos que moldearon el mundo en que vivimos",
+    },
+    tags: ["history", "events", "civilization"],
+  },
+  {
+    id: "psychology",
+    order: 5,
+    icon: "person",
+    color: "#B07BE0",
+    isActive: true,
+    title: {
+      pt: "Psicologia",
+      en: "Psychology",
+      es: "Psicología",
+    },
+    description: {
+      pt: "Como a mente humana pensa, sente e se comporta",
+      en: "How the human mind thinks, feels and behaves",
+      es: "Cómo la mente humana piensa, siente y se comporta",
+    },
+    tags: ["mind", "behavior", "cognition"],
   },
 ];
 
