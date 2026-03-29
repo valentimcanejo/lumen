@@ -80,18 +80,21 @@ export async function signInWithGoogle(): Promise<User> {
   const discovery = await GOOGLE_DISCOVERY;
 
   const returnUrl = Linking.createURL("/");
-  const state = btoa(JSON.stringify({ returnUrl }));
+  // auth.expo.io proxy requires state = base64(JSON.stringify({ returnUrl }))
+  // so it knows where to deep-link the user back after OAuth completes.
+  const state = btoa(unescape(encodeURIComponent(JSON.stringify({ returnUrl }))));
+  const nonce = Math.random().toString(36).slice(2);
 
+  // Use code flow (not implicit/IdToken): the proxy can only forward query-string
+  // params back to the app — URL fragments (#id_token=...) are never sent to it.
   const request = new AuthSession.AuthRequest({
     clientId: GOOGLE_WEB_CLIENT_ID,
     scopes: ["openid", "profile", "email"],
     redirectUri: EXPO_REDIRECT_URI,
-    responseType: AuthSession.ResponseType.IdToken,
-    usePKCE: false,
-    extraParams: {
-      nonce: Math.random().toString(36).slice(2),
-      state,
-    },
+    responseType: AuthSession.ResponseType.Code,
+    usePKCE: true,
+    state,
+    extraParams: { nonce },
   });
 
   const result = await request.promptAsync(discovery);
@@ -99,8 +102,19 @@ export async function signInWithGoogle(): Promise<User> {
     throw new Error("Google sign-in was cancelled or failed.");
   }
 
-  const idToken = result.params.id_token;
-  if (!idToken) throw new Error("No id_token returned by Google.");
+  // Exchange the authorization code for tokens (includes id_token)
+  const tokenResult = await AuthSession.exchangeCodeAsync(
+    {
+      clientId: GOOGLE_WEB_CLIENT_ID,
+      redirectUri: EXPO_REDIRECT_URI,
+      code: result.params.code,
+      extraParams: { code_verifier: request.codeVerifier ?? "" },
+    },
+    discovery
+  );
+
+  const idToken = tokenResult.idToken;
+  if (!idToken) throw new Error("No id_token in token response from Google.");
 
   const credential = GoogleAuthProvider.credential(idToken);
   return linkOrSignIn(credential);
