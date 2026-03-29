@@ -154,6 +154,7 @@
       "account_google": "Continuar con Google",
       "account_apple": "Continuar con Apple",
       "account_linked": "Cuenta vinculada",
+      "account_linked_success": "¡Sesión iniciada con éxito!",
       "account_synced": "Progreso sincronizado",
       "account_sign_out": "Cerrar sesión",
       "streak": "Racha actual",

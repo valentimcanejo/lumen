@@ -28,6 +28,7 @@ export function useAuth() {
 
   const handleSignInWithGoogle = useCallback(async () => {
     const u = await signInWithGoogle();
+    invalidateUserCache(u.uid);
     setUser(u);
     return u;
   }, []);

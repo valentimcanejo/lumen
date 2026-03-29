@@ -365,10 +365,9 @@ function AccountCard({
   onSignOut: () => Promise<void>;
 }) {
   const { t } = useTranslation();
-  const [loading, setLoading] = useState<"google" | "apple" | "signout" | null>(
-    null,
-  );
+  const [loading, setLoading] = useState<"google" | "apple" | "signout" | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   async function handle(
     action: "google" | "apple" | "signout",
@@ -378,6 +377,7 @@ function AccountCard({
     setError(null);
     try {
       await fn();
+      if (action !== "signout") setSuccess(true);
     } catch (err: unknown) {
       const e = err as { message?: string; code?: string };
       if (
@@ -448,6 +448,14 @@ function AccountCard({
 
   return (
     <Box className="bg-[#111827] rounded-2xl p-5 mb-6">
+      {success && (
+        <HStack className="items-center bg-[#1A2E1A] rounded-xl px-3 py-2 mb-4" space="sm">
+          <Ionicons name="checkmark-circle" size={16} color="#5ED19A" />
+          <Text className="text-[#5ED19A] text-[13px] font-medium">
+            {t("tabs.profile.account_linked_success")}
+          </Text>
+        </HStack>
+      )}
       <HStack className="items-center mb-4" space="md">
         <Box className="w-10 h-10 rounded-full bg-[#1A2233] items-center justify-center">
           <Ionicons name="person" size={20} color="#F5C77A" />
