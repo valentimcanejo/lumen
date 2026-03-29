@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  withSpring,
+} from "react-native-reanimated";
 import { Platform, ScrollView, ActivityIndicator, Linking, DevSettings, Alert, useWindowDimensions, View, StyleSheet } from "react-native";
 import * as Notifications from "expo-notifications";
 import { router } from "expo-router";
@@ -51,20 +57,37 @@ function AchievementsGrid({ achievements }: { achievements: AchievementDef[] }) 
   const { t } = useTranslation();
   const { width: screenWidth } = useWindowDimensions();
   const [expanded, setExpanded] = useState(false);
+  const [selected, setSelected] = useState<AchievementDef | null>(null);
+  const tooltipOpacity = useSharedValue(0);
+  const tooltipY = useSharedValue(8);
 
   const COLLAPSED_MAX = 10;
   const visible = expanded ? achievements : achievements.slice(0, COLLAPSED_MAX);
   const hasMore = achievements.length > COLLAPSED_MAX;
 
-  // Cell size: fill available width (screen - px-5*2 - card padding*2) across 5 cols
   const totalGaps = (COLS - 1) * BADGE_GAP;
   const cellSize = Math.floor((screenWidth - 40 - 32 - totalGaps) / COLS);
 
-  // Group into rows of COLS
   const rows: AchievementDef[][] = [];
   for (let i = 0; i < visible.length; i += COLS) {
     rows.push(visible.slice(i, i + COLS));
   }
+
+  function handleBadgePress(a: AchievementDef) {
+    setSelected(a);
+    tooltipOpacity.value = withTiming(1, { duration: 160 });
+    tooltipY.value = withSpring(0, { damping: 16, stiffness: 260 });
+  }
+
+  function dismissTooltip() {
+    tooltipOpacity.value = withTiming(0, { duration: 120 });
+    tooltipY.value = withTiming(8, { duration: 120 });
+  }
+
+  const tooltipStyle = useAnimatedStyle(() => ({
+    opacity: tooltipOpacity.value,
+    transform: [{ translateY: tooltipY.value }],
+  }));
 
   return (
     <View style={ag.container}>
@@ -77,14 +100,14 @@ function AchievementsGrid({ achievements }: { achievements: AchievementDef[] }) 
         {rows.map((row, ri) => (
           <View key={ri} style={[ag.row, ri > 0 && { marginTop: BADGE_GAP }]}>
             {row.map((a) => (
-              <View
+              <Pressable
                 key={a.id}
+                onPress={() => handleBadgePress(a)}
                 style={[ag.badge, { width: cellSize, height: cellSize }]}
               >
                 <Text style={{ fontSize: cellSize * 0.42 }}>{a.icon}</Text>
-              </View>
+              </Pressable>
             ))}
-            {/* Fill empty cells in last row so alignment stays left */}
             {row.length < COLS &&
               Array.from({ length: COLS - row.length }).map((_, i) => (
                 <View key={`empty-${i}`} style={{ width: cellSize }} />
@@ -99,6 +122,16 @@ function AchievementsGrid({ achievements }: { achievements: AchievementDef[] }) 
                 ? t("tabs.profile.achievements_collapse")
                 : t("tabs.profile.achievements_show_all", { count: achievements.length - COLLAPSED_MAX })}
             </Text>
+          </Pressable>
+        )}
+
+        {/* Inline tooltip — appears below the grid on tap */}
+        {selected && (
+          <Pressable onPress={dismissTooltip} style={ag.tooltipTouchable}>
+            <Animated.View style={[ag.tooltip, tooltipStyle]}>
+              <Text style={ag.tooltipIcon}>{selected.icon}</Text>
+              <Text style={ag.tooltipName}>{t(selected.titleKey)}</Text>
+            </Animated.View>
           </Pressable>
         )}
       </View>
@@ -125,6 +158,20 @@ const ag = StyleSheet.create({
   },
   expandBtn: { marginTop: 12, alignItems: "center" },
   expandLabel: { color: "#AAB0C0", fontSize: 13 },
+  tooltipTouchable: { marginTop: 12 },
+  tooltip: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    backgroundColor: "#1A2233",
+    borderWidth: 1,
+    borderColor: "#252E42",
+    borderRadius: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+  },
+  tooltipIcon: { fontSize: 20 },
+  tooltipName: { color: "#E6EAF2", fontSize: 14, fontWeight: "600", flex: 1 },
 });
 
 // ---------------------------------------------------------------------------

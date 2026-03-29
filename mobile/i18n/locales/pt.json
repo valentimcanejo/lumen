@@ -128,7 +128,10 @@
       "filter_following": "Seguindo",
       "difficulty_1": "Iniciante",
       "difficulty_2": "Intermediário",
-      "difficulty_3": "Avançado"
+      "difficulty_3": "Avançado",
+      "section_following": "Seguindo",
+      "section_explore": "Explorar",
+      "btn_follow": "Seguir"
     },
     "library": {
       "title": "Biblioteca",

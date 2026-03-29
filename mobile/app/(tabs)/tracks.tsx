@@ -1,5 +1,12 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { FlatList, StyleSheet, TextInput, TouchableOpacity, View as RNView, ScrollView as HScrollView } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View as RNView,
+  ScrollView as HScrollView,
+} from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -21,20 +28,38 @@ import type { Lang } from "../../models/lang";
 
 type FilterKey = "all" | "following" | "easy" | "medium" | "hard";
 
+type ListItem =
+  | { type: "section"; label: string; count?: number }
+  | { type: "track"; track: Track; following: boolean };
+
 const DIFF_COLORS = { 1: "#5ED19A", 2: "#F5C77A", 3: "#E26D6D" } as const;
 
-function DifficultyBadge({ level }: { level: 1 | 2 | 3 }) {
+function DifficultyBadge({ level, muted }: { level: 1 | 2 | 3; muted?: boolean }) {
   const { t } = useTranslation();
   const labels = {
     1: t("tabs.tracks.difficulty_1"),
     2: t("tabs.tracks.difficulty_2"),
     3: t("tabs.tracks.difficulty_3"),
   };
-  const color = DIFF_COLORS[level];
+  const color = muted ? "#3A4558" : DIFF_COLORS[level];
+  const dotColor = muted ? "#2A3350" : DIFF_COLORS[level];
   return (
     <RNView style={[tc.diffBadge, { backgroundColor: color + "22" }]}>
-      <RNView style={[tc.diffDot, { backgroundColor: color }]} />
+      <RNView style={[tc.diffDot, { backgroundColor: dotColor }]} />
       <Text style={[tc.diffText, { color }]}>{labels[level]}</Text>
+    </RNView>
+  );
+}
+
+function SectionHeader({ label, count }: { label: string; count?: number }) {
+  return (
+    <RNView style={tc.sectionHeader}>
+      <Text style={tc.sectionLabel}>{label}</Text>
+      {count !== undefined && (
+        <RNView style={tc.sectionCountBadge}>
+          <Text style={tc.sectionCount}>{count}</Text>
+        </RNView>
+      )}
     </RNView>
   );
 }
@@ -54,59 +79,124 @@ function TrackCard({
   canUnfollow: boolean;
   onToggleFollow: () => void;
 }) {
+  const { t } = useTranslation();
   const title = track.title[lang] ?? track.title.en ?? track.id;
+  const description = track.description?.[lang] ?? track.description?.en;
   const color = trackColor(track.id);
   const bg = trackBg(track.id);
   const total = getLessonCountForTrack(track.id);
   const done = completedIds.filter((id) => id.startsWith(track.id)).length;
   const pct = total > 0 ? (done / total) * 100 : 0;
 
+  if (isFollowing) {
+    // ── Following card — colorful, compact ──────────────────────────────────
+    return (
+      <Pressable onPress={() => router.push(`/track/${track.id}`)}>
+        <RNView
+          style={[
+            tc.card,
+            {
+              backgroundColor: bg,
+              borderColor: color + "44",
+              borderLeftColor: color + "80",
+            },
+          ]}
+        >
+          <RNView style={tc.headerRow}>
+            <RNView
+              style={[
+                tc.iconBadge,
+                { backgroundColor: color + "20", borderColor: color + "40" },
+              ]}
+            >
+              <RNView style={[tc.iconDot, { backgroundColor: color }]} />
+            </RNView>
+            <Text style={tc.title} numberOfLines={2}>
+              {title}
+            </Text>
+            <TouchableOpacity
+              onPress={onToggleFollow}
+              disabled={!canUnfollow}
+              hitSlop={10}
+              style={{ opacity: !canUnfollow ? 0.35 : 1, flexShrink: 0 }}
+            >
+              <RNView
+                style={[
+                  tc.followingPill,
+                  { backgroundColor: color + "18", borderColor: color + "40" },
+                ]}
+              >
+                <Text style={[tc.followingText, { color }]}>
+                  {t("tabs.tracks.section_following")}
+                </Text>
+              </RNView>
+            </TouchableOpacity>
+          </RNView>
+
+          <RNView style={tc.metaRow}>
+            <DifficultyBadge level={track.difficulty} />
+            {total > 0 && (
+              <RNView style={tc.progressRow}>
+                <RNView style={tc.progressTrack}>
+                  <RNView
+                    style={[
+                      tc.progressFill,
+                      { width: `${pct}%`, backgroundColor: color },
+                    ]}
+                  />
+                </RNView>
+                <Text
+                  style={[
+                    tc.progressLabel,
+                    { color: done > 0 ? color : "#4A5568" },
+                  ]}
+                >
+                  {done}/{total}
+                </Text>
+              </RNView>
+            )}
+          </RNView>
+        </RNView>
+      </Pressable>
+    );
+  }
+
+  // ── Not following card — muted, shows description for discovery ────────────
   return (
     <Pressable onPress={() => router.push(`/track/${track.id}`)}>
-      <RNView
-        style={[
-          tc.card,
-          {
-            backgroundColor: bg,
-            borderColor: color + "44",
-            borderLeftColor: color + "80",
-          },
-        ]}
-      >
-        {/* Header row: icon badge + title + follow */}
+      <RNView style={tc.cardMuted}>
         <RNView style={tc.headerRow}>
-          <RNView style={[tc.iconBadge, { backgroundColor: color + "20", borderColor: color + "40" }]}>
-            <RNView style={[tc.iconDot, { backgroundColor: color }]} />
+          <RNView style={tc.iconBadgeMuted}>
+            <RNView style={tc.iconDotMuted} />
           </RNView>
-          <Text style={tc.title} numberOfLines={2}>{title}</Text>
+
+          <RNView style={{ flex: 1 }}>
+            <Text style={tc.titleMuted} numberOfLines={1}>
+              {title}
+            </Text>
+            {description ? (
+              <Text style={tc.descriptionMuted} numberOfLines={2}>
+                {description}
+              </Text>
+            ) : null}
+          </RNView>
+
           <TouchableOpacity
             onPress={onToggleFollow}
-            disabled={isFollowing && !canUnfollow}
             hitSlop={10}
-            style={{ opacity: isFollowing && !canUnfollow ? 0.35 : 1, flexShrink: 0 }}
+            style={tc.followBtn}
           >
-            {isFollowing ? (
-              <RNView style={[tc.followingPill, { backgroundColor: color + "18", borderColor: color + "40" }]}>
-                <Text style={[tc.followingText, { color }]}>Seguindo</Text>
-              </RNView>
-            ) : (
-              <Ionicons name="add-circle-outline" size={20} color="#4A5568" />
-            )}
+            <Ionicons name="add" size={13} color="#AAB0C0" />
+            <Text style={tc.followBtnText}>{t("tabs.tracks.btn_follow")}</Text>
           </TouchableOpacity>
         </RNView>
 
-        {/* Meta row: difficulty + progress */}
-        <RNView style={tc.metaRow}>
-          <DifficultyBadge level={track.difficulty} />
+        <RNView style={[tc.metaRow, { marginTop: description ? 10 : 10 }]}>
+          <DifficultyBadge level={track.difficulty} muted />
           {total > 0 && (
-            <RNView style={tc.progressRow}>
-              <RNView style={tc.progressTrack}>
-                <RNView style={[tc.progressFill, { width: `${pct}%`, backgroundColor: color }]} />
-              </RNView>
-              <Text style={[tc.progressLabel, { color: done > 0 ? color : "#4A5568" }]}>
-                {done}/{total}
-              </Text>
-            </RNView>
+            <Text style={tc.lessonCount}>
+              {total} lições
+            </Text>
           )}
         </RNView>
       </RNView>
@@ -115,12 +205,22 @@ function TrackCard({
 }
 
 const tc = StyleSheet.create({
+  // ── Following card
   card: {
     borderRadius: 18,
     borderWidth: 1,
     borderLeftWidth: 3,
     padding: 16,
     marginBottom: 8,
+  },
+  // ── Not-following card
+  cardMuted: {
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: "#1A2233",
+    padding: 16,
+    marginBottom: 8,
+    backgroundColor: "#0D111A",
   },
   headerRow: {
     flexDirection: "row",
@@ -141,11 +241,30 @@ const tc = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexShrink: 0,
+    marginTop: 2,
   },
   iconDot: {
     width: 8,
     height: 8,
     borderRadius: 4,
+  },
+  iconBadgeMuted: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#1E2A3E",
+    backgroundColor: "#141B27",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    marginTop: 2,
+  },
+  iconDotMuted: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: "#2A3350",
   },
   title: {
     color: "#E6EAF2",
@@ -153,14 +272,51 @@ const tc = StyleSheet.create({
     fontWeight: "700",
     flex: 1,
     lineHeight: 21,
+    marginTop: 7,
+  },
+  titleMuted: {
+    color: "#5A6478",
+    fontSize: 15,
+    fontWeight: "700",
+    lineHeight: 21,
+    marginTop: 7,
+  },
+  descriptionMuted: {
+    color: "#3A4558",
+    fontSize: 12,
+    lineHeight: 17,
+    marginTop: 3,
+  },
+  lessonCount: {
+    color: "#2A3350",
+    fontSize: 12,
+    fontWeight: "600",
   },
   followingPill: {
     borderWidth: 1,
     borderRadius: 100,
     paddingHorizontal: 10,
     paddingVertical: 4,
+    marginTop: 6,
   },
   followingText: {
+    fontSize: 11,
+    fontWeight: "700",
+  },
+  followBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    borderWidth: 1,
+    borderColor: "#2A3350",
+    borderRadius: 100,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginTop: 6,
+    flexShrink: 0,
+  },
+  followBtnText: {
+    color: "#AAB0C0",
     fontSize: 11,
     fontWeight: "700",
   },
@@ -204,6 +360,32 @@ const tc = StyleSheet.create({
     minWidth: 28,
     textAlign: "right",
   },
+  // ── Section headers
+  sectionHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginTop: 8,
+    marginBottom: 10,
+  },
+  sectionLabel: {
+    color: "#AAB0C0",
+    fontSize: 11,
+    fontWeight: "700",
+    letterSpacing: 0.8,
+    textTransform: "uppercase",
+  },
+  sectionCountBadge: {
+    backgroundColor: "#1A2233",
+    borderRadius: 100,
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+  },
+  sectionCount: {
+    color: "#7B8193",
+    fontSize: 11,
+    fontWeight: "700",
+  },
 });
 
 export default function Tracks() {
@@ -239,27 +421,73 @@ export default function Tracks() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
 
-  const filteredTracks = useMemo(() => {
-    let result = tracks;
+  // Build the flat list items with section headers when not searching/filtering
+  const listItems = useMemo((): ListItem[] => {
+    const isSearching = search.trim().length > 0;
+    const isFiltering = activeFilter !== "all";
+
+    // Apply difficulty/following filter first
+    let filtered = tracks;
     if (activeFilter === "following") {
-      result = result.filter((t) => selectedTrackIds.includes(t.id));
+      filtered = filtered.filter((t) => selectedTrackIds.includes(t.id));
     } else if (activeFilter === "easy") {
-      result = result.filter((t) => t.difficulty === 1);
+      filtered = filtered.filter((t) => t.difficulty === 1);
     } else if (activeFilter === "medium") {
-      result = result.filter((t) => t.difficulty === 2);
+      filtered = filtered.filter((t) => t.difficulty === 2);
     } else if (activeFilter === "hard") {
-      result = result.filter((t) => t.difficulty === 3);
+      filtered = filtered.filter((t) => t.difficulty === 3);
     }
-    if (search.trim()) {
+
+    // Apply text search
+    if (isSearching) {
       const q = search.toLowerCase().trim();
-      result = result.filter((t) => {
+      filtered = filtered.filter((t) => {
         const title = (t.title[lang] ?? t.title.en ?? "").toLowerCase();
+        const desc = (t.description?.[lang] ?? t.description?.en ?? "").toLowerCase();
         const tags = (t.tags ?? []).join(" ").toLowerCase();
-        return title.includes(q) || tags.includes(q);
+        return title.includes(q) || desc.includes(q) || tags.includes(q);
       });
     }
-    return result;
-  }, [tracks, activeFilter, selectedTrackIds, search, lang]);
+
+    // Flat list when searching or filtering
+    if (isSearching || isFiltering) {
+      return filtered.map((track) => ({
+        type: "track",
+        track,
+        following: selectedTrackIds.includes(track.id),
+      }));
+    }
+
+    // Sectioned list: Following + Explore
+    const following = filtered.filter((t) => selectedTrackIds.includes(t.id));
+    const explore = filtered.filter((t) => !selectedTrackIds.includes(t.id));
+
+    const items: ListItem[] = [];
+
+    if (following.length > 0) {
+      items.push({
+        type: "section",
+        label: t("tabs.tracks.section_following"),
+        count: following.length,
+      });
+      following.forEach((track) =>
+        items.push({ type: "track", track, following: true }),
+      );
+    }
+
+    if (explore.length > 0) {
+      items.push({
+        type: "section",
+        label: t("tabs.tracks.section_explore"),
+        count: explore.length,
+      });
+      explore.forEach((track) =>
+        items.push({ type: "track", track, following: false }),
+      );
+    }
+
+    return items;
+  }, [tracks, activeFilter, selectedTrackIds, search, lang, t]);
 
   async function handleToggleFollow(trackId: string) {
     if (!uid) return;
@@ -282,7 +510,8 @@ export default function Tracks() {
     }
   }
 
-  const isNotPremium = !isPremium || aiPackError === "not-premium" || aiPackError === "premium-expired";
+  const isNotPremium =
+    !isPremium || aiPackError === "not-premium" || aiPackError === "premium-expired";
 
   const aiErrorMessage =
     aiPackError === "rate-limited"
@@ -406,22 +635,31 @@ export default function Tracks() {
       {/* Track list */}
       {loading ? (
         <Box className="px-6">
-          {[0, 1, 2, 3, 4].map((i) => <SkeletonTrackCard key={i} />)}
+          {[0, 1, 2, 3, 4].map((i) => (
+            <SkeletonTrackCard key={i} />
+          ))}
         </Box>
       ) : (
         <FlatList
-          data={filteredTracks}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item: track }) => (
-            <TrackCard
-              track={track}
-              lang={lang}
-              completedIds={completedIds}
-              isFollowing={selectedTrackIds.includes(track.id)}
-              canUnfollow={selectedTrackIds.length > 1}
-              onToggleFollow={() => handleToggleFollow(track.id)}
-            />
-          )}
+          data={listItems}
+          keyExtractor={(item, index) =>
+            item.type === "section" ? `section-${index}` : item.track.id
+          }
+          renderItem={({ item }) => {
+            if (item.type === "section") {
+              return <SectionHeader label={item.label} count={item.count} />;
+            }
+            return (
+              <TrackCard
+                track={item.track}
+                lang={lang}
+                completedIds={completedIds}
+                isFollowing={item.following}
+                canUnfollow={selectedTrackIds.length > 1}
+                onToggleFollow={() => handleToggleFollow(item.track.id)}
+              />
+            );
+          }}
           ListHeaderComponent={aiPackCard}
           ListEmptyComponent={
             <Text className="text-[#AAB0C0] text-center mt-6">
