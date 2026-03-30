@@ -669,7 +669,6 @@ export default function ProfileScreen() {
     useAuth();
   const insets = useSafeAreaInsets();
   const [language, setLanguage] = useState<Lang>("pt");
-  const [saving, setSaving] = useState(false);
   const [profileData, setProfileData] = useState<UserProfile | null>(null);
   const [notifGranted, setNotifGranted] = useState<boolean | null>(null);
   const [enablingNotif, setEnablingNotif] = useState(false);
@@ -724,19 +723,6 @@ export default function ProfileScreen() {
   const unlockedAchievements = ACHIEVEMENTS.filter(
     (a) => !!profileData?.achievements?.[a.id as AchievementId],
   );
-
-  const handleSaveChanges = async () => {
-    if (!uid) return;
-    setSaving(true);
-    try {
-      await Promise.all([
-        setUserLanguage(uid, language),
-        setI18nLanguage(language),
-      ]);
-    } finally {
-      setSaving(false);
-    }
-  };
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
@@ -836,7 +822,15 @@ export default function ProfileScreen() {
               </Text>
               <LanguageSelector
                 lang={language}
-                onChange={(l) => setLanguage(l as Lang)}
+                onChange={async (l) => {
+                  setLanguage(l as Lang);
+                  if (uid) {
+                    await Promise.all([
+                      setUserLanguage(uid, l as Lang),
+                      setI18nLanguage(l as Lang),
+                    ]).catch(console.error);
+                  }
+                }}
               />
             </Box>
 
@@ -885,15 +879,6 @@ export default function ProfileScreen() {
                 )}
               </Box>
             </Box>
-
-            <Pressable
-              onPress={handleSaveChanges}
-              className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
-            >
-              <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                {saving ? t("tabs.profile.saving") : t("tabs.profile.save")}
-              </Text>
-            </Pressable>
 
             {/* DEV ONLY */}
             <Pressable

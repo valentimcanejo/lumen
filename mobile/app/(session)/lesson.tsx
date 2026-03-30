@@ -97,7 +97,7 @@ function PackLoadingScreen({ color }: { color: string }) {
       withTiming(0.8, { duration: 900, easing: Easing.out(Easing.cubic) }),
       withTiming(0.93, { duration: 3000, easing: Easing.out(Easing.quad) }),
     );
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const barStyle = useAnimatedStyle(() => ({
     width: `${progress.value * 100}%`,
@@ -300,7 +300,7 @@ export default function LessonScreen() {
     return () => {
       cancelled = true;
     };
-  }, [pack, uid]);
+  }, [pack, uid]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Cleanup sound on unmount
   useEffect(() => {

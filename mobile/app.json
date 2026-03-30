@@ -12,9 +12,7 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "UIBackgroundModes": [
-          "audio"
-        ]
+        "UIBackgroundModes": ["audio"]
       }
     },
     "android": {
@@ -26,7 +24,8 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.valentimcanejo.lumen"
+      "package": "com.valentimcanejo.lumen",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "output": "static",

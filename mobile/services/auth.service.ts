@@ -77,7 +77,9 @@ export async function signInWithGoogle(): Promise<User> {
   await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
 
   const userInfo = await GoogleSignin.signIn();
+
   const idToken = userInfo.data?.idToken;
+
   if (!idToken) throw new Error("Google Sign-In não retornou idToken.");
 
   const credential = GoogleAuthProvider.credential(idToken);

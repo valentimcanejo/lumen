@@ -15,12 +15,16 @@ export function useAuth() {
 
   useEffect(() => {
     const unsub = listenAuth((u) => {
+      if (u === null) {
+        // Firebase loaded auth state and found no user — create anonymous session.
+        // We do this here (not outside the callback) to avoid a race condition where
+        // auth.currentUser is still null while Firebase is restoring a persisted session
+        // from AsyncStorage, which would create a new anonymous user and overwrite it.
+        ensureAnonymousAuth().catch(() => {});
+        return;
+      }
       setUser(u);
       setLoading(false);
-    });
-
-    ensureAnonymousAuth().catch(() => {
-      // silently ignore — UI can proceed without auth
     });
 
     return unsub;
