@@ -1,6 +1,5 @@
 import React from "react";
 import { ImageBackground, StyleSheet, View as RNView } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Box } from "../../components/ui/box";
 import { Text } from "../../components/ui/text";
 import { VStack } from "../../components/ui/vstack";
@@ -80,11 +79,6 @@ export default function Welcome() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
 
-  async function handleSkip() {
-    await AsyncStorage.setItem("hasOnboarded", "true");
-    router.replace("/(tabs)/home");
-  }
-
   return (
     <ImageBackground
       source={require("../../assets/images/lumen_welcome_bg.png")}
@@ -133,9 +127,6 @@ export default function Welcome() {
             <VStack space="sm" className="mt-2">
               <LumenButton onPress={() => router.push("/(onboarding)/goals")}>
                 {t("onboarding.welcome.start")}
-              </LumenButton>
-              <LumenButton variant="ghost" onPress={handleSkip}>
-                {t("onboarding.welcome.skip")}
               </LumenButton>
             </VStack>
           </VStack>

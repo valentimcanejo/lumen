@@ -7,6 +7,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import { LumenButton } from "../../components/ui/lumen/Button";
 import { useTranslation } from "react-i18next";
 import { useUser } from "../../hooks/useUser";
+import { useAuth } from "../../hooks/useAuth";
 import { Lang } from "../../models/lang";
 
 const OPTIONS = [
@@ -18,21 +19,24 @@ const OPTIONS = [
 
 export default function DailyTime() {
   const [minutes, setMinutes] = useState<number>(10);
+  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const { setUserPreferences } = useUser();
+  const { uid } = useAuth();
 
-  const { selectedLanguage, selectedTracks, userId } =
+  const { selectedLanguage, selectedTracks } =
     useLocalSearchParams() as {
       selectedLanguage: Lang;
       selectedTracks: string;
-      userId: string;
     };
 
   const handleNext = async () => {
+    if (!uid) return;
+    setLoading(true);
     try {
       await setUserPreferences({
-        userId: userId as string,
+        userId: uid,
         lang: selectedLanguage as Lang,
         minutes,
         selectedTrackIds: selectedTracks?.split(",") || [],
@@ -40,10 +44,11 @@ export default function DailyTime() {
 
       router.push({
         pathname: `/(onboarding)/notifications`,
-        params: { selectedLanguage, selectedMinutes: minutes, selectedTracks, userId },
+        params: { selectedLanguage, selectedMinutes: minutes, selectedTracks },
       });
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -112,8 +117,8 @@ export default function DailyTime() {
       </Box>
 
       <Box className="mt-auto" style={{ paddingBottom: Math.max(insets.bottom, 24) }}>
-        <LumenButton onPress={handleNext}>
-          {t("onboarding.daily-time.continue")}
+        <LumenButton onPress={handleNext} disabled={loading}>
+          {loading ? "…" : t("onboarding.daily-time.continue")}
         </LumenButton>
       </Box>
     </Box>

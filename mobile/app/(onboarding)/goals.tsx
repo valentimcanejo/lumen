@@ -11,8 +11,8 @@ import { LumenButton } from "../../components/ui/lumen/Button";
 import { useTranslation } from "react-i18next";
 import { Lang } from "../../models/lang";
 import { getBundledGoals, getGoals, type Goal } from "../../repositories/goals.repo";
-import { ensureAnonymousAuth } from "../../services/auth.service";
 import { setLanguage } from "../../i18n/setLanguage";
+import { useAuth } from "../../hooks/useAuth";
 
 const SUPPORTED: Lang[] = ["pt", "en", "es"];
 
@@ -102,9 +102,9 @@ export default function Goals() {
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<string[]>([]);
   const [selectedLanguage] = useState<Lang>(detectDeviceLang);
-  const [userId, setUserId] = useState<string>("");
   const canContinue = selected.length >= 1;
   const { t } = useTranslation();
+  const { uid: userId } = useAuth();
 
   const COLS = 2;
   const GAP = 12;
@@ -113,9 +113,6 @@ export default function Goals() {
 
   useEffect(() => {
     setLanguage(selectedLanguage).catch(console.error);
-    ensureAnonymousAuth()
-      .then((u) => setUserId(u.uid))
-      .catch(console.error);
     getGoals()
       .then((remote) => setGoals(remote))
       .catch(console.error)
