@@ -88,17 +88,15 @@ export default function CardsScreen() {
     setRevealed(false);
     setShowBack(false);
     flipScale.value = 1;
-    setIndex((prev) => {
-      const next = prev + 1;
-      if (next >= total) {
-        router.push({
-          pathname: "/(session)/quiz",
-          params: { contentId, version, lang },
-        });
-        return prev;
-      }
-      return next;
-    });
+    const next = index + 1;
+    if (next >= total) {
+      router.push({
+        pathname: "/(session)/quiz",
+        params: { contentId, version, lang },
+      });
+    } else {
+      setIndex(next);
+    }
   }
 
   function onGrade(g: Grade) {

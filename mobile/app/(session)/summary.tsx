@@ -40,7 +40,6 @@ import { ACHIEVEMENTS, type AchievementDef } from "../../repositories/achievemen
 import { todayYmd } from "../../repositories/session.repo";
 import { usePack } from "../../hooks/usePack";
 import {
-  pickNextLesson,
   getCompletedTracks,
   getAllTrackIds,
   getLessonMeta,
@@ -573,7 +572,6 @@ export default function SummaryScreen() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const hasStartedRef = useRef(false);
-  const [nextGoalId, setNextGoalId] = useState<string | null>(null);
   const [gainedXp, setGainedXp] = useState<number | null>(null);
   const [xpBreakdown, setXpBreakdown] = useState<{
     base: number; quizBonus: number; missionBonus: number;
@@ -602,12 +600,6 @@ export default function SummaryScreen() {
       getSavedContentIds(uid),
     ]).then(([user, completed, saved]) => {
       completedIdsRef.current = completed;
-      const trackIds = user?.selectedTrackIds ?? user?.selectedGoalIds ?? [];
-      const today = new Date().toISOString().slice(0, 10);
-      // Include current lesson as completed for the "next" calculation
-      const withCurrent = Array.from(new Set([...completed, contentId]));
-      const nextId = pickNextLesson(trackIds, withCurrent, today, contentId);
-      if (nextId && nextId !== contentId) setNextGoalId(nextId);
       setBookmarked(saved.includes(contentId));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -731,9 +723,6 @@ export default function SummaryScreen() {
     router.replace("/(tabs)/home");
   }
 
-  function nextContent() {
-    router.replace("/(tabs)/home");
-  }
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
@@ -874,27 +863,14 @@ export default function SummaryScreen() {
               <ActivityIndicator color="#F5C77A" />
             </Box>
           ) : (
-            <>
-              {nextGoalId && (
-                <Pressable
-                  onPress={nextContent}
-                  className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
-                >
-                  <Text className="text-[#0B0F14] text-[16px] font-semibold">
-                    {t("session.summary.next_content")}
-                  </Text>
-                </Pressable>
-              )}
-
-              <Pressable
+            <Pressable
                 onPress={goHome}
-                className="h-[52px] rounded-2xl border border-[#1A2233] items-center justify-center"
+                className="h-[52px] rounded-2xl bg-[#F5C77A] items-center justify-center"
               >
-                <Text className="text-[#AAB0C0] text-[16px] font-semibold">
+                <Text className="text-[#0B0F14] text-[16px] font-semibold">
                   {t("session.summary.go_home")}
                 </Text>
               </Pressable>
-            </>
           )}
         </VStack>
       </Box>
