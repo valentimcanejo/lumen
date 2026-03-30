@@ -17,7 +17,10 @@ import { Text } from "../../components/ui/text";
 import { Pressable } from "../../components/ui/pressable";
 import { getTracks } from "../../repositories/tracks.repo";
 import { getLessonCountForTrack } from "../../repositories/lessons.repo";
-import { getCompletedContentIds, setSelectedTracks } from "../../repositories/user.repo";
+import {
+  getCompletedContentIds,
+  setSelectedTracks,
+} from "../../repositories/user.repo";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import { useAiPack } from "../../hooks/useAiPack";
@@ -34,7 +37,13 @@ type ListItem =
 
 const DIFF_COLORS = { 1: "#5ED19A", 2: "#F5C77A", 3: "#E26D6D" } as const;
 
-function DifficultyBadge({ level, muted }: { level: 1 | 2 | 3; muted?: boolean }) {
+function DifficultyBadge({
+  level,
+  muted,
+}: {
+  level: 1 | 2 | 3;
+  muted?: boolean;
+}) {
   const { t } = useTranslation();
   const labels = {
     1: t("tabs.tracks.difficulty_1"),
@@ -193,11 +202,7 @@ function TrackCard({
 
         <RNView style={[tc.metaRow, { marginTop: description ? 10 : 10 }]}>
           <DifficultyBadge level={track.difficulty} muted />
-          {total > 0 && (
-            <Text style={tc.lessonCount}>
-              {total} lições
-            </Text>
-          )}
+          {total > 0 && <Text style={tc.lessonCount}>{total} lições</Text>}
         </RNView>
       </RNView>
     </Pressable>
@@ -414,10 +419,14 @@ export default function Tracks() {
     if (!uid) return;
     getUserData({ userId: uid }).then((user) => {
       if (user?.lang) setLang(user.lang);
-      setSelectedTrackIds(user?.selectedTrackIds ?? user?.selectedGoalIds ?? []);
+      setSelectedTrackIds(
+        user?.selectedTrackIds ?? user?.selectedGoalIds ?? [],
+      );
       setIsPremium(user?.premium?.isActive === true);
     });
-    getCompletedContentIds(uid).then(setCompletedIds).catch(() => {});
+    getCompletedContentIds(uid)
+      .then(setCompletedIds)
+      .catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
 
@@ -443,7 +452,11 @@ export default function Tracks() {
       const q = search.toLowerCase().trim();
       filtered = filtered.filter((t) => {
         const title = (t.title[lang] ?? t.title.en ?? "").toLowerCase();
-        const desc = (t.description?.[lang] ?? t.description?.en ?? "").toLowerCase();
+        const desc = (
+          t.description?.[lang] ??
+          t.description?.en ??
+          ""
+        ).toLowerCase();
         const tags = (t.tags ?? []).join(" ").toLowerCase();
         return title.includes(q) || desc.includes(q) || tags.includes(q);
       });
@@ -511,7 +524,9 @@ export default function Tracks() {
   }
 
   const isNotPremium =
-    !isPremium || aiPackError === "not-premium" || aiPackError === "premium-expired";
+    !isPremium ||
+    aiPackError === "not-premium" ||
+    aiPackError === "premium-expired";
 
   const aiErrorMessage =
     aiPackError === "rate-limited"
@@ -543,7 +558,9 @@ export default function Tracks() {
         {t("tabs.tracks.ai_description")}
       </Text>
       {aiErrorMessage ? (
-        <Text className="text-[#E26D6D] text-[12px] mt-3">{aiErrorMessage}</Text>
+        <Text className="text-[#E26D6D] text-[12px] mt-3">
+          {aiErrorMessage}
+        </Text>
       ) : null}
       <Pressable
         onPress={() => {
