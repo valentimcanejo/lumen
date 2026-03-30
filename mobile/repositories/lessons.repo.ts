@@ -37,11 +37,11 @@ async function _fetchFromFirestore(): Promise<LessonMeta[]> {
   return snap.docs.map((d) => {
     const data = d.data();
     return {
-      id: d.id,
       status: "published" as LessonStatus,
       tier: "free" as LessonTier,
       prerequisites: [] as string[],
       ...data,
+      id: d.id, // always use doc path key, never the stored field
     } as LessonMeta;
   });
 }
