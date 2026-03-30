@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { Pressable } from "../pressable";
-import { Text } from "../text";
 
 type Props = {
   children: React.ReactNode;
