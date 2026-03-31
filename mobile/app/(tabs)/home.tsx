@@ -56,10 +56,7 @@ import {
 import { getCompletedContentIds } from "../../repositories/user.repo";
 import { getCurrentWeekId } from "../../repositories/leaderboard.repo";
 import { WeeklyShareCard } from "../../components/WeeklyShareCard";
-import {
-  getTodayMissions,
-  getWeeklyMissions,
-} from "../../repositories/missions.repo";
+import { getTodayMissions, getWeeklyMissions } from "../../repositories/missions.repo";
 import type { DailyMission, WeeklyMission } from "../../models/user";
 import { todayYmd } from "../../repositories/session.repo";
 import {
@@ -71,6 +68,7 @@ import {
   getLevelTier,
 } from "../../models/user";
 import type { Lang } from "../../models/lang";
+
 
 // ---------------------------------------------------------------------------
 // Daily missions card
@@ -246,13 +244,7 @@ const wm = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  label: {
-    color: "#AAB0C0",
-    fontSize: 13,
-    fontWeight: "500",
-    flex: 1,
-    marginRight: 8,
-  },
+  label: { color: "#AAB0C0", fontSize: 13, fontWeight: "500", flex: 1, marginRight: 8 },
   labelDone: { color: "#3A4558", textDecorationLine: "line-through" },
   xpBadge: {
     backgroundColor: "#1A2614",
@@ -276,12 +268,7 @@ const wm = StyleSheet.create({
     overflow: "hidden",
   },
   barFill: { height: "100%", borderRadius: 3 },
-  progress: {
-    color: "#3A4558",
-    fontSize: 11,
-    fontWeight: "600",
-    textAlign: "right",
-  },
+  progress: { color: "#3A4558", fontSize: 11, fontWeight: "600", textAlign: "right" },
 });
 
 // ---------------------------------------------------------------------------
@@ -328,24 +315,13 @@ function StarterChallengeCard({
           const current = i === daysCompleted;
           return (
             <View key={i} style={sc.dayItem}>
-              <View
-                style={[
-                  sc.dayCircle,
-                  done && sc.dayCircleDone,
-                  current && sc.dayCircleCurrent,
-                ]}
-              >
-                {done ? (
-                  <Ionicons name="checkmark" size={20} color="#0B0F14" />
-                ) : (
-                  <Text style={[sc.dayNum, current && sc.dayNumCurrent]}>
-                    {i + 1}
-                  </Text>
-                )}
+              <View style={[sc.dayCircle, done && sc.dayCircleDone, current && sc.dayCircleCurrent]}>
+                {done
+                  ? <Ionicons name="checkmark" size={20} color="#0B0F14" />
+                  : <Text style={[sc.dayNum, current && sc.dayNumCurrent]}>{i + 1}</Text>
+                }
               </View>
-              <Text style={[sc.dayLabel, done && sc.dayLabelDone]}>
-                {label}
-              </Text>
+              <Text style={[sc.dayLabel, done && sc.dayLabelDone]}>{label}</Text>
             </View>
           );
         })}
@@ -438,12 +414,7 @@ const wk = StyleSheet.create({
     textTransform: "uppercase",
     marginBottom: 4,
   },
-  minutesNum: {
-    color: "#F5C77A",
-    fontSize: 34,
-    fontWeight: "800",
-    lineHeight: 38,
-  },
+  minutesNum: { color: "#F5C77A", fontSize: 34, fontWeight: "800", lineHeight: 38 },
   minutesUnit: { color: "#7B8193", fontSize: 15, marginBottom: 4 },
   badge: {
     flexDirection: "row",
@@ -512,9 +483,7 @@ function WeeklyCard({
       <View style={wk.headerRow}>
         <View>
           <Text style={wk.eyebrow}>{studiedLabel}</Text>
-          <View
-            style={{ flexDirection: "row", alignItems: "flex-end", gap: 5 }}
-          >
+          <View style={{ flexDirection: "row", alignItems: "flex-end", gap: 5 }}>
             <Text style={wk.minutesNum}>{totalMinutes}</Text>
             <Text style={wk.minutesUnit}>min</Text>
           </View>
@@ -556,15 +525,7 @@ function WeeklyCard({
                   <View style={[wk.dot, { backgroundColor: "#F5C77A" }]} />
                 ) : isFuture ? null : (
                   <View
-                    style={[
-                      wk.dot,
-                      {
-                        backgroundColor: "#2A3448",
-                        width: 5,
-                        height: 5,
-                        borderRadius: 3,
-                      },
-                    ]}
+                    style={[wk.dot, { backgroundColor: "#2A3448", width: 5, height: 5, borderRadius: 3 }]}
                   />
                 )}
               </View>
@@ -603,6 +564,7 @@ function WeeklyCard({
   );
 }
 
+
 // ---------------------------------------------------------------------------
 // Home screen
 // ---------------------------------------------------------------------------
@@ -622,8 +584,7 @@ export default function Home() {
   const [missions, setMissions] = useState<DailyMission[]>([]);
   const [weeklyMissions, setWeeklyMissions] = useState<WeeklyMission[]>([]);
   const [retryRecommendation, setRetryRecommendation] = useState<{
-    contentId: string;
-    quizScore: number;
+    contentId: string; quizScore: number;
   } | null>(null);
   const [comebackShield, setComebackShield] = useState(false);
   const comebackCheckedRef = useRef(false);
@@ -635,14 +596,11 @@ export default function Home() {
 
   // Flame pulse animation for streak pill
   const flameScale = useSharedValue(1);
-  const flameStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: flameScale.value }],
-  }));
+  const flameStyle = useAnimatedStyle(() => ({ transform: [{ scale: flameScale.value }] }));
 
   useFocusEffect(
     useCallback(() => {
       if (!currentUserId) return;
-      invalidateUserCache(currentUserId);
       setLoadingUser(true);
       getUserData({ userId: currentUserId })
         .then((u) => {
@@ -675,55 +633,38 @@ export default function Home() {
           }
         });
       }
-      getWeeklyData(currentUserId)
-        .then((data) => {
-          setWeeklyData(data);
-          if (!shareCheckedRef.current && new Date().getDay() === 0) {
-            shareCheckedRef.current = true;
-            const daysStudied = data.filter((d) => d.minutes > 0).length;
-            if (daysStudied >= 3) {
-              const weekId = getCurrentWeekId();
-              AsyncStorage.getItem(`weeklyShareShown_${weekId}`)
-                .then((shown) => {
-                  if (!shown) setShowShareModal(true);
-                })
-                .catch(() => {});
-            }
+      getWeeklyData(currentUserId).then((data) => {
+        setWeeklyData(data);
+        if (!shareCheckedRef.current && new Date().getDay() === 0) {
+          shareCheckedRef.current = true;
+          const daysStudied = data.filter((d) => d.minutes > 0).length;
+          if (daysStudied >= 3) {
+            const weekId = getCurrentWeekId();
+            AsyncStorage.getItem(`weeklyShareShown_${weekId}`).then((shown) => {
+              if (!shown) setShowShareModal(true);
+            }).catch(() => {});
           }
-        })
-        .catch(() => {});
+        }
+      }).catch(() => {});
       getTodaySession(currentUserId)
         .then((s) => setTodayCompletedId(s?.contentId ?? null))
         .catch(() => {});
-      getDueCardCount(currentUserId)
-        .then(setDueCardCount)
-        .catch(() => {});
-      getCompletedContentIds(currentUserId)
-        .then(setCompletedIds)
-        .catch(() => {});
-      getTodayMissions(currentUserId)
-        .then(setMissions)
-        .catch(() => {});
-      getWeeklyMissions(currentUserId)
-        .then(setWeeklyMissions)
-        .catch(() => {});
-      getRecentSessions(currentUserId)
-        .then((sessions) => {
-          const seen = new Set<string>();
-          for (const s of sessions) {
-            if (!seen.has(s.contentId)) {
-              seen.add(s.contentId);
-              if (s.quizScore < 0.6) {
-                setRetryRecommendation({
-                  contentId: s.contentId,
-                  quizScore: s.quizScore,
-                });
-                break;
-              }
+      getDueCardCount(currentUserId).then(setDueCardCount).catch(() => {});
+      getCompletedContentIds(currentUserId).then(setCompletedIds).catch(() => {});
+      getTodayMissions(currentUserId).then(setMissions).catch(() => {});
+      getWeeklyMissions(currentUserId).then(setWeeklyMissions).catch(() => {});
+      getRecentSessions(currentUserId).then((sessions) => {
+        const seen = new Set<string>();
+        for (const s of sessions) {
+          if (!seen.has(s.contentId)) {
+            seen.add(s.contentId);
+            if (s.quizScore < 0.6) {
+              setRetryRecommendation({ contentId: s.contentId, quizScore: s.quizScore });
+              break;
             }
           }
-        })
-        .catch(() => {});
+        }
+      }).catch(() => {});
     }, [currentUserId]),
   );
 
@@ -733,15 +674,12 @@ export default function Home() {
   useEffect(() => {
     if (streak > 0) {
       flameScale.value = withRepeat(
-        withSequence(
-          withTiming(1.3, { duration: 700 }),
-          withTiming(1, { duration: 700 }),
-        ),
+        withSequence(withTiming(1.3, { duration: 700 }), withTiming(1, { duration: 700 })),
         -1,
         true,
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [streak]);
   const shields = user?.streak?.shields ?? 0;
   const xp = user?.xp ?? 0;
@@ -752,11 +690,9 @@ export default function Home() {
   const xpPct = xpCeil > xpFloor ? (xp - xpFloor) / (xpCeil - xpFloor) : 1;
 
   // Backward-compat: fall back to selectedGoalIds for users who haven't migrated
-  const selectedTrackIds =
-    user?.selectedTrackIds ?? user?.selectedGoalIds ?? [];
+  const selectedTrackIds = user?.selectedTrackIds ?? user?.selectedGoalIds ?? [];
   const today = todayYmd();
   const todayLessonId = pickNextLesson(selectedTrackIds, completedIds, today);
-
   const todayLesson = todayLessonId ? getLessonMeta(todayLessonId) : null;
   const nextPerTrack = getNextLessonPerTrack(selectedTrackIds, completedIds);
 
@@ -767,10 +703,7 @@ export default function Home() {
       const uri = await (viewShotRef.current as any).capture();
       const available = await Sharing.isAvailableAsync();
       if (available) {
-        await Sharing.shareAsync(uri, {
-          mimeType: "image/png",
-          dialogTitle: "Compartilhar resultado semanal",
-        });
+        await Sharing.shareAsync(uri, { mimeType: "image/png", dialogTitle: "Compartilhar resultado semanal" });
         const weekId = getCurrentWeekId();
         await AsyncStorage.setItem(`weeklyShareShown_${weekId}`, "1");
         setShowShareModal(false);
@@ -806,547 +739,370 @@ export default function Home() {
 
   return (
     <>
-      {/* Weekly share modal */}
-      <Modal
-        visible={showShareModal}
-        transparent
-        animationType="fade"
-        onRequestClose={dismissShareModal}
-      >
-        <View style={sh.overlay}>
-          <View style={sh.sheet}>
-            <Text style={sh.sheetTitle}>Sua semana em resumo 🎉</Text>
-            <Text style={sh.sheetSub}>
-              Compartilhe seu resultado com quem você conhece.
-            </Text>
+    {/* Weekly share modal */}
+    <Modal visible={showShareModal} transparent animationType="fade" onRequestClose={dismissShareModal}>
+      <View style={sh.overlay}>
+        <View style={sh.sheet}>
+          <Text style={sh.sheetTitle}>Sua semana em resumo 🎉</Text>
+          <Text style={sh.sheetSub}>Compartilhe seu resultado com quem você conhece.</Text>
 
-            <ViewShot ref={viewShotRef} options={{ format: "png", quality: 1 }}>
-              <WeeklyShareCard data={weeklyData} streak={streak} lang={lang} />
-            </ViewShot>
+          <ViewShot ref={viewShotRef} options={{ format: "png", quality: 1 }}>
+            <WeeklyShareCard data={weeklyData} streak={streak} lang={lang} />
+          </ViewShot>
 
-            <TouchableOpacity
-              style={[sh.shareBtn, sharing && { opacity: 0.6 }]}
-              onPress={handleShare}
-              disabled={sharing}
-              activeOpacity={0.8}
-            >
-              <Ionicons name="share-social-outline" size={18} color="#0B0F14" />
-              <Text style={sh.shareBtnText}>
-                {sharing ? "Preparando…" : "Compartilhar"}
+          <TouchableOpacity
+            style={[sh.shareBtn, sharing && { opacity: 0.6 }]}
+            onPress={handleShare}
+            disabled={sharing}
+            activeOpacity={0.8}
+          >
+            <Ionicons name="share-social-outline" size={18} color="#0B0F14" />
+            <Text style={sh.shareBtnText}>{sharing ? "Preparando…" : "Compartilhar"}</Text>
+          </TouchableOpacity>
+
+          <Pressable onPress={dismissShareModal}>
+            <Text style={sh.dismiss}>Agora não</Text>
+          </Pressable>
+        </View>
+      </View>
+    </Modal>
+
+    <ScrollView
+      style={{ flex: 1, backgroundColor: "#0B0F14" }}
+      contentContainerStyle={{ paddingBottom: 48 }}
+      showsVerticalScrollIndicator={false}
+    >
+      {/* ── Header ─────────────────────────────────────────────── */}
+      <View style={[hd.headerWrap, { paddingTop: insets.top + 10 }]}>
+        {/* Top row: logo + streak | tier + level */}
+        <View style={hd.topRow}>
+          <View style={hd.logoGroup}>
+            <Image
+              source={require("../../assets/images/icon.png")}
+              style={hd.logoImg}
+            />
+            <Text style={hd.logoText}>Lumen</Text>
+            {streak > 0 && (
+              <View style={hd.streakPill}>
+                <Animated.Text style={[{ fontSize: 14 }, flameStyle]}>🔥</Animated.Text>
+                <Text style={hd.streakNum}>{streak}</Text>
+                {shields > 0 && (
+                  <View style={hd.shieldBadge}>
+                    <Ionicons name="shield" size={9} color="#7B8FE0" />
+                    <Text style={hd.shieldNum}>{shields}</Text>
+                  </View>
+                )}
+              </View>
+            )}
+          </View>
+          <Pressable onPress={() => router.push("/(tabs)/profile")} style={hd.levelGroup}>
+            <View style={[hd.tierPill, { backgroundColor: `${tier.color}18`, borderColor: `${tier.color}50` }]}>
+              <Text style={[hd.tierText, { color: tier.color }]}>{tier.name}</Text>
+            </View>
+            <Text style={hd.levelText}>{t("tabs.home.level", { level })}</Text>
+          </Pressable>
+        </View>
+
+        {/* XP progress bar */}
+        <View style={hd.xpBarTrack}>
+          <View
+            style={[
+              hd.xpBarFill,
+              { width: `${Math.min(xpPct * 100, 100)}%`, backgroundColor: tier.color },
+            ]}
+          />
+        </View>
+      </View>
+
+      {/* ── Comeback banner ────────────────────────────────────── */}
+      {comebackShield && (
+        <View style={{ paddingHorizontal: 20, marginTop: 12 }}>
+          <View style={cb.card}>
+            <View style={cb.iconWrap}>
+              <Ionicons name="shield" size={20} color="#7B8FE0" />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={cb.title}>Bem-vindo de volta!</Text>
+              <Text style={cb.body}>
+                Sentimos sua falta. Você ganhou um shield para proteger sua sequência.
               </Text>
+            </View>
+            <TouchableOpacity onPress={() => setComebackShield(false)} style={cb.close}>
+              <Ionicons name="close" size={16} color="#4A5568" />
             </TouchableOpacity>
-
-            <Pressable onPress={dismissShareModal}>
-              <Text style={sh.dismiss}>Agora não</Text>
-            </Pressable>
           </View>
         </View>
-      </Modal>
+      )}
 
-      <ScrollView
-        style={{ flex: 1, backgroundColor: "#0B0F14" }}
-        contentContainerStyle={{ paddingBottom: 48 }}
-        showsVerticalScrollIndicator={false}
-      >
-        {/* ── Header ─────────────────────────────────────────────── */}
-        <View style={[hd.headerWrap, { paddingTop: insets.top + 10 }]}>
-          {/* Top row: logo + streak | tier + level */}
-          <View style={hd.topRow}>
-            <View style={hd.logoGroup}>
-              <Image
-                source={require("../../assets/images/icon.png")}
-                style={hd.logoImg}
-              />
-              <Text style={hd.logoText}>Lumen</Text>
-              {streak > 0 && (
-                <View style={hd.streakPill}>
-                  <Animated.Text style={[{ fontSize: 14 }, flameStyle]}>
-                    🔥
-                  </Animated.Text>
-                  <Text style={hd.streakNum}>{streak}</Text>
-                  {shields > 0 && (
-                    <View style={hd.shieldBadge}>
-                      <Ionicons name="shield" size={9} color="#7B8FE0" />
-                      <Text style={hd.shieldNum}>{shields}</Text>
-                    </View>
-                  )}
+      {/* ── Lição de hoje ──────────────────────────────────────── */}
+      {loadingUser && (
+        <View style={{ paddingHorizontal: 20, marginTop: 20 }}>
+          <SkeletonCard />
+        </View>
+      )}
+
+      {!loadingUser && todayLesson && todayLessonId && (() => {
+        const isDone = todayCompletedId === todayLessonId;
+        const color = trackColor(todayLesson.trackId);
+        const cover = getCoverImage(todayLessonId);
+        return (
+          <View style={{ paddingHorizontal: 20, marginTop: 20 }}>
+            {/* Section label */}
+            <View style={lc.sectionHeader}>
+              <Text style={lc.sectionLabel}>
+                {t("tabs.home.pack_of_day").toUpperCase()}
+              </Text>
+              {isDone && (
+                <View style={lc.donePill}>
+                  <Ionicons name="checkmark-circle" size={12} color="#5ED19A" />
+                  <Text style={lc.doneText}>{t("tabs.home.done_today")}</Text>
                 </View>
               )}
             </View>
-            <Pressable
-              onPress={() => router.push("/(tabs)/profile")}
-              style={hd.levelGroup}
-            >
-              <View
+
+            {/* Hero card + CTA — unified container */}
+            <View style={[lc.heroWrap, { borderColor: isDone ? "#1E2A3E" : color + "50" }]}>
+              {/* Image */}
+              <View style={lc.heroCard}>
+                {cover ? (
+                  <Image source={cover} style={lc.heroImage} resizeMode="cover" />
+                ) : (
+                  <View style={[lc.heroImage, { backgroundColor: color + "18", alignItems: "center", justifyContent: "center" }]}>
+                    <View style={{ width: 3, height: 48, backgroundColor: color, borderRadius: 2 }} />
+                  </View>
+                )}
+
+                {/* Multi-layer scrim — simulates gradient */}
+                <View style={lc.heroScrimMid} />
+                <View style={lc.heroScrimBot} />
+
+                {/* Done dim overlay */}
+                {isDone && <View style={lc.doneDimOverlay} />}
+
+                {/* Overlaid content */}
+                <View style={lc.heroOverlay}>
+                  <View style={[lc.trackPill, { backgroundColor: color + "25", borderColor: color + "55" }]}>
+                    <Text style={[lc.trackPillText, { color }]}>
+                      {todayLesson.trackId.replace(/_/g, " ")}
+                    </Text>
+                  </View>
+                  <Text style={lc.heroTitle} numberOfLines={2}>
+                    {todayLesson.title[lang] ?? todayLesson.title.en}
+                  </Text>
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginTop: 4 }}>
+                    <Ionicons name="time-outline" size={12} color="#AAB0C0" />
+                    <Text style={lc.heroDuration}>{todayLesson.estimatedMinutes} min</Text>
+                  </View>
+                </View>
+              </View>
+
+              {/* Divider */}
+              <View style={[lc.heroCtaDivider, { backgroundColor: isDone ? "#1E2A3E" : color + "30" }]} />
+
+              {/* CTA — attached to bottom of card */}
+              <TouchableOpacity
+                onPress={() => startSession(todayLessonId)}
+                activeOpacity={0.82}
                 style={[
-                  hd.tierPill,
-                  {
-                    backgroundColor: `${tier.color}18`,
-                    borderColor: `${tier.color}50`,
-                  },
+                  lc.heroCta,
+                  isDone ? lc.heroCtaDone : { backgroundColor: color + "18" },
                 ]}
               >
-                <Text style={[hd.tierText, { color: tier.color }]}>
-                  {tier.name}
+                {!isDone && (
+                  <Ionicons name="play" size={14} color={color} style={{ marginRight: 7 }} />
+                )}
+                <Text style={[lc.heroCtaText, { color: isDone ? "#4A5568" : color }]}>
+                  {isDone ? t("tabs.home.redo") : t("tabs.home.start")}
                 </Text>
-              </View>
-              <Text style={hd.levelText}>
-                {t("tabs.home.level", { level })}
-              </Text>
-            </Pressable>
-          </View>
-
-          {/* XP progress bar */}
-          <View style={hd.xpBarTrack}>
-            <View
-              style={[
-                hd.xpBarFill,
-                {
-                  width: `${Math.min(xpPct * 100, 100)}%`,
-                  backgroundColor: tier.color,
-                },
-              ]}
-            />
-          </View>
-        </View>
-
-        {/* ── Comeback banner ────────────────────────────────────── */}
-        {comebackShield && (
-          <View style={{ paddingHorizontal: 20, marginTop: 12 }}>
-            <View style={cb.card}>
-              <View style={cb.iconWrap}>
-                <Ionicons name="shield" size={20} color="#7B8FE0" />
-              </View>
-              <View style={{ flex: 1 }}>
-                <Text style={cb.title}>Bem-vindo de volta!</Text>
-                <Text style={cb.body}>
-                  Sentimos sua falta. Você ganhou um shield para proteger sua
-                  sequência.
-                </Text>
-              </View>
-              <TouchableOpacity
-                onPress={() => setComebackShield(false)}
-                style={cb.close}
-              >
-                <Ionicons name="close" size={16} color="#4A5568" />
+                {isDone && (
+                  <Ionicons name="refresh" size={14} color="#4A5568" style={{ marginLeft: 7 }} />
+                )}
               </TouchableOpacity>
             </View>
           </View>
-        )}
+        );
+      })()}
 
-        {/* ── Lição de hoje ──────────────────────────────────────── */}
-        {loadingUser && (
-          <View style={{ paddingHorizontal: 20, marginTop: 20 }}>
-            <SkeletonCard />
-          </View>
-        )}
+      {/* ── Outros tracks ──────────────────────────────────────── */}
+      {!loadingUser && (() => {
+        const otherRows = selectedTrackIds
+          .filter((trackId) => trackId !== todayLesson?.trackId)
+          .map((trackId) => {
+            const lessonId = nextPerTrack[trackId];
+            if (!lessonId) return null;
+            const meta = getLessonMeta(lessonId);
+            if (!meta) return null;
+            return { trackId, lessonId, meta };
+          })
+          .filter(Boolean) as { trackId: string; lessonId: string; meta: ReturnType<typeof getLessonMeta> & {} }[];
 
-        {!loadingUser &&
-          todayLesson &&
-          todayLessonId &&
-          (() => {
-            const isDone = todayCompletedId === todayLessonId;
-            const color = trackColor(todayLesson.trackId);
-            const cover = getCoverImage(todayLessonId);
-            return (
-              <View style={{ paddingHorizontal: 20, marginTop: 20 }}>
-                {/* Section label */}
-                <View style={lc.sectionHeader}>
-                  <Text style={lc.sectionLabel}>
-                    {t("tabs.home.pack_of_day").toUpperCase()}
-                  </Text>
-                  {isDone && (
-                    <View style={lc.donePill}>
-                      <Ionicons
-                        name="checkmark-circle"
-                        size={12}
-                        color="#5ED19A"
-                      />
-                      <Text style={lc.doneText}>
-                        {t("tabs.home.done_today")}
-                      </Text>
-                    </View>
-                  )}
-                </View>
-
-                {/* Hero card + CTA — unified container */}
-                <View
-                  style={[
-                    lc.heroWrap,
-                    { borderColor: isDone ? "#1E2A3E" : color + "50" },
-                  ]}
-                >
-                  {/* Image */}
-                  <View style={lc.heroCard}>
-                    {cover ? (
-                      <Image
-                        source={cover}
-                        style={lc.heroImage}
-                        resizeMode="cover"
-                      />
-                    ) : (
-                      <View
-                        style={[
-                          lc.heroImage,
-                          {
-                            backgroundColor: color + "18",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          },
-                        ]}
-                      >
-                        <View
-                          style={{
-                            width: 3,
-                            height: 48,
-                            backgroundColor: color,
-                            borderRadius: 2,
-                          }}
-                        />
-                      </View>
-                    )}
-
-                    {/* Multi-layer scrim — simulates gradient */}
-                    <View style={lc.heroScrimMid} />
-                    <View style={lc.heroScrimBot} />
-
-                    {/* Done dim overlay */}
-                    {isDone && <View style={lc.doneDimOverlay} />}
-
-                    {/* Overlaid content */}
-                    <View style={lc.heroOverlay}>
-                      <View
-                        style={[
-                          lc.trackPill,
-                          {
-                            backgroundColor: color + "25",
-                            borderColor: color + "55",
-                          },
-                        ]}
-                      >
-                        <Text style={[lc.trackPillText, { color }]}>
-                          {todayLesson.trackId.replace(/_/g, " ")}
-                        </Text>
-                      </View>
-                      <Text style={lc.heroTitle} numberOfLines={2}>
-                        {todayLesson.title[lang] ?? todayLesson.title.en}
-                      </Text>
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          alignItems: "center",
-                          gap: 6,
-                          marginTop: 4,
-                        }}
-                      >
-                        <Ionicons
-                          name="time-outline"
-                          size={12}
-                          color="#AAB0C0"
-                        />
-                        <Text style={lc.heroDuration}>
-                          {todayLesson.estimatedMinutes} min
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
-
-                  {/* Divider */}
-                  <View
-                    style={[
-                      lc.heroCtaDivider,
-                      { backgroundColor: isDone ? "#1E2A3E" : color + "30" },
-                    ]}
-                  />
-
-                  {/* CTA — attached to bottom of card */}
-                  <TouchableOpacity
-                    onPress={() => startSession(todayLessonId)}
-                    activeOpacity={0.82}
-                    style={[
-                      lc.heroCta,
-                      isDone
-                        ? lc.heroCtaDone
-                        : { backgroundColor: color + "18" },
-                    ]}
-                  >
-                    {!isDone && (
-                      <Ionicons
-                        name="play"
-                        size={14}
-                        color={color}
-                        style={{ marginRight: 7 }}
-                      />
-                    )}
-                    <Text
-                      style={[
-                        lc.heroCtaText,
-                        { color: isDone ? "#4A5568" : color },
-                      ]}
+        if (otherRows.length === 0) return null;
+        return (
+          <View style={{ paddingHorizontal: 20, marginTop: 10 }}>
+            <View style={lc.listCard}>
+              {otherRows.map(({ trackId, lessonId, meta }, index) => {
+                const color = trackColor(trackId);
+                return (
+                  <React.Fragment key={trackId}>
+                    {index > 0 && <View style={lc.listDivider} />}
+                    <TouchableOpacity
+                      onPress={() => startSession(lessonId)}
+                      style={lc.listRow}
+                      activeOpacity={0.7}
                     >
-                      {isDone ? t("tabs.home.redo") : t("tabs.home.start")}
-                    </Text>
-                    {isDone && (
-                      <Ionicons
-                        name="refresh"
-                        size={14}
-                        color="#4A5568"
-                        style={{ marginLeft: 7 }}
-                      />
-                    )}
-                  </TouchableOpacity>
-                </View>
-              </View>
-            );
-          })()}
-
-        {/* ── Outros tracks ──────────────────────────────────────── */}
-        {!loadingUser &&
-          (() => {
-            const otherRows = selectedTrackIds
-              .filter((trackId) => trackId !== todayLesson?.trackId)
-              .map((trackId) => {
-                const lessonId = nextPerTrack[trackId];
-                if (!lessonId) return null;
-                const meta = getLessonMeta(lessonId);
-                if (!meta) return null;
-                return { trackId, lessonId, meta };
-              })
-              .filter(Boolean) as {
-              trackId: string;
-              lessonId: string;
-              meta: ReturnType<typeof getLessonMeta> & {};
-            }[];
-
-            if (otherRows.length === 0) return null;
-            return (
-              <View style={{ paddingHorizontal: 20, marginTop: 10 }}>
-                <View style={lc.listCard}>
-                  {otherRows.map(({ trackId, lessonId, meta }, index) => {
-                    const color = trackColor(trackId);
-                    return (
-                      <React.Fragment key={trackId}>
-                        {index > 0 && <View style={lc.listDivider} />}
-                        <TouchableOpacity
-                          onPress={() => startSession(lessonId)}
-                          style={lc.listRow}
-                          activeOpacity={0.7}
-                        >
-                          <View
-                            style={[lc.trackDot, { backgroundColor: color }]}
-                          />
-                          <VStack style={{ flex: 1 }}>
-                            <Text style={lc.listRowTitle} numberOfLines={1}>
-                              {meta!.title[lang] ?? meta!.title.en}
-                            </Text>
-                            {(() => {
-                              const total = getLessonCountForTrack(trackId);
-                              const done = completedIds.filter((id) =>
-                                id.startsWith(trackId),
-                              ).length;
-                              const pct = total > 0 ? done / total : 0;
-                              return (
-                                <View
-                                  style={{
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                    gap: 7,
-                                    marginTop: 5,
-                                  }}
-                                >
-                                  <View
-                                    style={{
-                                      flex: 1,
-                                      height: 3,
-                                      backgroundColor: "#0E1420",
-                                      borderRadius: 2,
-                                      overflow: "hidden",
-                                    }}
-                                  >
-                                    <View
-                                      style={{
-                                        height: "100%",
-                                        width: `${pct * 100}%`,
-                                        backgroundColor: color,
-                                        borderRadius: 2,
-                                      }}
-                                    />
-                                  </View>
-                                  <Text
-                                    style={{
-                                      color: done > 0 ? color : "#3A4558",
-                                      fontSize: 10,
-                                      fontWeight: "700",
-                                    }}
-                                  >
-                                    {done}/{total}
-                                  </Text>
-                                </View>
-                              );
-                            })()}
-                          </VStack>
-                          <Ionicons
-                            name="chevron-forward"
-                            size={14}
-                            color="#3A4558"
-                            style={{ marginLeft: 8 }}
-                          />
-                        </TouchableOpacity>
-                      </React.Fragment>
-                    );
-                  })}
-                </View>
-              </View>
-            );
-          })()}
-
-        {!loadingUser && (
-          <View style={{ paddingHorizontal: 20, marginTop: 4 }}>
-            <TouchableOpacity
-              onPress={() => router.push("/(tabs)/tracks")}
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                paddingVertical: 12,
-                gap: 6,
-              }}
-              activeOpacity={0.6}
-            >
-              <Ionicons name="add-circle-outline" size={14} color="#3A4558" />
-              <Text
-                style={{ color: "#3A4558", fontSize: 12, fontWeight: "600" }}
-              >
-                {t("tabs.home.manage_tracks")}
-              </Text>
-            </TouchableOpacity>
+                      <View style={[lc.trackDot, { backgroundColor: color }]} />
+                      <VStack style={{ flex: 1 }}>
+                        <Text style={lc.listRowTitle} numberOfLines={1}>
+                          {meta!.title[lang] ?? meta!.title.en}
+                        </Text>
+                        {(() => {
+                          const total = getLessonCountForTrack(trackId);
+                          const done = completedIds.filter((id) => id.startsWith(trackId)).length;
+                          const pct = total > 0 ? done / total : 0;
+                          return (
+                            <View style={{ flexDirection: "row", alignItems: "center", gap: 7, marginTop: 5 }}>
+                              <View style={{ flex: 1, height: 3, backgroundColor: "#0E1420", borderRadius: 2, overflow: "hidden" }}>
+                                <View style={{ height: "100%", width: `${pct * 100}%`, backgroundColor: color, borderRadius: 2 }} />
+                              </View>
+                              <Text style={{ color: done > 0 ? color : "#3A4558", fontSize: 10, fontWeight: "700" }}>
+                                {done}/{total}
+                              </Text>
+                            </View>
+                          );
+                        })()}
+                      </VStack>
+                      <Ionicons name="chevron-forward" size={14} color="#3A4558" style={{ marginLeft: 8 }} />
+                    </TouchableOpacity>
+                  </React.Fragment>
+                );
+              })}
+            </View>
           </View>
-        )}
+        );
+      })()}
 
-        {/* ── Revisão de cards ───────────────────────────────────── */}
-        {dueCardCount > 0 && (
-          <View style={{ paddingHorizontal: 20, marginTop: 4 }}>
-            <TouchableOpacity
-              onPress={() => router.push("/(session)/review")}
-              style={ab.reviewCard}
-              activeOpacity={0.85}
-            >
-              <View style={ab.reviewIconWrap}>
-                <Ionicons name="brain" size={18} color="#7B8FE0" />
-              </View>
-              <VStack style={{ flex: 1 }}>
-                <Text style={ab.reviewTitle}>
-                  {t("tabs.home.review_due", { count: dueCardCount })}
-                </Text>
-                {missions.some(
-                  (m) => m.id === "review_cards" && !m.completed,
-                ) && (
-                  <Text style={ab.reviewSub}>
-                    {t("missions.review_cards")} · +
-                    {missions.find((m) => m.id === "review_cards")?.xpReward} XP
-                  </Text>
-                )}
-              </VStack>
-              <Text style={ab.reviewCta}>{t("tabs.home.start_review")} →</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-
-        {/* ── Retry recommendation ───────────────────────────────── */}
-        {retryRecommendation &&
-          (() => {
-            const meta = getLessonMeta(retryRecommendation.contentId);
-            if (!meta || retryRecommendation.contentId === todayLessonId)
-              return null;
-            const pct = Math.round(retryRecommendation.quizScore * 100);
-            return (
-              <View style={{ paddingHorizontal: 20, marginTop: 10 }}>
-                <TouchableOpacity
-                  onPress={() => startSession(retryRecommendation.contentId)}
-                  style={ab.retryCard}
-                  activeOpacity={0.85}
-                >
-                  <Text style={ab.retryEyebrow}>
-                    {t("tabs.home.retry_title")}
-                  </Text>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <VStack style={{ flex: 1 }}>
-                      <Text style={ab.retryTitle} numberOfLines={1}>
-                        {meta.title[lang] ?? meta.title.en}
-                      </Text>
-                      <Text style={ab.retrySub}>
-                        {t("tabs.home.retry_score", { pct })}
-                      </Text>
-                    </VStack>
-                    <Text style={ab.retryCta}>
-                      {t("tabs.home.retry_cta")} →
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            );
-          })()}
-
-        {/* ── Desafio inicial ────────────────────────────────────── */}
-        {!loadingUser && user?.createdAt && (
-          <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
-            <StarterChallengeCard
-              challenge={user.starterChallenge}
-              createdAt={user.createdAt}
-            />
-          </View>
-        )}
-
-        {/* ── Missões diárias ────────────────────────────────────── */}
-        {missions.length > 0 && (
-          <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
-            <MissionsCard missions={missions} />
-          </View>
-        )}
-
-        {/* ── Missões semanais ───────────────────────────────────── */}
-        {weeklyMissions.length > 0 && (
-          <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
-            <WeeklyMissionsCard missions={weeklyMissions} />
-          </View>
-        )}
-
-        {/* ── Semana ─────────────────────────────────────────────── */}
-        {weeklyData.length > 0 && (
-          <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
-            <WeeklyCard
-              data={weeklyData}
-              goalMin={user?.dailyGoalMin ?? 10}
-              lang={lang}
-              studiedLabel={t("tabs.home.studied")}
-            />
-          </View>
-        )}
-
-        {/* ── Leaderboard ────────────────────────────────────────── */}
-        <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
+      {!loadingUser && (
+        <View style={{ paddingHorizontal: 20, marginTop: 4 }}>
           <TouchableOpacity
-            onPress={() => router.push("/(tabs)/leaderboard")}
-            style={lb.card}
-            activeOpacity={0.85}
+            onPress={() => router.push("/(tabs)/tracks")}
+            style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", paddingVertical: 12, gap: 6 }}
+            activeOpacity={0.6}
           >
-            <View style={lb.iconWrap}>
-              <Ionicons name="trophy" size={18} color="#7B8FE0" />
-            </View>
-            <View style={{ flex: 1 }}>
-              <Text style={lb.title}>{t("leaderboard.title")}</Text>
-              <Text style={lb.sub}>{t("leaderboard.home_sub")}</Text>
-            </View>
-            <Ionicons name="chevron-forward" size={15} color="#3A4558" />
+            <Ionicons name="add-circle-outline" size={14} color="#3A4558" />
+            <Text style={{ color: "#3A4558", fontSize: 12, fontWeight: "600" }}>
+              {t("tabs.home.manage_tracks")}
+            </Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
+      )}
+
+      {/* ── Revisão de cards ───────────────────────────────────── */}
+      {dueCardCount > 0 && (
+        <View style={{ paddingHorizontal: 20, marginTop: 4 }}>
+          <TouchableOpacity
+            onPress={() => router.push("/(session)/review")}
+            style={ab.reviewCard}
+            activeOpacity={0.85}
+          >
+            <View style={ab.reviewIconWrap}>
+              <Ionicons name="brain" size={18} color="#7B8FE0" />
+            </View>
+            <VStack style={{ flex: 1 }}>
+              <Text style={ab.reviewTitle}>
+                {t("tabs.home.review_due", { count: dueCardCount })}
+              </Text>
+              {missions.some((m) => m.id === "review_cards" && !m.completed) && (
+                <Text style={ab.reviewSub}>
+                  {t("missions.review_cards")} · +{missions.find((m) => m.id === "review_cards")?.xpReward} XP
+                </Text>
+              )}
+            </VStack>
+            <Text style={ab.reviewCta}>{t("tabs.home.start_review")} →</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
+      {/* ── Retry recommendation ───────────────────────────────── */}
+      {retryRecommendation && (() => {
+        const meta = getLessonMeta(retryRecommendation.contentId);
+        if (!meta || retryRecommendation.contentId === todayLessonId) return null;
+        const pct = Math.round(retryRecommendation.quizScore * 100);
+        return (
+          <View style={{ paddingHorizontal: 20, marginTop: 10 }}>
+            <TouchableOpacity
+              onPress={() => startSession(retryRecommendation.contentId)}
+              style={ab.retryCard}
+              activeOpacity={0.85}
+            >
+              <Text style={ab.retryEyebrow}>{t("tabs.home.retry_title")}</Text>
+              <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+                <VStack style={{ flex: 1 }}>
+                  <Text style={ab.retryTitle} numberOfLines={1}>
+                    {meta.title[lang] ?? meta.title.en}
+                  </Text>
+                  <Text style={ab.retrySub}>{t("tabs.home.retry_score", { pct })}</Text>
+                </VStack>
+                <Text style={ab.retryCta}>{t("tabs.home.retry_cta")} →</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        );
+      })()}
+
+      {/* ── Desafio inicial ────────────────────────────────────── */}
+      {!loadingUser && user?.createdAt && (
+        <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
+          <StarterChallengeCard
+            challenge={user.starterChallenge}
+            createdAt={user.createdAt}
+          />
+        </View>
+      )}
+
+      {/* ── Missões diárias ────────────────────────────────────── */}
+      {missions.length > 0 && (
+        <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
+          <MissionsCard missions={missions} />
+        </View>
+      )}
+
+      {/* ── Missões semanais ───────────────────────────────────── */}
+      {weeklyMissions.length > 0 && (
+        <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
+          <WeeklyMissionsCard missions={weeklyMissions} />
+        </View>
+      )}
+
+      {/* ── Semana ─────────────────────────────────────────────── */}
+      {weeklyData.length > 0 && (
+        <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
+          <WeeklyCard
+            data={weeklyData}
+            goalMin={user?.dailyGoalMin ?? 10}
+            lang={lang}
+            studiedLabel={t("tabs.home.studied")}
+          />
+        </View>
+      )}
+
+      {/* ── Leaderboard ────────────────────────────────────────── */}
+      <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
+        <TouchableOpacity
+          onPress={() => router.push("/(tabs)/leaderboard")}
+          style={lb.card}
+          activeOpacity={0.85}
+        >
+          <View style={lb.iconWrap}>
+            <Ionicons name="trophy" size={18} color="#7B8FE0" />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={lb.title}>{t("leaderboard.title")}</Text>
+            <Text style={lb.sub}>{t("leaderboard.home_sub")}</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={15} color="#3A4558" />
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
     </>
   );
 }

@@ -43,7 +43,6 @@ export function useUser() {
       );
 
       await AsyncStorage.setItem("hasOnboarded", "true");
-      cache.delete(args.userId);
     } catch (error) {
       console.log(error);
     } finally {
