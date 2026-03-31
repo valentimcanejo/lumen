@@ -10,13 +10,12 @@ export default function Index() {
 
   useEffect(() => {
     const unsub = listenAuth(async (firebaseUser) => {
-      if (firebaseUser === null) return; // waiting for ensureAnonymousAuth
+      if (firebaseUser === null) return; // wait for auth to settle
       const user = await getUser(firebaseUser.uid).catch(() => null);
       setHasOnboarded(user?.hasOnboarded === true);
       setReady(true);
       unsub();
     });
-    ensureAnonymousAuth().catch(() => {});
     return unsub;
   }, []);
 

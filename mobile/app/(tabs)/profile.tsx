@@ -367,7 +367,7 @@ function AccountCard({
   const { t } = useTranslation();
   const [loading, setLoading] = useState<"google" | "apple" | "signout" | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
+  const [justLinked, setJustLinked] = useState(false);
 
   async function handle(
     action: "google" | "apple" | "signout",
@@ -377,7 +377,7 @@ function AccountCard({
     setError(null);
     try {
       await fn();
-      if (action !== "signout") setSuccess(true);
+      if (action !== "signout") setJustLinked(true);
     } catch (err: unknown) {
       const e = err as { message?: string; code?: string };
       if (
@@ -391,7 +391,7 @@ function AccountCard({
     }
   }
 
-  if (isAnonymous) {
+  if (isAnonymous && !justLinked) {
     return (
       <Box className="bg-[#111827] rounded-2xl p-5 mb-6">
         <Text className="text-[#E6EAF2] text-[16px] font-semibold mb-1">
@@ -448,7 +448,7 @@ function AccountCard({
 
   return (
     <Box className="bg-[#111827] rounded-2xl p-5 mb-6">
-      {success && (
+      {justLinked && (
         <HStack className="items-center bg-[#1A2E1A] rounded-xl px-3 py-2 mb-4" space="sm">
           <Ionicons name="checkmark-circle" size={16} color="#5ED19A" />
           <Text className="text-[#5ED19A] text-[13px] font-medium">
@@ -502,25 +502,37 @@ function LanguageSelector({
   lang: string;
   onChange: (lang: string) => void;
 }) {
+  const LABELS: Record<string, string> = { pt: "PT", en: "EN", es: "ES" };
   return (
-    <HStack className="flex flex-col gap-2">
-      {(["pt", "en", "es"] as const).map((code) => (
-        <Pressable
-          key={code}
-          onPress={() => onChange(code)}
-          className="border border-[#AAB0C0] rounded-[16px] p-4"
-        >
-          <Text
-            className={`text-[16px] ${lang === code ? "text-[#F5C77A]" : "text-[#AAB0C0]"}`}
+    <HStack className="gap-2">
+      {(["pt", "en", "es"] as const).map((code) => {
+        const active = lang === code;
+        return (
+          <Pressable
+            key={code}
+            onPress={() => onChange(code)}
+            style={{
+              paddingHorizontal: 14,
+              paddingVertical: 6,
+              borderRadius: 20,
+              borderWidth: 1,
+              borderColor: active ? "#F5C77A" : "#2A3448",
+              backgroundColor: active ? "#F5C77A18" : "transparent",
+            }}
           >
-            {code === "pt"
-              ? "Português"
-              : code === "en"
-                ? "English"
-                : "Español"}
-          </Text>
-        </Pressable>
-      ))}
+            <Text
+              style={{
+                fontSize: 12,
+                fontWeight: "700",
+                color: active ? "#F5C77A" : "#4A5568",
+                letterSpacing: 0.5,
+              }}
+            >
+              {LABELS[code]}
+            </Text>
+          </Pressable>
+        );
+      })}
     </HStack>
   );
 }
@@ -816,8 +828,8 @@ export default function ProfileScreen() {
             <StudyHeatmap heatmap={heatmap} />
 
             {/* Language */}
-            <Box className="mb-6">
-              <Text className="text-[#E6EAF2] text-[16px] font-semibold mb-3">
+            <HStack className="items-center justify-between mb-6">
+              <Text className="text-[#4A5568] text-[13px]">
                 {t("tabs.profile.language")}
               </Text>
               <LanguageSelector
@@ -832,7 +844,7 @@ export default function ProfileScreen() {
                   }
                 }}
               />
-            </Box>
+            </HStack>
 
             {/* Notifications */}
             <Box className="mb-6">

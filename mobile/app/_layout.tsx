@@ -23,7 +23,7 @@ import "../i18n";
 import { loadLanguage } from "../i18n/setLanguage";
 import "@/global.css";
 import { auth } from "../firebase/firebaseConfig";
-import { ensureAnonymousAuth } from "../services/auth.service";
+import { listenAuth, ensureAnonymousAuth } from "../services/auth.service";
 import { getUser, getCompletedContentIds } from "../repositories/user.repo";
 import {
   getLessonMeta,
@@ -57,9 +57,12 @@ export default function RootLayout() {
   const [lessonsReady, setLessonsReady] = useState(false);
 
   useEffect(() => {
-    ensureAnonymousAuth()
-      .catch(() => {})
-      .finally(() => initLessons().finally(() => setLessonsReady(true)));
+    const unsub = listenAuth(async (u) => {
+      unsub();
+      if (u === null) await ensureAnonymousAuth().catch(() => {});
+      initLessons().finally(() => setLessonsReady(true));
+    });
+    return unsub;
   }, []);
 
   useEffect(() => {
