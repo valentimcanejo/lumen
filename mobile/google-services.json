@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "304073115831",
+    "project_id": "lumen-13d0d",
+    "storage_bucket": "lumen-13d0d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:304073115831:android:211e5515f7fb1edd2e2532",
+        "android_client_info": {
+          "package_name": "com.valentimcanejo.lumen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "304073115831-e7j9hsou4bqns0bv8rikr0qo9o73cnlo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVpKf5Kvn5eyrJG6iN-gp5W_pBI0Ew_v0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "304073115831-e7j9hsou4bqns0bv8rikr0qo9o73cnlo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
