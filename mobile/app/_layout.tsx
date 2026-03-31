@@ -57,12 +57,23 @@ export default function RootLayout() {
   const [lessonsReady, setLessonsReady] = useState(false);
 
   useEffect(() => {
-    const unsub = listenAuth(async (u) => {
+    // Safety net: never block the splash indefinitely
+    const timeout = setTimeout(() => setLessonsReady(true), 10_000);
+
+    const unsub = listenAuth((u) => {
       unsub();
-      if (u === null) await ensureAnonymousAuth().catch(() => {});
-      initLessons().finally(() => setLessonsReady(true));
+      // Fire-and-forget: don't await auth before fetching lessons
+      if (u === null) ensureAnonymousAuth().catch(() => {});
+      initLessons().finally(() => {
+        clearTimeout(timeout);
+        setLessonsReady(true);
+      });
     });
-    return unsub;
+
+    return () => {
+      unsub();
+      clearTimeout(timeout);
+    };
   }, []);
 
   useEffect(() => {
