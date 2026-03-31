@@ -8,7 +8,6 @@ import {
   signOut,
 } from "../services/auth.service";
 import { invalidateUserCache } from "./useUser";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 
 export function useAuth() {
@@ -48,7 +47,6 @@ export function useAuth() {
   const handleSignOut = useCallback(async () => {
     if (user?.uid) invalidateUserCache(user.uid);
     await signOut();
-    await AsyncStorage.removeItem("hasOnboarded");
     router.replace("/(onboarding)/welcome");
   }, [user?.uid]);
 

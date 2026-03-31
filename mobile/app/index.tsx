@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 import { View, ActivityIndicator } from "react-native";
 import { Redirect } from "expo-router";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { listenAuth, ensureAnonymousAuth } from "../services/auth.service";
+import { getUser } from "../repositories/user.repo";
 
 export default function Index() {
   const [ready, setReady] = useState(false);
   const [hasOnboarded, setHasOnboarded] = useState(false);
 
   useEffect(() => {
-    AsyncStorage.getItem("hasOnboarded").then((val) => {
-      setHasOnboarded(val === "true");
+    const unsub = listenAuth(async (firebaseUser) => {
+      if (firebaseUser === null) return; // waiting for ensureAnonymousAuth
+      const user = await getUser(firebaseUser.uid).catch(() => null);
+      setHasOnboarded(user?.hasOnboarded === true);
       setReady(true);
+      unsub();
     });
+    ensureAnonymousAuth().catch(() => {});
+    return unsub;
   }, []);
 
   if (!ready) {

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Stack } from "expo-router";
 import { router } from "expo-router";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 import * as Notifications from "expo-notifications";
@@ -24,8 +23,13 @@ import "../i18n";
 import { loadLanguage } from "../i18n/setLanguage";
 import "@/global.css";
 import { auth } from "../firebase/firebaseConfig";
+import { ensureAnonymousAuth } from "../services/auth.service";
 import { getUser, getCompletedContentIds } from "../repositories/user.repo";
-import { getLessonMeta, pickNextLesson, initLessons } from "../repositories/lessons.repo";
+import {
+  getLessonMeta,
+  pickNextLesson,
+  initLessons,
+} from "../repositories/lessons.repo";
 import { todayYmd } from "../repositories/session.repo";
 
 SplashScreen.preventAutoHideAsync();
@@ -53,7 +57,9 @@ export default function RootLayout() {
   const [lessonsReady, setLessonsReady] = useState(false);
 
   useEffect(() => {
-    initLessons().finally(() => setLessonsReady(true));
+    ensureAnonymousAuth()
+      .catch(() => {})
+      .finally(() => initLessons().finally(() => setLessonsReady(true)));
   }, []);
 
   useEffect(() => {
@@ -67,18 +73,11 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    AsyncStorage.getItem("hasOnboarded").then((val) => {
-      if (val !== "true") {
-        router.replace("/(onboarding)/welcome");
-      }
-    });
-  }, []);
-
-  useEffect(() => {
     const sub = Notifications.addNotificationResponseReceivedListener(
       async (response) => {
         try {
-          const notifData = response.notification.request.content.data as Record<string, unknown> | null;
+          const notifData = response.notification.request.content
+            .data as Record<string, unknown> | null;
 
           // Review notification → go to review screen
           if (notifData?.type === "review") {
@@ -93,7 +92,8 @@ export default function RootLayout() {
             getUser(uid),
             getCompletedContentIds(uid),
           ]);
-          const trackIds = user?.selectedTrackIds ?? user?.selectedGoalIds ?? [];
+          const trackIds =
+            user?.selectedTrackIds ?? user?.selectedGoalIds ?? [];
           if (!trackIds.length) return;
 
           const today = todayYmd();

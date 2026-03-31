@@ -2,7 +2,6 @@ import { useState } from "react";
 import type { Lang } from "../models/lang";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getDocData } from "../services/firestore.service";
 import { UserProfile } from "../models/user";
 
@@ -42,7 +41,6 @@ export function useUser() {
         { merge: true }, // never overwrite xp/level/achievements/streak
       );
 
-      await AsyncStorage.setItem("hasOnboarded", "true");
     } catch (error) {
       console.log(error);
     } finally {
