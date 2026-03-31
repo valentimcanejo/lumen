@@ -1,6 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
-import { Image, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -66,12 +72,23 @@ function TopProgress({
 
 function Waveform({ progress = 0 }: { progress?: number }) {
   const bars = useMemo(
-    () => Array.from({ length: 28 }).map((_, i) => ({ h: 8 + ((i * 13) % 22), i })),
+    () =>
+      Array.from({ length: 28 }).map((_, i) => ({ h: 8 + ((i * 13) % 22), i })),
     [],
   );
 
   return (
-    <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center", marginHorizontal: 10, overflow: "hidden", gap: 3 }}>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        marginHorizontal: 10,
+        overflow: "hidden",
+        gap: 3,
+      }}
+    >
       {bars.map((b) => (
         <View
           key={b.i}
@@ -107,7 +124,12 @@ function PackLoadingScreen({ color }: { color: string }) {
     <View style={ld.screen}>
       <View style={ld.center}>
         {/* Icon badge */}
-        <View style={[ld.iconBadge, { borderColor: color + "40", backgroundColor: color + "12" }]}>
+        <View
+          style={[
+            ld.iconBadge,
+            { borderColor: color + "40", backgroundColor: color + "12" },
+          ]}
+        >
           <Ionicons name="book-outline" size={28} color={color} />
         </View>
 
@@ -115,9 +137,13 @@ function PackLoadingScreen({ color }: { color: string }) {
 
         {/* Progress bar */}
         <View style={ld.barTrack}>
-          <Animated.View style={[ld.barFill, barStyle, { backgroundColor: color }]} />
+          <Animated.View
+            style={[ld.barFill, barStyle, { backgroundColor: color }]}
+          />
           {/* Shimmer head */}
-          <Animated.View style={[ld.barHead, barStyle, { shadowColor: color }]} />
+          <Animated.View
+            style={[ld.barHead, barStyle, { shadowColor: color }]}
+          />
         </View>
       </View>
     </View>
@@ -248,7 +274,7 @@ export default function LessonScreen() {
         } catch (e) {
           // Audio not yet generated — call Cloud Function with extracted text, then retry
           const text = extractText(pack.lesson.blocks);
-          console.log(text);
+
           await generateAudio({
             contentId,
             version: Number(version),
@@ -378,24 +404,42 @@ export default function LessonScreen() {
         <View style={ls.content}>
           <Text style={ls.lessonTitle}>{pack.lesson.title}</Text>
           <Text style={ls.lessonMeta}>
-            {pack.tags?.[0] ?? t("common.content")} • {pack.estimatedMinutes} min
+            {pack.tags?.[0] ?? t("common.content")} • {pack.estimatedMinutes}{" "}
+            min
           </Text>
 
           <View style={ls.divider} />
 
           {/* Audio player */}
-          <View style={[ls.playerCard, { borderColor: color + "30", borderLeftColor: color + "70" }]}>
+          <View
+            style={[
+              ls.playerCard,
+              { borderColor: color + "30", borderLeftColor: color + "70" },
+            ]}
+          >
             <View style={ls.playerRow}>
               <TouchableOpacity
                 onPress={handlePlayPause}
                 activeOpacity={0.65}
                 disabled={!audioReady}
-                style={[as.playBtn, { borderColor: color + "55", backgroundColor: color + "15", opacity: audioReady ? 1 : 0.4 }]}
+                style={[
+                  as.playBtn,
+                  {
+                    borderColor: color + "55",
+                    backgroundColor: color + "15",
+                    opacity: audioReady ? 1 : 0.4,
+                  },
+                ]}
               >
                 {showLoadingIcon ? (
                   <Ionicons name="hourglass-outline" size={18} color={color} />
                 ) : (
-                  <Ionicons name={playIconName} size={18} color={color} style={{ marginLeft: playing ? 0 : 2 }} />
+                  <Ionicons
+                    name={playIconName}
+                    size={18}
+                    color={color}
+                    style={{ marginLeft: playing ? 0 : 2 }}
+                  />
                 )}
               </TouchableOpacity>
 
@@ -411,7 +455,12 @@ export default function LessonScreen() {
             </View>
 
             <View style={ls.progressTrack}>
-              <View style={[ls.progressFill, { width: `${audioProgress * 100}%`, backgroundColor: color }]} />
+              <View
+                style={[
+                  ls.progressFill,
+                  { width: `${audioProgress * 100}%`, backgroundColor: color },
+                ]}
+              />
             </View>
 
             {pack.lesson.summary ? (
@@ -421,7 +470,9 @@ export default function LessonScreen() {
             {audioReady && (
               <View style={ls.audioHint}>
                 <Ionicons name="headset-outline" size={13} color="#4A5568" />
-                <Text style={ls.audioHintText}>{t("session.lesson.audio_hint")}</Text>
+                <Text style={ls.audioHintText}>
+                  {t("session.lesson.audio_hint")}
+                </Text>
               </View>
             )}
           </View>
@@ -430,12 +481,16 @@ export default function LessonScreen() {
 
           <View style={ls.actions}>
             <Pressable
-              onPress={() =>
+              onPress={() => {
                 router.push({
                   pathname: "/(session)/cards",
-                  params: { contentId: pack.id, version: String(pack.version), lang },
-                })
-              }
+                  params: {
+                    contentId,
+                    version,
+                    lang,
+                  },
+                });
+              }}
               style={[ls.nextBtn, { backgroundColor: color }]}
             >
               <Text style={ls.nextBtnText}>{t("common.next")}</Text>
@@ -446,8 +501,14 @@ export default function LessonScreen() {
               disabled={savingContent}
               style={[ls.saveBtn, { opacity: savingContent ? 0.6 : 1 }]}
             >
-              <Ionicons name={saved ? "bookmark" : "bookmark-outline"} size={18} color={saved ? color : "#AAB0C0"} />
-              <Text style={[ls.saveBtnText, { color: saved ? color : "#AAB0C0" }]}>
+              <Ionicons
+                name={saved ? "bookmark" : "bookmark-outline"}
+                size={18}
+                color={saved ? color : "#AAB0C0"}
+              />
+              <Text
+                style={[ls.saveBtnText, { color: saved ? color : "#AAB0C0" }]}
+              >
                 {saved ? t("common.saved") : t("common.save")}
               </Text>
             </Pressable>

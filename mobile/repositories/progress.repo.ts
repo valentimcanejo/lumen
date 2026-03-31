@@ -131,6 +131,9 @@ export async function getWeeklyData(uid: string): Promise<DayData[]> {
   return dates.map((date) => ({ date, minutes: minutesByDate[date] ?? 0 }));
 }
 
+// Session-level cache for heatmap — profile screen may re-mount multiple times
+const _heatmapCache = new Map<string, Record<string, number>>();
+
 /**
  * Returns a map of { [YYYY-MM-DD]: totalMinutes } for the last `weeks` weeks.
  * Used to render the activity heatmap on the profile screen.
@@ -139,6 +142,9 @@ export async function getStudyHeatmap(
   uid: string,
   weeks = 16,
 ): Promise<Record<string, number>> {
+  const cacheKey = `${uid}:${weeks}:${ymd(new Date())}`;
+  if (_heatmapCache.has(cacheKey)) return _heatmapCache.get(cacheKey)!;
+
   const today = new Date();
   // Anchor start to the Monday of the week `weeks` ago
   const dow = today.getDay(); // 0=Sun
@@ -161,6 +167,7 @@ export async function getStudyHeatmap(
     const s = d.data() as CompletedSession;
     result[s.date] = (result[s.date] ?? 0) + s.minutes;
   }
+  _heatmapCache.set(cacheKey, result);
   return result;
 }
 
@@ -189,6 +196,10 @@ export type DueCard = {
   version: number;
   lang: Lang;
   nextReviewAt: number;
+  // SM-2 fields — returned so callers can pass prevState to gradeCard and skip a read
+  interval: number;
+  easeFactor: number;
+  reviewCount: number;
 };
 
 function cardProgressPath(uid: string, contentId: string, cardId: string) {
@@ -234,9 +245,10 @@ export async function gradeCard(
   cardId: string,
   grade: CardGrade,
   meta?: { version: number; lang: Lang },
+  prevState?: { interval?: number; easeFactor?: number; reviewCount?: number },
 ) {
   const path = cardProgressPath(uid, contentId, cardId);
-  const prev = (await getDocData<CardProgressDoc>(path)) ?? {};
+  const prev = prevState ?? ((await getDocData<CardProgressDoc>(path)) ?? {});
   const sm2 = computeSM2(grade, prev);
 
   await setDocData<CardProgressDoc>(path, {
@@ -245,8 +257,8 @@ export async function gradeCard(
     grade,
     updatedAt: Date.now(),
     ...sm2,
-    version: meta?.version ?? prev.version ?? 1,
-    lang: meta?.lang ?? prev.lang ?? "pt",
+    version: meta?.version ?? (prev as CardProgressDoc).version ?? 1,
+    lang: meta?.lang ?? (prev as CardProgressDoc).lang ?? "pt",
   });
 }
 
@@ -268,13 +280,23 @@ export async function getDueCards(uid: string): Promise<DueCard[]> {
       version: data.version ?? 1,
       lang: data.lang ?? "pt",
       nextReviewAt: data.nextReviewAt,
+      interval: data.interval ?? 1,
+      easeFactor: data.easeFactor ?? 2.5,
+      reviewCount: data.reviewCount ?? 0,
     };
   });
 }
 
 export async function getDueCardCount(uid: string): Promise<number> {
-  const due = await getDueCards(uid);
-  return due.length;
+  const now = Date.now();
+  const q = query(
+    collection(db, "users", uid, "card_progress"),
+    where("nextReviewAt", "<=", now),
+    orderBy("nextReviewAt", "asc"),
+    fbLimit(500),
+  );
+  const snap = await getDocs(q);
+  return snap.docs.length;
 }
 
 export async function markDayCompleted(

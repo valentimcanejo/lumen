@@ -163,6 +163,10 @@ export default function ReviewScreen() {
       gradeCard(uid, current.contentId, current.cardId, g, {
         version: current.version,
         lang: current.lang,
+      }, {
+        interval: current.interval,
+        easeFactor: current.easeFactor,
+        reviewCount: current.reviewCount,
       }).catch(() => {});
     }
     const newCount = gradedCount + 1;
