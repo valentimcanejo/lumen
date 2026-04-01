@@ -8,7 +8,8 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "postinstall": "node -e \"const fs=require('fs'),p='node_modules/@react-native/gradle-plugin/gradle/libs.versions.toml';try{fs.writeFileSync(p,fs.readFileSync(p,'utf8').replace(/agp = \\\"[^\\\"]+\\\"/,'agp = \\\"8.7.3\\\"'));console.log('Patched AGP to 8.7.3');}catch(e){}\""
   },
   "dependencies": {
     "@expo-google-fonts/dm-sans": "^0.4.2",
