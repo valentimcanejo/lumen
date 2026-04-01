@@ -35,6 +35,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      "./plugins/withAgpVersion",
       "expo-router",
       "expo-apple-authentication",
       "@react-native-google-signin/google-signin",
