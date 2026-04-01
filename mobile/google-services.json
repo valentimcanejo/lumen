@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "304073115831-3b44pfe6tbri7keh0c53hru2moq9ipf7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.valentimcanejo.lumen",
+            "certificate_hash": "54b42fee10abebd128abaf83ca65899189b13965"
+          }
+        },
+        {
+          "client_id": "304073115831-b307dk9ouvner5p2qi24f7dvkr6p911r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.valentimcanejo.lumen",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "304073115831-e7j9hsou4bqns0bv8rikr0qo9o73cnlo.apps.googleusercontent.com",
           "client_type": 3
         }
