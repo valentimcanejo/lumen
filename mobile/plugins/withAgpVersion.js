@@ -11,7 +11,6 @@ const { withProjectBuildGradle } = require("expo/config-plugins");
  *     are compiled with Kotlin 2.1 metadata — causing a "incompatible version" compile error.
  *
  * Solution: pin AGP → 8.7.3, Kotlin compiler → 2.1.20 explicitly.
- * (react-native-track-player still needs a languageVersion 1.9 override via postinstall patch)
  */
 module.exports = function withAgpVersion(config) {
   return withProjectBuildGradle(config, (config) => {
