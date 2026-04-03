@@ -49,7 +49,8 @@
           }
         }
       ],
-      "expo-localization"
+      "expo-localization",
+      "expo-updates"
     ],
     "experiments": {
       "typedRoutes": true,
@@ -60,6 +61,12 @@
       "eas": {
         "projectId": "32dee7cb-eae0-497b-ab88-14cefd9c580a"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/32dee7cb-eae0-497b-ab88-14cefd9c580a"
     }
   }
 }

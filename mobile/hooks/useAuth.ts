@@ -7,12 +7,13 @@ import {
   signInWithApple,
   signOut,
 } from "../services/auth.service";
+import { auth } from "../firebase/firebaseConfig";
 import { invalidateUserCache } from "./useUser";
 import { router } from "expo-router";
 
 export function useAuth() {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(auth.currentUser);
+  const [loading, setLoading] = useState(auth.currentUser === null);
 
   useEffect(() => {
     const unsub = listenAuth((u) => {

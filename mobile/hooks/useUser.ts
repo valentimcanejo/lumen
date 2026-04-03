@@ -40,7 +40,7 @@ export function useUser() {
         },
         { merge: true }, // never overwrite xp/level/achievements/streak
       );
-
+      cache.delete(args.userId);
     } catch (error) {
       console.log(error);
     } finally {
