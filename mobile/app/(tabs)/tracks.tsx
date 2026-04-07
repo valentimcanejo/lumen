@@ -89,6 +89,7 @@ function TrackCard({
   onToggleFollow: () => void;
 }) {
   const { t } = useTranslation();
+  const [pressedFollow, setPressedFollow] = useState(false);
   const title = track.title[lang] ?? track.title.en ?? track.id;
   const description = track.description?.[lang] ?? track.description?.en;
   const color = trackColor(track.id);
@@ -125,6 +126,8 @@ function TrackCard({
             </Text>
             <TouchableOpacity
               onPress={onToggleFollow}
+              onPressIn={() => setPressedFollow(true)}
+              onPressOut={() => setPressedFollow(false)}
               disabled={!canUnfollow}
               hitSlop={10}
               style={{ opacity: !canUnfollow ? 0.35 : 1, flexShrink: 0 }}
@@ -132,11 +135,20 @@ function TrackCard({
               <RNView
                 style={[
                   tc.followingPill,
-                  { backgroundColor: color + "18", borderColor: color + "40" },
+                  pressedFollow
+                    ? { backgroundColor: "#E26D6D18", borderColor: "#E26D6D50" }
+                    : { backgroundColor: color + "18", borderColor: color + "40" },
                 ]}
               >
-                <Text style={[tc.followingText, { color }]}>
-                  {t("tabs.tracks.section_following")}
+                <Ionicons
+                  name={pressedFollow ? "close" : "checkmark"}
+                  size={11}
+                  color={pressedFollow ? "#E26D6D" : color}
+                />
+                <Text style={[tc.followingText, { color: pressedFollow ? "#E26D6D" : color }]}>
+                  {pressedFollow
+                    ? t("tabs.tracks.btn_unfollow")
+                    : t("tabs.tracks.section_following")}
                 </Text>
               </RNView>
             </TouchableOpacity>
@@ -298,6 +310,9 @@ const tc = StyleSheet.create({
     fontWeight: "600",
   },
   followingPill: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
     borderWidth: 1,
     borderRadius: 100,
     paddingHorizontal: 10,

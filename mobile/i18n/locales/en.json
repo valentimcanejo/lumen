@@ -131,7 +131,8 @@
       "difficulty_3": "Advanced",
       "section_following": "Following",
       "section_explore": "Explore",
-      "btn_follow": "Follow"
+      "btn_follow": "Follow",
+      "btn_unfollow": "Leave"
     },
     "library": {
       "title": "Library",
