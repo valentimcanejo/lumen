@@ -125,7 +125,12 @@ Return ONLY valid JSON — no markdown, no explanation — matching this exact s
 Rules:
 - lesson.blocks: 5–8 blocks mixing h2, p, bullets (at least one of each), 1 optional quote
 - cards: 6–10 cards with a clear concept on the front and a concise explanation on the back
-- quiz: 4–5 questions, 4 options each, answerIndex between 0–3
+- quiz: exactly 5 questions, 4 options each
+  - 2 definition questions: test recall of a key concept ("What is X?", "What does X mean?")
+  - 2 application questions: test understanding in context ("In which situation would X apply?", "What would happen if X?")
+  - 1 example question: test recognition ("Which of these is an example of X?")
+  - Vary the correct answer position — do NOT place the correct answer always at index 0
+  - Each explanation should add insight beyond just restating the answer
 - All text in ${langName}
 - Return ONLY the JSON object, nothing else`;
 }
