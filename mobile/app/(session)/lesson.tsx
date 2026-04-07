@@ -464,21 +464,23 @@ export default function LessonScreen() {
           paddingBottom: Math.max(insets.bottom + 16, 32),
         }}
       >
+        {/* Hero cover image — full bleed */}
         {(() => {
           const cover = getCoverImage(contentId);
           return cover ? (
-            <View style={ls.coverWrap}>
-              <Image source={cover} style={ls.coverImage} resizeMode="cover" />
-              <View style={ls.coverFade} />
+            <Image source={cover} style={ls.heroImage} resizeMode="cover" />
+          ) : (
+            <View style={[ls.heroPlaceholder, { backgroundColor: color + "20" }]}>
+              <Ionicons name="book-outline" size={44} color={color} />
             </View>
-          ) : null;
+          );
         })()}
 
         <View style={ls.content}>
-          <Text style={ls.lessonTitle}>{pack.lesson.title}</Text>
+          {/* Title + meta below the hero */}
+          <Text style={ls.lessonTitle} numberOfLines={2}>{pack.lesson.title}</Text>
           <Text style={ls.lessonMeta}>
-            {pack.tags?.[0] ?? t("common.content")} • {pack.estimatedMinutes}{" "}
-            min
+            {pack.tags?.[0] ?? t("common.content")} • {pack.estimatedMinutes} min
           </Text>
 
           <View style={ls.divider} />
@@ -614,38 +616,31 @@ const as = StyleSheet.create({
 });
 
 const ls = StyleSheet.create({
-  coverWrap: {
+  heroImage: {
     width: "100%",
-    height: 200,
-    position: "relative",
+    height: 230,
   },
-  coverImage: {
+  heroPlaceholder: {
     width: "100%",
-    height: 200,
-  },
-  coverFade: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 80,
-    backgroundColor: "#0B0F1490",
+    height: 230,
+    alignItems: "center",
+    justifyContent: "center",
   },
   content: {
     paddingHorizontal: 20,
-    paddingTop: 24,
+    paddingTop: 18,
   },
   lessonTitle: {
     color: "#E6EAF2",
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: "700",
-    lineHeight: 28,
-    letterSpacing: -0.2,
+    lineHeight: 26,
+    letterSpacing: -0.3,
   },
   lessonMeta: {
     color: "#AAB0C0",
     fontSize: 13,
-    marginTop: 4,
+    marginTop: 5,
   },
   divider: {
     height: 1,
