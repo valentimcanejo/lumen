@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import {
   Image,
+  PanResponder,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -233,6 +234,60 @@ export default function LessonScreen() {
   const [positionMs, setPositionMs] = useState(0);
   const [durationMs, setDurationMs] = useState(0);
 
+  // Refs para o slider — lidos dentro do PanResponder (criado uma vez)
+  const audioReadyRef = useRef(false);
+  audioReadyRef.current = audioReady;
+  const durationMsRef = useRef(0);
+  durationMsRef.current = durationMs;
+  const isDragging = useRef(false);
+  const dragPositionMs = useRef(0);
+  const progressBarRef = useRef<View>(null);
+  const progressBarLayout = useRef({ x: 0, width: 1 });
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => audioReadyRef.current,
+      onMoveShouldSetPanResponder: () => audioReadyRef.current,
+      onPanResponderGrant: (e) => {
+        if (!soundRef.current || durationMsRef.current === 0) return;
+        isDragging.current = true;
+        const fraction = Math.max(
+          0,
+          Math.min(
+            1,
+            (e.nativeEvent.pageX - progressBarLayout.current.x) /
+              progressBarLayout.current.width,
+          ),
+        );
+        const ms = Math.round(fraction * durationMsRef.current);
+        dragPositionMs.current = ms;
+        setPositionMs(ms);
+      },
+      onPanResponderMove: (e) => {
+        if (!soundRef.current || durationMsRef.current === 0) return;
+        const fraction = Math.max(
+          0,
+          Math.min(
+            1,
+            (e.nativeEvent.pageX - progressBarLayout.current.x) /
+              progressBarLayout.current.width,
+          ),
+        );
+        const ms = Math.round(fraction * durationMsRef.current);
+        dragPositionMs.current = ms;
+        setPositionMs(ms);
+      },
+      onPanResponderRelease: () => {
+        isDragging.current = false;
+        soundRef.current?.setPositionAsync(dragPositionMs.current);
+      },
+      onPanResponderTerminate: () => {
+        isDragging.current = false;
+        soundRef.current?.setPositionAsync(dragPositionMs.current);
+      },
+    }),
+  ).current;
+
   const audioProgress =
     durationMs > 0 ? Math.min(1, positionMs / durationMs) : 0;
 
@@ -300,7 +355,7 @@ export default function LessonScreen() {
 
         sound.setOnPlaybackStatusUpdate((status) => {
           if (!status.isLoaded) return;
-          setPositionMs(status.positionMillis);
+          if (!isDragging.current) setPositionMs(status.positionMillis);
           if (status.durationMillis) setDurationMs(status.durationMillis);
           if (status.didJustFinish) {
             setPlaying(false);
@@ -344,6 +399,13 @@ export default function LessonScreen() {
       await soundRef.current.playAsync();
       setPlaying(true);
     }
+  }
+
+  async function handleSeekToFraction(fraction: number) {
+    if (!soundRef.current || !audioReady || durationMs === 0) return;
+    const next = Math.round(fraction * durationMs);
+    await soundRef.current.setPositionAsync(next);
+    setPositionMs(next);
   }
 
   async function handleNext() {
@@ -465,13 +527,32 @@ export default function LessonScreen() {
               </Text>
             </View>
 
-            <View style={ls.progressTrack}>
-              <View
-                style={[
-                  ls.progressFill,
-                  { width: `${audioProgress * 100}%`, backgroundColor: color },
-                ]}
-              />
+            <View
+              ref={progressBarRef}
+              onLayout={() => {
+                progressBarRef.current?.measureInWindow((x, _y, width) => {
+                  progressBarLayout.current = { x, width: width || 1 };
+                });
+              }}
+              {...panResponder.panHandlers}
+              style={ls.progressHitArea}
+            >
+              <View style={ls.progressTrack}>
+                <View
+                  style={[
+                    ls.progressFill,
+                    { width: `${audioProgress * 100}%`, backgroundColor: color },
+                  ]}
+                />
+                {audioReady && (
+                  <View
+                    style={[
+                      ls.progressThumb,
+                      { left: `${audioProgress * 100}%` as any, backgroundColor: color },
+                    ]}
+                  />
+                )}
+              </View>
             </View>
 
             {pack.lesson.summary ? (
@@ -589,16 +670,28 @@ const ls = StyleSheet.create({
     width: 68,
     textAlign: "right",
   },
+  progressHitArea: {
+    marginTop: 12,
+    height: 28,
+    justifyContent: "center",
+  },
   progressTrack: {
     height: 4,
     borderRadius: 2,
     backgroundColor: "#1A2233",
-    overflow: "hidden",
-    marginTop: 12,
+    position: "relative",
   },
   progressFill: {
     height: "100%",
     borderRadius: 2,
+  },
+  progressThumb: {
+    position: "absolute",
+    top: -5,
+    width: 14,
+    height: 14,
+    borderRadius: 7,
+    marginLeft: -7,
   },
   summaryText: {
     color: "#7B8193",
