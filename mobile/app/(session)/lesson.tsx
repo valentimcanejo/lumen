@@ -346,6 +346,17 @@ export default function LessonScreen() {
     }
   }
 
+  async function handleNext() {
+    if (soundRef.current && playing) {
+      await soundRef.current.pauseAsync();
+      setPlaying(false);
+    }
+    router.push({
+      pathname: "/(session)/quiz",
+      params: { contentId, version, lang },
+    });
+  }
+
   async function handleSave() {
     if (!uid) return;
     const newSaved = !saved;
@@ -481,16 +492,7 @@ export default function LessonScreen() {
 
           <View style={ls.actions}>
             <Pressable
-              onPress={() => {
-                router.push({
-                  pathname: "/(session)/cards",
-                  params: {
-                    contentId,
-                    version,
-                    lang,
-                  },
-                });
-              }}
+              onPress={handleNext}
               style={[ls.nextBtn, { backgroundColor: color }]}
             >
               <Text style={ls.nextBtnText}>{t("common.next")}</Text>
