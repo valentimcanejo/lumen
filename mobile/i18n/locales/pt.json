@@ -206,7 +206,9 @@
     "empty": "Nenhuma lição disponível.",
     "min": "min",
     "mastered_title": "Trilha concluída!",
-    "mastered_fallback": "Você domina todos os conteúdos desta trilha."
+    "mastered_fallback": "Você domina todos os conteúdos desta trilha.",
+    "premium_badge": "Premium",
+    "premium_unlock": "Assinar"
   },
   "session": {
     "intro": {

@@ -13,6 +13,8 @@ import { VStack } from "@/components/ui/vstack";
 import { LumenButton } from "../../components/ui/lumen/Button";
 import { trackColor, trackBg } from "../../constants/tracks";
 import { incrementContentStart } from "../../repositories/content_stats.repo";
+import { getLessonMeta } from "../../repositories/lessons.repo";
+import { usePremium } from "../../hooks/usePremium";
 import type { Lang } from "../../models/lang";
 
 const DIFFICULTY_LABELS: Record<string, Record<Lang, string>> = {
@@ -40,12 +42,22 @@ export default function LessonIntroScreen() {
       estimatedMinutes: string;
     };
 
+  const { isPremium } = usePremium();
+
   const color = trackColor(contentId);
   const bg = trackBg(contentId);
   const diffLabel = DIFFICULTY_LABELS[difficulty]?.[lang ?? "pt"] ?? difficulty;
   const diffColor = DIFFICULTY_COLORS[difficulty] ?? "#AAB0C0";
 
+  // Gate: if this is a premium lesson and user is not premium, redirect to paywall
+  const lessonMeta = getLessonMeta(contentId);
+  const isPremiumLocked = lessonMeta?.tier === "premium" && !isPremium;
+
   function startLesson() {
+    if (isPremiumLocked) {
+      router.replace("/(premium)/paywall");
+      return;
+    }
     incrementContentStart(contentId).catch(() => {});
     router.push({
       pathname: "/(session)/lesson",

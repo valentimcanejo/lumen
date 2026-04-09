@@ -15,6 +15,7 @@ import {
 } from "../../repositories/lessons.repo";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "../../hooks/useAuth";
+import { usePremium } from "../../hooks/usePremium";
 import { getCompletedContentIds } from "../../repositories/user.repo";
 import { SkeletonLessonRow } from "../../components/ui/lumen/Skeleton";
 import { trackColor, trackBg } from "../../constants/tracks";
@@ -28,26 +29,29 @@ function LessonCard({
   lang,
   completed,
   locked,
+  premiumLocked,
   color,
   onStart,
+  onUnlock,
 }: {
   lesson: LessonMeta;
   lang: Lang;
   completed: boolean;
-  locked: boolean;
+  locked: boolean;        // locked by prerequisites
+  premiumLocked: boolean; // locked by premium tier
   color: string;
   onStart: () => void;
+  onUnlock: () => void;
 }) {
   const { t } = useTranslation();
   const title = lesson.title[lang] ?? lesson.title.en ?? lesson.id;
   const diffColor = DIFF_COLORS[lesson.difficulty] ?? "#AAB0C0";
 
-  const cardBg = locked ? "#0B0F14" : completed ? "#0D1A10" : "#121826";
-  const borderColor = locked ? "#1A2233" : completed ? color + "44" : "#1A2233";
-  const accentColor = locked ? "#1A2233" : completed ? color + "70" : color + "50";
-
-  const iconBg = locked ? "#1A2233" : completed ? color + "20" : color + "15";
-  const iconBorderColor = locked ? "#2A3448" : completed ? color + "40" : color + "30";
+  const cardBg = locked ? "#0B0F14" : premiumLocked ? "#111420" : completed ? "#0D1A10" : "#121826";
+  const borderColor = locked ? "#1A2233" : premiumLocked ? "#F5C77A33" : completed ? color + "44" : "#1A2233";
+  const accentColor = locked ? "#1A2233" : premiumLocked ? "#F5C77A55" : completed ? color + "70" : color + "50";
+  const iconBg = locked ? "#1A2233" : premiumLocked ? "#F5C77A15" : completed ? color + "20" : color + "15";
+  const iconBorderColor = locked ? "#2A3448" : premiumLocked ? "#F5C77A40" : completed ? color + "40" : color + "30";
 
   return (
     <RNView
@@ -65,19 +69,28 @@ function LessonCard({
       <RNView style={[lc.iconBadge, { backgroundColor: iconBg, borderColor: iconBorderColor }]}>
         {locked
           ? <Ionicons name="lock-closed" size={15} color="#4A5568" />
-          : completed
-            ? <Ionicons name="checkmark" size={16} color={color} />
-            : <Ionicons name="book-outline" size={16} color={color} />
+          : premiumLocked
+            ? <Ionicons name="sparkles" size={15} color="#F5C77A" />
+            : completed
+              ? <Ionicons name="checkmark" size={16} color={color} />
+              : <Ionicons name="book-outline" size={16} color={color} />
         }
       </RNView>
 
       {/* Text */}
       <RNView style={lc.textCol}>
-        <Text style={lc.cardTitle}>{title}</Text>
+        <RNView style={lc.titleRow}>
+          <Text style={lc.cardTitle} numberOfLines={2}>{title}</Text>
+          {premiumLocked && (
+            <RNView style={lc.premiumBadge}>
+              <Text style={lc.premiumBadgeText}>{t("track.premium_badge")}</Text>
+            </RNView>
+          )}
+        </RNView>
         <RNView style={lc.metaRow}>
           <RNView style={[lc.diffDot, { backgroundColor: diffColor }]} />
           <Text style={lc.metaText}>{lesson.estimatedMinutes} {t("track.min")}</Text>
-          {completed && !locked && (
+          {completed && !locked && !premiumLocked && (
             <>
               <RNView style={lc.metaDivider} />
               <Text style={[lc.metaText, { color }]}>{t("track.completed")}</Text>
@@ -89,18 +102,24 @@ function LessonCard({
       {/* Action */}
       {!locked && (
         <Pressable
-          onPress={onStart}
+          onPress={premiumLocked ? onUnlock : onStart}
           style={[
             lc.actionBtn,
-            {
-              backgroundColor: completed ? "transparent" : color,
-              borderColor: color,
-              borderWidth: completed ? 1 : 0,
-            },
+            premiumLocked
+              ? { backgroundColor: "#F5C77A", borderWidth: 0 }
+              : {
+                  backgroundColor: completed ? "transparent" : color,
+                  borderColor: color,
+                  borderWidth: completed ? 1 : 0,
+                },
           ]}
         >
-          <Text style={[lc.actionText, { color: completed ? color : "#0B0F14" }]}>
-            {completed ? t("track.review") : t("track.start")}
+          <Text style={[lc.actionText, { color: premiumLocked ? "#0B0F14" : completed ? color : "#0B0F14" }]}>
+            {premiumLocked
+              ? t("track.premium_unlock")
+              : completed
+                ? t("track.review")
+                : t("track.start")}
           </Text>
         </Pressable>
       )}
@@ -113,6 +132,7 @@ export default function TrackDetailScreen() {
   const insets = useSafeAreaInsets();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { uid } = useAuth();
+  const { isPremium } = usePremium();
 
   const lang = (i18n.language ?? "pt") as Lang;
   const [track, setTrack] = useState<Track | null>(null);
@@ -225,16 +245,19 @@ export default function TrackDetailScreen() {
         ) : (
           lessons.map((lesson) => {
             const locked = lesson.prerequisites.some((p) => !completedIds.includes(p));
+            const premiumLocked = lesson.tier === "premium" && !isPremium;
             return (
-            <LessonCard
-              key={lesson.id}
-              lesson={lesson}
-              lang={lang}
-              completed={completedIds.includes(lesson.id)}
-              locked={locked}
-              color={color}
-              onStart={() => startLesson(lesson)}
-            />
+              <LessonCard
+                key={lesson.id}
+                lesson={lesson}
+                lang={lang}
+                completed={completedIds.includes(lesson.id)}
+                locked={locked}
+                premiumLocked={premiumLocked}
+                color={color}
+                onStart={() => startLesson(lesson)}
+                onUnlock={() => router.push("/(premium)/paywall")}
+              />
             );
           })
         )}
@@ -354,11 +377,32 @@ const lc = StyleSheet.create({
     flex: 1,
     gap: 5,
   },
+  titleRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    flexWrap: "wrap",
+  },
   cardTitle: {
     color: "#E6EAF2",
     fontSize: 14,
     fontWeight: "700",
     lineHeight: 19,
+    flexShrink: 1,
+  },
+  premiumBadge: {
+    backgroundColor: "#F5C77A22",
+    borderRadius: 6,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderWidth: 1,
+    borderColor: "#F5C77A44",
+  },
+  premiumBadgeText: {
+    color: "#F5C77A",
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 0.3,
   },
   metaRow: {
     flexDirection: "row",

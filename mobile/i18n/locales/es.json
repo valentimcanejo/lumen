@@ -206,7 +206,9 @@
     "empty": "No hay lecciones disponibles.",
     "min": "min",
     "mastered_title": "¡Ruta completada!",
-    "mastered_fallback": "Ya dominas todos los contenidos de esta ruta."
+    "mastered_fallback": "Ya dominas todos los contenidos de esta ruta.",
+    "premium_badge": "Premium",
+    "premium_unlock": "Suscribirse"
   },
   "session": {
     "intro": {

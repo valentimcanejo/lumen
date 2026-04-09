@@ -206,7 +206,9 @@
     "empty": "No lessons available.",
     "min": "min",
     "mastered_title": "Track completed!",
-    "mastered_fallback": "You've mastered all content in this track."
+    "mastered_fallback": "You've mastered all content in this track.",
+    "premium_badge": "Premium",
+    "premium_unlock": "Subscribe"
   },
   "session": {
     "intro": {
