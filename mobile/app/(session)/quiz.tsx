@@ -239,7 +239,7 @@ export default function QuizScreen() {
 
   const progressValue = useMemo(() => {
     if (!total) return 0.62;
-    const stepStart = 0.5;
+    const stepStart = 0.25;
     const stepEnd = 0.75;
     const pct = qIndex / Math.max(1, total);
     return stepStart + (stepEnd - stepStart) * pct;
