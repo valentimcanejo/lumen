@@ -2,7 +2,6 @@ import React, { useEffect, useState, useMemo } from "react";
 import {
   FlatList,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
   View as RNView,
   ScrollView as HScrollView,
@@ -23,8 +22,6 @@ import {
 } from "../../repositories/user.repo";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
-import { useAiPack } from "../../hooks/useAiPack";
-import { usePremium } from "../../hooks/usePremium";
 import { SkeletonTrackCard } from "../../components/ui/lumen/Skeleton";
 import { trackColor, trackBg } from "../../constants/tracks";
 import type { Track } from "../../models/track";
@@ -414,9 +411,6 @@ export default function Tracks() {
   const insets = useSafeAreaInsets();
   const { uid } = useAuth();
   const { getUserData } = useUser();
-  const { generate, loading: generating, error: aiPackError } = useAiPack(uid);
-  const { isPremium } = usePremium();
-  const [topicHint, setTopicHint] = useState("");
   const [tracks, setTracks] = useState<Track[]>([]);
   const [lang, setLang] = useState<Lang>("pt");
   const [loading, setLoading] = useState(true);
@@ -529,33 +523,6 @@ export default function Tracks() {
     await setSelectedTracks(uid, next);
   }
 
-  async function handleGenerate() {
-    const pack = await generate({
-      lang,
-      minutes: 10,
-      topicHint: topicHint.trim() || undefined,
-    });
-    if (pack) {
-      setTopicHint("");
-      router.push({
-        pathname: "/(session)/lesson",
-        params: { contentId: pack.id, version: String(pack.version), lang },
-      });
-    }
-  }
-
-  const isNotPremium =
-    !isPremium ||
-    aiPackError === "not-premium" ||
-    aiPackError === "premium-expired";
-
-  const aiErrorMessage =
-    aiPackError === "rate-limited"
-      ? t("tabs.tracks.ai_error_rate_limited")
-      : aiPackError === "unknown"
-        ? t("tabs.tracks.ai_error_unknown")
-        : null;
-
   const FILTERS: { key: FilterKey; label: string }[] = [
     { key: "all", label: t("tabs.tracks.filter_all") },
     { key: "following", label: t("tabs.tracks.filter_following") },
@@ -564,79 +531,6 @@ export default function Tracks() {
     { key: "hard", label: t("tabs.tracks.difficulty_3") },
   ];
 
-  const aiPackCard = (
-    <Box className="bg-[#121826] border border-[#F5C77A]/30 rounded-[22px] p-5 mb-4">
-      <HStack className="items-center mb-2" space="sm">
-        <Ionicons name="sparkles" size={16} color="#F5C77A" />
-        <Text className="text-[#F5C77A] text-[12px] font-semibold">
-          {t("tabs.tracks.ai_badge")}
-        </Text>
-      </HStack>
-      <Text className="text-[#E6EAF2] text-[16px] font-semibold">
-        {t("tabs.tracks.ai_title")}
-      </Text>
-      <Text className="text-[#AAB0C0] text-[13px] mt-1 leading-[20px]">
-        {t("tabs.tracks.ai_description")}
-      </Text>
-      {!isNotPremium && (
-        <RNView
-          style={{
-            marginTop: 14,
-            backgroundColor: "#0B0F14",
-            borderRadius: 12,
-            borderWidth: 1,
-            borderColor: "#1A2233",
-            flexDirection: "row",
-            alignItems: "center",
-            paddingHorizontal: 12,
-            height: 44,
-          }}
-        >
-          <TextInput
-            value={topicHint}
-            onChangeText={setTopicHint}
-            placeholder={t("tabs.tracks.ai_placeholder")}
-            placeholderTextColor="#4A5568"
-            style={{ flex: 1, color: "#E6EAF2", fontSize: 14 }}
-            maxLength={80}
-            returnKeyType="done"
-            onSubmitEditing={handleGenerate}
-            editable={!generating}
-          />
-          {topicHint.length > 0 && (
-            <TouchableOpacity onPress={() => setTopicHint("")} hitSlop={8}>
-              <Ionicons name="close-circle" size={16} color="#4A5568" />
-            </TouchableOpacity>
-          )}
-        </RNView>
-      )}
-      {aiErrorMessage ? (
-        <Text className="text-[#E26D6D] text-[12px] mt-3">
-          {aiErrorMessage}
-        </Text>
-      ) : null}
-      <Pressable
-        onPress={() => {
-          if (isNotPremium) {
-            router.push("/(premium)/paywall");
-          } else {
-            handleGenerate();
-          }
-        }}
-        disabled={generating}
-        className="mt-3 h-[44px] rounded-2xl bg-[#F5C77A] items-center justify-center"
-        style={{ opacity: generating ? 0.6 : 1 }}
-      >
-        <Text className="text-[#0B0F14] text-[15px] font-semibold">
-          {generating
-            ? t("tabs.tracks.ai_generating")
-            : isNotPremium
-              ? t("tabs.tracks.ai_unlock")
-              : t("tabs.tracks.ai_generate")}
-        </Text>
-      </Pressable>
-    </Box>
-  );
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
@@ -730,7 +624,6 @@ export default function Tracks() {
               />
             );
           }}
-          ListHeaderComponent={aiPackCard}
           ListEmptyComponent={
             <Text className="text-[#AAB0C0] text-center mt-6">
               {tracks.length === 0
