@@ -195,7 +195,15 @@
       "mastery_title": "Lo que dominas",
       "mastery_completed": "Completado",
       "mastery_in_progress": "En curso",
-      "mastery_lessons": "{{done}}/{{total}} lecciones"
+      "mastery_lessons": "{{done}}/{{total}} lecciones",
+      "weekly_report_title": "Resumen semanal",
+      "weekly_report_loading": "Generando tu resumen…",
+      "weekly_report_empty": "Tu resumen semanal aparecerá aquí después de tu primera semana de estudio.",
+      "weekly_report_highlight": "Destacado",
+      "weekly_report_suggestion": "Próxima semana",
+      "weekly_report_sessions": "{{count}} sesiones",
+      "weekly_report_minutes": "{{count}} min",
+      "weekly_report_xp": "+{{count}} XP"
     }
   },
   "track": {

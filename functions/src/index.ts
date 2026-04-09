@@ -1,4 +1,5 @@
 import { onCall, onRequest, HttpsError } from "firebase-functions/v2/https";
+import { onSchedule } from "firebase-functions/v2/scheduler";
 import { setGlobalOptions } from "firebase-functions/v2";
 import { defineSecret } from "firebase-functions/params";
 import * as admin from "firebase-admin";
@@ -325,5 +326,170 @@ export const revenuecatWebhook = onRequest(
     }
 
     res.status(200).send("OK");
+  }
+);
+
+// ---------------------------------------------------------------------------
+// generateWeeklyReports — runs every Monday at 10:00 UTC (07:00 Brasília)
+// Generates a personalised AI learning summary for each active premium user
+// Saves to: users/{uid}/weekly_reports/{YYYY-WNN}
+// ---------------------------------------------------------------------------
+
+function getWeekId(date: Date): string {
+  // ISO week: YYYY-WNN
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  const weekNo = Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7);
+  return `${d.getUTCFullYear()}-W${String(weekNo).padStart(2, "0")}`;
+}
+
+function buildReportPrompt(
+  lang: "pt" | "en" | "es",
+  weekId: string,
+  stats: { sessionsCompleted: number; minutesStudied: number; xpEarned: number; topTracks: string[] },
+): string {
+  const langName = LANG_NAMES[lang];
+  const tracksLine = stats.topTracks.length > 0
+    ? `Top tracks studied: ${stats.topTracks.join(", ")}.`
+    : "No specific tracks identified.";
+
+  return `You are a learning coach for Lumen, a knowledge app. Write a personalised weekly learning report for a user in ${langName}.
+
+Week: ${weekId}
+Sessions completed: ${stats.sessionsCompleted}
+Minutes studied: ${stats.minutesStudied}
+XP earned: ${stats.xpEarned}
+${tracksLine}
+
+Return ONLY valid JSON — no markdown — matching this exact structure:
+{
+  "headline": "<motivational headline, max 60 chars>",
+  "summary": "<2-3 sentences summarising the week's learning effort and achievements>",
+  "highlight": "<one interesting insight or fact the user likely encountered this week based on their tracks>",
+  "suggestion": "<one concrete suggestion for what to study next week, based on tracks covered>"
+}
+
+Rules:
+- All text in ${langName}
+- Be warm, specific, and encouraging — like a smart friend reviewing their week
+- Return ONLY the JSON object`;
+}
+
+export const generateWeeklyReports = onSchedule(
+  {
+    schedule: "every monday 10:00",
+    timeZone: "UTC",
+    secrets: [openaiApiKey],
+    memory: "512MiB",
+    timeoutSeconds: 540,
+  },
+  async () => {
+    const db = admin.firestore();
+    const now = new Date();
+    const weekId = getWeekId(now);
+
+    // Monday = start of THIS week; look back 7 days for session data
+    const weekStart = new Date(now);
+    weekStart.setUTCDate(weekStart.getUTCDate() - 7);
+    const weekStartStr = weekStart.toISOString().split("T")[0];
+    const weekEndStr = new Date(now.getTime() - 86400000).toISOString().split("T")[0];
+
+    // Fetch all premium users
+    const usersSnap = await db.collection("users")
+      .where("premium.isActive", "==", true)
+      .get();
+
+    if (usersSnap.empty) {
+      console.log("No premium users found — skipping report generation.");
+      return;
+    }
+
+    const openai = new OpenAI({ apiKey: openaiApiKey.value() });
+    let generated = 0;
+    let skipped = 0;
+
+    for (const userDoc of usersSnap.docs) {
+      const uid = userDoc.id;
+      const userData = userDoc.data();
+      const lang: "pt" | "en" | "es" = ["pt", "en", "es"].includes(userData.lang)
+        ? userData.lang
+        : "pt";
+
+      // Skip if report already exists for this week
+      const reportRef = db.doc(`users/${uid}/weekly_reports/${weekId}`);
+      const existing = await reportRef.get();
+      if (existing.exists) {
+        skipped++;
+        continue;
+      }
+
+      // Fetch daily session docs for the past week
+      const sessionsSnap = await db.collection(`users/${uid}/daily_sessions`)
+        .where("date", ">=", weekStartStr)
+        .where("date", "<=", weekEndStr)
+        .get();
+
+      let sessionsCompleted = 0;
+      let minutesStudied = 0;
+      let xpEarned = 0;
+      const trackCounts: Record<string, number> = {};
+
+      sessionsSnap.docs.forEach((d) => {
+        const s = d.data();
+        sessionsCompleted += s.sessionsCompleted ?? 1;
+        minutesStudied += s.totalMinutes ?? s.minutes ?? 0;
+        xpEarned += s.xpEarned ?? 0;
+        if (s.trackId) trackCounts[s.trackId] = (trackCounts[s.trackId] ?? 0) + 1;
+      });
+
+      // No activity this week — skip (don't write a "you did nothing" report)
+      if (sessionsCompleted === 0 && minutesStudied === 0) {
+        skipped++;
+        continue;
+      }
+
+      const topTracks = Object.entries(trackCounts)
+        .sort(([, a], [, b]) => b - a)
+        .slice(0, 3)
+        .map(([id]) => id);
+
+      const stats = { sessionsCompleted, minutesStudied, xpEarned, topTracks };
+
+      try {
+        const completion = await openai.chat.completions.create({
+          model: "gpt-4o-mini",
+          max_tokens: 512,
+          messages: [{ role: "user", content: buildReportPrompt(lang, weekId, stats) }],
+        });
+
+        const raw = completion.choices[0]?.message?.content ?? "{}";
+        let parsed: { headline?: string; summary?: string; highlight?: string; suggestion?: string };
+        try {
+          parsed = JSON.parse(raw);
+        } catch {
+          console.error(`[${uid}] Failed to parse AI response:`, raw);
+          continue;
+        }
+
+        await reportRef.set({
+          weekId,
+          generatedAt: Date.now(),
+          lang,
+          headline: parsed.headline ?? "",
+          summary: parsed.summary ?? "",
+          highlight: parsed.highlight ?? "",
+          suggestion: parsed.suggestion ?? "",
+          stats,
+        });
+
+        generated++;
+      } catch (err) {
+        console.error(`[${uid}] Error generating report:`, err);
+      }
+    }
+
+    console.log(`Weekly reports done — generated: ${generated}, skipped: ${skipped}`);
   }
 );

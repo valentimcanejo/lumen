@@ -25,6 +25,9 @@ import { getStudyHeatmap } from "../../repositories/progress.repo";
 import { getTracks } from "../../repositories/tracks.repo";
 import { getCurrentWeekId } from "../../repositories/leaderboard.repo";
 import { getLessonCountForTrack } from "../../repositories/lessons.repo";
+import { getLatestWeeklyReport } from "../../repositories/weeklyReports.repo";
+import { usePremium } from "../../hooks/usePremium";
+import type { WeeklyReport } from "../../models/weeklyReport";
 import { trackColor, trackBg } from "../../constants/tracks";
 import type { Track } from "../../models/track";
 import {
@@ -671,6 +674,110 @@ function MasterySection({
 }
 
 // ---------------------------------------------------------------------------
+// WeeklyReportCard — premium feature
+// ---------------------------------------------------------------------------
+
+function WeeklyReportCard({ report }: { report: WeeklyReport | null | "loading" }) {
+  const { t } = useTranslation();
+
+  return (
+    <View style={wr.container}>
+      <View style={wr.header}>
+        <Text style={wr.title}>{t("tabs.profile.weekly_report_title")}</Text>
+        <View style={wr.premiumBadge}>
+          <Text style={wr.premiumBadgeText}>PREMIUM</Text>
+        </View>
+      </View>
+
+      <View style={wr.card}>
+        {report === "loading" ? (
+          <Text style={wr.empty}>{t("tabs.profile.weekly_report_loading")}</Text>
+        ) : report === null ? (
+          <Text style={wr.empty}>{t("tabs.profile.weekly_report_empty")}</Text>
+        ) : (
+          <>
+            {/* Stats row */}
+            <View style={wr.statsRow}>
+              <View style={wr.statChip}>
+                <Text style={wr.statValue}>
+                  {t("tabs.profile.weekly_report_sessions", { count: report.stats.sessionsCompleted })}
+                </Text>
+              </View>
+              <View style={wr.statChip}>
+                <Text style={wr.statValue}>
+                  {t("tabs.profile.weekly_report_minutes", { count: report.stats.minutesStudied })}
+                </Text>
+              </View>
+              <View style={wr.statChip}>
+                <Text style={[wr.statValue, { color: "#F5C77A" }]}>
+                  {t("tabs.profile.weekly_report_xp", { count: report.stats.xpEarned })}
+                </Text>
+              </View>
+            </View>
+
+            {/* Headline */}
+            <Text style={wr.headline}>{report.headline}</Text>
+
+            {/* Summary */}
+            <Text style={wr.summary}>{report.summary}</Text>
+
+            {/* Highlight */}
+            <View style={wr.section}>
+              <View style={wr.sectionHeader}>
+                <Text style={wr.sectionIcon}>✨</Text>
+                <Text style={wr.sectionLabel}>{t("tabs.profile.weekly_report_highlight")}</Text>
+              </View>
+              <Text style={wr.sectionText}>{report.highlight}</Text>
+            </View>
+
+            {/* Suggestion */}
+            <View style={[wr.section, { marginBottom: 0 }]}>
+              <View style={wr.sectionHeader}>
+                <Text style={wr.sectionIcon}>🎯</Text>
+                <Text style={wr.sectionLabel}>{t("tabs.profile.weekly_report_suggestion")}</Text>
+              </View>
+              <Text style={wr.sectionText}>{report.suggestion}</Text>
+            </View>
+          </>
+        )}
+      </View>
+    </View>
+  );
+}
+
+const wr = StyleSheet.create({
+  container: { marginBottom: 24 },
+  header: { flexDirection: "row", alignItems: "center", marginBottom: 12, gap: 8 },
+  title: { color: "#E6EAF2", fontSize: 16, fontWeight: "600" },
+  premiumBadge: {
+    backgroundColor: "#F5C77A18",
+    borderWidth: 1,
+    borderColor: "#F5C77A50",
+    borderRadius: 10,
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+  },
+  premiumBadgeText: { color: "#F5C77A", fontSize: 10, fontWeight: "800", letterSpacing: 0.5 },
+  card: { backgroundColor: "#111827", borderRadius: 16, padding: 16 },
+  empty: { color: "#7B8193", fontSize: 13, lineHeight: 20, textAlign: "center" },
+  statsRow: { flexDirection: "row", gap: 6, marginBottom: 14, flexWrap: "wrap" },
+  statChip: {
+    backgroundColor: "#1A2233",
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  statValue: { color: "#AAB0C0", fontSize: 12, fontWeight: "600" },
+  headline: { color: "#E6EAF2", fontSize: 15, fontWeight: "700", marginBottom: 8, lineHeight: 21 },
+  summary: { color: "#AAB0C0", fontSize: 13, lineHeight: 20, marginBottom: 14 },
+  section: { backgroundColor: "#1A2233", borderRadius: 12, padding: 12, marginBottom: 10 },
+  sectionHeader: { flexDirection: "row", alignItems: "center", gap: 6, marginBottom: 6 },
+  sectionIcon: { fontSize: 14 },
+  sectionLabel: { color: "#E6EAF2", fontSize: 12, fontWeight: "700", textTransform: "uppercase", letterSpacing: 0.5 },
+  sectionText: { color: "#AAB0C0", fontSize: 13, lineHeight: 20 },
+});
+
+// ---------------------------------------------------------------------------
 // Screen
 // ---------------------------------------------------------------------------
 
@@ -687,6 +794,8 @@ export default function ProfileScreen() {
   const [heatmap, setHeatmap] = useState<Record<string, number>>({});
   const [tracks, setTracks] = useState<Track[]>([]);
   const [completedIds, setCompletedIds] = useState<string[]>([]);
+  const [weeklyReport, setWeeklyReport] = useState<WeeklyReport | null | "loading">(null);
+  const { isPremium } = usePremium();
 
   useEffect(() => {
     if (!uid) return;
@@ -700,6 +809,14 @@ export default function ProfileScreen() {
     getCompletedContentIds(uid).then(setCompletedIds).catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid]);
+
+  useEffect(() => {
+    if (!uid || !isPremium) return;
+    setWeeklyReport("loading");
+    getLatestWeeklyReport(uid)
+      .then(setWeeklyReport)
+      .catch(() => setWeeklyReport(null));
+  }, [uid, isPremium]);
 
   useEffect(() => {
     Notifications.getPermissionsAsync().then(({ status }) => {
@@ -826,6 +943,11 @@ export default function ProfileScreen() {
 
             {/* Activity heatmap */}
             <StudyHeatmap heatmap={heatmap} />
+
+            {/* Weekly AI report — premium only */}
+            {isPremium && (
+              <WeeklyReportCard report={weeklyReport} />
+            )}
 
             {/* Language */}
             <HStack className="items-center justify-between mb-6">

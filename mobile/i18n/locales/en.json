@@ -195,7 +195,15 @@
       "mastery_title": "What you've mastered",
       "mastery_completed": "Completed",
       "mastery_in_progress": "In progress",
-      "mastery_lessons": "{{done}}/{{total}} lessons"
+      "mastery_lessons": "{{done}}/{{total}} lessons",
+      "weekly_report_title": "Weekly summary",
+      "weekly_report_loading": "Generating your summary…",
+      "weekly_report_empty": "Your weekly summary will appear here after your first study week.",
+      "weekly_report_highlight": "Highlight",
+      "weekly_report_suggestion": "Next week",
+      "weekly_report_sessions": "{{count}} sessions",
+      "weekly_report_minutes": "{{count}} min",
+      "weekly_report_xp": "+{{count}} XP"
     }
   },
   "track": {
