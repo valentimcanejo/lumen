@@ -1,7 +1,11 @@
 import { onCall, HttpsError } from "firebase-functions/v2/https";
 import { setGlobalOptions } from "firebase-functions/v2";
+import { defineSecret } from "firebase-functions/params";
 import * as admin from "firebase-admin";
 import Anthropic from "@anthropic-ai/sdk";
+import OpenAI from "openai";
+
+const openaiApiKey = defineSecret("OPENAI_API_KEY");
 
 admin.initializeApp();
 
@@ -136,15 +140,8 @@ Rules:
 }
 
 // ---------------------------------------------------------------------------
-// generateAudio — Google Cloud TTS Neural2
+// generateAudio — OpenAI TTS tts-1-hd
 // ---------------------------------------------------------------------------
-
-const TTS_VOICES: Record<Lang, { languageCode: string; name: string }> = {
-  pt: { languageCode: "pt-BR", name: "pt-BR-Neural2-C" },
-  en: { languageCode: "en-US", name: "en-US-Neural2-F" },
-  es: { languageCode: "es-ES", name: "es-ES-Neural2-F" },
-};
-
 
 interface GenerateAudioInput {
   contentId: string;
@@ -154,7 +151,7 @@ interface GenerateAudioInput {
 }
 
 export const generateAudio = onCall(
-  { enforceAppCheck: false, memory: "512MiB", invoker: "public" },
+  { enforceAppCheck: false, memory: "512MiB", invoker: "public", secrets: [openaiApiKey] },
   async (request) => {
     const { contentId, version, lang, text } = (request.data as GenerateAudioInput) ?? {};
 
@@ -166,7 +163,7 @@ export const generateAudio = onCall(
       throw new HttpsError("invalid-argument", "text exceeds maximum length of 10,000 characters.");
     }
 
-    const audioPath = `packs/${contentId}/v${version}/audio/${lang}.mp3`;
+    const audioPath = `packs/${contentId}/v${version}/audio/${lang}_gpt.mp3`;
     const bucket = admin.storage().bucket();
     const audioFile = bucket.file(audioPath);
 
@@ -174,22 +171,19 @@ export const generateAudio = onCall(
     const [exists] = await audioFile.exists();
     if (exists) return { storagePath: audioPath };
 
-    // Call Google Cloud TTS Neural2
-    const { TextToSpeechClient } = await import("@google-cloud/text-to-speech");
-    const ttsClient = new TextToSpeechClient();
-    const voice = TTS_VOICES[lang];
-    const [ttsResponse] = await ttsClient.synthesizeSpeech({
-      input: { text },
-      voice: { languageCode: voice.languageCode, name: voice.name },
-      audioConfig: { audioEncoding: "MP3", speakingRate: 0.9 },
+    // Call OpenAI TTS tts-1-hd
+    const openai = new OpenAI({ apiKey: openaiApiKey.value() });
+    const response = await openai.audio.speech.create({
+      model: "tts-1-hd",
+      voice: "onyx",
+      input: text,
+      response_format: "mp3",
     });
 
-    if (!ttsResponse.audioContent) {
-      throw new HttpsError("internal", "TTS returned no audio content.");
-    }
+    const buffer = Buffer.from(await response.arrayBuffer());
 
     // Save MP3 to Firebase Storage
-    await audioFile.save(Buffer.from(ttsResponse.audioContent as Uint8Array), {
+    await audioFile.save(buffer, {
       contentType: "audio/mpeg",
       metadata: { cacheControl: "public, max-age=31536000" },
     });

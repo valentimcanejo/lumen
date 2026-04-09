@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import {
   Image,
+  Linking,
   PanResponder,
   ScrollView,
   StyleSheet,
@@ -13,6 +14,7 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
   withSequence,
+  withRepeat,
   Easing,
 } from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons";
@@ -33,6 +35,8 @@ import { useUser } from "../../hooks/useUser";
 import { toggleSaveContent } from "../../repositories/user.repo";
 import { trackColor } from "../../constants/tracks";
 import { getCoverImage } from "../../constants/covers";
+import { getLessonMeta } from "../../repositories/lessons.repo";
+import { CoverImage } from "../../components/ui/lumen/CoverImage";
 import { getStorageDownloadUrl } from "../../services/storage.service";
 import { generateAudio } from "../../services/functions.service";
 import type { Lang } from "../../models/lang";
@@ -71,7 +75,7 @@ function TopProgress({
   );
 }
 
-function Waveform({ progress = 0 }: { progress?: number }) {
+function Waveform({ progress = 0, color }: { progress?: number; color: string }) {
   const bars = useMemo(
     () =>
       Array.from({ length: 28 }).map((_, i) => ({ h: 8 + ((i * 13) % 22), i })),
@@ -97,11 +101,33 @@ function Waveform({ progress = 0 }: { progress?: number }) {
             width: 3,
             height: b.h,
             borderRadius: 2,
-            backgroundColor: b.i / 28 < progress ? "#F5C77A" : "#2A3448",
+            backgroundColor: b.i / 28 < progress ? color : "#2A3448",
           }}
         />
       ))}
     </View>
+  );
+}
+
+function SpinningLoader({ color }: { color: string }) {
+  const rotation = useSharedValue(0);
+
+  useEffect(() => {
+    rotation.value = withRepeat(
+      withTiming(360, { duration: 1200, easing: Easing.linear }),
+      -1,
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const animStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${rotation.value}deg` }],
+  }));
+
+  return (
+    <Animated.View style={animStyle}>
+      <Ionicons name="sync-outline" size={18} color={color} />
+    </Animated.View>
   );
 }
 
@@ -320,7 +346,7 @@ export default function LessonScreen() {
 
     async function prepareAudio() {
       setAudioLoading(true);
-      const storagePath = `packs/${contentId}/v${version}/audio/${lang}.mp3`;
+      const storagePath = `packs/${contentId}/v${version}/audio/${lang}_gpt.mp3`;
 
       try {
         let url: string;
@@ -466,10 +492,21 @@ export default function LessonScreen() {
       >
         {/* Hero cover image — full bleed */}
         {(() => {
-          const cover = getCoverImage(contentId);
-          return cover ? (
-            <Image source={cover} style={ls.heroImage} resizeMode="cover" />
-          ) : (
+          const meta = getLessonMeta(contentId);
+          const coverUri = meta?.coverImageUrl;
+          const coverLocal = getCoverImage(contentId);
+          if (coverUri) {
+            return (
+              <CoverImage
+                uri={coverUri}
+                credit={meta?.coverImageCredit}
+                width="100%"
+                height={230}
+              />
+            );
+          }
+          if (coverLocal) return <Image source={coverLocal} style={ls.heroImage} resizeMode="cover" />;
+          return (
             <View style={[ls.heroPlaceholder, { backgroundColor: color + "20" }]}>
               <Ionicons name="book-outline" size={44} color={color} />
             </View>
@@ -507,7 +544,7 @@ export default function LessonScreen() {
                 ]}
               >
                 {showLoadingIcon ? (
-                  <Ionicons name="hourglass-outline" size={18} color={color} />
+                  <SpinningLoader color={color} />
                 ) : (
                   <Ionicons
                     name={playIconName}
@@ -518,7 +555,7 @@ export default function LessonScreen() {
                 )}
               </TouchableOpacity>
 
-              <Waveform progress={audioProgress} />
+              <Waveform progress={audioProgress} color={color} />
 
               <Text style={ls.timeLabel}>
                 {audioReady
