@@ -88,7 +88,12 @@
     "restore_success": "¡Suscripción restaurada con éxito!",
     "restore_none": "No se encontró ninguna suscripción activa.",
     "purchase_error": "Error al procesar la compra. Inténtalo de nuevo.",
-    "sign_in_required": "Inicia sesión para suscribirte"
+    "sign_in_required": "Inicia sesión para suscribirte",
+    "success_title": "¡Bienvenido a Premium!",
+    "success_subtitle": "Ahora tienes acceso ilimitado a todo el contenido de Lumen.",
+    "success_cta": "Comenzar",
+    "per_year": "/año",
+    "per_month": "/mes"
   },
   "tabs": {
     "home": {

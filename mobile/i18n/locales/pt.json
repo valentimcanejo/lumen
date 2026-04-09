@@ -88,7 +88,12 @@
     "restore_success": "Assinatura restaurada com sucesso!",
     "restore_none": "Nenhuma assinatura ativa encontrada.",
     "purchase_error": "Erro ao processar compra. Tente novamente.",
-    "sign_in_required": "Entre com sua conta para assinar"
+    "sign_in_required": "Entre com sua conta para assinar",
+    "success_title": "Bem-vindo ao Premium!",
+    "success_subtitle": "Agora você tem acesso a todo o conteúdo ilimitado do Lumen.",
+    "success_cta": "Começar",
+    "per_year": "/ano",
+    "per_month": "/mês"
   },
   "tabs": {
     "home": {

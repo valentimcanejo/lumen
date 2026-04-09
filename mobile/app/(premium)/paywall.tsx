@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { ScrollView, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
+import {
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+  Modal,
+  View,
+} from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -11,6 +17,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { usePremium } from "../../hooks/usePremium";
 
 type Plan = "annual" | "monthly";
+type FeedbackModal = "success" | "restored" | "none_found" | "error" | null;
 
 function FeatureRow({ icon, title, desc }: { icon: string; title: string; desc: string }) {
   return (
@@ -40,34 +47,185 @@ function FeatureRow({ icon, title, desc }: { icon: string; title: string; desc: 
   );
 }
 
+function FeedbackOverlay({
+  type,
+  onClose,
+}: {
+  type: FeedbackModal;
+  onClose: () => void;
+}) {
+  const { t } = useTranslation();
+  if (!type) return null;
+
+  const isSuccess = type === "success" || type === "restored";
+
+  const config = {
+    success: {
+      icon: "sparkles" as const,
+      iconColor: "#F5C77A",
+      iconBg: "#F5C77A22",
+      title: t("premium.success_title"),
+      subtitle: t("premium.success_subtitle"),
+      cta: t("premium.success_cta"),
+      ctaBg: "#F5C77A",
+      ctaColor: "#0B0F14",
+    },
+    restored: {
+      icon: "checkmark-circle" as const,
+      iconColor: "#50C878",
+      iconBg: "#50C87822",
+      title: t("premium.restore_success"),
+      subtitle: t("premium.success_subtitle"),
+      cta: t("premium.success_cta"),
+      ctaBg: "#F5C77A",
+      ctaColor: "#0B0F14",
+    },
+    none_found: {
+      icon: "information-circle" as const,
+      iconColor: "#AAB0C0",
+      iconBg: "#AAB0C022",
+      title: t("premium.restore_none"),
+      subtitle: "",
+      cta: "OK",
+      ctaBg: "#1A2233",
+      ctaColor: "#E6EAF2",
+    },
+    error: {
+      icon: "alert-circle" as const,
+      iconColor: "#E0115F",
+      iconBg: "#E0115F22",
+      title: t("premium.purchase_error"),
+      subtitle: "",
+      cta: "OK",
+      ctaBg: "#1A2233",
+      ctaColor: "#E6EAF2",
+    },
+  }[type];
+
+  return (
+    <Modal transparent animationType="fade" visible statusBarTranslucent>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "#000000CC",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingHorizontal: 32,
+        }}
+      >
+        <View
+          style={{
+            backgroundColor: "#111827",
+            borderRadius: 24,
+            padding: 32,
+            width: "100%",
+            alignItems: "center",
+            borderWidth: 1,
+            borderColor: isSuccess ? "#F5C77A33" : "#1A2233",
+          }}
+        >
+          {/* Icon */}
+          <View
+            style={{
+              width: 64,
+              height: 64,
+              borderRadius: 32,
+              backgroundColor: config.iconBg,
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 20,
+            }}
+          >
+            <Ionicons name={config.icon} size={32} color={config.iconColor} />
+          </View>
+
+          {/* Title */}
+          <Text
+            style={{
+              color: "#E6EAF2",
+              fontSize: 22,
+              fontWeight: "800",
+              textAlign: "center",
+              marginBottom: config.subtitle ? 10 : 24,
+            }}
+          >
+            {config.title}
+          </Text>
+
+          {/* Subtitle */}
+          {!!config.subtitle && (
+            <Text
+              style={{
+                color: "#AAB0C0",
+                fontSize: 14,
+                textAlign: "center",
+                lineHeight: 20,
+                marginBottom: 28,
+              }}
+            >
+              {config.subtitle}
+            </Text>
+          )}
+
+          {/* CTA */}
+          <TouchableOpacity
+            onPress={onClose}
+            activeOpacity={0.85}
+            style={{
+              backgroundColor: config.ctaBg,
+              borderRadius: 14,
+              height: 48,
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={{ color: config.ctaColor, fontSize: 15, fontWeight: "700" }}>
+              {config.cta}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </Modal>
+  );
+}
+
 export default function Paywall() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const [selectedPlan, setSelectedPlan] = useState<Plan>("annual");
   const [processing, setProcessing] = useState(false);
   const [restoring, setRestoring] = useState(false);
+  const [feedback, setFeedback] = useState<FeedbackModal>(null);
 
   const { isAnonymous, signInWithGoogle } = useAuth();
   const { annualPackage, monthlyPackage, purchasePlan, restorePurchases } = usePremium();
 
+  // Dynamic prices from RevenueCat packages, fallback to i18n strings
+  const annualPrice = annualPackage
+    ? `${annualPackage.product.priceString}${t("premium.per_year")}`
+    : t("premium.plan_annual_price");
+  const monthlyPrice = monthlyPackage
+    ? `${monthlyPackage.product.priceString}${t("premium.per_month")}`
+    : t("premium.plan_monthly_price");
+
+  function handleFeedbackClose() {
+    setFeedback(null);
+    if (feedback === "success" || feedback === "restored") router.back();
+  }
+
   async function handleSubscribe() {
     setProcessing(true);
     try {
-      // Require sign-in before purchase
-      if (isAnonymous) {
-        await signInWithGoogle();
-      }
+      if (isAnonymous) await signInWithGoogle();
 
       const pkg = selectedPlan === "annual" ? annualPackage : monthlyPackage;
-      if (!pkg) {
-        Alert.alert(t("premium.purchase_error"));
-        return;
-      }
+      if (!pkg) { setFeedback("error"); return; }
 
       const success = await purchasePlan(pkg);
-      if (success) router.back();
+      if (success) setFeedback("success");
     } catch {
-      Alert.alert(t("premium.purchase_error"));
+      setFeedback("error");
     } finally {
       setProcessing(false);
     }
@@ -77,15 +235,9 @@ export default function Paywall() {
     setRestoring(true);
     try {
       const active = await restorePurchases();
-      if (active) {
-        Alert.alert(t("premium.restore_success"), undefined, [
-          { text: "OK", onPress: () => router.back() },
-        ]);
-      } else {
-        Alert.alert(t("premium.restore_none"));
-      }
+      setFeedback(active ? "restored" : "none_found");
     } catch {
-      Alert.alert(t("premium.purchase_error"));
+      setFeedback("error");
     } finally {
       setRestoring(false);
     }
@@ -93,6 +245,8 @@ export default function Paywall() {
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
+      <FeedbackOverlay type={feedback} onClose={handleFeedbackClose} />
+
       {/* Close button */}
       <TouchableOpacity
         onPress={() => router.back()}
@@ -185,7 +339,7 @@ export default function Paywall() {
                 <Box>
                   <HStack space="sm" style={{ alignItems: "center", marginBottom: 4 }}>
                     <Text style={{ color: "#E6EAF2", fontSize: 16, fontWeight: "700" }}>
-                      {t("premium.plan_annual_price")}
+                      {annualPrice}
                     </Text>
                     <Box
                       style={{
@@ -238,7 +392,7 @@ export default function Paywall() {
               <HStack style={{ justifyContent: "space-between", alignItems: "center" }}>
                 <Box>
                   <Text style={{ color: "#E6EAF2", fontSize: 16, fontWeight: "700", marginBottom: 4 }}>
-                    {t("premium.plan_monthly_price")}
+                    {monthlyPrice}
                   </Text>
                   <Text style={{ color: "#AAB0C0", fontSize: 12 }}>
                     {t("premium.plan_monthly_label")}

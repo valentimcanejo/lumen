@@ -88,7 +88,12 @@
     "restore_success": "Subscription restored successfully!",
     "restore_none": "No active subscription found.",
     "purchase_error": "Purchase failed. Please try again.",
-    "sign_in_required": "Sign in to subscribe"
+    "sign_in_required": "Sign in to subscribe",
+    "success_title": "Welcome to Premium!",
+    "success_subtitle": "You now have unlimited access to all Lumen content.",
+    "success_cta": "Get started",
+    "per_year": "/year",
+    "per_month": "/month"
   },
   "tabs": {
     "home": {
