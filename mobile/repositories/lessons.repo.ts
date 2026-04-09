@@ -16,6 +16,8 @@ export type LessonMeta = {
   tier: LessonTier; // content gating
   status: LessonStatus; // visibility control
   prerequisites: string[]; // contentIds that must be completed first
+  coverImageUrl?: string; // Unsplash photo URL, set via fetch-covers script
+  coverImageCredit?: { photographer: string; profileUrl: string }; // required attribution per Unsplash API Terms §9
 };
 
 // ---------------------------------------------------------------------------

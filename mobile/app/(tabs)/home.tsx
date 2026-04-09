@@ -31,6 +31,7 @@ import { VStack } from "../../components/ui/vstack";
 import { SkeletonCard } from "../../components/ui/lumen/Skeleton";
 import { trackColor } from "../../constants/tracks";
 import { getCoverImage } from "../../constants/covers";
+import { CoverImage } from "../../components/ui/lumen/CoverImage";
 
 import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
@@ -50,9 +51,9 @@ import {
 } from "../../repositories/progress.repo";
 import { invalidateUserCache } from "../../hooks/useUser";
 import {
-  requestNotificationPermission,
   scheduleDailyMissionNotification,
 } from "../../services/notifications.service";
+import * as Notifications from "expo-notifications";
 import { getCompletedContentIds } from "../../repositories/user.repo";
 import { getCurrentWeekId } from "../../repositories/leaderboard.repo";
 import { WeeklyShareCard } from "../../components/WeeklyShareCard";
@@ -624,8 +625,8 @@ export default function Home() {
       // Schedule daily mission notification (idempotent — replaces itself daily)
       if (!notifScheduledRef.current) {
         notifScheduledRef.current = true;
-        requestNotificationPermission().then((granted) => {
-          if (granted) {
+        Notifications.getPermissionsAsync().then(({ status }) => {
+          if (status === "granted") {
             scheduleDailyMissionNotification(
               "📋 Suas missões de hoje estão prontas!",
               "Complete suas missões diárias e ganhe XP bônus.",
@@ -844,7 +845,8 @@ export default function Home() {
       {!loadingUser && todayLesson && todayLessonId && (() => {
         const isDone = todayCompletedId === todayLessonId;
         const color = trackColor(todayLesson.trackId);
-        const cover = getCoverImage(todayLessonId);
+        const coverUri = todayLesson.coverImageUrl;
+        const coverLocal = getCoverImage(todayLessonId);
         return (
           <View style={{ paddingHorizontal: 20, marginTop: 20 }}>
             {/* Section label */}
@@ -864,8 +866,15 @@ export default function Home() {
             <View style={[lc.heroWrap, { borderColor: isDone ? "#1E2A3E" : color + "50" }]}>
               {/* Image */}
               <View style={lc.heroCard}>
-                {cover ? (
-                  <Image source={cover} style={lc.heroImage} resizeMode="cover" />
+                {coverUri ? (
+                  <CoverImage
+                    uri={coverUri}
+                    credit={todayLesson.coverImageCredit}
+                    width="100%"
+                    height={210}
+                  />
+                ) : coverLocal ? (
+                  <Image source={coverLocal} style={lc.heroImage} resizeMode="cover" />
                 ) : (
                   <View style={[lc.heroImage, { backgroundColor: color + "18", alignItems: "center", justifyContent: "center" }]}>
                     <View style={{ width: 3, height: 48, backgroundColor: color, borderRadius: 2 }} />
@@ -1085,23 +1094,6 @@ export default function Home() {
         </View>
       )}
 
-      {/* ── Leaderboard ────────────────────────────────────────── */}
-      <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
-        <TouchableOpacity
-          onPress={() => router.push("/(tabs)/leaderboard")}
-          style={lb.card}
-          activeOpacity={0.85}
-        >
-          <View style={lb.iconWrap}>
-            <Ionicons name="trophy" size={18} color="#7B8FE0" />
-          </View>
-          <View style={{ flex: 1 }}>
-            <Text style={lb.title}>{t("leaderboard.title")}</Text>
-            <Text style={lb.sub}>{t("leaderboard.home_sub")}</Text>
-          </View>
-          <Ionicons name="chevron-forward" size={15} color="#3A4558" />
-        </TouchableOpacity>
-      </View>
     </ScrollView>
     </>
   );
@@ -1460,41 +1452,6 @@ const ab = StyleSheet.create({
   },
 });
 
-// ---------------------------------------------------------------------------
-// Leaderboard entry
-// ---------------------------------------------------------------------------
-
-const lb = StyleSheet.create({
-  card: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#121826",
-    borderWidth: 1,
-    borderColor: "#7B8FE020",
-    borderRadius: 20,
-    padding: 16,
-    gap: 12,
-  },
-  iconWrap: {
-    width: 42,
-    height: 42,
-    borderRadius: 21,
-    backgroundColor: "#7B8FE015",
-    alignItems: "center",
-    justifyContent: "center",
-    flexShrink: 0,
-  },
-  title: {
-    color: "#E6EAF2",
-    fontSize: 14,
-    fontWeight: "700",
-    marginBottom: 2,
-  },
-  sub: {
-    color: "#4A5568",
-    fontSize: 12,
-  },
-});
 
 // ---------------------------------------------------------------------------
 // Share modal styles
