@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import {
   FlatList,
   StyleSheet,
+  TextInput,
   TouchableOpacity,
   View as RNView,
   ScrollView as HScrollView,
