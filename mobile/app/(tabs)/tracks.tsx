@@ -416,6 +416,7 @@ export default function Tracks() {
   const { getUserData } = useUser();
   const { generate, loading: generating, error: aiPackError } = useAiPack(uid);
   const { isPremium } = usePremium();
+  const [topicHint, setTopicHint] = useState("");
   const [tracks, setTracks] = useState<Track[]>([]);
   const [lang, setLang] = useState<Lang>("pt");
   const [loading, setLoading] = useState(true);
@@ -529,8 +530,13 @@ export default function Tracks() {
   }
 
   async function handleGenerate() {
-    const pack = await generate({ lang, minutes: 10 });
+    const pack = await generate({
+      lang,
+      minutes: 10,
+      topicHint: topicHint.trim() || undefined,
+    });
     if (pack) {
+      setTopicHint("");
       router.push({
         pathname: "/(session)/lesson",
         params: { contentId: pack.id, version: String(pack.version), lang },
@@ -572,6 +578,38 @@ export default function Tracks() {
       <Text className="text-[#AAB0C0] text-[13px] mt-1 leading-[20px]">
         {t("tabs.tracks.ai_description")}
       </Text>
+      {!isNotPremium && (
+        <RNView
+          style={{
+            marginTop: 14,
+            backgroundColor: "#0B0F14",
+            borderRadius: 12,
+            borderWidth: 1,
+            borderColor: "#1A2233",
+            flexDirection: "row",
+            alignItems: "center",
+            paddingHorizontal: 12,
+            height: 44,
+          }}
+        >
+          <TextInput
+            value={topicHint}
+            onChangeText={setTopicHint}
+            placeholder={t("tabs.tracks.ai_placeholder")}
+            placeholderTextColor="#4A5568"
+            style={{ flex: 1, color: "#E6EAF2", fontSize: 14 }}
+            maxLength={80}
+            returnKeyType="done"
+            onSubmitEditing={handleGenerate}
+            editable={!generating}
+          />
+          {topicHint.length > 0 && (
+            <TouchableOpacity onPress={() => setTopicHint("")} hitSlop={8}>
+              <Ionicons name="close-circle" size={16} color="#4A5568" />
+            </TouchableOpacity>
+          )}
+        </RNView>
+      )}
       {aiErrorMessage ? (
         <Text className="text-[#E26D6D] text-[12px] mt-3">
           {aiErrorMessage}
@@ -586,7 +624,7 @@ export default function Tracks() {
           }
         }}
         disabled={generating}
-        className="mt-4 h-[44px] rounded-2xl bg-[#F5C77A] items-center justify-center"
+        className="mt-3 h-[44px] rounded-2xl bg-[#F5C77A] items-center justify-center"
         style={{ opacity: generating ? 0.6 : 1 }}
       >
         <Text className="text-[#0B0F14] text-[15px] font-semibold">

@@ -131,6 +131,7 @@
       "ai_error_expired": "Sua assinatura Premium expirou. Renove para continuar.",
       "ai_error_rate_limited": "Limite diário de sessões IA atingido. Tente amanhã.",
       "ai_error_unknown": "Não foi possível gerar o conteúdo. Tente novamente.",
+      "ai_placeholder": "Ex: Queda do Império Romano, Viés Cognitivo…",
       "empty": "Nenhuma trilha disponível.",
       "no_results": "Nenhuma trilha encontrada.",
       "search_placeholder": "Buscar trilhas…",

@@ -131,6 +131,7 @@
       "ai_error_expired": "Tu suscripción Premium ha expirado. Renuévala para continuar.",
       "ai_error_rate_limited": "Límite diario de sesiones IA alcanzado. Inténtalo mañana.",
       "ai_error_unknown": "No se pudo generar el contenido. Inténtalo de nuevo.",
+      "ai_placeholder": "Ej: Caída del Imperio Romano, Sesgo Cognitivo…",
       "empty": "No hay rutas disponibles.",
       "no_results": "No se encontraron rutas.",
       "search_placeholder": "Buscar rutas…",

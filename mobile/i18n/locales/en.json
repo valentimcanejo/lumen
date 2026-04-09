@@ -131,6 +131,7 @@
       "ai_error_expired": "Your Premium subscription has expired. Renew to continue.",
       "ai_error_rate_limited": "Daily AI session limit reached. Try again tomorrow.",
       "ai_error_unknown": "Could not generate the content. Please try again.",
+      "ai_placeholder": "E.g. Fall of the Roman Empire, Cognitive Bias…",
       "empty": "No tracks available.",
       "no_results": "No tracks found.",
       "search_placeholder": "Search tracks…",
