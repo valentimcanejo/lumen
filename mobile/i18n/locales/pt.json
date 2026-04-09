@@ -83,7 +83,12 @@
     "plan_monthly_label": "Mensal",
     "cta": "Começar trial grátis — 7 dias",
     "fine_print": "Cancele quando quiser. Sem compromisso.",
-    "coming_soon": "Pagamentos em breve disponíveis"
+    "coming_soon": "Pagamentos em breve disponíveis",
+    "restore": "Restaurar compra",
+    "restore_success": "Assinatura restaurada com sucesso!",
+    "restore_none": "Nenhuma assinatura ativa encontrada.",
+    "purchase_error": "Erro ao processar compra. Tente novamente.",
+    "sign_in_required": "Entre com sua conta para assinar"
   },
   "tabs": {
     "home": {

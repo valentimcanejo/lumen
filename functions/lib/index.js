@@ -36,7 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generatePack = exports.generateAudio = void 0;
+exports.revenuecatWebhook = exports.generatePack = exports.generateAudio = void 0;
 const https_1 = require("firebase-functions/v2/https");
 const v2_1 = require("firebase-functions/v2");
 const params_1 = require("firebase-functions/params");
@@ -44,6 +44,7 @@ const admin = __importStar(require("firebase-admin"));
 const sdk_1 = __importDefault(require("@anthropic-ai/sdk"));
 const openai_1 = __importDefault(require("openai"));
 const openaiApiKey = (0, params_1.defineSecret)("OPENAI_API_KEY");
+const rcWebhookSecret = (0, params_1.defineSecret)("REVENUECAT_WEBHOOK_SECRET");
 admin.initializeApp();
 (0, v2_1.setGlobalOptions)({ region: "us-central1" });
 // ---------------------------------------------------------------------------
@@ -219,5 +220,54 @@ exports.generatePack = (0, https_1.onCall)({ enforceAppCheck: false }, async (re
     pack.lang = lang;
     await incrementUsage(uid);
     return pack;
+});
+// ---------------------------------------------------------------------------
+// revenuecatWebhook — activates / deactivates premium.isActive in Firestore
+// Configure in RevenueCat dashboard: Project → Integrations → Webhooks
+// Authorization header value must match REVENUECAT_WEBHOOK_SECRET
+// ---------------------------------------------------------------------------
+const ACTIVATE_EVENTS = new Set([
+    "INITIAL_PURCHASE",
+    "RENEWAL",
+    "PRODUCT_CHANGE",
+    "UNCANCELLATION",
+]);
+const DEACTIVATE_EVENTS = new Set([
+    "EXPIRATION",
+]);
+exports.revenuecatWebhook = (0, https_1.onRequest)({ secrets: [rcWebhookSecret] }, async (req, res) => {
+    var _a, _b;
+    if (req.method !== "POST") {
+        res.status(405).send("Method Not Allowed");
+        return;
+    }
+    const authHeader = (_a = req.headers.authorization) !== null && _a !== void 0 ? _a : "";
+    if (authHeader !== `Bearer ${rcWebhookSecret.value()}`) {
+        res.status(401).send("Unauthorized");
+        return;
+    }
+    const event = (_b = req.body) === null || _b === void 0 ? void 0 : _b.event;
+    if (!(event === null || event === void 0 ? void 0 : event.app_user_id)) {
+        res.status(400).send("Missing event or app_user_id");
+        return;
+    }
+    const { type, app_user_id, expiration_at_ms } = event;
+    const userRef = admin.firestore().doc(`users/${app_user_id}`);
+    if (ACTIVATE_EVENTS.has(type)) {
+        await userRef.set({
+            premium: {
+                isActive: true,
+                until: expiration_at_ms ? new Date(expiration_at_ms).toISOString() : null,
+            },
+            updatedAt: Date.now(),
+        }, { merge: true });
+    }
+    else if (DEACTIVATE_EVENTS.has(type)) {
+        await userRef.set({
+            premium: { isActive: false, until: null },
+            updatedAt: Date.now(),
+        }, { merge: true });
+    }
+    res.status(200).send("OK");
 });
 //# sourceMappingURL=index.js.map

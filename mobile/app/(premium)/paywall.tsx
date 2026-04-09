@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, TouchableOpacity, Alert } from "react-native";
+import { ScrollView, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -7,6 +7,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box } from "../../components/ui/box";
 import { Text } from "../../components/ui/text";
 import { HStack } from "../../components/ui/hstack";
+import { useAuth } from "../../hooks/useAuth";
+import { usePremium } from "../../hooks/usePremium";
 
 type Plan = "annual" | "monthly";
 
@@ -42,9 +44,51 @@ export default function Paywall() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const [selectedPlan, setSelectedPlan] = useState<Plan>("annual");
+  const [processing, setProcessing] = useState(false);
+  const [restoring, setRestoring] = useState(false);
 
-  function handleSubscribe() {
-    Alert.alert(t("premium.coming_soon"));
+  const { isAnonymous, signInWithGoogle } = useAuth();
+  const { annualPackage, monthlyPackage, purchasePlan, restorePurchases } = usePremium();
+
+  async function handleSubscribe() {
+    setProcessing(true);
+    try {
+      // Require sign-in before purchase
+      if (isAnonymous) {
+        await signInWithGoogle();
+      }
+
+      const pkg = selectedPlan === "annual" ? annualPackage : monthlyPackage;
+      if (!pkg) {
+        Alert.alert(t("premium.purchase_error"));
+        return;
+      }
+
+      const success = await purchasePlan(pkg);
+      if (success) router.back();
+    } catch {
+      Alert.alert(t("premium.purchase_error"));
+    } finally {
+      setProcessing(false);
+    }
+  }
+
+  async function handleRestore() {
+    setRestoring(true);
+    try {
+      const active = await restorePurchases();
+      if (active) {
+        Alert.alert(t("premium.restore_success"), undefined, [
+          { text: "OK", onPress: () => router.back() },
+        ]);
+      } else {
+        Alert.alert(t("premium.restore_none"));
+      }
+    } catch {
+      Alert.alert(t("premium.purchase_error"));
+    } finally {
+      setRestoring(false);
+    }
   }
 
   return (
@@ -224,9 +268,10 @@ export default function Paywall() {
         {/* CTA */}
         <TouchableOpacity
           onPress={handleSubscribe}
+          disabled={processing}
           activeOpacity={0.85}
           style={{
-            backgroundColor: "#F5C77A",
+            backgroundColor: processing ? "#A88B50" : "#F5C77A",
             borderRadius: 16,
             height: 52,
             alignItems: "center",
@@ -234,15 +279,26 @@ export default function Paywall() {
             marginBottom: 12,
           }}
         >
-          <Text style={{ color: "#0B0F14", fontSize: 16, fontWeight: "700" }}>
-            {t("premium.cta")}
-          </Text>
+          {processing ? (
+            <ActivityIndicator color="#0B0F14" />
+          ) : (
+            <Text style={{ color: "#0B0F14", fontSize: 16, fontWeight: "700" }}>
+              {t("premium.cta")}
+            </Text>
+          )}
         </TouchableOpacity>
 
         {/* Fine print */}
-        <Text style={{ color: "#4A5568", fontSize: 12, textAlign: "center" }}>
+        <Text style={{ color: "#4A5568", fontSize: 12, textAlign: "center", marginBottom: 16 }}>
           {t("premium.fine_print")}
         </Text>
+
+        {/* Restore */}
+        <TouchableOpacity onPress={handleRestore} disabled={restoring} activeOpacity={0.7}>
+          <Text style={{ color: "#4A5568", fontSize: 12, textAlign: "center" }}>
+            {restoring ? "..." : t("premium.restore")}
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
     </Box>
   );

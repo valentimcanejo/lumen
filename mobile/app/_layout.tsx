@@ -24,6 +24,7 @@ import { loadLanguage } from "../i18n/setLanguage";
 import "@/global.css";
 import { auth } from "../firebase/firebaseConfig";
 import { listenAuth, ensureAnonymousAuth } from "../services/auth.service";
+import { configurePurchases } from "../services/purchases.service";
 import { getUser, getCompletedContentIds } from "../repositories/user.repo";
 import {
   getLessonMeta,
@@ -84,6 +85,10 @@ export default function RootLayout() {
 
   useEffect(() => {
     loadLanguage();
+  }, []);
+
+  useEffect(() => {
+    configurePurchases();
   }, []);
 
   useEffect(() => {

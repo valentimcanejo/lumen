@@ -1,4 +1,4 @@
-import { onCall, HttpsError } from "firebase-functions/v2/https";
+import { onCall, onRequest, HttpsError } from "firebase-functions/v2/https";
 import { setGlobalOptions } from "firebase-functions/v2";
 import { defineSecret } from "firebase-functions/params";
 import * as admin from "firebase-admin";
@@ -6,6 +6,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import OpenAI from "openai";
 
 const openaiApiKey = defineSecret("OPENAI_API_KEY");
+const rcWebhookSecret = defineSecret("REVENUECAT_WEBHOOK_SECRET");
 
 admin.initializeApp();
 
@@ -254,5 +255,75 @@ export const generatePack = onCall(
     await incrementUsage(uid);
 
     return pack;
+  }
+);
+
+// ---------------------------------------------------------------------------
+// revenuecatWebhook — activates / deactivates premium.isActive in Firestore
+// Configure in RevenueCat dashboard: Project → Integrations → Webhooks
+// Authorization header value must match REVENUECAT_WEBHOOK_SECRET
+// ---------------------------------------------------------------------------
+
+const ACTIVATE_EVENTS = new Set([
+  "INITIAL_PURCHASE",
+  "RENEWAL",
+  "PRODUCT_CHANGE",
+  "UNCANCELLATION",
+]);
+
+const DEACTIVATE_EVENTS = new Set([
+  "EXPIRATION",
+]);
+
+export const revenuecatWebhook = onRequest(
+  { secrets: [rcWebhookSecret] },
+  async (req, res) => {
+    if (req.method !== "POST") {
+      res.status(405).send("Method Not Allowed");
+      return;
+    }
+
+    const authHeader = req.headers.authorization ?? "";
+    if (authHeader !== `Bearer ${rcWebhookSecret.value()}`) {
+      res.status(401).send("Unauthorized");
+      return;
+    }
+
+    const event = req.body?.event;
+    if (!event?.app_user_id) {
+      res.status(400).send("Missing event or app_user_id");
+      return;
+    }
+
+    const { type, app_user_id, expiration_at_ms } = event as {
+      type: string;
+      app_user_id: string;
+      expiration_at_ms: number | null;
+    };
+
+    const userRef = admin.firestore().doc(`users/${app_user_id}`);
+
+    if (ACTIVATE_EVENTS.has(type)) {
+      await userRef.set(
+        {
+          premium: {
+            isActive: true,
+            until: expiration_at_ms ? new Date(expiration_at_ms).toISOString() : null,
+          },
+          updatedAt: Date.now(),
+        },
+        { merge: true }
+      );
+    } else if (DEACTIVATE_EVENTS.has(type)) {
+      await userRef.set(
+        {
+          premium: { isActive: false, until: null },
+          updatedAt: Date.now(),
+        },
+        { merge: true }
+      );
+    }
+
+    res.status(200).send("OK");
   }
 );

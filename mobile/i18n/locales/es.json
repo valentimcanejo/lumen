@@ -83,7 +83,12 @@
     "plan_monthly_label": "Mensual",
     "cta": "Comenzar prueba gratis — 7 días",
     "fine_print": "Cancela cuando quieras. Sin compromiso.",
-    "coming_soon": "Pagos disponibles próximamente"
+    "coming_soon": "Pagos disponibles próximamente",
+    "restore": "Restaurar compra",
+    "restore_success": "¡Suscripción restaurada con éxito!",
+    "restore_none": "No se encontró ninguna suscripción activa.",
+    "purchase_error": "Error al procesar la compra. Inténtalo de nuevo.",
+    "sign_in_required": "Inicia sesión para suscribirte"
   },
   "tabs": {
     "home": {
