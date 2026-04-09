@@ -38,14 +38,15 @@ export function usePremium() {
 
   const purchasePlan = useCallback(async (pkg: PurchasesPackage): Promise<boolean> => {
     try {
-      const { customerInfo } = await Purchases.purchasePackage(pkg);
-      const active = !!customerInfo.entitlements.active["premium"];
-      setIsPremium(active);
+      await Purchases.purchasePackage(pkg);
+      // Purchase resolved without error — activate optimistically.
+      // Firestore will be updated via RevenueCat webhook.
+      setIsPremium(true);
       if (user?.uid) invalidateUserCache(user.uid);
-      return active;
+      return true;
     } catch (e: unknown) {
-      if (e && typeof e === "object" && "userCancelled" in e && e.userCancelled) {
-        return false;
+      if (e && typeof e === "object" && "userCancelled" in e && (e as { userCancelled: boolean }).userCancelled) {
+        return false; // User dismissed the store dialog — stay on paywall silently
       }
       throw e;
     }
