@@ -3,7 +3,6 @@ import type { Lang } from "../models/lang";
 import type { Pack } from "../models/pack";
 import { generateAiPack } from "../services/functions.service";
 import { saveAiPackToCache } from "../repositories/packs.repo";
-import { getUser } from "../repositories/user.repo";
 
 export type AiPackError =
   | "not-premium"
@@ -22,17 +21,6 @@ export function useAiPack(uid: string | null) {
   }): Promise<Pack | null> {
     if (!uid) {
       setError("not-premium");
-      return null;
-    }
-
-    // Client-side premium check for fast feedback before the network call
-    const user = await getUser(uid);
-    if (!user?.premium?.isActive) {
-      setError("not-premium");
-      return null;
-    }
-    if (user.premium.until && new Date(user.premium.until) < new Date()) {
-      setError("premium-expired");
       return null;
     }
 

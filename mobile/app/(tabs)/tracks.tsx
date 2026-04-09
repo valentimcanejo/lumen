@@ -24,6 +24,7 @@ import {
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import { useAiPack } from "../../hooks/useAiPack";
+import { usePremium } from "../../hooks/usePremium";
 import { SkeletonTrackCard } from "../../components/ui/lumen/Skeleton";
 import { trackColor, trackBg } from "../../constants/tracks";
 import type { Track } from "../../models/track";
@@ -414,6 +415,7 @@ export default function Tracks() {
   const { uid } = useAuth();
   const { getUserData } = useUser();
   const { generate, loading: generating, error: aiPackError } = useAiPack(uid);
+  const { isPremium } = usePremium();
   const [tracks, setTracks] = useState<Track[]>([]);
   const [lang, setLang] = useState<Lang>("pt");
   const [loading, setLoading] = useState(true);
@@ -421,7 +423,6 @@ export default function Tracks() {
   const [selectedTrackIds, setSelectedTrackIds] = useState<string[]>([]);
   const [search, setSearch] = useState("");
   const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
-  const [isPremium, setIsPremium] = useState(false);
 
   useEffect(() => {
     getTracks()
@@ -437,7 +438,6 @@ export default function Tracks() {
       setSelectedTrackIds(
         user?.selectedTrackIds ?? user?.selectedGoalIds ?? [],
       );
-      setIsPremium(user?.premium?.isActive === true);
     });
     getCompletedContentIds(uid)
       .then(setCompletedIds)
