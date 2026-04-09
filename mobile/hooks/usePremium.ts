@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import Purchases, { PACKAGE_TYPE, PurchasesPackage } from "react-native-purchases";
 import { useAuth } from "./useAuth";
 import { invalidateUserCache } from "./useUser";
+import { getUser } from "../repositories/user.repo";
 
 export function usePremium() {
   const { user } = useAuth();
@@ -16,17 +17,31 @@ export function usePremium() {
 
     async function init() {
       try {
-        const [{ customerInfo }, offerings] = await Promise.all([
-          Purchases.logIn(user!.uid),
-          Purchases.getOfferings(),
+        // Check RevenueCat and Firestore in parallel.
+        // RevenueCat is authoritative; Firestore is the webhook fallback
+        // (covers cases where entitlement isn't configured yet or RC is unavailable).
+        const [rcResult, firestoreUser] = await Promise.allSettled([
+          Promise.all([Purchases.logIn(user!.uid), Purchases.getOfferings()]),
+          getUser(user!.uid),
         ]);
 
         if (cancelled) return;
 
-        setIsPremium(!!customerInfo.entitlements.active["premium"]);
-        setPackages(offerings.current?.availablePackages ?? []);
+        const rcPremium =
+          rcResult.status === "fulfilled" &&
+          !!rcResult.value[0].customerInfo.entitlements.active["premium"];
+
+        const firestorePremium =
+          firestoreUser.status === "fulfilled" &&
+          firestoreUser.value?.premium?.isActive === true;
+
+        setIsPremium(rcPremium || firestorePremium);
+
+        if (rcResult.status === "fulfilled") {
+          setPackages(rcResult.value[1].current?.availablePackages ?? []);
+        }
       } catch {
-        // RevenueCat unavailable (Expo Go) or network error — fail silently
+        // fail silently
       } finally {
         if (!cancelled) setLoading(false);
       }
