@@ -129,7 +129,13 @@ Return ONLY valid JSON — no markdown, no explanation — matching this exact s
 }
 
 Rules:
-- lesson.blocks: 5–8 blocks mixing h2, p, bullets (at least one of each), 1 optional quote
+- lesson.blocks: 10–14 blocks. Required structure:
+  - At least 3 h2 section headers
+  - At least 4 p paragraphs (each 2–4 sentences, dense and informative)
+  - At least 2 bullets lists (3–4 items each)
+  - Exactly 1 quote from a relevant author, thinker, or historical figure
+  - Suggested flow: intro concept → historical/origin context → why it matters → real-world example → how to apply / critical perspective → key takeaways
+  - Each paragraph must add new information — no filler or repetition
 - cards: 6–10 cards with a clear concept on the front and a concise explanation on the back
 - quiz: exactly 5 questions, 4 options each
   - 2 definition questions: test recall of a key concept ("What is X?", "What does X mean?")
