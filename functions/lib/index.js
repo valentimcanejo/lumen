@@ -146,7 +146,7 @@ Rules:
 - All text in ${langName}
 - Return ONLY the JSON object, nothing else`;
 }
-exports.generateAudio = (0, https_1.onCall)({ enforceAppCheck: false, memory: "512MiB", timeoutSeconds: 120, invoker: "public", secrets: [openaiApiKey] }, async (request) => {
+exports.generateAudio = (0, https_1.onCall)({ enforceAppCheck: false, memory: "512MiB", timeoutSeconds: 180, invoker: "public", secrets: [openaiApiKey] }, async (request) => {
     var _a;
     const { contentId, version, lang, text } = (_a = request.data) !== null && _a !== void 0 ? _a : {};
     if (!contentId || !version || !["pt", "en", "es"].includes(lang) || !(text === null || text === void 0 ? void 0 : text.trim())) {

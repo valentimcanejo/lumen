@@ -23,6 +23,6 @@ type GenerateAudioInput = {
 };
 
 export async function generateAudio(input: GenerateAudioInput): Promise<void> {
-  const fn = httpsCallable<GenerateAudioInput, { storagePath: string }>(functions, "generateAudio");
+  const fn = httpsCallable<GenerateAudioInput, { storagePath: string }>(functions, "generateAudio", { timeout: 180_000 });
   await fn(input);
 }
