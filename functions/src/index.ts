@@ -167,10 +167,6 @@ export const generateAudio = onCall(
       throw new HttpsError("invalid-argument", "contentId, version, lang and text are required.");
     }
 
-    if (text.length > 10_000) {
-      throw new HttpsError("invalid-argument", "text exceeds maximum length of 10,000 characters.");
-    }
-
     const audioPath = `packs/${contentId}/v${version}/audio/${lang}_gpt.mp3`;
     const bucket = admin.storage().bucket();
     const audioFile = bucket.file(audioPath);
@@ -179,16 +175,36 @@ export const generateAudio = onCall(
     const [exists] = await audioFile.exists();
     if (exists) return { storagePath: audioPath };
 
-    // Call OpenAI TTS tts-1-hd
-    const openai = new OpenAI({ apiKey: openaiApiKey.value() });
-    const response = await openai.audio.speech.create({
-      model: "tts-1-hd",
-      voice: "onyx",
-      input: text,
-      response_format: "mp3",
-    });
+    // OpenAI TTS limit is 4096 chars per request — split into chunks if needed
+    const CHUNK_SIZE = 4000;
+    const chunks: string[] = [];
+    let remaining = text.trim();
+    while (remaining.length > 0) {
+      if (remaining.length <= CHUNK_SIZE) {
+        chunks.push(remaining);
+        break;
+      }
+      // Split at last sentence boundary before CHUNK_SIZE
+      let splitAt = remaining.lastIndexOf(". ", CHUNK_SIZE);
+      if (splitAt === -1) splitAt = CHUNK_SIZE;
+      else splitAt += 1; // include the period
+      chunks.push(remaining.slice(0, splitAt).trim());
+      remaining = remaining.slice(splitAt).trim();
+    }
 
-    const buffer = Buffer.from(await response.arrayBuffer());
+    // Call OpenAI TTS tts-1-hd for each chunk, then concatenate
+    const openai = new OpenAI({ apiKey: openaiApiKey.value() });
+    const buffers: Buffer[] = [];
+    for (const chunk of chunks) {
+      const response = await openai.audio.speech.create({
+        model: "tts-1-hd",
+        voice: "onyx",
+        input: chunk,
+        response_format: "mp3",
+      });
+      buffers.push(Buffer.from(await response.arrayBuffer()));
+    }
+    const buffer = Buffer.concat(buffers);
 
     // Save MP3 to Firebase Storage
     await audioFile.save(buffer, {

@@ -152,9 +152,6 @@ exports.generateAudio = (0, https_1.onCall)({ enforceAppCheck: false, memory: "5
     if (!contentId || !version || !["pt", "en", "es"].includes(lang) || !(text === null || text === void 0 ? void 0 : text.trim())) {
         throw new https_1.HttpsError("invalid-argument", "contentId, version, lang and text are required.");
     }
-    if (text.length > 10000) {
-        throw new https_1.HttpsError("invalid-argument", "text exceeds maximum length of 10,000 characters.");
-    }
     const audioPath = `packs/${contentId}/v${version}/audio/${lang}_gpt.mp3`;
     const bucket = admin.storage().bucket();
     const audioFile = bucket.file(audioPath);
@@ -162,15 +159,37 @@ exports.generateAudio = (0, https_1.onCall)({ enforceAppCheck: false, memory: "5
     const [exists] = await audioFile.exists();
     if (exists)
         return { storagePath: audioPath };
-    // Call OpenAI TTS tts-1-hd
+    // OpenAI TTS limit is 4096 chars per request — split into chunks if needed
+    const CHUNK_SIZE = 4000;
+    const chunks = [];
+    let remaining = text.trim();
+    while (remaining.length > 0) {
+        if (remaining.length <= CHUNK_SIZE) {
+            chunks.push(remaining);
+            break;
+        }
+        // Split at last sentence boundary before CHUNK_SIZE
+        let splitAt = remaining.lastIndexOf(". ", CHUNK_SIZE);
+        if (splitAt === -1)
+            splitAt = CHUNK_SIZE;
+        else
+            splitAt += 1; // include the period
+        chunks.push(remaining.slice(0, splitAt).trim());
+        remaining = remaining.slice(splitAt).trim();
+    }
+    // Call OpenAI TTS tts-1-hd for each chunk, then concatenate
     const openai = new openai_1.default({ apiKey: openaiApiKey.value() });
-    const response = await openai.audio.speech.create({
-        model: "tts-1-hd",
-        voice: "onyx",
-        input: text,
-        response_format: "mp3",
-    });
-    const buffer = Buffer.from(await response.arrayBuffer());
+    const buffers = [];
+    for (const chunk of chunks) {
+        const response = await openai.audio.speech.create({
+            model: "tts-1-hd",
+            voice: "onyx",
+            input: chunk,
+            response_format: "mp3",
+        });
+        buffers.push(Buffer.from(await response.arrayBuffer()));
+    }
+    const buffer = Buffer.concat(buffers);
     // Save MP3 to Firebase Storage
     await audioFile.save(buffer, {
         contentType: "audio/mpeg",
