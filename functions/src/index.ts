@@ -159,7 +159,7 @@ interface GenerateAudioInput {
 }
 
 export const generateAudio = onCall(
-  { enforceAppCheck: false, memory: "512MiB", invoker: "public", secrets: [openaiApiKey] },
+  { enforceAppCheck: false, memory: "512MiB", timeoutSeconds: 120, invoker: "public", secrets: [openaiApiKey] },
   async (request) => {
     const { contentId, version, lang, text } = (request.data as GenerateAudioInput) ?? {};
 
