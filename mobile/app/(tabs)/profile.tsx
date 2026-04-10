@@ -5,7 +5,7 @@ import Animated, {
   withTiming,
   withSpring,
 } from "react-native-reanimated";
-import { Platform, ScrollView, ActivityIndicator, Linking, DevSettings, Alert, useWindowDimensions, View, StyleSheet } from "react-native";
+import { Platform, ScrollView, ActivityIndicator, Linking, Alert, useWindowDimensions, View, StyleSheet } from "react-native";
 import * as Notifications from "expo-notifications";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -18,12 +18,11 @@ import { HStack } from "@/components/ui/hstack";
 import { Pressable } from "@/components/ui/pressable";
 import { VStack } from "@/components/ui/vstack";
 
-import { useUser, invalidateUserCache } from "../../hooks/useUser";
+import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
 import { setUserLanguage, getCompletedContentIds } from "../../repositories/user.repo";
 import { getStudyHeatmap } from "../../repositories/progress.repo";
 import { getTracks } from "../../repositories/tracks.repo";
-import { getCurrentWeekId } from "../../repositories/leaderboard.repo";
 import { getLessonCountForTrack } from "../../repositories/lessons.repo";
 import { getLatestWeeklyReport } from "../../repositories/weeklyReports.repo";
 import { usePremium } from "../../hooks/usePremium";
@@ -45,9 +44,6 @@ import {
   type UserProfile,
 } from "../../models/user";
 import { ACHIEVEMENTS, type AchievementDef } from "../../repositories/achievements.repo";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../firebase/firebaseConfig";
 
 // ---------------------------------------------------------------------------
 // Achievements grid — compact 5-column layout, expandable
@@ -1014,59 +1010,6 @@ export default function ProfileScreen() {
               </Box>
             </Box>
 
-            {/* DEV ONLY */}
-            <Pressable
-              onPress={() => {
-                Alert.alert(
-                  "[DEV] Reset completo",
-                  "Apaga todos os dados do usuário no Firestore e reinicia o app. Não há volta.",
-                  [
-                    { text: "Cancelar", style: "cancel" },
-                    {
-                      text: "Resetar tudo",
-                      style: "destructive",
-                      onPress: async () => {
-                        if (!uid) return;
-                        try {
-                          // Delete all subcollection docs
-                          const subcollections = [
-                            "daily_sessions", "card_progress",
-                            "completed_content", "saved_content", "stats",
-                          ];
-                          for (const sub of subcollections) {
-                            const snap = await getDocs(collection(db, "users", uid, sub));
-                            await Promise.all(snap.docs.map((d) => deleteDoc(d.ref)));
-                          }
-                          // Delete user doc
-                          await deleteDoc(doc(db, "users", uid));
-                          // Delete leaderboard entries for current week across all tiers
-                          const weekId = getCurrentWeekId();
-                          const allTiers = [
-                            "bronze","prata","ouro","platina",
-                            "safira","esmeralda","ametista","rubi","diamante","lumen",
-                          ];
-                          await Promise.all(
-                            allTiers.map((tier) =>
-                              deleteDoc(doc(db, `leaderboard/${weekId}/${tier}/entries/${uid}`)).catch(() => {})
-                            )
-                          );
-                        } catch {
-                          // ignore — proceed to clear local state anyway
-                        }
-                        invalidateUserCache(uid);
-                        await AsyncStorage.clear();
-                        DevSettings.reload();
-                      },
-                    },
-                  ],
-                );
-              }}
-              className="h-[44px] rounded-xl border border-[#E26D6D]/40 items-center justify-center mt-2"
-            >
-              <Text className="text-[#E26D6D] text-[13px] font-semibold">
-                [DEV] Reset completo
-              </Text>
-            </Pressable>
           </>
         )}
       </ScrollView>
