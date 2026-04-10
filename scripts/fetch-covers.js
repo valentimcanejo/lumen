@@ -133,7 +133,7 @@ const KEYWORDS = {
   science_climate:                "wildfire smoke aerial forest burning",
   science_biotech:                "dna helix strand blue laboratory",
   science_neuroscience:           "brain scan mri medical imaging",
-  science_future:                 "space rocket launch nasa fire",
+  science_future:                 "futuristic laboratory technology research",
 
   // Negócios — contexto real de trabalho
   business:                       "entrepreneur whiteboard startup office",
