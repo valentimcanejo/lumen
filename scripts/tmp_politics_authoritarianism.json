@@ -1,0 +1,279 @@
+{
+  "id": "politics_authoritarianism",
+  "trackId": "politics",
+  "order": 8,
+  "difficulty": 3,
+  "estimatedMinutes": 12,
+  "prerequisites": [],
+  "title": {
+    "pt": "Autoritarismo e o Colapso Democrático",
+    "en": "Authoritarianism and Democratic Collapse",
+    "es": "Autoritarismo y el Colapso Democrático"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "Autoritarismo e o Colapso Democrático",
+      "summary": "Democracias raramente morrem com uma bala. Hoje, elas costumam morrer gradualmente — pela erosão de normas, pela captura de instituições, pelo enfraquecimento da oposição. O autoritarismo moderno não precisa de tanques na rua. Entender como democracias colapsam não é exercício de pessimismo: é a condição para reconhecer os sinais antes que seja tarde demais.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Como as democracias morrem hoje" },
+        { "type": "p", "text": "No século XX, a ameaça clássica à democracia era o golpe militar. Mas Steven Levitsky e Lucan Way documentaram uma mudança nos padrões de ruptura democrática: no século XXI, a maioria das 'mortes democráticas' ocorre pela via eleitoral. Líderes democraticamente eleitos desmontam gradualmente as instituições que os limitam." },
+        { "type": "p", "text": "O mecanismo é sutil: o líder usa a legalidade para subverter a legalidade. Reformas constitucionais, nomeações para tribunais, mudanças nas leis eleitorais — cada passo parece legal isoladamente, mas o efeito acumulado é a concentração de poder e o enfraquecimento dos freios e contrapesos." },
+        { "type": "h2", "text": "O playbook do autocrata moderno" },
+        { "type": "p", "text": "Levitsky e Ziblatt identificaram um padrão recorrente. O primeiro passo é capturar os árbitros — juízes, promotores, controladores eleitorais. O segundo é usar o Estado para perseguir inimigos: investigações seletivas, auditorias, pressão sobre empresas que financiam a oposição. O terceiro é mudar as regras do jogo: reformas constitucionais ou eleitorais que favoreçam o governante." },
+        { "type": "p", "text": "O quarto passo é sufocar a mídia independente — não necessariamente através da censura explícita, mas por meio de pressão econômica, processos judiciais abusivos e favorecimento de veículos aliados. E o quinto é mobilizar seguidores contra a legitimidade das instituições, criando a narrativa de que qualquer derrota eleitoral é fraude." },
+        { "type": "quote", "text": "As democracias morrem hoje não com um estrondo, mas com um murmúrio.", "author": "Steven Levitsky e Daniel Ziblatt" },
+        { "type": "h2", "text": "Autocracia eleitoral: democracia de fachada" },
+        { "type": "p", "text": "Um dos desenvolvimentos mais importantes do século XXI é a proliferação de 'autocracias eleitorais' — regimes que mantêm eleições regulares mas as manipulam de forma sistemática. As eleições existem, mas o campo de jogo é profundamente desigual: oposição é perseguida, mídia é controlada, regras são mudadas para favorecer quem está no poder." },
+        { "type": "p", "text": "Esses regimes são diferentes das ditaduras clássicas porque mantêm a legitimidade formal da eleição. Isso os torna mais resilientes: é difícil para a comunidade internacional criticar 'eleições' mesmo quando elas não são livres. Rússia, Venezuela, Turquia e Hungria são exemplos contemporâneos em diferentes pontos desse espectro." },
+        { "type": "h2", "text": "O papel das normas informais" },
+        { "type": "p", "text": "Levitsky e Ziblatt argumentam que a democracia depende não apenas de leis formais, mas de normas informais — 'guardrails' não escritas. As mais importantes são a tolerância mútua (aceitar que os adversários são competidores legítimos, não inimigos a destruir) e a contenção institucional (não usar todos os poderes legais disponíveis só porque pode)." },
+        { "type": "p", "text": "Quando essas normas se erodem, a competição política se torna guerra. Cada lado justifica escaladas porque o outro 'começou'. O resultado é uma espiral de radicalização que pode tornar o sistema ingovernável — ou abrir espaço para um líder que prometa restaurar a ordem à custa da democracia." },
+        { "type": "h2", "text": "Resiliência democrática: o que funciona?" },
+        { "type": "p", "text": "A pesquisa comparativa identifica fatores que tornam democracias mais resistentes ao autoritarismo: partidos políticos robustos (que não se subordinam a líderes individuais), judiciário independente com capacidade real de impor limites, mídia independente e sociedade civil organizada, e experiência democrática — quanto mais antiga a democracia, mais resiliente tende a ser." },
+        { "type": "p", "text": "Mas nenhum sistema é imune. As democracias mais antigas — EUA, Reino Unido — também demonstraram vulnerabilidades nos últimos anos. A lição não é que democracias fortes não podem colapsar, mas que a democracia é uma prática contínua, não uma conquista permanente. Ela precisa ser ativa e deliberadamente defendida." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_authoritarianism_q1",
+        "question": "Como a maioria das 'mortes democráticas' ocorre no século XXI, segundo Levitsky e Way?",
+        "options": [
+          "Por golpes militares clássicos",
+          "Por invasões estrangeiras",
+          "Pela via eleitoral — líderes eleitos que desmontam instituições gradualmente",
+          "Por colapso econômico seguido de revolução"
+        ],
+        "answerIndex": 2,
+        "explanation": "No século XXI, a maioria das rupturas democráticas ocorre pela via eleitoral: líderes democraticamente eleitos desmontam gradualmente as instituições que os limitam, usando a legalidade para subverter a legalidade."
+      },
+      {
+        "id": "politics_authoritarianism_q2",
+        "question": "Qual é o primeiro passo no 'playbook do autocrata moderno' segundo Levitsky e Ziblatt?",
+        "options": [
+          "Sufocar a mídia independente",
+          "Mobilizar seguidores contra as instituições",
+          "Capturar os árbitros — juízes, promotores, controladores eleitorais",
+          "Perseguir financiadores da oposição"
+        ],
+        "answerIndex": 2,
+        "explanation": "O primeiro passo é capturar os árbitros — quem supervisiona e julga o processo político. Sem juízes e promotores independentes, os passos seguintes de perseguição e mudança das regras ficam sem obstáculo."
+      },
+      {
+        "id": "politics_authoritarianism_q3",
+        "question": "O que diferencia uma 'autocracia eleitoral' de uma ditadura clássica?",
+        "options": [
+          "Autocracias eleitorais são economicamente mais eficientes",
+          "Autocracias eleitorais mantêm eleições regulares, mas manipuladas sistematicamente",
+          "Autocracias eleitorais permitem liberdade de imprensa plena",
+          "Autocracias eleitorais resultam sempre de golpes militares"
+        ],
+        "answerIndex": 1,
+        "explanation": "Autocracias eleitorais mantêm a fachada de eleições, mas o campo de jogo é desigual — oposição é perseguida, mídia controlada. Isso as torna mais resilientes que ditaduras, pois mantêm legitimidade formal."
+      },
+      {
+        "id": "politics_authoritarianism_q4",
+        "question": "Quais são as duas normas informais mais importantes para a democracia segundo Levitsky e Ziblatt?",
+        "options": [
+          "Transparência fiscal e combate à corrupção",
+          "Tolerância mútua e contenção institucional",
+          "Liberdade de imprensa e independência judicial",
+          "Alternância de poder e sistemas multipartidários"
+        ],
+        "answerIndex": 1,
+        "explanation": "Tolerância mútua (aceitar adversários como competidores legítimos) e contenção institucional (não usar todos os poderes disponíveis só porque pode) são os 'guardrails' informais que sustentam a democracia além das leis formais."
+      },
+      {
+        "id": "politics_authoritarianism_q5",
+        "question": "Qual fator NÃO é identificado como promotor de resiliência democrática?",
+        "options": [
+          "Partidos políticos robustos que não se subordinam a líderes individuais",
+          "Judiciário independente com capacidade real de impor limites",
+          "Alta concentração de riqueza nas elites econômicas",
+          "Experiência democrática acumulada ao longo do tempo"
+        ],
+        "answerIndex": 2,
+        "explanation": "Alta concentração de riqueza nas elites econômicas não promove resiliência democrática — pelo contrário, pode aumentar a vulnerabilidade ao autoritarismo ao criar incentivos para as elites apoiarem líderes que protejam seus interesses."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Authoritarianism and Democratic Collapse",
+      "summary": "Democracies rarely die with a bullet. Today they tend to die gradually — through the erosion of norms, institutional capture, and the weakening of opposition. Modern authoritarianism doesn't need tanks in the streets. Understanding how democracies collapse isn't an exercise in pessimism: it's the condition for recognizing the signs before it's too late.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "How democracies die today" },
+        { "type": "p", "text": "In the 20th century, the classic threat to democracy was military coup. But Steven Levitsky and Lucan Way documented a shift in patterns of democratic breakdown: in the 21st century, most 'democratic deaths' occur through the electoral path. Democratically elected leaders gradually dismantle the institutions that constrain them." },
+        { "type": "p", "text": "The mechanism is subtle: the leader uses legality to subvert legality. Constitutional reforms, court appointments, changes in electoral laws — each step seems legal in isolation, but the cumulative effect is power concentration and the weakening of checks and balances." },
+        { "type": "h2", "text": "The modern autocrat's playbook" },
+        { "type": "p", "text": "Levitsky and Ziblatt identified a recurring pattern. The first step is capturing the referees — judges, prosecutors, electoral controllers. The second is using the state to persecute enemies: selective investigations, audits, pressure on companies funding the opposition. The third is changing the rules of the game: constitutional or electoral reforms favoring the ruler." },
+        { "type": "p", "text": "The fourth step is suffocating independent media — not necessarily through explicit censorship, but through economic pressure, abusive lawsuits, and favoring allied outlets. And the fifth is mobilizing followers against institutional legitimacy, creating the narrative that any electoral defeat is fraud." },
+        { "type": "quote", "text": "Democracies die today not with a bang, but with a whimper.", "author": "Steven Levitsky and Daniel Ziblatt" },
+        { "type": "h2", "text": "Electoral autocracy: facade democracy" },
+        { "type": "p", "text": "One of the 21st century's most important developments is the proliferation of 'electoral autocracies' — regimes that maintain regular elections but systematically manipulate them. Elections exist, but the playing field is profoundly unequal: opposition is persecuted, media is controlled, rules are changed to favor those in power." },
+        { "type": "p", "text": "These regimes differ from classic dictatorships because they maintain the formal legitimacy of elections. This makes them more resilient: it's difficult for the international community to criticize 'elections' even when they aren't free. Russia, Venezuela, Turkey, and Hungary are contemporary examples at different points on this spectrum." },
+        { "type": "h2", "text": "The role of informal norms" },
+        { "type": "p", "text": "Levitsky and Ziblatt argue that democracy depends not just on formal laws but on informal norms — unwritten 'guardrails.' The most important are mutual toleration (accepting that adversaries are legitimate competitors, not enemies to destroy) and institutional forbearance (not using all legally available powers just because you can)." },
+        { "type": "p", "text": "When these norms erode, political competition becomes warfare. Each side justifies escalation because the other 'started it.' The result is a radicalization spiral that can make the system ungovernable — or open space for a leader who promises to restore order at the cost of democracy." },
+        { "type": "h2", "text": "Democratic resilience: what works?" },
+        { "type": "p", "text": "Comparative research identifies factors that make democracies more resistant to authoritarianism: robust political parties (that don't subordinate themselves to individual leaders), an independent judiciary with real capacity to impose limits, independent media and organized civil society, and democratic experience — the older the democracy, the more resilient it tends to be." },
+        { "type": "p", "text": "But no system is immune. The oldest democracies — the US, UK — have also demonstrated vulnerabilities in recent years. The lesson isn't that strong democracies can't collapse, but that democracy is an ongoing practice, not a permanent achievement. It needs to be actively and deliberately defended." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_authoritarianism_q1",
+        "question": "How do most 'democratic deaths' occur in the 21st century, according to Levitsky and Way?",
+        "options": [
+          "Through classic military coups",
+          "Through foreign invasions",
+          "Through the electoral path — elected leaders gradually dismantling institutions",
+          "Through economic collapse followed by revolution"
+        ],
+        "answerIndex": 2,
+        "explanation": "In the 21st century, most democratic breakdowns occur through the electoral path: democratically elected leaders gradually dismantle the institutions that constrain them, using legality to subvert legality."
+      },
+      {
+        "id": "politics_authoritarianism_q2",
+        "question": "What is the first step in the 'modern autocrat's playbook' according to Levitsky and Ziblatt?",
+        "options": [
+          "Suffocating independent media",
+          "Mobilizing followers against institutions",
+          "Capturing the referees — judges, prosecutors, electoral controllers",
+          "Persecuting opposition funders"
+        ],
+        "answerIndex": 2,
+        "explanation": "The first step is capturing the referees — those who supervise and judge the political process. Without independent judges and prosecutors, the subsequent steps of persecution and rule-changing meet no obstacle."
+      },
+      {
+        "id": "politics_authoritarianism_q3",
+        "question": "What distinguishes an 'electoral autocracy' from a classic dictatorship?",
+        "options": [
+          "Electoral autocracies are economically more efficient",
+          "Electoral autocracies maintain regular but systematically manipulated elections",
+          "Electoral autocracies allow full press freedom",
+          "Electoral autocracies always result from military coups"
+        ],
+        "answerIndex": 1,
+        "explanation": "Electoral autocracies maintain the facade of elections, but the playing field is unequal — opposition is persecuted, media controlled. This makes them more resilient than dictatorships, as they retain formal legitimacy."
+      },
+      {
+        "id": "politics_authoritarianism_q4",
+        "question": "What are the two most important informal norms for democracy according to Levitsky and Ziblatt?",
+        "options": [
+          "Fiscal transparency and anti-corruption",
+          "Mutual toleration and institutional forbearance",
+          "Press freedom and judicial independence",
+          "Power alternation and multiparty systems"
+        ],
+        "answerIndex": 1,
+        "explanation": "Mutual toleration (accepting adversaries as legitimate competitors) and institutional forbearance (not using all available powers just because you can) are the informal guardrails sustaining democracy beyond formal laws."
+      },
+      {
+        "id": "politics_authoritarianism_q5",
+        "question": "Which factor is NOT identified as promoting democratic resilience?",
+        "options": [
+          "Robust political parties that don't subordinate to individual leaders",
+          "An independent judiciary with real capacity to impose limits",
+          "High wealth concentration among economic elites",
+          "Accumulated democratic experience over time"
+        ],
+        "answerIndex": 2,
+        "explanation": "High wealth concentration among economic elites doesn't promote democratic resilience — it can actually increase vulnerability to authoritarianism by creating incentives for elites to support leaders who protect their interests."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Autoritarismo y el Colapso Democrático",
+      "summary": "Las democracias rara vez mueren con una bala. Hoy tienden a morir gradualmente — por la erosión de normas, la captura de instituciones, el debilitamiento de la oposición. El autoritarismo moderno no necesita tanques en las calles. Entender cómo colapsan las democracias no es un ejercicio de pesimismo: es la condición para reconocer las señales antes de que sea demasiado tarde.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Cómo mueren las democracias hoy" },
+        { "type": "p", "text": "En el siglo XX, la amenaza clásica a la democracia era el golpe militar. Pero Steven Levitsky y Lucan Way documentaron un cambio en los patrones de ruptura democrática: en el siglo XXI, la mayoría de las 'muertes democráticas' ocurren por la vía electoral. Los líderes democráticamente elegidos desmantelan gradualmente las instituciones que los limitan." },
+        { "type": "p", "text": "El mecanismo es sutil: el líder usa la legalidad para subvertir la legalidad. Reformas constitucionales, nombramientos para tribunales, cambios en las leyes electorales — cada paso parece legal por separado, pero el efecto acumulado es la concentración de poder y el debilitamiento de los controles y contrapesos." },
+        { "type": "h2", "text": "El manual del autócrata moderno" },
+        { "type": "p", "text": "Levitsky y Ziblatt identificaron un patrón recurrente. El primer paso es capturar a los árbitros — jueces, fiscales, controladores electorales. El segundo es usar el Estado para perseguir a los enemigos: investigaciones selectivas, auditorías, presión sobre empresas que financian a la oposición. El tercero es cambiar las reglas del juego: reformas constitucionales o electorales que favorezcan al gobernante." },
+        { "type": "p", "text": "El cuarto paso es sofocar a los medios independientes — no necesariamente a través de la censura explícita, sino mediante presión económica, procesos judiciales abusivos y favoritismo hacia medios aliados. Y el quinto es movilizar seguidores contra la legitimidad de las instituciones, creando la narrativa de que cualquier derrota electoral es fraude." },
+        { "type": "quote", "text": "Las democracias mueren hoy no con un estruendo, sino con un susurro.", "author": "Steven Levitsky y Daniel Ziblatt" },
+        { "type": "h2", "text": "Autocracia electoral: democracia de fachada" },
+        { "type": "p", "text": "Uno de los desarrollos más importantes del siglo XXI es la proliferación de 'autocracias electorales' — regímenes que mantienen elecciones regulares pero las manipulan sistemáticamente. Las elecciones existen, pero el campo de juego es profundamente desigual: la oposición es perseguida, los medios controlados, las reglas cambiadas para favorecer al que está en el poder." },
+        { "type": "p", "text": "Estos regímenes difieren de las dictaduras clásicas porque mantienen la legitimidad formal de la elección. Esto los hace más resilientes: es difícil para la comunidad internacional criticar 'elecciones' aunque no sean libres. Rusia, Venezuela, Turquía y Hungría son ejemplos contemporáneos en diferentes puntos de ese espectro." },
+        { "type": "h2", "text": "El papel de las normas informales" },
+        { "type": "p", "text": "Levitsky y Ziblatt argumentan que la democracia depende no solo de leyes formales sino de normas informales — 'guardrails' no escritas. Las más importantes son la tolerancia mutua (aceptar que los adversarios son competidores legítimos, no enemigos a destruir) y la contención institucional (no usar todos los poderes legales disponibles solo porque se puede)." },
+        { "type": "p", "text": "Cuando estas normas se erosionan, la competencia política se convierte en guerra. Cada bando justifica escaladas porque el otro 'empezó'. El resultado es una espiral de radicalización que puede hacer el sistema ingobernable — o abrir espacio para un líder que prometa restaurar el orden a costa de la democracia." },
+        { "type": "h2", "text": "Resiliencia democrática: ¿qué funciona?" },
+        { "type": "p", "text": "La investigación comparativa identifica factores que hacen a las democracias más resistentes al autoritarismo: partidos políticos robustos (que no se subordinan a líderes individuales), poder judicial independiente con capacidad real de imponer límites, medios independientes y sociedad civil organizada, y experiencia democrática — cuanto más antigua la democracia, más resiliente tiende a ser." },
+        { "type": "p", "text": "Pero ningún sistema es inmune. Las democracias más antiguas — EE.UU., Reino Unido — también han demostrado vulnerabilidades en los últimos años. La lección no es que las democracias fuertes no puedan colapsar, sino que la democracia es una práctica continua, no un logro permanente. Necesita ser activa y deliberadamente defendida." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_authoritarianism_q1",
+        "question": "¿Cómo ocurre la mayoría de las 'muertes democráticas' en el siglo XXI según Levitsky y Way?",
+        "options": [
+          "Por golpes militares clásicos",
+          "Por invasiones extranjeras",
+          "Por la vía electoral — líderes elegidos que desmantelan instituciones gradualmente",
+          "Por colapso económico seguido de revolución"
+        ],
+        "answerIndex": 2,
+        "explanation": "En el siglo XXI, la mayoría de las rupturas democráticas ocurren por la vía electoral: los líderes democráticamente elegidos desmantelan gradualmente las instituciones que los limitan, usando la legalidad para subvertir la legalidad."
+      },
+      {
+        "id": "politics_authoritarianism_q2",
+        "question": "¿Cuál es el primer paso en el 'manual del autócrata moderno' según Levitsky y Ziblatt?",
+        "options": [
+          "Sofocar a los medios independientes",
+          "Movilizar seguidores contra las instituciones",
+          "Capturar a los árbitros — jueces, fiscales, controladores electorales",
+          "Perseguir a los financiadores de la oposición"
+        ],
+        "answerIndex": 2,
+        "explanation": "El primer paso es capturar a los árbitros — quienes supervisan y juzgan el proceso político. Sin jueces y fiscales independientes, los siguientes pasos de persecución y cambio de reglas no encuentran obstáculo."
+      },
+      {
+        "id": "politics_authoritarianism_q3",
+        "question": "¿Qué diferencia a una 'autocracia electoral' de una dictadura clásica?",
+        "options": [
+          "Las autocracias electorales son económicamente más eficientes",
+          "Las autocracias electorales mantienen elecciones regulares pero sistemáticamente manipuladas",
+          "Las autocracias electorales permiten plena libertad de prensa",
+          "Las autocracias electorales siempre resultan de golpes militares"
+        ],
+        "answerIndex": 1,
+        "explanation": "Las autocracias electorales mantienen la fachada de elecciones, pero el campo de juego es desigual — la oposición es perseguida, los medios controlados. Esto las hace más resilientes que las dictaduras, pues mantienen legitimidad formal."
+      },
+      {
+        "id": "politics_authoritarianism_q4",
+        "question": "¿Cuáles son las dos normas informales más importantes para la democracia según Levitsky y Ziblatt?",
+        "options": [
+          "Transparencia fiscal y lucha anticorrupción",
+          "Tolerancia mutua y contención institucional",
+          "Libertad de prensa e independencia judicial",
+          "Alternancia de poder y sistemas multipartidistas"
+        ],
+        "answerIndex": 1,
+        "explanation": "La tolerancia mutua (aceptar a los adversarios como competidores legítimos) y la contención institucional (no usar todos los poderes disponibles solo porque se puede) son los 'guardrails' informales que sostienen la democracia más allá de las leyes formales."
+      },
+      {
+        "id": "politics_authoritarianism_q5",
+        "question": "¿Qué factor NO se identifica como promotor de resiliencia democrática?",
+        "options": [
+          "Partidos políticos robustos que no se subordinan a líderes individuales",
+          "Poder judicial independiente con capacidad real de imponer límites",
+          "Alta concentración de riqueza en las élites económicas",
+          "Experiencia democrática acumulada a lo largo del tiempo"
+        ],
+        "answerIndex": 2,
+        "explanation": "La alta concentración de riqueza en las élites económicas no promueve la resiliencia democrática — al contrario, puede aumentar la vulnerabilidad al autoritarismo al crear incentivos para que las élites apoyen a líderes que protejan sus intereses."
+      }
+    ]
+  }
+}

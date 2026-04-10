@@ -1,0 +1,278 @@
+{
+  "id": "politics",
+  "trackId": "politics",
+  "order": 1,
+  "difficulty": 1,
+  "estimatedMinutes": 10,
+  "prerequisites": [],
+  "title": { "pt": "O que é Política?", "en": "What Is Politics?", "es": "¿Qué es la Política?" },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "O que é Política?",
+      "summary": "Política é o processo pelo qual sociedades tomam decisões coletivas sobre poder, recursos e regras de convivência. Entender o que é política, por que ela existe e quais são suas dimensões fundamentais é o ponto de partida para compreender o mundo em que vivemos.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Por que a política existe?" },
+        { "type": "p", "text": "Política é o conjunto de processos pelos quais uma sociedade toma decisões coletivas — quem governa, como os recursos são distribuídos, que regras valem, quem tem o quê. A palavra vem do grego polis (cidade-estado), e Aristóteles a definiu como a ciência da vida boa em comunidade. Mas política também pode ser definida de forma mais crua: a atividade de obter, usar e manter o poder. As duas definições capturam dimensões reais do fenômeno político." },
+        { "type": "p", "text": "A política existe porque seres humanos vivem em sociedade e têm interesses conflitantes. Recursos são escassos: dinheiro público, território, tempo legislativo, atenção pública. Valores divergem: liberdade versus igualdade, segurança versus privacidade, crescimento econômico versus sustentabilidade ambiental. A política é o mecanismo pelo qual esses conflitos são gerenciados — idealmente de forma pacífica, através de negociação, representação e regras. Sem política, restaria apenas a força bruta." },
+        { "type": "quote", "text": "O homem é por natureza um animal político. — Aristóteles" },
+        { "type": "h2", "text": "As dimensões do poder político" },
+        { "type": "p", "text": "O politólogo Robert Dahl definiu poder como a capacidade de fazer alguém fazer algo que não faria de outra forma. Mas poder político tem múltiplas dimensões. Poder coercitivo: o Estado tem o monopólio legítimo da violência (Weber) — polícia, exército, leis com sanções. Poder econômico: controle de recursos materiais que determinam quem depende de quem. Poder simbólico (Bourdieu): controle da narrativa, da definição do que é legítimo, normal e desejável — a dimensão menos visível mas frequentemente mais poderosa." },
+        { "type": "bullets", "items": [
+          "Política distributiva: quem recebe o quê — impostos, subsídios, políticas sociais",
+          "Política regulatória: que regras valem — leis, normas, proibições e permissões",
+          "Política constitutiva: quem tem o direito de participar das decisões — cidadania, sufrágio, representação",
+          "Política simbólica: que valores e identidades são legitimados pelo poder — bandeiras, narrativas nacionais, reconhecimento"
+        ]},
+        { "type": "h2", "text": "Estado, governo e regime político" },
+        { "type": "p", "text": "É essencial distinguir três conceitos frequentemente confundidos. Estado é a estrutura permanente de poder sobre um território — inclui as instituições (judiciário, forças armadas, burocracia) e persiste além de qualquer governante específico. Governo é o conjunto de pessoas que atualmente exercem o poder do Estado — o presidente, o ministério, o parlamento eleito. Regime político é o conjunto de regras e normas que definem como o poder é obtido e exercido — democracia, autocracia, teocracia." },
+        { "type": "p", "text": "Essa distinção importa: governos mudam a cada eleição; o Estado permanece. Regimes podem mudar através de revoluções ou golpes; o Estado frequentemente sobrevive. Um Estado pode ter um bom regime político (democracia consolidada) com um mau governo (corrupto, ineficiente). Compreender qual nível está em questão — Estado, governo ou regime — é fundamental para análise política precisa." },
+        { "type": "h2", "text": "Por que a política importa para todos" },
+        { "type": "p", "text": "A frase atribuída a Pericles resume a questão: 'Só porque você não se interessa por política não significa que a política não se interessa por você.' Decisões políticas definem o custo do seu aluguel (políticas habitacionais), a qualidade do seu ar (regulações ambientais), o valor do seu salário (política monetária e trabalhista), a segurança das ruas onde você anda. Desengajamento político não é neutralidade — é deixar as decisões que afetam sua vida nas mãos de outros. Entender política é uma forma de autodefesa e de responsabilidade cívica." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "q1",
+        "question": "Por que a política existe nas sociedades humanas?",
+        "options": [
+          "Porque os seres humanos são naturalmente agressivos e precisam ser controlados",
+          "Porque recursos são escassos e valores divergem — a política é o mecanismo para gerenciar conflitos coletivos de forma pacífica",
+          "Porque governantes sempre existiram e precisam de estruturas para manter seu poder",
+          "Porque sem política não haveria leis e a sociedade seria impossível"
+        ],
+        "answerIndex": 1,
+        "explanation": "A política existe porque interesses conflitam: recursos escassos precisam ser distribuídos, valores divergentes precisam ser arbitrados. Sem um mecanismo político para gerenciar esses conflitos pacificamente, restaria apenas a força bruta. A política é, antes de tudo, uma alternativa à violência como forma de resolver disputas coletivas."
+      },
+      {
+        "id": "q2",
+        "question": "Qual é a diferença entre Estado, governo e regime político?",
+        "options": [
+          "São termos sinônimos que descrevem a mesma estrutura de poder",
+          "Estado é a estrutura permanente; governo é quem exerce o poder atualmente; regime é como o poder é obtido e exercido",
+          "Estado refere-se ao poder federal; governo ao poder local; regime ao poder judiciário",
+          "Estado é a constituição escrita; governo é o executivo; regime é o sistema parlamentar ou presidencial"
+        ],
+        "answerIndex": 1,
+        "explanation": "Estado é a estrutura institucional permanente (judiciário, forças armadas, burocracia) que persiste além de qualquer governante. Governo é quem atualmente ocupa o poder — muda com eleições ou crises. Regime é o conjunto de regras que define como o poder é obtido e exercido — democracia, autocracia, etc. Um bom regime pode ter um mau governo; um Estado sólido pode sobreviver a vários governos ruins."
+      },
+      {
+        "id": "q3",
+        "question": "O que o sociólogo Max Weber quis dizer ao definir o Estado como detentor do 'monopólio legítimo da violência'?",
+        "options": [
+          "Que governos democráticos têm o direito de usar qualquer forma de violência contra cidadãos",
+          "Que o Estado é a única entidade reconhecida como tendo o direito de usar a força coercitiva dentro de um território",
+          "Que a violência política é sempre justificada quando praticada por instituições governamentais",
+          "Que o Estado deve possuir todas as armas para prevenir conflitos entre cidadãos"
+        ],
+        "answerIndex": 1,
+        "explanation": "Weber identificou que o que distingue o Estado de outras organizações é o monopólio reconhecido do uso legítimo da força dentro de um território. Polícia e exército podem usar coerção; cidadãos comuns não podem (sem se tornar criminosos). Esse monopólio é condicionado à legitimidade — quando o Estado perde legitimidade, sua autoridade se fragmenta."
+      },
+      {
+        "id": "q4",
+        "question": "Quais são as dimensões do poder político além da coerção?",
+        "options": [
+          "Apenas poder econômico — quem controla o dinheiro controla a política",
+          "Poder coercitivo, poder econômico e poder simbólico — controle de narrativas e do que é considerado legítimo",
+          "Poder militar e poder diplomático — as duas forças que determinam quem governa",
+          "Poder legislativo, executivo e judiciário — a tripartição clássica do Estado moderno"
+        ],
+        "answerIndex": 1,
+        "explanation": "Robert Dahl e Pierre Bourdieu identificaram múltiplas dimensões do poder. Coercitivo: monopólio da força (Estado). Econômico: controle de recursos materiais. Simbólico (Bourdieu): controle da narrativa, definição do que é legítimo e normal — frequentemente a dimensão mais invisível e mais durável do poder."
+      },
+      {
+        "id": "q5",
+        "question": "Por que o desengajamento político não é uma posição neutra?",
+        "options": [
+          "Porque votar é obrigatório na maioria das democracias modernas",
+          "Porque decisões políticas afetam diretamente a vida de todos — não participar é deixar as decisões nas mãos de outros",
+          "Porque desengajamento político é ilegal em regimes democráticos consolidados",
+          "Porque a política só funciona quando 100% dos cidadãos participam ativamente"
+        ],
+        "answerIndex": 1,
+        "explanation": "Decisões políticas definem o custo do aluguel (políticas habitacionais), a qualidade do ar (regulações ambientais), o valor do salário (política monetária e trabalhista), a segurança das ruas. Não se importar com política não impede que suas consequências te alcancem. Desengajamento não é neutralidade — é abrir mão de influência sobre decisões que já estão sendo tomadas, com ou sem você."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "What Is Politics?",
+      "summary": "Politics is the process by which societies make collective decisions about power, resources, and rules of coexistence. Understanding what politics is, why it exists, and what its fundamental dimensions are is the starting point for understanding the world we live in.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Why does politics exist?" },
+        { "type": "p", "text": "Politics is the set of processes by which a society makes collective decisions — who governs, how resources are distributed, which rules apply, who gets what. The word comes from the Greek polis (city-state), and Aristotle defined it as the science of the good life in community. But politics can also be defined more bluntly: the activity of obtaining, using, and maintaining power. Both definitions capture real dimensions of the political phenomenon." },
+        { "type": "p", "text": "Politics exists because human beings live in society and have conflicting interests. Resources are scarce: public money, territory, legislative time, public attention. Values diverge: freedom versus equality, security versus privacy, economic growth versus environmental sustainability. Politics is the mechanism by which these conflicts are managed — ideally peacefully, through negotiation, representation, and rules. Without politics, only brute force would remain." },
+        { "type": "quote", "text": "Man is by nature a political animal. — Aristotle" },
+        { "type": "h2", "text": "The dimensions of political power" },
+        { "type": "p", "text": "Political scientist Robert Dahl defined power as the ability to make someone do something they would not otherwise do. But political power has multiple dimensions. Coercive power: the State holds the legitimate monopoly on violence (Weber) — police, military, laws with sanctions. Economic power: control of material resources that determine who depends on whom. Symbolic power (Bourdieu): control of the narrative, the definition of what is legitimate, normal, and desirable — the least visible but often most powerful dimension." },
+        { "type": "bullets", "items": [
+          "Distributive politics: who gets what — taxes, subsidies, social policies",
+          "Regulatory politics: what rules apply — laws, norms, prohibitions and permissions",
+          "Constitutive politics: who has the right to participate in decisions — citizenship, suffrage, representation",
+          "Symbolic politics: what values and identities are legitimized by power — flags, national narratives, recognition"
+        ]},
+        { "type": "h2", "text": "State, government, and political regime" },
+        { "type": "p", "text": "It is essential to distinguish three concepts frequently confused. The State is the permanent power structure over a territory — it includes institutions (judiciary, armed forces, bureaucracy) and persists beyond any specific ruler. The government is the group of people currently exercising State power — the president, the ministry, the elected parliament. The political regime is the set of rules and norms defining how power is obtained and exercised — democracy, autocracy, theocracy." },
+        { "type": "p", "text": "This distinction matters: governments change with every election; the State remains. Regimes can change through revolutions or coups; the State often survives. A State can have a good political regime (consolidated democracy) with a bad government (corrupt, inefficient). Understanding which level is at stake — State, government, or regime — is fundamental for precise political analysis." },
+        { "type": "h2", "text": "Why politics matters to everyone" },
+        { "type": "p", "text": "The phrase attributed to Pericles summarizes the issue: 'Just because you don't take an interest in politics doesn't mean politics won't take an interest in you.' Political decisions define the cost of your rent (housing policies), the quality of your air (environmental regulations), the value of your wages (monetary and labor policy), the safety of the streets where you walk. Political disengagement is not neutrality — it is leaving the decisions that affect your life in the hands of others. Understanding politics is a form of self-defense and civic responsibility." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "q1",
+        "question": "Why does politics exist in human societies?",
+        "options": [
+          "Because human beings are naturally aggressive and need to be controlled",
+          "Because resources are scarce and values diverge — politics is the mechanism for peacefully managing collective conflicts",
+          "Because rulers have always existed and need structures to maintain their power",
+          "Because without politics there would be no laws and society would be impossible"
+        ],
+        "answerIndex": 1,
+        "explanation": "Politics exists because interests conflict: scarce resources need to be distributed, diverging values need to be arbitrated. Without a political mechanism to manage these conflicts peacefully, only brute force would remain. Politics is, above all, an alternative to violence as a way of resolving collective disputes."
+      },
+      {
+        "id": "q2",
+        "question": "What is the difference between State, government, and political regime?",
+        "options": [
+          "They are synonymous terms describing the same power structure",
+          "State is the permanent structure; government is who currently exercises power; regime is how power is obtained and exercised",
+          "State refers to federal power; government to local power; regime to judicial power",
+          "State is the written constitution; government is the executive; regime is the parliamentary or presidential system"
+        ],
+        "answerIndex": 1,
+        "explanation": "State is the permanent institutional structure (judiciary, armed forces, bureaucracy) that persists beyond any ruler. Government is who currently holds power — changes with elections or crises. Regime is the set of rules defining how power is obtained and exercised — democracy, autocracy, etc. A good regime can have a bad government; a solid State can survive many bad governments."
+      },
+      {
+        "id": "q3",
+        "question": "What did sociologist Max Weber mean by defining the State as holding the 'legitimate monopoly on violence'?",
+        "options": [
+          "That democratic governments have the right to use any form of violence against citizens",
+          "That the State is the only entity recognized as having the right to use coercive force within a territory",
+          "That political violence is always justified when practiced by governmental institutions",
+          "That the State must own all weapons to prevent conflicts between citizens"
+        ],
+        "answerIndex": 1,
+        "explanation": "Weber identified that what distinguishes the State from other organizations is its recognized monopoly on the legitimate use of force within a territory. Police and military can use coercion; ordinary citizens cannot (without becoming criminals). This monopoly is conditional on legitimacy — when the State loses legitimacy, its authority fragments."
+      },
+      {
+        "id": "q4",
+        "question": "What are the dimensions of political power beyond coercion?",
+        "options": [
+          "Only economic power — whoever controls money controls politics",
+          "Coercive power, economic power, and symbolic power — control of narratives and what is considered legitimate",
+          "Military power and diplomatic power — the two forces that determine who governs",
+          "Legislative, executive, and judicial power — the classic tripartition of the modern State"
+        ],
+        "answerIndex": 1,
+        "explanation": "Robert Dahl and Pierre Bourdieu identified multiple dimensions of power. Coercive: monopoly of force (State). Economic: control of material resources. Symbolic (Bourdieu): control of the narrative, definition of what is legitimate and normal — often the most invisible and most durable dimension of power."
+      },
+      {
+        "id": "q5",
+        "question": "Why is political disengagement not a neutral position?",
+        "options": [
+          "Because voting is compulsory in most modern democracies",
+          "Because political decisions directly affect everyone's life — not participating means leaving decisions in others' hands",
+          "Because political disengagement is illegal in consolidated democratic regimes",
+          "Because politics only works when 100% of citizens actively participate"
+        ],
+        "answerIndex": 1,
+        "explanation": "Political decisions define the cost of rent (housing policies), air quality (environmental regulations), wage value (monetary and labor policy), street safety. Not caring about politics doesn't prevent its consequences from reaching you. Disengagement is not neutrality — it is giving up influence over decisions that are already being made, with or without you."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "¿Qué es la Política?",
+      "summary": "La política es el proceso por el cual las sociedades toman decisiones colectivas sobre poder, recursos y reglas de convivencia. Entender qué es la política, por qué existe y cuáles son sus dimensiones fundamentales es el punto de partida para comprender el mundo en que vivimos.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "¿Por qué existe la política?" },
+        { "type": "p", "text": "La política es el conjunto de procesos por los cuales una sociedad toma decisiones colectivas — quién gobierna, cómo se distribuyen los recursos, qué reglas rigen, quién obtiene qué. La palabra proviene del griego polis (ciudad-estado), y Aristóteles la definió como la ciencia de la vida buena en comunidad. Pero la política también puede definirse de forma más cruda: la actividad de obtener, usar y mantener el poder. Ambas definiciones capturan dimensiones reales del fenómeno político." },
+        { "type": "p", "text": "La política existe porque los seres humanos viven en sociedad y tienen intereses en conflicto. Los recursos son escasos: dinero público, territorio, tiempo legislativo, atención pública. Los valores divergen: libertad versus igualdad, seguridad versus privacidad, crecimiento económico versus sostenibilidad ambiental. La política es el mecanismo por el cual se gestionan estos conflictos — idealmente de forma pacífica, a través de la negociación, la representación y las reglas." },
+        { "type": "quote", "text": "El hombre es por naturaleza un animal político. — Aristóteles" },
+        { "type": "h2", "text": "Las dimensiones del poder político" },
+        { "type": "p", "text": "El politólogo Robert Dahl definió el poder como la capacidad de hacer que alguien haga algo que de otro modo no haría. Pero el poder político tiene múltiples dimensiones. Poder coercitivo: el Estado tiene el monopolio legítimo de la violencia (Weber) — policía, ejército, leyes con sanciones. Poder económico: control de recursos materiales que determinan quién depende de quién. Poder simbólico (Bourdieu): control de la narrativa, de la definición de lo que es legítimo, normal y deseable — la dimensión menos visible pero frecuentemente más poderosa." },
+        { "type": "bullets", "items": [
+          "Política distributiva: quién recibe qué — impuestos, subsidios, políticas sociales",
+          "Política regulatoria: qué reglas rigen — leyes, normas, prohibiciones y permisos",
+          "Política constitutiva: quién tiene derecho a participar en las decisiones — ciudadanía, sufragio, representación",
+          "Política simbólica: qué valores e identidades son legitimados por el poder — banderas, narrativas nacionales, reconocimiento"
+        ]},
+        { "type": "h2", "text": "Estado, gobierno y régimen político" },
+        { "type": "p", "text": "Es esencial distinguir tres conceptos frecuentemente confundidos. El Estado es la estructura permanente de poder sobre un territorio — incluye las instituciones (poder judicial, fuerzas armadas, burocracia) y persiste más allá de cualquier gobernante específico. El gobierno es el conjunto de personas que actualmente ejercen el poder del Estado — el presidente, el ministerio, el parlamento elegido. El régimen político es el conjunto de reglas y normas que definen cómo se obtiene y ejerce el poder — democracia, autocracia, teocracia." },
+        { "type": "p", "text": "Esta distinción importa: los gobiernos cambian con cada elección; el Estado permanece. Los regímenes pueden cambiar a través de revoluciones o golpes; el Estado frecuentemente sobrevive. Un Estado puede tener un buen régimen político (democracia consolidada) con un mal gobierno (corrupto, ineficiente). Comprender qué nivel está en cuestión — Estado, gobierno o régimen — es fundamental para un análisis político preciso." },
+        { "type": "h2", "text": "Por qué la política importa a todos" },
+        { "type": "p", "text": "La frase atribuida a Pericles resume la cuestión: 'El hecho de que no te interese la política no significa que la política no se interese por ti.' Las decisiones políticas definen el costo de tu alquiler (políticas habitacionales), la calidad del aire que respiras (regulaciones ambientales), el valor de tu salario (política monetaria y laboral), la seguridad de las calles por donde caminas. El desenganchamiento político no es neutralidad — es dejar las decisiones que afectan tu vida en manos de otros." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "q1",
+        "question": "¿Por qué existe la política en las sociedades humanas?",
+        "options": [
+          "Porque los seres humanos son naturalmente agresivos y necesitan ser controlados",
+          "Porque los recursos son escasos y los valores divergen — la política es el mecanismo para gestionar pacíficamente los conflictos colectivos",
+          "Porque siempre han existido gobernantes que necesitan estructuras para mantener su poder",
+          "Porque sin política no habría leyes y la sociedad sería imposible"
+        ],
+        "answerIndex": 1,
+        "explanation": "La política existe porque los intereses entran en conflicto: los recursos escasos necesitan distribuirse, los valores divergentes necesitan arbitrarse. Sin un mecanismo político para gestionar pacíficamente estos conflictos, solo quedaría la fuerza bruta. La política es, ante todo, una alternativa a la violencia como forma de resolver disputas colectivas."
+      },
+      {
+        "id": "q2",
+        "question": "¿Cuál es la diferencia entre Estado, gobierno y régimen político?",
+        "options": [
+          "Son términos sinónimos que describen la misma estructura de poder",
+          "El Estado es la estructura permanente; el gobierno es quien ejerce actualmente el poder; el régimen es cómo se obtiene y ejerce el poder",
+          "El Estado se refiere al poder federal; el gobierno al poder local; el régimen al poder judicial",
+          "El Estado es la constitución escrita; el gobierno es el ejecutivo; el régimen es el sistema parlamentario o presidencial"
+        ],
+        "answerIndex": 1,
+        "explanation": "El Estado es la estructura institucional permanente (poder judicial, fuerzas armadas, burocracia) que persiste más allá de cualquier gobernante. El gobierno es quien actualmente ocupa el poder — cambia con las elecciones o las crisis. El régimen es el conjunto de reglas que define cómo se obtiene y ejerce el poder. Un buen régimen puede tener un mal gobierno; un Estado sólido puede sobrevivir a muchos malos gobiernos."
+      },
+      {
+        "id": "q3",
+        "question": "¿Qué quiso decir el sociólogo Max Weber al definir al Estado como detentador del 'monopolio legítimo de la violencia'?",
+        "options": [
+          "Que los gobiernos democráticos tienen derecho a usar cualquier forma de violencia contra los ciudadanos",
+          "Que el Estado es la única entidad reconocida como con derecho a usar la fuerza coercitiva dentro de un territorio",
+          "Que la violencia política siempre está justificada cuando la practican las instituciones gubernamentales",
+          "Que el Estado debe poseer todas las armas para prevenir conflictos entre ciudadanos"
+        ],
+        "answerIndex": 1,
+        "explanation": "Weber identificó que lo que distingue al Estado de otras organizaciones es su monopolio reconocido del uso legítimo de la fuerza dentro de un territorio. Policía y ejército pueden usar coerción; los ciudadanos comunes no (sin convertirse en criminales). Este monopolio está condicionado a la legitimidad — cuando el Estado pierde legitimidad, su autoridad se fragmenta."
+      },
+      {
+        "id": "q4",
+        "question": "¿Cuáles son las dimensiones del poder político más allá de la coerción?",
+        "options": [
+          "Solo el poder económico — quien controla el dinero controla la política",
+          "Poder coercitivo, poder económico y poder simbólico — control de narrativas y de lo que se considera legítimo",
+          "Poder militar y poder diplomático — las dos fuerzas que determinan quién gobierna",
+          "Poder legislativo, ejecutivo y judicial — la tripartición clásica del Estado moderno"
+        ],
+        "answerIndex": 1,
+        "explanation": "Robert Dahl y Pierre Bourdieu identificaron múltiples dimensiones del poder. Coercitivo: monopolio de la fuerza (Estado). Económico: control de recursos materiales. Simbólico (Bourdieu): control de la narrativa, definición de lo que es legítimo y normal — frecuentemente la dimensión más invisible y más duradera del poder."
+      },
+      {
+        "id": "q5",
+        "question": "¿Por qué el desenganchamiento político no es una posición neutral?",
+        "options": [
+          "Porque votar es obligatorio en la mayoría de las democracias modernas",
+          "Porque las decisiones políticas afectan directamente la vida de todos — no participar es dejar las decisiones en manos de otros",
+          "Porque el desenganchamiento político es ilegal en los regímenes democráticos consolidados",
+          "Porque la política solo funciona cuando el 100% de los ciudadanos participan activamente"
+        ],
+        "answerIndex": 1,
+        "explanation": "Las decisiones políticas definen el costo del alquiler (políticas habitacionales), la calidad del aire (regulaciones ambientales), el valor del salario (política monetaria y laboral), la seguridad de las calles. No importarte la política no impide que sus consecuencias te alcancen. El desenganchamiento no es neutralidad — es renunciar a influir en decisiones que ya se están tomando, con o sin ti."
+      }
+    ]
+  }
+}

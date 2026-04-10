@@ -1,0 +1,278 @@
+{
+  "id": "politics_constitution",
+  "trackId": "politics",
+  "order": 3,
+  "difficulty": 2,
+  "estimatedMinutes": 10,
+  "prerequisites": ["politics", "politics_democracy"],
+  "title": { "pt": "Constituições e Estado de Direito", "en": "Constitutions and Rule of Law", "es": "Constituciones y Estado de Derecho" },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "Constituições e Estado de Direito",
+      "summary": "Constituições são os documentos que definem os limites do poder e os direitos dos cidadãos. O Estado de Direito — a ideia de que as leis valem para todos, inclusive quem governa — é o alicerce de qualquer democracia funcional. Sem esses mecanismos, eleições são inúteis.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "O que é uma constituição?" },
+        { "type": "p", "text": "Uma constituição é a lei fundamental de um Estado — define como o poder é organizado, distribuído e limitado, e quais são os direitos fundamentais dos cidadãos que nem governos eleitos podem violar. Constituições existem para resolver o problema central do poder político: como evitar que aqueles que têm poder o usem para seus próprios interesses em detrimento de todos os demais? A resposta constitucional: amarrar o poder antes de ele ser exercido." },
+        { "type": "p", "text": "A maioria dos países tem constituições escritas — documentos formais aprovados por processos especiais. Os EUA têm a mais antiga constituição escrita ainda em vigor (1787). A Constituição Brasileira de 1988 é uma das mais detalhadas do mundo, com 250 artigos. Mas algumas democracias funcionam sem constituição formal escrita: o Reino Unido tem uma constituição não-codificada, formada por leis, convenções e precedentes históricos acumulados por séculos — da Magna Carta (1215) ao Human Rights Act (1998)." },
+        { "type": "quote", "text": "Uma constituição não é o ato de um governo, mas de um povo que constitui um governo. — Thomas Paine" },
+        { "type": "h2", "text": "Separação de poderes e freios e contrapesos" },
+        { "type": "p", "text": "Montesquieu, no Espírito das Leis (1748), formulou a ideia que se tornaria o fundamento das democracias modernas: o poder deve ser dividido entre legislativo (que faz as leis), executivo (que as executa) e judiciário (que as interpreta e arbitra conflitos). Nenhum dos três poderes deve controlar os outros dois — existem mecanismos de freios e contrapesos (checks and balances) para isso. O presidente veta leis do congresso, o congresso aprova nomeações do executivo, o judiciário pode anular leis inconstitucionais." },
+        { "type": "bullets", "items": [
+          "Legislativo: faz as leis — parlamento, congresso, assembleia",
+          "Executivo: implementa as leis e governa — presidente, primeiro-ministro, gabinete",
+          "Judiciário: interpreta as leis e protege direitos — cortes, tribunais, supremo",
+          "Freios e contrapesos: cada poder limita os outros — veto presidencial, controle de constitucionalidade, aprovação legislativa de nomeações"
+        ]},
+        { "type": "h2", "text": "Estado de Direito: o princípio fundamental" },
+        { "type": "p", "text": "Estado de Direito (rule of law) é o princípio de que todos — cidadãos e governantes — estão submetidos às mesmas leis, aplicadas de forma igual e previsível. O oposto é o Estado de homens (rule of men): onde quem governa decide as regras conforme sua conveniência. A diferença não é teórica — é a diferença entre um sistema onde o presidente pode ser processado por crimes cometidos no cargo e um sistema onde o presidente decide quem é processado." },
+        { "type": "p", "text": "Os quatro elementos do Estado de Direito, segundo o jurista Albert Dicey: a lei é suprema sobre qualquer pessoa (ninguém está acima da lei); a lei é igual para todos (não há privilégios baseados em classe ou status); o poder governamental está sujeito a leis e procedimentos preestabelecidos; direitos fundamentais são garantidos e protegidos. Quando qualquer desses elementos é sistematicamente violado, o Estado de Direito está em erosão — mesmo que eleições continuem ocorrendo." },
+        { "type": "h2", "text": "Controle de constitucionalidade" },
+        { "type": "p", "text": "Um dos mecanismos mais poderosos das democracias constitucionais é o controle de constitucionalidade: a capacidade de tribunais de declarar leis inconstitucionais. Nos EUA, a Suprema Corte exerce esse poder desde Marbury v. Madison (1803). No Brasil, o STF. Na Alemanha, o Tribunal Constitucional Federal. Esse mecanismo é ao mesmo tempo o mais poderoso limite ao poder da maioria e o mais controverso — juízes não eleitos podem anular decisões de legisladores eleitos. É a tensão fundamental entre democracia (maioria decide) e constitucionalismo (direitos limitam a maioria)." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "q1",
+        "question": "Por que as constituições existem? Qual problema fundamental elas tentam resolver?",
+        "options": [
+          "Para organizar a burocracia do Estado de forma eficiente",
+          "Para amarrar o poder antes de ser exercido — evitar que governantes usem o poder para seus próprios interesses",
+          "Para garantir que todos os cidadãos conheçam seus deveres cívicos",
+          "Para registrar historicamente os valores e tradições de uma nação"
+        ],
+        "answerIndex": 1,
+        "explanation": "O problema central do poder político é que quem o detém tem incentivos para usá-lo em benefício próprio. Constituições resolvem isso estabelecendo regras antes do jogo: limitam o que qualquer governante pode fazer, definem direitos que não podem ser violados e criam mecanismos de accountability. São o 'pré-compromisso' pelo qual uma sociedade amarra seu futuro poder a regras presentes."
+      },
+      {
+        "id": "q2",
+        "question": "O que é a separação de poderes e por que Montesquieu a considerou essencial?",
+        "options": [
+          "A divisão do território nacional em estados e municípios com autonomia local",
+          "A divisão do poder em legislativo, executivo e judiciário independentes — para que nenhum monopolize o controle",
+          "A separação entre poderes políticos e poderes econômicos para evitar corrupção",
+          "A distinção entre direitos civis e direitos políticos na constituição"
+        ],
+        "answerIndex": 1,
+        "explanation": "Montesquieu observou que quando o mesmo órgão faz as leis, as executa e as interpreta, o poder é absoluto e o abuso é inevitável. A separação em três poderes independentes com mecanismos de freios e contrapesos — onde cada um pode limitar os outros — é a solução estrutural para o problema do abuso de poder. É o fundamento arquitetônico de todas as democracias liberais modernas."
+      },
+      {
+        "id": "q3",
+        "question": "Qual é a diferença entre Estado de Direito (rule of law) e Estado de homens (rule of men)?",
+        "options": [
+          "Estado de Direito existe em democracias; Estado de homens em ditaduras",
+          "No Estado de Direito, todos — incluindo governantes — estão submetidos às mesmas leis; no Estado de homens, quem governa decide as regras",
+          "Estado de Direito significa que advogados controlam o governo; Estado de homens que militares controlam",
+          "Estado de Direito requer constituição escrita; Estado de homens funciona por tradição e costume"
+        ],
+        "answerIndex": 1,
+        "explanation": "A distinção é prática: no Estado de Direito, um presidente pode ser processado por crimes cometidos no cargo, contratos são cumpridos mesmo que prejudiquem o poderoso, decisões judiciais valem contra o Estado. No Estado de homens, as regras são aplicadas seletivamente conforme conveniência do governante. Muitos regimes têm constituições escritas mas não têm Estado de Direito real."
+      },
+      {
+        "id": "q4",
+        "question": "O que é o controle de constitucionalidade e por que é controverso?",
+        "options": [
+          "O processo pelo qual cidadãos podem propor emendas à constituição",
+          "A capacidade de tribunais de anular leis inconstitucionais — controverso porque juízes não eleitos limitam decisões da maioria eleita",
+          "A revisão periódica da constituição por uma assembleia especialmente eleita",
+          "O mecanismo pelo qual partidos políticos verificam se seus programas estão dentro da constituição"
+        ],
+        "answerIndex": 1,
+        "explanation": "Controle de constitucionalidade é poderoso e necessário — protege direitos fundamentais de maiorias temporárias. Mas é controverso: juízes vitalícios (não eleitos, não responsabilizados por voto popular) podem anular leis aprovadas por legisladores eleitos pela maioria. É a tensão central do constitucionalismo democrático: quem tem a última palavra — a maioria ou a constituição?"
+      },
+      {
+        "id": "q5",
+        "question": "Quais sinais indicam erosão do Estado de Direito mesmo em países com eleições regulares?",
+        "options": [
+          "Quando o partido governante perde eleições para a oposição",
+          "Quando governantes violam sistematicamente leis, controlam o judiciário ou aplicam as leis seletivamente",
+          "Quando a constituição é emendada com frequência pelo legislativo",
+          "Quando há alta abstenção eleitoral em períodos de eleição"
+        ],
+        "answerIndex": 1,
+        "explanation": "Estado de Direito pode se deteriorar com eleições continuando: quando o executivo politiza o judiciário (nomeia aliados para cortes), quando leis são aplicadas seletivamente (perseguindo oposição, protegendo aliados), quando governantes ignoram decisões judiciais. O Brasil, Hungria, Turquia e Venezuela mostram esse padrão — eleições persistem enquanto Estado de Direito é sistematicamente corroído."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Constitutions and Rule of Law",
+      "summary": "Constitutions are the documents that define the limits of power and citizens' rights. The rule of law — the idea that laws apply to everyone, including those who govern — is the foundation of any functional democracy. Without these mechanisms, elections are useless.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "What is a constitution?" },
+        { "type": "p", "text": "A constitution is the fundamental law of a State — it defines how power is organized, distributed, and limited, and what fundamental rights citizens have that not even elected governments can violate. Constitutions exist to solve the central problem of political power: how to prevent those who hold power from using it for their own interests at everyone else's expense? The constitutional answer: tie down power before it is exercised." },
+        { "type": "p", "text": "Most countries have written constitutions — formal documents approved through special processes. The US has the oldest written constitution still in force (1787). Brazil's 1988 Constitution is one of the most detailed in the world, with 250 articles. But some democracies function without a formal written constitution: the UK has an uncodified constitution, formed by laws, conventions, and historical precedents accumulated over centuries — from the Magna Carta (1215) to the Human Rights Act (1998)." },
+        { "type": "quote", "text": "A constitution is not the act of a government, but of a people constituting a government. — Thomas Paine" },
+        { "type": "h2", "text": "Separation of powers and checks and balances" },
+        { "type": "p", "text": "Montesquieu, in The Spirit of the Laws (1748), formulated the idea that became the foundation of modern democracies: power must be divided among the legislative (which makes laws), executive (which implements them), and judicial (which interprets them and arbitrates conflicts). None of the three powers should control the other two — there are checks and balances mechanisms for this. The president vetoes congressional laws, Congress approves executive nominations, the judiciary can strike down unconstitutional laws." },
+        { "type": "bullets", "items": [
+          "Legislative: makes laws — parliament, congress, assembly",
+          "Executive: implements laws and governs — president, prime minister, cabinet",
+          "Judicial: interprets laws and protects rights — courts, tribunals, supreme court",
+          "Checks and balances: each power limits the others — presidential veto, judicial review, legislative approval of nominations"
+        ]},
+        { "type": "h2", "text": "Rule of law: the fundamental principle" },
+        { "type": "p", "text": "Rule of law is the principle that everyone — citizens and rulers — is subject to the same laws, applied equally and predictably. The opposite is rule of men: where those who govern decide the rules according to their convenience. The difference is not theoretical — it is the difference between a system where the president can be prosecuted for crimes committed in office and a system where the president decides who gets prosecuted." },
+        { "type": "p", "text": "The four elements of the rule of law, according to jurist Albert Dicey: the law is supreme over any person (no one is above the law); the law is equal for all (no privileges based on class or status); governmental power is subject to pre-established laws and procedures; fundamental rights are guaranteed and protected. When any of these elements is systematically violated, the rule of law is eroding — even if elections continue to occur." },
+        { "type": "h2", "text": "Judicial review of constitutionality" },
+        { "type": "p", "text": "One of the most powerful mechanisms of constitutional democracies is judicial review: courts' ability to strike down unconstitutional laws. In the US, the Supreme Court has exercised this power since Marbury v. Madison (1803). In Brazil, the STF. In Germany, the Federal Constitutional Court. This mechanism is simultaneously the most powerful limit on majority power and the most controversial — unelected judges can overturn decisions of elected legislators. It is the fundamental tension between democracy (majority decides) and constitutionalism (rights limit the majority)." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "q1",
+        "question": "Why do constitutions exist? What fundamental problem do they try to solve?",
+        "options": [
+          "To organize state bureaucracy efficiently",
+          "To tie down power before it is exercised — prevent rulers from using power for their own interests",
+          "To ensure all citizens know their civic duties",
+          "To historically record the values and traditions of a nation"
+        ],
+        "answerIndex": 1,
+        "explanation": "The central problem of political power is that those who hold it have incentives to use it for their own benefit. Constitutions solve this by establishing rules before the game: limit what any ruler can do, define rights that cannot be violated, and create accountability mechanisms. They are the 'pre-commitment' by which a society ties its future power to present rules."
+      },
+      {
+        "id": "q2",
+        "question": "What is the separation of powers and why did Montesquieu consider it essential?",
+        "options": [
+          "The division of national territory into states and municipalities with local autonomy",
+          "The division of power into independent legislative, executive, and judicial branches — so that none monopolizes control",
+          "The separation between political and economic powers to prevent corruption",
+          "The distinction between civil and political rights in the constitution"
+        ],
+        "answerIndex": 1,
+        "explanation": "Montesquieu observed that when the same body makes laws, executes them, and interprets them, power is absolute and abuse is inevitable. Separation into three independent powers with checks and balances — where each can limit the others — is the structural solution to the problem of power abuse. It is the architectural foundation of all modern liberal democracies."
+      },
+      {
+        "id": "q3",
+        "question": "What is the difference between rule of law and rule of men?",
+        "options": [
+          "Rule of law exists in democracies; rule of men in dictatorships",
+          "In rule of law, everyone — including rulers — is subject to the same laws; in rule of men, those who govern decide the rules",
+          "Rule of law means lawyers control the government; rule of men means the military controls it",
+          "Rule of law requires a written constitution; rule of men operates by tradition and custom"
+        ],
+        "answerIndex": 1,
+        "explanation": "The distinction is practical: under rule of law, a president can be prosecuted for crimes committed in office, contracts are honored even when they harm the powerful, court decisions apply against the State. Under rule of men, rules are applied selectively based on the ruler's convenience. Many regimes have written constitutions but no real rule of law."
+      },
+      {
+        "id": "q4",
+        "question": "What is judicial review of constitutionality and why is it controversial?",
+        "options": [
+          "The process by which citizens can propose constitutional amendments",
+          "Courts' ability to strike down unconstitutional laws — controversial because unelected judges limit decisions of elected majorities",
+          "The periodic review of the constitution by a specially elected assembly",
+          "The mechanism by which political parties verify that their programs comply with the constitution"
+        ],
+        "answerIndex": 1,
+        "explanation": "Judicial review is powerful and necessary — it protects fundamental rights from temporary majorities. But it is controversial: lifetime judges (unelected, not accountable by popular vote) can overturn laws passed by majority-elected legislators. It is the central tension of democratic constitutionalism: who has the last word — the majority or the constitution?"
+      },
+      {
+        "id": "q5",
+        "question": "What signs indicate erosion of the rule of law even in countries with regular elections?",
+        "options": [
+          "When the governing party loses elections to the opposition",
+          "When rulers systematically violate laws, control the judiciary, or apply laws selectively",
+          "When the constitution is frequently amended by the legislature",
+          "When there is high abstention in electoral periods"
+        ],
+        "answerIndex": 1,
+        "explanation": "Rule of law can deteriorate while elections continue: when the executive politicizes the judiciary (appointing allies to courts), when laws are applied selectively (persecuting opposition, protecting allies), when rulers ignore court decisions. Brazil, Hungary, Turkey, and Venezuela show this pattern — elections persist while rule of law is systematically eroded."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Constituciones y Estado de Derecho",
+      "summary": "Las constituciones son los documentos que definen los límites del poder y los derechos de los ciudadanos. El Estado de Derecho — la idea de que las leyes rigen para todos, incluidos los gobernantes — es el cimiento de cualquier democracia funcional. Sin estos mecanismos, las elecciones son inútiles.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "¿Qué es una constitución?" },
+        { "type": "p", "text": "Una constitución es la ley fundamental de un Estado — define cómo se organiza, distribuye y limita el poder, y cuáles son los derechos fundamentales de los ciudadanos que ni siquiera los gobiernos elegidos pueden violar. Las constituciones existen para resolver el problema central del poder político: ¿cómo evitar que quienes tienen el poder lo usen para sus propios intereses en detrimento de todos los demás? La respuesta constitucional: atar el poder antes de que sea ejercido." },
+        { "type": "p", "text": "La mayoría de los países tienen constituciones escritas — documentos formales aprobados mediante procesos especiales. EE.UU. tiene la constitución escrita más antigua aún vigente (1787). La Constitución Brasileña de 1988 es una de las más detalladas del mundo, con 250 artículos. Pero algunas democracias funcionan sin constitución formal escrita: el Reino Unido tiene una constitución no codificada, formada por leyes, convenciones y precedentes históricos acumulados durante siglos." },
+        { "type": "quote", "text": "Una constitución no es el acto de un gobierno, sino de un pueblo que constituye un gobierno. — Thomas Paine" },
+        { "type": "h2", "text": "Separación de poderes y controles y contrapesos" },
+        { "type": "p", "text": "Montesquieu, en El espíritu de las leyes (1748), formuló la idea que se convertiría en el fundamento de las democracias modernas: el poder debe dividirse entre el legislativo (que hace las leyes), el ejecutivo (que las ejecuta) y el judicial (que las interpreta y arbitra conflictos). Ninguno de los tres poderes debe controlar a los otros dos — existen mecanismos de controles y contrapesos para ello." },
+        { "type": "bullets", "items": [
+          "Legislativo: hace las leyes — parlamento, congreso, asamblea",
+          "Ejecutivo: implementa las leyes y gobierna — presidente, primer ministro, gabinete",
+          "Judicial: interpreta las leyes y protege derechos — tribunales, cortes, supremo",
+          "Controles y contrapesos: cada poder limita a los demás — veto presidencial, control de constitucionalidad, aprobación legislativa de nombramientos"
+        ]},
+        { "type": "h2", "text": "Estado de Derecho: el principio fundamental" },
+        { "type": "p", "text": "Estado de Derecho (rule of law) es el principio de que todos — ciudadanos y gobernantes — están sometidos a las mismas leyes, aplicadas de forma igual y predecible. Lo contrario es el Estado de hombres (rule of men): donde quienes gobiernan deciden las reglas según su conveniencia. La diferencia no es teórica — es la diferencia entre un sistema donde el presidente puede ser procesado por delitos cometidos en el cargo y uno donde el presidente decide quién es procesado." },
+        { "type": "p", "text": "Los cuatro elementos del Estado de Derecho según el jurista Albert Dicey: la ley es suprema sobre cualquier persona; la ley es igual para todos (sin privilegios por clase o estatus); el poder gubernamental está sujeto a leyes y procedimientos preestablecidos; los derechos fundamentales están garantizados y protegidos. Cuando cualquiera de estos elementos es sistemáticamente violado, el Estado de Derecho está en erosión." },
+        { "type": "h2", "text": "Control de constitucionalidad" },
+        { "type": "p", "text": "Uno de los mecanismos más poderosos de las democracias constitucionales es el control de constitucionalidad: la capacidad de los tribunales de declarar inconstitucionales las leyes. En EE.UU., la Corte Suprema ejerce este poder desde Marbury v. Madison (1803). En Brasil, el STF. En Alemania, el Tribunal Constitucional Federal. Este mecanismo es al mismo tiempo el límite más poderoso al poder de la mayoría y el más controvertido — jueces no elegidos pueden anular decisiones de legisladores elegidos por la mayoría." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "q1",
+        "question": "¿Por qué existen las constituciones? ¿Qué problema fundamental intentan resolver?",
+        "options": [
+          "Para organizar la burocracia del Estado de forma eficiente",
+          "Para atar el poder antes de que sea ejercido — evitar que los gobernantes usen el poder para sus propios intereses",
+          "Para garantizar que todos los ciudadanos conozcan sus deberes cívicos",
+          "Para registrar históricamente los valores y tradiciones de una nación"
+        ],
+        "answerIndex": 1,
+        "explanation": "El problema central del poder político es que quienes lo detentan tienen incentivos para usarlo en beneficio propio. Las constituciones resuelven esto estableciendo reglas antes del juego: limitan lo que cualquier gobernante puede hacer, definen derechos que no pueden violarse y crean mecanismos de rendición de cuentas. Son el 'pre-compromiso' por el cual una sociedad ata su futuro poder a reglas presentes."
+      },
+      {
+        "id": "q2",
+        "question": "¿Qué es la separación de poderes y por qué Montesquieu la consideró esencial?",
+        "options": [
+          "La división del territorio nacional en estados y municipios con autonomía local",
+          "La división del poder en poderes legislativo, ejecutivo y judicial independientes — para que ninguno monopolice el control",
+          "La separación entre poderes políticos y económicos para evitar la corrupción",
+          "La distinción entre derechos civiles y políticos en la constitución"
+        ],
+        "answerIndex": 1,
+        "explanation": "Montesquieu observó que cuando el mismo órgano hace las leyes, las ejecuta y las interpreta, el poder es absoluto y el abuso inevitable. La separación en tres poderes independientes con controles y contrapesos es la solución estructural al problema del abuso de poder. Es el fundamento arquitectónico de todas las democracias liberales modernas."
+      },
+      {
+        "id": "q3",
+        "question": "¿Cuál es la diferencia entre Estado de Derecho y Estado de hombres?",
+        "options": [
+          "El Estado de Derecho existe en democracias; el Estado de hombres en dictaduras",
+          "En el Estado de Derecho, todos — incluidos los gobernantes — están sometidos a las mismas leyes; en el Estado de hombres, quienes gobiernan deciden las reglas",
+          "El Estado de Derecho significa que los abogados controlan el gobierno; el Estado de hombres que los militares lo controlan",
+          "El Estado de Derecho requiere constitución escrita; el Estado de hombres funciona por tradición y costumbre"
+        ],
+        "answerIndex": 1,
+        "explanation": "La distinción es práctica: en el Estado de Derecho, un presidente puede ser procesado por delitos cometidos en el cargo, los contratos se cumplen aunque perjudiquen al poderoso, las decisiones judiciales valen contra el Estado. En el Estado de hombres, las reglas se aplican selectivamente según la conveniencia del gobernante. Muchos regímenes tienen constituciones escritas pero no tienen Estado de Derecho real."
+      },
+      {
+        "id": "q4",
+        "question": "¿Qué es el control de constitucionalidad y por qué es controvertido?",
+        "options": [
+          "El proceso por el cual los ciudadanos pueden proponer enmiendas a la constitución",
+          "La capacidad de los tribunales de anular leyes inconstitucionales — controvertido porque jueces no elegidos limitan decisiones de mayorías elegidas",
+          "La revisión periódica de la constitución por una asamblea especialmente elegida",
+          "El mecanismo por el cual los partidos políticos verifican si sus programas están dentro de la constitución"
+        ],
+        "answerIndex": 1,
+        "explanation": "El control de constitucionalidad es poderoso y necesario — protege los derechos fundamentales de las mayorías temporales. Pero es controvertido: jueces vitalicios (no elegidos, no responsables ante el voto popular) pueden anular leyes aprobadas por legisladores elegidos por la mayoría. Es la tensión central del constitucionalismo democrático: ¿quién tiene la última palabra — la mayoría o la constitución?"
+      },
+      {
+        "id": "q5",
+        "question": "¿Qué señales indican erosión del Estado de Derecho incluso en países con elecciones regulares?",
+        "options": [
+          "Cuando el partido gobernante pierde elecciones ante la oposición",
+          "Cuando los gobernantes violan sistemáticamente las leyes, controlan el poder judicial o aplican las leyes selectivamente",
+          "Cuando la constitución es enmendada con frecuencia por el legislativo",
+          "Cuando hay alta abstención en los períodos electorales"
+        ],
+        "answerIndex": 1,
+        "explanation": "El Estado de Derecho puede deteriorarse mientras las elecciones continúan: cuando el ejecutivo politiza el poder judicial (nombrando aliados a tribunales), cuando las leyes se aplican selectivamente (persiguiendo a la oposición, protegiendo a los aliados), cuando los gobernantes ignoran las decisiones judiciales. Brasil, Hungría, Turquía y Venezuela muestran este patrón — las elecciones persisten mientras el Estado de Derecho se erosiona sistemáticamente."
+      }
+    ]
+  }
+}

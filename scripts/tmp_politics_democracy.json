@@ -1,0 +1,278 @@
+{
+  "id": "politics_democracy",
+  "trackId": "politics",
+  "order": 2,
+  "difficulty": 1,
+  "estimatedMinutes": 11,
+  "prerequisites": ["politics"],
+  "title": { "pt": "Democracia: Origens e Princípios", "en": "Democracy: Origins and Principles", "es": "Democracia: Orígenes y Principios" },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "Democracia: Origens e Princípios",
+      "summary": "Democracia é mais do que eleições — é um conjunto de princípios sobre como o poder deve ser obtido, exercido e limitado. Entender suas origens na Grécia antiga, suas formas modernas e seus pilares fundamentais é essencial para distinguir democracias reais de imitações autoritárias.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "O que é democracia?" },
+        { "type": "p", "text": "Democracia vem do grego demos (povo) e kratos (poder): governo do povo. Nasceu em Atenas no século V a.C. sob Clístenes e Péricles, onde os cidadãos se reuniam na Assembleia (Ekklesia) para votar diretamente as leis. Mas a democracia ateniense excluía mulheres, escravos e estrangeiros — apenas ~10% da população eram cidadãos. O conceito moderno de democracia é uma construção histórica progressiva que levou séculos para incluir todos os adultos." },
+        { "type": "p", "text": "A definição mais simples de democracia — 'governo da maioria' — é insuficiente e perigosa. Uma maioria pode votar pela perseguição de uma minoria: isso seria democracia? O conceito moderno de democracia liberal combina dois elementos: soberania popular (decisões emanam do povo através de eleições livres e justas) e constitucionalismo (existência de direitos individuais e limitações ao poder que nem mesmo a maioria pode violar). Sem o segundo elemento, democracia se transforma em 'tirania da maioria'." },
+        { "type": "quote", "text": "A democracia é o pior sistema de governo, exceto por todos os outros que foram tentados. — Winston Churchill" },
+        { "type": "h2", "text": "Os pilares da democracia liberal" },
+        { "type": "p", "text": "Robert Dahl identificou os requisitos mínimos de uma poliarquia (democracia real) moderna: sufrágio universal; eleições livres, justas e regulares; liberdade de expressão e imprensa; direito de se organizar e fundar partidos; fontes alternativas de informação; e instituições que tornam as políticas públicas dependentes de votos e preferências dos cidadãos. Democracia não é apenas eleição — é um ecossistema de instituições, direitos e práticas que se sustentam mutuamente." },
+        { "type": "bullets", "items": [
+          "Soberania popular: o poder emana do povo; governantes precisam do consentimento dos governados",
+          "Separação de poderes: legislativo, executivo e judiciário independentes evitam concentração de poder",
+          "Estado de direito: as leis valem para todos, incluindo quem governa — ninguém está acima da lei",
+          "Proteção de minorias: direitos fundamentais que nem a maioria pode suprimir — são o antídoto à tirania da maioria"
+        ]},
+        { "type": "h2", "text": "Democracia direta vs. representativa" },
+        { "type": "p", "text": "Na democracia direta (como em Atenas), cidadãos votam diretamente nas leis. Na democracia representativa (como nos países modernos), cidadãos elegem representantes que votam em seu nome. A democracia representativa tornou-se necessária pela escala — é impossível reunir milhões de pessoas para decidir cada lei. Mas a representação cria o 'problema do agente-principal': representantes eleitos têm incentivos próprios que podem divergir dos interesses de seus eleitores. Eleições periódicas são o mecanismo de accountability, mas imperfeito." },
+        { "type": "p", "text": "Formas híbridas combinam os dois modelos. Referendos e plebiscitos permitem que cidadãos votem diretamente sobre questões específicas. A Suíça usa referendos obrigatórios para mudanças constitucionais e referendos facultativos para legislação ordinária. O Brexit foi decidido por referendo. Democracia participativa e deliberativa buscam criar espaços para cidadãos influenciarem políticas além do voto. Orçamentos participativos permitem que comunidades decidam diretamente sobre alocação de recursos públicos." },
+        { "type": "h2", "text": "Por que a democracia importa" },
+        { "type": "p", "text": "Além dos valores intrínsecos (dignidade, liberdade, igualdade), democracias têm desempenho superior em dimensões práticas. O argumento de Amartya Sen: nenhuma democracia consolidada com imprensa livre jamais sofreu uma fome em massa — governos democráticos são responsabilizados publicamente e têm incentivos para responder a crises. Democracias raramente fazem guerras entre si (paz democrática). Países democráticos têm maior desenvolvimento humano, menor corrupção e maior prosperidade a longo prazo. A democracia não é perfeita — mas seus rivais são piores." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "q1",
+        "question": "Por que a definição de democracia como 'governo da maioria' é insuficiente?",
+        "options": [
+          "Porque a maioria nem sempre é a mais educada para tomar decisões políticas",
+          "Porque uma maioria pode votar pela perseguição de minorias — democracia real exige proteção de direitos individuais além do voto da maioria",
+          "Porque governos modernos são muito complexos para serem decididos pela população em geral",
+          "Porque eleições nem sempre refletem corretamente a vontade da maioria da população"
+        ],
+        "answerIndex": 1,
+        "explanation": "Democracia liberal combina soberania popular (decisões via eleições livres) com constitucionalismo (direitos que nem a maioria pode violar). Sem essa proteção, democracia vira 'tirania da maioria' — a perseguição de minorias raciais, religiosas ou políticas pode ser democraticamente legitimada. É por isso que constituições protegem direitos fundamentais contra maiorias temporárias."
+      },
+      {
+        "id": "q2",
+        "question": "Quais são os pilares identificados por Robert Dahl para uma democracia real (poliarquia)?",
+        "options": [
+          "Apenas eleições livres e sufrágio universal",
+          "Sufrágio universal, eleições livres e regulares, liberdade de expressão, direito de organização e fontes alternativas de informação",
+          "Constituição escrita, sistema multipartidário e judiciário independente",
+          "Presidente eleito, parlamento bicameral e sistema federal"
+        ],
+        "answerIndex": 1,
+        "explanation": "Dahl identificou que democracia é um ecossistema de instituições interdependentes: não basta ter eleições se não há liberdade de imprensa, direito de organização, ou fontes alternativas de informação. Eleições sem liberdade de expressão são teatro autoritário. Cada pilar sustenta os outros — quando um cai, os demais ficam vulneráveis."
+      },
+      {
+        "id": "q3",
+        "question": "Qual é o 'problema do agente-principal' na democracia representativa?",
+        "options": [
+          "A dificuldade de encontrar candidatos qualificados para representar o povo",
+          "O fato de que representantes eleitos têm incentivos próprios que podem divergir dos interesses dos eleitores",
+          "A impossibilidade de representar adequadamente todos os grupos minoritários da sociedade",
+          "O problema de que agentes do governo executivo ignoram as decisões do legislativo"
+        ],
+        "answerIndex": 1,
+        "explanation": "Na representação, o eleitor (principal) delega poder ao representante (agente). Mas o agente pode usar esse poder para seus próprios interesses — financiadores de campanha, carreira política pessoal, ideologia — em vez dos interesses dos eleitores. Eleições periódicas são o mecanismo de accountability, mas imperfeito: votantes têm informação limitada e memória curta, e muitos problemas só se manifestam após o mandato."
+      },
+      {
+        "id": "q4",
+        "question": "Como Amartya Sen conectou democracia e prevenção de fomes?",
+        "options": [
+          "Democracias têm economias mais eficientes que produzem mais alimentos por definição",
+          "Nenhuma democracia consolidada com imprensa livre jamais sofreu fome em massa — governos são responsabilizados publicamente e respondem a crises",
+          "Países democráticos recebem mais ajuda internacional em situações de crise alimentar",
+          "A separação de poderes em democracias impede que governos desperdicem recursos alimentares"
+        ],
+        "answerIndex": 1,
+        "explanation": "Sen observou que fomes em massa não ocorrem por falta de comida, mas por falhas políticas na distribuição. Democracias com imprensa livre têm dois mecanismos que autocracias não têm: imprensa que divulga a crise ao público, e eleições que punem governos que falham. Governantes democráticos têm incentivos fortes para responder a crises — governantes autocráticos não."
+      },
+      {
+        "id": "q5",
+        "question": "Qual é a principal diferença entre democracia direta e representativa?",
+        "options": [
+          "Democracia direta é mais justa; representativa é mais eficiente",
+          "Na direta, cidadãos votam nas leis; na representativa, elegem quem vota em seu nome — escala tornou a representativa necessária",
+          "Democracia direta existe apenas em países pequenos; representativa em países grandes",
+          "Democracia direta requer referendos obrigatórios; representativa usa apenas eleições para cargos"
+        ],
+        "answerIndex": 1,
+        "explanation": "A democracia direta ateniense era possível para ~40.000 cidadãos. Para nações de milhões, reunir todos para cada decisão é impraticável. A representação resolve o problema de escala mas cria o problema da agência: representantes podem desviar dos interesses dos representados. Democracias modernas usam ambos — eleições representativas com elementos de democracia direta (referendos, plebiscitos, orçamentos participativos)."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Democracy: Origins and Principles",
+      "summary": "Democracy is more than elections — it is a set of principles about how power should be obtained, exercised, and limited. Understanding its origins in ancient Greece, its modern forms, and its fundamental pillars is essential for distinguishing real democracies from authoritarian imitations.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "What is democracy?" },
+        { "type": "p", "text": "Democracy comes from the Greek demos (people) and kratos (power): government of the people. It was born in Athens in the 5th century BCE under Cleisthenes and Pericles, where citizens gathered in the Assembly (Ekklesia) to vote directly on laws. But Athenian democracy excluded women, slaves, and foreigners — only ~10% of the population were citizens. The modern concept of democracy is a progressive historical construction that took centuries to include all adults." },
+        { "type": "p", "text": "The simplest definition of democracy — 'majority rule' — is insufficient and dangerous. A majority can vote for the persecution of a minority: would that be democracy? The modern concept of liberal democracy combines two elements: popular sovereignty (decisions come from the people through free and fair elections) and constitutionalism (existence of individual rights and limits to power that even the majority cannot violate). Without the second element, democracy becomes 'tyranny of the majority.'" },
+        { "type": "quote", "text": "Democracy is the worst form of government, except for all the others that have been tried. — Winston Churchill" },
+        { "type": "h2", "text": "The pillars of liberal democracy" },
+        { "type": "p", "text": "Robert Dahl identified the minimum requirements of a modern polyarchy (real democracy): universal suffrage; free, fair, and regular elections; freedom of expression and press; right to organize and form parties; alternative sources of information; and institutions that make public policies dependent on citizens' votes and preferences. Democracy is not just elections — it is an ecosystem of institutions, rights, and practices that sustain each other." },
+        { "type": "bullets", "items": [
+          "Popular sovereignty: power emanates from the people; rulers need the consent of the governed",
+          "Separation of powers: independent legislative, executive, and judicial branches prevent concentration of power",
+          "Rule of law: laws apply to everyone, including those who govern — no one is above the law",
+          "Protection of minorities: fundamental rights that even the majority cannot suppress — the antidote to tyranny of the majority"
+        ]},
+        { "type": "h2", "text": "Direct vs. representative democracy" },
+        { "type": "p", "text": "In direct democracy (as in Athens), citizens vote directly on laws. In representative democracy (as in modern countries), citizens elect representatives who vote on their behalf. Representative democracy became necessary due to scale — it is impossible to gather millions of people to decide every law. But representation creates the 'principal-agent problem': elected representatives have their own incentives that may diverge from voters' interests. Periodic elections are the accountability mechanism, but an imperfect one." },
+        { "type": "p", "text": "Hybrid forms combine both models. Referendums and plebiscites allow citizens to vote directly on specific issues. Switzerland uses mandatory referendums for constitutional changes and optional referendums for ordinary legislation. Brexit was decided by referendum. Participatory and deliberative democracy seeks to create spaces for citizens to influence policies beyond voting. Participatory budgeting allows communities to directly decide on the allocation of public resources." },
+        { "type": "h2", "text": "Why democracy matters" },
+        { "type": "p", "text": "Beyond intrinsic values (dignity, freedom, equality), democracies perform better on practical dimensions. Amartya Sen's argument: no consolidated democracy with a free press has ever experienced a major famine — democratic governments are publicly accountable and have incentives to respond to crises. Democracies rarely go to war with each other (democratic peace). Democratic countries have higher human development, lower corruption, and greater long-term prosperity. Democracy is not perfect — but its rivals are worse." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "q1",
+        "question": "Why is the definition of democracy as 'majority rule' insufficient?",
+        "options": [
+          "Because the majority is not always the most educated to make political decisions",
+          "Because a majority can vote for the persecution of minorities — real democracy requires protection of individual rights beyond majority vote",
+          "Because modern governments are too complex to be decided by the general population",
+          "Because elections don't always accurately reflect the will of the majority of the population"
+        ],
+        "answerIndex": 1,
+        "explanation": "Liberal democracy combines popular sovereignty (decisions via free elections) with constitutionalism (rights that even the majority cannot violate). Without this protection, democracy becomes 'tyranny of the majority' — the persecution of racial, religious, or political minorities can be democratically legitimized. That is why constitutions protect fundamental rights against temporary majorities."
+      },
+      {
+        "id": "q2",
+        "question": "What are the pillars identified by Robert Dahl for a real democracy (polyarchy)?",
+        "options": [
+          "Only free elections and universal suffrage",
+          "Universal suffrage, free and regular elections, freedom of expression, right to organize, and alternative sources of information",
+          "Written constitution, multiparty system, and independent judiciary",
+          "Elected president, bicameral parliament, and federal system"
+        ],
+        "answerIndex": 1,
+        "explanation": "Dahl identified that democracy is an ecosystem of interdependent institutions: elections without freedom of the press, right to organize, or alternative information sources are authoritarian theater. Each pillar sustains the others — when one falls, the rest become vulnerable."
+      },
+      {
+        "id": "q3",
+        "question": "What is the 'principal-agent problem' in representative democracy?",
+        "options": [
+          "The difficulty of finding qualified candidates to represent the people",
+          "The fact that elected representatives have their own incentives that may diverge from voters' interests",
+          "The impossibility of adequately representing all minority groups in society",
+          "The problem that executive government agents ignore legislative decisions"
+        ],
+        "answerIndex": 1,
+        "explanation": "In representation, the voter (principal) delegates power to the representative (agent). But the agent may use that power for their own interests — campaign donors, personal political career, ideology — rather than voters' interests. Periodic elections are the accountability mechanism, but imperfect: voters have limited information and short memory, and many problems only manifest after the term ends."
+      },
+      {
+        "id": "q4",
+        "question": "How did Amartya Sen connect democracy and famine prevention?",
+        "options": [
+          "Democracies have more efficient economies that produce more food by definition",
+          "No consolidated democracy with a free press has ever experienced a major famine — governments are publicly accountable and respond to crises",
+          "Democratic countries receive more international aid in food crisis situations",
+          "The separation of powers in democracies prevents governments from wasting food resources"
+        ],
+        "answerIndex": 1,
+        "explanation": "Sen observed that major famines don't happen due to lack of food, but due to political failures in distribution. Democracies with free press have two mechanisms autocracies don't: press that publicizes the crisis, and elections that punish failing governments. Democratic rulers have strong incentives to respond to crises — autocratic rulers don't."
+      },
+      {
+        "id": "q5",
+        "question": "What is the main difference between direct and representative democracy?",
+        "options": [
+          "Direct democracy is fairer; representative is more efficient",
+          "In direct democracy, citizens vote on laws; in representative, they elect who votes on their behalf — scale made representative necessary",
+          "Direct democracy only exists in small countries; representative in large ones",
+          "Direct democracy requires mandatory referendums; representative only uses elections for offices"
+        ],
+        "answerIndex": 1,
+        "explanation": "Athenian direct democracy worked for ~40,000 citizens. For nations of millions, gathering everyone for every decision is impractical. Representation solves the scale problem but creates the agency problem: representatives can deviate from represented interests. Modern democracies use both — representative elections with elements of direct democracy (referendums, plebiscites, participatory budgeting)."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Democracia: Orígenes y Principios",
+      "summary": "La democracia es más que elecciones — es un conjunto de principios sobre cómo debe obtenerse, ejercerse y limitarse el poder. Entender sus orígenes en la Grecia antigua, sus formas modernas y sus pilares fundamentales es esencial para distinguir las democracias reales de las imitaciones autoritarias.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "¿Qué es la democracia?" },
+        { "type": "p", "text": "Democracia viene del griego demos (pueblo) y kratos (poder): gobierno del pueblo. Nació en Atenas en el siglo V a.C. bajo Clístenes y Pericles, donde los ciudadanos se reunían en la Asamblea (Ekklesia) para votar directamente las leyes. Pero la democracia ateniense excluía a mujeres, esclavos y extranjeros — solo ~10% de la población eran ciudadanos. El concepto moderno de democracia es una construcción histórica progresiva que tardó siglos en incluir a todos los adultos." },
+        { "type": "p", "text": "La definición más simple de democracia — 'gobierno de la mayoría' — es insuficiente y peligrosa. Una mayoría puede votar por la persecución de una minoría: ¿sería eso democracia? El concepto moderno de democracia liberal combina dos elementos: soberanía popular (las decisiones emanan del pueblo a través de elecciones libres y justas) y constitucionalismo (existencia de derechos individuales y limitaciones al poder que ni siquiera la mayoría puede violar)." },
+        { "type": "quote", "text": "La democracia es la peor forma de gobierno, excepto por todas las demás que se han intentado. — Winston Churchill" },
+        { "type": "h2", "text": "Los pilares de la democracia liberal" },
+        { "type": "p", "text": "Robert Dahl identificó los requisitos mínimos de una poliarquía (democracia real) moderna: sufragio universal; elecciones libres, justas y regulares; libertad de expresión y prensa; derecho a organizarse y fundar partidos; fuentes alternativas de información; e instituciones que hacen que las políticas públicas dependan de los votos y preferencias de los ciudadanos. La democracia no es solo elecciones — es un ecosistema de instituciones, derechos y prácticas que se sostienen mutuamente." },
+        { "type": "bullets", "items": [
+          "Soberanía popular: el poder emana del pueblo; los gobernantes necesitan el consentimiento de los gobernados",
+          "Separación de poderes: poderes legislativo, ejecutivo y judicial independientes evitan la concentración del poder",
+          "Estado de derecho: las leyes rigen para todos, incluidos los gobernantes — nadie está por encima de la ley",
+          "Protección de minorías: derechos fundamentales que ni la mayoría puede suprimir — el antídoto a la tiranía de la mayoría"
+        ]},
+        { "type": "h2", "text": "Democracia directa vs. representativa" },
+        { "type": "p", "text": "En la democracia directa (como en Atenas), los ciudadanos votan directamente las leyes. En la democracia representativa (como en los países modernos), los ciudadanos eligen representantes que votan en su nombre. La democracia representativa se volvió necesaria por la escala — es imposible reunir a millones de personas para decidir cada ley. Pero la representación crea el 'problema del agente-principal': los representantes elegidos tienen sus propios incentivos que pueden divergir de los intereses de sus electores." },
+        { "type": "p", "text": "Las formas híbridas combinan ambos modelos. Los referéndums y plebiscitos permiten que los ciudadanos voten directamente sobre cuestiones específicas. Suiza utiliza referéndums obligatorios para cambios constitucionales y referéndums facultativos para la legislación ordinaria. El Brexit fue decidido por referéndum. Los presupuestos participativos permiten que las comunidades decidan directamente sobre la asignación de recursos públicos." },
+        { "type": "h2", "text": "Por qué importa la democracia" },
+        { "type": "p", "text": "Más allá de los valores intrínsecos (dignidad, libertad, igualdad), las democracias tienen mejor desempeño en dimensiones prácticas. El argumento de Amartya Sen: ninguna democracia consolidada con prensa libre ha sufrido jamás una hambruna masiva — los gobiernos democráticos son responsables públicamente y tienen incentivos para responder a las crisis. Las democracias raramente hacen la guerra entre sí (paz democrática). Los países democráticos tienen mayor desarrollo humano, menor corrupción y mayor prosperidad a largo plazo." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "q1",
+        "question": "¿Por qué la definición de democracia como 'gobierno de la mayoría' es insuficiente?",
+        "options": [
+          "Porque la mayoría no siempre es la más educada para tomar decisiones políticas",
+          "Porque una mayoría puede votar por la persecución de minorías — la democracia real exige protección de derechos individuales más allá del voto de la mayoría",
+          "Porque los gobiernos modernos son demasiado complejos para ser decididos por la población en general",
+          "Porque las elecciones no siempre reflejan correctamente la voluntad de la mayoría de la población"
+        ],
+        "answerIndex": 1,
+        "explanation": "La democracia liberal combina soberanía popular (decisiones mediante elecciones libres) con constitucionalismo (derechos que ni la mayoría puede violar). Sin esta protección, la democracia se convierte en 'tiranía de la mayoría' — la persecución de minorías raciales, religiosas o políticas puede ser democráticamente legitimada. Por eso las constituciones protegen los derechos fundamentales frente a las mayorías temporales."
+      },
+      {
+        "id": "q2",
+        "question": "¿Cuáles son los pilares identificados por Robert Dahl para una democracia real (poliarquía)?",
+        "options": [
+          "Solo elecciones libres y sufragio universal",
+          "Sufragio universal, elecciones libres y regulares, libertad de expresión, derecho de organización y fuentes alternativas de información",
+          "Constitución escrita, sistema multipartidista y poder judicial independiente",
+          "Presidente electo, parlamento bicameral y sistema federal"
+        ],
+        "answerIndex": 1,
+        "explanation": "Dahl identificó que la democracia es un ecosistema de instituciones interdependientes: no basta tener elecciones si no hay libertad de prensa, derecho de organización o fuentes alternativas de información. Las elecciones sin libertad de expresión son teatro autoritario. Cada pilar sustenta a los demás — cuando uno cae, los demás quedan vulnerables."
+      },
+      {
+        "id": "q3",
+        "question": "¿Cuál es el 'problema del agente-principal' en la democracia representativa?",
+        "options": [
+          "La dificultad de encontrar candidatos calificados para representar al pueblo",
+          "El hecho de que los representantes elegidos tienen sus propios incentivos que pueden divergir de los intereses de los electores",
+          "La imposibilidad de representar adecuadamente a todos los grupos minoritarios de la sociedad",
+          "El problema de que los agentes del gobierno ejecutivo ignoran las decisiones del legislativo"
+        ],
+        "answerIndex": 1,
+        "explanation": "En la representación, el elector (principal) delega poder al representante (agente). Pero el agente puede usar ese poder para sus propios intereses — financiadores de campaña, carrera política personal, ideología — en lugar de los intereses de los electores. Las elecciones periódicas son el mecanismo de rendición de cuentas, pero imperfecto: los votantes tienen información limitada y memoria corta."
+      },
+      {
+        "id": "q4",
+        "question": "¿Cómo conectó Amartya Sen la democracia con la prevención de hambrunas?",
+        "options": [
+          "Las democracias tienen economías más eficientes que producen más alimentos por definición",
+          "Ninguna democracia consolidada con prensa libre ha sufrido jamás una hambruna masiva — los gobiernos son responsables públicamente y responden a las crisis",
+          "Los países democráticos reciben más ayuda internacional en situaciones de crisis alimentaria",
+          "La separación de poderes en democracias impide que los gobiernos desperdicien recursos alimentarios"
+        ],
+        "answerIndex": 1,
+        "explanation": "Sen observó que las hambrunas masivas no ocurren por falta de alimentos, sino por fallos políticos en la distribución. Las democracias con prensa libre tienen dos mecanismos que las autocracias no tienen: prensa que divulga la crisis al público y elecciones que castigan a los gobiernos que fallan. Los gobernantes democráticos tienen fuertes incentivos para responder a las crisis — los gobernantes autocráticos no."
+      },
+      {
+        "id": "q5",
+        "question": "¿Cuál es la principal diferencia entre democracia directa y representativa?",
+        "options": [
+          "La democracia directa es más justa; la representativa es más eficiente",
+          "En la directa, los ciudadanos votan las leyes; en la representativa, eligen a quienes votan en su nombre — la escala hizo necesaria la representativa",
+          "La democracia directa solo existe en países pequeños; la representativa en países grandes",
+          "La democracia directa requiere referéndums obligatorios; la representativa solo usa elecciones para cargos"
+        ],
+        "answerIndex": 1,
+        "explanation": "La democracia directa ateniense funcionaba para ~40.000 ciudadanos. Para naciones de millones, reunir a todos para cada decisión es impracticable. La representación resuelve el problema de escala pero crea el problema de la agencia. Las democracias modernas usan ambas — elecciones representativas con elementos de democracia directa (referéndums, plebiscitos, presupuestos participativos)."
+      }
+    ]
+  }
+}

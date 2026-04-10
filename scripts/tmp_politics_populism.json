@@ -1,0 +1,288 @@
+{
+  "id": "politics_populism",
+  "trackId": "politics",
+  "order": 6,
+  "difficulty": 2,
+  "estimatedMinutes": 11,
+  "prerequisites": [],
+  "title": {
+    "pt": "Populismo: Ameaça ou Resposta à Crise?",
+    "en": "Populism: Threat or Response to Crisis?",
+    "es": "Populismo: ¿Amenaza o Respuesta a la Crisis?"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "Populismo: Ameaça ou Resposta à Crise?",
+      "summary": "Populismo é um dos termos mais usados — e mais mal compreendidos — do vocabulário político contemporâneo. É chamado de populista quem quer que desagrade as elites: líderes de esquerda e de direita, do chavismo ao trumpismo. Para entender o fenômeno além da retórica, precisamos de uma definição precisa e de uma análise honesta: o populismo é sintoma de algo errado na democracia, não apenas a causa.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "O que é populismo, de verdade?" },
+        { "type": "p", "text": "A definição mais influente é a de Cas Mudde e Cristóbal Rovira Kaltwasser: populismo é uma 'ideologia fina' que divide a sociedade em dois grupos homogêneos e antagônicos — 'o povo puro' versus 'a elite corrupta' — e defende que a política deve ser expressão da vontade geral do povo." },
+        { "type": "p", "text": "É uma 'ideologia fina' porque não tem substância própria: precisa se combinar com ideologias mais densas (socialismo, nacionalismo) para produzir políticas concretas. Por isso existe populismo de esquerda (Chávez, Evo Morales) e de direita (Trump, Orbán, Bolsonaro) — todos compartilham a estrutura povo-versus-elite, mas com conteúdos opostos." },
+        { "type": "h2", "text": "A demanda democrática no populismo" },
+        { "type": "p", "text": "Jan-Werner Müller argumenta que o populismo é uma ameaça porque é 'antipluralist': populistas afirmam representar o 'povo real' e, implicitamente, excluem quem não faz parte desse povo — minorias, imigrantes, elites, oposição. Quando chegam ao poder, tendem a atacar as instituições que limitam a vontade da maioria." },
+        { "type": "p", "text": "Mas Chantal Mouffe defende uma leitura diferente: o populismo de esquerda pode ser uma resposta legítima ao esvaziamento da democracia por elites tecnocráticas. Para ela, quando partidos tradicionais convergem ao centro e abandonam as demandas das classes trabalhadoras, o populismo preenche o vácuo que eles deixaram." },
+        { "type": "quote", "text": "Os populistas não apenas apelam ao povo — eles afirmam ser o único representante legítimo do povo.", "author": "Jan-Werner Müller" },
+        { "type": "h2", "text": "Por que o populismo cresce?" },
+        { "type": "p", "text": "A literatura aponta dois grandes conjuntos de causas. O primeiro é econômico: a globalização e a desindustrialização criaram 'perdedores' que as políticas dos partidos tradicionais ignoraram. O crescimento da desigualdade e a estagnação dos salários reais alimentam ressentimento contra elites cosmopolitas." },
+        { "type": "p", "text": "O segundo é cultural: a revolução de valores das décadas de 1960-80 criou um conflito entre cosmopolitismo progressista e conservadorismo tradicional. Populistas exploram o sentimento de que identidades culturais majoritárias estão sendo 'apagadas' por elites urbanas e minorias ativas." },
+        { "type": "h2", "text": "Populismo no poder: o que acontece?" },
+        { "type": "p", "text": "Quando populistas conquistam o poder, o padrão histórico é preocupante. Usando a legitimidade eleitoral como escudo, costumam: atacar a independência judicial, concentrar poder no executivo, minar a liberdade de imprensa, polarizar o eleitorado, e redesenhar regras eleitorais para manter-se no poder." },
+        { "type": "p", "text": "Isso não acontece sempre ou de forma automática — mas o caso Venezuela, a Hungria de Orbán e a Turquia de Erdoğan mostram como democracias eleitorais podem se transformar em autocracias eleitorais sem golpes de Estado explícitos, usando o voto como ferramenta de desmontagem democrática." },
+        { "type": "h2", "text": "A diferença entre populismo e demagogia" },
+        { "type": "p", "text": "Todo demagogo apela às emoções e simplifica problemas complexos. Mas nem todo demagogo é populista. A demagogia é uma técnica retórica; o populismo é uma estrutura ideológica. Um líder pode usar apelos emocionais sem dividir o mundo em 'povo puro' vs. 'elite corrupta'." },
+        { "type": "p", "text": "Por outro lado, o populismo não é sinônimo de incompetência. Líderes populistas podem ser habilidosos tecnicamente — o que os torna mais perigosos. O problema não é a habilidade de governar, mas a lógica política que os anima: a recusa ao pluralismo e às limitações institucionais." },
+        { "type": "h2", "text": "Como responder ao populismo?" },
+        { "type": "p", "text": "Ignorar as causas do populismo tende a amplificá-lo. As respostas mais eficazes endereçam as demandas legítimas que o alimentam — políticas redistributivas, reconhecimento de identidades culturais desconsideradas, reforma das instituições políticas que parecem distantes dos cidadãos." },
+        { "type": "p", "text": "Combater o populismo apenas como 'irracionalidade' ou 'emoção' é uma armadilha: trata eleitores populistas como ignorantes em vez de perguntar o que eles estão tentando dizer. O populismo é frequentemente o sintoma de uma democracia que falhou em representar setores significativos de sua população." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_populism_q1",
+        "question": "Segundo Mudde e Kaltwasser, o populismo é definido como:",
+        "options": [
+          "Uma política econômica que favorece os pobres",
+          "Uma ideologia fina que divide sociedade em 'povo puro' vs. 'elite corrupta'",
+          "Um sistema de governo baseado em referendos frequentes",
+          "Uma estratégia de comunicação que usa linguagem simples"
+        ],
+        "answerIndex": 1,
+        "explanation": "O populismo é uma 'ideologia fina' que divide a sociedade em dois grupos antagônicos — o povo puro e a elite corrupta — e defende que a política deve expressar a vontade geral do povo."
+      },
+      {
+        "id": "politics_populism_q2",
+        "question": "Por que Mudde chama o populismo de 'ideologia fina'?",
+        "options": [
+          "Porque tem poucos seguidores",
+          "Porque não tem substância própria e precisa se combinar com outras ideologias",
+          "Porque só funciona em pequenos países",
+          "Porque desaparece rapidamente após eleições"
+        ],
+        "answerIndex": 1,
+        "explanation": "É 'fina' porque sozinha não gera políticas concretas — precisa se unir ao socialismo, ao nacionalismo ou outras ideologias. Por isso existe populismo de esquerda e de direita."
+      },
+      {
+        "id": "politics_populism_q3",
+        "question": "Para Jan-Werner Müller, qual é o perigo central do populismo?",
+        "options": [
+          "Propor políticas economicamente inviáveis",
+          "Usar linguagem emocional em vez de argumentos racionais",
+          "Ser antipluralist — excluir parte da população do 'povo real'",
+          "Concentrar recursos nas classes mais pobres"
+        ],
+        "answerIndex": 2,
+        "explanation": "Para Müller, populistas afirmam representar o 'povo real', mas implicitamente excluem minorias, oposição e elites — o que é uma ameaça ao pluralismo democrático."
+      },
+      {
+        "id": "politics_populism_q4",
+        "question": "Quais são as duas grandes causas do crescimento do populismo segundo a literatura?",
+        "options": [
+          "Incompetência dos governos e falta de educação",
+          "Causas econômicas (desigualdade, globalização) e culturais (conflito de valores)",
+          "Redes sociais e polarização midiática",
+          "Corrupção endêmica e sistemas eleitorais inadequados"
+        ],
+        "answerIndex": 1,
+        "explanation": "A literatura aponta causas econômicas (perdedores da globalização, estagnação salarial) e culturais (conflito entre cosmopolitismo progressista e conservadorismo tradicional)."
+      },
+      {
+        "id": "politics_populism_q5",
+        "question": "O que distingue demagogia de populismo?",
+        "options": [
+          "A demagogia usa mentiras; o populismo usa fatos distorcidos",
+          "A demagogia é técnica retórica; o populismo é estrutura ideológica (povo vs. elite)",
+          "A demagogia é de direita; o populismo é de esquerda",
+          "A demagogia funciona em democracias; o populismo em autocracias"
+        ],
+        "answerIndex": 1,
+        "explanation": "Demagogia é uma técnica retórica que apela às emoções; o populismo é uma estrutura ideológica específica que divide o mundo entre povo puro e elite corrupta."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Populism: Threat or Response to Crisis?",
+      "summary": "Populism is one of the most used — and most misunderstood — terms in contemporary political vocabulary. Anyone who displeases elites gets called populist: left and right leaders, from Chavismo to Trumpism. To understand the phenomenon beyond rhetoric, we need a precise definition and an honest analysis: populism is a symptom of something wrong in democracy, not just a cause.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "What is populism, really?" },
+        { "type": "p", "text": "The most influential definition is from Cas Mudde and Cristóbal Rovira Kaltwasser: populism is a 'thin ideology' that divides society into two homogeneous and antagonistic groups — 'the pure people' versus 'the corrupt elite' — and holds that politics should express the general will of the people." },
+        { "type": "p", "text": "It's a 'thin ideology' because it lacks substance of its own: it must combine with denser ideologies (socialism, nationalism) to produce concrete policies. That's why there is left-wing populism (Chávez, Evo Morales) and right-wing populism (Trump, Orbán, Bolsonaro) — all sharing the people-versus-elite structure, but with opposing content." },
+        { "type": "h2", "text": "The democratic demand in populism" },
+        { "type": "p", "text": "Jan-Werner Müller argues that populism is a threat because it is 'anti-pluralist': populists claim to represent the 'real people' and implicitly exclude those who don't belong — minorities, immigrants, elites, the opposition. When they reach power, they tend to attack institutions that limit majority will." },
+        { "type": "p", "text": "But Chantal Mouffe offers a different reading: left-wing populism can be a legitimate response to democracy's hollowing-out by technocratic elites. For her, when traditional parties converge at the center and abandon working-class demands, populism fills the vacuum they leave behind." },
+        { "type": "quote", "text": "Populists don't just appeal to the people — they claim to be the only legitimate representatives of the people.", "author": "Jan-Werner Müller" },
+        { "type": "h2", "text": "Why does populism grow?" },
+        { "type": "p", "text": "The literature points to two main sets of causes. The first is economic: globalization and deindustrialization created 'losers' that traditional party policies ignored. Growing inequality and stagnant real wages fuel resentment against cosmopolitan elites." },
+        { "type": "p", "text": "The second is cultural: the 1960s-80s values revolution created a conflict between progressive cosmopolitanism and traditional conservatism. Populists exploit the feeling that majority cultural identities are being 'erased' by urban elites and activist minorities." },
+        { "type": "h2", "text": "Populism in power: what happens?" },
+        { "type": "p", "text": "When populists gain power, the historical pattern is concerning. Using electoral legitimacy as a shield, they typically: attack judicial independence, concentrate power in the executive, undermine press freedom, polarize the electorate, and reshape electoral rules to stay in power." },
+        { "type": "p", "text": "This doesn't always happen automatically — but Venezuela, Orbán's Hungary, and Erdoğan's Turkey show how electoral democracies can transform into electoral autocracies without explicit coups, using the vote itself as a tool of democratic dismantlement." },
+        { "type": "h2", "text": "The difference between populism and demagoguery" },
+        { "type": "p", "text": "Every demagogue appeals to emotions and simplifies complex problems. But not every demagogue is a populist. Demagoguery is a rhetorical technique; populism is an ideological structure. A leader can use emotional appeals without dividing the world into 'pure people' vs. 'corrupt elite.'" },
+        { "type": "p", "text": "On the other hand, populism isn't synonymous with incompetence. Populist leaders can be technically skilled — which makes them more dangerous. The problem isn't their governing ability but the political logic that drives them: the refusal of pluralism and institutional constraints." },
+        { "type": "h2", "text": "How to respond to populism?" },
+        { "type": "p", "text": "Ignoring populism's causes tends to amplify it. The most effective responses address the legitimate demands that fuel it — redistributive policies, recognition of disregarded cultural identities, and reform of political institutions that seem distant from citizens." },
+        { "type": "p", "text": "Fighting populism only as 'irrationality' or 'emotion' is a trap: it treats populist voters as ignorant rather than asking what they're trying to say. Populism is often the symptom of a democracy that failed to represent significant sectors of its population." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_populism_q1",
+        "question": "According to Mudde and Kaltwasser, populism is defined as:",
+        "options": [
+          "An economic policy favoring the poor",
+          "A thin ideology dividing society into 'pure people' vs. 'corrupt elite'",
+          "A system of government based on frequent referendums",
+          "A communication strategy using simple language"
+        ],
+        "answerIndex": 1,
+        "explanation": "Populism is a 'thin ideology' dividing society into two antagonistic groups — the pure people and the corrupt elite — holding that politics should express the general will of the people."
+      },
+      {
+        "id": "politics_populism_q2",
+        "question": "Why does Mudde call populism a 'thin ideology'?",
+        "options": [
+          "Because it has few followers",
+          "Because it lacks substance of its own and must combine with other ideologies",
+          "Because it only works in small countries",
+          "Because it disappears quickly after elections"
+        ],
+        "answerIndex": 1,
+        "explanation": "It's 'thin' because alone it doesn't generate concrete policies — it must join socialism, nationalism, or other ideologies. That's why left-wing and right-wing populism both exist."
+      },
+      {
+        "id": "politics_populism_q3",
+        "question": "For Jan-Werner Müller, what is the central danger of populism?",
+        "options": [
+          "Proposing economically unviable policies",
+          "Using emotional language instead of rational arguments",
+          "Being anti-pluralist — excluding part of the population from 'the real people'",
+          "Concentrating resources in the poorest classes"
+        ],
+        "answerIndex": 2,
+        "explanation": "For Müller, populists claim to represent the 'real people' but implicitly exclude minorities, opposition, and elites — a fundamental threat to democratic pluralism."
+      },
+      {
+        "id": "politics_populism_q4",
+        "question": "What are the two main causes of populism's growth according to the literature?",
+        "options": [
+          "Government incompetence and lack of education",
+          "Economic causes (inequality, globalization) and cultural causes (values conflict)",
+          "Social media and media polarization",
+          "Endemic corruption and inadequate electoral systems"
+        ],
+        "answerIndex": 1,
+        "explanation": "The literature points to economic causes (globalization losers, wage stagnation) and cultural causes (conflict between progressive cosmopolitanism and traditional conservatism)."
+      },
+      {
+        "id": "politics_populism_q5",
+        "question": "What distinguishes demagoguery from populism?",
+        "options": [
+          "Demagoguery uses lies; populism uses distorted facts",
+          "Demagoguery is a rhetorical technique; populism is an ideological structure (people vs. elite)",
+          "Demagoguery is right-wing; populism is left-wing",
+          "Demagoguery works in democracies; populism in autocracies"
+        ],
+        "answerIndex": 1,
+        "explanation": "Demagoguery is a rhetorical technique appealing to emotions; populism is a specific ideological structure dividing the world between the pure people and the corrupt elite."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Populismo: ¿Amenaza o Respuesta a la Crisis?",
+      "summary": "El populismo es uno de los términos más usados — y más mal entendidos — del vocabulario político contemporáneo. Se llama populista a cualquiera que desagrade a las élites: líderes de izquierda y derecha, desde el chavismo hasta el trumpismo. Para entender el fenómeno más allá de la retórica, necesitamos una definición precisa y un análisis honesto: el populismo es síntoma de algo que falla en la democracia, no solo la causa.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "¿Qué es el populismo, realmente?" },
+        { "type": "p", "text": "La definición más influyente es la de Cas Mudde y Cristóbal Rovira Kaltwasser: el populismo es una 'ideología delgada' que divide a la sociedad en dos grupos homogéneos y antagónicos — 'el pueblo puro' versus 'la élite corrupta' — y defiende que la política debe ser expresión de la voluntad general del pueblo." },
+        { "type": "p", "text": "Es una 'ideología delgada' porque carece de sustancia propia: necesita combinarse con ideologías más densas (socialismo, nacionalismo) para producir políticas concretas. Por eso existe populismo de izquierda (Chávez, Evo Morales) y de derecha (Trump, Orbán, Bolsonaro) — todos comparten la estructura pueblo-versus-élite, pero con contenidos opuestos." },
+        { "type": "h2", "text": "La demanda democrática en el populismo" },
+        { "type": "p", "text": "Jan-Werner Müller sostiene que el populismo es una amenaza porque es 'antipluralista': los populistas afirman representar al 'pueblo real' y excluyen implícitamente a quienes no forman parte de él — minorías, inmigrantes, élites, oposición. Cuando llegan al poder, tienden a atacar las instituciones que limitan la voluntad mayoritaria." },
+        { "type": "p", "text": "Pero Chantal Mouffe ofrece una lectura distinta: el populismo de izquierda puede ser una respuesta legítima al vaciamiento de la democracia por élites tecnocráticas. Para ella, cuando los partidos tradicionales convergen al centro y abandonan las demandas de las clases trabajadoras, el populismo llena el vacío que dejan." },
+        { "type": "quote", "text": "Los populistas no solo apelan al pueblo — afirman ser los únicos representantes legítimos del pueblo.", "author": "Jan-Werner Müller" },
+        { "type": "h2", "text": "¿Por qué crece el populismo?" },
+        { "type": "p", "text": "La literatura señala dos grandes conjuntos de causas. El primero es económico: la globalización y la desindustrialización crearon 'perdedores' que las políticas de los partidos tradicionales ignoraron. El crecimiento de la desigualdad y el estancamiento de los salarios reales alimentan el resentimiento contra las élites cosmopolitas." },
+        { "type": "p", "text": "El segundo es cultural: la revolución de valores de los años 1960-80 creó un conflicto entre cosmopolitismo progresista y conservadurismo tradicional. Los populistas explotan el sentimiento de que las identidades culturales mayoritarias están siendo 'borradas' por élites urbanas y minorías activas." },
+        { "type": "h2", "text": "El populismo en el poder: ¿qué ocurre?" },
+        { "type": "p", "text": "Cuando los populistas conquistan el poder, el patrón histórico es preocupante. Usando la legitimidad electoral como escudo, suelen: atacar la independencia judicial, concentrar el poder en el ejecutivo, socavar la libertad de prensa, polarizar al electorado y rediseñar las reglas electorales para mantenerse en el poder." },
+        { "type": "p", "text": "Esto no ocurre siempre ni automáticamente — pero Venezuela, la Hungría de Orbán y la Turquía de Erdoğan muestran cómo las democracias electorales pueden transformarse en autocracias electorales sin golpes de Estado explícitos, usando el voto como herramienta de desmontaje democrático." },
+        { "type": "h2", "text": "La diferencia entre populismo y demagogia" },
+        { "type": "p", "text": "Todo demagogo apela a las emociones y simplifica problemas complejos. Pero no todo demagogo es populista. La demagogia es una técnica retórica; el populismo es una estructura ideológica. Un líder puede usar apelaciones emocionales sin dividir el mundo en 'pueblo puro' vs. 'élite corrupta'." },
+        { "type": "p", "text": "Por otro lado, el populismo no es sinónimo de incompetencia. Los líderes populistas pueden ser técnicamente hábiles — lo que los hace más peligrosos. El problema no es su capacidad de gobernar, sino la lógica política que los anima: el rechazo al pluralismo y a los límites institucionales." },
+        { "type": "h2", "text": "¿Cómo responder al populismo?" },
+        { "type": "p", "text": "Ignorar las causas del populismo tiende a amplificarlo. Las respuestas más eficaces abordan las demandas legítimas que lo alimentan — políticas redistributivas, reconocimiento de identidades culturales desatendidas, reforma de las instituciones políticas que parecen alejadas de los ciudadanos." },
+        { "type": "p", "text": "Combatir el populismo solo como 'irracionalidad' o 'emoción' es una trampa: trata a los votantes populistas como ignorantes en lugar de preguntarse qué están tratando de decir. El populismo es frecuentemente síntoma de una democracia que falló en representar sectores significativos de su población." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_populism_q1",
+        "question": "Según Mudde y Kaltwasser, el populismo se define como:",
+        "options": [
+          "Una política económica que favorece a los pobres",
+          "Una ideología delgada que divide la sociedad en 'pueblo puro' vs. 'élite corrupta'",
+          "Un sistema de gobierno basado en referéndums frecuentes",
+          "Una estrategia de comunicación que usa lenguaje sencillo"
+        ],
+        "answerIndex": 1,
+        "explanation": "El populismo es una 'ideología delgada' que divide a la sociedad en dos grupos antagónicos — el pueblo puro y la élite corrupta — y defiende que la política debe expresar la voluntad general del pueblo."
+      },
+      {
+        "id": "politics_populism_q2",
+        "question": "¿Por qué Mudde llama al populismo una 'ideología delgada'?",
+        "options": [
+          "Porque tiene pocos seguidores",
+          "Porque carece de sustancia propia y debe combinarse con otras ideologías",
+          "Porque solo funciona en países pequeños",
+          "Porque desaparece rápidamente después de las elecciones"
+        ],
+        "answerIndex": 1,
+        "explanation": "Es 'delgada' porque sola no genera políticas concretas — debe unirse al socialismo, al nacionalismo u otras ideologías. Por eso existe populismo de izquierda y de derecha."
+      },
+      {
+        "id": "politics_populism_q3",
+        "question": "Para Jan-Werner Müller, ¿cuál es el peligro central del populismo?",
+        "options": [
+          "Proponer políticas económicamente inviables",
+          "Usar lenguaje emocional en lugar de argumentos racionales",
+          "Ser antipluralista — excluir a parte de la población del 'pueblo real'",
+          "Concentrar recursos en las clases más pobres"
+        ],
+        "answerIndex": 2,
+        "explanation": "Para Müller, los populistas afirman representar al 'pueblo real', pero excluyen implícitamente a minorías, oposición y élites — una amenaza fundamental al pluralismo democrático."
+      },
+      {
+        "id": "politics_populism_q4",
+        "question": "¿Cuáles son las dos grandes causas del crecimiento del populismo según la literatura?",
+        "options": [
+          "Incompetencia gubernamental y falta de educación",
+          "Causas económicas (desigualdad, globalización) y culturales (conflicto de valores)",
+          "Redes sociales y polarización mediática",
+          "Corrupción endémica y sistemas electorales inadecuados"
+        ],
+        "answerIndex": 1,
+        "explanation": "La literatura señala causas económicas (perdedores de la globalización, estancamiento salarial) y culturales (conflicto entre cosmopolitismo progresista y conservadurismo tradicional)."
+      },
+      {
+        "id": "politics_populism_q5",
+        "question": "¿Qué distingue a la demagogia del populismo?",
+        "options": [
+          "La demagogia usa mentiras; el populismo usa hechos distorsionados",
+          "La demagogia es técnica retórica; el populismo es estructura ideológica (pueblo vs. élite)",
+          "La demagogia es de derecha; el populismo es de izquierda",
+          "La demagogia funciona en democracias; el populismo en autocracias"
+        ],
+        "answerIndex": 1,
+        "explanation": "La demagogia es una técnica retórica que apela a las emociones; el populismo es una estructura ideológica específica que divide el mundo entre el pueblo puro y la élite corrupta."
+      }
+    ]
+  }
+}

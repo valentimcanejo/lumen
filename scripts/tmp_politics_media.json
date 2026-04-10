@@ -1,0 +1,288 @@
+{
+  "id": "politics_media",
+  "trackId": "politics",
+  "order": 7,
+  "difficulty": 2,
+  "estimatedMinutes": 11,
+  "prerequisites": [],
+  "title": {
+    "pt": "Mídia, Desinformação e Democracia",
+    "en": "Media, Disinformation, and Democracy",
+    "es": "Medios, Desinformación y Democracia"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "Mídia, Desinformação e Democracia",
+      "summary": "A democracia pressupõe cidadãos informados. Mas o que acontece quando a informação é sistematicamente distorcida — não apenas por erro, mas por design? A crise da desinformação não é nova, mas ganhou escala e velocidade sem precedentes com as redes sociais. Entender como a mídia molda a política, como a desinformação se espalha e o que pode ser feito é urgente para qualquer democracia funcional.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "O papel político da mídia" },
+        { "type": "p", "text": "A mídia cumpre funções essenciais em democracias: informa os cidadãos, fiscaliza o poder (o chamado 'quarto poder'), fornece a arena pública de debate e define quais assuntos são considerados importantes — a chamada função de 'agenda-setting'." },
+        { "type": "p", "text": "Maxwell McCombs e Donald Shaw demonstraram nos anos 1970 que a mídia não diz às pessoas o que pensar, mas sobre o que pensar. Ao decidir o que cobrir e com que ênfase, a mídia estrutura a atenção pública e indiretamente influencia quais problemas os políticos precisam responder." },
+        { "type": "h2", "text": "Desinformação, misinformação e malinformação" },
+        { "type": "p", "text": "Há distinções importantes. Misinformação é informação falsa disseminada sem intenção de enganar — o compartilhamento de uma notícia incorreta acreditando ser verdadeira. Desinformação é informação falsa criada deliberadamente para enganar. Malinformação é informação verdadeira usada com intenção de prejudicar — como vazar documentos privados de um adversário." },
+        { "type": "p", "text": "O problema com 'fake news' é que o termo foi cooptado politicamente para desacreditar qualquer jornalismo inconveniente. Por isso especialistas preferem as categorias mais precisas acima — elas permitem identificar o que exatamente está errado e quem é responsável." },
+        { "type": "quote", "text": "A ameaça não é que as pessoas acreditem em falsidades. É que elas deixem de acreditar em qualquer coisa.", "author": "Hannah Arendt (paráfrase)" },
+        { "type": "h2", "text": "Por que a desinformação se espalha?" },
+        { "type": "p", "text": "Um estudo do MIT de 2018 (Vosoughi, Roy e Aral) analisou 126.000 histórias no Twitter e descobriu que notícias falsas se espalham seis vezes mais rápido que notícias verdadeiras. A razão não é a malícia dos usuários — é que informações falsas tendem a ser mais novas, surpreendentes e emocionalmente carregadas, o que as torna mais atraentes para compartilhar." },
+        { "type": "p", "text": "Algoritmos de plataformas de redes sociais otimizam para engajamento, e o conteúdo que gera raiva e medo — frequentemente desinformação — engaja mais. Essa lógica cria um incentivo estrutural para a produção e circulação de informação distorcida, independente da intenção de qualquer usuário individual." },
+        { "type": "h2", "text": "Câmaras de eco e polarização" },
+        { "type": "p", "text": "O conceito de 'câmara de eco' descreve ambientes informacionais onde as pessoas só encontram informações que confirmam suas crenças existentes. Combinado com o 'viés de confirmação' — a tendência cognitiva de buscar e aceitar informação que confirma o que já cremos — o resultado pode ser uma radicalização progressiva." },
+        { "type": "p", "text": "Porém, pesquisas recentes questionam a intensidade do efeito de câmara de eco. Eli Pariser, que cunhou o termo 'bolha de filtro', reconheceu que os dados são mais complexos do que o modelo simples sugere. O problema maior pode ser não a falta de exposição a visões diversas, mas a qualidade do processamento dessa informação." },
+        { "type": "h2", "text": "Concentração midiática e pluralismo" },
+        { "type": "p", "text": "A concentração da propriedade midiática é uma ameaça estrutural ao pluralismo informativo. Quando poucos conglomerados controlam a maior parte dos veículos de comunicação, o leque de perspectivas disponíveis se estreita. Isso não exige conspirações — basta que os interesses comerciais e políticos dos proprietários influenciem sutilmente as coberturas." },
+        { "type": "p", "text": "A crise do modelo de negócios do jornalismo — queda da publicidade impressa, fragmentação de audiências — levou ao fechamento de centenas de veículos locais, criando 'desertos de notícias'. Sem cobertura local, a corrupção municipal e estadual tem menor escrutínio, o que pode aumentar a impunidade." },
+        { "type": "h2", "text": "O que pode ser feito?" },
+        { "type": "p", "text": "As respostas à desinformação incluem regulação de plataformas (obrigação de transparência em publicidade política, moderação de conteúdo), letramento midiático e informacional nas escolas, e apoio público ao jornalismo independente." },
+        { "type": "p", "text": "Mas há tensões reais: regulação governamental da mídia pode facilmente tornar-se censura. Letramento midiático pode ser eficaz mas lento — leva décadas. E identificar o que é 'desinformação' versus 'discurso legítimo mas contestado' é um problema filosófico e político sem solução fácil." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_media_q1",
+        "question": "O que é a função de 'agenda-setting' da mídia?",
+        "options": [
+          "Dizer às pessoas o que pensar politicamente",
+          "Definir quais assuntos recebem atenção pública e política",
+          "Fiscalizar os gastos do governo",
+          "Organizar debates entre candidatos"
+        ],
+        "answerIndex": 1,
+        "explanation": "McCombs e Shaw demonstraram que a mídia não diz às pessoas o que pensar, mas sobre o que pensar — ao decidir o que cobrir, estrutura a atenção pública e indiretamente pressiona a agenda política."
+      },
+      {
+        "id": "politics_media_q2",
+        "question": "Qual é a diferença entre misinformação e desinformação?",
+        "options": [
+          "Misinformação é política; desinformação é comercial",
+          "Misinformação é falsa sem intenção de enganar; desinformação é falsa e deliberada",
+          "Misinformação vem de redes sociais; desinformação da mídia tradicional",
+          "Misinformação prejudica indivíduos; desinformação prejudica governos"
+        ],
+        "answerIndex": 1,
+        "explanation": "Misinformação é informação falsa disseminada sem intenção de enganar; desinformação é informação falsa criada deliberadamente para enganar. A intenção é o critério distintivo."
+      },
+      {
+        "id": "politics_media_q3",
+        "question": "O que o estudo do MIT (2018) descobriu sobre notícias falsas no Twitter?",
+        "options": [
+          "Que bots são responsáveis pela maior parte da disseminação",
+          "Que notícias falsas se espalham 6x mais rápido que as verdadeiras",
+          "Que usuários jovens compartilham mais desinformação",
+          "Que redes sociais amplificam mais notícias políticas"
+        ],
+        "answerIndex": 1,
+        "explanation": "O estudo descobriu que notícias falsas se espalham seis vezes mais rápido que as verdadeiras — porque tendem a ser mais novas, surpreendentes e emocionalmente carregadas, não por causa de bots."
+      },
+      {
+        "id": "politics_media_q4",
+        "question": "O que são 'desertos de notícias'?",
+        "options": [
+          "Regiões onde a internet não chega",
+          "Países com censura governamental à imprensa",
+          "Localidades sem cobertura jornalística local após fechamento de veículos",
+          "Períodos sem eventos políticos relevantes"
+        ],
+        "answerIndex": 2,
+        "explanation": "Com a crise do modelo de negócios do jornalismo, centenas de veículos locais fecharam, criando 'desertos de notícias' onde corrupção local tem menor escrutínio."
+      },
+      {
+        "id": "politics_media_q5",
+        "question": "Por que a regulação governamental da mídia para combater desinformação é problemática?",
+        "options": [
+          "É tecnicamente impossível nas redes sociais",
+          "Regulação pode facilmente tornar-se censura e ferramenta de controle político",
+          "Governos não têm jurisdição sobre plataformas digitais",
+          "Eleitores rejeitam qualquer forma de regulação midiática"
+        ],
+        "answerIndex": 1,
+        "explanation": "A regulação governamental da mídia carrega o risco de tornar-se censura — o Estado decidindo o que é 'desinformação' pode usar esse poder para silenciar discurso legítimo de oposição."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Media, Disinformation, and Democracy",
+      "summary": "Democracy presupposes informed citizens. But what happens when information is systematically distorted — not just by error, but by design? The disinformation crisis isn't new, but it has gained unprecedented scale and speed with social media. Understanding how media shapes politics, how disinformation spreads, and what can be done is urgent for any functional democracy.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "The political role of media" },
+        { "type": "p", "text": "Media fulfills essential functions in democracies: informing citizens, holding power accountable (the so-called 'fourth estate'), providing the public arena for debate, and defining which issues are considered important — the 'agenda-setting' function." },
+        { "type": "p", "text": "Maxwell McCombs and Donald Shaw demonstrated in the 1970s that media doesn't tell people what to think, but what to think about. By deciding what to cover and with what emphasis, media structures public attention and indirectly influences which problems politicians need to address." },
+        { "type": "h2", "text": "Disinformation, misinformation, and malinformation" },
+        { "type": "p", "text": "There are important distinctions. Misinformation is false information spread without intent to deceive — sharing an incorrect story believing it to be true. Disinformation is false information deliberately created to deceive. Malinformation is true information used with intent to harm — such as leaking a private document to harm an adversary." },
+        { "type": "p", "text": "The problem with 'fake news' is that the term has been politically co-opted to discredit inconvenient journalism. That's why experts prefer the more precise categories above — they allow identifying exactly what's wrong and who is responsible." },
+        { "type": "quote", "text": "The danger is not that people believe falsehoods. It's that they stop believing anything.", "author": "Hannah Arendt (paraphrase)" },
+        { "type": "h2", "text": "Why does disinformation spread?" },
+        { "type": "p", "text": "A 2018 MIT study (Vosoughi, Roy, and Aral) analyzed 126,000 stories on Twitter and found that false news spreads six times faster than true news. The reason isn't user malice — it's that false information tends to be newer, more surprising, and more emotionally charged, making it more attractive to share." },
+        { "type": "p", "text": "Social media platform algorithms optimize for engagement, and content that generates anger and fear — often disinformation — engages more. This logic creates a structural incentive for producing and circulating distorted information, independent of any individual user's intent." },
+        { "type": "h2", "text": "Echo chambers and polarization" },
+        { "type": "p", "text": "The concept of 'echo chamber' describes information environments where people only encounter information confirming their existing beliefs. Combined with 'confirmation bias' — the cognitive tendency to seek and accept information confirming what we already believe — the result can be progressive radicalization." },
+        { "type": "p", "text": "However, recent research questions the intensity of the echo chamber effect. Eli Pariser, who coined the term 'filter bubble,' acknowledged that data is more complex than the simple model suggests. The bigger problem may not be the lack of exposure to diverse views, but the quality of processing that information." },
+        { "type": "h2", "text": "Media concentration and pluralism" },
+        { "type": "p", "text": "Media ownership concentration is a structural threat to informational pluralism. When a few conglomerates control most media outlets, the range of available perspectives narrows. This doesn't require conspiracies — it's enough for owners' commercial and political interests to subtly influence coverage." },
+        { "type": "p", "text": "The journalism business model crisis — declining print advertising, audience fragmentation — led to hundreds of local outlets closing, creating 'news deserts.' Without local coverage, municipal and state corruption faces less scrutiny, which can increase impunity." },
+        { "type": "h2", "text": "What can be done?" },
+        { "type": "p", "text": "Responses to disinformation include platform regulation (transparency requirements for political advertising, content moderation), media and information literacy in schools, and public support for independent journalism." },
+        { "type": "p", "text": "But real tensions exist: government media regulation can easily become censorship. Media literacy may be effective but slow — it takes decades. And identifying what constitutes 'disinformation' versus 'legitimate but contested speech' is a philosophical and political problem without easy answers." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_media_q1",
+        "question": "What is media's 'agenda-setting' function?",
+        "options": [
+          "Telling people what to think politically",
+          "Defining which issues receive public and political attention",
+          "Auditing government spending",
+          "Organizing debates between candidates"
+        ],
+        "answerIndex": 1,
+        "explanation": "McCombs and Shaw demonstrated that media doesn't tell people what to think, but what to think about — by deciding what to cover, it structures public attention and indirectly pressures the political agenda."
+      },
+      {
+        "id": "politics_media_q2",
+        "question": "What is the difference between misinformation and disinformation?",
+        "options": [
+          "Misinformation is political; disinformation is commercial",
+          "Misinformation is false without intent to deceive; disinformation is deliberately false",
+          "Misinformation comes from social media; disinformation from traditional media",
+          "Misinformation harms individuals; disinformation harms governments"
+        ],
+        "answerIndex": 1,
+        "explanation": "Misinformation is false information spread without intent to deceive; disinformation is false information deliberately created to deceive. Intent is the distinguishing criterion."
+      },
+      {
+        "id": "politics_media_q3",
+        "question": "What did the MIT study (2018) find about false news on Twitter?",
+        "options": [
+          "That bots are responsible for most of the spreading",
+          "That false news spreads 6x faster than true news",
+          "That younger users share more disinformation",
+          "That social networks amplify political news more"
+        ],
+        "answerIndex": 1,
+        "explanation": "The study found that false news spreads six times faster than true news — because it tends to be newer, more surprising, and more emotionally charged, not because of bots."
+      },
+      {
+        "id": "politics_media_q4",
+        "question": "What are 'news deserts'?",
+        "options": [
+          "Regions where internet doesn't reach",
+          "Countries with government press censorship",
+          "Localities without local news coverage after outlets closed",
+          "Periods without significant political events"
+        ],
+        "answerIndex": 2,
+        "explanation": "With the journalism business model crisis, hundreds of local outlets closed, creating 'news deserts' where local corruption faces less scrutiny."
+      },
+      {
+        "id": "politics_media_q5",
+        "question": "Why is government media regulation to combat disinformation problematic?",
+        "options": [
+          "It's technically impossible on social networks",
+          "Regulation can easily become censorship and a political control tool",
+          "Governments have no jurisdiction over digital platforms",
+          "Voters reject any form of media regulation"
+        ],
+        "answerIndex": 1,
+        "explanation": "Government media regulation carries the risk of becoming censorship — the state deciding what is 'disinformation' can use that power to silence legitimate opposition speech."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Medios, Desinformación y Democracia",
+      "summary": "La democracia presupone ciudadanos informados. Pero ¿qué ocurre cuando la información es sistemáticamente distorsionada — no solo por error, sino por diseño? La crisis de la desinformación no es nueva, pero ha ganado una escala y velocidad sin precedentes con las redes sociales. Entender cómo los medios moldean la política, cómo se difunde la desinformación y qué puede hacerse es urgente para cualquier democracia funcional.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "El papel político de los medios" },
+        { "type": "p", "text": "Los medios cumplen funciones esenciales en las democracias: informar a los ciudadanos, fiscalizar el poder (el llamado 'cuarto poder'), proveer la arena pública de debate y definir qué asuntos se consideran importantes — la llamada función de 'agenda-setting'." },
+        { "type": "p", "text": "Maxwell McCombs y Donald Shaw demostraron en los años 1970 que los medios no dicen a las personas qué pensar, sino sobre qué pensar. Al decidir qué cubrir y con qué énfasis, los medios estructuran la atención pública e influyen indirectamente en qué problemas deben responder los políticos." },
+        { "type": "h2", "text": "Desinformación, información errónea y malinformación" },
+        { "type": "p", "text": "Hay distinciones importantes. La información errónea (misinformation) es información falsa difundida sin intención de engañar — compartir una noticia incorrecta creyendo que es verdadera. La desinformación es información falsa creada deliberadamente para engañar. La malinformación es información verdadera usada con intención de dañar — como filtrar documentos privados de un adversario." },
+        { "type": "p", "text": "El problema con 'noticias falsas' es que el término fue cooptado políticamente para desacreditar cualquier periodismo inconveniente. Por eso los especialistas prefieren las categorías más precisas anteriores — permiten identificar exactamente qué está mal y quién es responsable." },
+        { "type": "quote", "text": "El peligro no es que la gente crea falsedades. Es que deje de creer en cualquier cosa.", "author": "Hannah Arendt (paráfrasis)" },
+        { "type": "h2", "text": "¿Por qué se difunde la desinformación?" },
+        { "type": "p", "text": "Un estudio del MIT de 2018 (Vosoughi, Roy y Aral) analizó 126.000 historias en Twitter y descubrió que las noticias falsas se difunden seis veces más rápido que las verdaderas. La razón no es la malicia de los usuarios — es que la información falsa tiende a ser más nueva, sorprendente y emocionalmente cargada, lo que la hace más atractiva para compartir." },
+        { "type": "p", "text": "Los algoritmos de las plataformas de redes sociales optimizan para el engagement, y el contenido que genera ira y miedo — frecuentemente desinformación — genera más engagement. Esta lógica crea un incentivo estructural para la producción y circulación de información distorsionada, independientemente de la intención de cualquier usuario individual." },
+        { "type": "h2", "text": "Cámaras de eco y polarización" },
+        { "type": "p", "text": "El concepto de 'cámara de eco' describe entornos informativos donde las personas solo encuentran información que confirma sus creencias existentes. Combinado con el 'sesgo de confirmación' — la tendencia cognitiva a buscar y aceptar información que confirma lo que ya creemos — el resultado puede ser una radicalización progresiva." },
+        { "type": "p", "text": "Sin embargo, investigaciones recientes cuestionan la intensidad del efecto de cámara de eco. Eli Pariser, quien acuñó el término 'burbuja de filtro', reconoció que los datos son más complejos de lo que el modelo simple sugiere. El problema mayor puede no ser la falta de exposición a visiones diversas, sino la calidad del procesamiento de esa información." },
+        { "type": "h2", "text": "Concentración mediática y pluralismo" },
+        { "type": "p", "text": "La concentración de la propiedad mediática es una amenaza estructural al pluralismo informativo. Cuando unos pocos conglomerados controlan la mayor parte de los medios de comunicación, el abanico de perspectivas disponibles se estrecha. Esto no requiere conspiraciones — basta que los intereses comerciales y políticos de los propietarios influyan sutilmente en las coberturas." },
+        { "type": "p", "text": "La crisis del modelo de negocios del periodismo — caída de la publicidad impresa, fragmentación de audiencias — llevó al cierre de cientos de medios locales, creando 'desiertos de noticias'. Sin cobertura local, la corrupción municipal y estatal tiene menor escrutinio, lo que puede aumentar la impunidad." },
+        { "type": "h2", "text": "¿Qué puede hacerse?" },
+        { "type": "p", "text": "Las respuestas a la desinformación incluyen regulación de plataformas (obligación de transparencia en publicidad política, moderación de contenido), alfabetización mediática e informacional en las escuelas, y apoyo público al periodismo independiente." },
+        { "type": "p", "text": "Pero existen tensiones reales: la regulación gubernamental de los medios puede fácilmente convertirse en censura. La alfabetización mediática puede ser eficaz pero lenta — lleva décadas. E identificar qué es 'desinformación' frente a 'discurso legítimo pero controvertido' es un problema filosófico y político sin solución fácil." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_media_q1",
+        "question": "¿Qué es la función de 'agenda-setting' de los medios?",
+        "options": [
+          "Decirle a la gente qué pensar políticamente",
+          "Definir qué asuntos reciben atención pública y política",
+          "Fiscalizar el gasto del gobierno",
+          "Organizar debates entre candidatos"
+        ],
+        "answerIndex": 1,
+        "explanation": "McCombs y Shaw demostraron que los medios no dicen a las personas qué pensar, sino sobre qué pensar — al decidir qué cubrir, estructuran la atención pública e influyen indirectamente en la agenda política."
+      },
+      {
+        "id": "politics_media_q2",
+        "question": "¿Cuál es la diferencia entre información errónea y desinformación?",
+        "options": [
+          "La información errónea es política; la desinformación es comercial",
+          "La información errónea es falsa sin intención de engañar; la desinformación es deliberadamente falsa",
+          "La información errónea viene de redes sociales; la desinformación de los medios tradicionales",
+          "La información errónea daña a individuos; la desinformación daña a gobiernos"
+        ],
+        "answerIndex": 1,
+        "explanation": "La información errónea es falsa sin intención de engañar; la desinformación es información falsa creada deliberadamente para engañar. La intención es el criterio distintivo."
+      },
+      {
+        "id": "politics_media_q3",
+        "question": "¿Qué descubrió el estudio del MIT (2018) sobre las noticias falsas en Twitter?",
+        "options": [
+          "Que los bots son responsables de la mayor parte de la difusión",
+          "Que las noticias falsas se difunden 6 veces más rápido que las verdaderas",
+          "Que los usuarios jóvenes comparten más desinformación",
+          "Que las redes sociales amplifican más las noticias políticas"
+        ],
+        "answerIndex": 1,
+        "explanation": "El estudio descubrió que las noticias falsas se difunden seis veces más rápido que las verdaderas — porque tienden a ser más nuevas, sorprendentes y emocionalmente cargadas, no por culpa de los bots."
+      },
+      {
+        "id": "politics_media_q4",
+        "question": "¿Qué son los 'desiertos de noticias'?",
+        "options": [
+          "Regiones donde no llega internet",
+          "Países con censura gubernamental a la prensa",
+          "Localidades sin cobertura periodística local tras el cierre de medios",
+          "Períodos sin eventos políticos relevantes"
+        ],
+        "answerIndex": 2,
+        "explanation": "Con la crisis del modelo de negocios del periodismo, cientos de medios locales cerraron, creando 'desiertos de noticias' donde la corrupción local tiene menor escrutinio."
+      },
+      {
+        "id": "politics_media_q5",
+        "question": "¿Por qué la regulación gubernamental de los medios para combatir la desinformación es problemática?",
+        "options": [
+          "Es técnicamente imposible en las redes sociales",
+          "La regulación puede fácilmente convertirse en censura y herramienta de control político",
+          "Los gobiernos no tienen jurisdicción sobre las plataformas digitales",
+          "Los votantes rechazan cualquier forma de regulación mediática"
+        ],
+        "answerIndex": 1,
+        "explanation": "La regulación gubernamental de los medios conlleva el riesgo de convertirse en censura — el Estado decidiendo qué es 'desinformación' puede usar ese poder para silenciar el discurso legítimo de la oposición."
+      }
+    ]
+  }
+}

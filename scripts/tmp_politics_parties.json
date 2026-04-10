@@ -1,0 +1,288 @@
+{
+  "id": "politics_parties",
+  "trackId": "politics",
+  "order": 5,
+  "difficulty": 2,
+  "estimatedMinutes": 11,
+  "prerequisites": [],
+  "title": {
+    "pt": "Partidos, Eleições e Representação",
+    "en": "Parties, Elections, and Representation",
+    "es": "Partidos, Elecciones y Representación"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "Partidos, Eleições e Representação",
+      "summary": "Os partidos políticos são alvos fáceis de crítica. São vistos como corruptos, oportunistas, mais preocupados com poder do que com o bem público. Mas, por mais imperfeitos que sejam, os partidos resolvem um problema real: como agregar preferências diversas de milhões de pessoas em decisões coletivas. Entender como funcionam — e por que as eleições às vezes falham em representar os cidadãos — é essencial para qualquer análise política séria.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Por que existem partidos políticos?" },
+        { "type": "p", "text": "Em democracias representativas, os cidadãos não governam diretamente — elegem representantes para fazê-lo. Os partidos surgem para organizar essa representação: recrutam candidatos, articulam programas, mobilizam eleitores e coordenam ação legislativa." },
+        { "type": "p", "text": "Edmund Burke, no século XVIII, já definia partido como um grupo unido por princípios comuns para promover o interesse nacional. Na prática, os partidos também são máquinas de conquista de poder — mas esse objetivo não anula sua função representativa." },
+        { "type": "h2", "text": "O espectro esquerda-direita" },
+        { "type": "p", "text": "A divisão esquerda-direita nasceu literalmente de assentos: na Assembleia Nacional Francesa de 1789, os que apoiavam o rei sentavam-se à direita; os que queriam mudança, à esquerda. Com o tempo, a dimensão econômica dominou: a esquerda tende a favorecer intervenção estatal e redistribuição; a direita, mercado livre e propriedade privada." },
+        { "type": "p", "text": "Mas o espectro é insuficiente. A dimensão cultural — cosmopolismo vs. nacionalismo, progressismo vs. conservadorismo em costumes — criou uma segunda dimensão que explica muitas tensões contemporâneas. Partidos que antes se encaixavam bem no eixo econômico agora navegam contradições entre suas bases trabalhadoras e suas elites progressistas." },
+        { "type": "h2", "text": "Como as eleições funcionam — e falham" },
+        { "type": "p", "text": "Há dois grandes modelos eleitorais. No sistema majoritário (ou 'first-past-the-post'), vence quem obtiver mais votos em cada circunscrição — mesmo sem maioria absoluta. É simples, gera governos estáveis, mas pode produzir representação muito distorcida: um partido pode ganhar 40% dos votos e obter 60% das cadeiras." },
+        { "type": "p", "text": "Na representação proporcional, os assentos são distribuídos de acordo com a porcentagem de votos obtidos. É mais fiel à diversidade do eleitorado, mas pode gerar fragmentação parlamentar e dificuldade de formar governos estáveis. A maioria das democracias usa algum sistema misto." },
+        { "type": "quote", "text": "As eleições não elegem o povo — elas elegem representantes do povo. A distinção importa.", "author": "Bernard Manin" },
+        { "type": "h2", "text": "O paradoxo da escolha racional" },
+        { "type": "p", "text": "Em eleições com milhões de votantes, a probabilidade de um único voto ser decisivo é infinitesimal. Do ponto de vista estritamente racional, o custo de votar (tempo, informação, deslocamento) supera o benefício esperado. Isso é o 'paradoxo do votante' de Anthony Downs." },
+        { "type": "p", "text": "No entanto, as pessoas votam. As explicações incluem o voto como expressão de identidade, senso de dever cívico, e os efeitos expressivos coletivos. Esse paradoxo revela que a democracia não funciona apenas por cálculo individual — ela depende de normas culturais e senso de pertencimento." },
+        { "type": "h2", "text": "Crise dos partidos tradicionais" },
+        { "type": "p", "text": "Desde os anos 1980, partidos tradicionais enfrentam erosão de filiação e fidelidade. O voto volátil aumentou. Novos partidos — verdes, populistas de direita, movimentos — surgem e crescem rapidamente. A desintermediação digital permite que políticos se comuniquem diretamente com eleitores, reduzindo a dependência do aparato partidário." },
+        { "type": "p", "text": "Para Peter Mair, estamos vivendo o 'colapso da política de partido' — os partidos se tornaram partes do Estado mais do que representantes da sociedade civil, criando um vácuo que os populistas exploram." },
+        { "type": "h2", "text": "Representação descritiva vs. substantiva" },
+        { "type": "p", "text": "Há dois conceitos de representação. A representação descritiva pergunta: os representantes parecem com os representados (em gênero, etnia, classe)? A representação substantiva pergunta: os representantes defendem os interesses dos representados?" },
+        { "type": "p", "text": "Esses dois tipos podem divergir. Um parlamento com alta proporção de mulheres pode ainda aprovar políticas que prejudicam mulheres vulneráveis. Um parlamento homogeneamente masculino pode, em teoria, representar bem os interesses femininos. Mas pesquisas mostram que a representação descritiva tende a melhorar a substantiva — corpos legislativos mais diversos produzem políticas mais inclusivas." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_parties_q1",
+        "question": "Qual é o principal problema que os partidos políticos resolvem em democracias representativas?",
+        "options": [
+          "Eliminar a corrupção do governo",
+          "Agregar preferências diversas em decisões coletivas",
+          "Garantir que apenas especialistas governem",
+          "Impedir que minorias influenciem as eleições"
+        ],
+        "answerIndex": 1,
+        "explanation": "Os partidos surgem para organizar a representação: recrutam candidatos, articulam programas e coordenam ação legislativa, agregando as preferências de milhões de cidadãos."
+      },
+      {
+        "id": "politics_parties_q2",
+        "question": "Qual é a principal crítica ao sistema eleitoral majoritário (first-past-the-post)?",
+        "options": [
+          "Produz governos instáveis por excesso de partidos",
+          "É muito complexo para o eleitor médio entender",
+          "Pode gerar representação muito distorcida em relação aos votos",
+          "Favorece sistematicamente partidos de esquerda"
+        ],
+        "answerIndex": 2,
+        "explanation": "No sistema majoritário, um partido pode ganhar 40% dos votos e obter 60% das cadeiras, distorcendo a representação. A representação proporcional é mais fiel à diversidade do eleitorado."
+      },
+      {
+        "id": "politics_parties_q3",
+        "question": "O 'paradoxo do votante' de Anthony Downs refere-se a:",
+        "options": [
+          "O fato de eleitores votarem contra seus interesses econômicos",
+          "A tendência de partidos convergirem para o centro",
+          "A irracionalidade aparente de votar quando a chance de ser decisivo é mínima",
+          "A dificuldade de medir preferências políticas"
+        ],
+        "answerIndex": 2,
+        "explanation": "Racionalmente, o custo de votar supera o benefício esperado quando a probabilidade de ser o voto decisivo é infinitesimal. Mesmo assim as pessoas votam, por identidade, dever cívico e normas culturais."
+      },
+      {
+        "id": "politics_parties_q4",
+        "question": "Segundo Peter Mair, qual é o principal sintoma do colapso da política de partido?",
+        "options": [
+          "Partidos se tornaram parte do Estado, não da sociedade civil",
+          "Líderes carismáticos dominaram os partidos",
+          "A internet eliminou a necessidade de partidos",
+          "Partidos deixaram de ter distinções ideológicas claras"
+        ],
+        "answerIndex": 0,
+        "explanation": "Para Mair, os partidos se tornaram mais próximos do Estado do que da sociedade civil, criando um vácuo de representação que os movimentos populistas exploram."
+      },
+      {
+        "id": "politics_parties_q5",
+        "question": "A 'representação descritiva' em política refere-se a:",
+        "options": [
+          "Representantes que seguem fielmente o programa do partido",
+          "Representantes cujo perfil demográfico reflete o da população",
+          "Representantes eleitos por maioria absoluta",
+          "Representantes que publicam relatórios detalhados de suas atividades"
+        ],
+        "answerIndex": 1,
+        "explanation": "Representação descritiva questiona se os representantes 'parecem' com os representados em gênero, etnia e classe. Isso difere da representação substantiva, que avalia se os interesses são de fato defendidos."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Parties, Elections, and Representation",
+      "summary": "Political parties are easy targets for criticism — seen as corrupt, opportunistic, more concerned with power than the public good. But however imperfect, parties solve a real problem: how to aggregate the diverse preferences of millions into collective decisions. Understanding how they work — and why elections sometimes fail to represent citizens — is essential for any serious political analysis.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Why do political parties exist?" },
+        { "type": "p", "text": "In representative democracies, citizens don't govern directly — they elect representatives to do so. Parties emerge to organize this representation: they recruit candidates, articulate programs, mobilize voters, and coordinate legislative action." },
+        { "type": "p", "text": "Edmund Burke, in the 18th century, already defined a party as a group united by common principles to advance the national interest. In practice, parties are also power-seeking machines — but that goal doesn't nullify their representative function." },
+        { "type": "h2", "text": "The left-right spectrum" },
+        { "type": "p", "text": "The left-right divide literally came from seating: in France's 1789 National Assembly, those supporting the king sat to the right; those wanting change sat to the left. Over time, the economic dimension dominated: the left tends to favor state intervention and redistribution; the right, free markets and private property." },
+        { "type": "p", "text": "But the spectrum is insufficient. The cultural dimension — cosmopolitanism vs. nationalism, progressivism vs. conservatism in customs — created a second axis that explains many contemporary tensions. Parties once fitting neatly on the economic axis now navigate contradictions between working-class bases and progressive elites." },
+        { "type": "h2", "text": "How elections work — and fail" },
+        { "type": "p", "text": "There are two main electoral models. In majoritarian systems (first-past-the-post), whoever gets the most votes in each constituency wins — even without an absolute majority. It's simple, generates stable governments, but can produce highly distorted representation: a party can win 40% of votes and get 60% of seats." },
+        { "type": "p", "text": "In proportional representation, seats are distributed according to vote share. It's more faithful to voter diversity but can generate parliamentary fragmentation and difficulty forming stable governments. Most democracies use some mixed system." },
+        { "type": "quote", "text": "Elections do not elect the people — they elect representatives of the people. The distinction matters.", "author": "Bernard Manin" },
+        { "type": "h2", "text": "The rational choice paradox" },
+        { "type": "p", "text": "In elections with millions of voters, the probability of a single vote being decisive is infinitesimal. From a strictly rational perspective, the cost of voting (time, information, travel) exceeds the expected benefit. This is Anthony Downs's 'voter paradox.'" },
+        { "type": "p", "text": "Yet people vote. Explanations include voting as identity expression, civic duty, and collective expressive effects. This paradox reveals that democracy doesn't run on individual calculation alone — it depends on cultural norms and a sense of belonging." },
+        { "type": "h2", "text": "The crisis of traditional parties" },
+        { "type": "p", "text": "Since the 1980s, traditional parties have faced eroding membership and loyalty. Volatile voting has increased. New parties — green, right-wing populist, movements — emerge and grow rapidly. Digital disintermediation allows politicians to communicate directly with voters, reducing dependence on the party apparatus." },
+        { "type": "p", "text": "For Peter Mair, we are living through the 'collapse of party politics' — parties have become parts of the State more than representatives of civil society, creating a vacuum that populists exploit." },
+        { "type": "h2", "text": "Descriptive vs. substantive representation" },
+        { "type": "p", "text": "There are two concepts of representation. Descriptive representation asks: do representatives resemble the represented (in gender, ethnicity, class)? Substantive representation asks: do representatives defend the interests of the represented?" },
+        { "type": "p", "text": "The two can diverge. A parliament with high female representation may still pass policies that harm vulnerable women. A homogeneously male parliament could, in theory, well represent women's interests. But research shows descriptive representation tends to improve substantive representation — more diverse legislatures produce more inclusive policies." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_parties_q1",
+        "question": "What main problem do political parties solve in representative democracies?",
+        "options": [
+          "Eliminating government corruption",
+          "Aggregating diverse preferences into collective decisions",
+          "Ensuring only experts govern",
+          "Preventing minorities from influencing elections"
+        ],
+        "answerIndex": 1,
+        "explanation": "Parties emerge to organize representation: recruiting candidates, articulating programs, and coordinating legislative action, aggregating the preferences of millions of citizens."
+      },
+      {
+        "id": "politics_parties_q2",
+        "question": "What is the main criticism of the majoritarian (first-past-the-post) electoral system?",
+        "options": [
+          "It produces unstable governments due to too many parties",
+          "It is too complex for average voters to understand",
+          "It can generate highly distorted representation relative to votes",
+          "It systematically favors left-wing parties"
+        ],
+        "answerIndex": 2,
+        "explanation": "In majoritarian systems, a party can win 40% of votes and get 60% of seats, distorting representation. Proportional representation is more faithful to voter diversity."
+      },
+      {
+        "id": "politics_parties_q3",
+        "question": "Anthony Downs's 'voter paradox' refers to:",
+        "options": [
+          "Voters voting against their economic interests",
+          "The tendency of parties to converge toward the center",
+          "The apparent irrationality of voting when the chance of being decisive is minimal",
+          "The difficulty of measuring political preferences"
+        ],
+        "answerIndex": 2,
+        "explanation": "Rationally, the cost of voting exceeds the expected benefit when the probability of casting the decisive vote is infinitesimal. Yet people vote, due to identity, civic duty, and cultural norms."
+      },
+      {
+        "id": "politics_parties_q4",
+        "question": "According to Peter Mair, what is the main symptom of the collapse of party politics?",
+        "options": [
+          "Parties became part of the State, not civil society",
+          "Charismatic leaders came to dominate parties",
+          "The internet eliminated the need for parties",
+          "Parties stopped having clear ideological distinctions"
+        ],
+        "answerIndex": 0,
+        "explanation": "For Mair, parties became closer to the State than to civil society, creating a representation vacuum that populist movements exploit."
+      },
+      {
+        "id": "politics_parties_q5",
+        "question": "'Descriptive representation' in politics refers to:",
+        "options": [
+          "Representatives who faithfully follow the party program",
+          "Representatives whose demographic profile reflects that of the population",
+          "Representatives elected by absolute majority",
+          "Representatives who publish detailed activity reports"
+        ],
+        "answerIndex": 1,
+        "explanation": "Descriptive representation asks whether representatives 'look like' the represented in gender, ethnicity, and class. This differs from substantive representation, which evaluates whether interests are actually defended."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Partidos, Elecciones y Representación",
+      "summary": "Los partidos políticos son blancos fáciles de crítica — se los ve como corruptos, oportunistas, más preocupados por el poder que por el bien público. Pero por más imperfectos que sean, los partidos resuelven un problema real: cómo agregar las preferencias diversas de millones de personas en decisiones colectivas. Entender cómo funcionan — y por qué las elecciones a veces no logran representar a los ciudadanos — es esencial para cualquier análisis político serio.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "¿Por qué existen los partidos políticos?" },
+        { "type": "p", "text": "En las democracias representativas, los ciudadanos no gobiernan directamente — eligen representantes para hacerlo. Los partidos surgen para organizar esta representación: reclutan candidatos, articulan programas, movilizan votantes y coordinan la acción legislativa." },
+        { "type": "p", "text": "Edmund Burke, en el siglo XVIII, ya definía partido como un grupo unido por principios comunes para promover el interés nacional. En la práctica, los partidos también son máquinas de conquista del poder — pero ese objetivo no anula su función representativa." },
+        { "type": "h2", "text": "El espectro izquierda-derecha" },
+        { "type": "p", "text": "La división izquierda-derecha nació literalmente de los asientos: en la Asamblea Nacional Francesa de 1789, quienes apoyaban al rey se sentaban a la derecha; quienes querían cambios, a la izquierda. Con el tiempo, dominó la dimensión económica: la izquierda tiende a favorecer la intervención estatal y la redistribución; la derecha, el mercado libre y la propiedad privada." },
+        { "type": "p", "text": "Pero el espectro es insuficiente. La dimensión cultural — cosmopolitismo vs. nacionalismo, progresismo vs. conservadurismo en las costumbres — creó un segundo eje que explica muchas tensiones contemporáneas. Partidos que antes encajaban bien en el eje económico ahora navegan contradicciones entre sus bases obreras y sus élites progresistas." },
+        { "type": "h2", "text": "Cómo funcionan las elecciones — y cómo fallan" },
+        { "type": "p", "text": "Hay dos grandes modelos electorales. En el sistema mayoritario (first-past-the-post), gana quien obtiene más votos en cada circunscripción — incluso sin mayoría absoluta. Es simple, genera gobiernos estables, pero puede producir una representación muy distorsionada: un partido puede ganar el 40% de los votos y obtener el 60% de los escaños." },
+        { "type": "p", "text": "En la representación proporcional, los escaños se distribuyen según el porcentaje de votos obtenidos. Es más fiel a la diversidad del electorado, pero puede generar fragmentación parlamentaria y dificultad para formar gobiernos estables. La mayoría de las democracias usa algún sistema mixto." },
+        { "type": "quote", "text": "Las elecciones no eligen al pueblo — eligen representantes del pueblo. La distinción importa.", "author": "Bernard Manin" },
+        { "type": "h2", "text": "La paradoja de la elección racional" },
+        { "type": "p", "text": "En elecciones con millones de votantes, la probabilidad de que un solo voto sea decisivo es infinitesimal. Desde una perspectiva estrictamente racional, el costo de votar (tiempo, información, desplazamiento) supera el beneficio esperado. Esta es la 'paradoja del votante' de Anthony Downs." },
+        { "type": "p", "text": "Sin embargo, la gente vota. Las explicaciones incluyen el voto como expresión de identidad, sentido del deber cívico y efectos expresivos colectivos. Esta paradoja revela que la democracia no funciona solo por cálculo individual — depende de normas culturales y un sentido de pertenencia." },
+        { "type": "h2", "text": "Crisis de los partidos tradicionales" },
+        { "type": "p", "text": "Desde los años 1980, los partidos tradicionales enfrentan erosión de afiliación y lealtad. El voto volátil ha aumentado. Nuevos partidos — verdes, populistas de derecha, movimientos — surgen y crecen rápidamente. La desintermediación digital permite que los políticos se comuniquen directamente con los votantes, reduciendo la dependencia del aparato partidario." },
+        { "type": "p", "text": "Para Peter Mair, estamos viviendo el 'colapso de la política de partido' — los partidos se han convertido en partes del Estado más que en representantes de la sociedad civil, creando un vacío que los populistas explotan." },
+        { "type": "h2", "text": "Representación descriptiva vs. sustantiva" },
+        { "type": "p", "text": "Hay dos conceptos de representación. La representación descriptiva pregunta: ¿los representantes se parecen a los representados (en género, etnia, clase)? La representación sustantiva pregunta: ¿los representantes defienden los intereses de los representados?" },
+        { "type": "p", "text": "Estos dos tipos pueden divergir. Un parlamento con alta proporción de mujeres puede igualmente aprobar políticas que perjudican a mujeres vulnerables. Un parlamento homogéneamente masculino podría, en teoría, representar bien los intereses femeninos. Pero la investigación muestra que la representación descriptiva tiende a mejorar la sustantiva — los cuerpos legislativos más diversos producen políticas más inclusivas." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_parties_q1",
+        "question": "¿Qué problema principal resuelven los partidos políticos en las democracias representativas?",
+        "options": [
+          "Eliminar la corrupción del gobierno",
+          "Agregar preferencias diversas en decisiones colectivas",
+          "Garantizar que solo gobiernen expertos",
+          "Impedir que las minorías influyan en las elecciones"
+        ],
+        "answerIndex": 1,
+        "explanation": "Los partidos surgen para organizar la representación: reclutando candidatos, articulando programas y coordinando la acción legislativa, agregando las preferencias de millones de ciudadanos."
+      },
+      {
+        "id": "politics_parties_q2",
+        "question": "¿Cuál es la principal crítica al sistema electoral mayoritario (first-past-the-post)?",
+        "options": [
+          "Produce gobiernos inestables por exceso de partidos",
+          "Es demasiado complejo para el votante promedio",
+          "Puede generar una representación muy distorsionada respecto a los votos",
+          "Favorece sistemáticamente a los partidos de izquierda"
+        ],
+        "answerIndex": 2,
+        "explanation": "En el sistema mayoritario, un partido puede ganar el 40% de los votos y obtener el 60% de los escaños, distorsionando la representación. La representación proporcional es más fiel a la diversidad del electorado."
+      },
+      {
+        "id": "politics_parties_q3",
+        "question": "La 'paradoja del votante' de Anthony Downs se refiere a:",
+        "options": [
+          "El hecho de que los votantes voten contra sus intereses económicos",
+          "La tendencia de los partidos a converger hacia el centro",
+          "La aparente irracionalidad de votar cuando la posibilidad de ser decisivo es mínima",
+          "La dificultad de medir las preferencias políticas"
+        ],
+        "answerIndex": 2,
+        "explanation": "Racionalmente, el costo de votar supera el beneficio esperado cuando la probabilidad de emitir el voto decisivo es infinitesimal. Aun así la gente vota, por identidad, deber cívico y normas culturales."
+      },
+      {
+        "id": "politics_parties_q4",
+        "question": "Según Peter Mair, ¿cuál es el principal síntoma del colapso de la política de partido?",
+        "options": [
+          "Los partidos se convirtieron en parte del Estado, no de la sociedad civil",
+          "Los líderes carismáticos dominaron los partidos",
+          "Internet eliminó la necesidad de los partidos",
+          "Los partidos dejaron de tener distinciones ideológicas claras"
+        ],
+        "answerIndex": 0,
+        "explanation": "Para Mair, los partidos se acercaron más al Estado que a la sociedad civil, creando un vacío de representación que los movimientos populistas explotan."
+      },
+      {
+        "id": "politics_parties_q5",
+        "question": "La 'representación descriptiva' en política se refiere a:",
+        "options": [
+          "Representantes que siguen fielmente el programa del partido",
+          "Representantes cuyo perfil demográfico refleja el de la población",
+          "Representantes elegidos por mayoría absoluta",
+          "Representantes que publican informes detallados de sus actividades"
+        ],
+        "answerIndex": 1,
+        "explanation": "La representación descriptiva pregunta si los representantes 'se parecen' a los representados en género, etnia y clase. Esto difiere de la representación sustantiva, que evalúa si los intereses son realmente defendidos."
+      }
+    ]
+  }
+}

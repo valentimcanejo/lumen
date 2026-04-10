@@ -1,0 +1,279 @@
+{
+  "id": "politics_civil_rights",
+  "trackId": "politics",
+  "order": 9,
+  "difficulty": 2,
+  "estimatedMinutes": 11,
+  "prerequisites": [],
+  "title": {
+    "pt": "Direitos Civis e Movimentos Sociais",
+    "en": "Civil Rights and Social Movements",
+    "es": "Derechos Civiles y Movimientos Sociales"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "Direitos Civis e Movimentos Sociais",
+      "summary": "A história dos direitos civis é a história de pessoas comuns exigindo ser tratadas como iguais — e frequentemente confrontando violência e repressão para isso. Os movimentos sociais moldaram profundamente a democracia, expandindo quem conta como cidadão pleno. Entender como eles funcionam — e por que às vezes falham — é entender um dos motores mais poderosos de transformação política.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "O que são direitos civis?" },
+        { "type": "p", "text": "Direitos civis são as proteções que o Estado oferece aos indivíduos contra discriminação e tratamento arbitrário — especialmente por razões de raça, gênero, religião, origem nacional ou orientação sexual. Eles diferem dos direitos políticos (votar, candidatar-se) e dos direitos sociais (saúde, educação), embora frequentemente se sobreponham." },
+        { "type": "p", "text": "Historicamente, direitos formalmente garantidos e direitos efetivamente exercidos são coisas muito diferentes. A Constituição americana garantia igualdade após a Guerra Civil, mas por quase um século leis Jim Crow e violência sistemática tornaram esses direitos letra morta para milhões de afro-americanos." },
+        { "type": "h2", "text": "Como os movimentos sociais mudam a política" },
+        { "type": "p", "text": "Sidney Tarrow e Charles Tilly definiram movimentos sociais como campanhas coletivas sustentadas que fazem reivindicações de mudança por meio de repertórios de ação contenciosa — manifestações, greves, boicotes, ocupações, petições. O que os distingue de grupos de pressão comuns é a mobilização de pessoas comuns, não apenas elites." },
+        { "type": "p", "text": "Movimentos têm mais sucesso quando combinam três elementos: disrupção (custo político de ignorar as demandas), legitimidade moral (a causa é difícil de atacar publicamente) e aliados internos (parlamentares, juízes, líderes religiosos que simpatizam). O Movimento pelos Direitos Civis americano dos anos 1950-60 é o caso paradigmático: combinou desobediência civil disciplinada com litigância jurídica e pressão legislativa." },
+        { "type": "quote", "text": "Uma lei injusta não é lei alguma.", "author": "Santo Agostinho / citado por Martin Luther King Jr." },
+        { "type": "h2", "text": "Desobediência civil: quando violar a lei é moral" },
+        { "type": "p", "text": "A teoria da desobediência civil, elaborada por Henry David Thoreau e refinada por Gandhi e Martin Luther King Jr., defende que há casos em que violar deliberadamente uma lei injusta — e aceitar as consequências legais — é não apenas justificado, mas moralmente obrigatório." },
+        { "type": "p", "text": "A condição chave para King é que a desobediência civil deve ser não-violenta, pública, e voltada para despertar a consciência moral da maioria — não apenas para expressar raiva ou ganho imediato. A violência do Estado contra manifestantes pacíficos foi, paradoxalmente, uma das armas mais poderosas do movimento: expôs ao mundo a brutalidade do sistema que defendia a 'ordem'." },
+        { "type": "h2", "text": "Interseccionalidade: quando as categorias se cruzam" },
+        { "type": "p", "text": "O conceito de interseccionalidade, desenvolvido por Kimberlé Crenshaw, argumenta que as formas de opressão — racismo, sexismo, classismo — não operam de forma independente, mas se intersectam e se reforçam mutuamente. Uma mulher negra pobre não experimenta apenas 'racismo mais sexismo', mas uma forma específica de desvantagem que não pode ser reduzida a nenhuma das categorias isoladas." },
+        { "type": "p", "text": "A interseccionalidade teve impacto significativo nos movimentos sociais contemporâneos, levando movimentos feministas, de direitos LGBTQ+, e anti-racistas a interrogar suas próprias exclusões internas. Mas também foi criticada por alguns como fragmentando a solidariedade necessária para construir maiorias políticas." },
+        { "type": "h2", "text": "Movimentos sociais e suas limitações" },
+        { "type": "p", "text": "Movimentos têm pontos fortes e fraquezas estruturais. São bons em criar urgência, mobilizar atenção e forçar mudanças que a política ordinária bloqueava. São menos eficazes em sustentar conquistas ao longo do tempo: sem institutionalização, ganhos podem ser revertidos. O Movimento pelos Direitos Civis conquistou a Lei dos Direitos Civis de 1964 e a Lei do Direito de Voto de 1965 — mas décadas depois, restrições ao voto e segregação educacional de fato persistem." },
+        { "type": "p", "text": "A tensão entre radicalismo (que mantém energia e clareza moral) e negociação (que produz mudanças concretas e sustentáveis) é permanente nos movimentos. Movimentos que se recusam a negociar podem manter a pureza moral mas perder influência política; movimentos que negociam demais podem perder a base e a urgência transformadora." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_civil_rights_q1",
+        "question": "O que distingue direitos civis de direitos políticos?",
+        "options": [
+          "Direitos civis só se aplicam a cidadãos; direitos políticos a todos os residentes",
+          "Direitos civis protegem contra discriminação arbitrária; direitos políticos tratam de participação (votar, candidatar-se)",
+          "Direitos civis são constitucionais; direitos políticos são legais",
+          "Direitos civis foram conquistados antes; direitos políticos são mais recentes"
+        ],
+        "answerIndex": 1,
+        "explanation": "Direitos civis protegem indivíduos contra discriminação e tratamento arbitrário pelo Estado. Direitos políticos se referem à participação política — votar, candidatar-se a cargos, organizar-se politicamente."
+      },
+      {
+        "id": "politics_civil_rights_q2",
+        "question": "Quais três elementos Tarrow e Tilly identificam como críticos para o sucesso de movimentos sociais?",
+        "options": [
+          "Liderança carismática, financiamento adequado, cobertura midiática",
+          "Disrupção, legitimidade moral e aliados internos",
+          "Tamanho da base, clareza ideológica e organização hierárquica",
+          "Violência simbólica, apoio internacional e pressão econômica"
+        ],
+        "answerIndex": 1,
+        "explanation": "Movimentos têm mais sucesso quando combinam disrupção (custo político de ignorar demandas), legitimidade moral (causa difícil de atacar) e aliados internos (parlamentares, juízes, líderes religiosos)."
+      },
+      {
+        "id": "politics_civil_rights_q3",
+        "question": "Qual é a condição central para a desobediência civil ser moralmente justificada, segundo Martin Luther King Jr.?",
+        "options": [
+          "Deve ser conduzida por minorias oprimidas, não por maiorias",
+          "Deve visar ganhos econômicos concretos, não apenas simbólicos",
+          "Deve ser não-violenta, pública e voltada para despertar consciência moral",
+          "Deve ter aprovação de líderes religiosos antes de ser realizada"
+        ],
+        "answerIndex": 2,
+        "explanation": "Para King, a desobediência civil deve ser não-violenta, pública, e voltada para despertar a consciência moral da maioria. Aceitar as consequências legais da violação demonstra respeito pela lei em geral, enquanto a rejeita em caso específico."
+      },
+      {
+        "id": "politics_civil_rights_q4",
+        "question": "O conceito de interseccionalidade, de Kimberlé Crenshaw, propõe que:",
+        "options": [
+          "Movimentos sociais devem se unir em coalizões para ser eficazes",
+          "Formas de opressão (raça, gênero, classe) se intersectam criando formas específicas de desvantagem",
+          "Direitos civis só podem ser conquistados por grupos que sofrem múltiplas formas de opressão",
+          "A intersecção entre democracia e capitalismo produz necessariamente desigualdade"
+        ],
+        "answerIndex": 1,
+        "explanation": "Interseccionalidade argumenta que raça, gênero, classe e outras categorias não operam independentemente — se cruzam e reforçam mutuamente, criando formas específicas de desvantagem que não podem ser reduzidas a categorias isoladas."
+      },
+      {
+        "id": "politics_civil_rights_q5",
+        "question": "Qual é a principal fraqueza estrutural dos movimentos sociais em comparação com partidos políticos?",
+        "options": [
+          "Movimentos não conseguem mobilizar grande número de pessoas",
+          "Movimentos são incapazes de gerar mudanças legais",
+          "Movimentos têm dificuldade em sustentar conquistas ao longo do tempo sem institucionalização",
+          "Movimentos dependem de financiamento externo para funcionar"
+        ],
+        "answerIndex": 2,
+        "explanation": "Movimentos são eficazes em criar urgência e forçar mudanças, mas sem institucionalização, ganhos podem ser revertidos. A tensão entre radicalismo (que mantém energia) e negociação (que produz mudanças sustentáveis) é estrutural."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Civil Rights and Social Movements",
+      "summary": "The history of civil rights is the history of ordinary people demanding to be treated as equals — and frequently confronting violence and repression to do so. Social movements have profoundly shaped democracy, expanding who counts as a full citizen. Understanding how they work — and why they sometimes fail — is understanding one of the most powerful engines of political transformation.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "What are civil rights?" },
+        { "type": "p", "text": "Civil rights are the protections the state offers individuals against discrimination and arbitrary treatment — especially on grounds of race, gender, religion, national origin, or sexual orientation. They differ from political rights (voting, running for office) and social rights (health, education), though they often overlap." },
+        { "type": "p", "text": "Historically, formally guaranteed rights and rights actually exercised are very different things. The US Constitution guaranteed equality after the Civil War, but for nearly a century Jim Crow laws and systematic violence made those rights a dead letter for millions of African Americans." },
+        { "type": "h2", "text": "How social movements change politics" },
+        { "type": "p", "text": "Sidney Tarrow and Charles Tilly defined social movements as sustained collective campaigns making demands for change through repertoires of contentious action — demonstrations, strikes, boycotts, occupations, petitions. What distinguishes them from ordinary pressure groups is the mobilization of ordinary people, not just elites." },
+        { "type": "p", "text": "Movements are most successful when they combine three elements: disruption (political cost of ignoring the demands), moral legitimacy (the cause is hard to publicly attack), and internal allies (legislators, judges, religious leaders who sympathize). The American Civil Rights Movement of the 1950s-60s is the paradigmatic case: it combined disciplined civil disobedience with legal litigation and legislative pressure." },
+        { "type": "quote", "text": "An unjust law is no law at all.", "author": "Saint Augustine / quoted by Martin Luther King Jr." },
+        { "type": "h2", "text": "Civil disobedience: when breaking the law is moral" },
+        { "type": "p", "text": "The theory of civil disobedience, elaborated by Henry David Thoreau and refined by Gandhi and Martin Luther King Jr., holds that there are cases where deliberately violating an unjust law — and accepting the legal consequences — is not only justified but morally obligatory." },
+        { "type": "p", "text": "The key condition for King is that civil disobedience must be nonviolent, public, and aimed at awakening the moral conscience of the majority — not just expressing anger or seeking immediate gain. State violence against peaceful protesters was, paradoxically, one of the movement's most powerful weapons: it exposed to the world the brutality of the system that claimed to defend 'order.'" },
+        { "type": "h2", "text": "Intersectionality: when categories cross" },
+        { "type": "p", "text": "The concept of intersectionality, developed by Kimberlé Crenshaw, argues that forms of oppression — racism, sexism, classism — don't operate independently but intersect and reinforce each other. A poor Black woman doesn't just experience 'racism plus sexism,' but a specific form of disadvantage that can't be reduced to either category alone." },
+        { "type": "p", "text": "Intersectionality has had significant impact on contemporary social movements, leading feminist, LGBTQ+ rights, and anti-racist movements to interrogate their own internal exclusions. But it has also been criticized by some as fragmenting the solidarity needed to build political majorities." },
+        { "type": "h2", "text": "Social movements and their limitations" },
+        { "type": "p", "text": "Movements have structural strengths and weaknesses. They're good at creating urgency, mobilizing attention, and forcing changes that ordinary politics blocked. They're less effective at sustaining gains over time: without institutionalization, achievements can be reversed. The Civil Rights Movement won the Civil Rights Act of 1964 and the Voting Rights Act of 1965 — but decades later, voting restrictions and de facto educational segregation persist." },
+        { "type": "p", "text": "The tension between radicalism (which maintains energy and moral clarity) and negotiation (which produces concrete, sustainable changes) is permanent in movements. Movements that refuse to negotiate may keep moral purity but lose political influence; movements that negotiate too much may lose their base and transformative urgency." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_civil_rights_q1",
+        "question": "What distinguishes civil rights from political rights?",
+        "options": [
+          "Civil rights only apply to citizens; political rights to all residents",
+          "Civil rights protect against arbitrary discrimination; political rights concern participation (voting, running for office)",
+          "Civil rights are constitutional; political rights are statutory",
+          "Civil rights were won earlier; political rights are more recent"
+        ],
+        "answerIndex": 1,
+        "explanation": "Civil rights protect individuals against discrimination and arbitrary state treatment. Political rights refer to political participation — voting, running for office, organizing politically."
+      },
+      {
+        "id": "politics_civil_rights_q2",
+        "question": "What three elements do Tarrow and Tilly identify as critical for social movement success?",
+        "options": [
+          "Charismatic leadership, adequate funding, media coverage",
+          "Disruption, moral legitimacy, and internal allies",
+          "Base size, ideological clarity, and hierarchical organization",
+          "Symbolic violence, international support, and economic pressure"
+        ],
+        "answerIndex": 1,
+        "explanation": "Movements are most successful combining disruption (political cost of ignoring demands), moral legitimacy (cause hard to publicly attack), and internal allies (legislators, judges, religious leaders)."
+      },
+      {
+        "id": "politics_civil_rights_q3",
+        "question": "What is the central condition for civil disobedience to be morally justified, according to Martin Luther King Jr.?",
+        "options": [
+          "It must be conducted by oppressed minorities, not majorities",
+          "It must aim for concrete economic gains, not just symbolic ones",
+          "It must be nonviolent, public, and aimed at awakening moral conscience",
+          "It must have religious leaders' approval before being carried out"
+        ],
+        "answerIndex": 2,
+        "explanation": "For King, civil disobedience must be nonviolent, public, and aimed at awakening the moral conscience of the majority. Accepting the legal consequences of the violation demonstrates respect for law generally while rejecting it in the specific case."
+      },
+      {
+        "id": "politics_civil_rights_q4",
+        "question": "Kimberlé Crenshaw's concept of intersectionality proposes that:",
+        "options": [
+          "Social movements must unite in coalitions to be effective",
+          "Forms of oppression (race, gender, class) intersect creating specific forms of disadvantage",
+          "Civil rights can only be won by groups suffering multiple forms of oppression",
+          "The intersection between democracy and capitalism necessarily produces inequality"
+        ],
+        "answerIndex": 1,
+        "explanation": "Intersectionality argues that race, gender, class, and other categories don't operate independently — they intersect and reinforce each other, creating specific forms of disadvantage that can't be reduced to isolated categories."
+      },
+      {
+        "id": "politics_civil_rights_q5",
+        "question": "What is the main structural weakness of social movements compared to political parties?",
+        "options": [
+          "Movements can't mobilize large numbers of people",
+          "Movements are incapable of generating legal changes",
+          "Movements struggle to sustain gains over time without institutionalization",
+          "Movements depend on external funding to function"
+        ],
+        "answerIndex": 2,
+        "explanation": "Movements are effective at creating urgency and forcing changes, but without institutionalization, gains can be reversed. The tension between radicalism (maintaining energy) and negotiation (producing sustainable changes) is structural."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Derechos Civiles y Movimientos Sociales",
+      "summary": "La historia de los derechos civiles es la historia de personas comunes exigiendo ser tratadas como iguales — y frecuentemente enfrentando violencia y represión para lograrlo. Los movimientos sociales han moldeado profundamente la democracia, expandiendo quién cuenta como ciudadano pleno. Entender cómo funcionan — y por qué a veces fracasan — es entender uno de los motores más poderosos de transformación política.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "¿Qué son los derechos civiles?" },
+        { "type": "p", "text": "Los derechos civiles son las protecciones que el Estado ofrece a los individuos contra la discriminación y el trato arbitrario — especialmente por razones de raza, género, religión, origen nacional u orientación sexual. Difieren de los derechos políticos (votar, candidatarse) y los derechos sociales (salud, educación), aunque frecuentemente se superponen." },
+        { "type": "p", "text": "Históricamente, los derechos formalmente garantizados y los derechos efectivamente ejercidos son cosas muy distintas. La Constitución estadounidense garantizó la igualdad tras la Guerra Civil, pero durante casi un siglo las leyes Jim Crow y la violencia sistemática convirtieron esos derechos en letra muerta para millones de afroamericanos." },
+        { "type": "h2", "text": "Cómo los movimientos sociales cambian la política" },
+        { "type": "p", "text": "Sidney Tarrow y Charles Tilly definieron los movimientos sociales como campañas colectivas sostenidas que hacen reivindicaciones de cambio mediante repertorios de acción contenciosa — manifestaciones, huelgas, boicots, ocupaciones, peticiones. Lo que los distingue de los grupos de presión comunes es la movilización de personas comunes, no solo élites." },
+        { "type": "p", "text": "Los movimientos tienen más éxito cuando combinan tres elementos: disrupción (costo político de ignorar las demandas), legitimidad moral (la causa es difícil de atacar públicamente) y aliados internos (parlamentarios, jueces, líderes religiosos que simpatizan). El Movimiento por los Derechos Civiles estadounidense de los años 1950-60 es el caso paradigmático: combinó desobediencia civil disciplinada con litigación jurídica y presión legislativa." },
+        { "type": "quote", "text": "Una ley injusta no es ley alguna.", "author": "San Agustín / citado por Martin Luther King Jr." },
+        { "type": "h2", "text": "Desobediencia civil: cuándo violar la ley es moral" },
+        { "type": "p", "text": "La teoría de la desobediencia civil, elaborada por Henry David Thoreau y refinada por Gandhi y Martin Luther King Jr., sostiene que hay casos en que violar deliberadamente una ley injusta — y aceptar las consecuencias legales — no solo está justificado, sino que es moralmente obligatorio." },
+        { "type": "p", "text": "La condición clave para King es que la desobediencia civil debe ser no violenta, pública y orientada a despertar la conciencia moral de la mayoría — no solo a expresar rabia o buscar ganancias inmediatas. La violencia del Estado contra manifestantes pacíficos fue, paradójicamente, una de las armas más poderosas del movimiento: expuso al mundo la brutalidad del sistema que decía defender el 'orden'." },
+        { "type": "h2", "text": "Interseccionalidad: cuando las categorías se cruzan" },
+        { "type": "p", "text": "El concepto de interseccionalidad, desarrollado por Kimberlé Crenshaw, argumenta que las formas de opresión — racismo, sexismo, clasismo — no operan de forma independiente sino que se intersectan y se refuerzan mutuamente. Una mujer negra pobre no experimenta solo 'racismo más sexismo', sino una forma específica de desventaja que no puede reducirse a ninguna de las categorías aisladas." },
+        { "type": "p", "text": "La interseccionalidad ha tenido un impacto significativo en los movimientos sociales contemporáneos, llevando a los movimientos feministas, de derechos LGBTQ+ y antirracistas a interrogar sus propias exclusiones internas. Pero también ha sido criticada por algunos como fragmentadora de la solidaridad necesaria para construir mayorías políticas." },
+        { "type": "h2", "text": "Los movimientos sociales y sus limitaciones" },
+        { "type": "p", "text": "Los movimientos tienen puntos fuertes y debilidades estructurales. Son buenos para crear urgencia, movilizar atención y forzar cambios que la política ordinaria bloqueaba. Son menos eficaces en sostener conquistas a lo largo del tiempo: sin institucionalización, los logros pueden revertirse. El Movimiento por los Derechos Civiles conquistó la Ley de Derechos Civiles de 1964 y la Ley del Derecho de Voto de 1965 — pero décadas después, restricciones al voto y segregación educativa de facto persisten." },
+        { "type": "p", "text": "La tensión entre radicalismo (que mantiene energía y claridad moral) y negociación (que produce cambios concretos y sostenibles) es permanente en los movimientos. Los movimientos que se niegan a negociar pueden mantener la pureza moral pero perder influencia política; los movimientos que negocian demasiado pueden perder la base y la urgencia transformadora." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_civil_rights_q1",
+        "question": "¿Qué distingue los derechos civiles de los derechos políticos?",
+        "options": [
+          "Los derechos civiles solo se aplican a ciudadanos; los políticos a todos los residentes",
+          "Los derechos civiles protegen contra la discriminación arbitraria; los políticos conciernen la participación (votar, candidatarse)",
+          "Los derechos civiles son constitucionales; los políticos son legales",
+          "Los derechos civiles se conquistaron antes; los políticos son más recientes"
+        ],
+        "answerIndex": 1,
+        "explanation": "Los derechos civiles protegen a los individuos contra la discriminación y el trato arbitrario del Estado. Los derechos políticos se refieren a la participación política — votar, candidatarse, organizarse políticamente."
+      },
+      {
+        "id": "politics_civil_rights_q2",
+        "question": "¿Qué tres elementos identifican Tarrow y Tilly como críticos para el éxito de los movimientos sociales?",
+        "options": [
+          "Liderazgo carismático, financiamiento adecuado, cobertura mediática",
+          "Disrupción, legitimidad moral y aliados internos",
+          "Tamaño de la base, claridad ideológica y organización jerárquica",
+          "Violencia simbólica, apoyo internacional y presión económica"
+        ],
+        "answerIndex": 1,
+        "explanation": "Los movimientos tienen más éxito cuando combinan disrupción (costo político de ignorar las demandas), legitimidad moral (causa difícil de atacar públicamente) y aliados internos (parlamentarios, jueces, líderes religiosos)."
+      },
+      {
+        "id": "politics_civil_rights_q3",
+        "question": "¿Cuál es la condición central para que la desobediencia civil esté moralmente justificada, según Martin Luther King Jr.?",
+        "options": [
+          "Debe ser conducida por minorías oprimidas, no por mayorías",
+          "Debe apuntar a ganancias económicas concretas, no solo simbólicas",
+          "Debe ser no violenta, pública y orientada a despertar la conciencia moral",
+          "Debe tener aprobación de líderes religiosos antes de realizarse"
+        ],
+        "answerIndex": 2,
+        "explanation": "Para King, la desobediencia civil debe ser no violenta, pública y orientada a despertar la conciencia moral de la mayoría. Aceptar las consecuencias legales de la violación demuestra respeto por la ley en general, mientras se rechaza en el caso específico."
+      },
+      {
+        "id": "politics_civil_rights_q4",
+        "question": "El concepto de interseccionalidad de Kimberlé Crenshaw propone que:",
+        "options": [
+          "Los movimientos sociales deben unirse en coaliciones para ser eficaces",
+          "Las formas de opresión (raza, género, clase) se intersectan creando formas específicas de desventaja",
+          "Los derechos civiles solo pueden conquistarse por grupos que sufren múltiples formas de opresión",
+          "La intersección entre democracia y capitalismo produce necesariamente desigualdad"
+        ],
+        "answerIndex": 1,
+        "explanation": "La interseccionalidad argumenta que raza, género, clase y otras categorías no operan independientemente — se cruzan y se refuerzan mutuamente, creando formas específicas de desventaja que no pueden reducirse a categorías aisladas."
+      },
+      {
+        "id": "politics_civil_rights_q5",
+        "question": "¿Cuál es la principal debilidad estructural de los movimientos sociales en comparación con los partidos políticos?",
+        "options": [
+          "Los movimientos no pueden movilizar gran número de personas",
+          "Los movimientos son incapaces de generar cambios legales",
+          "Los movimientos tienen dificultad para sostener logros a lo largo del tiempo sin institucionalización",
+          "Los movimientos dependen de financiamiento externo para funcionar"
+        ],
+        "answerIndex": 2,
+        "explanation": "Los movimientos son eficaces para crear urgencia y forzar cambios, pero sin institucionalización, los logros pueden revertirse. La tensión entre radicalismo (que mantiene la energía) y negociación (que produce cambios sostenibles) es estructural."
+      }
+    ]
+  }
+}

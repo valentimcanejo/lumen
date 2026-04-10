@@ -1,0 +1,279 @@
+{
+  "id": "politics_future",
+  "trackId": "politics",
+  "order": 10,
+  "difficulty": 3,
+  "estimatedMinutes": 12,
+  "prerequisites": [],
+  "title": {
+    "pt": "O Futuro da Democracia",
+    "en": "The Future of Democracy",
+    "es": "El Futuro de la Democracia"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "O Futuro da Democracia",
+      "summary": "A democracia enfrenta hoje desafios sem precedentes históricos: polarização extrema, desinformação em escala industrial, desconfiança nas instituições, autoritarismo ressurgente, e as perturbações que a inteligência artificial está introduzindo na política. Mas a democracia já sobreviveu à Grande Depressão, a duas guerras mundiais e ao totalitarismo do século XX. O que está em jogo agora? O que precisará mudar? E o que vale a pena defender?",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "O diagnóstico: o que está em crise?" },
+        { "type": "p", "text": "A crise democrática contemporânea tem múltiplas dimensões. A crise de confiança: em quase todas as democracias avançadas, a confiança nas instituições — parlamentos, partidos, mídia, judiciário — caiu drasticamente desde os anos 1980. A crise de representação: setores crescentes da população sentem que nenhum partido os representa adequadamente." },
+        { "type": "p", "text": "A crise de eficácia: democracias parecem incapazes de resolver problemas de longo prazo como mudança climática, desigualdade crescente, ou pandemias — problemas que requerem cooperação além de ciclos eleitorais de quatro anos. E a crise de soberania: decisões cada vez mais importantes são tomadas em instâncias internacionais ou por atores privados (corporações, plataformas digitais) que estão fora do controle democrático." },
+        { "type": "h2", "text": "Polarização: o veneno lento" },
+        { "type": "p", "text": "A polarização política — especialmente a 'polarização afetiva', onde o problema não é discordância substantiva, mas aversão ao outro lado — corrói os fundamentos da democracia. Quando adversários se tornam inimigos, a tolerância mútua colapsa. Pesquisas mostram que nos EUA, membros dos dois partidos superestimam vastamente o extremismo do outro lado." },
+        { "type": "p", "text": "A polarização não é apenas fenômeno americano — Polônia, Hungria, Brasil, Israel e muitos outros países experimentaram dinâmicas similares. As causas são debatidas: mídias sociais, desigualdade econômica, mudanças culturais, estratégia política deliberada — provavelmente todos têm algum papel." },
+        { "type": "quote", "text": "Quando não conseguimos mais imaginar que um governo do outro partido poderia ser legítimo, a democracia começa a morrer.", "author": "Steven Levitsky" },
+        { "type": "h2", "text": "Inteligência artificial e democracia" },
+        { "type": "p", "text": "A IA introduz riscos e possibilidades sem precedentes na política democrática. Os riscos incluem deepfakes (vídeos falsos indistinguíveis de reais), geração de desinformação em escala industrial, e personalização extrema de mensagens políticas que pode tornar o debate público impossível — cada cidadão em sua própria realidade informacional." },
+        { "type": "p", "text": "Mas há possibilidades positivas: IA pode aumentar a capacidade do Estado de prestar serviços públicos de forma mais eficiente e personalizada, pode ajudar a identificar desinformação, e pode baixar barreiras à participação política. A questão não é se a IA impactará a democracia — é se democracias conseguirão governar a IA ou serão governadas por ela." },
+        { "type": "h2", "text": "Democracias alternativas: além do modelo liberal" },
+        { "type": "p", "text": "A democracia liberal representativa não é o único modelo concebível. Experiências com democracia deliberativa — onde cidadãos comuns (selecionados aleatoriamente, como jurados) deliberam e tomam decisões sobre políticas públicas — têm mostrado resultados promissores em Irlanda, França e outros países. Essas 'assembleias de cidadãos' produziram decisões sobre temas controversos (casamento igualitário, aborto) com alto grau de legitimidade." },
+        { "type": "p", "text": "A democracia participativa digital — plataformas onde cidadãos propõem e votam em políticas — tem sido experimentada em Taiwan (vTaiwan), Islândia (Better Reykjavik) e Brasil (Participa.br). Os resultados são mistos, mas indicam que há espaço para inovar nos mecanismos democráticos sem abandonar os valores fundamentais." },
+        { "type": "h2", "text": "O que é inegociável" },
+        { "type": "p", "text": "No meio das transformações necessárias, alguns princípios parecem inegociáveis para que qualquer sistema mereça o nome de democracia. Primeiro: a possibilidade real de alternância de poder — quem governa pode perder o poder pacificamente. Segundo: proteção de direitos fundamentais, especialmente das minorias — democracia não é apenas regra da maioria, mas também limite ao que a maioria pode fazer." },
+        { "type": "p", "text": "Terceiro: informação suficientemente livre e plural para que os cidadãos possam formar preferências genuínas. Quarto: algum grau de igualdade política — que o peso do voto de um cidadão rico não seja infinitamente maior que o de um cidadão pobre apenas por sua riqueza. Sem esses elementos, o que existe pode ter a forma da democracia, mas não a sua substância." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_future_q1",
+        "question": "O que é 'polarização afetiva', em contraste com polarização ideológica?",
+        "options": [
+          "Polarização entre regiões geográficas diferentes",
+          "Aversão ao outro partido, independentemente de discordâncias substantivas de política",
+          "Conflito entre valores religiosos e seculares",
+          "Divisão entre gerações sobre questões culturais"
+        ],
+        "answerIndex": 1,
+        "explanation": "Polarização afetiva é quando o problema central não é discordância sobre políticas, mas aversão emocional ao outro partido. Pessoas superestimam o extremismo do outro lado e tratam adversários como inimigos."
+      },
+      {
+        "id": "politics_future_q2",
+        "question": "Qual é um dos principais riscos da inteligência artificial para a democracia?",
+        "options": [
+          "Substituição de líderes políticos por algoritmos",
+          "Geração de desinformação em escala industrial e deepfakes",
+          "Eliminação da necessidade de eleições através de polling contínuo",
+          "Concentração do poder em países com maior capacidade computacional"
+        ],
+        "answerIndex": 1,
+        "explanation": "A IA permite gerar desinformação em escala industrial e criar deepfakes indistinguíveis de vídeos reais — ameaças diretas à capacidade dos cidadãos de formar preferências baseadas em informação verídica."
+      },
+      {
+        "id": "politics_future_q3",
+        "question": "O que são 'assembleias de cidadãos' no modelo de democracia deliberativa?",
+        "options": [
+          "Parlamentos locais eleitos por bairro",
+          "Grupos de lobistas que representam interesses específicos",
+          "Grupos de cidadãos comuns selecionados aleatoriamente para deliberar sobre políticas",
+          "Plataformas online onde qualquer cidadão pode votar em propostas"
+        ],
+        "answerIndex": 2,
+        "explanation": "Assembleias de cidadãos são grupos de pessoas comuns selecionadas aleatoriamente (como jurados) que deliberam sobre temas complexos. Na Irlanda, produziram decisões sobre casamento igualitário e aborto com alta legitimidade."
+      },
+      {
+        "id": "politics_future_q4",
+        "question": "Qual é uma das quatro dimensões da crise democrática contemporânea identificadas na lição?",
+        "options": [
+          "Crise de exportação — democracias não conseguem ser adotadas por outros países",
+          "Crise de soberania — decisões importantes tomadas fora do controle democrático",
+          "Crise de tradição — perda de valores culturais ligados à democracia",
+          "Crise de tamanho — democracias funcionam apenas em países pequenos"
+        ],
+        "answerIndex": 1,
+        "explanation": "Uma das dimensões é a crise de soberania: decisões cada vez mais importantes são tomadas em instâncias internacionais ou por atores privados (corporações, plataformas digitais) que estão fora do controle democrático."
+      },
+      {
+        "id": "politics_future_q5",
+        "question": "Qual destes é um princípio 'inegociável' para que um sistema mereça ser chamado de democracia?",
+        "options": [
+          "Eleições a cada quatro anos com múltiplos partidos",
+          "Separação formal dos três poderes em diferentes instituições",
+          "Possibilidade real de alternância pacífica de poder",
+          "Sistema proporcional de representação no legislativo"
+        ],
+        "answerIndex": 2,
+        "explanation": "A possibilidade real de alternância de poder — quem governa pode perder o poder pacificamente — é um elemento inegociável. Sem isso, o sistema pode ter a forma da democracia mas não sua substância."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "The Future of Democracy",
+      "summary": "Democracy faces unprecedented challenges today: extreme polarization, industrial-scale disinformation, distrust in institutions, resurgent authoritarianism, and the disruptions that artificial intelligence is introducing into politics. But democracy has already survived the Great Depression, two world wars, and 20th-century totalitarianism. What's at stake now? What will need to change? And what's worth defending?",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "The diagnosis: what's in crisis?" },
+        { "type": "p", "text": "The contemporary democratic crisis has multiple dimensions. The trust crisis: in almost all advanced democracies, trust in institutions — parliaments, parties, media, the judiciary — has fallen dramatically since the 1980s. The representation crisis: growing segments of the population feel no party adequately represents them." },
+        { "type": "p", "text": "The effectiveness crisis: democracies seem unable to solve long-term problems like climate change, growing inequality, or pandemics — problems requiring cooperation beyond four-year electoral cycles. And the sovereignty crisis: increasingly important decisions are made in international bodies or by private actors (corporations, digital platforms) that are outside democratic control." },
+        { "type": "h2", "text": "Polarization: the slow poison" },
+        { "type": "p", "text": "Political polarization — especially 'affective polarization,' where the problem isn't substantive disagreement but aversion to the other side — corrodes democracy's foundations. When adversaries become enemies, mutual toleration collapses. Research shows that in the US, members of both parties vastly overestimate the other side's extremism." },
+        { "type": "p", "text": "Polarization isn't solely an American phenomenon — Poland, Hungary, Brazil, Israel, and many other countries have experienced similar dynamics. The causes are debated: social media, economic inequality, cultural change, deliberate political strategy — likely all play some role." },
+        { "type": "quote", "text": "When we can no longer imagine that a government of the other party could be legitimate, democracy begins to die.", "author": "Steven Levitsky" },
+        { "type": "h2", "text": "Artificial intelligence and democracy" },
+        { "type": "p", "text": "AI introduces unprecedented risks and possibilities into democratic politics. The risks include deepfakes (fake videos indistinguishable from real ones), industrial-scale disinformation generation, and extreme personalization of political messages that can make public debate impossible — each citizen in their own informational reality." },
+        { "type": "p", "text": "But there are positive possibilities: AI can increase the state's capacity to deliver public services more efficiently and personally, can help identify disinformation, and can lower barriers to political participation. The question isn't whether AI will impact democracy — it's whether democracies will govern AI or be governed by it." },
+        { "type": "h2", "text": "Alternative democracies: beyond the liberal model" },
+        { "type": "p", "text": "Liberal representative democracy isn't the only conceivable model. Experiments with deliberative democracy — where ordinary citizens (randomly selected, like jurors) deliberate and decide on public policies — have shown promising results in Ireland, France, and elsewhere. These 'citizens' assemblies' produced decisions on controversial topics (same-sex marriage, abortion) with high degrees of legitimacy." },
+        { "type": "p", "text": "Digital participatory democracy — platforms where citizens propose and vote on policies — has been experimented with in Taiwan (vTaiwan), Iceland (Better Reykjavik), and Brazil (Participa.br). Results are mixed, but indicate there's room to innovate in democratic mechanisms without abandoning fundamental values." },
+        { "type": "h2", "text": "What is non-negotiable" },
+        { "type": "p", "text": "Amid necessary transformations, some principles seem non-negotiable for any system to deserve the name democracy. First: the real possibility of power alternation — those who govern can lose power peacefully. Second: protection of fundamental rights, especially for minorities — democracy isn't just majority rule, but also a limit on what the majority can do." },
+        { "type": "p", "text": "Third: information sufficiently free and plural for citizens to form genuine preferences. Fourth: some degree of political equality — that a wealthy citizen's vote doesn't carry infinitely more weight than a poor citizen's simply due to wealth. Without these elements, what exists may have democracy's form, but not its substance." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_future_q1",
+        "question": "What is 'affective polarization,' in contrast to ideological polarization?",
+        "options": [
+          "Polarization between different geographic regions",
+          "Aversion to the other party, regardless of substantive policy disagreements",
+          "Conflict between religious and secular values",
+          "Generational division over cultural issues"
+        ],
+        "answerIndex": 1,
+        "explanation": "Affective polarization is when the core problem isn't policy disagreement, but emotional aversion to the other party. People vastly overestimate the other side's extremism and treat adversaries as enemies."
+      },
+      {
+        "id": "politics_future_q2",
+        "question": "What is one of the main risks of artificial intelligence for democracy?",
+        "options": [
+          "Replacement of political leaders by algorithms",
+          "Generation of disinformation at industrial scale and deepfakes",
+          "Elimination of the need for elections through continuous polling",
+          "Concentration of power in countries with greater computing capacity"
+        ],
+        "answerIndex": 1,
+        "explanation": "AI enables generating disinformation at industrial scale and creating deepfakes indistinguishable from real videos — direct threats to citizens' capacity to form preferences based on truthful information."
+      },
+      {
+        "id": "politics_future_q3",
+        "question": "What are 'citizens' assemblies' in the deliberative democracy model?",
+        "options": [
+          "Locally elected parliaments by neighborhood",
+          "Groups of lobbyists representing specific interests",
+          "Groups of ordinary citizens randomly selected to deliberate on policies",
+          "Online platforms where any citizen can vote on proposals"
+        ],
+        "answerIndex": 2,
+        "explanation": "Citizens' assemblies are groups of ordinary people selected randomly (like jurors) who deliberate on complex issues. In Ireland, they produced decisions on same-sex marriage and abortion with high legitimacy."
+      },
+      {
+        "id": "politics_future_q4",
+        "question": "What is one of the four dimensions of the contemporary democratic crisis identified in the lesson?",
+        "options": [
+          "Export crisis — democracies can't be adopted by other countries",
+          "Sovereignty crisis — important decisions taken outside democratic control",
+          "Tradition crisis — loss of cultural values linked to democracy",
+          "Size crisis — democracy only works in small countries"
+        ],
+        "answerIndex": 1,
+        "explanation": "One dimension is the sovereignty crisis: increasingly important decisions are made in international bodies or by private actors (corporations, digital platforms) that are outside democratic control."
+      },
+      {
+        "id": "politics_future_q5",
+        "question": "Which of these is a 'non-negotiable' principle for a system to deserve to be called a democracy?",
+        "options": [
+          "Elections every four years with multiple parties",
+          "Formal separation of three branches in different institutions",
+          "Real possibility of peaceful alternation of power",
+          "Proportional representation system in the legislature"
+        ],
+        "answerIndex": 2,
+        "explanation": "The real possibility of power alternation — those who govern can lose power peacefully — is a non-negotiable element. Without it, a system may have democracy's form but not its substance."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "El Futuro de la Democracia",
+      "summary": "La democracia enfrenta hoy desafíos sin precedentes históricos: polarización extrema, desinformación a escala industrial, desconfianza en las instituciones, autoritarismo resurgente y las perturbaciones que la inteligencia artificial está introduciendo en la política. Pero la democracia ya sobrevivió a la Gran Depresión, dos guerras mundiales y al totalitarismo del siglo XX. ¿Qué está en juego ahora? ¿Qué necesitará cambiar? ¿Y qué vale la pena defender?",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "El diagnóstico: ¿qué está en crisis?" },
+        { "type": "p", "text": "La crisis democrática contemporánea tiene múltiples dimensiones. La crisis de confianza: en casi todas las democracias avanzadas, la confianza en las instituciones — parlamentos, partidos, medios, poder judicial — ha caído drásticamente desde los años 1980. La crisis de representación: sectores crecientes de la población sienten que ningún partido los representa adecuadamente." },
+        { "type": "p", "text": "La crisis de eficacia: las democracias parecen incapaces de resolver problemas a largo plazo como el cambio climático, la creciente desigualdad o las pandemias — problemas que requieren cooperación más allá de ciclos electorales de cuatro años. Y la crisis de soberanía: decisiones cada vez más importantes se toman en instancias internacionales o por actores privados (corporaciones, plataformas digitales) que están fuera del control democrático." },
+        { "type": "h2", "text": "Polarización: el veneno lento" },
+        { "type": "p", "text": "La polarización política — especialmente la 'polarización afectiva', donde el problema no es el desacuerdo sustantivo sino la aversión al otro bando — corroe los fundamentos de la democracia. Cuando los adversarios se convierten en enemigos, la tolerancia mutua colapsa. Investigaciones muestran que en EE.UU., los miembros de ambos partidos sobreestiman vastamente el extremismo del otro bando." },
+        { "type": "p", "text": "La polarización no es solo un fenómeno estadounidense — Polonia, Hungría, Brasil, Israel y muchos otros países han experimentado dinámicas similares. Las causas son debatidas: redes sociales, desigualdad económica, cambios culturales, estrategia política deliberada — probablemente todos juegan algún papel." },
+        { "type": "quote", "text": "Cuando ya no podemos imaginar que un gobierno del otro partido podría ser legítimo, la democracia comienza a morir.", "author": "Steven Levitsky" },
+        { "type": "h2", "text": "Inteligencia artificial y democracia" },
+        { "type": "p", "text": "La IA introduce riesgos y posibilidades sin precedentes en la política democrática. Los riesgos incluyen deepfakes (videos falsos indistinguibles de los reales), generación de desinformación a escala industrial, y personalización extrema de mensajes políticos que puede hacer imposible el debate público — cada ciudadano en su propia realidad informacional." },
+        { "type": "p", "text": "Pero hay posibilidades positivas: la IA puede aumentar la capacidad del Estado para prestar servicios públicos de manera más eficiente y personalizada, puede ayudar a identificar desinformación y puede reducir las barreras a la participación política. La pregunta no es si la IA impactará la democracia — es si las democracias lograrán gobernar la IA o serán gobernadas por ella." },
+        { "type": "h2", "text": "Democracias alternativas: más allá del modelo liberal" },
+        { "type": "p", "text": "La democracia representativa liberal no es el único modelo concebible. Experimentos con democracia deliberativa — donde ciudadanos comunes (seleccionados aleatoriamente, como jurados) deliberan y toman decisiones sobre políticas públicas — han mostrado resultados prometedores en Irlanda, Francia y otros países. Estas 'asambleas ciudadanas' produjeron decisiones sobre temas controversiales (matrimonio igualitario, aborto) con alto grado de legitimidad." },
+        { "type": "p", "text": "La democracia participativa digital — plataformas donde los ciudadanos proponen y votan políticas — ha sido experimentada en Taiwán (vTaiwan), Islandia (Better Reykjavik) y Brasil (Participa.br). Los resultados son mixtos, pero indican que hay espacio para innovar en los mecanismos democráticos sin abandonar los valores fundamentales." },
+        { "type": "h2", "text": "Lo innegociable" },
+        { "type": "p", "text": "En medio de las transformaciones necesarias, algunos principios parecen innegociables para que cualquier sistema merezca el nombre de democracia. Primero: la posibilidad real de alternancia de poder — quienes gobiernan pueden perder el poder pacíficamente. Segundo: protección de derechos fundamentales, especialmente de las minorías — la democracia no es solo regla de la mayoría, sino también un límite a lo que la mayoría puede hacer." },
+        { "type": "p", "text": "Tercero: información suficientemente libre y plural para que los ciudadanos puedan formar preferencias genuinas. Cuarto: algún grado de igualdad política — que el peso del voto de un ciudadano rico no sea infinitamente mayor que el de un ciudadano pobre solo por su riqueza. Sin estos elementos, lo que existe puede tener la forma de la democracia, pero no su sustancia." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "politics_future_q1",
+        "question": "¿Qué es la 'polarización afectiva', en contraste con la polarización ideológica?",
+        "options": [
+          "Polarización entre diferentes regiones geográficas",
+          "Aversión al otro partido, independientemente de los desacuerdos sustantivos de política",
+          "Conflicto entre valores religiosos y seculares",
+          "División generacional sobre cuestiones culturales"
+        ],
+        "answerIndex": 1,
+        "explanation": "La polarización afectiva es cuando el problema central no es el desacuerdo sobre políticas, sino la aversión emocional al otro partido. Las personas sobreestiman vastamente el extremismo del otro bando y tratan a los adversarios como enemigos."
+      },
+      {
+        "id": "politics_future_q2",
+        "question": "¿Cuál es uno de los principales riesgos de la inteligencia artificial para la democracia?",
+        "options": [
+          "Sustitución de líderes políticos por algoritmos",
+          "Generación de desinformación a escala industrial y deepfakes",
+          "Eliminación de la necesidad de elecciones a través de sondeos continuos",
+          "Concentración del poder en países con mayor capacidad computacional"
+        ],
+        "answerIndex": 1,
+        "explanation": "La IA permite generar desinformación a escala industrial y crear deepfakes indistinguibles de videos reales — amenazas directas a la capacidad de los ciudadanos de formar preferencias basadas en información veraz."
+      },
+      {
+        "id": "politics_future_q3",
+        "question": "¿Qué son las 'asambleas ciudadanas' en el modelo de democracia deliberativa?",
+        "options": [
+          "Parlamentos locales elegidos por barrio",
+          "Grupos de lobistas que representan intereses específicos",
+          "Grupos de ciudadanos comunes seleccionados aleatoriamente para deliberar sobre políticas",
+          "Plataformas en línea donde cualquier ciudadano puede votar propuestas"
+        ],
+        "answerIndex": 2,
+        "explanation": "Las asambleas ciudadanas son grupos de personas comunes seleccionadas aleatoriamente (como jurados) que deliberan sobre temas complejos. En Irlanda, produjeron decisiones sobre matrimonio igualitario y aborto con alta legitimidad."
+      },
+      {
+        "id": "politics_future_q4",
+        "question": "¿Cuál es una de las cuatro dimensiones de la crisis democrática contemporánea identificadas en la lección?",
+        "options": [
+          "Crisis de exportación — las democracias no pueden ser adoptadas por otros países",
+          "Crisis de soberanía — decisiones importantes tomadas fuera del control democrático",
+          "Crisis de tradición — pérdida de valores culturales vinculados a la democracia",
+          "Crisis de tamaño — la democracia solo funciona en países pequeños"
+        ],
+        "answerIndex": 1,
+        "explanation": "Una de las dimensiones es la crisis de soberanía: decisiones cada vez más importantes se toman en instancias internacionales o por actores privados (corporaciones, plataformas digitales) que están fuera del control democrático."
+      },
+      {
+        "id": "politics_future_q5",
+        "question": "¿Cuál de estos es un principio 'innegociable' para que un sistema merezca ser llamado democracia?",
+        "options": [
+          "Elecciones cada cuatro años con múltiples partidos",
+          "Separación formal de los tres poderes en diferentes instituciones",
+          "Posibilidad real de alternancia pacífica del poder",
+          "Sistema proporcional de representación en el legislativo"
+        ],
+        "answerIndex": 2,
+        "explanation": "La posibilidad real de alternancia de poder — quienes gobiernan pueden perder el poder pacíficamente — es un elemento innegociable. Sin esto, un sistema puede tener la forma de la democracia pero no su sustancia."
+      }
+    ]
+  }
+}

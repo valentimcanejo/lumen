@@ -1,0 +1,278 @@
+{
+  "id": "politics_systems",
+  "trackId": "politics",
+  "order": 4,
+  "difficulty": 2,
+  "estimatedMinutes": 10,
+  "prerequisites": ["politics", "politics_democracy"],
+  "title": { "pt": "Sistemas de Governo: Presidencialismo e Parlamentarismo", "en": "Systems of Government: Presidentialism and Parliamentarism", "es": "Sistemas de Gobierno: Presidencialismo y Parlamentarismo" },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "Sistemas de Governo: Presidencialismo e Parlamentarismo",
+      "summary": "Como um governo é organizado importa tanto quanto quem governa. Presidencialismo e parlamentarismo são as duas grandes famílias de sistemas democráticos, com lógicas, incentivos e pontos fracos radicalmente diferentes — e a escolha entre eles moldou o destino de países inteiros.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "As duas grandes famílias" },
+        { "type": "p", "text": "O design institucional de uma democracia determina como o poder é organizado, quem responde a quem e como governos são formados e encerrados. Dois modelos dominam o mundo democrático. No presidencialismo, o chefe de governo (presidente) é eleito diretamente pelo povo, tem mandato fixo independente do parlamento e acumula as funções de chefe de Estado e chefe de governo. No parlamentarismo, o chefe de governo (primeiro-ministro) é escolhido pelo parlamento, depende da confiança dos parlamentares para governar e pode ser substituído se perder essa confiança." },
+        { "type": "p", "text": "O presidencialismo nasceu nos EUA em 1787 — os Pais Fundadores desconfiavam de partidos e queriam um executivo forte com mandato fixo. O parlamentarismo evoluiu na Inglaterra ao longo de séculos, consolidando-se no século XIX quando o gabinete passou a depender da maioria parlamentar. Hoje, a maioria dos países da Europa e das antigas colônias britânicas usa parlamentarismo; América Latina e partes da África e Ásia usam presidencialismo." },
+        { "type": "quote", "text": "As instituições políticas não são ornamentos — determinam se a democracia sobrevive ou colapsa. — Juan Linz" },
+        { "type": "h2", "text": "Presidencialismo: pontos fortes e fracos" },
+        { "type": "p", "text": "O presidencialismo tem vantagens claras: o presidente tem legitimidade democrática direta (eleito pelo povo inteiro), governabilidade previsível (mandato fixo evita instabilidade por crises parlamentares) e separação nítida entre executivo e legislativo. Mas o politólogo Juan Linz identificou um problema estrutural grave: o 'perigo do presidencialismo'. Quando presidente e parlamento têm maioria de partidos diferentes (governo dividido) e um conflito surge, não há mecanismo constitucional para resolver — exceto crise institucional, paralisia ou golpe." },
+        { "type": "bullets", "items": [
+          "Presidencialismo: presidente eleito diretamente, mandato fixo, independente do legislativo — EUA, Brasil, México, Argentina",
+          "Parlamentarismo puro: primeiro-ministro eleito indiretamente pelo parlamento, pode ser destituído por voto de desconfiança — UK, Alemanha, Japão, Índia",
+          "Semipresidencialismo: presidente eleito diretamente + primeiro-ministro responsável ao parlamento — França, Portugal, Rússia",
+          "Monarquia constitucional parlamentarista: rei/rainha é chefe de Estado simbólico; primeiro-ministro governa — Suécia, Espanha, Países Baixos"
+        ]},
+        { "type": "h2", "text": "Parlamentarismo: flexibilidade e instabilidade" },
+        { "type": "p", "text": "O parlamentarismo tem uma vantagem que o presidencialismo não tem: flexibilidade em crises. Se um primeiro-ministro perde a confiança do parlamento, pode ser substituído rapidamente — sem a necessidade de esperar o fim do mandato ou recorrer ao impeachment. A Itália trocou de governo dezenas de vezes desde 1945 sem jamais ter um golpe. O Reino Unido trocou Boris Johnson por Liz Truss por Rishi Sunak em poucos meses de 2022 de forma completamente dentro do processo institucional." },
+        { "type": "p", "text": "A desvantagem é a instabilidade. Sem maioria parlamentar sólida, governos caem. Países com sistemas parlamentaristas e sistemas eleitorais proporcionais tendem a ter governos de coalizão — múltiplos partidos precisam negociar para governar. Isso pode criar impasse e paralisia ou, ao contrário, exigir mais negociação e moderação. Israel e Itália são exemplos de instabilidade extrema; Alemanha e Escandinávia demonstram que coalizões podem ser estáveis e eficazes." },
+        { "type": "h2", "text": "Sistemas eleitorais: majoritário vs. proporcional" },
+        { "type": "p", "text": "Independentemente do sistema de governo, os sistemas eleitorais determinam como votos se transformam em cadeiras. O sistema majoritário (plurality/majority) elege quem tem mais votos no distrito — tende a produzir dois grandes partidos e governos de maioria (EUA, UK). O sistema proporcional distribui cadeiras conforme a proporção de votos de cada partido — representa mais fielmente o eleitorado mas frequentemente gera fragmentação e coalizões (Holanda, Israel, Brasil). Sistemas mistos combinam os dois (Alemanha, Nova Zelândia). Cada sistema tem trade-offs entre representatividade e governabilidade." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "q1",
+        "question": "Qual é a diferença fundamental entre presidencialismo e parlamentarismo?",
+        "options": [
+          "No presidencialismo há apenas um partido; no parlamentarismo há múltiplos partidos",
+          "No presidencialismo o executivo tem mandato fixo e independe do legislativo; no parlamentarismo o governo depende da confiança parlamentar",
+          "Presidencialismo é usado em repúblicas; parlamentarismo em monarquias",
+          "No presidencialismo o presidente é apenas chefe de Estado; no parlamentarismo o primeiro-ministro é chefe de governo"
+        ],
+        "answerIndex": 1,
+        "explanation": "A diferença central é de accountability e sobrevivência do governo. No presidencialismo, o executivo tem legitimidade direta (eleito pelo povo) e mandato fixo — não pode ser removido por voto parlamentar ordinário. No parlamentarismo, o governo existe enquanto tiver a confiança da maioria parlamentar — pode ser derrubado por um voto de desconfiança e substituído sem eleições gerais."
+      },
+      {
+        "id": "q2",
+        "question": "O que Juan Linz chamou de 'perigo do presidencialismo'?",
+        "options": [
+          "O risco de que presidentes acumulem poder demais e se tornem ditadores",
+          "O problema estrutural de que governo dividido pode gerar impasse institucional sem mecanismo constitucional de resolução",
+          "A tendência dos presidentes eleitos de ignorar o poder legislativo em seus governos",
+          "O perigo de que eleições presidenciais gerem polarização excessiva na sociedade"
+        ],
+        "answerIndex": 1,
+        "explanation": "Linz identificou que no presidencialismo, quando presidente e parlamento têm maioria de partidos diferentes, um conflito grave pode criar impasse sem saída constitucional — já que ambos têm legitimidade democrática direta e nenhum pode forçar o outro a sair. No parlamentarismo, o impasse se resolve removendo o governo por voto de desconfiança. No presidencialismo, as saídas tendem a ser extra-constitucionais: golpe, impeachment politizado ou paralisia prolongada."
+      },
+      {
+        "id": "q3",
+        "question": "Por que o parlamentarismo é considerado mais flexível em crises políticas?",
+        "options": [
+          "Porque parlamentos podem alterar a constituição mais facilmente que presidentes",
+          "Porque um primeiro-ministro que perde a confiança parlamentar pode ser substituído rapidamente sem esperar fim de mandato",
+          "Porque sistemas parlamentaristas têm mais partidos e portanto mais opções de governo",
+          "Porque juízes em sistemas parlamentaristas têm mais poder para remover governos corruptos"
+        ],
+        "answerIndex": 1,
+        "explanation": "No parlamentarismo, quando um governo entra em crise — escândalo, incapacidade, perda de apoio — o parlamento pode votar uma moção de desconfiança e nomear um novo primeiro-ministro sem necessidade de eleições gerais. O UK substituiu três primeiros-ministros em poucos meses em 2022 de forma completamente institucional. No presidencialismo, substituir um presidente ruim exige impeachment — processo longo, politicamente explosivo."
+      },
+      {
+        "id": "q4",
+        "question": "Qual é o principal trade-off entre sistema eleitoral majoritário e proporcional?",
+        "options": [
+          "Majoritário favorece partidos pequenos; proporcional favorece partidos grandes",
+          "Majoritário tende a produzir governabilidade (dois partidos fortes) mas representa menos; proporcional representa mais mas pode gerar fragmentação",
+          "Majoritário é mais democrático; proporcional é mais eficiente administrativamente",
+          "Majoritário existe em repúblicas; proporcional em monarquias constitucionais"
+        ],
+        "answerIndex": 1,
+        "explanation": "O sistema majoritário (quem tem mais votos no distrito ganha tudo) tende a consolidar dois grandes partidos e governos de maioria — mais governabilidade, menos representatividade para minorias. O proporcional distribui cadeiras proporcionalmente aos votos — representa mais fielmente o eleitorado mas fragmenta o parlamento, exige coalizões e pode criar instabilidade. Não existe sistema perfeito — cada um reflete escolhas sobre o que priorizar."
+      },
+      {
+        "id": "q5",
+        "question": "O que é um sistema semipresidencialista e onde ele é usado?",
+        "options": [
+          "Um sistema onde o presidente e o primeiro-ministro compartilham o poder executivo — usado na França e Portugal",
+          "Um sistema onde o presidente é eleito pelo parlamento em vez de diretamente pelo povo",
+          "Um sistema onde o presidente governa por dois anos e o primeiro-ministro pelos outros dois",
+          "Um sistema presidencialista com um senado muito forte que limita os poderes do presidente"
+        ],
+        "answerIndex": 0,
+        "explanation": "No semipresidencialismo (França, Portugal, Rússia), existe um presidente eleito diretamente com poderes executivos reais E um primeiro-ministro responsável ao parlamento. Quando o presidente e a maioria parlamentar são do mesmo partido, o presidente domina. Quando são de partidos opostos ('coabitação'), o poder se divide — como ocorreu na França em 1986-88, 1993-95 e 1997-2002."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Systems of Government: Presidentialism and Parliamentarism",
+      "summary": "How a government is organized matters as much as who governs. Presidentialism and parliamentarism are the two great families of democratic systems, with radically different logics, incentives, and weaknesses — and the choice between them has shaped the destiny of entire countries.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "The two great families" },
+        { "type": "p", "text": "The institutional design of a democracy determines how power is organized, who answers to whom, and how governments are formed and ended. Two models dominate the democratic world. In presidentialism, the head of government (president) is directly elected by the people, has a fixed term independent of parliament, and combines the roles of head of state and head of government. In parliamentarism, the head of government (prime minister) is chosen by parliament, depends on legislators' confidence to govern, and can be replaced if that confidence is lost." },
+        { "type": "p", "text": "Presidentialism was born in the US in 1787 — the Founding Fathers distrusted parties and wanted a strong executive with a fixed term. Parliamentarism evolved in England over centuries, consolidating in the 19th century when the cabinet became dependent on parliamentary majority. Today, most European countries and former British colonies use parliamentarism; Latin America and parts of Africa and Asia use presidentialism." },
+        { "type": "quote", "text": "Political institutions are not ornaments — they determine whether democracy survives or collapses. — Juan Linz" },
+        { "type": "h2", "text": "Presidentialism: strengths and weaknesses" },
+        { "type": "p", "text": "Presidentialism has clear advantages: the president has direct democratic legitimacy (elected by the whole people), predictable governability (fixed term avoids instability from parliamentary crises), and clear separation between executive and legislative. But political scientist Juan Linz identified a serious structural problem: the 'perils of presidentialism.' When president and parliament have majorities from different parties (divided government) and a serious conflict arises, there is no constitutional mechanism to resolve it — except institutional crisis, paralysis, or a coup." },
+        { "type": "bullets", "items": [
+          "Presidentialism: directly elected president, fixed term, independent of legislature — US, Brazil, Mexico, Argentina",
+          "Pure parliamentarism: indirectly elected prime minister, can be removed by no-confidence vote — UK, Germany, Japan, India",
+          "Semi-presidentialism: directly elected president + parliament-responsible prime minister — France, Portugal, Russia",
+          "Constitutional parliamentary monarchy: king/queen is symbolic head of state; prime minister governs — Sweden, Spain, Netherlands"
+        ]},
+        { "type": "h2", "text": "Parliamentarism: flexibility and instability" },
+        { "type": "p", "text": "Parliamentarism has an advantage presidentialism lacks: flexibility in crises. If a prime minister loses parliament's confidence, they can be quickly replaced — without needing to wait for the term to end or resorting to impeachment. Italy changed governments dozens of times since 1945 without ever having a coup. The UK replaced Boris Johnson with Liz Truss with Rishi Sunak within months in 2022 completely within institutional processes." },
+        { "type": "p", "text": "The disadvantage is instability. Without a solid parliamentary majority, governments fall. Countries with parliamentary systems and proportional electoral systems tend to have coalition governments — multiple parties need to negotiate to govern. This can create deadlock and paralysis or, conversely, require more negotiation and moderation. Israel and Italy are examples of extreme instability; Germany and Scandinavia demonstrate that coalitions can be stable and effective." },
+        { "type": "h2", "text": "Electoral systems: majoritarian vs. proportional" },
+        { "type": "p", "text": "Regardless of the system of government, electoral systems determine how votes become seats. The majoritarian system (plurality/majority) elects whoever has the most votes in the district — tends to produce two large parties and majority governments (US, UK). The proportional system distributes seats according to each party's vote share — more faithfully represents the electorate but often generates fragmentation and coalitions (Netherlands, Israel, Brazil). Mixed systems combine both (Germany, New Zealand). Each system involves trade-offs between representativeness and governability." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "q1",
+        "question": "What is the fundamental difference between presidentialism and parliamentarism?",
+        "options": [
+          "Presidentialism has only one party; parliamentarism has multiple parties",
+          "In presidentialism the executive has a fixed term and is independent of the legislature; in parliamentarism the government depends on parliamentary confidence",
+          "Presidentialism is used in republics; parliamentarism in monarchies",
+          "In presidentialism the president is only head of state; in parliamentarism the prime minister is head of government"
+        ],
+        "answerIndex": 1,
+        "explanation": "The central difference is accountability and government survival. In presidentialism, the executive has direct legitimacy (elected by the people) and a fixed term — cannot be removed by ordinary parliamentary vote. In parliamentarism, the government exists as long as it has the majority's confidence — it can be brought down by a no-confidence vote and replaced without general elections."
+      },
+      {
+        "id": "q2",
+        "question": "What did Juan Linz call the 'perils of presidentialism'?",
+        "options": [
+          "The risk that presidents accumulate too much power and become dictators",
+          "The structural problem that divided government can produce institutional deadlock without a constitutional resolution mechanism",
+          "The tendency of elected presidents to ignore the legislative branch in their governments",
+          "The danger that presidential elections generate excessive polarization in society"
+        ],
+        "answerIndex": 1,
+        "explanation": "Linz identified that in presidentialism, when president and parliament have majorities from different parties, a serious conflict can create a deadlock with no constitutional exit — since both have direct democratic legitimacy and neither can force the other out. In parliamentarism, deadlock is resolved by removing the government through a no-confidence vote. In presidentialism, the exits tend to be extra-constitutional: coup, politicized impeachment, or prolonged paralysis."
+      },
+      {
+        "id": "q3",
+        "question": "Why is parliamentarism considered more flexible in political crises?",
+        "options": [
+          "Because parliaments can change the constitution more easily than presidents",
+          "Because a prime minister who loses parliamentary confidence can be quickly replaced without waiting for the term to end",
+          "Because parliamentary systems have more parties and therefore more government options",
+          "Because judges in parliamentary systems have more power to remove corrupt governments"
+        ],
+        "answerIndex": 1,
+        "explanation": "In parliamentarism, when a government enters crisis — scandal, incapacity, loss of support — parliament can vote a no-confidence motion and nominate a new prime minister without general elections. The UK replaced three prime ministers within months in 2022 completely institutionally. In presidentialism, replacing a bad president requires impeachment — a long, politically explosive process."
+      },
+      {
+        "id": "q4",
+        "question": "What is the main trade-off between majoritarian and proportional electoral systems?",
+        "options": [
+          "Majoritarian favors small parties; proportional favors large parties",
+          "Majoritarian tends to produce governability (two strong parties) but represents less; proportional represents more but can generate fragmentation",
+          "Majoritarian is more democratic; proportional is more administratively efficient",
+          "Majoritarian exists in republics; proportional in constitutional monarchies"
+        ],
+        "answerIndex": 1,
+        "explanation": "The majoritarian system (winner takes all in the district) tends to consolidate two large parties and majority governments — more governability, less representativeness for minorities. Proportional distributes seats proportionally to votes — more faithfully represents the electorate but fragments parliament, requires coalitions, and can create instability. No perfect system exists — each reflects choices about what to prioritize."
+      },
+      {
+        "id": "q5",
+        "question": "What is a semi-presidential system and where is it used?",
+        "options": [
+          "A system where the president and prime minister share executive power — used in France and Portugal",
+          "A system where the president is elected by parliament instead of directly by the people",
+          "A system where the president governs for two years and the prime minister for the other two",
+          "A presidential system with a very strong senate that limits presidential powers"
+        ],
+        "answerIndex": 0,
+        "explanation": "In semi-presidentialism (France, Portugal, Russia), there is a directly elected president with real executive powers AND a prime minister responsible to parliament. When the president and the parliamentary majority are from the same party, the president dominates. When from opposing parties ('cohabitation'), power divides — as happened in France in 1986-88, 1993-95, and 1997-2002."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Sistemas de Gobierno: Presidencialismo y Parlamentarismo",
+      "summary": "Cómo se organiza un gobierno importa tanto como quién gobierna. El presidencialismo y el parlamentarismo son las dos grandes familias de sistemas democráticos, con lógicas, incentivos y puntos débiles radicalmente diferentes — y la elección entre ellos ha moldeado el destino de países enteros.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Las dos grandes familias" },
+        { "type": "p", "text": "El diseño institucional de una democracia determina cómo se organiza el poder, quién responde ante quién y cómo se forman y terminan los gobiernos. Dos modelos dominan el mundo democrático. En el presidencialismo, el jefe de gobierno (presidente) es elegido directamente por el pueblo, tiene mandato fijo independiente del parlamento y acumula las funciones de jefe de Estado y jefe de gobierno. En el parlamentarismo, el jefe de gobierno (primer ministro) es elegido por el parlamento, depende de la confianza de los parlamentarios para gobernar y puede ser sustituido si pierde esa confianza." },
+        { "type": "p", "text": "El presidencialismo nació en EE.UU. en 1787 — los Padres Fundadores desconfiaban de los partidos y querían un ejecutivo fuerte con mandato fijo. El parlamentarismo evolucionó en Inglaterra a lo largo de siglos, consolidándose en el siglo XIX cuando el gabinete pasó a depender de la mayoría parlamentaria. Hoy, la mayoría de los países de Europa y las antiguas colonias británicas utilizan el parlamentarismo; América Latina y partes de África y Asia utilizan el presidencialismo." },
+        { "type": "quote", "text": "Las instituciones políticas no son adornos — determinan si la democracia sobrevive o colapsa. — Juan Linz" },
+        { "type": "h2", "text": "Presidencialismo: fortalezas y debilidades" },
+        { "type": "p", "text": "El presidencialismo tiene ventajas claras: el presidente tiene legitimidad democrática directa (elegido por todo el pueblo), gobernabilidad predecible (mandato fijo evita la inestabilidad por crisis parlamentarias) y separación nítida entre ejecutivo y legislativo. Pero el politólogo Juan Linz identificó un grave problema estructural: el 'peligro del presidencialismo'. Cuando el presidente y el parlamento tienen mayoría de partidos diferentes y surge un conflicto grave, no hay mecanismo constitucional para resolverlo — solo crisis institucional, parálisis o golpe." },
+        { "type": "bullets", "items": [
+          "Presidencialismo: presidente elegido directamente, mandato fijo, independiente del legislativo — EE.UU., Brasil, México, Argentina",
+          "Parlamentarismo puro: primer ministro elegido indirectamente por el parlamento, puede ser destituido por moción de censura — UK, Alemania, Japón, India",
+          "Semipresidencialismo: presidente elegido directamente + primer ministro responsable ante el parlamento — Francia, Portugal, Rusia",
+          "Monarquía constitucional parlamentarista: el rey/reina es jefe de Estado simbólico; el primer ministro gobierna — Suecia, España, Países Bajos"
+        ]},
+        { "type": "h2", "text": "Parlamentarismo: flexibilidad e inestabilidad" },
+        { "type": "p", "text": "El parlamentarismo tiene una ventaja que el presidencialismo no tiene: flexibilidad en las crisis. Si un primer ministro pierde la confianza del parlamento, puede ser sustituido rápidamente — sin necesidad de esperar el fin del mandato ni recurrir al impeachment. Italia ha cambiado de gobierno decenas de veces desde 1945 sin haber tenido nunca un golpe. El Reino Unido sustituyó a Boris Johnson por Liz Truss por Rishi Sunak en pocos meses de 2022 de forma completamente institucional." },
+        { "type": "p", "text": "La desventaja es la inestabilidad. Sin una mayoría parlamentaria sólida, los gobiernos caen. Los países con sistemas parlamentaristas y sistemas electorales proporcionales tienden a tener gobiernos de coalición — múltiples partidos necesitan negociar para gobernar. Israel e Italia son ejemplos de inestabilidad extrema; Alemania y Escandinavia demuestran que las coaliciones pueden ser estables y eficaces." },
+        { "type": "h2", "text": "Sistemas electorales: mayoritario vs. proporcional" },
+        { "type": "p", "text": "Independientemente del sistema de gobierno, los sistemas electorales determinan cómo los votos se convierten en escaños. El sistema mayoritario elige al que tiene más votos en el distrito — tiende a producir dos grandes partidos y gobiernos de mayoría (EE.UU., UK). El sistema proporcional distribuye los escaños según la proporción de votos de cada partido — representa más fielmente al electorado pero frecuentemente genera fragmentación y coaliciones. Los sistemas mixtos combinan ambos (Alemania, Nueva Zelanda)." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "q1",
+        "question": "¿Cuál es la diferencia fundamental entre presidencialismo y parlamentarismo?",
+        "options": [
+          "En el presidencialismo hay solo un partido; en el parlamentarismo hay múltiples partidos",
+          "En el presidencialismo el ejecutivo tiene mandato fijo e independiente del legislativo; en el parlamentarismo el gobierno depende de la confianza parlamentaria",
+          "El presidencialismo se usa en repúblicas; el parlamentarismo en monarquías",
+          "En el presidencialismo el presidente es solo jefe de Estado; en el parlamentarismo el primer ministro es jefe de gobierno"
+        ],
+        "answerIndex": 1,
+        "explanation": "La diferencia central es de rendición de cuentas y supervivencia del gobierno. En el presidencialismo, el ejecutivo tiene legitimidad directa (elegido por el pueblo) y mandato fijo — no puede ser removido por voto parlamentario ordinario. En el parlamentarismo, el gobierno existe mientras tenga la confianza de la mayoría parlamentaria — puede ser derrocado por una moción de censura y sustituido sin elecciones generales."
+      },
+      {
+        "id": "q2",
+        "question": "¿Qué llamó Juan Linz el 'peligro del presidencialismo'?",
+        "options": [
+          "El riesgo de que los presidentes acumulen demasiado poder y se conviertan en dictadores",
+          "El problema estructural de que el gobierno dividido puede generar un bloqueo institucional sin mecanismo constitucional de resolución",
+          "La tendencia de los presidentes elegidos a ignorar el poder legislativo en sus gobiernos",
+          "El peligro de que las elecciones presidenciales generen una polarización excesiva en la sociedad"
+        ],
+        "answerIndex": 1,
+        "explanation": "Linz identificó que en el presidencialismo, cuando el presidente y el parlamento tienen mayorías de partidos diferentes, un conflicto grave puede crear un bloqueo sin salida constitucional — ya que ambos tienen legitimidad democrática directa y ninguno puede forzar al otro a salir. En el parlamentarismo, el bloqueo se resuelve removiendo al gobierno mediante una moción de censura."
+      },
+      {
+        "id": "q3",
+        "question": "¿Por qué el parlamentarismo se considera más flexible en las crisis políticas?",
+        "options": [
+          "Porque los parlamentos pueden modificar la constitución más fácilmente que los presidentes",
+          "Porque un primer ministro que pierde la confianza parlamentaria puede ser sustituido rápidamente sin esperar el fin del mandato",
+          "Porque los sistemas parlamentaristas tienen más partidos y por tanto más opciones de gobierno",
+          "Porque los jueces en los sistemas parlamentaristas tienen más poder para remover gobiernos corruptos"
+        ],
+        "answerIndex": 1,
+        "explanation": "En el parlamentarismo, cuando un gobierno entra en crisis — escándalo, incapacidad, pérdida de apoyo — el parlamento puede votar una moción de censura y nombrar un nuevo primer ministro sin necesidad de elecciones generales. El Reino Unido sustituyó a tres primeros ministros en pocos meses en 2022 de forma completamente institucional. En el presidencialismo, sustituir a un mal presidente requiere un impeachment — un proceso largo y políticamente explosivo."
+      },
+      {
+        "id": "q4",
+        "question": "¿Cuál es el principal trade-off entre los sistemas electorales mayoritario y proporcional?",
+        "options": [
+          "El mayoritario favorece a los partidos pequeños; el proporcional a los grandes",
+          "El mayoritario tiende a producir gobernabilidad (dos partidos fuertes) pero representa menos; el proporcional representa más pero puede generar fragmentación",
+          "El mayoritario es más democrático; el proporcional es más eficiente administrativamente",
+          "El mayoritario existe en repúblicas; el proporcional en monarquías constitucionales"
+        ],
+        "answerIndex": 1,
+        "explanation": "El sistema mayoritario (el que más votos tiene en el distrito se lo lleva todo) tiende a consolidar dos grandes partidos y gobiernos de mayoría — más gobernabilidad, menos representatividad para las minorías. El proporcional distribuye los escaños proporcionalmente a los votos — representa más fielmente al electorado pero fragmenta el parlamento y puede crear inestabilidad. No existe sistema perfecto — cada uno refleja elecciones sobre qué priorizar."
+      },
+      {
+        "id": "q5",
+        "question": "¿Qué es un sistema semipresidencialista y dónde se usa?",
+        "options": [
+          "Un sistema donde el presidente y el primer ministro comparten el poder ejecutivo — usado en Francia y Portugal",
+          "Un sistema donde el presidente es elegido por el parlamento en lugar de directamente por el pueblo",
+          "Un sistema donde el presidente gobierna durante dos años y el primer ministro los otros dos",
+          "Un sistema presidencialista con un senado muy fuerte que limita los poderes del presidente"
+        ],
+        "answerIndex": 0,
+        "explanation": "En el semipresidencialismo (Francia, Portugal, Rusia), existe un presidente elegido directamente con poderes ejecutivos reales Y un primer ministro responsable ante el parlamento. Cuando el presidente y la mayoría parlamentaria son del mismo partido, el presidente domina. Cuando son de partidos opuestos ('cohabitación'), el poder se divide — como ocurrió en Francia en 1986-88, 1993-95 y 1997-2002."
+      }
+    ]
+  }
+}
