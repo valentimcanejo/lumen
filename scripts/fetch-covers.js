@@ -126,7 +126,7 @@ const KEYWORDS = {
   // Ciência — o objeto de estudo, literal
   science:                        "scientist laboratory pipette research",
   science_evolution:              "fossil bones dinosaur museum natural history",
-  science_physics:                "particle accelerator cern tunnel",
+  science_physics:                "physics quantum wave light abstract",
   science_computing:              "vintage computer transistor circuit board",
   science_internet:               "undersea cable fiber optic light",
   science_ai:                     "robot humanoid machine technology",
