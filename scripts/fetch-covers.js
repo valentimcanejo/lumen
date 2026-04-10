@@ -107,13 +107,13 @@ const KEYWORDS = {
   philosophy_existentialism:      "person alone fog road walking",
   philosophy_logic:               "blackboard equations mathematics chalk",
   philosophy_political_phil:      "parliament empty chamber seats architecture",
-  philosophy_mind:                "brain scan neurology medical dark",
+  philosophy_mind:                "consciousness abstract light tunnel surreal",
   philosophy_free_will:           "open cage bird flying freedom sky",
   philosophy_meaning:             "person silhouette starry sky milky way",
 
   // Política — símbolo reconhecível ou multidão real
   politics:                       "capitol building washington dc dome",
-  politics_democracy:             "voting booth ballot box election",
+  politics_democracy:             "election day polling station queue people",
   politics_constitution:          "old document parchment seal law",
   politics_systems:               "world flags united nations assembly",
   politics_parties:               "political rally crowd flags outdoor",
