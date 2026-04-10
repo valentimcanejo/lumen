@@ -1,0 +1,270 @@
+{
+  "id": "science_future",
+  "trackId": "science_tech",
+  "order": 10,
+  "difficulty": 2,
+  "estimatedMinutes": 11,
+  "prerequisites": [],
+  "title": {
+    "pt": "O Futuro da Ciência e Tecnologia",
+    "en": "The Future of Science and Technology",
+    "es": "El Futuro de la Ciencia y la Tecnología"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "O Futuro da Ciência e Tecnologia",
+      "summary": "Vivemos em um momento único na história: múltiplas tecnologias exponenciais estão convergindo simultaneamente — inteligência artificial, biotecnologia, computação quântica, energias renováveis, exploração espacial. As próximas décadas podem trazer transformações mais profundas do que qualquer período anterior. Entender as tendências emergentes é essencial para navegar — e influenciar — esse futuro.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Computação quântica: além do bit clássico" },
+        { "type": "p", "text": "Computadores clássicos processam bits — estados binários de 0 ou 1. Computadores quânticos usam qubits, que podem existir em superposição — representando 0 e 1 simultaneamente. Isso permite explorar múltiplas soluções em paralelo para certos tipos de problema. Para alguns problemas específicos (fatoração de números primos, simulação molecular, otimização), computadores quânticos podem ser exponencialmente mais rápidos que qualquer computador clássico." },
+        { "type": "p", "text": "As implicações são profundas: a maior parte da criptografia atual baseia-se na dificuldade de fatorar números grandes — um computador quântico suficientemente poderoso poderia quebrar esses sistemas. Por isso governos e empresas já investem em 'criptografia pós-quântica'. Para além da criptografia, simulação molecular quântica pode revolucionar o design de fármacos e materiais." },
+        { "type": "h2", "text": "Fusão nuclear: a energia do sol" },
+        { "type": "p", "text": "A fusão nuclear — o mesmo processo que alimenta o sol — promete energia quase ilimitada, com emissões próximas de zero e sem os resíduos radioativos de longa duração da fissão nuclear. Em 2022, o National Ignition Facility nos EUA atingiu o marco histórico de 'ignição' — produzindo mais energia do que a usada para disparar o laser. E em 2023 e 2024 repetiram e superaram o resultado." },
+        { "type": "p", "text": "Empresas privadas como Commonwealth Fusion Systems e TAE Technologies estão competindo para comercializar a fusão. A piada antiga — 'a energia de fusão está 30 anos no futuro e sempre estará' — pode finalmente estar sendo desafiada. Se a fusão comercial se tornar realidade nesta ou na próxima década, representa uma das maiores transições energéticas da história." },
+        { "type": "quote", "text": "Qualquer tecnologia suficientemente avançada é indistinguível da magia.", "author": "Arthur C. Clarke" },
+        { "type": "h2", "text": "Biologia sintética e a programação da vida" },
+        { "type": "p", "text": "A biologia sintética aplica princípios de engenharia à biologia — projetando organismos com funções específicas. Já existem bactérias projetadas para produzir biocombustíveis, plásticos biodegradáveis, fármacos e até materiais de construção. Em 2010, Craig Venter criou o primeiro organismo com genoma completamente sintético — um marco controverso na história da biologia." },
+        { "type": "p", "text": "As aplicações médicas incluem terapias celulares onde células do paciente são reprogramadas para combater câncer, e organismos que detectam e destroem patógenos específicos. O desafio ético central é o mesmo de sempre na tecnologia poderosa: garantir que seja usada para ampliar o bem-estar humano, não criar novas formas de dano — incluindo a criação acidental ou deliberada de patógenos perigosos." },
+        { "type": "h2", "text": "Exploração espacial: a espécie multiplanetária" },
+        { "type": "p", "text": "Pela primeira vez desde o programa Apollo, há um impulso genuíno em direção à exploração humana do espaço — agora liderado parcialmente por empresas privadas. SpaceX reduziu drasticamente o custo de lançamento com foguetes reutilizáveis, abrindo a era da 'democratização do acesso ao espaço'. A missão a Marte — planejada pela NASA e pela SpaceX para as décadas de 2030-2040 — pode tornar humanos uma espécie multiplanetária." },
+        { "type": "p", "text": "Além da exploração humana, satélites em megaconstelações (Starlink, OneWeb) estão conectando à internet partes remotas do planeta. E telescópios como o James Webb estão revelando o universo com detalhes sem precedentes, observando galáxias formadas menos de 300 milhões de anos após o Big Bang." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_future_q1",
+        "question": "Por que computadores quânticos ameaçam a criptografia atual?",
+        "options": [
+          "Porque são muito mais rápidos em todas as tarefas de computação",
+          "Porque podem fatorar números grandes exponencialmente mais rápido, quebrando a base da criptografia atual",
+          "Porque operam a temperaturas próximas do zero absoluto, criando vulnerabilidades físicas",
+          "Porque requerem internet quântica que é impossível de monitorar"
+        ],
+        "answerIndex": 1,
+        "explanation": "A maior parte da criptografia atual baseia-se na dificuldade de fatorar números grandes. Computadores quânticos podem fazer isso exponencialmente mais rápido, quebrando esses sistemas — por isso já há investimento em 'criptografia pós-quântica'."
+      },
+      {
+        "id": "science_future_q2",
+        "question": "O que torna a fusão nuclear diferente da fissão (usada em usinas nucleares atuais)?",
+        "options": [
+          "Fusão usa urânio; fissão usa hidrogênio",
+          "Fusão é mais barata de construir; fissão requer infraestrutura mais complexa",
+          "Fusão une átomos leves sem resíduos radioativos de longa duração; fissão quebra átomos pesados gerando resíduos",
+          "Fusão produz menos energia; fissão produz mais por quantidade de combustível"
+        ],
+        "answerIndex": 2,
+        "explanation": "Fusão une núcleos leves (hidrogênio) liberando energia, sem os resíduos radioativos de longa duração da fissão (que quebra urânio). Com combustível quase inesgotável e emissões próximas de zero, é considerada a energia ideal."
+      },
+      {
+        "id": "science_future_q3",
+        "question": "O que é biologia sintética?",
+        "options": [
+          "O estudo de organismos extintos reconstruídos a partir de DNA antigo",
+          "A aplicação de princípios de engenharia à biologia — projetando organismos com funções específicas",
+          "A criação de órgãos humanos artificiais para transplante",
+          "O uso de computadores para simular sistemas biológicos"
+        ],
+        "answerIndex": 1,
+        "explanation": "Biologia sintética aplica princípios de engenharia à biologia — projetando organismos com funções específicas, como bactérias que produzem biocombustíveis, fármacos ou materiais, ou células reprogramadas para combater câncer."
+      },
+      {
+        "id": "science_future_q4",
+        "question": "Como a SpaceX mudou o custo de acesso ao espaço?",
+        "options": [
+          "Desenvolvendo propulsão nuclear mais eficiente que combustíveis químicos",
+          "Reduzindo drasticamente custos com foguetes reutilizáveis, democratizando o acesso",
+          "Estabelecendo parcerias com agências espaciais para compartilhar infraestrutura",
+          "Usando materiais compostos leves que reduziram o peso dos foguetes em 70%"
+        ],
+        "answerIndex": 1,
+        "explanation": "A SpaceX reduziu drasticamente o custo de lançamento com foguetes reutilizáveis, abrindo a era da 'democratização do acesso ao espaço' e tornando viável megaconstelações de satélites e missões comerciais."
+      },
+      {
+        "id": "science_future_q5",
+        "question": "Qual foi o marco histórico alcançado pelo National Ignition Facility em 2022?",
+        "options": [
+          "Primeira fusão nuclear em condições de temperatura ambiente",
+          "Primeira vez que fusão produziu mais energia do que a usada para disparar o laser",
+          "Primeiro reator de fusão conectado à rede elétrica",
+          "Primeiro uso de hélio-3 lunar como combustível de fusão"
+        ],
+        "answerIndex": 1,
+        "explanation": "Em 2022, o NIF atingiu 'ignição' — produzindo mais energia do que a usada para disparar o laser no plasma. Foi o primeiro marco desse tipo, desafiando a piada de que a fusão comercial está 'sempre 30 anos no futuro'."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "The Future of Science and Technology",
+      "summary": "We live in a unique historical moment: multiple exponential technologies are converging simultaneously — artificial intelligence, biotechnology, quantum computing, renewable energies, space exploration. The coming decades may bring deeper transformations than any previous period. Understanding emerging trends is essential for navigating — and influencing — this future.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Quantum computing: beyond the classical bit" },
+        { "type": "p", "text": "Classical computers process bits — binary states of 0 or 1. Quantum computers use qubits, which can exist in superposition — representing 0 and 1 simultaneously. This allows exploring multiple solutions in parallel for certain types of problems. For some specific problems (prime number factorization, molecular simulation, optimization), quantum computers can be exponentially faster than any classical computer." },
+        { "type": "p", "text": "The implications are profound: most current cryptography is based on the difficulty of factoring large numbers — a sufficiently powerful quantum computer could break these systems. That's why governments and companies already invest in 'post-quantum cryptography.' Beyond cryptography, quantum molecular simulation can revolutionize drug and materials design." },
+        { "type": "h2", "text": "Nuclear fusion: the energy of the sun" },
+        { "type": "p", "text": "Nuclear fusion — the same process that powers the sun — promises near-unlimited energy, with near-zero emissions and without the long-lived radioactive waste of nuclear fission. In 2022, the US National Ignition Facility reached the historic milestone of 'ignition' — producing more energy than used to fire the laser. In 2023 and 2024 they repeated and exceeded the result." },
+        { "type": "p", "text": "Private companies like Commonwealth Fusion Systems and TAE Technologies are competing to commercialize fusion. The old joke — 'fusion energy is 30 years away and always will be' — may finally be being challenged. If commercial fusion becomes reality this decade or the next, it represents one of history's greatest energy transitions." },
+        { "type": "quote", "text": "Any sufficiently advanced technology is indistinguishable from magic.", "author": "Arthur C. Clarke" },
+        { "type": "h2", "text": "Synthetic biology and programming life" },
+        { "type": "p", "text": "Synthetic biology applies engineering principles to biology — designing organisms with specific functions. Already existing are bacteria designed to produce biofuels, biodegradable plastics, drugs, and even building materials. In 2010, Craig Venter created the first organism with a completely synthetic genome — a controversial milestone in biology's history." },
+        { "type": "p", "text": "Medical applications include cellular therapies where patient cells are reprogrammed to fight cancer, and organisms that detect and destroy specific pathogens. The central ethical challenge is the same as always with powerful technology: ensuring it's used to expand human well-being, not create new forms of harm — including the accidental or deliberate creation of dangerous pathogens." },
+        { "type": "h2", "text": "Space exploration: the multiplanetary species" },
+        { "type": "p", "text": "For the first time since the Apollo program, there's genuine momentum toward human space exploration — now partially led by private companies. SpaceX dramatically reduced launch costs with reusable rockets, opening the era of 'democratization of space access.' The Mars mission — planned by NASA and SpaceX for the 2030s-2040s — may make humans a multiplanetary species." },
+        { "type": "p", "text": "Beyond human exploration, satellites in megaconstellations (Starlink, OneWeb) are connecting remote parts of the planet to the internet. And telescopes like the James Webb are revealing the universe with unprecedented detail, observing galaxies formed less than 300 million years after the Big Bang." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_future_q1",
+        "question": "Why do quantum computers threaten current cryptography?",
+        "options": [
+          "Because they are much faster at all computing tasks",
+          "Because they can factor large numbers exponentially faster, breaking the basis of current cryptography",
+          "Because they operate near absolute zero, creating physical vulnerabilities",
+          "Because they require quantum internet that is impossible to monitor"
+        ],
+        "answerIndex": 1,
+        "explanation": "Most current cryptography is based on the difficulty of factoring large numbers. Quantum computers can do this exponentially faster, breaking these systems — that's why there's already investment in 'post-quantum cryptography.'"
+      },
+      {
+        "id": "science_future_q2",
+        "question": "What makes nuclear fusion different from fission (used in current nuclear plants)?",
+        "options": [
+          "Fusion uses uranium; fission uses hydrogen",
+          "Fusion is cheaper to build; fission requires more complex infrastructure",
+          "Fusion joins light atoms without long-lived radioactive waste; fission splits heavy atoms generating waste",
+          "Fusion produces less energy; fission produces more per unit of fuel"
+        ],
+        "answerIndex": 2,
+        "explanation": "Fusion joins light nuclei (hydrogen) releasing energy, without fission's long-lived radioactive waste. With nearly inexhaustible fuel and near-zero emissions, it's considered the ideal energy source."
+      },
+      {
+        "id": "science_future_q3",
+        "question": "What is synthetic biology?",
+        "options": [
+          "The study of extinct organisms reconstructed from ancient DNA",
+          "The application of engineering principles to biology — designing organisms with specific functions",
+          "The creation of artificial human organs for transplant",
+          "The use of computers to simulate biological systems"
+        ],
+        "answerIndex": 1,
+        "explanation": "Synthetic biology applies engineering principles to biology — designing organisms with specific functions, like bacteria that produce biofuels, drugs, or materials, or cells reprogrammed to fight cancer."
+      },
+      {
+        "id": "science_future_q4",
+        "question": "How did SpaceX change the cost of space access?",
+        "options": [
+          "By developing nuclear propulsion more efficient than chemical fuels",
+          "By dramatically reducing costs with reusable rockets, democratizing access",
+          "By establishing partnerships with space agencies to share infrastructure",
+          "By using lightweight composite materials that reduced rocket weight by 70%"
+        ],
+        "answerIndex": 1,
+        "explanation": "SpaceX dramatically reduced launch costs with reusable rockets, opening the era of 'democratization of space access' and making viable megaconstellations of satellites and commercial missions."
+      },
+      {
+        "id": "science_future_q5",
+        "question": "What was the historic milestone reached by the National Ignition Facility in 2022?",
+        "options": [
+          "First nuclear fusion at room temperature conditions",
+          "First time fusion produced more energy than used to fire the laser",
+          "First fusion reactor connected to the electrical grid",
+          "First use of lunar helium-3 as fusion fuel"
+        ],
+        "answerIndex": 1,
+        "explanation": "In 2022, the NIF achieved 'ignition' — producing more energy than used to fire the laser into the plasma. It was the first milestone of this kind, challenging the joke that commercial fusion is 'always 30 years away.'"
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "El Futuro de la Ciencia y la Tecnología",
+      "summary": "Vivimos un momento único en la historia: múltiples tecnologías exponenciales convergen simultáneamente — inteligencia artificial, biotecnología, computación cuántica, energías renovables, exploración espacial. Las próximas décadas pueden traer transformaciones más profundas que cualquier período anterior. Entender las tendencias emergentes es esencial para navegar — e influir — en ese futuro.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Computación cuántica: más allá del bit clásico" },
+        { "type": "p", "text": "Las computadoras clásicas procesan bits — estados binarios de 0 o 1. Las computadoras cuánticas usan qubits, que pueden existir en superposición — representando 0 y 1 simultáneamente. Esto permite explorar múltiples soluciones en paralelo para ciertos tipos de problemas. Para algunos problemas específicos (factorización de números primos, simulación molecular, optimización), las computadoras cuánticas pueden ser exponencialmente más rápidas que cualquier computadora clásica." },
+        { "type": "p", "text": "Las implicaciones son profundas: la mayor parte de la criptografía actual se basa en la dificultad de factorizar números grandes — una computadora cuántica suficientemente poderosa podría romper estos sistemas. Por eso los gobiernos y empresas ya invierten en 'criptografía poscuántica'. Más allá de la criptografía, la simulación molecular cuántica puede revolucionar el diseño de fármacos y materiales." },
+        { "type": "h2", "text": "Fusión nuclear: la energía del sol" },
+        { "type": "p", "text": "La fusión nuclear — el mismo proceso que alimenta al sol — promete energía casi ilimitada, con emisiones cercanas a cero y sin los residuos radiactivos de larga duración de la fisión nuclear. En 2022, el National Ignition Facility de EE.UU. alcanzó el hito histórico de la 'ignición' — produciendo más energía de la usada para disparar el láser. En 2023 y 2024 repitieron y superaron el resultado." },
+        { "type": "p", "text": "Empresas privadas como Commonwealth Fusion Systems y TAE Technologies compiten para comercializar la fusión. El viejo chiste — 'la energía de fusión está a 30 años y siempre lo estará' — puede finalmente estar siendo desafiado. Si la fusión comercial se hace realidad en esta o en la próxima década, representa una de las mayores transiciones energéticas de la historia." },
+        { "type": "quote", "text": "Cualquier tecnología suficientemente avanzada es indistinguible de la magia.", "author": "Arthur C. Clarke" },
+        { "type": "h2", "text": "Biología sintética y la programación de la vida" },
+        { "type": "p", "text": "La biología sintética aplica principios de ingeniería a la biología — diseñando organismos con funciones específicas. Ya existen bacterias diseñadas para producir biocombustibles, plásticos biodegradables, fármacos e incluso materiales de construcción. En 2010, Craig Venter creó el primer organismo con un genoma completamente sintético — un hito controvertido en la historia de la biología." },
+        { "type": "p", "text": "Las aplicaciones médicas incluyen terapias celulares donde las células del paciente se reprograman para combatir el cáncer, y organismos que detectan y destruyen patógenos específicos. El desafío ético central es el mismo de siempre con la tecnología poderosa: garantizar que se use para ampliar el bienestar humano, no para crear nuevas formas de daño — incluida la creación accidental o deliberada de patógenos peligrosos." },
+        { "type": "h2", "text": "Exploración espacial: la especie multiplanetaria" },
+        { "type": "p", "text": "Por primera vez desde el programa Apolo, hay un impulso genuino hacia la exploración humana del espacio — ahora liderado parcialmente por empresas privadas. SpaceX redujo drásticamente el costo de lanzamiento con cohetes reutilizables, abriendo la era de la 'democratización del acceso al espacio'. La misión a Marte — planificada por la NASA y SpaceX para las décadas de 2030-2040 — puede convertir a los humanos en una especie multiplanetaria." },
+        { "type": "p", "text": "Más allá de la exploración humana, satélites en megaconstelaciones (Starlink, OneWeb) están conectando a internet partes remotas del planeta. Y telescopios como el James Webb están revelando el universo con un detalle sin precedentes, observando galaxias formadas menos de 300 millones de años después del Big Bang." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_future_q1",
+        "question": "¿Por qué las computadoras cuánticas amenazan la criptografía actual?",
+        "options": [
+          "Porque son mucho más rápidas en todas las tareas de computación",
+          "Porque pueden factorizar números grandes exponencialmente más rápido, rompiendo la base de la criptografía actual",
+          "Porque operan cerca del cero absoluto, creando vulnerabilidades físicas",
+          "Porque requieren internet cuántica imposible de monitorear"
+        ],
+        "answerIndex": 1,
+        "explanation": "La mayor parte de la criptografía actual se basa en la dificultad de factorizar números grandes. Las computadoras cuánticas pueden hacerlo exponencialmente más rápido, rompiendo estos sistemas — por eso ya hay inversión en 'criptografía poscuántica'."
+      },
+      {
+        "id": "science_future_q2",
+        "question": "¿Qué diferencia a la fusión nuclear de la fisión (usada en centrales nucleares actuales)?",
+        "options": [
+          "La fusión usa uranio; la fisión usa hidrógeno",
+          "La fusión es más barata de construir; la fisión requiere infraestructura más compleja",
+          "La fusión une átomos ligeros sin residuos radiactivos duraderos; la fisión rompe átomos pesados generando residuos",
+          "La fusión produce menos energía; la fisión produce más por unidad de combustible"
+        ],
+        "answerIndex": 2,
+        "explanation": "La fusión une núcleos ligeros (hidrógeno) liberando energía, sin los residuos radiactivos de larga duración de la fisión. Con combustible casi inagotable y emisiones cercanas a cero, se considera la fuente de energía ideal."
+      },
+      {
+        "id": "science_future_q3",
+        "question": "¿Qué es la biología sintética?",
+        "options": [
+          "El estudio de organismos extintos reconstruidos a partir de ADN antiguo",
+          "La aplicación de principios de ingeniería a la biología — diseñando organismos con funciones específicas",
+          "La creación de órganos humanos artificiales para trasplante",
+          "El uso de computadoras para simular sistemas biológicos"
+        ],
+        "answerIndex": 1,
+        "explanation": "La biología sintética aplica principios de ingeniería a la biología — diseñando organismos con funciones específicas, como bacterias que producen biocombustibles, fármacos o materiales, o células reprogramadas para combatir el cáncer."
+      },
+      {
+        "id": "science_future_q4",
+        "question": "¿Cómo cambió SpaceX el costo de acceso al espacio?",
+        "options": [
+          "Desarrollando propulsión nuclear más eficiente que los combustibles químicos",
+          "Reduciendo drásticamente los costos con cohetes reutilizables, democratizando el acceso",
+          "Estableciendo asociaciones con agencias espaciales para compartir infraestructura",
+          "Usando materiales compuestos ligeros que redujeron el peso de los cohetes en un 70%"
+        ],
+        "answerIndex": 1,
+        "explanation": "SpaceX redujo drásticamente el costo de lanzamiento con cohetes reutilizables, abriendo la era de la 'democratización del acceso al espacio' y haciendo viables las megaconstelaciones de satélites y las misiones comerciales."
+      },
+      {
+        "id": "science_future_q5",
+        "question": "¿Cuál fue el hito histórico alcanzado por el National Ignition Facility en 2022?",
+        "options": [
+          "Primera fusión nuclear en condiciones de temperatura ambiente",
+          "Primera vez que la fusión produjo más energía de la usada para disparar el láser",
+          "Primer reactor de fusión conectado a la red eléctrica",
+          "Primer uso de helio-3 lunar como combustible de fusión"
+        ],
+        "answerIndex": 1,
+        "explanation": "En 2022, el NIF alcanzó la 'ignición' — produciendo más energía de la usada para disparar el láser al plasma. Fue el primer hito de este tipo, desafiando el chiste de que la fusión comercial está 'siempre a 30 años'."
+      }
+    ]
+  }
+}

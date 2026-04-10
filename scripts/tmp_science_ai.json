@@ -1,0 +1,270 @@
+{
+  "id": "science_ai",
+  "trackId": "science_tech",
+  "order": 6,
+  "difficulty": 2,
+  "estimatedMinutes": 11,
+  "prerequisites": [],
+  "title": {
+    "pt": "Inteligência Artificial: Como as Máquinas Aprendem",
+    "en": "Artificial Intelligence: How Machines Learn",
+    "es": "Inteligencia Artificial: Cómo Aprenden las Máquinas"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "Inteligência Artificial: Como as Máquinas Aprendem",
+      "summary": "A inteligência artificial deixou de ser ficção científica para se tornar infraestrutura invisível do cotidiano — nos algoritmos que recomendam o que assistir, nos sistemas que aprovam empréstimos, nos modelos que escrevem texto indistinguível do humano. Entender como ela funciona não é opcional para quem quer navegar o mundo do século XXI.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "O que é aprendizado de máquina?" },
+        { "type": "p", "text": "A abordagem clássica da computação era programar regras explícitas: 'se X, então Y'. O aprendizado de máquina inverte isso: em vez de programar regras, você fornece exemplos e deixa o sistema encontrar os padrões sozinho. Um filtro de spam clássico usava regras escritas por humanos; um filtro moderno aprendeu quais palavras e padrões caracterizam spam analisando milhões de exemplos." },
+        { "type": "p", "text": "Existem três tipos principais: aprendizado supervisionado (treinamento com exemplos rotulados — 'isso é um gato', 'isso não é'), não supervisionado (encontrar estrutura em dados sem rótulos), e por reforço (o sistema aprende por tentativa e erro, maximizando uma recompensa). A maioria das aplicações práticas usa o supervisionado." },
+        { "type": "h2", "text": "Redes neurais e deep learning" },
+        { "type": "p", "text": "Redes neurais artificiais são sistemas inspirados (vagamente) na estrutura do cérebro: camadas de 'neurônios' artificiais que processam e transmitem sinais. O deep learning usa redes com muitas camadas — daí 'profundo'. Cada camada extrai representações progressivamente mais abstratas dos dados: nas primeiras camadas de um reconhecedor de imagem, detectam-se bordas; nas últimas, conceitos como 'rosto' ou 'gato'." },
+        { "type": "p", "text": "O breakthrough do deep learning ocorreu por volta de 2012, quando redes treinadas em GPUs (originalmente feitas para jogos) superaram métodos clássicos em reconhecimento de imagens. Desde então, a técnica dominou visão computacional, processamento de linguagem natural, e síntese de áudio." },
+        { "type": "quote", "text": "A IA é provavelmente a coisa mais transformadora que a humanidade já trabalhou. Mais do que a eletricidade ou o fogo.", "author": "Sundar Pichai" },
+        { "type": "h2", "text": "Grandes modelos de linguagem (LLMs)" },
+        { "type": "p", "text": "Os modelos de linguagem como GPT-4 e Claude são redes neurais treinadas para prever a próxima palavra em sequências de texto — usando trilhões de parâmetros e vastos corpora de texto humano. Emergiram capacidades surpreendentes: raciocínio, escrita, código, tradução, resumo. Essas 'capacidades emergentes' não foram explicitamente programadas — surgiram do treinamento em escala." },
+        { "type": "p", "text": "Uma limitação crítica é a 'alucinação': LLMs podem gerar informações falsas com a mesma confiança que informações corretas. O modelo não 'sabe' a diferença entre verdade e mentira — apenas prevê sequências plausíveis. Isso torna verificação humana essencial em aplicações de alto risco." },
+        { "type": "h2", "text": "Vieses e riscos da IA" },
+        { "type": "p", "text": "Modelos de IA aprendem os vieses presentes nos dados de treinamento. Um sistema de reconhecimento facial treinado principalmente em rostos brancos terá performance pior em outros grupos étnicos. Um sistema de concessão de crédito treinado em dados históricos pode perpetuar discriminações passadas. O problema não é técnico apenas — é político: quem decide o que é um resultado 'justo'?" },
+        { "type": "p", "text": "O debate sobre riscos existenciais da IA — a possibilidade de sistemas superinteligentes que escapem ao controle humano — divide experts. Alguns, como Geoffrey Hinton (um dos 'pais' do deep learning), expressaram preocupações sérias após deixar o Google em 2023. Outros argumentam que esses riscos são especulativos e distorcem o foco dos riscos presentes e reais, como automação de empregos e uso em desinformação." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_ai_q1",
+        "question": "Qual é a diferença fundamental entre programação clássica e aprendizado de máquina?",
+        "options": [
+          "Programação clássica é mais rápida; aprendizado de máquina é mais preciso",
+          "Programação clássica usa regras explícitas; aprendizado de máquina aprende padrões a partir de exemplos",
+          "Programação clássica é determinística; aprendizado de máquina é aleatório",
+          "Programação clássica usa texto; aprendizado de máquina usa números"
+        ],
+        "answerIndex": 1,
+        "explanation": "Na programação clássica, humanos escrevem regras explícitas. No aprendizado de máquina, o sistema aprende padrões a partir de exemplos, sem que as regras sejam explicitamente programadas."
+      },
+      {
+        "id": "science_ai_q2",
+        "question": "O que é 'deep learning' e por que é chamado 'profundo'?",
+        "options": [
+          "Porque analisa dados em profundidade estatística",
+          "Porque usa redes neurais com muitas camadas que extraem representações progressivamente abstratas",
+          "Porque requer hardware especializado de alta profundidade de bits",
+          "Porque aprendeu com dados coletados ao longo de muitos anos"
+        ],
+        "answerIndex": 1,
+        "explanation": "Deep learning usa redes neurais com muitas camadas — daí 'profundo'. Cada camada extrai representações progressivamente mais abstratas, como bordas nas primeiras camadas e conceitos como 'rosto' nas últimas."
+      },
+      {
+        "id": "science_ai_q3",
+        "question": "O que é 'alucinação' em modelos de linguagem como GPT e Claude?",
+        "options": [
+          "Quando o modelo gera respostas excessivamente criativas e poéticas",
+          "Quando o modelo recusa responder a perguntas sensíveis",
+          "Quando o modelo gera informações falsas com a mesma confiança de informações corretas",
+          "Quando o modelo repete a mesma resposta várias vezes"
+        ],
+        "answerIndex": 2,
+        "explanation": "Alucinação é quando LLMs geram informações falsas com confiança. O modelo não distingue verdade de mentira — apenas prevê sequências plausíveis de texto. Isso torna verificação humana essencial em aplicações de alto risco."
+      },
+      {
+        "id": "science_ai_q4",
+        "question": "Por que sistemas de IA podem perpetuar discriminações históricas?",
+        "options": [
+          "Porque foram programados por pessoas com preconceitos conscientes",
+          "Porque aprendem os vieses presentes nos dados históricos de treinamento",
+          "Porque são incapazes de processar diferenças entre grupos",
+          "Porque os algoritmos favorecem matematicamente maiorias"
+        ],
+        "answerIndex": 1,
+        "explanation": "Modelos de IA aprendem os vieses presentes nos dados de treinamento. Um sistema de crédito treinado em dados históricos pode perpetuar discriminações passadas mesmo sem intenção consciente dos desenvolvedores."
+      },
+      {
+        "id": "science_ai_q5",
+        "question": "O que são 'capacidades emergentes' em grandes modelos de linguagem?",
+        "options": [
+          "Capacidades adicionadas por atualizações após o lançamento do modelo",
+          "Recursos que surgem do treinamento em escala, sem serem explicitamente programados",
+          "Habilidades que o modelo demonstra apenas quando conectado à internet",
+          "Funcionalidades desbloqueadas por usuários com prompts específicos"
+        ],
+        "answerIndex": 1,
+        "explanation": "Capacidades emergentes são habilidades como raciocínio e escrita criativa que surgiram do treinamento em escala em grandes corpora de texto, sem serem explicitamente programadas pelos desenvolvedores."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Artificial Intelligence: How Machines Learn",
+      "summary": "Artificial intelligence has moved from science fiction to invisible everyday infrastructure — in algorithms recommending what to watch, systems approving loans, models writing text indistinguishable from human. Understanding how it works isn't optional for anyone wanting to navigate the 21st-century world.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "What is machine learning?" },
+        { "type": "p", "text": "The classical computing approach was to program explicit rules: 'if X, then Y.' Machine learning inverts this: instead of programming rules, you provide examples and let the system find patterns on its own. A classic spam filter used human-written rules; a modern one learned which words and patterns characterize spam by analyzing millions of examples." },
+        { "type": "p", "text": "There are three main types: supervised learning (training with labeled examples — 'this is a cat,' 'this isn't'), unsupervised (finding structure in unlabeled data), and reinforcement learning (the system learns by trial and error, maximizing a reward). Most practical applications use supervised learning." },
+        { "type": "h2", "text": "Neural networks and deep learning" },
+        { "type": "p", "text": "Artificial neural networks are systems loosely inspired by the brain's structure: layers of artificial 'neurons' that process and transmit signals. Deep learning uses networks with many layers — hence 'deep.' Each layer extracts progressively more abstract representations of data: early layers in an image recognizer detect edges; later ones detect concepts like 'face' or 'cat.'" },
+        { "type": "p", "text": "Deep learning's breakthrough came around 2012, when networks trained on GPUs (originally made for gaming) surpassed classical methods in image recognition. Since then, the technique has dominated computer vision, natural language processing, and audio synthesis." },
+        { "type": "quote", "text": "AI is probably the most transformative thing humanity has ever worked on. More than electricity or fire.", "author": "Sundar Pichai" },
+        { "type": "h2", "text": "Large language models (LLMs)" },
+        { "type": "p", "text": "Language models like GPT-4 and Claude are neural networks trained to predict the next word in text sequences — using trillions of parameters and vast corpora of human text. Surprising capabilities emerged: reasoning, writing, code, translation, summarization. These 'emergent capabilities' weren't explicitly programmed — they emerged from training at scale." },
+        { "type": "p", "text": "A critical limitation is 'hallucination': LLMs can generate false information with the same confidence as correct information. The model doesn't 'know' the difference between truth and falsehood — it just predicts plausible sequences. This makes human verification essential in high-stakes applications." },
+        { "type": "h2", "text": "Biases and AI risks" },
+        { "type": "p", "text": "AI models learn the biases present in training data. A facial recognition system trained mainly on white faces will perform worse on other ethnic groups. A credit-granting system trained on historical data may perpetuate past discrimination. The problem isn't only technical — it's political: who decides what a 'fair' outcome is?" },
+        { "type": "p", "text": "The debate about AI's existential risks — the possibility of superintelligent systems escaping human control — divides experts. Some, like Geoffrey Hinton (one of deep learning's 'godfathers'), expressed serious concerns after leaving Google in 2023. Others argue these risks are speculative and distort focus from present and real risks, like job automation and use in disinformation." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_ai_q1",
+        "question": "What is the fundamental difference between classical programming and machine learning?",
+        "options": [
+          "Classical programming is faster; machine learning is more accurate",
+          "Classical programming uses explicit rules; machine learning learns patterns from examples",
+          "Classical programming is deterministic; machine learning is random",
+          "Classical programming uses text; machine learning uses numbers"
+        ],
+        "answerIndex": 1,
+        "explanation": "In classical programming, humans write explicit rules. In machine learning, the system learns patterns from examples, without rules being explicitly programmed."
+      },
+      {
+        "id": "science_ai_q2",
+        "question": "What is 'deep learning' and why is it called 'deep'?",
+        "options": [
+          "Because it analyzes data with statistical depth",
+          "Because it uses neural networks with many layers that extract progressively abstract representations",
+          "Because it requires specialized high bit-depth hardware",
+          "Because it learned from data collected over many years"
+        ],
+        "answerIndex": 1,
+        "explanation": "Deep learning uses neural networks with many layers — hence 'deep.' Each layer extracts progressively more abstract representations, like edges in early layers and concepts like 'face' in later ones."
+      },
+      {
+        "id": "science_ai_q3",
+        "question": "What is 'hallucination' in language models like GPT and Claude?",
+        "options": [
+          "When the model generates excessively creative and poetic responses",
+          "When the model refuses to answer sensitive questions",
+          "When the model generates false information with the same confidence as correct information",
+          "When the model repeats the same response multiple times"
+        ],
+        "answerIndex": 2,
+        "explanation": "Hallucination is when LLMs generate false information confidently. The model doesn't distinguish truth from falsehood — it just predicts plausible text sequences. This makes human verification essential in high-stakes applications."
+      },
+      {
+        "id": "science_ai_q4",
+        "question": "Why can AI systems perpetuate historical discrimination?",
+        "options": [
+          "Because they were programmed by people with conscious biases",
+          "Because they learn the biases present in historical training data",
+          "Because they are incapable of processing differences between groups",
+          "Because algorithms mathematically favor majorities"
+        ],
+        "answerIndex": 1,
+        "explanation": "AI models learn the biases present in training data. A credit system trained on historical data may perpetuate past discrimination even without conscious developer intent."
+      },
+      {
+        "id": "science_ai_q5",
+        "question": "What are 'emergent capabilities' in large language models?",
+        "options": [
+          "Capabilities added through updates after model launch",
+          "Capabilities that arise from training at scale, without being explicitly programmed",
+          "Skills the model only demonstrates when connected to the internet",
+          "Features unlocked by users with specific prompts"
+        ],
+        "answerIndex": 1,
+        "explanation": "Emergent capabilities are skills like reasoning and creative writing that arose from training at scale on large text corpora, without being explicitly programmed by developers."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Inteligencia Artificial: Cómo Aprenden las Máquinas",
+      "summary": "La inteligencia artificial dejó de ser ciencia ficción para convertirse en infraestructura invisible del cotidiano — en los algoritmos que recomiendan qué ver, los sistemas que aprueban préstamos, los modelos que escriben texto indistinguible del humano. Entender cómo funciona no es opcional para quien quiere navegar el mundo del siglo XXI.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "¿Qué es el aprendizaje automático?" },
+        { "type": "p", "text": "El enfoque clásico de la computación era programar reglas explícitas: 'si X, entonces Y'. El aprendizaje automático invierte esto: en lugar de programar reglas, proporcionas ejemplos y dejas que el sistema encuentre los patrones por sí solo. Un filtro de spam clásico usaba reglas escritas por humanos; uno moderno aprendió qué palabras y patrones caracterizan el spam analizando millones de ejemplos." },
+        { "type": "p", "text": "Existen tres tipos principales: aprendizaje supervisado (entrenamiento con ejemplos etiquetados — 'esto es un gato', 'esto no lo es'), no supervisado (encontrar estructura en datos sin etiquetas) y por refuerzo (el sistema aprende por ensayo y error, maximizando una recompensa). La mayoría de las aplicaciones prácticas usan el supervisado." },
+        { "type": "h2", "text": "Redes neuronales y deep learning" },
+        { "type": "p", "text": "Las redes neuronales artificiales son sistemas inspirados (vagamente) en la estructura del cerebro: capas de 'neuronas' artificiales que procesan y transmiten señales. El deep learning usa redes con muchas capas — de ahí 'profundo'. Cada capa extrae representaciones progresivamente más abstractas de los datos: en las primeras capas de un reconocedor de imágenes se detectan bordes; en las últimas, conceptos como 'cara' o 'gato'." },
+        { "type": "p", "text": "El avance del deep learning ocurrió alrededor de 2012, cuando redes entrenadas en GPUs (originalmente hechas para juegos) superaron los métodos clásicos en reconocimiento de imágenes. Desde entonces, la técnica ha dominado la visión computacional, el procesamiento de lenguaje natural y la síntesis de audio." },
+        { "type": "quote", "text": "La IA es probablemente lo más transformador en lo que la humanidad ha trabajado jamás. Más que la electricidad o el fuego.", "author": "Sundar Pichai" },
+        { "type": "h2", "text": "Grandes modelos de lenguaje (LLMs)" },
+        { "type": "p", "text": "Los modelos de lenguaje como GPT-4 y Claude son redes neuronales entrenadas para predecir la siguiente palabra en secuencias de texto — usando billones de parámetros y vastos corpus de texto humano. Surgieron capacidades sorprendentes: razonamiento, escritura, código, traducción, resumen. Estas 'capacidades emergentes' no fueron programadas explícitamente — surgieron del entrenamiento a escala." },
+        { "type": "p", "text": "Una limitación crítica es la 'alucinación': los LLMs pueden generar información falsa con la misma confianza que información correcta. El modelo no 'sabe' la diferencia entre verdad y mentira — solo predice secuencias plausibles. Esto hace que la verificación humana sea esencial en aplicaciones de alto riesgo." },
+        { "type": "h2", "text": "Sesgos y riesgos de la IA" },
+        { "type": "p", "text": "Los modelos de IA aprenden los sesgos presentes en los datos de entrenamiento. Un sistema de reconocimiento facial entrenado principalmente con rostros blancos tendrá peor rendimiento en otros grupos étnicos. Un sistema de concesión de crédito entrenado con datos históricos puede perpetuar discriminaciones pasadas. El problema no es solo técnico — es político: ¿quién decide qué es un resultado 'justo'?" },
+        { "type": "p", "text": "El debate sobre los riesgos existenciales de la IA — la posibilidad de sistemas superinteligentes que escapen al control humano — divide a los expertos. Algunos, como Geoffrey Hinton (uno de los 'padres' del deep learning), expresaron preocupaciones serias tras dejar Google en 2023. Otros argumentan que estos riesgos son especulativos y distorsionan el foco de los riesgos presentes y reales, como la automatización del empleo y el uso en desinformación." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_ai_q1",
+        "question": "¿Cuál es la diferencia fundamental entre la programación clásica y el aprendizaje automático?",
+        "options": [
+          "La programación clásica es más rápida; el aprendizaje automático es más preciso",
+          "La programación clásica usa reglas explícitas; el aprendizaje automático aprende patrones a partir de ejemplos",
+          "La programación clásica es determinista; el aprendizaje automático es aleatorio",
+          "La programación clásica usa texto; el aprendizaje automático usa números"
+        ],
+        "answerIndex": 1,
+        "explanation": "En la programación clásica, los humanos escriben reglas explícitas. En el aprendizaje automático, el sistema aprende patrones a partir de ejemplos, sin que las reglas sean programadas explícitamente."
+      },
+      {
+        "id": "science_ai_q2",
+        "question": "¿Qué es el 'deep learning' y por qué se llama 'profundo'?",
+        "options": [
+          "Porque analiza datos con profundidad estadística",
+          "Porque usa redes neuronales con muchas capas que extraen representaciones progresivamente abstractas",
+          "Porque requiere hardware especializado de alta profundidad de bits",
+          "Porque aprendió de datos recopilados a lo largo de muchos años"
+        ],
+        "answerIndex": 1,
+        "explanation": "El deep learning usa redes neuronales con muchas capas — de ahí 'profundo'. Cada capa extrae representaciones progresivamente más abstractas, como bordes en las primeras capas y conceptos como 'cara' en las últimas."
+      },
+      {
+        "id": "science_ai_q3",
+        "question": "¿Qué es la 'alucinación' en modelos de lenguaje como GPT y Claude?",
+        "options": [
+          "Cuando el modelo genera respuestas excesivamente creativas y poéticas",
+          "Cuando el modelo se niega a responder preguntas sensibles",
+          "Cuando el modelo genera información falsa con la misma confianza que información correcta",
+          "Cuando el modelo repite la misma respuesta varias veces"
+        ],
+        "answerIndex": 2,
+        "explanation": "La alucinación es cuando los LLMs generan información falsa con confianza. El modelo no distingue verdad de mentira — solo predice secuencias plausibles de texto. Esto hace que la verificación humana sea esencial en aplicaciones de alto riesgo."
+      },
+      {
+        "id": "science_ai_q4",
+        "question": "¿Por qué los sistemas de IA pueden perpetuar discriminaciones históricas?",
+        "options": [
+          "Porque fueron programados por personas con prejuicios conscientes",
+          "Porque aprenden los sesgos presentes en los datos históricos de entrenamiento",
+          "Porque son incapaces de procesar diferencias entre grupos",
+          "Porque los algoritmos favorecen matemáticamente a las mayorías"
+        ],
+        "answerIndex": 1,
+        "explanation": "Los modelos de IA aprenden los sesgos presentes en los datos de entrenamiento. Un sistema de crédito entrenado con datos históricos puede perpetuar discriminaciones pasadas incluso sin intención consciente de los desarrolladores."
+      },
+      {
+        "id": "science_ai_q5",
+        "question": "¿Qué son las 'capacidades emergentes' en los grandes modelos de lenguaje?",
+        "options": [
+          "Capacidades añadidas mediante actualizaciones tras el lanzamiento del modelo",
+          "Capacidades que surgen del entrenamiento a escala, sin ser programadas explícitamente",
+          "Habilidades que el modelo solo demuestra cuando está conectado a internet",
+          "Funcionalidades desbloqueadas por usuarios con indicaciones específicas"
+        ],
+        "answerIndex": 1,
+        "explanation": "Las capacidades emergentes son habilidades como el razonamiento y la escritura creativa que surgieron del entrenamiento a escala en grandes corpus de texto, sin ser programadas explícitamente por los desarrolladores."
+      }
+    ]
+  }
+}

@@ -1,0 +1,367 @@
+{
+  "id": "business_finance",
+  "trackId": "business",
+  "order": 5,
+  "difficulty": "beginner",
+  "estimatedMinutes": 11,
+  "prerequisites": ["business_startup"],
+  "titlePt": "Finanças para Empreendedores",
+  "titleEn": "Finance for Entrepreneurs",
+  "titleEs": "Finanzas para Emprendedores",
+  "coverImageUrl": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80",
+  "coverImageCredit": "Photo by Towfiqu barbhuiya on Unsplash",
+  "pt": {
+    "lesson": {
+      "title": "Finanças para Empreendedores: O que os Números Revelam",
+      "summary": "Empreendedores não precisam ser contadores, mas precisam entender as métricas que revelam a saúde do negócio: fluxo de caixa, margem, unit economics e runway.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Peter Drucker disse que 'o que não é medido não é gerenciado'. Em negócios, os números são a linguagem da realidade. Empreendedores que evitam as finanças tomam decisões no escuro — e frequentemente descobrem os problemas tarde demais."
+        },
+        {
+          "type": "text",
+          "content": "Você não precisa ser contador. Mas precisa entender as métricas fundamentais que revelam se seu negócio é saudável, se está crescendo de forma sustentável e quanto tempo tem antes de ficar sem dinheiro."
+        },
+        {
+          "type": "heading",
+          "content": "Fluxo de Caixa: Rei de Todos os Números"
+        },
+        {
+          "type": "text",
+          "content": "Um negócio pode ser lucrativo no papel e ainda assim falir — se não tiver caixa para pagar as contas. **Fluxo de caixa** é a diferença entre o dinheiro que entra e o que sai em um período. Lucro é uma opinião contábil; caixa é um fato."
+        },
+        {
+          "type": "text",
+          "content": "Startups medem o **burn rate** (quanto dinheiro consomem por mês) e o **runway** (por quantos meses o dinheiro disponível dura). Se você tem $500k no banco e gasta $50k/mês, seu runway é 10 meses. Esse número define urgência em levantar capital ou reduzir custos."
+        },
+        {
+          "type": "heading",
+          "content": "Margem: A Diferença Importa"
+        },
+        {
+          "type": "text",
+          "content": "**Margem bruta** é a receita menos o custo direto de entregar o produto ou serviço. Uma empresa SaaS com 80% de margem bruta retém $0,80 de cada $1 para cobrir despesas operacionais. Uma distribuidora com 10% retém apenas $0,10."
+        },
+        {
+          "type": "text",
+          "content": "**Margem líquida** é o lucro após todas as despesas. Empresas de software podem ter margens líquidas acima de 30%; supermercados ficam em 1-2%. Margens altas permitem reinvestimento, resistência em crises e geração de valor a longo prazo."
+        },
+        {
+          "type": "heading",
+          "content": "Unit Economics: O Coração de Startups"
+        },
+        {
+          "type": "text",
+          "content": "**CAC** (Custo de Aquisição de Cliente) é quanto você gasta para trazer um novo cliente. **LTV** (Lifetime Value) é quanto esse cliente gera de receita ao longo do relacionamento. A relação LTV:CAC é fundamental: se LTV > 3× CAC, o negócio é viável. Se LTV < CAC, cada cliente novo piora a situação."
+        },
+        {
+          "type": "text",
+          "content": "Empresas que crescem rápido aumentando marketing sem controlar essa relação frequentemente descobrem que estão comprando crescimento a um preço que nunca se pagará. Unit economics negativo é uma bomba-relógio."
+        },
+        {
+          "type": "heading",
+          "content": "As Três Demonstrações Financeiras"
+        },
+        {
+          "type": "text",
+          "content": "**DRE** (Demonstração de Resultado): mostra receitas, custos e lucro em um período — como a empresa performou. **Balanço Patrimonial**: fotografia de ativos, passivos e patrimônio em uma data — o que a empresa tem e deve. **Fluxo de Caixa**: movimento real de dinheiro — o que entrou e saiu."
+        },
+        {
+          "type": "quote",
+          "content": "Revenue is vanity, profit is sanity, cash is reality.",
+          "attribution": "Ditado popular em finanças empresariais"
+        },
+        {
+          "type": "text",
+          "content": "Entender essas métricas não é opcional para empreendedores — é responsabilidade. Investidores, bancos e parceiros tomam decisões baseadas nelas. E mais importante: você não pode melhorar o que não mede. Finanças são o termômetro da saúde do negócio."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "Por que uma empresa lucrativa pode falir?",
+        "options": [
+          "Porque tem muitos funcionários",
+          "Porque pode não ter caixa suficiente para pagar despesas correntes",
+          "Porque vende demais e não consegue entregar",
+          "Porque paga impostos demais"
+        ],
+        "correctIndex": 1,
+        "explanation": "Lucro é contábil — pode incluir receitas ainda não recebidas. Caixa é real. Uma empresa pode ser lucrativa no papel mas falir por falta de liquidez para pagar fornecedores e salários."
+      },
+      {
+        "question": "Se uma startup tem $300k no banco e burn rate de $30k/mês, seu runway é:",
+        "options": ["6 meses", "10 meses", "12 meses", "15 meses"],
+        "correctIndex": 1,
+        "explanation": "Runway = dinheiro disponível ÷ burn rate mensal = $300k ÷ $30k = 10 meses. Esse é o tempo que a startup tem antes de ficar sem dinheiro."
+      },
+      {
+        "question": "Uma relação LTV:CAC saudável para startups geralmente é:",
+        "options": ["LTV = CAC (equilíbrio)", "LTV > 3× CAC", "LTV > 10× CAC", "Qualquer LTV positivo é suficiente"],
+        "correctIndex": 1,
+        "explanation": "A regra geral é LTV > 3× CAC: o cliente precisa gerar pelo menos 3 vezes o que custou adquiri-lo, para cobrir operações e gerar retorno."
+      },
+      {
+        "question": "Margem bruta representa:",
+        "options": [
+          "O lucro líquido após todos os impostos",
+          "A receita menos o custo direto de entregar o produto ou serviço",
+          "O total de ativos menos passivos",
+          "A diferença entre receita e despesas fixas"
+        ],
+        "correctIndex": 1,
+        "explanation": "Margem bruta = Receita − Custo dos Produtos Vendidos (CPV). Indica quanto sobra de cada real de venda antes das despesas operacionais."
+      },
+      {
+        "question": "Qual das três demonstrações financeiras mostra a 'fotografia' de ativos e passivos em uma data específica?",
+        "options": [
+          "Demonstração de Resultado (DRE)",
+          "Balanço Patrimonial",
+          "Demonstração de Fluxo de Caixa",
+          "Demonstração de Valor Adicionado"
+        ],
+        "correctIndex": 1,
+        "explanation": "O Balanço Patrimonial é uma fotografia estática: o que a empresa possui (ativos) e o que deve (passivos) em uma data específica, revelando a estrutura financeira."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Finance for Entrepreneurs: What the Numbers Reveal",
+      "summary": "Entrepreneurs don't need to be accountants, but they need to understand the metrics that reveal business health: cash flow, margin, unit economics, and runway.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Peter Drucker said 'what isn't measured isn't managed'. In business, numbers are the language of reality. Entrepreneurs who avoid finances make decisions in the dark — and frequently discover problems too late."
+        },
+        {
+          "type": "text",
+          "content": "You don't need to be an accountant. But you need to understand the fundamental metrics that reveal whether your business is healthy, whether it's growing sustainably, and how much time you have before running out of money."
+        },
+        {
+          "type": "heading",
+          "content": "Cash Flow: King of All Numbers"
+        },
+        {
+          "type": "text",
+          "content": "A business can be profitable on paper and still go bankrupt — if it doesn't have cash to pay bills. **Cash flow** is the difference between money coming in and going out in a period. Profit is an accounting opinion; cash is a fact."
+        },
+        {
+          "type": "text",
+          "content": "Startups measure **burn rate** (how much cash they consume per month) and **runway** (how many months the available money lasts). If you have $500k in the bank and spend $50k/month, your runway is 10 months. This number defines urgency in raising capital or reducing costs."
+        },
+        {
+          "type": "heading",
+          "content": "Margin: The Difference Matters"
+        },
+        {
+          "type": "text",
+          "content": "**Gross margin** is revenue minus the direct cost of delivering the product or service. A SaaS company with 80% gross margin retains $0.80 of every $1 to cover operating expenses. A distributor with 10% retains only $0.10."
+        },
+        {
+          "type": "text",
+          "content": "**Net margin** is profit after all expenses. Software companies can have net margins above 30%; supermarkets stay at 1-2%. High margins allow reinvestment, resilience in crises, and long-term value creation."
+        },
+        {
+          "type": "heading",
+          "content": "Unit Economics: The Heart of Startups"
+        },
+        {
+          "type": "text",
+          "content": "**CAC** (Customer Acquisition Cost) is how much you spend to bring in a new customer. **LTV** (Lifetime Value) is how much that customer generates in revenue over the relationship. The LTV:CAC ratio is fundamental: if LTV > 3× CAC, the business is viable. If LTV < CAC, each new customer worsens the situation."
+        },
+        {
+          "type": "text",
+          "content": "Companies that grow fast by increasing marketing without controlling this ratio frequently discover they're buying growth at a price that will never pay off. Negative unit economics is a time bomb."
+        },
+        {
+          "type": "heading",
+          "content": "The Three Financial Statements"
+        },
+        {
+          "type": "text",
+          "content": "**Income Statement (P&L)**: shows revenues, costs, and profit in a period — how the company performed. **Balance Sheet**: snapshot of assets, liabilities, and equity on a date — what the company has and owes. **Cash Flow Statement**: actual movement of money — what came in and went out."
+        },
+        {
+          "type": "quote",
+          "content": "Revenue is vanity, profit is sanity, cash is reality.",
+          "attribution": "Popular saying in business finance"
+        },
+        {
+          "type": "text",
+          "content": "Understanding these metrics isn't optional for entrepreneurs — it's a responsibility. Investors, banks, and partners make decisions based on them. And more importantly: you can't improve what you don't measure. Finance is the thermometer of business health."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "Why can a profitable company go bankrupt?",
+        "options": [
+          "Because it has too many employees",
+          "Because it may not have enough cash to pay current expenses",
+          "Because it sells too much and can't deliver",
+          "Because it pays too much in taxes"
+        ],
+        "correctIndex": 1,
+        "explanation": "Profit is accounting — it can include revenues not yet received. Cash is real. A company can be profitable on paper but go bankrupt due to lack of liquidity to pay suppliers and salaries."
+      },
+      {
+        "question": "If a startup has $300k in the bank and a burn rate of $30k/month, its runway is:",
+        "options": ["6 months", "10 months", "12 months", "15 months"],
+        "correctIndex": 1,
+        "explanation": "Runway = available money ÷ monthly burn rate = $300k ÷ $30k = 10 months. That's how long the startup has before running out of money."
+      },
+      {
+        "question": "A healthy LTV:CAC ratio for startups is generally:",
+        "options": ["LTV = CAC (break even)", "LTV > 3× CAC", "LTV > 10× CAC", "Any positive LTV is sufficient"],
+        "correctIndex": 1,
+        "explanation": "The general rule is LTV > 3× CAC: the customer needs to generate at least 3 times what it cost to acquire them, to cover operations and generate returns."
+      },
+      {
+        "question": "Gross margin represents:",
+        "options": [
+          "Net profit after all taxes",
+          "Revenue minus the direct cost of delivering the product or service",
+          "Total assets minus liabilities",
+          "The difference between revenue and fixed expenses"
+        ],
+        "correctIndex": 1,
+        "explanation": "Gross margin = Revenue − Cost of Goods Sold (COGS). It indicates how much remains from each dollar of sales before operating expenses."
+      },
+      {
+        "question": "Which of the three financial statements shows a 'snapshot' of assets and liabilities on a specific date?",
+        "options": [
+          "Income Statement (P&L)",
+          "Balance Sheet",
+          "Cash Flow Statement",
+          "Statement of Retained Earnings"
+        ],
+        "correctIndex": 1,
+        "explanation": "The Balance Sheet is a static snapshot: what the company owns (assets) and owes (liabilities) on a specific date, revealing the financial structure."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Finanzas para Emprendedores: Lo que Revelan los Números",
+      "summary": "Los emprendedores no necesitan ser contadores, pero sí entender las métricas que revelan la salud del negocio: flujo de caja, margen, unit economics y runway.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Peter Drucker dijo que 'lo que no se mide no se gestiona'. En los negocios, los números son el lenguaje de la realidad. Los emprendedores que evitan las finanzas toman decisiones a ciegas — y frecuentemente descubren los problemas demasiado tarde."
+        },
+        {
+          "type": "text",
+          "content": "No necesitas ser contador. Pero necesitas entender las métricas fundamentales que revelan si tu negocio está saludable, si crece de forma sostenible y cuánto tiempo tienes antes de quedarte sin dinero."
+        },
+        {
+          "type": "heading",
+          "content": "Flujo de Caja: El Rey de Todos los Números"
+        },
+        {
+          "type": "text",
+          "content": "Un negocio puede ser rentable en papel y aún así quebrar — si no tiene caja para pagar las cuentas. El **flujo de caja** es la diferencia entre el dinero que entra y el que sale en un período. La ganancia es una opinión contable; el efectivo es un hecho."
+        },
+        {
+          "type": "text",
+          "content": "Las startups miden el **burn rate** (cuánto dinero consumen por mes) y el **runway** (cuántos meses dura el dinero disponible). Si tienes $500k en el banco y gastas $50k/mes, tu runway es de 10 meses. Este número define la urgencia de levantar capital o reducir costos."
+        },
+        {
+          "type": "heading",
+          "content": "Margen: La Diferencia Importa"
+        },
+        {
+          "type": "text",
+          "content": "El **margen bruto** es la facturación menos el costo directo de entregar el producto o servicio. Una empresa SaaS con 80% de margen bruto retiene $0,80 de cada $1 para cubrir gastos operativos. Una distribuidora con 10% retiene apenas $0,10."
+        },
+        {
+          "type": "text",
+          "content": "El **margen neto** es la ganancia después de todos los gastos. Las empresas de software pueden tener márgenes netos por encima del 30%; los supermercados están en 1-2%. Los márgenes altos permiten reinversión, resistencia en crisis y generación de valor a largo plazo."
+        },
+        {
+          "type": "heading",
+          "content": "Unit Economics: El Corazón de las Startups"
+        },
+        {
+          "type": "text",
+          "content": "El **CAC** (Costo de Adquisición de Cliente) es cuánto gastas para traer un nuevo cliente. El **LTV** (Lifetime Value) es cuánto genera ese cliente en ingresos durante la relación. La relación LTV:CAC es fundamental: si LTV > 3× CAC, el negocio es viable. Si LTV < CAC, cada nuevo cliente empeora la situación."
+        },
+        {
+          "type": "text",
+          "content": "Las empresas que crecen rápido aumentando el marketing sin controlar esta relación frecuentemente descubren que están comprando crecimiento a un precio que nunca se pagará. Los unit economics negativos son una bomba de tiempo."
+        },
+        {
+          "type": "heading",
+          "content": "Los Tres Estados Financieros"
+        },
+        {
+          "type": "text",
+          "content": "**Estado de Resultados**: muestra ingresos, costos y ganancia en un período — cómo se desempeñó la empresa. **Balance General**: fotografía de activos, pasivos y patrimonio en una fecha — lo que la empresa tiene y debe. **Flujo de Caja**: movimiento real del dinero — lo que entró y salió."
+        },
+        {
+          "type": "quote",
+          "content": "Los ingresos son vanidad, la ganancia es cordura, el efectivo es realidad.",
+          "attribution": "Dicho popular en finanzas empresariales"
+        },
+        {
+          "type": "text",
+          "content": "Entender estas métricas no es opcional para emprendedores — es una responsabilidad. Inversores, bancos y socios toman decisiones basadas en ellas. Y más importante: no puedes mejorar lo que no mides. Las finanzas son el termómetro de la salud del negocio."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "¿Por qué una empresa rentable puede quebrar?",
+        "options": [
+          "Porque tiene demasiados empleados",
+          "Porque puede no tener suficiente efectivo para pagar gastos corrientes",
+          "Porque vende demasiado y no puede entregar",
+          "Porque paga demasiados impuestos"
+        ],
+        "correctIndex": 1,
+        "explanation": "La ganancia es contable — puede incluir ingresos aún no cobrados. El efectivo es real. Una empresa puede ser rentable en papel pero quebrar por falta de liquidez para pagar proveedores y salarios."
+      },
+      {
+        "question": "Si una startup tiene $300k en el banco y un burn rate de $30k/mes, su runway es:",
+        "options": ["6 meses", "10 meses", "12 meses", "15 meses"],
+        "correctIndex": 1,
+        "explanation": "Runway = dinero disponible ÷ burn rate mensual = $300k ÷ $30k = 10 meses. Es el tiempo que le queda a la startup antes de quedarse sin dinero."
+      },
+      {
+        "question": "Una relación LTV:CAC saludable para startups es generalmente:",
+        "options": ["LTV = CAC (equilibrio)", "LTV > 3× CAC", "LTV > 10× CAC", "Cualquier LTV positivo es suficiente"],
+        "correctIndex": 1,
+        "explanation": "La regla general es LTV > 3× CAC: el cliente necesita generar al menos 3 veces lo que costó adquirirlo, para cubrir operaciones y generar retorno."
+      },
+      {
+        "question": "El margen bruto representa:",
+        "options": [
+          "La ganancia neta después de todos los impuestos",
+          "Los ingresos menos el costo directo de entregar el producto o servicio",
+          "El total de activos menos pasivos",
+          "La diferencia entre ingresos y gastos fijos"
+        ],
+        "correctIndex": 1,
+        "explanation": "Margen bruto = Ingresos − Costo de los Bienes Vendidos (COGS). Indica cuánto queda de cada peso de ventas antes de los gastos operativos."
+      },
+      {
+        "question": "¿Cuál de los tres estados financieros muestra una 'fotografía' de activos y pasivos en una fecha específica?",
+        "options": [
+          "Estado de Resultados",
+          "Balance General",
+          "Estado de Flujo de Caja",
+          "Estado de Ganancias Retenidas"
+        ],
+        "correctIndex": 1,
+        "explanation": "El Balance General es una fotografía estática: lo que la empresa posee (activos) y lo que debe (pasivos) en una fecha específica, revelando la estructura financiera."
+      }
+    ]
+  }
+}

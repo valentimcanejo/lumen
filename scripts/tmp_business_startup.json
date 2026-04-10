@@ -1,0 +1,397 @@
+{
+  "id": "business_startup",
+  "trackId": "business",
+  "order": 4,
+  "difficulty": "beginner",
+  "estimatedMinutes": 11,
+  "prerequisites": ["business_strategy"],
+  "titlePt": "Startups e Lean Startup",
+  "titleEn": "Startups and Lean Startup",
+  "titleEs": "Startups y Lean Startup",
+  "coverImageUrl": "https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&q=80",
+  "coverImageCredit": "Photo by Kaleidico on Unsplash",
+  "pt": {
+    "lesson": {
+      "title": "Startups e Lean Startup: Construindo no Escuro",
+      "summary": "Uma startup não é uma empresa pequena — é uma instituição criada para encontrar um modelo de negócio escalável em condições de extrema incerteza. O método Lean Startup minimiza o desperdício nessa busca.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Steve Blank definiu startup de uma forma que mudou tudo: 'uma startup não é uma versão menor de uma empresa grande'. É uma instituição temporária projetada para **encontrar** um modelo de negócio repetível e escalável — não para executar um que já existe."
+        },
+        {
+          "type": "text",
+          "content": "Essa distinção é fundamental. Empresas estabelecidas executam um modelo conhecido. Startups estão em busca de um modelo. As ferramentas, métricas e processos adequados para cada situação são completamente diferentes."
+        },
+        {
+          "type": "heading",
+          "content": "O Método Lean Startup"
+        },
+        {
+          "type": "text",
+          "content": "Eric Ries sistematizou o **Lean Startup** em 2011, inspirado no pensamento Lean da Toyota. O princípio central: aprender o máximo possível com o mínimo de desperdício de tempo e recursos."
+        },
+        {
+          "type": "text",
+          "content": "O ciclo fundamental é **Construir → Medir → Aprender**: construa um MVP (Produto Mínimo Viável), meça como os clientes reais respondem, aprenda com os dados e decida: continuar na mesma direção (**perseverar**) ou mudar de rumo (**pivotar**)."
+        },
+        {
+          "type": "heading",
+          "content": "O MVP: Mínimo Viável, Não Mínimo"
+        },
+        {
+          "type": "text",
+          "content": "O MVP é frequentemente mal entendido. Não é um produto ruim ou incompleto — é o **menor experimento** que valida ou invalida uma hipótese de negócio. O objetivo é aprender, não impressionar."
+        },
+        {
+          "type": "text",
+          "content": "O Dropbox lançou um MVP de um vídeo de demonstração — antes de escrever uma linha de código, testou se havia demanda. A página de cadastro acumulou 75.000 e-mails em uma noite. O MVP provou a hipótese sem construir o produto."
+        },
+        {
+          "type": "heading",
+          "content": "Product-Market Fit"
+        },
+        {
+          "type": "text",
+          "content": "Marc Andreessen cunhou o conceito de **Product-Market Fit (PMF)**: o momento em que um produto satisfaz uma necessidade de mercado tão bem que o crescimento se torna quase automático. Você sente PMF quando a demanda supera sua capacidade de atender."
+        },
+        {
+          "type": "text",
+          "content": "Sean Ellis criou um teste simples: pergunte a seus usuários 'como você se sentiria se não pudesse mais usar nosso produto?' Se mais de 40% responderem 'muito desapontado', você tem PMF. Abaixo disso, precisa continuar iterando."
+        },
+        {
+          "type": "heading",
+          "content": "Pivotar ou Perseverar"
+        },
+        {
+          "type": "text",
+          "content": "A decisão mais difícil numa startup é quando pivotar. Pivotar não é fracassar — é aprender. Instagram começou como Burbn, um app de check-in. Twitter surgiu de um projeto de podcasting chamado Odeo. YouTube era um site de namoro."
+        },
+        {
+          "type": "quote",
+          "content": "O maior desperdício não é construir a coisa errada da maneira errada. É construir a coisa errada da maneira certa.",
+          "attribution": "Eric Ries, The Lean Startup"
+        },
+        {
+          "type": "text",
+          "content": "O método Lean Startup não garante sucesso — mas reduz significativamente o custo do fracasso. Em vez de gastar dois anos e milhões de dólares para descobrir que o mercado não quer seu produto, você descobre isso em semanas com um experimento barato. Na incerteza extrema das startups, aprender rápido é a única vantagem real."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "Segundo Steve Blank, qual é a definição correta de startup?",
+        "options": [
+          "Uma empresa pequena com poucos funcionários",
+          "Uma instituição temporária em busca de um modelo de negócio escalável em condições de extrema incerteza",
+          "Uma empresa de tecnologia em fase inicial",
+          "Uma empresa que ainda não dá lucro"
+        ],
+        "correctIndex": 1,
+        "explanation": "Blank definiu startup como uma instituição temporária buscando um modelo — não executando um existente. Isso a distingue fundamentalmente de empresas estabelecidas."
+      },
+      {
+        "question": "O ciclo do Lean Startup é:",
+        "options": [
+          "Planejar → Executar → Revisar",
+          "Construir → Medir → Aprender",
+          "Pesquisar → Desenvolver → Lançar",
+          "Ideação → Prototipagem → Escala"
+        ],
+        "correctIndex": 1,
+        "explanation": "O ciclo Construir-Medir-Aprender é o coração do método Lean Startup: construa um MVP, meça dados reais, aprenda e decida se persevera ou pivota."
+      },
+      {
+        "question": "O teste de Product-Market Fit de Sean Ellis usa qual pergunta?",
+        "options": [
+          "'Você recomendaria nosso produto para um amigo?'",
+          "'Como você se sentiria se não pudesse mais usar nosso produto?'",
+          "'Quanto você pagaria pelo nosso produto?'",
+          "'Com que frequência você usa nosso produto?'"
+        ],
+        "correctIndex": 1,
+        "explanation": "Se mais de 40% dos usuários responderem 'muito desapontado' ao imaginar não poder usar mais o produto, é sinal de Product-Market Fit."
+      },
+      {
+        "question": "Como o Dropbox usou um MVP antes de desenvolver o produto?",
+        "options": [
+          "Lançou um beta fechado para mil usuários selecionados",
+          "Publicou um vídeo de demonstração para testar a demanda",
+          "Criou uma versão simplificada com apenas uma funcionalidade",
+          "Fez entrevistas com 500 potenciais usuários"
+        ],
+        "correctIndex": 1,
+        "explanation": "O Dropbox lançou um vídeo de demo antes de escrever código, acumulando 75.000 cadastros em uma noite — provando a demanda sem construir o produto."
+      },
+      {
+        "question": "Pivotar em contexto de startup significa:",
+        "options": [
+          "Falhar e encerrar a empresa",
+          "Mudar de rumo com base em aprendizados dos dados",
+          "Contratar novos executivos para liderar a empresa",
+          "Abrir o capital na bolsa de valores"
+        ],
+        "correctIndex": 1,
+        "explanation": "Pivotar é uma mudança estratégica de direção baseada em aprendizados. Instagram, Twitter e YouTube pivotaram de ideias originais antes de encontrar seus modelos de sucesso."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Startups and Lean Startup: Building in the Dark",
+      "summary": "A startup is not a small company — it's an institution created to find a scalable business model under conditions of extreme uncertainty. The Lean Startup method minimizes waste in that search.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Steve Blank defined startup in a way that changed everything: 'a startup is not a smaller version of a large company'. It's a temporary institution designed to **find** a repeatable, scalable business model — not to execute one that already exists."
+        },
+        {
+          "type": "text",
+          "content": "This distinction is fundamental. Established companies execute a known model. Startups are searching for a model. The appropriate tools, metrics, and processes for each situation are completely different."
+        },
+        {
+          "type": "heading",
+          "content": "The Lean Startup Method"
+        },
+        {
+          "type": "text",
+          "content": "Eric Ries systematized **Lean Startup** in 2011, inspired by Toyota's Lean thinking. The central principle: learn as much as possible with the minimum waste of time and resources."
+        },
+        {
+          "type": "text",
+          "content": "The fundamental cycle is **Build → Measure → Learn**: build an MVP (Minimum Viable Product), measure how real customers respond, learn from the data, and decide: stay the course (**persevere**) or change direction (**pivot**)."
+        },
+        {
+          "type": "heading",
+          "content": "The MVP: Minimum Viable, Not Minimum"
+        },
+        {
+          "type": "text",
+          "content": "The MVP is frequently misunderstood. It's not a bad or incomplete product — it's the **smallest experiment** that validates or invalidates a business hypothesis. The goal is to learn, not to impress."
+        },
+        {
+          "type": "text",
+          "content": "Dropbox launched an MVP as a demo video — before writing a single line of code, it tested whether demand existed. The signup page accumulated 75,000 emails overnight. The MVP proved the hypothesis without building the product."
+        },
+        {
+          "type": "heading",
+          "content": "Product-Market Fit"
+        },
+        {
+          "type": "text",
+          "content": "Marc Andreessen coined the concept of **Product-Market Fit (PMF)**: the moment when a product satisfies a market need so well that growth becomes almost automatic. You feel PMF when demand exceeds your capacity to serve."
+        },
+        {
+          "type": "text",
+          "content": "Sean Ellis created a simple test: ask your users 'how would you feel if you could no longer use our product?' If more than 40% answer 'very disappointed', you have PMF. Below that, you need to keep iterating."
+        },
+        {
+          "type": "heading",
+          "content": "Pivot or Persevere"
+        },
+        {
+          "type": "text",
+          "content": "The hardest decision in a startup is when to pivot. Pivoting isn't failing — it's learning. Instagram started as Burbn, a check-in app. Twitter emerged from a podcasting project called Odeo. YouTube was a dating site."
+        },
+        {
+          "type": "quote",
+          "content": "The biggest waste isn't building the wrong thing the wrong way. It's building the wrong thing the right way.",
+          "attribution": "Eric Ries, The Lean Startup"
+        },
+        {
+          "type": "text",
+          "content": "The Lean Startup method doesn't guarantee success — but it significantly reduces the cost of failure. Instead of spending two years and millions of dollars to discover the market doesn't want your product, you find out in weeks with an inexpensive experiment. In the extreme uncertainty of startups, learning fast is the only real advantage."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "According to Steve Blank, what is the correct definition of a startup?",
+        "options": [
+          "A small company with few employees",
+          "A temporary institution searching for a scalable business model under extreme uncertainty",
+          "An early-stage technology company",
+          "A company that hasn't yet made a profit"
+        ],
+        "correctIndex": 1,
+        "explanation": "Blank defined a startup as a temporary institution searching for a model — not executing an existing one. This fundamentally distinguishes it from established companies."
+      },
+      {
+        "question": "The Lean Startup cycle is:",
+        "options": [
+          "Plan → Execute → Review",
+          "Build → Measure → Learn",
+          "Research → Develop → Launch",
+          "Ideation → Prototyping → Scale"
+        ],
+        "correctIndex": 1,
+        "explanation": "The Build-Measure-Learn cycle is the heart of the Lean Startup method: build an MVP, measure real data, learn and decide whether to persevere or pivot."
+      },
+      {
+        "question": "Sean Ellis's Product-Market Fit test uses which question?",
+        "options": [
+          "'Would you recommend our product to a friend?'",
+          "'How would you feel if you could no longer use our product?'",
+          "'How much would you pay for our product?'",
+          "'How often do you use our product?'"
+        ],
+        "correctIndex": 1,
+        "explanation": "If more than 40% of users answer 'very disappointed' when imagining not being able to use the product anymore, it's a sign of Product-Market Fit."
+      },
+      {
+        "question": "How did Dropbox use an MVP before developing the product?",
+        "options": [
+          "Launched a closed beta for one thousand selected users",
+          "Published a demo video to test demand",
+          "Created a simplified version with just one feature",
+          "Conducted interviews with 500 potential users"
+        ],
+        "correctIndex": 1,
+        "explanation": "Dropbox launched a demo video before writing code, accumulating 75,000 signups overnight — proving demand without building the product."
+      },
+      {
+        "question": "Pivoting in a startup context means:",
+        "options": [
+          "Failing and shutting down the company",
+          "Changing direction based on learnings from data",
+          "Hiring new executives to lead the company",
+          "Going public on the stock exchange"
+        ],
+        "correctIndex": 1,
+        "explanation": "Pivoting is a strategic change of direction based on learnings. Instagram, Twitter, and YouTube all pivoted from their original ideas before finding their successful models."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Startups y Lean Startup: Construyendo en la Oscuridad",
+      "summary": "Una startup no es una empresa pequeña — es una institución creada para encontrar un modelo de negocio escalable en condiciones de extrema incertidumbre. El método Lean Startup minimiza el desperdicio en esa búsqueda.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Steve Blank definió startup de una forma que cambió todo: 'una startup no es una versión más pequeña de una empresa grande'. Es una institución temporal diseñada para **encontrar** un modelo de negocio repetible y escalable — no para ejecutar uno que ya existe."
+        },
+        {
+          "type": "text",
+          "content": "Esta distinción es fundamental. Las empresas establecidas ejecutan un modelo conocido. Las startups están buscando un modelo. Las herramientas, métricas y procesos adecuados para cada situación son completamente diferentes."
+        },
+        {
+          "type": "heading",
+          "content": "El Método Lean Startup"
+        },
+        {
+          "type": "text",
+          "content": "Eric Ries sistematizó el **Lean Startup** en 2011, inspirado en el pensamiento Lean de Toyota. El principio central: aprender lo máximo posible con el mínimo desperdicio de tiempo y recursos."
+        },
+        {
+          "type": "text",
+          "content": "El ciclo fundamental es **Construir → Medir → Aprender**: construye un MVP (Producto Mínimo Viable), mide cómo responden los clientes reales, aprende de los datos y decide: continuar en la misma dirección (**perseverar**) o cambiar de rumbo (**pivotar**)."
+        },
+        {
+          "type": "heading",
+          "content": "El MVP: Mínimo Viable, No Mínimo"
+        },
+        {
+          "type": "text",
+          "content": "El MVP es frecuentemente malentendido. No es un producto malo o incompleto — es el **experimento más pequeño** que valida o invalida una hipótesis de negocio. El objetivo es aprender, no impresionar."
+        },
+        {
+          "type": "text",
+          "content": "Dropbox lanzó un MVP como video de demostración — antes de escribir una línea de código, probó si había demanda. La página de registro acumuló 75,000 correos en una noche. El MVP probó la hipótesis sin construir el producto."
+        },
+        {
+          "type": "heading",
+          "content": "Product-Market Fit"
+        },
+        {
+          "type": "text",
+          "content": "Marc Andreessen acuñó el concepto de **Product-Market Fit (PMF)**: el momento en que un producto satisface una necesidad del mercado tan bien que el crecimiento se vuelve casi automático. Sientes PMF cuando la demanda supera tu capacidad de atender."
+        },
+        {
+          "type": "text",
+          "content": "Sean Ellis creó una prueba simple: pregunta a tus usuarios '¿cómo te sentirías si ya no pudieras usar nuestro producto?' Si más del 40% responde 'muy decepcionado', tienes PMF. Por debajo de eso, necesitas seguir iterando."
+        },
+        {
+          "type": "heading",
+          "content": "Pivotar o Perseverar"
+        },
+        {
+          "type": "text",
+          "content": "La decisión más difícil en una startup es cuándo pivotar. Pivotar no es fracasar — es aprender. Instagram comenzó como Burbn, una app de check-in. Twitter surgió de un proyecto de podcasting llamado Odeo. YouTube era un sitio de citas."
+        },
+        {
+          "type": "quote",
+          "content": "El mayor desperdicio no es construir la cosa equivocada de la manera equivocada. Es construir la cosa equivocada de la manera correcta.",
+          "attribution": "Eric Ries, The Lean Startup"
+        },
+        {
+          "type": "text",
+          "content": "El método Lean Startup no garantiza el éxito — pero reduce significativamente el costo del fracaso. En lugar de gastar dos años y millones de dólares para descubrir que el mercado no quiere tu producto, lo descubres en semanas con un experimento barato. En la incertidumbre extrema de las startups, aprender rápido es la única ventaja real."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "Según Steve Blank, ¿cuál es la definición correcta de startup?",
+        "options": [
+          "Una empresa pequeña con pocos empleados",
+          "Una institución temporal en busca de un modelo de negocio escalable en condiciones de extrema incertidumbre",
+          "Una empresa de tecnología en fase inicial",
+          "Una empresa que todavía no genera ganancias"
+        ],
+        "correctIndex": 1,
+        "explanation": "Blank definió startup como una institución temporal buscando un modelo — no ejecutando uno existente. Esto la distingue fundamentalmente de las empresas establecidas."
+      },
+      {
+        "question": "El ciclo del Lean Startup es:",
+        "options": [
+          "Planificar → Ejecutar → Revisar",
+          "Construir → Medir → Aprender",
+          "Investigar → Desarrollar → Lanzar",
+          "Ideación → Prototipado → Escala"
+        ],
+        "correctIndex": 1,
+        "explanation": "El ciclo Construir-Medir-Aprender es el corazón del método Lean Startup: construye un MVP, mide datos reales, aprende y decide si persevera o pivota."
+      },
+      {
+        "question": "La prueba de Product-Market Fit de Sean Ellis usa la pregunta:",
+        "options": [
+          "'¿Recomendarías nuestro producto a un amigo?'",
+          "'¿Cómo te sentirías si ya no pudieras usar nuestro producto?'",
+          "'¿Cuánto pagarías por nuestro producto?'",
+          "'¿Con qué frecuencia usas nuestro producto?'"
+        ],
+        "correctIndex": 1,
+        "explanation": "Si más del 40% de los usuarios responde 'muy decepcionado' al imaginar no poder usar más el producto, es señal de Product-Market Fit."
+      },
+      {
+        "question": "¿Cómo usó Dropbox un MVP antes de desarrollar el producto?",
+        "options": [
+          "Lanzó una beta cerrada para mil usuarios seleccionados",
+          "Publicó un video de demostración para probar la demanda",
+          "Creó una versión simplificada con solo una funcionalidad",
+          "Realizó entrevistas con 500 potenciales usuarios"
+        ],
+        "correctIndex": 1,
+        "explanation": "Dropbox lanzó un video de demo antes de escribir código, acumulando 75,000 registros en una noche — probando la demanda sin construir el producto."
+      },
+      {
+        "question": "Pivotar en el contexto de startup significa:",
+        "options": [
+          "Fracasar y cerrar la empresa",
+          "Cambiar de rumbo basándose en aprendizajes de los datos",
+          "Contratar nuevos ejecutivos para liderar la empresa",
+          "Salir a bolsa de valores"
+        ],
+        "correctIndex": 1,
+        "explanation": "Pivotar es un cambio estratégico de dirección basado en aprendizajes. Instagram, Twitter y YouTube pivotaron de sus ideas originales antes de encontrar sus modelos exitosos."
+      }
+    ]
+  }
+}

@@ -1,0 +1,279 @@
+{
+  "id": "science",
+  "trackId": "science_tech",
+  "order": 1,
+  "difficulty": 1,
+  "estimatedMinutes": 10,
+  "prerequisites": [],
+  "title": {
+    "pt": "O que é Ciência?",
+    "en": "What Is Science?",
+    "es": "¿Qué es la Ciencia?"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "O que é Ciência?",
+      "summary": "A ciência é a forma mais confiável que a humanidade encontrou para distinguir o verdadeiro do falso sobre o mundo natural. Mas o que torna algo científico? Por que confiar nela? E quais são seus limites reais? Entender o método científico não é apenas um exercício acadêmico — é a base do pensamento crítico em um mundo saturado de afirmações conflitantes.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "O problema da demarcação" },
+        { "type": "p", "text": "O filósofo Karl Popper dedicou sua vida a uma questão: o que separa ciência de pseudociência? Sua resposta foi a falsificabilidade. Uma teoria é científica se — e somente se — for possível imaginar uma observação que a refutaria. A teoria da gravitação de Newton é científica porque poderia ser falsificada se objetos não caíssem como previsto. Astrologia e homeopatia, em contraste, são formuladas de modo a resistir a qualquer evidência contrária." },
+        { "type": "p", "text": "Isso não significa que teorias científicas são falsas — significa que estão abertas a teste. E essa abertura é justamente o que as torna poderosas. Uma teoria que não pode ser refutada por nada também não explica nada." },
+        { "type": "h2", "text": "O método científico na prática" },
+        { "type": "p", "text": "O método científico não é um algoritmo rígido, mas um conjunto de práticas que convergem para o mesmo objetivo: minimizar o auto-engano. As etapas canônicas são: observação de um fenômeno, formulação de hipótese, previsão de consequências testáveis, experimento controlado, e análise dos resultados." },
+        { "type": "p", "text": "O experimento controlado é central porque isola variáveis. Sem controle, é impossível saber se o efeito observado se deve à causa que estamos testando ou a algum outro fator. O grupo de controle — que recebe placebo ou nenhum tratamento — permite comparação precisa." },
+        { "type": "quote", "text": "Na ciência, não há estrada real. Aqueles que procuram a verdade precisam estar dispostos a trilhar caminhos ásperos.", "author": "Carl Sagan" },
+        { "type": "h2", "text": "Viés de confirmação: o inimigo interno" },
+        { "type": "p", "text": "O maior obstáculo à ciência não são os instrumentos deficientes — é a mente humana. O viés de confirmação nos leva a procurar e lembrar evidências que confirmam o que já cremos, e a ignorar ou minimizar o que contradiz. Cientistas são humanos e estão sujeitos a esse viés como qualquer pessoa." },
+        { "type": "p", "text": "Por isso a ciência é coletiva. A revisão por pares, a replicação de experimentos, e a possibilidade de qualquer pesquisador contestar resultados publicados são mecanismos institucionais para corrigir o viés individual. Nenhum cientista isolado é confiável; a comunidade científica como processo tem um histórico impressionante." },
+        { "type": "h2", "text": "Ciência vs. tecnologia vs. engenharia" },
+        { "type": "p", "text": "Ciência busca compreender como as coisas funcionam. Tecnologia aplica esse conhecimento para criar ferramentas e sistemas. Engenharia projeta soluções práticas para problemas específicos. As três se alimentam mutuamente, mas têm objetivos diferentes: a ciência busca verdade; a tecnologia e a engenharia buscam utilidade." },
+        { "type": "p", "text": "Muitas das maiores conquistas tecnológicas vieram de ciência básica sem aplicação prática imediata em mente. A física quântica — uma teoria abstrata sobre o comportamento de partículas subatômicas — está na base dos transistores que tornam computadores possíveis. Pesquisa 'inútil' frequentemente se torna a base de tecnologias transformadoras décadas depois." },
+        { "type": "h2", "text": "Os limites da ciência" },
+        { "type": "p", "text": "A ciência é poderosa dentro de seu domínio — explicar e prever fenômenos naturais — mas tem limites reais. Questões normativas ('O que devemos fazer?'), estéticas ('O que é belo?') e metafísicas ('Por que existe algo em vez de nada?') estão além do alcance do método científico." },
+        { "type": "p", "text": "Isso não significa que ciência seja irrelevante para a ética — ela pode informar o debate sobre consequências. Mas a questão 'O que devemos valorizar?' é filosófica, não científica. Reconhecer os limites da ciência é essencial tanto para usá-la bem quanto para não atribuir a ela uma autoridade que ela mesma não reivindica." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_q1",
+        "question": "Qual é o critério de demarcação científica proposto por Karl Popper?",
+        "options": [
+          "Uma teoria deve ser confirmada por múltiplos experimentos",
+          "Uma teoria deve ser falsificável — passível de ser refutada por observações",
+          "Uma teoria deve ser aceita pela maioria dos cientistas",
+          "Uma teoria deve ter aplicação tecnológica prática"
+        ],
+        "answerIndex": 1,
+        "explanation": "Para Popper, uma teoria é científica se for possível imaginar uma observação que a refutaria. A falsificabilidade — e não a confirmação — é o critério que separa ciência de pseudociência."
+      },
+      {
+        "id": "science_q2",
+        "question": "Por que o experimento controlado é central no método científico?",
+        "options": [
+          "Porque é mais barato do que outros métodos de pesquisa",
+          "Porque isola variáveis, permitindo identificar causas específicas",
+          "Porque elimina completamente o viés do pesquisador",
+          "Porque produz resultados reproduzíveis por definição"
+        ],
+        "answerIndex": 1,
+        "explanation": "O experimento controlado isola variáveis — com grupo de controle e grupo experimental — permitindo atribuir o efeito observado à causa específica que está sendo testada, não a fatores externos."
+      },
+      {
+        "id": "science_q3",
+        "question": "O viés de confirmação é particularmente perigoso na ciência porque:",
+        "options": [
+          "Leva cientistas a publicar resultados negativos",
+          "Faz pesquisadores buscarem evidências que confirmam o que já creem",
+          "Aumenta o custo dos experimentos desnecessariamente",
+          "Impede a formulação de novas hipóteses"
+        ],
+        "answerIndex": 1,
+        "explanation": "O viés de confirmação leva pesquisadores a buscar e valorizar evidências que confirmam suas crenças e a minimizar as contraditórias. Por isso a ciência é coletiva: revisão por pares e replicação corrigem o viés individual."
+      },
+      {
+        "id": "science_q4",
+        "question": "Qual é a diferença fundamental entre ciência e tecnologia?",
+        "options": [
+          "Ciência usa matemática; tecnologia usa linguagem natural",
+          "Ciência busca compreender como as coisas funcionam; tecnologia aplica esse conhecimento para criar ferramentas",
+          "Ciência é financiada pelo governo; tecnologia pela iniciativa privada",
+          "Ciência produz teorias; tecnologia produz experimentos"
+        ],
+        "answerIndex": 1,
+        "explanation": "Ciência busca verdade — compreender como as coisas funcionam. Tecnologia busca utilidade — aplicar esse conhecimento para criar ferramentas e sistemas. As duas se alimentam mutuamente mas têm objetivos distintos."
+      },
+      {
+        "id": "science_q5",
+        "question": "Quais tipos de questões estão além do alcance do método científico?",
+        "options": [
+          "Questões sobre o comportamento de partículas subatômicas",
+          "Questões sobre a origem do universo",
+          "Questões normativas, estéticas e metafísicas",
+          "Questões sobre fenômenos que não podem ser observados diretamente"
+        ],
+        "answerIndex": 2,
+        "explanation": "Questões normativas ('O que devemos fazer?'), estéticas e metafísicas estão além do método científico. A ciência pode informar debates éticos, mas a questão 'O que devemos valorizar?' é filosófica, não científica."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "What Is Science?",
+      "summary": "Science is the most reliable method humanity has found to distinguish true from false about the natural world. But what makes something scientific? Why trust it? And what are its real limits? Understanding the scientific method isn't just an academic exercise — it's the foundation of critical thinking in a world saturated with conflicting claims.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "The demarcation problem" },
+        { "type": "p", "text": "Philosopher Karl Popper dedicated his life to one question: what separates science from pseudoscience? His answer was falsifiability. A theory is scientific if — and only if — it's possible to imagine an observation that would refute it. Newton's theory of gravitation is scientific because it could be falsified if objects didn't fall as predicted. Astrology and homeopathy, by contrast, are formulated to resist any contrary evidence." },
+        { "type": "p", "text": "This doesn't mean scientific theories are false — it means they're open to testing. And that openness is precisely what makes them powerful. A theory that can't be refuted by anything also explains nothing." },
+        { "type": "h2", "text": "The scientific method in practice" },
+        { "type": "p", "text": "The scientific method isn't a rigid algorithm, but a set of practices converging on the same goal: minimizing self-deception. The canonical steps are: observation of a phenomenon, hypothesis formulation, prediction of testable consequences, controlled experiment, and results analysis." },
+        { "type": "p", "text": "The controlled experiment is central because it isolates variables. Without control, it's impossible to know whether an observed effect is due to the cause being tested or some other factor. The control group — receiving a placebo or no treatment — allows precise comparison." },
+        { "type": "quote", "text": "In science there is no royal road. Those who seek truth must be willing to travel rough paths.", "author": "Carl Sagan" },
+        { "type": "h2", "text": "Confirmation bias: the inner enemy" },
+        { "type": "p", "text": "The greatest obstacle to science isn't deficient instruments — it's the human mind. Confirmation bias leads us to seek and remember evidence confirming what we already believe, and to ignore or minimize what contradicts it. Scientists are human and subject to this bias like anyone." },
+        { "type": "p", "text": "That's why science is collective. Peer review, experiment replication, and the possibility of any researcher contesting published results are institutional mechanisms to correct individual bias. No isolated scientist is reliable; the scientific community as a process has an impressive track record." },
+        { "type": "h2", "text": "Science vs. technology vs. engineering" },
+        { "type": "p", "text": "Science seeks to understand how things work. Technology applies that knowledge to create tools and systems. Engineering designs practical solutions to specific problems. The three feed each other, but have different goals: science seeks truth; technology and engineering seek utility." },
+        { "type": "p", "text": "Many of the greatest technological achievements came from basic science with no immediate practical application in mind. Quantum physics — an abstract theory about subatomic particle behavior — underlies the transistors that make computers possible. 'Useless' research frequently becomes the foundation for transformative technologies decades later." },
+        { "type": "h2", "text": "The limits of science" },
+        { "type": "p", "text": "Science is powerful within its domain — explaining and predicting natural phenomena — but has real limits. Normative questions ('What should we do?'), aesthetic questions ('What is beautiful?'), and metaphysical questions ('Why is there something rather than nothing?') lie beyond the scientific method's reach." },
+        { "type": "p", "text": "This doesn't mean science is irrelevant to ethics — it can inform debates about consequences. But the question 'What should we value?' is philosophical, not scientific. Recognizing science's limits is essential both for using it well and for not attributing it an authority it doesn't itself claim." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_q1",
+        "question": "What is Karl Popper's proposed criterion for scientific demarcation?",
+        "options": [
+          "A theory must be confirmed by multiple experiments",
+          "A theory must be falsifiable — capable of being refuted by observations",
+          "A theory must be accepted by the majority of scientists",
+          "A theory must have practical technological application"
+        ],
+        "answerIndex": 1,
+        "explanation": "For Popper, a theory is scientific if it's possible to imagine an observation that would refute it. Falsifiability — not confirmation — is the criterion separating science from pseudoscience."
+      },
+      {
+        "id": "science_q2",
+        "question": "Why is the controlled experiment central to the scientific method?",
+        "options": [
+          "Because it's cheaper than other research methods",
+          "Because it isolates variables, allowing specific causes to be identified",
+          "Because it completely eliminates researcher bias",
+          "Because it produces reproducible results by definition"
+        ],
+        "answerIndex": 1,
+        "explanation": "The controlled experiment isolates variables — with a control group and experimental group — allowing the observed effect to be attributed to the specific cause being tested, not external factors."
+      },
+      {
+        "id": "science_q3",
+        "question": "Confirmation bias is particularly dangerous in science because:",
+        "options": [
+          "It leads scientists to publish negative results",
+          "It makes researchers seek evidence confirming what they already believe",
+          "It increases experimental costs unnecessarily",
+          "It prevents formulating new hypotheses"
+        ],
+        "answerIndex": 1,
+        "explanation": "Confirmation bias leads researchers to seek and value evidence confirming their beliefs and to minimize contradictory evidence. That's why science is collective: peer review and replication correct individual bias."
+      },
+      {
+        "id": "science_q4",
+        "question": "What is the fundamental difference between science and technology?",
+        "options": [
+          "Science uses mathematics; technology uses natural language",
+          "Science seeks to understand how things work; technology applies that knowledge to create tools",
+          "Science is government-funded; technology is privately funded",
+          "Science produces theories; technology produces experiments"
+        ],
+        "answerIndex": 1,
+        "explanation": "Science seeks truth — understanding how things work. Technology seeks utility — applying that knowledge to create tools and systems. The two feed each other but have distinct goals."
+      },
+      {
+        "id": "science_q5",
+        "question": "What types of questions lie beyond the scientific method's reach?",
+        "options": [
+          "Questions about subatomic particle behavior",
+          "Questions about the origin of the universe",
+          "Normative, aesthetic, and metaphysical questions",
+          "Questions about phenomena that can't be directly observed"
+        ],
+        "answerIndex": 2,
+        "explanation": "Normative questions ('What should we do?'), aesthetic questions, and metaphysical questions lie beyond the scientific method. Science can inform ethical debates, but 'What should we value?' is philosophical, not scientific."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "¿Qué es la Ciencia?",
+      "summary": "La ciencia es el método más confiable que la humanidad ha encontrado para distinguir lo verdadero de lo falso sobre el mundo natural. Pero ¿qué hace que algo sea científico? ¿Por qué confiar en ella? ¿Y cuáles son sus límites reales? Entender el método científico no es solo un ejercicio académico — es la base del pensamiento crítico en un mundo saturado de afirmaciones contradictorias.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "El problema de la demarcación" },
+        { "type": "p", "text": "El filósofo Karl Popper dedicó su vida a una pregunta: ¿qué separa la ciencia de la pseudociencia? Su respuesta fue la falsabilidad. Una teoría es científica si — y solo si — es posible imaginar una observación que la refutaría. La teoría de la gravitación de Newton es científica porque podría ser falsificada si los objetos no cayeran como se predice. La astrología y la homeopatía, en cambio, están formuladas para resistir cualquier evidencia contraria." },
+        { "type": "p", "text": "Esto no significa que las teorías científicas sean falsas — significa que están abiertas a prueba. Y esa apertura es precisamente lo que las hace poderosas. Una teoría que no puede ser refutada por nada tampoco explica nada." },
+        { "type": "h2", "text": "El método científico en la práctica" },
+        { "type": "p", "text": "El método científico no es un algoritmo rígido, sino un conjunto de prácticas que convergen hacia el mismo objetivo: minimizar el autoengaño. Los pasos canónicos son: observación de un fenómeno, formulación de hipótesis, predicción de consecuencias verificables, experimento controlado y análisis de resultados." },
+        { "type": "p", "text": "El experimento controlado es central porque aísla variables. Sin control, es imposible saber si el efecto observado se debe a la causa que estamos probando o a algún otro factor. El grupo de control — que recibe placebo o ningún tratamiento — permite una comparación precisa." },
+        { "type": "quote", "text": "En la ciencia no hay camino real. Quienes buscan la verdad deben estar dispuestos a recorrer caminos difíciles.", "author": "Carl Sagan" },
+        { "type": "h2", "text": "Sesgo de confirmación: el enemigo interior" },
+        { "type": "p", "text": "El mayor obstáculo para la ciencia no son los instrumentos deficientes — es la mente humana. El sesgo de confirmación nos lleva a buscar y recordar evidencias que confirman lo que ya creemos, e ignorar o minimizar lo que lo contradice. Los científicos son humanos y están sujetos a este sesgo como cualquier persona." },
+        { "type": "p", "text": "Por eso la ciencia es colectiva. La revisión por pares, la replicación de experimentos y la posibilidad de que cualquier investigador cuestione los resultados publicados son mecanismos institucionales para corregir el sesgo individual. Ningún científico aislado es confiable; la comunidad científica como proceso tiene un historial impresionante." },
+        { "type": "h2", "text": "Ciencia vs. tecnología vs. ingeniería" },
+        { "type": "p", "text": "La ciencia busca comprender cómo funcionan las cosas. La tecnología aplica ese conocimiento para crear herramientas y sistemas. La ingeniería diseña soluciones prácticas a problemas específicos. Las tres se alimentan mutuamente, pero tienen objetivos diferentes: la ciencia busca verdad; la tecnología y la ingeniería buscan utilidad." },
+        { "type": "p", "text": "Muchos de los mayores logros tecnológicos vinieron de ciencia básica sin ninguna aplicación práctica inmediata en mente. La física cuántica — una teoría abstracta sobre el comportamiento de partículas subatómicas — está en la base de los transistores que hacen posibles las computadoras. La investigación 'inútil' frecuentemente se convierte en la base de tecnologías transformadoras décadas después." },
+        { "type": "h2", "text": "Los límites de la ciencia" },
+        { "type": "p", "text": "La ciencia es poderosa dentro de su dominio — explicar y predecir fenómenos naturales — pero tiene límites reales. Las preguntas normativas ('¿Qué debemos hacer?'), estéticas ('¿Qué es bello?') y metafísicas ('¿Por qué existe algo en lugar de nada?') están más allá del alcance del método científico." },
+        { "type": "p", "text": "Esto no significa que la ciencia sea irrelevante para la ética — puede informar el debate sobre consecuencias. Pero la pregunta '¿Qué debemos valorar?' es filosófica, no científica. Reconocer los límites de la ciencia es esencial tanto para usarla bien como para no atribuirle una autoridad que ella misma no reivindica." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_q1",
+        "question": "¿Cuál es el criterio de demarcación científica propuesto por Karl Popper?",
+        "options": [
+          "Una teoría debe ser confirmada por múltiples experimentos",
+          "Una teoría debe ser falsable — susceptible de ser refutada por observaciones",
+          "Una teoría debe ser aceptada por la mayoría de los científicos",
+          "Una teoría debe tener aplicación tecnológica práctica"
+        ],
+        "answerIndex": 1,
+        "explanation": "Para Popper, una teoría es científica si es posible imaginar una observación que la refutaría. La falsabilidad — no la confirmación — es el criterio que separa la ciencia de la pseudociencia."
+      },
+      {
+        "id": "science_q2",
+        "question": "¿Por qué el experimento controlado es central en el método científico?",
+        "options": [
+          "Porque es más barato que otros métodos de investigación",
+          "Porque aísla variables, permitiendo identificar causas específicas",
+          "Porque elimina completamente el sesgo del investigador",
+          "Porque produce resultados reproducibles por definición"
+        ],
+        "answerIndex": 1,
+        "explanation": "El experimento controlado aísla variables — con grupo de control y grupo experimental — permitiendo atribuir el efecto observado a la causa específica que se está probando, no a factores externos."
+      },
+      {
+        "id": "science_q3",
+        "question": "El sesgo de confirmación es particularmente peligroso en la ciencia porque:",
+        "options": [
+          "Lleva a los científicos a publicar resultados negativos",
+          "Hace que los investigadores busquen evidencias que confirman lo que ya creen",
+          "Aumenta el costo de los experimentos innecesariamente",
+          "Impide la formulación de nuevas hipótesis"
+        ],
+        "answerIndex": 1,
+        "explanation": "El sesgo de confirmación lleva a los investigadores a buscar y valorar evidencias que confirman sus creencias y a minimizar las contradictorias. Por eso la ciencia es colectiva: la revisión por pares y la replicación corrigen el sesgo individual."
+      },
+      {
+        "id": "science_q4",
+        "question": "¿Cuál es la diferencia fundamental entre ciencia y tecnología?",
+        "options": [
+          "La ciencia usa matemáticas; la tecnología usa lenguaje natural",
+          "La ciencia busca comprender cómo funcionan las cosas; la tecnología aplica ese conocimiento para crear herramientas",
+          "La ciencia es financiada por el gobierno; la tecnología por la iniciativa privada",
+          "La ciencia produce teorías; la tecnología produce experimentos"
+        ],
+        "answerIndex": 1,
+        "explanation": "La ciencia busca verdad — comprender cómo funcionan las cosas. La tecnología busca utilidad — aplicar ese conocimiento para crear herramientas y sistemas. Las dos se alimentan mutuamente pero tienen objetivos distintos."
+      },
+      {
+        "id": "science_q5",
+        "question": "¿Qué tipos de preguntas están más allá del alcance del método científico?",
+        "options": [
+          "Preguntas sobre el comportamiento de partículas subatómicas",
+          "Preguntas sobre el origen del universo",
+          "Preguntas normativas, estéticas y metafísicas",
+          "Preguntas sobre fenómenos que no pueden observarse directamente"
+        ],
+        "answerIndex": 2,
+        "explanation": "Las preguntas normativas ('¿Qué debemos hacer?'), estéticas y metafísicas están más allá del método científico. La ciencia puede informar debates éticos, pero '¿Qué debemos valorar?' es filosófico, no científico."
+      }
+    ]
+  }
+}

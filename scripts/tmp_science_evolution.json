@@ -1,0 +1,279 @@
+{
+  "id": "science_evolution",
+  "trackId": "science_tech",
+  "order": 2,
+  "difficulty": 1,
+  "estimatedMinutes": 11,
+  "prerequisites": [],
+  "title": {
+    "pt": "Darwin e a Evolução",
+    "en": "Darwin and Evolution",
+    "es": "Darwin y la Evolución"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "Darwin e a Evolução",
+      "summary": "Poucas ideias na história humana foram tão revolucionárias quanto a evolução por seleção natural. Darwin não apenas explicou a diversidade da vida — ele mudou a posição da humanidade no cosmos, retirando-nos do centro de uma criação especial e nos colocando como um ramo entre inúmeros na árvore da vida. Entender a evolução é entender a base de toda a biologia moderna.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "A grande ideia de Darwin" },
+        { "type": "p", "text": "Charles Darwin publicou 'A Origem das Espécies' em 1859 após quase 20 anos de hesitação. A ideia central é elegante: organismos com variações hereditárias favoráveis ao ambiente sobrevivem e se reproduzem mais; os menos adaptados deixam menos descendentes. Ao longo de gerações, essa pressão acumula mudanças — e novas espécies emergem." },
+        { "type": "p", "text": "Darwin chamou esse processo de seleção natural, em analogia à seleção artificial que criadores de animais praticavam há milênios. A diferença é que na natureza não há um criador consciente escolhendo traços desejáveis — apenas o ambiente filtrando quem sobrevive e se reproduz." },
+        { "type": "h2", "text": "Os três pilares da seleção natural" },
+        { "type": "p", "text": "Para a seleção natural funcionar, três condições precisam ser satisfeitas. Primeiro: variação — indivíduos dentro de uma população devem diferir entre si em algum traço. Segundo: hereditariedade — essas diferenças devem ser transmissíveis aos descendentes. Terceiro: seleção diferencial — diferentes variantes devem ter taxas diferentes de sobrevivência e reprodução." },
+        { "type": "p", "text": "Quando essas condições existem, a evolução é inevitável — não é uma teoria, é uma consequência lógica. O debate não é se a evolução ocorre, mas como e em que velocidade. Darwin não sabia o mecanismo da hereditariedade; só com Mendel e depois com a descoberta do DNA essa peça se encaixou." },
+        { "type": "quote", "text": "Nada em biologia faz sentido exceto à luz da evolução.", "author": "Theodosius Dobzhansky" },
+        { "type": "h2", "text": "DNA: o código da vida" },
+        { "type": "p", "text": "Em 1953, Watson e Crick (com dados cruciais de Rosalind Franklin) descreveram a estrutura em dupla hélice do DNA. Isso explicou o mecanismo molecular da hereditariedade: genes são sequências de bases no DNA que codificam proteínas, e mutações são alterações nessas sequências. A evolução, traduzida para a linguagem molecular, é mudança na frequência de variantes genéticas em populações ao longo do tempo." },
+        { "type": "p", "text": "O genoma humano contém aproximadamente 3 bilhões de pares de bases e cerca de 20 mil genes. Compartilhamos 98,7% do DNA com chimpanzés — o que por si só é uma evidência poderosa de descendência comum. A diferença de 1,3% contém as mudanças que nos tornaram humanos nos últimos 6-7 milhões de anos." },
+        { "type": "h2", "text": "Equívocos comuns sobre evolução" },
+        { "type": "p", "text": "A evolução não é um progresso em direção à perfeição — é adaptação ao ambiente atual. Um peixe não é 'inferior' a um mamífero; é perfeitamente adaptado ao seu nicho. Além disso, evolução não tem propósito ou direção: não há 'intenção' de criar seres mais complexos. Complexidade emerge como efeito colateral, não como objetivo." },
+        { "type": "p", "text": "Outro equívoco: 'A teoria da evolução é apenas uma teoria.' Em ciência, 'teoria' não significa suposição — significa explicação sistematizada e bem testada de um fenômeno. A teoria da gravidade também é 'apenas uma teoria'. A evolução é tão estabelecida quanto qualquer outro fato científico." },
+        { "type": "h2", "text": "Por que a evolução importa além da biologia" },
+        { "type": "p", "text": "A lógica evolutiva se aplica a qualquer sistema com variação, hereditariedade e seleção. Algoritmos evolutivos em computação usam esse princípio para resolver problemas de otimização. Economistas como Friedrich Hayek usaram analogias evolutivas para descrever como mercados selecionam práticas eficientes." },
+        { "type": "p", "text": "Na medicina, a evolução é diretamente relevante: bactérias evoluem resistência a antibióticos exatamente pelo mesmo mecanismo que Darwin descreveu. Entender evolução é entender por que usar antibióticos até o final é importante, por que vírus mutam rapidamente, e por que cânceres são tão difíceis de tratar — células cancerosas também evoluem." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_evolution_q1",
+        "question": "Quais são os três pilares necessários para que a seleção natural funcione?",
+        "options": [
+          "Mutação, migração e deriva genética",
+          "Variação, hereditariedade e seleção diferencial",
+          "Adaptação, especiação e extinção",
+          "DNA, proteínas e ambiente"
+        ],
+        "answerIndex": 1,
+        "explanation": "Para a seleção natural funcionar precisam existir: variação entre indivíduos, hereditariedade (diferenças transmissíveis) e seleção diferencial (diferentes variantes com taxas distintas de sobrevivência e reprodução)."
+      },
+      {
+        "id": "science_evolution_q2",
+        "question": "O que a descoberta da estrutura do DNA em 1953 explicou sobre a evolução?",
+        "options": [
+          "Confirmou que a evolução ocorre apenas em populações grandes",
+          "Explicou o mecanismo molecular da hereditariedade — como variações são transmitidas",
+          "Provou que toda evolução é dirigida por mutações aleatórias",
+          "Mostrou que humanos e chimpanzés têm DNA idêntico"
+        ],
+        "answerIndex": 1,
+        "explanation": "A estrutura do DNA explicou o mecanismo molecular da hereditariedade: genes são sequências que codificam proteínas, mutações são alterações nessas sequências, e evolução é mudança na frequência de variantes genéticas em populações."
+      },
+      {
+        "id": "science_evolution_q3",
+        "question": "O que significa dizer que 'evolução não é progresso em direção à perfeição'?",
+        "options": [
+          "Que a evolução produz apenas simplificação, não complexidade",
+          "Que é adaptação ao ambiente atual, sem direção ou propósito",
+          "Que organismos mais antigos são superiores aos mais novos",
+          "Que a evolução não pode produzir novas espécies"
+        ],
+        "answerIndex": 1,
+        "explanation": "Evolução é adaptação ao ambiente atual, sem propósito ou direção. Complexidade emerge como efeito colateral, não como objetivo. Um peixe não é 'inferior' a um mamífero — é perfeitamente adaptado ao seu nicho."
+      },
+      {
+        "id": "science_evolution_q4",
+        "question": "Por que a resistência bacteriana a antibióticos é um exemplo direto de evolução?",
+        "options": [
+          "Porque bactérias aprendem a neutralizar antibióticos por experiência",
+          "Porque antibióticos causam mutações benéficas em bactérias",
+          "Porque bactérias com variações resistentes sobrevivem e se reproduzem mais sob pressão do antibiótico",
+          "Porque a resistência é transmitida entre bactérias de espécies diferentes"
+        ],
+        "answerIndex": 2,
+        "explanation": "Bactérias com variações genéticas que conferem resistência sobrevivem e se reproduzem quando expostas a antibióticos — seleção natural clássica. O uso incompleto de antibióticos acelera esse processo ao eliminar as bactérias sensíveis e deixar as resistentes se multiplicarem."
+      },
+      {
+        "id": "science_evolution_q5",
+        "question": "Por que dizer 'evolução é apenas uma teoria' não é uma crítica válida?",
+        "options": [
+          "Porque evolução já foi elevada ao status de lei científica",
+          "Porque em ciência 'teoria' significa explicação sistematizada e bem testada, não suposição",
+          "Porque Darwin nunca usou a palavra 'teoria' para descrever sua ideia",
+          "Porque a evolução foi comprovada matematicamente"
+        ],
+        "answerIndex": 1,
+        "explanation": "Em ciência, 'teoria' não significa suposição — significa explicação sistematizada e bem testada de um fenômeno. A teoria da gravidade também é 'apenas uma teoria'. A evolução é tão estabelecida quanto qualquer outro fato científico."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Darwin and Evolution",
+      "summary": "Few ideas in human history have been as revolutionary as evolution by natural selection. Darwin didn't just explain the diversity of life — he changed humanity's position in the cosmos, removing us from the center of a special creation and placing us as one branch among countless others in the tree of life. Understanding evolution is understanding the foundation of all modern biology.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Darwin's big idea" },
+        { "type": "p", "text": "Charles Darwin published 'On the Origin of Species' in 1859 after nearly 20 years of hesitation. The central idea is elegant: organisms with heritable variations favorable to their environment survive and reproduce more; less adapted ones leave fewer descendants. Over generations, this pressure accumulates changes — and new species emerge." },
+        { "type": "p", "text": "Darwin called this process natural selection, in analogy to the artificial selection that animal breeders had practiced for millennia. The difference is that in nature there's no conscious breeder choosing desirable traits — just the environment filtering who survives and reproduces." },
+        { "type": "h2", "text": "The three pillars of natural selection" },
+        { "type": "p", "text": "For natural selection to work, three conditions must be met. First: variation — individuals within a population must differ from each other in some trait. Second: heredity — these differences must be transmissible to descendants. Third: differential selection — different variants must have different rates of survival and reproduction." },
+        { "type": "p", "text": "When these conditions exist, evolution is inevitable — it's not a theory but a logical consequence. The debate isn't whether evolution occurs, but how and at what speed. Darwin didn't know the mechanism of heredity; only with Mendel and later the discovery of DNA did this piece fall into place." },
+        { "type": "quote", "text": "Nothing in biology makes sense except in the light of evolution.", "author": "Theodosius Dobzhansky" },
+        { "type": "h2", "text": "DNA: the code of life" },
+        { "type": "p", "text": "In 1953, Watson and Crick (with crucial data from Rosalind Franklin) described DNA's double helix structure. This explained heredity's molecular mechanism: genes are sequences of bases in DNA that encode proteins, and mutations are changes in those sequences. Evolution, translated into molecular language, is change in the frequency of genetic variants in populations over time." },
+        { "type": "p", "text": "The human genome contains approximately 3 billion base pairs and about 20,000 genes. We share 98.7% of our DNA with chimpanzees — itself powerful evidence of common descent. The 1.3% difference contains the changes that made us human over the last 6-7 million years." },
+        { "type": "h2", "text": "Common misconceptions about evolution" },
+        { "type": "p", "text": "Evolution is not progress toward perfection — it's adaptation to the current environment. A fish isn't 'inferior' to a mammal; it's perfectly adapted to its niche. Moreover, evolution has no purpose or direction: there's no 'intention' to create more complex beings. Complexity emerges as a side effect, not as a goal." },
+        { "type": "p", "text": "Another misconception: 'The theory of evolution is just a theory.' In science, 'theory' doesn't mean guess — it means a systematized, well-tested explanation of a phenomenon. The theory of gravity is also 'just a theory.' Evolution is as established as any other scientific fact." },
+        { "type": "h2", "text": "Why evolution matters beyond biology" },
+        { "type": "p", "text": "Evolutionary logic applies to any system with variation, heredity, and selection. Evolutionary algorithms in computing use this principle to solve optimization problems. Economists like Friedrich Hayek used evolutionary analogies to describe how markets select efficient practices." },
+        { "type": "p", "text": "In medicine, evolution is directly relevant: bacteria evolve antibiotic resistance by exactly the same mechanism Darwin described. Understanding evolution means understanding why finishing antibiotic courses matters, why viruses mutate rapidly, and why cancers are so hard to treat — cancer cells also evolve." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_evolution_q1",
+        "question": "What are the three pillars required for natural selection to work?",
+        "options": [
+          "Mutation, migration, and genetic drift",
+          "Variation, heredity, and differential selection",
+          "Adaptation, speciation, and extinction",
+          "DNA, proteins, and environment"
+        ],
+        "answerIndex": 1,
+        "explanation": "Natural selection requires: variation among individuals, heredity (transmissible differences), and differential selection (different variants with distinct survival and reproduction rates)."
+      },
+      {
+        "id": "science_evolution_q2",
+        "question": "What did the discovery of DNA's structure in 1953 explain about evolution?",
+        "options": [
+          "It confirmed that evolution only occurs in large populations",
+          "It explained the molecular mechanism of heredity — how variations are transmitted",
+          "It proved all evolution is driven by random mutations",
+          "It showed humans and chimpanzees have identical DNA"
+        ],
+        "answerIndex": 1,
+        "explanation": "DNA's structure explained the molecular mechanism of heredity: genes are sequences encoding proteins, mutations are changes in those sequences, and evolution is change in the frequency of genetic variants in populations."
+      },
+      {
+        "id": "science_evolution_q3",
+        "question": "What does it mean to say 'evolution is not progress toward perfection'?",
+        "options": [
+          "That evolution only produces simplification, not complexity",
+          "That it's adaptation to the current environment, without direction or purpose",
+          "That older organisms are superior to newer ones",
+          "That evolution cannot produce new species"
+        ],
+        "answerIndex": 1,
+        "explanation": "Evolution is adaptation to the current environment, without purpose or direction. Complexity emerges as a side effect, not a goal. A fish isn't 'inferior' to a mammal — it's perfectly adapted to its niche."
+      },
+      {
+        "id": "science_evolution_q4",
+        "question": "Why is bacterial antibiotic resistance a direct example of evolution?",
+        "options": [
+          "Because bacteria learn to neutralize antibiotics through experience",
+          "Because antibiotics cause beneficial mutations in bacteria",
+          "Because bacteria with resistant variations survive and reproduce more under antibiotic pressure",
+          "Because resistance is transmitted between bacteria of different species"
+        ],
+        "answerIndex": 2,
+        "explanation": "Bacteria with genetic variations conferring resistance survive and reproduce when exposed to antibiotics — classic natural selection. Incomplete antibiotic use accelerates this by eliminating sensitive bacteria and letting resistant ones multiply."
+      },
+      {
+        "id": "science_evolution_q5",
+        "question": "Why is saying 'evolution is just a theory' not a valid criticism?",
+        "options": [
+          "Because evolution has been elevated to the status of scientific law",
+          "Because in science 'theory' means a systematized, well-tested explanation, not a guess",
+          "Because Darwin never used the word 'theory' to describe his idea",
+          "Because evolution has been proven mathematically"
+        ],
+        "answerIndex": 1,
+        "explanation": "In science, 'theory' doesn't mean guess — it means a systematized, well-tested explanation of a phenomenon. The theory of gravity is also 'just a theory.' Evolution is as established as any other scientific fact."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Darwin y la Evolución",
+      "summary": "Pocas ideas en la historia humana han sido tan revolucionarias como la evolución por selección natural. Darwin no solo explicó la diversidad de la vida — cambió la posición de la humanidad en el cosmos, sacándonos del centro de una creación especial y situándonos como una rama entre innumerables en el árbol de la vida. Entender la evolución es entender la base de toda la biología moderna.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "La gran idea de Darwin" },
+        { "type": "p", "text": "Charles Darwin publicó 'El origen de las especies' en 1859 tras casi 20 años de dudas. La idea central es elegante: los organismos con variaciones hereditarias favorables al entorno sobreviven y se reproducen más; los menos adaptados dejan menos descendientes. A lo largo de generaciones, esta presión acumula cambios — y emergen nuevas especies." },
+        { "type": "p", "text": "Darwin llamó a este proceso selección natural, en analogía con la selección artificial que los criadores de animales practicaban desde hacía milenios. La diferencia es que en la naturaleza no hay un criador consciente eligiendo rasgos deseables — solo el entorno filtrando quién sobrevive y se reproduce." },
+        { "type": "h2", "text": "Los tres pilares de la selección natural" },
+        { "type": "p", "text": "Para que la selección natural funcione, deben cumplirse tres condiciones. Primero: variación — los individuos dentro de una población deben diferir entre sí en algún rasgo. Segundo: herencia — estas diferencias deben ser transmisibles a los descendientes. Tercero: selección diferencial — diferentes variantes deben tener tasas distintas de supervivencia y reproducción." },
+        { "type": "p", "text": "Cuando estas condiciones existen, la evolución es inevitable — no es una teoría, es una consecuencia lógica. El debate no es si la evolución ocurre, sino cómo y a qué velocidad. Darwin no conocía el mecanismo de la herencia; solo con Mendel y luego con el descubrimiento del ADN encajó esta pieza." },
+        { "type": "quote", "text": "Nada en biología tiene sentido excepto a la luz de la evolución.", "author": "Theodosius Dobzhansky" },
+        { "type": "h2", "text": "ADN: el código de la vida" },
+        { "type": "p", "text": "En 1953, Watson y Crick (con datos cruciales de Rosalind Franklin) describieron la estructura de doble hélice del ADN. Esto explicó el mecanismo molecular de la herencia: los genes son secuencias de bases en el ADN que codifican proteínas, y las mutaciones son alteraciones en esas secuencias. La evolución, traducida al lenguaje molecular, es el cambio en la frecuencia de variantes genéticas en poblaciones a lo largo del tiempo." },
+        { "type": "p", "text": "El genoma humano contiene aproximadamente 3 mil millones de pares de bases y unos 20.000 genes. Compartimos el 98,7% del ADN con los chimpancés — evidencia poderosa de descendencia común. El 1,3% de diferencia contiene los cambios que nos hicieron humanos en los últimos 6-7 millones de años." },
+        { "type": "h2", "text": "Conceptos erróneos comunes sobre la evolución" },
+        { "type": "p", "text": "La evolución no es un progreso hacia la perfección — es adaptación al entorno actual. Un pez no es 'inferior' a un mamífero; está perfectamente adaptado a su nicho. Además, la evolución no tiene propósito ni dirección: no hay 'intención' de crear seres más complejos. La complejidad emerge como efecto secundario, no como objetivo." },
+        { "type": "p", "text": "Otro concepto erróneo: 'La teoría de la evolución es solo una teoría.' En ciencia, 'teoría' no significa suposición — significa explicación sistematizada y bien probada de un fenómeno. La teoría de la gravedad también es 'solo una teoría'. La evolución está tan establecida como cualquier otro hecho científico." },
+        { "type": "h2", "text": "Por qué la evolución importa más allá de la biología" },
+        { "type": "p", "text": "La lógica evolutiva se aplica a cualquier sistema con variación, herencia y selección. Los algoritmos evolutivos en computación usan este principio para resolver problemas de optimización. Economistas como Friedrich Hayek usaron analogías evolutivas para describir cómo los mercados seleccionan prácticas eficientes." },
+        { "type": "p", "text": "En medicina, la evolución es directamente relevante: las bacterias desarrollan resistencia a los antibióticos exactamente por el mismo mecanismo que describió Darwin. Entender la evolución es entender por qué terminar el tratamiento antibiótico es importante, por qué los virus mutan rápidamente y por qué los cánceres son tan difíciles de tratar — las células cancerosas también evolucionan." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_evolution_q1",
+        "question": "¿Cuáles son los tres pilares necesarios para que funcione la selección natural?",
+        "options": [
+          "Mutación, migración y deriva genética",
+          "Variación, herencia y selección diferencial",
+          "Adaptación, especiación y extinción",
+          "ADN, proteínas y entorno"
+        ],
+        "answerIndex": 1,
+        "explanation": "Para que funcione la selección natural se necesitan: variación entre individuos, herencia (diferencias transmisibles) y selección diferencial (distintas variantes con tasas distintas de supervivencia y reproducción)."
+      },
+      {
+        "id": "science_evolution_q2",
+        "question": "¿Qué explicó el descubrimiento de la estructura del ADN en 1953 sobre la evolución?",
+        "options": [
+          "Confirmó que la evolución solo ocurre en poblaciones grandes",
+          "Explicó el mecanismo molecular de la herencia — cómo se transmiten las variaciones",
+          "Probó que toda la evolución es impulsada por mutaciones aleatorias",
+          "Mostró que humanos y chimpancés tienen ADN idéntico"
+        ],
+        "answerIndex": 1,
+        "explanation": "La estructura del ADN explicó el mecanismo molecular de la herencia: los genes son secuencias que codifican proteínas, las mutaciones son cambios en esas secuencias, y la evolución es cambio en la frecuencia de variantes genéticas en poblaciones."
+      },
+      {
+        "id": "science_evolution_q3",
+        "question": "¿Qué significa decir que 'la evolución no es un progreso hacia la perfección'?",
+        "options": [
+          "Que la evolución solo produce simplificación, no complejidad",
+          "Que es adaptación al entorno actual, sin dirección ni propósito",
+          "Que los organismos más antiguos son superiores a los más nuevos",
+          "Que la evolución no puede producir nuevas especies"
+        ],
+        "answerIndex": 1,
+        "explanation": "La evolución es adaptación al entorno actual, sin propósito ni dirección. La complejidad emerge como efecto secundario, no como objetivo. Un pez no es 'inferior' a un mamífero — está perfectamente adaptado a su nicho."
+      },
+      {
+        "id": "science_evolution_q4",
+        "question": "¿Por qué la resistencia bacteriana a los antibióticos es un ejemplo directo de evolución?",
+        "options": [
+          "Porque las bacterias aprenden a neutralizar antibióticos por experiencia",
+          "Porque los antibióticos causan mutaciones beneficiosas en las bacterias",
+          "Porque las bacterias con variaciones resistentes sobreviven y se reproducen más bajo la presión del antibiótico",
+          "Porque la resistencia se transmite entre bacterias de distintas especies"
+        ],
+        "answerIndex": 2,
+        "explanation": "Las bacterias con variaciones genéticas que confieren resistencia sobreviven y se reproducen cuando se exponen a antibióticos — selección natural clásica. El uso incompleto de antibióticos acelera este proceso al eliminar las bacterias sensibles y dejar que las resistentes se multipliquen."
+      },
+      {
+        "id": "science_evolution_q5",
+        "question": "¿Por qué decir 'la evolución es solo una teoría' no es una crítica válida?",
+        "options": [
+          "Porque la evolución ya ha sido elevada al estatus de ley científica",
+          "Porque en ciencia 'teoría' significa explicación sistematizada y bien probada, no suposición",
+          "Porque Darwin nunca usó la palabra 'teoría' para describir su idea",
+          "Porque la evolución ha sido demostrada matemáticamente"
+        ],
+        "answerIndex": 1,
+        "explanation": "En ciencia, 'teoría' no significa suposición — significa explicación sistematizada y bien probada de un fenómeno. La teoría de la gravedad también es 'solo una teoría'. La evolución está tan establecida como cualquier otro hecho científico."
+      }
+    ]
+  }
+}

@@ -1,0 +1,270 @@
+{
+  "id": "science_biotech",
+  "trackId": "science_tech",
+  "order": 8,
+  "difficulty": 3,
+  "estimatedMinutes": 11,
+  "prerequisites": [],
+  "title": {
+    "pt": "Biotecnologia e CRISPR",
+    "en": "Biotechnology and CRISPR",
+    "es": "Biotecnología y CRISPR"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "Biotecnologia e CRISPR",
+      "summary": "Pela primeira vez na história, temos ferramentas para editar deliberadamente o código da vida. A tecnologia CRISPR-Cas9 permite cortar e reescrever sequências específicas de DNA com precisão, velocidade e custo sem precedentes. Isso abre possibilidades médicas extraordinárias — e questões éticas que a humanidade nunca precisou enfrentar antes.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "O que é biotecnologia?" },
+        { "type": "p", "text": "Biotecnologia é o uso de sistemas biológicos ou organismos vivos para desenvolver produtos e processos. Na forma mais ampla, é tão antiga quanto a fermentação de cerveja e o cultivo de plantas. Na forma moderna, começa com a descoberta da estrutura do DNA em 1953 e acelera com a engenharia genética dos anos 1970 — a capacidade de manipular genes diretamente." },
+        { "type": "p", "text": "A primeira grande aplicação prática foi a produção de insulina humana por bactérias geneticamente modificadas, aprovada em 1982. Antes, insulina para diabéticos era extraída de pâncreas de porcos — cara, limitada e com risco de reação imunológica. A engenharia genética tornou a insulina humana abundante e acessível." },
+        { "type": "h2", "text": "CRISPR-Cas9: tesouras moleculares" },
+        { "type": "p", "text": "CRISPR-Cas9 é uma tecnologia de edição genética desenvolvida a partir de um mecanismo natural de defesa de bactérias contra vírus. Jennifer Doudna e Emmanuelle Charpentier adaptaram esse sistema para editar DNA de qualquer organismo — trabalho que rendeu o Nobel de Química de 2020." },
+        { "type": "p", "text": "O funcionamento é elegante: uma sequência de RNA 'guia' a proteína Cas9 até o local exato do DNA a ser cortado. Após o corte, a célula repara o DNA — e nesse processo, pesquisadores podem inserir, deletar ou substituir sequências genéticas específicas. A precisão, velocidade e baixo custo em comparação com técnicas anteriores foram revolucionários." },
+        { "type": "quote", "text": "CRISPR nos dá um par de tesouras moleculares para o código da vida — mais preciso, mais rápido, mais barato que qualquer coisa antes.", "author": "Jennifer Doudna" },
+        { "type": "h2", "text": "Aplicações médicas transformadoras" },
+        { "type": "p", "text": "As possibilidades médicas são vastas. Doenças genéticas causadas por um único gene defeituoso — anemia falciforme, distrofia muscular, fibrose cística — são candidatas naturais para cura por edição genética. Em 2023, a FDA aprovou o primeiro tratamento baseado em CRISPR para anemia falciforme — uma cura funcional para uma doença que afeta milhões." },
+        { "type": "p", "text": "No campo do câncer, terapias que editam células do sistema imunológico para reconhecer e atacar tumores específicos estão em testes clínicos avançados. E pesquisas sobre resistência a infecções — editando células humanas para serem resistentes ao HIV — exploram fronteiras antes inimagináveis." },
+        { "type": "h2", "text": "A linha vermelha ética: edição de linhagem germinativa" },
+        { "type": "p", "text": "Há uma distinção crucial em bioética: edição somática (células não-reprodutivas de um indivíduo, alterações não hereditárias) versus edição de linhagem germinativa (células reprodutivas ou embriões, alterações transmissíveis a todas as gerações futuras). A primeira é amplamente aceita em contextos terapêuticos; a segunda é profundamente controversa." },
+        { "type": "p", "text": "Em 2018, o cientista chinês He Jiankui anunciou ter criado os primeiros bebês geneticamente editados — gêmeas com gene modificado para resistência ao HIV. O choque foi global: a comunidade científica condenou unanimemente a ação como prematura, irresponsável e eticamente inaceitável. He foi preso. O caso levantou a questão central: quem decide o que é 'melhoria' aceitável do genoma humano?" }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_biotech_q1",
+        "question": "Qual foi a primeira grande aplicação prática da engenharia genética moderna?",
+        "options": [
+          "Criação de organismos geneticamente modificados para agricultura",
+          "Produção de insulina humana por bactérias geneticamente modificadas",
+          "Clonagem do primeiro mamífero (ovelha Dolly)",
+          "Sequenciamento do genoma humano completo"
+        ],
+        "answerIndex": 1,
+        "explanation": "A produção de insulina humana por bactérias geneticamente modificadas, aprovada em 1982, foi a primeira grande aplicação prática. Tornou a insulina abundante e acessível para diabéticos de todo o mundo."
+      },
+      {
+        "id": "science_biotech_q2",
+        "question": "Como a tecnologia CRISPR-Cas9 funciona?",
+        "options": [
+          "Injeta DNA novo diretamente nas células sem modificar o existente",
+          "Um RNA guia a proteína Cas9 ao local exato do DNA para corte e edição",
+          "Usa vírus para transportar genes novos para dentro das células",
+          "Remove genes defeituosos através de processos químicos seletivos"
+        ],
+        "answerIndex": 1,
+        "explanation": "Um RNA guia a proteína Cas9 até o local exato do DNA a ser cortado. Após o corte, a célula repara o DNA — e nesse processo, pesquisadores podem inserir, deletar ou substituir sequências específicas."
+      },
+      {
+        "id": "science_biotech_q3",
+        "question": "Qual é a diferença ética fundamental entre edição somática e edição de linhagem germinativa?",
+        "options": [
+          "Edição somática é cara; edição germinativa é acessível",
+          "Edição somática altera células de um indivíduo; edição germinativa é hereditária e afeta gerações futuras",
+          "Edição somática usa CRISPR; edição germinativa usa técnicas mais antigas",
+          "Edição somática é permitida apenas para animais; germinativa para humanos"
+        ],
+        "answerIndex": 1,
+        "explanation": "Edição somática altera células não-reprodutivas — mudanças não hereditárias, amplamente aceitas em contextos terapêuticos. Edição germinativa altera células reprodutivas ou embriões — mudanças transmissíveis a todas as gerações futuras, profundamente controversa."
+      },
+      {
+        "id": "science_biotech_q4",
+        "question": "Por que o caso do cientista He Jiankui foi considerado eticamente inaceitável?",
+        "options": [
+          "Porque usou CRISPR sem patente, violando direitos de propriedade intelectual",
+          "Porque criou bebês com edição de linhagem germinativa prematura e sem consenso ético",
+          "Porque modificou genes sem aprovação do governo chinês",
+          "Porque seus resultados científicos foram considerados fraudulentos"
+        ],
+        "answerIndex": 1,
+        "explanation": "He Jiankui criou os primeiros bebês com genoma editado (edição germinativa) para resistência ao HIV — ação considerada prematura, irresponsável e eticamente inaceitável pela comunidade científica global. Foi preso."
+      },
+      {
+        "id": "science_biotech_q5",
+        "question": "Qual doença recebeu o primeiro tratamento baseado em CRISPR aprovado pelo FDA em 2023?",
+        "options": [
+          "Fibrose cística",
+          "Distrofia muscular de Duchenne",
+          "Anemia falciforme",
+          "Doença de Huntington"
+        ],
+        "answerIndex": 2,
+        "explanation": "Em 2023, a FDA aprovou o primeiro tratamento baseado em CRISPR para anemia falciforme — uma doença genética que afeta milhões, resultando em uma cura funcional através de edição das células do próprio paciente."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Biotechnology and CRISPR",
+      "summary": "For the first time in history, we have tools to deliberately edit the code of life. CRISPR-Cas9 technology allows cutting and rewriting specific DNA sequences with unprecedented precision, speed, and cost. This opens extraordinary medical possibilities — and ethical questions humanity has never had to face before.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "What is biotechnology?" },
+        { "type": "p", "text": "Biotechnology is the use of biological systems or living organisms to develop products and processes. In its broadest form, it's as old as beer fermentation and crop cultivation. In modern form, it begins with the discovery of DNA's structure in 1953 and accelerates with genetic engineering of the 1970s — the ability to manipulate genes directly." },
+        { "type": "p", "text": "The first major practical application was the production of human insulin by genetically modified bacteria, approved in 1982. Before, insulin for diabetics was extracted from pig pancreases — expensive, limited, and with risk of immune reaction. Genetic engineering made human insulin abundant and accessible." },
+        { "type": "h2", "text": "CRISPR-Cas9: molecular scissors" },
+        { "type": "p", "text": "CRISPR-Cas9 is a gene editing technology developed from bacteria's natural defense mechanism against viruses. Jennifer Doudna and Emmanuelle Charpentier adapted this system to edit DNA from any organism — work that earned the 2020 Nobel Prize in Chemistry." },
+        { "type": "p", "text": "The operation is elegant: an RNA sequence 'guides' the Cas9 protein to the exact DNA location to be cut. After the cut, the cell repairs the DNA — and in that process, researchers can insert, delete, or replace specific genetic sequences. The precision, speed, and low cost compared to previous techniques were revolutionary." },
+        { "type": "quote", "text": "CRISPR gives us a pair of molecular scissors for the code of life — more precise, faster, cheaper than anything before.", "author": "Jennifer Doudna" },
+        { "type": "h2", "text": "Transformative medical applications" },
+        { "type": "p", "text": "Medical possibilities are vast. Genetic diseases caused by a single defective gene — sickle cell disease, muscular dystrophy, cystic fibrosis — are natural candidates for gene editing cures. In 2023, the FDA approved the first CRISPR-based treatment for sickle cell disease — a functional cure for a disease affecting millions." },
+        { "type": "p", "text": "In cancer, therapies that edit immune system cells to recognize and attack specific tumors are in advanced clinical trials. And research on infection resistance — editing human cells to be resistant to HIV — explores previously unimaginable frontiers." },
+        { "type": "h2", "text": "The ethical red line: germline editing" },
+        { "type": "p", "text": "There's a crucial distinction in bioethics: somatic editing (non-reproductive cells of an individual, non-heritable changes) versus germline editing (reproductive cells or embryos, changes transmissible to all future generations). The former is widely accepted in therapeutic contexts; the latter is profoundly controversial." },
+        { "type": "p", "text": "In 2018, Chinese scientist He Jiankui announced he had created the first genetically edited babies — twins with a modified gene for HIV resistance. The shock was global: the scientific community unanimously condemned the action as premature, irresponsible, and ethically unacceptable. He was imprisoned. The case raised the central question: who decides what 'improvement' of the human genome is acceptable?" }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_biotech_q1",
+        "question": "What was the first major practical application of modern genetic engineering?",
+        "options": [
+          "Creating genetically modified organisms for agriculture",
+          "Production of human insulin by genetically modified bacteria",
+          "Cloning the first mammal (Dolly the sheep)",
+          "Sequencing the complete human genome"
+        ],
+        "answerIndex": 1,
+        "explanation": "Production of human insulin by genetically modified bacteria, approved in 1982, was the first major practical application. It made insulin abundant and accessible for diabetics worldwide."
+      },
+      {
+        "id": "science_biotech_q2",
+        "question": "How does CRISPR-Cas9 technology work?",
+        "options": [
+          "It injects new DNA directly into cells without modifying existing DNA",
+          "An RNA guides the Cas9 protein to the exact DNA location for cutting and editing",
+          "It uses viruses to transport new genes into cells",
+          "It removes defective genes through selective chemical processes"
+        ],
+        "answerIndex": 1,
+        "explanation": "An RNA guides the Cas9 protein to the exact DNA location to be cut. After the cut, the cell repairs the DNA — and in that process, researchers can insert, delete, or replace specific sequences."
+      },
+      {
+        "id": "science_biotech_q3",
+        "question": "What is the fundamental ethical difference between somatic and germline editing?",
+        "options": [
+          "Somatic editing is expensive; germline editing is accessible",
+          "Somatic editing alters cells of an individual; germline editing is heritable and affects future generations",
+          "Somatic editing uses CRISPR; germline editing uses older techniques",
+          "Somatic editing is only permitted for animals; germline editing for humans"
+        ],
+        "answerIndex": 1,
+        "explanation": "Somatic editing alters non-reproductive cells — non-heritable changes, widely accepted in therapeutic contexts. Germline editing alters reproductive cells or embryos — changes transmissible to all future generations, profoundly controversial."
+      },
+      {
+        "id": "science_biotech_q4",
+        "question": "Why was scientist He Jiankui's case considered ethically unacceptable?",
+        "options": [
+          "Because he used CRISPR without a patent, violating intellectual property rights",
+          "Because he created babies with premature germline editing without ethical consensus",
+          "Because he modified genes without Chinese government approval",
+          "Because his scientific results were considered fraudulent"
+        ],
+        "answerIndex": 1,
+        "explanation": "He Jiankui created the first babies with edited genomes (germline editing) for HIV resistance — an action considered premature, irresponsible, and ethically unacceptable by the global scientific community. He was imprisoned."
+      },
+      {
+        "id": "science_biotech_q5",
+        "question": "Which disease received the first FDA-approved CRISPR-based treatment in 2023?",
+        "options": [
+          "Cystic fibrosis",
+          "Duchenne muscular dystrophy",
+          "Sickle cell disease",
+          "Huntington's disease"
+        ],
+        "answerIndex": 2,
+        "explanation": "In 2023, the FDA approved the first CRISPR-based treatment for sickle cell disease — a genetic disease affecting millions, resulting in a functional cure through editing the patient's own cells."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Biotecnología y CRISPR",
+      "summary": "Por primera vez en la historia, tenemos herramientas para editar deliberadamente el código de la vida. La tecnología CRISPR-Cas9 permite cortar y reescribir secuencias específicas de ADN con una precisión, velocidad y costo sin precedentes. Esto abre posibilidades médicas extraordinarias — y preguntas éticas que la humanidad nunca antes había tenido que enfrentar.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "¿Qué es la biotecnología?" },
+        { "type": "p", "text": "La biotecnología es el uso de sistemas biológicos u organismos vivos para desarrollar productos y procesos. En su forma más amplia, es tan antigua como la fermentación de cerveza y el cultivo de plantas. En su forma moderna, comienza con el descubrimiento de la estructura del ADN en 1953 y se acelera con la ingeniería genética de los años 1970 — la capacidad de manipular genes directamente." },
+        { "type": "p", "text": "La primera gran aplicación práctica fue la producción de insulina humana por bacterias genéticamente modificadas, aprobada en 1982. Antes, la insulina para diabéticos se extraía del páncreas de cerdos — cara, limitada y con riesgo de reacción inmunológica. La ingeniería genética hizo que la insulina humana fuera abundante y accesible." },
+        { "type": "h2", "text": "CRISPR-Cas9: tijeras moleculares" },
+        { "type": "p", "text": "CRISPR-Cas9 es una tecnología de edición genética desarrollada a partir de un mecanismo natural de defensa de las bacterias contra los virus. Jennifer Doudna y Emmanuelle Charpentier adaptaron este sistema para editar el ADN de cualquier organismo — trabajo que les valió el Premio Nobel de Química de 2020." },
+        { "type": "p", "text": "El funcionamiento es elegante: una secuencia de ARN 'guía' a la proteína Cas9 hasta el lugar exacto del ADN que debe cortarse. Tras el corte, la célula repara el ADN — y en ese proceso, los investigadores pueden insertar, eliminar o sustituir secuencias genéticas específicas. La precisión, velocidad y bajo costo en comparación con técnicas anteriores fueron revolucionarios." },
+        { "type": "quote", "text": "CRISPR nos da un par de tijeras moleculares para el código de la vida — más preciso, más rápido, más barato que cualquier cosa anterior.", "author": "Jennifer Doudna" },
+        { "type": "h2", "text": "Aplicaciones médicas transformadoras" },
+        { "type": "p", "text": "Las posibilidades médicas son vastas. Las enfermedades genéticas causadas por un único gen defectuoso — anemia de células falciformes, distrofia muscular, fibrosis quística — son candidatas naturales para su cura mediante edición genética. En 2023, la FDA aprobó el primer tratamiento basado en CRISPR para la anemia de células falciformes — una cura funcional para una enfermedad que afecta a millones." },
+        { "type": "p", "text": "En el campo del cáncer, las terapias que editan células del sistema inmunológico para reconocer y atacar tumores específicos están en ensayos clínicos avanzados. Y la investigación sobre resistencia a infecciones — editando células humanas para que sean resistentes al VIH — explora fronteras antes inimaginables." },
+        { "type": "h2", "text": "La línea roja ética: edición de línea germinal" },
+        { "type": "p", "text": "Existe una distinción crucial en bioética: edición somática (células no reproductivas de un individuo, cambios no hereditarios) versus edición de línea germinal (células reproductivas o embriones, cambios transmisibles a todas las generaciones futuras). La primera es ampliamente aceptada en contextos terapéuticos; la segunda es profundamente controvertida." },
+        { "type": "p", "text": "En 2018, el científico chino He Jiankui anunció haber creado los primeros bebés genéticamente editados — gemelas con un gen modificado para la resistencia al VIH. El impacto fue global: la comunidad científica condenó unánimemente la acción como prematura, irresponsable y éticamente inaceptable. He fue encarcelado. El caso planteó la pregunta central: ¿quién decide qué 'mejora' del genoma humano es aceptable?" }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_biotech_q1",
+        "question": "¿Cuál fue la primera gran aplicación práctica de la ingeniería genética moderna?",
+        "options": [
+          "Creación de organismos genéticamente modificados para la agricultura",
+          "Producción de insulina humana por bacterias genéticamente modificadas",
+          "Clonación del primer mamífero (la oveja Dolly)",
+          "Secuenciación del genoma humano completo"
+        ],
+        "answerIndex": 1,
+        "explanation": "La producción de insulina humana por bacterias genéticamente modificadas, aprobada en 1982, fue la primera gran aplicación práctica. Hizo que la insulina fuera abundante y accesible para diabéticos de todo el mundo."
+      },
+      {
+        "id": "science_biotech_q2",
+        "question": "¿Cómo funciona la tecnología CRISPR-Cas9?",
+        "options": [
+          "Inyecta ADN nuevo directamente en las células sin modificar el existente",
+          "Un ARN guía a la proteína Cas9 al lugar exacto del ADN para corte y edición",
+          "Usa virus para transportar nuevos genes al interior de las células",
+          "Elimina genes defectuosos mediante procesos químicos selectivos"
+        ],
+        "answerIndex": 1,
+        "explanation": "Un ARN guía a la proteína Cas9 hasta el lugar exacto del ADN que debe cortarse. Tras el corte, la célula repara el ADN — y en ese proceso, los investigadores pueden insertar, eliminar o sustituir secuencias específicas."
+      },
+      {
+        "id": "science_biotech_q3",
+        "question": "¿Cuál es la diferencia ética fundamental entre la edición somática y la de línea germinal?",
+        "options": [
+          "La edición somática es cara; la germinal es accesible",
+          "La edición somática altera células de un individuo; la germinal es hereditaria y afecta a generaciones futuras",
+          "La edición somática usa CRISPR; la germinal usa técnicas más antiguas",
+          "La edición somática solo está permitida para animales; la germinal para humanos"
+        ],
+        "answerIndex": 1,
+        "explanation": "La edición somática altera células no reproductivas — cambios no hereditarios, ampliamente aceptados en contextos terapéuticos. La edición germinal altera células reproductivas o embriones — cambios transmisibles a todas las generaciones futuras, profundamente controvertida."
+      },
+      {
+        "id": "science_biotech_q4",
+        "question": "¿Por qué el caso del científico He Jiankui se consideró éticamente inaceptable?",
+        "options": [
+          "Porque usó CRISPR sin patente, violando derechos de propiedad intelectual",
+          "Porque creó bebés con edición de línea germinal prematura y sin consenso ético",
+          "Porque modificó genes sin aprobación del gobierno chino",
+          "Porque sus resultados científicos fueron considerados fraudulentos"
+        ],
+        "answerIndex": 1,
+        "explanation": "He Jiankui creó los primeros bebés con genoma editado (edición germinal) para resistencia al VIH — acción considerada prematura, irresponsable y éticamente inaceptable por la comunidad científica global. Fue encarcelado."
+      },
+      {
+        "id": "science_biotech_q5",
+        "question": "¿Qué enfermedad recibió el primer tratamiento basado en CRISPR aprobado por la FDA en 2023?",
+        "options": [
+          "Fibrosis quística",
+          "Distrofia muscular de Duchenne",
+          "Anemia de células falciformes",
+          "Enfermedad de Huntington"
+        ],
+        "answerIndex": 2,
+        "explanation": "En 2023, la FDA aprobó el primer tratamiento basado en CRISPR para la anemia de células falciformes — una enfermedad genética que afecta a millones, logrando una cura funcional mediante la edición de las células del propio paciente."
+      }
+    ]
+  }
+}

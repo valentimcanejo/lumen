@@ -1,0 +1,270 @@
+{
+  "id": "science_computing",
+  "trackId": "science_tech",
+  "order": 4,
+  "difficulty": 1,
+  "estimatedMinutes": 11,
+  "prerequisites": [],
+  "title": {
+    "pt": "A Era da Computação",
+    "en": "The Computing Era",
+    "es": "La Era de la Computación"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "A Era da Computação",
+      "summary": "Em menos de um século, computadores evoluíram de máquinas do tamanho de prédios que calculavam trajetórias de artilharia para dispositivos minúsculos no seu bolso com mais poder que os sistemas que mandaram humanos à Lua. Essa trajetória não foi acidente — foi o resultado de ideias fundamentais sobre o que é computação, e de avanços físicos que desafiam a intuição.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Alan Turing e a ideia de computação universal" },
+        { "type": "p", "text": "Em 1936, o matemático Alan Turing publicou um artigo que fundou a ciência da computação teórica. Ele imaginou uma máquina abstrata — a Máquina de Turing — capaz de simular qualquer processo de computação. A tese de Church-Turing afirma que qualquer problema computável pode ser resolvido por tal máquina. Todo computador moderno é essencialmente uma implementação física dessa ideia abstrata." },
+        { "type": "p", "text": "Turing também mostrou que existem problemas matematicamente insolúveis — o 'problema da parada' demonstra que é impossível criar um programa geral que determine se qualquer programa arbitrário eventualmente para ou roda para sempre. Esse resultado foi um choque: havia limites fundamentais ao que qualquer computador poderia fazer." },
+        { "type": "h2", "text": "O transistor: a pedra fundamental" },
+        { "type": "p", "text": "Em 1947, físicos da Bell Labs inventaram o transistor — um dispositivo semicondutor que amplifica ou alterna sinais elétricos. Antes dos transistores, computadores usavam válvulas de vácuo: frágeis, grandes, quentes e lentas. Um único transistor substituiu várias válvulas, revolucionando a eletrônica." },
+        { "type": "p", "text": "O verdadeiro salto veio com o circuito integrado, inventado independentemente por Jack Kilby e Robert Noyce em 1958-59: múltiplos transistores gravados em um único chip de silício. Hoje, um chip moderno contém mais de 100 bilhões de transistores em uma área do tamanho da sua unha." },
+        { "type": "quote", "text": "O número de transistores em um circuito integrado dobra aproximadamente a cada dois anos.", "author": "Gordon Moore — Lei de Moore (1965)" },
+        { "type": "h2", "text": "A Lei de Moore e seus limites" },
+        { "type": "p", "text": "Em 1965, Gordon Moore observou que o número de transistores por chip dobrava a cada dois anos — e previu que essa tendência continuaria. Por décadas, a Lei de Moore foi profecia autorrealizável: a indústria inteira organizou seus roadmaps em torno dela. O resultado foi um crescimento exponencial de poder computacional com queda de custo." },
+        { "type": "p", "text": "Mas a Lei de Moore está chegando ao fim físico. Transistores hoje têm apenas alguns nanômetros de largura — escalas comparáveis a moléculas. Em algum ponto, os efeitos quânticos impossibilitam o funcionamento normal dos transistores. A indústria está respondendo com arquiteturas 3D, chips especializados, e apostando em computação quântica para continuar o progresso." },
+        { "type": "h2", "text": "Software: o lado invisível" },
+        { "type": "p", "text": "Hardware sem software é inútil. O software — instruções que dizem ao hardware o que fazer — transformou computadores de calculadoras especializadas em máquinas universais. Sistemas operacionais gerenciam recursos; linguagens de programação permitem que humanos instruam máquinas em termos mais próximos da linguagem natural; algoritmos determinam a eficiência de cada operação." },
+        { "type": "p", "text": "A revolução do código aberto — iniciada por Richard Stallman e amplificada por Linus Torvalds com o Linux — mostrou que software desenvolvido colaborativamente por voluntários pode superar produtos de grandes corporações. Hoje, Linux roda na maioria dos servidores da internet, todos os smartphones Android, e a maioria dos supercomputadores do mundo." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_computing_q1",
+        "question": "O que a tese de Church-Turing afirma?",
+        "options": [
+          "Que computadores sempre serão limitados pela velocidade da luz",
+          "Que qualquer problema computável pode ser resolvido por uma Máquina de Turing",
+          "Que toda inteligência é, no fundo, computação",
+          "Que problemas matemáticos complexos exigem computadores quânticos"
+        ],
+        "answerIndex": 1,
+        "explanation": "A tese de Church-Turing afirma que qualquer problema computável pode ser resolvido por uma Máquina de Turing. Todo computador moderno é uma implementação física dessa ideia abstrata."
+      },
+      {
+        "id": "science_computing_q2",
+        "question": "O que o 'problema da parada' de Turing demonstrou?",
+        "options": [
+          "Que programas de computador sempre param em tempo finito",
+          "Que existem problemas matematicamente insolúveis para qualquer computador",
+          "Que a velocidade de processamento tem limite físico",
+          "Que linguagens de programação não podem expressar toda a matemática"
+        ],
+        "answerIndex": 1,
+        "explanation": "O problema da parada prova que é impossível criar um programa geral que determine se qualquer programa arbitrário eventualmente para ou roda para sempre — demonstrando limites fundamentais ao que computadores podem fazer."
+      },
+      {
+        "id": "science_computing_q3",
+        "question": "Por que o transistor foi revolucionário em relação às válvulas de vácuo?",
+        "options": [
+          "Porque permitiu usar eletricidade alternada em vez de contínua",
+          "Porque era menor, mais durável, mais eficiente e permitiu integração em chips",
+          "Porque operava a velocidades próximas à da luz",
+          "Porque não precisava de energia elétrica para funcionar"
+        ],
+        "answerIndex": 1,
+        "explanation": "Transistores eram menores, mais duráveis, mais eficientes e consumiam menos energia que válvulas de vácuo. Crucialmente, permitiram a criação de circuitos integrados com bilhões de transistores em um único chip."
+      },
+      {
+        "id": "science_computing_q4",
+        "question": "Por que a Lei de Moore está chegando ao fim?",
+        "options": [
+          "Porque a demanda por processamento parou de crescer",
+          "Porque transistores chegaram a escalas nanométricas onde efeitos quânticos interferem",
+          "Porque o silício é um material muito escasso",
+          "Porque os custos de fabricação se tornaram proibitivos"
+        ],
+        "answerIndex": 1,
+        "explanation": "Transistores hoje têm apenas alguns nanômetros — escalas comparáveis a moléculas. Nessas escalas, efeitos quânticos impossibilitam o funcionamento normal. A indústria responde com arquiteturas 3D e chips especializados."
+      },
+      {
+        "id": "science_computing_q5",
+        "question": "Qual foi o impacto do movimento de código aberto na computação?",
+        "options": [
+          "Eliminou a necessidade de sistemas operacionais proprietários para uso doméstico",
+          "Mostrou que software colaborativo pode superar produtos corporativos — Linux roda na maioria dos servidores",
+          "Forçou empresas a tornar todos os seus softwares gratuitos",
+          "Criou um padrão universal de programação adotado pela indústria"
+        ],
+        "answerIndex": 1,
+        "explanation": "O código aberto mostrou que software desenvolvido colaborativamente por voluntários pode superar produtos corporativos. Linux roda na maioria dos servidores da internet, todos os smartphones Android e a maioria dos supercomputadores."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "The Computing Era",
+      "summary": "In less than a century, computers evolved from building-sized machines calculating artillery trajectories to tiny devices in your pocket with more power than the systems that sent humans to the Moon. That trajectory wasn't an accident — it was the result of fundamental ideas about what computation is, and physical advances that defy intuition.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Alan Turing and the idea of universal computation" },
+        { "type": "p", "text": "In 1936, mathematician Alan Turing published a paper that founded theoretical computer science. He imagined an abstract machine — the Turing Machine — capable of simulating any computational process. The Church-Turing thesis states that any computable problem can be solved by such a machine. Every modern computer is essentially a physical implementation of this abstract idea." },
+        { "type": "p", "text": "Turing also showed that there are mathematically unsolvable problems — the 'halting problem' demonstrates it's impossible to create a general program that determines whether any arbitrary program eventually stops or runs forever. This result was a shock: there were fundamental limits to what any computer could do." },
+        { "type": "h2", "text": "The transistor: the foundational stone" },
+        { "type": "p", "text": "In 1947, Bell Labs physicists invented the transistor — a semiconductor device that amplifies or switches electrical signals. Before transistors, computers used vacuum tubes: fragile, large, hot, and slow. A single transistor replaced several tubes, revolutionizing electronics." },
+        { "type": "p", "text": "The real leap came with the integrated circuit, independently invented by Jack Kilby and Robert Noyce in 1958-59: multiple transistors etched onto a single silicon chip. Today, a modern chip contains more than 100 billion transistors in an area the size of your thumbnail." },
+        { "type": "quote", "text": "The number of transistors on an integrated circuit doubles approximately every two years.", "author": "Gordon Moore — Moore's Law (1965)" },
+        { "type": "h2", "text": "Moore's Law and its limits" },
+        { "type": "p", "text": "In 1965, Gordon Moore observed that the number of transistors per chip doubled every two years — and predicted this trend would continue. For decades, Moore's Law was a self-fulfilling prophecy: the entire industry organized its roadmaps around it. The result was exponential growth in computing power with falling costs." },
+        { "type": "p", "text": "But Moore's Law is reaching its physical end. Today's transistors are only a few nanometers wide — scales comparable to molecules. At some point, quantum effects prevent normal transistor operation. The industry is responding with 3D architectures, specialized chips, and betting on quantum computing to continue progress." },
+        { "type": "h2", "text": "Software: the invisible side" },
+        { "type": "p", "text": "Hardware without software is useless. Software — instructions telling hardware what to do — transformed computers from specialized calculators into universal machines. Operating systems manage resources; programming languages allow humans to instruct machines in terms closer to natural language; algorithms determine the efficiency of each operation." },
+        { "type": "p", "text": "The open-source revolution — started by Richard Stallman and amplified by Linus Torvalds with Linux — showed that software collaboratively developed by volunteers can surpass large corporate products. Today, Linux runs on most internet servers, all Android smartphones, and most of the world's supercomputers." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_computing_q1",
+        "question": "What does the Church-Turing thesis state?",
+        "options": [
+          "That computers will always be limited by the speed of light",
+          "That any computable problem can be solved by a Turing Machine",
+          "That all intelligence is, at its core, computation",
+          "That complex mathematical problems require quantum computers"
+        ],
+        "answerIndex": 1,
+        "explanation": "The Church-Turing thesis states that any computable problem can be solved by a Turing Machine. Every modern computer is a physical implementation of this abstract idea."
+      },
+      {
+        "id": "science_computing_q2",
+        "question": "What did Turing's 'halting problem' demonstrate?",
+        "options": [
+          "That computer programs always stop in finite time",
+          "That there are mathematically unsolvable problems for any computer",
+          "That processing speed has a physical limit",
+          "That programming languages can't express all mathematics"
+        ],
+        "answerIndex": 1,
+        "explanation": "The halting problem proves it's impossible to create a general program determining whether any arbitrary program eventually stops or runs forever — demonstrating fundamental limits to what computers can do."
+      },
+      {
+        "id": "science_computing_q3",
+        "question": "Why was the transistor revolutionary compared to vacuum tubes?",
+        "options": [
+          "Because it allowed using alternating instead of direct current",
+          "Because it was smaller, more durable, more efficient, and enabled chip integration",
+          "Because it operated at speeds close to light speed",
+          "Because it required no electrical power to function"
+        ],
+        "answerIndex": 1,
+        "explanation": "Transistors were smaller, more durable, more efficient, and consumed less energy than vacuum tubes. Crucially, they enabled the creation of integrated circuits with billions of transistors on a single chip."
+      },
+      {
+        "id": "science_computing_q4",
+        "question": "Why is Moore's Law approaching its end?",
+        "options": [
+          "Because demand for processing stopped growing",
+          "Because transistors reached nanometer scales where quantum effects interfere",
+          "Because silicon is too scarce a material",
+          "Because manufacturing costs became prohibitive"
+        ],
+        "answerIndex": 1,
+        "explanation": "Today's transistors are only a few nanometers — scales comparable to molecules. At these scales, quantum effects prevent normal operation. The industry responds with 3D architectures and specialized chips."
+      },
+      {
+        "id": "science_computing_q5",
+        "question": "What was the impact of the open-source movement on computing?",
+        "options": [
+          "It eliminated the need for proprietary operating systems for home use",
+          "It showed collaborative software can surpass corporate products — Linux runs on most servers",
+          "It forced companies to make all their software free",
+          "It created a universal programming standard adopted by the industry"
+        ],
+        "answerIndex": 1,
+        "explanation": "Open source showed that collaboratively developed software can surpass corporate products. Linux runs on most internet servers, all Android smartphones, and most of the world's supercomputers."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "La Era de la Computación",
+      "summary": "En menos de un siglo, las computadoras evolucionaron de máquinas del tamaño de edificios que calculaban trayectorias de artillería a dispositivos diminutos en tu bolsillo con más potencia que los sistemas que enviaron humanos a la Luna. Esa trayectoria no fue un accidente — fue el resultado de ideas fundamentales sobre qué es la computación, y de avances físicos que desafían la intuición.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Alan Turing y la idea de computación universal" },
+        { "type": "p", "text": "En 1936, el matemático Alan Turing publicó un artículo que fundó la informática teórica. Imaginó una máquina abstracta — la Máquina de Turing — capaz de simular cualquier proceso de computación. La tesis de Church-Turing afirma que cualquier problema computable puede resolverse con tal máquina. Toda computadora moderna es esencialmente una implementación física de esta idea abstracta." },
+        { "type": "p", "text": "Turing también demostró que existen problemas matemáticamente irresolubles — el 'problema de la parada' prueba que es imposible crear un programa general que determine si cualquier programa arbitrario eventualmente se detiene o corre indefinidamente. Este resultado fue un shock: había límites fundamentales a lo que cualquier computadora podría hacer." },
+        { "type": "h2", "text": "El transistor: la piedra fundamental" },
+        { "type": "p", "text": "En 1947, físicos de Bell Labs inventaron el transistor — un dispositivo semiconductor que amplifica o conmuta señales eléctricas. Antes de los transistores, las computadoras usaban tubos de vacío: frágiles, grandes, calientes y lentos. Un solo transistor reemplazó varios tubos, revolucionando la electrónica." },
+        { "type": "p", "text": "El verdadero salto llegó con el circuito integrado, inventado independientemente por Jack Kilby y Robert Noyce en 1958-59: múltiples transistores grabados en un solo chip de silicio. Hoy, un chip moderno contiene más de 100 mil millones de transistores en un área del tamaño de tu uña." },
+        { "type": "quote", "text": "El número de transistores en un circuito integrado se duplica aproximadamente cada dos años.", "author": "Gordon Moore — Ley de Moore (1965)" },
+        { "type": "h2", "text": "La Ley de Moore y sus límites" },
+        { "type": "p", "text": "En 1965, Gordon Moore observó que el número de transistores por chip se duplicaba cada dos años — y predijo que esta tendencia continuaría. Durante décadas, la Ley de Moore fue una profecía autocumplida: toda la industria organizó sus hojas de ruta en torno a ella. El resultado fue un crecimiento exponencial del poder computacional con caída de costos." },
+        { "type": "p", "text": "Pero la Ley de Moore está llegando a su límite físico. Los transistores de hoy tienen solo unos pocos nanómetros de ancho — escalas comparables a moléculas. En algún punto, los efectos cuánticos imposibilitan el funcionamiento normal de los transistores. La industria responde con arquitecturas 3D, chips especializados y apuestas en la computación cuántica." },
+        { "type": "h2", "text": "Software: el lado invisible" },
+        { "type": "p", "text": "El hardware sin software es inútil. El software — instrucciones que le dicen al hardware qué hacer — transformó las computadoras de calculadoras especializadas en máquinas universales. Los sistemas operativos gestionan recursos; los lenguajes de programación permiten que los humanos instruyan a las máquinas en términos más cercanos al lenguaje natural; los algoritmos determinan la eficiencia de cada operación." },
+        { "type": "p", "text": "La revolución del código abierto — iniciada por Richard Stallman y amplificada por Linus Torvalds con Linux — demostró que el software desarrollado colaborativamente por voluntarios puede superar los productos de las grandes corporaciones. Hoy, Linux corre en la mayoría de los servidores de internet, todos los smartphones Android y la mayoría de las supercomputadoras del mundo." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_computing_q1",
+        "question": "¿Qué afirma la tesis de Church-Turing?",
+        "options": [
+          "Que las computadoras siempre estarán limitadas por la velocidad de la luz",
+          "Que cualquier problema computable puede resolverse con una Máquina de Turing",
+          "Que toda inteligencia es, en el fondo, computación",
+          "Que los problemas matemáticos complejos requieren computadoras cuánticas"
+        ],
+        "answerIndex": 1,
+        "explanation": "La tesis de Church-Turing afirma que cualquier problema computable puede resolverse con una Máquina de Turing. Toda computadora moderna es una implementación física de esta idea abstracta."
+      },
+      {
+        "id": "science_computing_q2",
+        "question": "¿Qué demostró el 'problema de la parada' de Turing?",
+        "options": [
+          "Que los programas de computadora siempre se detienen en tiempo finito",
+          "Que existen problemas matemáticamente irresolubles para cualquier computadora",
+          "Que la velocidad de procesamiento tiene un límite físico",
+          "Que los lenguajes de programación no pueden expresar toda la matemática"
+        ],
+        "answerIndex": 1,
+        "explanation": "El problema de la parada prueba que es imposible crear un programa general que determine si cualquier programa arbitrario eventualmente se detiene o corre indefinidamente — demostrando límites fundamentales a lo que las computadoras pueden hacer."
+      },
+      {
+        "id": "science_computing_q3",
+        "question": "¿Por qué el transistor fue revolucionario respecto a los tubos de vacío?",
+        "options": [
+          "Porque permitió usar corriente alterna en lugar de continua",
+          "Porque era más pequeño, duradero, eficiente y permitió la integración en chips",
+          "Porque operaba a velocidades cercanas a la de la luz",
+          "Porque no necesitaba energía eléctrica para funcionar"
+        ],
+        "answerIndex": 1,
+        "explanation": "Los transistores eran más pequeños, duraderos, eficientes y consumían menos energía que los tubos de vacío. Crucialmente, permitieron crear circuitos integrados con miles de millones de transistores en un solo chip."
+      },
+      {
+        "id": "science_computing_q4",
+        "question": "¿Por qué la Ley de Moore está llegando a su fin?",
+        "options": [
+          "Porque la demanda de procesamiento dejó de crecer",
+          "Porque los transistores llegaron a escalas nanométricas donde los efectos cuánticos interfieren",
+          "Porque el silicio es un material demasiado escaso",
+          "Porque los costos de fabricación se volvieron prohibitivos"
+        ],
+        "answerIndex": 1,
+        "explanation": "Los transistores de hoy tienen solo unos pocos nanómetros — escalas comparables a moléculas. A estas escalas, los efectos cuánticos impiden el funcionamiento normal. La industria responde con arquitecturas 3D y chips especializados."
+      },
+      {
+        "id": "science_computing_q5",
+        "question": "¿Cuál fue el impacto del movimiento de código abierto en la computación?",
+        "options": [
+          "Eliminó la necesidad de sistemas operativos propietarios para uso doméstico",
+          "Demostró que el software colaborativo puede superar a los productos corporativos — Linux corre en la mayoría de los servidores",
+          "Obligó a las empresas a hacer gratuito todo su software",
+          "Creó un estándar universal de programación adoptado por la industria"
+        ],
+        "answerIndex": 1,
+        "explanation": "El código abierto demostró que el software desarrollado colaborativamente puede superar a los productos corporativos. Linux corre en la mayoría de los servidores de internet, todos los smartphones Android y la mayoría de las supercomputadoras del mundo."
+      }
+    ]
+  }
+}

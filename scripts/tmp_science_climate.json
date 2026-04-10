@@ -1,0 +1,270 @@
+{
+  "id": "science_climate",
+  "trackId": "science_tech",
+  "order": 7,
+  "difficulty": 2,
+  "estimatedMinutes": 11,
+  "prerequisites": [],
+  "title": {
+    "pt": "Mudança Climática: A Ciência",
+    "en": "Climate Change: The Science",
+    "es": "Cambio Climático: La Ciencia"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "Mudança Climática: A Ciência",
+      "summary": "A mudança climática é o maior desafio coletivo que a humanidade já enfrentou. E, ao contrário de muitos desafios políticos, tem uma base científica sólida e bem estabelecida. Entender a ciência por trás das mudanças climáticas — o mecanismo, as evidências, os riscos — é o primeiro passo para qualquer debate sério sobre como responder.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "O efeito estufa: necessário e amplificado" },
+        { "type": "p", "text": "O efeito estufa é natural e essencial para a vida: sem ele, a temperatura média da Terra seria cerca de -18°C em vez dos 15°C atuais. Gases como vapor d'água, CO₂ e metano absorvem radiação infravermelha emitida pela superfície e a reemitem em todas as direções, aquecendo a atmosfera. O problema não é o efeito estufa em si — é sua amplificação por emissões humanas." },
+        { "type": "p", "text": "Desde a Revolução Industrial, a concentração de CO₂ na atmosfera aumentou de 280 ppm para mais de 420 ppm — o nível mais alto em pelo menos 3 milhões de anos. A causa principal são as emissões de combustíveis fósseis (carvão, petróleo, gás), seguidas pelo desmatamento e pela agricultura intensiva." },
+        { "type": "h2", "text": "Evidências: múltiplas linhas convergentes" },
+        { "type": "p", "text": "A ciência climática não depende de um único tipo de evidência. As múltiplas linhas incluem: registros de temperatura direta (desde 1850), análise de bolhas de ar em testemunhos de gelo (que preservam atmosferas de até 800.000 anos atrás), anéis de crescimento de árvores, registros de fósseis de corais, e modelos climáticos que incorporam física bem estabelecida." },
+        { "type": "p", "text": "O consenso científico é claro: mais de 97% dos climatologistas ativos concordam que o aquecimento global é real e causado principalmente pela atividade humana. Isso não é 'votação científica' — é a convergência independente de múltiplas linhas de evidência analisadas por pesquisadores de dezenas de países." },
+        { "type": "quote", "text": "Não existe um plano B porque não existe um planeta B.", "author": "Ban Ki-moon" },
+        { "type": "h2", "text": "Pontos de inflexão: o risco de irreversibilidade" },
+        { "type": "p", "text": "Um dos aspectos mais preocupantes da ciência climática são os 'pontos de inflexão' (tipping points): limiares além dos quais mudanças se tornam autossustentadas e irreversíveis. Exemplos incluem: derretimento do permafrost (que libera metano armazenado, amplificando o aquecimento), colapso da circulação oceânica do Atlântico (AMOC), e morte em larga escala de recifes de corais." },
+        { "type": "p", "text": "A preocupação é que múltiplos tipping points podem se interconectar em efeito cascata — um desencadeando o outro. Uma vez cruzados esses limiares, nenhuma política humana pode reverter o processo em escala de tempo humana. Por isso a janela de tempo para ação preventiva é tão crítica." },
+        { "type": "h2", "text": "Mitigação vs. adaptação" },
+        { "type": "p", "text": "As respostas ao clima são de dois tipos. Mitigação é reduzir as causas — descarbonizar energia, transporte e indústria, parar o desmatamento, capturar carbono. Adaptação é ajustar-se aos impactos já inevitáveis — construir diques, desenvolver culturas resistentes ao calor, migrar populações de zonas costeiras." },
+        { "type": "p", "text": "A boa notícia é que a transição energética está acelerando: energia solar e eólica caíram mais de 90% em custo nas últimas décadas e agora são as fontes mais baratas de nova geração elétrica em quase todo o mundo. A má notícia é que a velocidade atual de descarbonização está abaixo do necessário para limitar o aquecimento a 1,5°C ou mesmo 2°C acima dos níveis pré-industriais." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_climate_q1",
+        "question": "Por que o efeito estufa natural é essencial para a vida na Terra?",
+        "options": [
+          "Porque protege contra radiação UV do sol",
+          "Porque sem ele a temperatura média seria cerca de -18°C, inviabilizando a vida como a conhecemos",
+          "Porque gera os ventos e correntes oceânicas",
+          "Porque converte CO₂ em oxigênio através de fotossíntese atmosférica"
+        ],
+        "answerIndex": 1,
+        "explanation": "Sem o efeito estufa natural, a temperatura média da Terra seria cerca de -18°C em vez de 15°C. O problema não é o efeito estufa em si, mas sua amplificação pelas emissões humanas desde a Revolução Industrial."
+      },
+      {
+        "id": "science_climate_q2",
+        "question": "Qual é o principal indicador do aumento das emissões humanas na atmosfera?",
+        "options": [
+          "Aumento do metano oceânico",
+          "CO₂ aumentou de 280 ppm para mais de 420 ppm desde a Revolução Industrial",
+          "Redução da camada de ozônio estratosférico",
+          "Aumento da temperatura da superfície dos oceanos em 3°C"
+        ],
+        "answerIndex": 1,
+        "explanation": "Desde a Revolução Industrial, a concentração de CO₂ aumentou de 280 ppm para mais de 420 ppm — o nível mais alto em pelo menos 3 milhões de anos, causado principalmente pela queima de combustíveis fósseis."
+      },
+      {
+        "id": "science_climate_q3",
+        "question": "O que são 'pontos de inflexão' (tipping points) climáticos?",
+        "options": [
+          "Momentos em que políticas climáticas se tornam politicamente viáveis",
+          "Limiares além dos quais mudanças climáticas se tornam autossustentadas e irreversíveis",
+          "Datas-limite estabelecidas pelo Acordo de Paris",
+          "Picos de emissões após os quais a temperatura estabiliza"
+        ],
+        "answerIndex": 1,
+        "explanation": "Tipping points são limiares além dos quais mudanças se tornam autossustentadas e irreversíveis — como o derretimento do permafrost liberando metano, que amplifica o aquecimento e libera mais metano."
+      },
+      {
+        "id": "science_climate_q4",
+        "question": "Qual é a diferença entre mitigação e adaptação climática?",
+        "options": [
+          "Mitigação é individual; adaptação é coletiva",
+          "Mitigação reduz as causas do aquecimento; adaptação ajusta-se aos impactos já inevitáveis",
+          "Mitigação é de curto prazo; adaptação é de longo prazo",
+          "Mitigação é técnica; adaptação é política"
+        ],
+        "answerIndex": 1,
+        "explanation": "Mitigação reduz as causas (descarbonização, parar desmatamento). Adaptação ajusta-se aos impactos já inevitáveis (diques, culturas resistentes ao calor, migração de populações costeiras). Ambas são necessárias."
+      },
+      {
+        "id": "science_climate_q5",
+        "question": "Qual foi a tendência de custo de energia solar e eólica nas últimas décadas?",
+        "options": [
+          "Aumentaram em custo devido à escassez de materiais críticos",
+          "Permaneceram estáveis, competitivos mas não baratos",
+          "Caíram mais de 90%, tornando-se as fontes mais baratas de nova geração elétrica",
+          "Caíram 30%, sendo competitivas apenas em regiões específicas"
+        ],
+        "answerIndex": 2,
+        "explanation": "Energia solar e eólica caíram mais de 90% em custo nas últimas décadas e agora são as fontes mais baratas de nova geração elétrica em quase todo o mundo — a transição energética está acelerando, embora abaixo do ritmo necessário."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Climate Change: The Science",
+      "summary": "Climate change is the greatest collective challenge humanity has ever faced. And unlike many political challenges, it has a solid, well-established scientific foundation. Understanding the science behind climate change — the mechanism, the evidence, the risks — is the first step toward any serious debate about how to respond.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "The greenhouse effect: necessary and amplified" },
+        { "type": "p", "text": "The greenhouse effect is natural and essential for life: without it, Earth's average temperature would be about -18°C instead of today's 15°C. Gases like water vapor, CO₂, and methane absorb infrared radiation emitted by the surface and re-emit it in all directions, warming the atmosphere. The problem isn't the greenhouse effect itself — it's its amplification by human emissions." },
+        { "type": "p", "text": "Since the Industrial Revolution, atmospheric CO₂ concentration has increased from 280 ppm to over 420 ppm — the highest level in at least 3 million years. The main cause is fossil fuel emissions (coal, oil, gas), followed by deforestation and intensive agriculture." },
+        { "type": "h2", "text": "Evidence: multiple converging lines" },
+        { "type": "p", "text": "Climate science doesn't rely on a single type of evidence. Multiple lines include: direct temperature records (since 1850), analysis of air bubbles in ice cores (preserving atmospheres up to 800,000 years old), tree growth rings, coral fossil records, and climate models incorporating well-established physics." },
+        { "type": "p", "text": "The scientific consensus is clear: more than 97% of active climatologists agree that global warming is real and mainly caused by human activity. This isn't a 'scientific vote' — it's the independent convergence of multiple lines of evidence analyzed by researchers from dozens of countries." },
+        { "type": "quote", "text": "There is no Plan B because there is no Planet B.", "author": "Ban Ki-moon" },
+        { "type": "h2", "text": "Tipping points: the risk of irreversibility" },
+        { "type": "p", "text": "One of the most concerning aspects of climate science is 'tipping points': thresholds beyond which changes become self-sustaining and irreversible. Examples include: permafrost melting (which releases stored methane, amplifying warming), collapse of the Atlantic ocean circulation (AMOC), and large-scale coral reef death." },
+        { "type": "p", "text": "The concern is that multiple tipping points may interconnect in a cascade effect — one triggering another. Once these thresholds are crossed, no human policy can reverse the process on a human timescale. That's why the window for preventive action is so critical." },
+        { "type": "h2", "text": "Mitigation vs. adaptation" },
+        { "type": "p", "text": "Climate responses are of two types. Mitigation is reducing the causes — decarbonizing energy, transport, and industry, stopping deforestation, capturing carbon. Adaptation is adjusting to already unavoidable impacts — building seawalls, developing heat-resistant crops, migrating populations from coastal zones." },
+        { "type": "p", "text": "The good news is that the energy transition is accelerating: solar and wind energy fell more than 90% in cost over the past decades and are now the cheapest sources of new electricity generation in almost the entire world. The bad news is that the current decarbonization speed is below what's needed to limit warming to 1.5°C or even 2°C above pre-industrial levels." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_climate_q1",
+        "question": "Why is the natural greenhouse effect essential for life on Earth?",
+        "options": [
+          "Because it protects against UV radiation from the sun",
+          "Because without it, average temperature would be about -18°C, making life as we know it impossible",
+          "Because it generates winds and ocean currents",
+          "Because it converts CO₂ to oxygen through atmospheric photosynthesis"
+        ],
+        "answerIndex": 1,
+        "explanation": "Without the natural greenhouse effect, Earth's average temperature would be about -18°C instead of 15°C. The problem isn't the greenhouse effect itself, but its amplification by human emissions since the Industrial Revolution."
+      },
+      {
+        "id": "science_climate_q2",
+        "question": "What is the main indicator of increased human emissions in the atmosphere?",
+        "options": [
+          "Increased oceanic methane",
+          "CO₂ increased from 280 ppm to over 420 ppm since the Industrial Revolution",
+          "Reduction of the stratospheric ozone layer",
+          "Increase in ocean surface temperature by 3°C"
+        ],
+        "answerIndex": 1,
+        "explanation": "Since the Industrial Revolution, CO₂ concentration increased from 280 ppm to over 420 ppm — the highest level in at least 3 million years, caused mainly by fossil fuel combustion."
+      },
+      {
+        "id": "science_climate_q3",
+        "question": "What are climate 'tipping points'?",
+        "options": [
+          "Moments when climate policies become politically viable",
+          "Thresholds beyond which climate changes become self-sustaining and irreversible",
+          "Deadlines established by the Paris Agreement",
+          "Emission peaks after which temperature stabilizes"
+        ],
+        "answerIndex": 1,
+        "explanation": "Tipping points are thresholds beyond which changes become self-sustaining and irreversible — like permafrost melting releasing methane, which amplifies warming and releases more methane."
+      },
+      {
+        "id": "science_climate_q4",
+        "question": "What is the difference between climate mitigation and adaptation?",
+        "options": [
+          "Mitigation is individual; adaptation is collective",
+          "Mitigation reduces the causes of warming; adaptation adjusts to already unavoidable impacts",
+          "Mitigation is short-term; adaptation is long-term",
+          "Mitigation is technical; adaptation is political"
+        ],
+        "answerIndex": 1,
+        "explanation": "Mitigation reduces causes (decarbonization, stopping deforestation). Adaptation adjusts to already unavoidable impacts (seawalls, heat-resistant crops, relocating coastal populations). Both are necessary."
+      },
+      {
+        "id": "science_climate_q5",
+        "question": "What has been the cost trend for solar and wind energy in recent decades?",
+        "options": [
+          "Increased in cost due to scarce critical materials",
+          "Remained stable, competitive but not cheap",
+          "Fell over 90%, becoming the cheapest sources of new electricity generation",
+          "Fell 30%, competitive only in specific regions"
+        ],
+        "answerIndex": 2,
+        "explanation": "Solar and wind energy fell over 90% in cost in recent decades and are now the cheapest sources of new electricity generation in almost the entire world — the energy transition is accelerating, though below the necessary pace."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Cambio Climático: La Ciencia",
+      "summary": "El cambio climático es el mayor desafío colectivo al que se ha enfrentado la humanidad. Y, a diferencia de muchos desafíos políticos, tiene una base científica sólida y bien establecida. Entender la ciencia detrás del cambio climático — el mecanismo, las evidencias, los riesgos — es el primer paso para cualquier debate serio sobre cómo responder.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "El efecto invernadero: necesario y amplificado" },
+        { "type": "p", "text": "El efecto invernadero es natural y esencial para la vida: sin él, la temperatura media de la Tierra sería de unos -18°C en lugar de los 15°C actuales. Gases como el vapor de agua, el CO₂ y el metano absorben la radiación infrarroja emitida por la superficie y la reemiten en todas direcciones, calentando la atmósfera. El problema no es el efecto invernadero en sí — es su amplificación por las emisiones humanas." },
+        { "type": "p", "text": "Desde la Revolución Industrial, la concentración de CO₂ en la atmósfera ha aumentado de 280 ppm a más de 420 ppm — el nivel más alto en al menos 3 millones de años. La causa principal son las emisiones de combustibles fósiles (carbón, petróleo, gas), seguidas por la deforestación y la agricultura intensiva." },
+        { "type": "h2", "text": "Evidencias: múltiples líneas convergentes" },
+        { "type": "p", "text": "La ciencia climática no depende de un solo tipo de evidencia. Las múltiples líneas incluyen: registros de temperatura directa (desde 1850), análisis de burbujas de aire en testigos de hielo (que preservan atmósferas de hasta 800.000 años atrás), anillos de crecimiento de árboles, registros de fósiles de corales y modelos climáticos que incorporan física bien establecida." },
+        { "type": "p", "text": "El consenso científico es claro: más del 97% de los climatólogos activos coinciden en que el calentamiento global es real y está causado principalmente por la actividad humana. Esto no es una 'votación científica' — es la convergencia independiente de múltiples líneas de evidencia analizadas por investigadores de decenas de países." },
+        { "type": "quote", "text": "No existe un plan B porque no existe un planeta B.", "author": "Ban Ki-moon" },
+        { "type": "h2", "text": "Puntos de inflexión: el riesgo de la irreversibilidad" },
+        { "type": "p", "text": "Uno de los aspectos más preocupantes de la ciencia climática son los 'puntos de inflexión' (tipping points): umbrales más allá de los cuales los cambios se vuelven autosostenidos e irreversibles. Ejemplos incluyen: el deshielo del permafrost (que libera metano almacenado, amplificando el calentamiento), el colapso de la circulación oceánica del Atlántico (AMOC) y la muerte masiva de arrecifes de coral." },
+        { "type": "p", "text": "La preocupación es que múltiples puntos de inflexión puedan interconectarse en efecto cascada — uno desencadenando al siguiente. Una vez cruzados estos umbrales, ninguna política humana puede revertir el proceso en escala de tiempo humana. Por eso la ventana de tiempo para la acción preventiva es tan crítica." },
+        { "type": "h2", "text": "Mitigación vs. adaptación" },
+        { "type": "p", "text": "Las respuestas al clima son de dos tipos. La mitigación consiste en reducir las causas — descarbonizar la energía, el transporte y la industria, detener la deforestación, capturar carbono. La adaptación consiste en ajustarse a los impactos ya inevitables — construir diques, desarrollar cultivos resistentes al calor, migrar poblaciones de zonas costeras." },
+        { "type": "p", "text": "La buena noticia es que la transición energética se está acelerando: la energía solar y eólica cayó más de un 90% en costo en las últimas décadas y ahora son las fuentes más baratas de nueva generación eléctrica en casi todo el mundo. La mala noticia es que la velocidad actual de descarbonización está por debajo de lo necesario para limitar el calentamiento a 1,5°C o incluso 2°C sobre los niveles preindustriales." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_climate_q1",
+        "question": "¿Por qué el efecto invernadero natural es esencial para la vida en la Tierra?",
+        "options": [
+          "Porque protege de la radiación UV del sol",
+          "Porque sin él la temperatura media sería de unos -18°C, haciendo imposible la vida tal como la conocemos",
+          "Porque genera los vientos y las corrientes oceánicas",
+          "Porque convierte CO₂ en oxígeno a través de fotosíntesis atmosférica"
+        ],
+        "answerIndex": 1,
+        "explanation": "Sin el efecto invernadero natural, la temperatura media de la Tierra sería de unos -18°C en lugar de 15°C. El problema no es el efecto invernadero en sí, sino su amplificación por las emisiones humanas desde la Revolución Industrial."
+      },
+      {
+        "id": "science_climate_q2",
+        "question": "¿Cuál es el principal indicador del aumento de las emisiones humanas en la atmósfera?",
+        "options": [
+          "Aumento del metano oceánico",
+          "El CO₂ aumentó de 280 ppm a más de 420 ppm desde la Revolución Industrial",
+          "Reducción de la capa de ozono estratosférico",
+          "Aumento de la temperatura superficial de los océanos en 3°C"
+        ],
+        "answerIndex": 1,
+        "explanation": "Desde la Revolución Industrial, la concentración de CO₂ aumentó de 280 ppm a más de 420 ppm — el nivel más alto en al menos 3 millones de años, causado principalmente por la quema de combustibles fósiles."
+      },
+      {
+        "id": "science_climate_q3",
+        "question": "¿Qué son los 'puntos de inflexión' climáticos?",
+        "options": [
+          "Momentos en que las políticas climáticas se vuelven políticamente viables",
+          "Umbrales más allá de los cuales los cambios climáticos se vuelven autosostenidos e irreversibles",
+          "Fechas límite establecidas por el Acuerdo de París",
+          "Picos de emisiones tras los cuales la temperatura se estabiliza"
+        ],
+        "answerIndex": 1,
+        "explanation": "Los puntos de inflexión son umbrales más allá de los cuales los cambios se vuelven autosostenidos e irreversibles — como el deshielo del permafrost que libera metano, lo que amplifica el calentamiento y libera más metano."
+      },
+      {
+        "id": "science_climate_q4",
+        "question": "¿Cuál es la diferencia entre mitigación y adaptación climática?",
+        "options": [
+          "La mitigación es individual; la adaptación es colectiva",
+          "La mitigación reduce las causas del calentamiento; la adaptación se ajusta a los impactos ya inevitables",
+          "La mitigación es a corto plazo; la adaptación es a largo plazo",
+          "La mitigación es técnica; la adaptación es política"
+        ],
+        "answerIndex": 1,
+        "explanation": "La mitigación reduce las causas (descarbonización, detener la deforestación). La adaptación se ajusta a los impactos ya inevitables (diques, cultivos resistentes al calor, migración de poblaciones costeras). Ambas son necesarias."
+      },
+      {
+        "id": "science_climate_q5",
+        "question": "¿Cuál ha sido la tendencia de costos de la energía solar y eólica en las últimas décadas?",
+        "options": [
+          "Aumentaron en costo debido a la escasez de materiales críticos",
+          "Permanecieron estables, competitivas pero no baratas",
+          "Cayeron más de un 90%, convirtiéndose en las fuentes más baratas de nueva generación eléctrica",
+          "Cayeron un 30%, siendo competitivas solo en regiones específicas"
+        ],
+        "answerIndex": 2,
+        "explanation": "La energía solar y eólica cayó más de un 90% en costo en las últimas décadas y ahora son las fuentes más baratas de nueva generación eléctrica en casi todo el mundo — la transición energética se acelera, aunque por debajo del ritmo necesario."
+      }
+    ]
+  }
+}

@@ -1,0 +1,373 @@
+{
+  "id": "business_leadership",
+  "trackId": "business",
+  "order": 7,
+  "difficulty": "beginner",
+  "estimatedMinutes": 11,
+  "prerequisites": ["business_marketing"],
+  "titlePt": "Liderança e Gestão de Pessoas",
+  "titleEn": "Leadership and People Management",
+  "titleEs": "Liderazgo y Gestión de Personas",
+  "coverImageUrl": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80",
+  "coverImageCredit": "Photo by Brooke Cagle on Unsplash",
+  "pt": {
+    "lesson": {
+      "title": "Liderança e Gestão de Pessoas: O Multiplicador Humano",
+      "summary": "Nenhuma empresa cresce além da qualidade de sua liderança. Entender como motivar, delegar e criar cultura é tão importante quanto qualquer habilidade técnica.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Sam Walton, fundador do Walmart, disse: 'cuide dos seus funcionários e eles cuidarão dos seus clientes'. A qualidade da liderança determina a qualidade da empresa. Tecnologia pode ser copiada; uma equipe excepcional, raramente."
+        },
+        {
+          "type": "text",
+          "content": "Gerenciar e liderar são coisas diferentes. **Gerenciar** é garantir que os processos funcionem — planejamento, organização, controle. **Liderar** é inspirar as pessoas a ir além do que acreditavam ser possível — visão, motivação, desenvolvimento."
+        },
+        {
+          "type": "heading",
+          "content": "Teorias de Motivação"
+        },
+        {
+          "type": "text",
+          "content": "Abraham Maslow propôs a **Hierarquia de Necessidades**: as pessoas satisfazem necessidades básicas (fisiológicas, segurança) antes de buscar as superiores (pertencimento, estima, autorrealização). Um funcionário com medo de perder o emprego não está focado em inovação."
+        },
+        {
+          "type": "text",
+          "content": "Frederick Herzberg identificou que fatores de **higiene** (salário, condições de trabalho) previnem insatisfação, mas não criam motivação. Os verdadeiros motivadores são **fatores de crescimento**: reconhecimento, responsabilidade, conquista e oportunidade de aprendizado."
+        },
+        {
+          "type": "text",
+          "content": "Daniel Pink, em 'Drive', sintetizou décadas de pesquisa: para trabalho complexo e criativo, a motivação intrínseca supera a extrínseca. Os três pilares: **Autonomia** (controle sobre o próprio trabalho), **Maestria** (progredir em algo que importa) e **Propósito** (servir a algo maior)."
+        },
+        {
+          "type": "heading",
+          "content": "Delegação e Desenvolvimento"
+        },
+        {
+          "type": "text",
+          "content": "O maior erro de líderes iniciantes é não delegar. Delegar não é abrir mão do controle — é investir no desenvolvimento das pessoas e multiplicar a capacidade da equipe. Um líder que não delega cria um gargalo: tudo para antes de chegar até ele."
+        },
+        {
+          "type": "text",
+          "content": "A liderança situacional de Hersey e Blanchard propõe que o estilo ideal varia conforme a maturidade do liderado: iniciantes precisam de mais direção, profissionais experientes precisam de mais autonomia. Tratar todos igualmente é tratar todos de forma inadequada."
+        },
+        {
+          "type": "heading",
+          "content": "Cultura Organizacional"
+        },
+        {
+          "type": "text",
+          "content": "Peter Drucker disse 'a cultura come a estratégia no café da manhã'. A cultura é o conjunto de valores, comportamentos e normas não escritas que definem 'como as coisas funcionam aqui'. Ela é criada pelo que os líderes **fazem**, não pelo que dizem."
+        },
+        {
+          "type": "quote",
+          "content": "A função de um líder é produzir mais líderes, não mais seguidores.",
+          "attribution": "Ralph Nader"
+        },
+        {
+          "type": "text",
+          "content": "Liderança eficaz começa com autoconhecimento. Saber seus pontos fortes e limitações, entender como você impacta os outros, e ter a humildade de continuar aprendendo — essas qualidades distinguem líderes que apenas chegam ao topo daqueles que transformam as organizações e as pessoas ao redor."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "Segundo Frederick Herzberg, quais fatores realmente motivam os funcionários?",
+        "options": [
+          "Salário alto e benefícios",
+          "Reconhecimento, responsabilidade, conquista e oportunidade de aprendizado",
+          "Ambiente de trabalho confortável e segurança no emprego",
+          "Bônus e participação nos lucros"
+        ],
+        "correctIndex": 1,
+        "explanation": "Herzberg diferenciou fatores de higiene (que previnem insatisfação) de motivadores reais (crescimento, reconhecimento, responsabilidade). Salário previne insatisfação, mas não cria motivação."
+      },
+      {
+        "question": "Daniel Pink identificou os três pilares da motivação intrínseca como:",
+        "options": [
+          "Salário, benefícios e estabilidade",
+          "Autonomia, maestria e propósito",
+          "Reconhecimento, promoção e poder",
+          "Metas, recompensas e penalidades"
+        ],
+        "correctIndex": 1,
+        "explanation": "Pink argumenta que para trabalho criativo e complexo, autonomia (controle do próprio trabalho), maestria (progredir) e propósito (servir algo maior) são mais motivadores que recompensas externas."
+      },
+      {
+        "question": "A frase de Drucker 'a cultura come a estratégia no café da manhã' significa:",
+        "options": [
+          "Cultura é mais cara de implementar que estratégia",
+          "A cultura real de uma organização supera qualquer plano estratégico formal",
+          "Líderes devem priorizar almoços de equipe",
+          "Estratégia deve ser desenvolvida pela cultura existente"
+        ],
+        "correctIndex": 1,
+        "explanation": "Mesmo a melhor estratégia falha se a cultura organizacional não a suportar. Comportamentos reais e normas não escritas determinam o que de fato acontece na empresa."
+      },
+      {
+        "question": "A liderança situacional de Hersey e Blanchard propõe que:",
+        "options": [
+          "Líderes devem sempre ser autoritários para manter o controle",
+          "O estilo de liderança ideal varia conforme a maturidade e experiência do liderado",
+          "Democracia sempre produz melhores resultados que autocracia",
+          "Líderes devem delegar 100% das decisões para serem eficazes"
+        ],
+        "correctIndex": 1,
+        "explanation": "Não existe estilo de liderança universalmente ideal. Iniciantes precisam de direção clara; profissionais experientes precisam de autonomia. O líder eficaz adapta o estilo à situação."
+      },
+      {
+        "question": "Por que a delegação é essencial para líderes?",
+        "options": [
+          "Para reduzir a carga de trabalho do líder",
+          "Para investir no desenvolvimento das pessoas e multiplicar a capacidade da equipe",
+          "Para ter alguém para culpar quando as coisas dão errado",
+          "Para cumprir requisitos legais de estrutura organizacional"
+        ],
+        "correctIndex": 1,
+        "explanation": "Delegar é um investimento no crescimento das pessoas e na capacidade da equipe. Líderes que não delegam criam gargalos e impedem o desenvolvimento dos seus liderados."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Leadership and People Management: The Human Multiplier",
+      "summary": "No company grows beyond the quality of its leadership. Understanding how to motivate, delegate, and create culture is just as important as any technical skill.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Sam Walton, founder of Walmart, said: 'take care of your employees and they'll take care of your customers'. The quality of leadership determines the quality of the company. Technology can be copied; an exceptional team, rarely."
+        },
+        {
+          "type": "text",
+          "content": "Managing and leading are different things. **Managing** is ensuring processes work — planning, organizing, controlling. **Leading** is inspiring people to go beyond what they believed was possible — vision, motivation, development."
+        },
+        {
+          "type": "heading",
+          "content": "Motivation Theories"
+        },
+        {
+          "type": "text",
+          "content": "Abraham Maslow proposed the **Hierarchy of Needs**: people satisfy basic needs (physiological, safety) before seeking higher ones (belonging, esteem, self-actualization). An employee afraid of losing their job isn't focused on innovation."
+        },
+        {
+          "type": "text",
+          "content": "Frederick Herzberg identified that **hygiene** factors (salary, working conditions) prevent dissatisfaction but don't create motivation. The real motivators are **growth factors**: recognition, responsibility, achievement, and learning opportunity."
+        },
+        {
+          "type": "text",
+          "content": "Daniel Pink, in 'Drive', synthesized decades of research: for complex and creative work, intrinsic motivation surpasses extrinsic. The three pillars: **Autonomy** (control over one's own work), **Mastery** (progressing at something that matters) and **Purpose** (serving something greater)."
+        },
+        {
+          "type": "heading",
+          "content": "Delegation and Development"
+        },
+        {
+          "type": "text",
+          "content": "The biggest mistake of new leaders is not delegating. Delegating isn't giving up control — it's investing in people's development and multiplying team capacity. A leader who doesn't delegate creates a bottleneck: everything stops before reaching them."
+        },
+        {
+          "type": "text",
+          "content": "Hersey and Blanchard's situational leadership proposes that the ideal style varies with the maturity of the person being led: beginners need more direction, experienced professionals need more autonomy. Treating everyone equally is treating everyone inadequately."
+        },
+        {
+          "type": "heading",
+          "content": "Organizational Culture"
+        },
+        {
+          "type": "text",
+          "content": "Peter Drucker said 'culture eats strategy for breakfast'. Culture is the set of values, behaviors, and unwritten norms that define 'how things work here'. It's created by what leaders **do**, not what they say."
+        },
+        {
+          "type": "quote",
+          "content": "The function of a leader is to produce more leaders, not more followers.",
+          "attribution": "Ralph Nader"
+        },
+        {
+          "type": "text",
+          "content": "Effective leadership starts with self-knowledge. Knowing your strengths and limitations, understanding how you impact others, and having the humility to keep learning — these qualities distinguish leaders who merely reach the top from those who transform organizations and the people around them."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "According to Frederick Herzberg, what factors actually motivate employees?",
+        "options": [
+          "High salary and benefits",
+          "Recognition, responsibility, achievement, and learning opportunity",
+          "Comfortable work environment and job security",
+          "Bonuses and profit sharing"
+        ],
+        "correctIndex": 1,
+        "explanation": "Herzberg distinguished hygiene factors (which prevent dissatisfaction) from real motivators (growth, recognition, responsibility). Salary prevents dissatisfaction but doesn't create motivation."
+      },
+      {
+        "question": "Daniel Pink identified the three pillars of intrinsic motivation as:",
+        "options": [
+          "Salary, benefits, and stability",
+          "Autonomy, mastery, and purpose",
+          "Recognition, promotion, and power",
+          "Goals, rewards, and penalties"
+        ],
+        "correctIndex": 1,
+        "explanation": "Pink argues that for creative and complex work, autonomy (control of one's own work), mastery (progressing), and purpose (serving something greater) are more motivating than external rewards."
+      },
+      {
+        "question": "Drucker's phrase 'culture eats strategy for breakfast' means:",
+        "options": [
+          "Culture is more expensive to implement than strategy",
+          "The real culture of an organization surpasses any formal strategic plan",
+          "Leaders should prioritize team lunches",
+          "Strategy must be developed from existing culture"
+        ],
+        "correctIndex": 1,
+        "explanation": "Even the best strategy fails if the organizational culture doesn't support it. Real behaviors and unwritten norms determine what actually happens in the company."
+      },
+      {
+        "question": "Hersey and Blanchard's situational leadership proposes that:",
+        "options": [
+          "Leaders should always be authoritarian to maintain control",
+          "The ideal leadership style varies with the maturity and experience of the person being led",
+          "Democracy always produces better results than autocracy",
+          "Leaders should delegate 100% of decisions to be effective"
+        ],
+        "correctIndex": 1,
+        "explanation": "There's no universally ideal leadership style. Beginners need clear direction; experienced professionals need autonomy. The effective leader adapts their style to the situation."
+      },
+      {
+        "question": "Why is delegation essential for leaders?",
+        "options": [
+          "To reduce the leader's workload",
+          "To invest in people's development and multiply team capacity",
+          "To have someone to blame when things go wrong",
+          "To meet legal requirements for organizational structure"
+        ],
+        "correctIndex": 1,
+        "explanation": "Delegating is an investment in people's growth and team capacity. Leaders who don't delegate create bottlenecks and prevent their team members from developing."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Liderazgo y Gestión de Personas: El Multiplicador Humano",
+      "summary": "Ninguna empresa crece más allá de la calidad de su liderazgo. Entender cómo motivar, delegar y crear cultura es tan importante como cualquier habilidad técnica.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Sam Walton, fundador de Walmart, dijo: 'cuida a tus empleados y ellos cuidarán a tus clientes'. La calidad del liderazgo determina la calidad de la empresa. La tecnología puede copiarse; un equipo excepcional, raramente."
+        },
+        {
+          "type": "text",
+          "content": "Gestionar y liderar son cosas diferentes. **Gestionar** es garantizar que los procesos funcionen — planificación, organización, control. **Liderar** es inspirar a las personas a ir más allá de lo que creían posible — visión, motivación, desarrollo."
+        },
+        {
+          "type": "heading",
+          "content": "Teorías de Motivación"
+        },
+        {
+          "type": "text",
+          "content": "Abraham Maslow propuso la **Jerarquía de Necesidades**: las personas satisfacen necesidades básicas (fisiológicas, seguridad) antes de buscar las superiores (pertenencia, estima, autorrealización). Un empleado con miedo de perder su trabajo no está enfocado en la innovación."
+        },
+        {
+          "type": "text",
+          "content": "Frederick Herzberg identificó que los factores de **higiene** (salario, condiciones de trabajo) previenen la insatisfacción, pero no crean motivación. Los verdaderos motivadores son los **factores de crecimiento**: reconocimiento, responsabilidad, logro y oportunidad de aprendizaje."
+        },
+        {
+          "type": "text",
+          "content": "Daniel Pink, en 'Drive', sintetizó décadas de investigación: para trabajo complejo y creativo, la motivación intrínseca supera a la extrínseca. Los tres pilares: **Autonomía** (control sobre el propio trabajo), **Maestría** (progresar en algo que importa) y **Propósito** (servir a algo mayor)."
+        },
+        {
+          "type": "heading",
+          "content": "Delegación y Desarrollo"
+        },
+        {
+          "type": "text",
+          "content": "El mayor error de los líderes novatos es no delegar. Delegar no es renunciar al control — es invertir en el desarrollo de las personas y multiplicar la capacidad del equipo. Un líder que no delega crea un cuello de botella: todo se detiene antes de llegar a él."
+        },
+        {
+          "type": "text",
+          "content": "El liderazgo situacional de Hersey y Blanchard propone que el estilo ideal varía según la madurez del liderado: los principiantes necesitan más dirección, los profesionales experimentados necesitan más autonomía. Tratar a todos por igual es tratar a todos de forma inadecuada."
+        },
+        {
+          "type": "heading",
+          "content": "Cultura Organizacional"
+        },
+        {
+          "type": "text",
+          "content": "Peter Drucker dijo 'la cultura se come a la estrategia en el desayuno'. La cultura es el conjunto de valores, comportamientos y normas no escritas que definen 'cómo funcionan las cosas aquí'. Es creada por lo que los líderes **hacen**, no por lo que dicen."
+        },
+        {
+          "type": "quote",
+          "content": "La función de un líder es producir más líderes, no más seguidores.",
+          "attribution": "Ralph Nader"
+        },
+        {
+          "type": "text",
+          "content": "El liderazgo eficaz comienza con el autoconocimiento. Saber tus fortalezas y limitaciones, entender cómo impactas a los demás, y tener la humildad de seguir aprendiendo — estas cualidades distinguen a los líderes que solo llegan a la cima de aquellos que transforman las organizaciones y las personas a su alrededor."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "Según Frederick Herzberg, ¿qué factores realmente motivan a los empleados?",
+        "options": [
+          "Salario alto y beneficios",
+          "Reconocimiento, responsabilidad, logro y oportunidad de aprendizaje",
+          "Ambiente de trabajo cómodo y seguridad laboral",
+          "Bonos y participación en las ganancias"
+        ],
+        "correctIndex": 1,
+        "explanation": "Herzberg diferenció los factores de higiene (que previenen la insatisfacción) de los motivadores reales (crecimiento, reconocimiento, responsabilidad). El salario previene la insatisfacción pero no crea motivación."
+      },
+      {
+        "question": "Daniel Pink identificó los tres pilares de la motivación intrínseca como:",
+        "options": [
+          "Salario, beneficios y estabilidad",
+          "Autonomía, maestría y propósito",
+          "Reconocimiento, ascenso y poder",
+          "Metas, recompensas y penalizaciones"
+        ],
+        "correctIndex": 1,
+        "explanation": "Pink argumenta que para el trabajo creativo y complejo, la autonomía (control del propio trabajo), la maestría (progresar) y el propósito (servir a algo mayor) son más motivadores que las recompensas externas."
+      },
+      {
+        "question": "La frase de Drucker 'la cultura se come a la estrategia en el desayuno' significa:",
+        "options": [
+          "La cultura es más cara de implementar que la estrategia",
+          "La cultura real de una organización supera cualquier plan estratégico formal",
+          "Los líderes deben priorizar los almuerzos de equipo",
+          "La estrategia debe desarrollarse a partir de la cultura existente"
+        ],
+        "correctIndex": 1,
+        "explanation": "Incluso la mejor estrategia falla si la cultura organizacional no la apoya. Los comportamientos reales y las normas no escritas determinan lo que realmente ocurre en la empresa."
+      },
+      {
+        "question": "El liderazgo situacional de Hersey y Blanchard propone que:",
+        "options": [
+          "Los líderes siempre deben ser autoritarios para mantener el control",
+          "El estilo de liderazgo ideal varía según la madurez y experiencia del liderado",
+          "La democracia siempre produce mejores resultados que la autocracia",
+          "Los líderes deben delegar el 100% de las decisiones para ser eficaces"
+        ],
+        "correctIndex": 1,
+        "explanation": "No existe un estilo de liderazgo universalmente ideal. Los principiantes necesitan dirección clara; los profesionales experimentados necesitan autonomía. El líder eficaz adapta su estilo a la situación."
+      },
+      {
+        "question": "¿Por qué la delegación es esencial para los líderes?",
+        "options": [
+          "Para reducir la carga de trabajo del líder",
+          "Para invertir en el desarrollo de las personas y multiplicar la capacidad del equipo",
+          "Para tener a alguien a quien culpar cuando las cosas salen mal",
+          "Para cumplir requisitos legales de estructura organizacional"
+        ],
+        "correctIndex": 1,
+        "explanation": "Delegar es una inversión en el crecimiento de las personas y la capacidad del equipo. Los líderes que no delegan crean cuellos de botella e impiden el desarrollo de sus liderados."
+      }
+    ]
+  }
+}

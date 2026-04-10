@@ -1,0 +1,270 @@
+{
+  "id": "science_internet",
+  "trackId": "science_tech",
+  "order": 5,
+  "difficulty": 1,
+  "estimatedMinutes": 10,
+  "prerequisites": [],
+  "title": {
+    "pt": "A Internet e a Revolução Digital",
+    "en": "The Internet and the Digital Revolution",
+    "es": "Internet y la Revolución Digital"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "A Internet e a Revolução Digital",
+      "summary": "A internet é a infraestrutura mais transformadora da história moderna. Em décadas, migrou de projeto militar experimental para o substrato de quase toda atividade econômica, social e cultural humana. Entender como ela funciona — e quem controla o quê — é entender o terreno onde grande parte do poder do século XXI se exerce.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Das origens militares à web global" },
+        { "type": "p", "text": "A internet nasceu da ARPANET, rede criada pelo Departamento de Defesa americano nos anos 1960 para conectar computadores de universidades e centros de pesquisa. O design foi revolucionário: em vez de uma rede centralizada, era distribuída — sem ponto central de falha. Pacotes de dados podiam seguir múltiplos caminhos até o destino, tornando a rede resiliente a ataques." },
+        { "type": "p", "text": "Em 1989, Tim Berners-Lee, cientista no CERN, inventou a World Wide Web — o sistema de documentos interligados por hiperlinks que transformou a internet em algo acessível ao público geral. A web e a internet são frequentemente confundidas, mas a web é apenas uma das aplicações que roda sobre a infraestrutura da internet." },
+        { "type": "h2", "text": "Como a internet funciona" },
+        { "type": "p", "text": "A internet é uma rede de redes conectadas pelo protocolo TCP/IP. Quando você acessa um site, seu computador divide os dados em 'pacotes', que trafegam por roteadores pelo mundo até o servidor de destino, onde são reassemblados. O endereço IP identifica cada dispositivo; DNS traduz nomes de domínio legíveis (google.com) para endereços numéricos." },
+        { "type": "p", "text": "A infraestrutura física inclui cabos submarinos que cruzam os oceanos — mais de 400 sistemas de cabos ligam os continentes. Esses cabos de fibra óptica transmitem 95% do tráfego internacional de dados. Apesar de parecer 'sem fio', a internet global depende profundamente de infraestrutura física concentrada em poucos pontos críticos." },
+        { "type": "quote", "text": "A internet trata a censura como dano e roteia em torno dela.", "author": "John Gilmore" },
+        { "type": "h2", "text": "Web 1.0, 2.0 e o modelo de plataformas" },
+        { "type": "p", "text": "A Web 1.0 (anos 1990) era estática: sites publicavam conteúdo, usuários consumiam. A Web 2.0 (anos 2000 em diante) foi interativa: usuários passaram a criar conteúdo — blogs, redes sociais, YouTube. Esse modelo gerou as plataformas dominantes: Facebook, Google, Amazon — empresas que não produzem conteúdo mas criam mercados onde outros interagem." },
+        { "type": "p", "text": "O modelo de negócios das plataformas é fundamentalmente diferente do comércio tradicional: baseiam-se em efeitos de rede (o valor aumenta com cada novo usuário), dados como ativo principal, e frequentemente atenção como produto vendido a anunciantes. O usuário não paga pelo serviço — o usuário é o produto." },
+        { "type": "h2", "text": "Neutralidade de rede e governança" },
+        { "type": "p", "text": "A neutralidade de rede — o princípio de que provedores de internet devem tratar todos os dados igualmente, sem discriminar por origem, destino ou tipo — é um dos debates mais importantes sobre a internet. Sem ela, provedores poderiam favorecer seus próprios serviços ou cobrar mais por certos conteúdos, alterando o campo de jogo competitivo." },
+        { "type": "p", "text": "A governança da internet é descentralizada e complexa: ICANN gerencia nomes de domínio, IETF desenvolve padrões técnicos, governos regulam dentro de suas jurisdições. A fragmentação geopolítica da internet — a 'splinternet' — avança, com países como China, Rússia e Irã criando versões nacionais parcialmente isoladas do resto do mundo." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_internet_q1",
+        "question": "Qual foi o design inovador da ARPANET que influenciou toda a internet?",
+        "options": [
+          "Velocidade de transmissão muito superior às redes existentes",
+          "Rede distribuída sem ponto central de falha, com pacotes seguindo múltiplos caminhos",
+          "Uso de satélites para transmissão global de dados",
+          "Sistema de criptografia que protegia comunicações militares"
+        ],
+        "answerIndex": 1,
+        "explanation": "O design distribuído da ARPANET — sem ponto central de falha, com pacotes de dados podendo seguir múltiplos caminhos — foi revolucionário e tornou a rede resiliente. É a base arquitetural da internet moderna."
+      },
+      {
+        "id": "science_internet_q2",
+        "question": "Qual é a diferença entre a internet e a World Wide Web?",
+        "options": [
+          "Internet é sem fio; web é por cabos",
+          "Web é a infraestrutura física; internet é o sistema de aplicativos",
+          "Internet é a infraestrutura de redes; web é uma aplicação que roda sobre ela",
+          "São termos sinônimos que descrevem o mesmo sistema"
+        ],
+        "answerIndex": 2,
+        "explanation": "A internet é a infraestrutura de rede (TCP/IP, roteadores, cabos). A World Wide Web é uma aplicação que roda sobre essa infraestrutura — o sistema de documentos interligados por hiperlinks inventado por Tim Berners-Lee."
+      },
+      {
+        "id": "science_internet_q3",
+        "question": "O que caracteriza o modelo de negócios das grandes plataformas digitais?",
+        "options": [
+          "Cobrar assinatura mensal por acesso a conteúdo premium",
+          "Vender hardware que acessa seus serviços exclusivos",
+          "Usar efeitos de rede e dados do usuário, vendendo atenção a anunciantes",
+          "Licenciar tecnologia para outras empresas desenvolverem serviços"
+        ],
+        "answerIndex": 2,
+        "explanation": "Plataformas como Google e Facebook baseiam-se em efeitos de rede, dados como ativo principal, e atenção como produto vendido a anunciantes. O usuário não paga pelo serviço — o usuário é o produto."
+      },
+      {
+        "id": "science_internet_q4",
+        "question": "O que é a neutralidade de rede?",
+        "options": [
+          "Que a internet não deve ser usada para fins políticos",
+          "Que provedores devem tratar todos os dados igualmente, sem discriminação",
+          "Que governos não devem regular a internet",
+          "Que plataformas devem ser neutras politicamente em suas moderações"
+        ],
+        "answerIndex": 1,
+        "explanation": "Neutralidade de rede é o princípio de que provedores de internet devem tratar todos os dados igualmente, sem discriminar por origem, destino ou tipo. Sem ela, provedores poderiam favorecer seus próprios serviços."
+      },
+      {
+        "id": "science_internet_q5",
+        "question": "Qual infraestrutura física transporta a maior parte do tráfego internacional de dados?",
+        "options": [
+          "Satélites em órbita geoestacionária",
+          "Torres de transmissão 5G interconectadas",
+          "Cabos submarinos de fibra óptica",
+          "Centros de dados distribuídos em todos os continentes"
+        ],
+        "answerIndex": 2,
+        "explanation": "Cabos submarinos de fibra óptica transportam cerca de 95% do tráfego internacional de dados. Apesar da percepção de uma internet 'sem fio', ela depende profundamente de infraestrutura física concentrada em pontos críticos."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "The Internet and the Digital Revolution",
+      "summary": "The internet is the most transformative infrastructure of modern history. In decades, it migrated from an experimental military project to the substrate of nearly all human economic, social, and cultural activity. Understanding how it works — and who controls what — is understanding the terrain where much of 21st-century power is exercised.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "From military origins to the global web" },
+        { "type": "p", "text": "The internet was born from ARPANET, a network created by the US Department of Defense in the 1960s to connect university and research center computers. The design was revolutionary: instead of a centralized network, it was distributed — without a central point of failure. Data packets could follow multiple paths to their destination, making the network resilient to attacks." },
+        { "type": "p", "text": "In 1989, Tim Berners-Lee, a scientist at CERN, invented the World Wide Web — the system of documents linked by hyperlinks that transformed the internet into something accessible to the general public. The web and the internet are often confused, but the web is just one of the applications running on the internet's infrastructure." },
+        { "type": "h2", "text": "How the internet works" },
+        { "type": "p", "text": "The internet is a network of networks connected by the TCP/IP protocol. When you access a website, your computer splits data into 'packets' that travel through routers around the world to the destination server, where they're reassembled. IP addresses identify each device; DNS translates readable domain names (google.com) to numerical addresses." },
+        { "type": "p", "text": "The physical infrastructure includes submarine cables crossing the oceans — more than 400 cable systems link the continents. These fiber optic cables transmit 95% of international data traffic. Despite seeming 'wireless,' the global internet deeply depends on physical infrastructure concentrated at a few critical points." },
+        { "type": "quote", "text": "The internet treats censorship as damage and routes around it.", "author": "John Gilmore" },
+        { "type": "h2", "text": "Web 1.0, 2.0, and the platform model" },
+        { "type": "p", "text": "Web 1.0 (1990s) was static: sites published content, users consumed. Web 2.0 (2000s onward) was interactive: users began creating content — blogs, social networks, YouTube. This model generated dominant platforms: Facebook, Google, Amazon — companies that don't produce content but create markets where others interact." },
+        { "type": "p", "text": "The platform business model is fundamentally different from traditional commerce: it's based on network effects (value increases with each new user), data as the main asset, and frequently attention sold to advertisers. The user doesn't pay for the service — the user is the product." },
+        { "type": "h2", "text": "Net neutrality and governance" },
+        { "type": "p", "text": "Net neutrality — the principle that internet providers should treat all data equally, without discriminating by origin, destination, or type — is one of the most important debates about the internet. Without it, providers could favor their own services or charge more for certain content, altering the competitive playing field." },
+        { "type": "p", "text": "Internet governance is decentralized and complex: ICANN manages domain names, IETF develops technical standards, governments regulate within their jurisdictions. The geopolitical fragmentation of the internet — the 'splinternet' — advances, with countries like China, Russia, and Iran creating national versions partially isolated from the rest of the world." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_internet_q1",
+        "question": "What was ARPANET's innovative design that influenced the entire internet?",
+        "options": [
+          "Transmission speeds far superior to existing networks",
+          "Distributed network without a central point of failure, with packets following multiple paths",
+          "Use of satellites for global data transmission",
+          "Encryption system protecting military communications"
+        ],
+        "answerIndex": 1,
+        "explanation": "ARPANET's distributed design — without a central point of failure, with data packets able to follow multiple paths — was revolutionary and made the network resilient. It's the architectural foundation of the modern internet."
+      },
+      {
+        "id": "science_internet_q2",
+        "question": "What is the difference between the internet and the World Wide Web?",
+        "options": [
+          "Internet is wireless; web is through cables",
+          "Web is the physical infrastructure; internet is the application system",
+          "Internet is the network infrastructure; web is an application running on top of it",
+          "They are synonymous terms describing the same system"
+        ],
+        "answerIndex": 2,
+        "explanation": "The internet is the network infrastructure (TCP/IP, routers, cables). The World Wide Web is an application running on that infrastructure — the hyperlink-connected document system invented by Tim Berners-Lee."
+      },
+      {
+        "id": "science_internet_q3",
+        "question": "What characterizes the business model of major digital platforms?",
+        "options": [
+          "Charging monthly subscriptions for premium content access",
+          "Selling hardware that accesses their exclusive services",
+          "Using network effects and user data, selling attention to advertisers",
+          "Licensing technology to other companies to develop services"
+        ],
+        "answerIndex": 2,
+        "explanation": "Platforms like Google and Facebook are based on network effects, data as the main asset, and attention sold to advertisers. The user doesn't pay for the service — the user is the product."
+      },
+      {
+        "id": "science_internet_q4",
+        "question": "What is net neutrality?",
+        "options": [
+          "That the internet shouldn't be used for political purposes",
+          "That providers must treat all data equally, without discrimination",
+          "That governments shouldn't regulate the internet",
+          "That platforms must be politically neutral in their moderation"
+        ],
+        "answerIndex": 1,
+        "explanation": "Net neutrality is the principle that internet providers must treat all data equally, without discriminating by origin, destination, or type. Without it, providers could favor their own services."
+      },
+      {
+        "id": "science_internet_q5",
+        "question": "What physical infrastructure carries most international data traffic?",
+        "options": [
+          "Geostationary orbit satellites",
+          "Interconnected 5G transmission towers",
+          "Submarine fiber optic cables",
+          "Data centers distributed across all continents"
+        ],
+        "answerIndex": 2,
+        "explanation": "Submarine fiber optic cables carry about 95% of international data traffic. Despite the perception of a 'wireless' internet, it deeply depends on physical infrastructure concentrated at critical points."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Internet y la Revolución Digital",
+      "summary": "Internet es la infraestructura más transformadora de la historia moderna. En décadas, pasó de proyecto militar experimental al sustrato de casi toda la actividad económica, social y cultural humana. Entender cómo funciona — y quién controla qué — es entender el terreno donde se ejerce gran parte del poder del siglo XXI.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "De los orígenes militares a la web global" },
+        { "type": "p", "text": "Internet nació de ARPANET, red creada por el Departamento de Defensa estadounidense en los años 1960 para conectar computadoras de universidades y centros de investigación. El diseño fue revolucionario: en lugar de una red centralizada, era distribuida — sin punto central de fallo. Los paquetes de datos podían seguir múltiples caminos hasta el destino, haciendo la red resiliente a ataques." },
+        { "type": "p", "text": "En 1989, Tim Berners-Lee, científico en el CERN, inventó la World Wide Web — el sistema de documentos interconectados mediante hipervínculos que transformó internet en algo accesible al público general. La web e internet se confunden frecuentemente, pero la web es solo una de las aplicaciones que corre sobre la infraestructura de internet." },
+        { "type": "h2", "text": "Cómo funciona internet" },
+        { "type": "p", "text": "Internet es una red de redes conectadas por el protocolo TCP/IP. Cuando accedes a un sitio web, tu computadora divide los datos en 'paquetes' que viajan por enrutadores alrededor del mundo hasta el servidor de destino, donde se reensamblan. Las direcciones IP identifican cada dispositivo; el DNS traduce nombres de dominio legibles (google.com) a direcciones numéricas." },
+        { "type": "p", "text": "La infraestructura física incluye cables submarinos que cruzan los océanos — más de 400 sistemas de cables conectan los continentes. Estos cables de fibra óptica transmiten el 95% del tráfico internacional de datos. A pesar de parecer 'inalámbrica', la internet global depende profundamente de infraestructura física concentrada en pocos puntos críticos." },
+        { "type": "quote", "text": "Internet trata la censura como un daño y la evita.", "author": "John Gilmore" },
+        { "type": "h2", "text": "Web 1.0, 2.0 y el modelo de plataformas" },
+        { "type": "p", "text": "La Web 1.0 (años 1990) era estática: los sitios publicaban contenido, los usuarios consumían. La Web 2.0 (años 2000 en adelante) fue interactiva: los usuarios comenzaron a crear contenido — blogs, redes sociales, YouTube. Este modelo generó las plataformas dominantes: Facebook, Google, Amazon — empresas que no producen contenido sino que crean mercados donde otros interactúan." },
+        { "type": "p", "text": "El modelo de negocio de las plataformas es fundamentalmente diferente del comercio tradicional: se basa en efectos de red (el valor aumenta con cada nuevo usuario), datos como activo principal, y frecuentemente atención vendida a anunciantes. El usuario no paga por el servicio — el usuario es el producto." },
+        { "type": "h2", "text": "Neutralidad de red y gobernanza" },
+        { "type": "p", "text": "La neutralidad de red — el principio de que los proveedores de internet deben tratar todos los datos por igual, sin discriminar por origen, destino o tipo — es uno de los debates más importantes sobre internet. Sin ella, los proveedores podrían favorecer sus propios servicios o cobrar más por ciertos contenidos, alterando el campo competitivo." },
+        { "type": "p", "text": "La gobernanza de internet es descentralizada y compleja: la ICANN gestiona nombres de dominio, la IETF desarrolla estándares técnicos, los gobiernos regulan dentro de sus jurisdicciones. La fragmentación geopolítica de internet — la 'splinternet' — avanza, con países como China, Rusia e Irán creando versiones nacionales parcialmente aisladas del resto del mundo." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_internet_q1",
+        "question": "¿Cuál fue el diseño innovador de ARPANET que influyó en toda internet?",
+        "options": [
+          "Velocidades de transmisión muy superiores a las redes existentes",
+          "Red distribuida sin punto central de fallo, con paquetes siguiendo múltiples caminos",
+          "Uso de satélites para transmisión global de datos",
+          "Sistema de cifrado que protegía las comunicaciones militares"
+        ],
+        "answerIndex": 1,
+        "explanation": "El diseño distribuido de ARPANET — sin punto central de fallo, con paquetes de datos que podían seguir múltiples caminos — fue revolucionario y hizo la red resiliente. Es la base arquitectónica de la internet moderna."
+      },
+      {
+        "id": "science_internet_q2",
+        "question": "¿Cuál es la diferencia entre internet y la World Wide Web?",
+        "options": [
+          "Internet es inalámbrica; la web es por cables",
+          "La web es la infraestructura física; internet es el sistema de aplicaciones",
+          "Internet es la infraestructura de red; la web es una aplicación que corre sobre ella",
+          "Son términos sinónimos que describen el mismo sistema"
+        ],
+        "answerIndex": 2,
+        "explanation": "Internet es la infraestructura de red (TCP/IP, enrutadores, cables). La World Wide Web es una aplicación que corre sobre esa infraestructura — el sistema de documentos interconectados mediante hipervínculos inventado por Tim Berners-Lee."
+      },
+      {
+        "id": "science_internet_q3",
+        "question": "¿Qué caracteriza el modelo de negocio de las grandes plataformas digitales?",
+        "options": [
+          "Cobrar suscripción mensual por acceso a contenido premium",
+          "Vender hardware que accede a sus servicios exclusivos",
+          "Usar efectos de red y datos del usuario, vendiendo atención a anunciantes",
+          "Licenciar tecnología a otras empresas para desarrollar servicios"
+        ],
+        "answerIndex": 2,
+        "explanation": "Las plataformas como Google y Facebook se basan en efectos de red, datos como activo principal y atención vendida a anunciantes. El usuario no paga por el servicio — el usuario es el producto."
+      },
+      {
+        "id": "science_internet_q4",
+        "question": "¿Qué es la neutralidad de red?",
+        "options": [
+          "Que internet no debe usarse con fines políticos",
+          "Que los proveedores deben tratar todos los datos por igual, sin discriminación",
+          "Que los gobiernos no deben regular internet",
+          "Que las plataformas deben ser políticamente neutrales en su moderación"
+        ],
+        "answerIndex": 1,
+        "explanation": "La neutralidad de red es el principio de que los proveedores de internet deben tratar todos los datos por igual, sin discriminar por origen, destino o tipo. Sin ella, los proveedores podrían favorecer sus propios servicios."
+      },
+      {
+        "id": "science_internet_q5",
+        "question": "¿Qué infraestructura física transporta la mayor parte del tráfico internacional de datos?",
+        "options": [
+          "Satélites en órbita geoestacionaria",
+          "Torres de transmisión 5G interconectadas",
+          "Cables submarinos de fibra óptica",
+          "Centros de datos distribuidos en todos los continentes"
+        ],
+        "answerIndex": 2,
+        "explanation": "Los cables submarinos de fibra óptica transportan aproximadamente el 95% del tráfico internacional de datos. A pesar de la percepción de una internet 'inalámbrica', depende profundamente de infraestructura física concentrada en puntos críticos."
+      }
+    ]
+  }
+}

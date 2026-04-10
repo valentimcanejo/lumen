@@ -1,0 +1,394 @@
+{
+  "id": "business_models",
+  "trackId": "business",
+  "order": 2,
+  "difficulty": "beginner",
+  "estimatedMinutes": 11,
+  "prerequisites": ["business"],
+  "titlePt": "Modelos de Negócio",
+  "titleEn": "Business Models",
+  "titleEs": "Modelos de Negocio",
+  "coverImageUrl": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80",
+  "coverImageCredit": "Photo by Austin Distel on Unsplash",
+  "pt": {
+    "lesson": {
+      "title": "Modelos de Negócio: Como as Empresas Criam e Capturam Valor",
+      "summary": "Um modelo de negócio descreve como uma empresa cria, entrega e captura valor. Ferramentas como o Business Model Canvas tornam esse processo visual e estratégico.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Toda empresa, consciente ou não, opera segundo um modelo de negócio. Esse modelo responde a uma pergunta fundamental: como a organização cria valor para seus clientes e, ao mesmo tempo, captura parte desse valor para si mesma?"
+        },
+        {
+          "type": "text",
+          "content": "O conceito foi popularizado por Alexander Osterwalder com o **Business Model Canvas** — uma ferramenta visual que mapeia os nove componentes essenciais de qualquer negócio em um único quadro."
+        },
+        {
+          "type": "heading",
+          "content": "Os 9 Blocos do Business Model Canvas"
+        },
+        {
+          "type": "text",
+          "content": "**Segmentos de clientes**: para quem a empresa cria valor? **Proposta de valor**: qual problema resolve ou necessidade satisfaz? **Canais**: como chega até o cliente? **Relacionamento**: que tipo de relação mantém com o cliente?"
+        },
+        {
+          "type": "text",
+          "content": "**Fontes de receita**: como a empresa ganha dinheiro? **Recursos-chave**: quais ativos são indispensáveis? **Atividades-chave**: o que a empresa precisa fazer bem? **Parcerias-chave**: quem ajuda a operar? **Estrutura de custos**: quais são os principais custos?"
+        },
+        {
+          "type": "heading",
+          "content": "Pipelines vs. Plataformas"
+        },
+        {
+          "type": "text",
+          "content": "Uma das distinções mais importantes é entre negócios **pipeline** e negócios **plataforma**. Pipelines criam valor em uma cadeia linear: a empresa produz algo e vende ao consumidor. Montadoras, restaurantes e varejistas são exemplos clássicos."
+        },
+        {
+          "type": "text",
+          "content": "Plataformas conectam dois ou mais lados de um mercado, facilitando interações entre eles. O Uber não fabrica carros — conecta motoristas e passageiros. O Airbnb não possui imóveis — conecta anfitriões e hóspedes. A plataforma cria valor ao facilitar a troca."
+        },
+        {
+          "type": "text",
+          "content": "Plataformas tendem a escalar mais rápido porque cada novo usuário aumenta o valor para todos os outros — o que economistas chamam de **efeitos de rede**. Por isso as maiores empresas do mundo (Apple, Google, Amazon, Meta) são plataformas."
+        },
+        {
+          "type": "heading",
+          "content": "Modelos de Monetização"
+        },
+        {
+          "type": "text",
+          "content": "Como uma empresa cobra pelo valor que entrega? Existem vários modelos: **venda direta** (paga uma vez), **assinatura** (receita recorrente), **freemium** (grátis com upgrade pago), **publicidade** (grátis para usuários, pago por anunciantes), **marketplace** (comissão por transação), **licenciamento** (venda de direitos de uso)."
+        },
+        {
+          "type": "text",
+          "content": "A escolha do modelo de monetização impacta tudo: fluxo de caixa, relacionamento com clientes, estrutura de custos. Empresas SaaS preferem assinaturas pela previsibilidade. Apps de consumo frequentemente usam freemium para crescer rápido e converter depois."
+        },
+        {
+          "type": "heading",
+          "content": "Inovação no Modelo de Negócio"
+        },
+        {
+          "type": "text",
+          "content": "Muitas das maiores disrupções tecnológicas não foram inovações de produto, mas de **modelo de negócio**. A Netflix não inventou o streaming — revolucionou o modelo de assinatura frente ao aluguel por título da Blockbuster. O Spotify não criou música digital — mudou de venda de álbuns para streaming mensal."
+        },
+        {
+          "type": "quote",
+          "content": "Um produto brilhante com um modelo de negócio errado vai falhar. Um produto mediano com o modelo certo pode dominar o mercado.",
+          "attribution": "Clayton Christensen, Harvard Business School"
+        },
+        {
+          "type": "text",
+          "content": "O Business Model Canvas é mais do que uma ferramenta de planejamento — é uma linguagem comum para testar hipóteses, comunicar estratégia e pivotar quando necessário. Entender modelos de negócio é essencial para qualquer empreendedor ou gestor."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "O Business Model Canvas foi criado por:",
+        "options": ["Peter Drucker", "Alexander Osterwalder", "Michael Porter", "Eric Ries"],
+        "correctIndex": 1,
+        "explanation": "Alexander Osterwalder desenvolveu o Business Model Canvas, ferramenta que mapeia os 9 componentes de qualquer modelo de negócio."
+      },
+      {
+        "question": "Qual é a diferença fundamental entre negócios pipeline e plataforma?",
+        "options": [
+          "Pipelines são digitais, plataformas são físicas",
+          "Pipelines criam valor linearmente, plataformas conectam lados de um mercado",
+          "Pipelines são mais lucrativos que plataformas",
+          "Plataformas vendem produtos, pipelines vendem serviços"
+        ],
+        "correctIndex": 1,
+        "explanation": "Pipelines criam valor em cadeia linear (produzir → vender). Plataformas conectam múltiplos lados de um mercado, criando valor ao facilitar interações."
+      },
+      {
+        "question": "O modelo freemium funciona da seguinte forma:",
+        "options": [
+          "O produto é gratuito para todos sem exceção",
+          "Versão básica gratuita com funcionalidades premium pagas",
+          "Preço varia conforme a frequência de uso",
+          "Clientes pagam antecipadamente por funcionalidades futuras"
+        ],
+        "correctIndex": 1,
+        "explanation": "No freemium, a versão básica é gratuita para atrair usuários em escala, enquanto funcionalidades avançadas são pagas — estratégia usada por Spotify, Dropbox e LinkedIn."
+      },
+      {
+        "question": "Por que plataformas tendem a escalar mais rápido que pipelines?",
+        "options": [
+          "Porque têm mais funcionários",
+          "Por causa dos efeitos de rede: cada novo usuário aumenta o valor para todos",
+          "Porque têm menos custos fixos",
+          "Porque recebem mais investimento de VCs"
+        ],
+        "correctIndex": 1,
+        "explanation": "Efeitos de rede: quanto mais usuários uma plataforma tem, mais valiosa ela se torna para cada usuário. O WhatsApp vale mais quanto mais pessoas usam."
+      },
+      {
+        "question": "A disrupção da Netflix sobre a Blockbuster foi principalmente:",
+        "options": [
+          "Inovação tecnológica no streaming de vídeo",
+          "Inovação no modelo de negócio (assinatura vs. aluguel por título)",
+          "Maior variedade de títulos disponíveis",
+          "Melhor qualidade de imagem"
+        ],
+        "correctIndex": 1,
+        "explanation": "A Netflix revolucionou o modelo de monetização — assinatura mensal ilimitada versus pagamento por título. O modelo, não a tecnologia, foi a inovação decisiva."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Business Models: How Companies Create and Capture Value",
+      "summary": "A business model describes how a company creates, delivers, and captures value. Tools like the Business Model Canvas make this process visual and strategic.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Every company, whether consciously or not, operates according to a business model. This model answers a fundamental question: how does the organization create value for its customers while also capturing some of that value for itself?"
+        },
+        {
+          "type": "text",
+          "content": "The concept was popularized by Alexander Osterwalder with the **Business Model Canvas** — a visual tool that maps the nine essential components of any business on a single board."
+        },
+        {
+          "type": "heading",
+          "content": "The 9 Blocks of the Business Model Canvas"
+        },
+        {
+          "type": "text",
+          "content": "**Customer segments**: for whom does the company create value? **Value proposition**: what problem does it solve? **Channels**: how does it reach customers? **Customer relationships**: what type of relationship does it maintain?"
+        },
+        {
+          "type": "text",
+          "content": "**Revenue streams**: how does the company make money? **Key resources**: what assets are indispensable? **Key activities**: what must the company do well? **Key partnerships**: who helps it operate? **Cost structure**: what are the main costs?"
+        },
+        {
+          "type": "heading",
+          "content": "Pipelines vs. Platforms"
+        },
+        {
+          "type": "text",
+          "content": "One of the most important distinctions is between **pipeline** and **platform** businesses. Pipelines create value in a linear chain: the company produces something and sells it to consumers. Manufacturers, restaurants, and retailers are classic examples."
+        },
+        {
+          "type": "text",
+          "content": "Platforms connect two or more sides of a market, facilitating interactions between them. Uber doesn't manufacture cars — it connects drivers and passengers. Airbnb doesn't own properties — it connects hosts and guests. The platform creates value by facilitating exchange."
+        },
+        {
+          "type": "text",
+          "content": "Platforms tend to scale faster because each new user increases value for everyone else — what economists call **network effects**. That's why the world's largest companies (Apple, Google, Amazon, Meta) are platforms."
+        },
+        {
+          "type": "heading",
+          "content": "Monetization Models"
+        },
+        {
+          "type": "text",
+          "content": "How does a company charge for the value it delivers? There are several models: **direct sale** (one-time payment), **subscription** (recurring revenue), **freemium** (free with paid upgrade), **advertising** (free for users, paid by advertisers), **marketplace** (commission per transaction), **licensing** (selling usage rights)."
+        },
+        {
+          "type": "text",
+          "content": "The choice of monetization model impacts everything: cash flow, customer relationships, cost structure. SaaS companies prefer subscriptions for predictability. Consumer apps often use freemium to grow fast and convert later."
+        },
+        {
+          "type": "heading",
+          "content": "Business Model Innovation"
+        },
+        {
+          "type": "text",
+          "content": "Many of the greatest technological disruptions weren't product innovations but **business model** innovations. Netflix didn't invent streaming — it revolutionized the subscription model versus Blockbuster's per-title rental. Spotify didn't create digital music — it shifted from album sales to monthly streaming."
+        },
+        {
+          "type": "quote",
+          "content": "A brilliant product with the wrong business model will fail. A mediocre product with the right model can dominate the market.",
+          "attribution": "Clayton Christensen, Harvard Business School"
+        },
+        {
+          "type": "text",
+          "content": "The Business Model Canvas is more than a planning tool — it's a common language for testing hypotheses, communicating strategy, and pivoting when necessary. Understanding business models is essential for any entrepreneur or manager."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "The Business Model Canvas was created by:",
+        "options": ["Peter Drucker", "Alexander Osterwalder", "Michael Porter", "Eric Ries"],
+        "correctIndex": 1,
+        "explanation": "Alexander Osterwalder developed the Business Model Canvas, a tool that maps the 9 components of any business model."
+      },
+      {
+        "question": "What is the fundamental difference between pipeline and platform businesses?",
+        "options": [
+          "Pipelines are digital, platforms are physical",
+          "Pipelines create value linearly, platforms connect sides of a market",
+          "Pipelines are more profitable than platforms",
+          "Platforms sell products, pipelines sell services"
+        ],
+        "correctIndex": 1,
+        "explanation": "Pipelines create value in a linear chain (produce → sell). Platforms connect multiple sides of a market, creating value by facilitating interactions."
+      },
+      {
+        "question": "The freemium model works as follows:",
+        "options": [
+          "The product is free for everyone without exception",
+          "Basic version is free with paid premium features",
+          "Price varies based on frequency of use",
+          "Customers pay in advance for future features"
+        ],
+        "correctIndex": 1,
+        "explanation": "In freemium, the basic version is free to attract users at scale, while advanced features are paid — a strategy used by Spotify, Dropbox, and LinkedIn."
+      },
+      {
+        "question": "Why do platforms tend to scale faster than pipelines?",
+        "options": [
+          "Because they have more employees",
+          "Because of network effects: each new user increases value for everyone",
+          "Because they have fewer fixed costs",
+          "Because they receive more VC investment"
+        ],
+        "correctIndex": 1,
+        "explanation": "Network effects: the more users a platform has, the more valuable it becomes for each user. WhatsApp is worth more the more people use it."
+      },
+      {
+        "question": "Netflix's disruption of Blockbuster was primarily:",
+        "options": [
+          "Technological innovation in video streaming",
+          "Business model innovation (subscription vs. per-title rental)",
+          "Larger variety of available titles",
+          "Better picture quality"
+        ],
+        "correctIndex": 1,
+        "explanation": "Netflix revolutionized the monetization model — unlimited monthly subscription versus per-title payment. The model, not the technology, was the decisive innovation."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Modelos de Negocio: Cómo las Empresas Crean y Capturan Valor",
+      "summary": "Un modelo de negocio describe cómo una empresa crea, entrega y captura valor. Herramientas como el Business Model Canvas hacen este proceso visual y estratégico.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Toda empresa, consciente o no, opera según un modelo de negocio. Este modelo responde a una pregunta fundamental: ¿cómo crea valor la organización para sus clientes y, al mismo tiempo, captura parte de ese valor para sí misma?"
+        },
+        {
+          "type": "text",
+          "content": "El concepto fue popularizado por Alexander Osterwalder con el **Business Model Canvas** — una herramienta visual que mapea los nueve componentes esenciales de cualquier negocio en un solo cuadro."
+        },
+        {
+          "type": "heading",
+          "content": "Los 9 Bloques del Business Model Canvas"
+        },
+        {
+          "type": "text",
+          "content": "**Segmentos de clientes**: ¿para quién crea valor la empresa? **Propuesta de valor**: ¿qué problema resuelve? **Canales**: ¿cómo llega al cliente? **Relación con clientes**: ¿qué tipo de relación mantiene?"
+        },
+        {
+          "type": "text",
+          "content": "**Fuentes de ingresos**: ¿cómo gana dinero? **Recursos clave**: ¿qué activos son indispensables? **Actividades clave**: ¿qué debe hacer bien? **Socios clave**: ¿quién ayuda a operar? **Estructura de costos**: ¿cuáles son los costos principales?"
+        },
+        {
+          "type": "heading",
+          "content": "Pipelines vs. Plataformas"
+        },
+        {
+          "type": "text",
+          "content": "Una de las distinciones más importantes es entre negocios **pipeline** y negocios **plataforma**. Los pipelines crean valor en una cadena lineal: la empresa produce algo y lo vende al consumidor. Fabricantes, restaurantes y minoristas son ejemplos clásicos."
+        },
+        {
+          "type": "text",
+          "content": "Las plataformas conectan dos o más lados de un mercado, facilitando interacciones entre ellos. Uber no fabrica autos — conecta conductores y pasajeros. Airbnb no posee propiedades — conecta anfitriones y huéspedes. La plataforma crea valor al facilitar el intercambio."
+        },
+        {
+          "type": "text",
+          "content": "Las plataformas tienden a escalar más rápido porque cada nuevo usuario aumenta el valor para todos los demás — lo que los economistas llaman **efectos de red**. Por eso las mayores empresas del mundo (Apple, Google, Amazon, Meta) son plataformas."
+        },
+        {
+          "type": "heading",
+          "content": "Modelos de Monetización"
+        },
+        {
+          "type": "text",
+          "content": "¿Cómo cobra una empresa por el valor que entrega? Existen varios modelos: **venta directa** (pago único), **suscripción** (ingresos recurrentes), **freemium** (gratis con upgrade pago), **publicidad** (gratis para usuarios, pago por anunciantes), **marketplace** (comisión por transacción), **licenciamiento** (venta de derechos de uso)."
+        },
+        {
+          "type": "text",
+          "content": "La elección del modelo de monetización impacta todo: flujo de caja, relación con clientes, estructura de costos. Las empresas SaaS prefieren suscripciones por su previsibilidad. Las apps de consumo frecuentemente usan freemium para crecer rápido y convertir después."
+        },
+        {
+          "type": "heading",
+          "content": "Innovación en el Modelo de Negocio"
+        },
+        {
+          "type": "text",
+          "content": "Muchas de las mayores disrupciones tecnológicas no fueron innovaciones de producto, sino de **modelo de negocio**. Netflix no inventó el streaming — revolucionó el modelo de suscripción frente al alquiler por título de Blockbuster. Spotify no creó la música digital — cambió de venta de álbumes a streaming mensual."
+        },
+        {
+          "type": "quote",
+          "content": "Un producto brillante con el modelo de negocio equivocado fracasará. Un producto mediocre con el modelo correcto puede dominar el mercado.",
+          "attribution": "Clayton Christensen, Harvard Business School"
+        },
+        {
+          "type": "text",
+          "content": "El Business Model Canvas es más que una herramienta de planificación — es un lenguaje común para probar hipótesis, comunicar estrategia y pivotar cuando es necesario. Entender los modelos de negocio es esencial para cualquier emprendedor o gestor."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "El Business Model Canvas fue creado por:",
+        "options": ["Peter Drucker", "Alexander Osterwalder", "Michael Porter", "Eric Ries"],
+        "correctIndex": 1,
+        "explanation": "Alexander Osterwalder desarrolló el Business Model Canvas, herramienta que mapea los 9 componentes de cualquier modelo de negocio."
+      },
+      {
+        "question": "¿Cuál es la diferencia fundamental entre negocios pipeline y plataforma?",
+        "options": [
+          "Los pipelines son digitales, las plataformas son físicas",
+          "Los pipelines crean valor linealmente, las plataformas conectan lados de un mercado",
+          "Los pipelines son más rentables que las plataformas",
+          "Las plataformas venden productos, los pipelines venden servicios"
+        ],
+        "correctIndex": 1,
+        "explanation": "Los pipelines crean valor en cadena lineal (producir → vender). Las plataformas conectan múltiples lados de un mercado, creando valor al facilitar interacciones."
+      },
+      {
+        "question": "El modelo freemium funciona de la siguiente manera:",
+        "options": [
+          "El producto es gratuito para todos sin excepción",
+          "Versión básica gratuita con funcionalidades premium de pago",
+          "El precio varía según la frecuencia de uso",
+          "Los clientes pagan por adelantado por funcionalidades futuras"
+        ],
+        "correctIndex": 1,
+        "explanation": "En el freemium, la versión básica es gratuita para atraer usuarios a escala, mientras las funcionalidades avanzadas son de pago — estrategia usada por Spotify, Dropbox y LinkedIn."
+      },
+      {
+        "question": "¿Por qué las plataformas tienden a escalar más rápido que los pipelines?",
+        "options": [
+          "Porque tienen más empleados",
+          "Por los efectos de red: cada nuevo usuario aumenta el valor para todos",
+          "Porque tienen menos costos fijos",
+          "Porque reciben más inversión de VCs"
+        ],
+        "correctIndex": 1,
+        "explanation": "Efectos de red: cuantos más usuarios tiene una plataforma, más valiosa se vuelve para cada usuario. WhatsApp vale más cuantas más personas lo usan."
+      },
+      {
+        "question": "La disrupción de Netflix sobre Blockbuster fue principalmente:",
+        "options": [
+          "Innovación tecnológica en streaming de video",
+          "Innovación en el modelo de negocio (suscripción vs. alquiler por título)",
+          "Mayor variedad de títulos disponibles",
+          "Mejor calidad de imagen"
+        ],
+        "correctIndex": 1,
+        "explanation": "Netflix revolucionó el modelo de monetización — suscripción mensual ilimitada versus pago por título. El modelo, no la tecnología, fue la innovación decisiva."
+      }
+    ]
+  }
+}

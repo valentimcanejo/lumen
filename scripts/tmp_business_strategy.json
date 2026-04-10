@@ -1,0 +1,382 @@
+{
+  "id": "business_strategy",
+  "trackId": "business",
+  "order": 3,
+  "difficulty": "beginner",
+  "estimatedMinutes": 11,
+  "prerequisites": ["business_models"],
+  "titlePt": "Estratégia Competitiva",
+  "titleEn": "Competitive Strategy",
+  "titleEs": "Estrategia Competitiva",
+  "coverImageUrl": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
+  "coverImageCredit": "Photo by Helloquence on Unsplash",
+  "pt": {
+    "lesson": {
+      "title": "Estratégia Competitiva: Como Empresas Vencem no Mercado",
+      "summary": "Estratégia é sobre fazer escolhas. Porter definiu as três estratégias genéricas; Jobs demonstrou que foco no cliente supera qualquer análise de concorrência.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Por que algumas empresas prosperam enquanto outras fracassam no mesmo mercado? A resposta geralmente está na estratégia — as escolhas deliberadas sobre onde competir e como vencer."
+        },
+        {
+          "type": "text",
+          "content": "Michael Porter, professor de Harvard, é o pensador mais influente em estratégia competitiva. Sua obra, publicada nos anos 1980, ainda define o vocabulário básico do campo."
+        },
+        {
+          "type": "heading",
+          "content": "As 5 Forças de Porter"
+        },
+        {
+          "type": "text",
+          "content": "Porter argumenta que a lucratividade de um setor depende de cinco forças: **rivalidade entre concorrentes** (quão intensa é a competição?), **ameaça de novos entrantes** (quão fácil é entrar no setor?), **poder dos fornecedores** (fornecedores podem ditar preços?), **poder dos compradores** (clientes têm poder de barganha?) e **ameaça de substitutos** (existem alternativas ao produto?)."
+        },
+        {
+          "type": "text",
+          "content": "Quanto mais favoráveis essas forças, mais lucrativo o setor. A indústria farmacêutica tem altas barreiras de entrada, poucos substitutos e compradores dispersos — por isso é muito lucrativa. A aviação tem muitos concorrentes, clientes sensíveis a preço e combustível como insumo crítico — por isso é notoriamente difícil."
+        },
+        {
+          "type": "heading",
+          "content": "As 3 Estratégias Genéricas"
+        },
+        {
+          "type": "text",
+          "content": "Porter propõe que uma empresa deve escolher uma das três estratégias genéricas — tentar fazer tudo ao mesmo tempo leva à mediocridade, ao que ele chamou de 'stuck in the middle'."
+        },
+        {
+          "type": "text",
+          "content": "**Liderança em custo**: ser o produtor mais eficiente do setor, oferecendo preços menores que qualquer concorrente. Walmart, Ryanair e Xiaomi seguem essa estratégia. **Diferenciação**: oferecer algo único pelo qual os clientes pagam mais. Apple, BMW e Rolex diferenciam por design, status ou performance. **Foco**: servir um nicho específico melhor do que qualquer concorrente — seja com custos menores (foco em custo) ou com oferta superior (foco em diferenciação)."
+        },
+        {
+          "type": "heading",
+          "content": "Vantagem Competitiva Sustentável"
+        },
+        {
+          "type": "text",
+          "content": "Uma vantagem competitiva é sustentável quando é difícil de imitar. Warren Buffett chama isso de **moat** (fosso) — o que protege o castelo dos concorrentes. Moats podem vir de efeitos de rede (Facebook), custos de troca elevados (sistemas ERP), economias de escala (Amazon), ativos intangíveis (patentes, marcas) ou vantagem de custo estrutural."
+        },
+        {
+          "type": "text",
+          "content": "Empresas sem moat competem apenas em execução e eficiência — e sempre há alguém disposto a trabalhar mais barato. Por isso investidores pagam prêmio por empresas com vantagens competitivas duráveis."
+        },
+        {
+          "type": "heading",
+          "content": "Estratégia no Século XXI"
+        },
+        {
+          "type": "text",
+          "content": "Em mercados digitais de mudança rápida, a estratégia clássica de Porter enfrenta críticas. Rita McGrath propõe **vantagens transitórias** — em vez de defender uma posição, empresas devem ser ágeis o suficiente para criar e abandonar vantagens rapidamente."
+        },
+        {
+          "type": "quote",
+          "content": "A essência da estratégia é escolher o que não fazer.",
+          "attribution": "Michael Porter"
+        },
+        {
+          "type": "text",
+          "content": "Estratégia não é sobre ter um plano perfeito — é sobre fazer escolhas conscientes e alinhadas. Empresas que tentam ser tudo para todos acabam não sendo nada para ninguém. A clareza estratégica é o que permite alinhar recursos, pessoas e decisões em direção a um objetivo comum."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "Segundo Porter, o que acontece com empresas que tentam adotar todas as estratégias genéricas ao mesmo tempo?",
+        "options": [
+          "Tornam-se líderes de mercado",
+          "Ficam 'stuck in the middle' — medíocres em tudo",
+          "Criam uma nova categoria de mercado",
+          "Dominam múltiplos segmentos simultaneamente"
+        ],
+        "correctIndex": 1,
+        "explanation": "Porter argumenta que tentar ser líder em custo E diferenciar ao mesmo tempo resulta em mediocridade — a empresa fica 'presa no meio' sem vantagem em nenhuma dimensão."
+      },
+      {
+        "question": "O conceito de 'moat' de Warren Buffett refere-se a:",
+        "options": [
+          "A taxa de crescimento de uma empresa",
+          "Vantagem competitiva difícil de imitar que protege a empresa dos concorrentes",
+          "O valor de mercado de uma empresa",
+          "A margem de lucro líquida"
+        ],
+        "correctIndex": 1,
+        "explanation": "Moat (fosso) é a vantagem competitiva sustentável que protege uma empresa — como efeitos de rede, patentes, marcas fortes ou economias de escala."
+      },
+      {
+        "question": "Qual empresa é exemplo clássico de estratégia de liderança em custo?",
+        "options": ["Apple", "Rolex", "Walmart", "Tesla"],
+        "correctIndex": 2,
+        "explanation": "Walmart opera com margens apertadas e eficiência operacional máxima para oferecer os menores preços — estratégia clássica de liderança em custo."
+      },
+      {
+        "question": "As 5 Forças de Porter servem para:",
+        "options": [
+          "Analisar a motivação dos funcionários",
+          "Avaliar a lucratividade potencial de um setor",
+          "Calcular o valuation de uma startup",
+          "Definir o organograma de uma empresa"
+        ],
+        "correctIndex": 1,
+        "explanation": "As 5 Forças analisam rivalidade, novos entrantes, poder de fornecedores e compradores, e substitutos — determinando o quão atrativo é um setor para competir."
+      },
+      {
+        "question": "Rita McGrath critica Porter propondo que no século XXI empresas devem buscar:",
+        "options": [
+          "Posições de mercado ainda mais defensáveis",
+          "Vantagens transitórias — criar e abandonar vantagens rapidamente",
+          "Fusões e aquisições como estratégia principal",
+          "Internacionalização como único caminho de crescimento"
+        ],
+        "correctIndex": 1,
+        "explanation": "Em mercados digitais de mudança rápida, McGrath argumenta que vantagens sustentáveis são raras — empresas devem ser ágeis para criar e abandonar vantagens conforme o mercado muda."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Competitive Strategy: How Companies Win in the Market",
+      "summary": "Strategy is about making choices. Porter defined three generic strategies; Jobs demonstrated that customer focus beats any competitive analysis.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Why do some companies thrive while others fail in the same market? The answer usually lies in strategy — the deliberate choices about where to compete and how to win."
+        },
+        {
+          "type": "text",
+          "content": "Michael Porter, Harvard professor, is the most influential thinker in competitive strategy. His work, published in the 1980s, still defines the basic vocabulary of the field."
+        },
+        {
+          "type": "heading",
+          "content": "Porter's 5 Forces"
+        },
+        {
+          "type": "text",
+          "content": "Porter argues that an industry's profitability depends on five forces: **rivalry among competitors** (how intense is competition?), **threat of new entrants** (how easy is it to enter the industry?), **supplier power** (can suppliers dictate prices?), **buyer power** (do customers have bargaining power?) and **threat of substitutes** (are there alternatives to the product?)."
+        },
+        {
+          "type": "text",
+          "content": "The more favorable these forces, the more profitable the industry. The pharmaceutical industry has high entry barriers, few substitutes, and dispersed buyers — hence highly profitable. Aviation has many competitors, price-sensitive customers, and fuel as a critical input — hence notoriously difficult."
+        },
+        {
+          "type": "heading",
+          "content": "The 3 Generic Strategies"
+        },
+        {
+          "type": "text",
+          "content": "Porter proposes that a company must choose one of three generic strategies — trying to do everything at once leads to mediocrity, what he called being 'stuck in the middle'."
+        },
+        {
+          "type": "text",
+          "content": "**Cost leadership**: be the most efficient producer in the industry, offering lower prices than any competitor. Walmart, Ryanair, and Xiaomi follow this strategy. **Differentiation**: offer something unique for which customers pay more. Apple, BMW, and Rolex differentiate by design, status, or performance. **Focus**: serve a specific niche better than any competitor — either with lower costs (cost focus) or superior offering (differentiation focus)."
+        },
+        {
+          "type": "heading",
+          "content": "Sustainable Competitive Advantage"
+        },
+        {
+          "type": "text",
+          "content": "A competitive advantage is sustainable when it's difficult to imitate. Warren Buffett calls this a **moat** — what protects the castle from competitors. Moats can come from network effects (Facebook), high switching costs (ERP systems), economies of scale (Amazon), intangible assets (patents, brands), or structural cost advantage."
+        },
+        {
+          "type": "text",
+          "content": "Companies without moats compete only on execution and efficiency — and there's always someone willing to work cheaper. That's why investors pay a premium for companies with durable competitive advantages."
+        },
+        {
+          "type": "heading",
+          "content": "Strategy in the 21st Century"
+        },
+        {
+          "type": "text",
+          "content": "In fast-changing digital markets, Porter's classical strategy faces criticism. Rita McGrath proposes **transient advantages** — instead of defending a position, companies must be agile enough to create and abandon advantages quickly."
+        },
+        {
+          "type": "quote",
+          "content": "The essence of strategy is choosing what not to do.",
+          "attribution": "Michael Porter"
+        },
+        {
+          "type": "text",
+          "content": "Strategy isn't about having a perfect plan — it's about making conscious, aligned choices. Companies that try to be everything to everyone end up being nothing to anyone. Strategic clarity is what allows aligning resources, people, and decisions toward a common goal."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "According to Porter, what happens to companies that try to adopt all generic strategies simultaneously?",
+        "options": [
+          "They become market leaders",
+          "They get 'stuck in the middle' — mediocre at everything",
+          "They create a new market category",
+          "They dominate multiple segments simultaneously"
+        ],
+        "correctIndex": 1,
+        "explanation": "Porter argues that trying to be a cost leader AND differentiate simultaneously results in mediocrity — the company gets 'stuck in the middle' with no advantage in any dimension."
+      },
+      {
+        "question": "Warren Buffett's concept of 'moat' refers to:",
+        "options": [
+          "A company's growth rate",
+          "Difficult-to-imitate competitive advantage that protects a company from competitors",
+          "A company's market value",
+          "The net profit margin"
+        ],
+        "correctIndex": 1,
+        "explanation": "A moat is the sustainable competitive advantage that protects a company — like network effects, patents, strong brands, or economies of scale."
+      },
+      {
+        "question": "Which company is a classic example of cost leadership strategy?",
+        "options": ["Apple", "Rolex", "Walmart", "Tesla"],
+        "correctIndex": 2,
+        "explanation": "Walmart operates with tight margins and maximum operational efficiency to offer the lowest prices — classic cost leadership strategy."
+      },
+      {
+        "question": "Porter's 5 Forces are used to:",
+        "options": [
+          "Analyze employee motivation",
+          "Assess the potential profitability of an industry",
+          "Calculate a startup's valuation",
+          "Define a company's organizational chart"
+        ],
+        "correctIndex": 1,
+        "explanation": "The 5 Forces analyze rivalry, new entrants, supplier and buyer power, and substitutes — determining how attractive an industry is to compete in."
+      },
+      {
+        "question": "Rita McGrath criticizes Porter by proposing that in the 21st century, companies should seek:",
+        "options": [
+          "Even more defensible market positions",
+          "Transient advantages — creating and abandoning advantages rapidly",
+          "Mergers and acquisitions as the main strategy",
+          "Internationalization as the only growth path"
+        ],
+        "correctIndex": 1,
+        "explanation": "In fast-changing digital markets, McGrath argues that sustainable advantages are rare — companies must be agile to create and abandon advantages as the market changes."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Estrategia Competitiva: Cómo las Empresas Ganan en el Mercado",
+      "summary": "La estrategia se trata de hacer elecciones. Porter definió tres estrategias genéricas; Jobs demostró que el enfoque en el cliente supera cualquier análisis de competencia.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "¿Por qué algunas empresas prosperan mientras otras fracasan en el mismo mercado? La respuesta generalmente está en la estrategia — las elecciones deliberadas sobre dónde competir y cómo ganar."
+        },
+        {
+          "type": "text",
+          "content": "Michael Porter, profesor de Harvard, es el pensador más influyente en estrategia competitiva. Su obra, publicada en los años 80, aún define el vocabulario básico del campo."
+        },
+        {
+          "type": "heading",
+          "content": "Las 5 Fuerzas de Porter"
+        },
+        {
+          "type": "text",
+          "content": "Porter argumenta que la rentabilidad de un sector depende de cinco fuerzas: **rivalidad entre competidores** (¿qué tan intensa es la competencia?), **amenaza de nuevos entrantes** (¿qué tan fácil es entrar?), **poder de proveedores** (¿pueden dictar precios?), **poder de compradores** (¿tienen poder de negociación?) y **amenaza de sustitutos** (¿existen alternativas al producto?)."
+        },
+        {
+          "type": "text",
+          "content": "Cuanto más favorables sean estas fuerzas, más rentable es el sector. La industria farmacéutica tiene altas barreras de entrada, pocos sustitutos y compradores dispersos — por eso es muy rentable. La aviación tiene muchos competidores, clientes sensibles al precio y combustible como insumo crítico — por eso es notoriamente difícil."
+        },
+        {
+          "type": "heading",
+          "content": "Las 3 Estrategias Genéricas"
+        },
+        {
+          "type": "text",
+          "content": "Porter propone que una empresa debe elegir una de tres estrategias genéricas — intentar hacer todo al mismo tiempo lleva a la mediocridad, lo que él llamó estar 'stuck in the middle'."
+        },
+        {
+          "type": "text",
+          "content": "**Liderazgo en costos**: ser el productor más eficiente del sector, ofreciendo precios menores. Walmart, Ryanair y Xiaomi siguen esta estrategia. **Diferenciación**: ofrecer algo único por lo cual los clientes pagan más. Apple, BMW y Rolex diferencian por diseño, estatus o desempeño. **Enfoque**: servir un nicho específico mejor que cualquier competidor."
+        },
+        {
+          "type": "heading",
+          "content": "Ventaja Competitiva Sostenible"
+        },
+        {
+          "type": "text",
+          "content": "Una ventaja competitiva es sostenible cuando es difícil de imitar. Warren Buffett la llama **moat** (foso) — lo que protege el castillo de los competidores. Los moats pueden venir de efectos de red, costos de cambio elevados, economías de escala, activos intangibles o ventaja de costo estructural."
+        },
+        {
+          "type": "text",
+          "content": "Las empresas sin moat compiten solo en ejecución y eficiencia — y siempre hay alguien dispuesto a trabajar más barato. Por eso los inversores pagan prima por empresas con ventajas competitivas duraderas."
+        },
+        {
+          "type": "heading",
+          "content": "Estrategia en el Siglo XXI"
+        },
+        {
+          "type": "text",
+          "content": "En mercados digitales de cambio rápido, la estrategia clásica de Porter enfrenta críticas. Rita McGrath propone **ventajas transitorias** — en lugar de defender una posición, las empresas deben ser ágiles para crear y abandonar ventajas rápidamente."
+        },
+        {
+          "type": "quote",
+          "content": "La esencia de la estrategia es elegir lo que no hacer.",
+          "attribution": "Michael Porter"
+        },
+        {
+          "type": "text",
+          "content": "La estrategia no es tener un plan perfecto — es hacer elecciones conscientes y alineadas. Las empresas que intentan ser todo para todos terminan no siendo nada para nadie. La claridad estratégica es lo que permite alinear recursos, personas y decisiones hacia un objetivo común."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "Según Porter, ¿qué les pasa a las empresas que intentan adoptar todas las estrategias genéricas al mismo tiempo?",
+        "options": [
+          "Se convierten en líderes del mercado",
+          "Quedan 'stuck in the middle' — mediocres en todo",
+          "Crean una nueva categoría de mercado",
+          "Dominan múltiples segmentos simultáneamente"
+        ],
+        "correctIndex": 1,
+        "explanation": "Porter argumenta que intentar ser líder en costos Y diferenciarse al mismo tiempo resulta en mediocridad — la empresa queda 'atrapada en el medio' sin ventaja en ninguna dimensión."
+      },
+      {
+        "question": "El concepto de 'moat' de Warren Buffett se refiere a:",
+        "options": [
+          "La tasa de crecimiento de una empresa",
+          "Ventaja competitiva difícil de imitar que protege a la empresa de los competidores",
+          "El valor de mercado de una empresa",
+          "El margen de ganancia neta"
+        ],
+        "correctIndex": 1,
+        "explanation": "El moat (foso) es la ventaja competitiva sostenible que protege a una empresa — como efectos de red, patentes, marcas fuertes o economías de escala."
+      },
+      {
+        "question": "¿Qué empresa es ejemplo clásico de estrategia de liderazgo en costos?",
+        "options": ["Apple", "Rolex", "Walmart", "Tesla"],
+        "correctIndex": 2,
+        "explanation": "Walmart opera con márgenes ajustados y máxima eficiencia operacional para ofrecer los precios más bajos — estrategia clásica de liderazgo en costos."
+      },
+      {
+        "question": "Las 5 Fuerzas de Porter sirven para:",
+        "options": [
+          "Analizar la motivación de los empleados",
+          "Evaluar la rentabilidad potencial de un sector",
+          "Calcular el valor de una startup",
+          "Definir el organigrama de una empresa"
+        ],
+        "correctIndex": 1,
+        "explanation": "Las 5 Fuerzas analizan rivalidad, nuevos entrantes, poder de proveedores y compradores, y sustitutos — determinando qué tan atractivo es un sector para competir."
+      },
+      {
+        "question": "Rita McGrath critica a Porter proponiendo que en el siglo XXI las empresas deben buscar:",
+        "options": [
+          "Posiciones de mercado aún más defendibles",
+          "Ventajas transitorias — crear y abandonar ventajas rápidamente",
+          "Fusiones y adquisiciones como estrategia principal",
+          "La internacionalización como único camino de crecimiento"
+        ],
+        "correctIndex": 1,
+        "explanation": "En mercados digitales de cambio rápido, McGrath argumenta que las ventajas sostenibles son raras — las empresas deben ser ágiles para crear y abandonar ventajas según cambia el mercado."
+      }
+    ]
+  }
+}

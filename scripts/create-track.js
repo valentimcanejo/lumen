@@ -19,20 +19,20 @@ const db = admin.firestore();
 
 async function main() {
   const track = {
-    id: "politics",
-    order: 8,
+    id: "business",
+    order: 10,
     difficulty: 2,
     title: {
-      pt: "Política e Democracia",
-      en: "Politics and Democracy",
-      es: "Política y Democracia",
+      pt: "Negócios e Empreendedorismo",
+      en: "Business and Entrepreneurship",
+      es: "Negocios y Emprendimiento",
     },
     description: {
-      pt: "Como o poder funciona, por que a democracia importa e o que ameaça — partidos, eleições, populismo, desinformação e o futuro da participação cidadã",
-      en: "How power works, why democracy matters and what threatens it — parties, elections, populism, disinformation, and the future of civic participation",
-      es: "Cómo funciona el poder, por qué importa la democracia y qué la amenaza — partidos, elecciones, populismo, desinformación y el futuro de la participación ciudadana",
+      pt: "De Schumpeter ao Vale do Silício — como empreendedores criam valor, como empresas crescem e competem, e as forças que estão transformando o trabalho no século XXI",
+      en: "From Schumpeter to Silicon Valley — how entrepreneurs create value, how companies grow and compete, and the forces transforming work in the 21st century",
+      es: "De Schumpeter a Silicon Valley — cómo los emprendedores crean valor, cómo las empresas crecen y compiten, y las fuerzas que están transformando el trabajo en el siglo XXI",
     },
-    tags: ["politics", "democracy", "elections", "civil rights"],
+    tags: ["business", "entrepreneurship", "startups", "strategy", "finance"],
   };
 
   await db.collection("tracks").doc(track.id).set(track);

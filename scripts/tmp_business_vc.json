@@ -1,0 +1,370 @@
+{
+  "id": "business_vc",
+  "trackId": "business",
+  "order": 8,
+  "difficulty": "intermediate",
+  "estimatedMinutes": 11,
+  "prerequisites": ["business_finance"],
+  "titlePt": "Venture Capital e Financiamento",
+  "titleEn": "Venture Capital and Funding",
+  "titleEs": "Venture Capital y Financiamiento",
+  "coverImageUrl": "https://images.unsplash.com/photo-1559526324-593bc073d938?w=800&q=80",
+  "coverImageCredit": "Photo by Austin Distel on Unsplash",
+  "pt": {
+    "lesson": {
+      "title": "Venture Capital: Como Startups Captam Dinheiro",
+      "summary": "Do capital semente até o IPO, cada rodada de investimento tem regras, expectativas e trade-offs específicos. Entender essa estrutura é essencial para qualquer empreendedor.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Arthur Rock, pioneiro do venture capital no Vale do Silício, disse que investia em pessoas, não em planos de negócio. Essa filosofia define o VC: capital de risco para empresas de alto crescimento em estágios iniciais, onde o risco é alto mas o retorno potencial é extraordinário."
+        },
+        {
+          "type": "text",
+          "content": "O modelo de VC opera por uma lógica específica: em um portfólio de 10 investimentos, 6 falham, 3 retornam o capital e 1 — o 'unicórnio' — paga por todos os outros com retornos de 10x, 50x ou até 100x. Portanto, VCs buscam empresas com potencial de se tornar muito grandes."
+        },
+        {
+          "type": "heading",
+          "content": "O Funil de Financiamento"
+        },
+        {
+          "type": "text",
+          "content": "**Pre-seed/Bootstrapping**: os fundadores usam economia pessoal ou receita para iniciar. **Seed (capital semente)**: primeiros investidores externos — anjos ou fundos seed — tipicamente $250k a $2M para provar o conceito."
+        },
+        {
+          "type": "text",
+          "content": "**Série A**: $2M–$15M para escalar o que já foi provado — equipe, produto, primeiros clientes. **Série B**: $15M–$50M para crescimento acelerado — marketing, expansão geográfica, novos produtos. **Série C e além**: $50M+ para domínio de mercado ou expansão internacional. **IPO**: abertura de capital ao público na bolsa."
+        },
+        {
+          "type": "heading",
+          "content": "Investidores-Anjo"
+        },
+        {
+          "type": "text",
+          "content": "Antes do VC, muitas startups recorrem a **investidores-anjo** — indivíduos ricos que investem capital próprio, geralmente $25k–$500k. Anjos são frequentemente ex-empreendedores que agregam mentoria além do capital. Peter Thiel investiu $500k no Facebook em 2004; em 2012, era $1 bilhão."
+        },
+        {
+          "type": "heading",
+          "content": "Dilution e Valuation"
+        },
+        {
+          "type": "text",
+          "content": "Cada rodada de investimento **dilui** os fundadores: em troca de capital, os investidores recebem uma porcentagem da empresa. Se você tem 100% e vende 20% por $1M, a empresa está avaliada em $5M (post-money valuation). Sua participação cai para 80%, mas 80% de $5M vale mais que 100% de $0."
+        },
+        {
+          "type": "text",
+          "content": "O termo sheet define os termos do investimento. Cláusulas importantes: **liquidation preference** (investidores recebem primeiro em caso de venda), **anti-dilution** (proteção contra rodadas futuras a valuation menor) e **board seats** (controle na tomada de decisão)."
+        },
+        {
+          "type": "heading",
+          "content": "Alternativas ao VC"
+        },
+        {
+          "type": "text",
+          "content": "VC é adequado apenas para empresas com potencial de crescimento exponencial. A maioria dos negócios é financiada por: **empréstimos bancários** (exige garantias), **revenue-based financing** (reembolso como % da receita), **crowdfunding** (capital da 'multidão') ou simplesmente **crescimento orgânico** — usar a própria receita para financiar expansão."
+        },
+        {
+          "type": "quote",
+          "content": "O VC não é para todos. A maioria dos ótimos negócios nunca levantou capital de risco.",
+          "attribution": "Paul Graham, Y Combinator"
+        },
+        {
+          "type": "text",
+          "content": "Captar capital não é sinônimo de sucesso — é uma ferramenta. Mais capital acelera o crescimento mas também aumenta a pressão por retorno e dilui o controle dos fundadores. A decisão de levantar VC deve ser baseada na natureza do negócio: se você precisa de escala rápida para vencer, VC faz sentido. Se seu negócio pode crescer sustentavelmente com a própria receita, o bootstrapping pode ser mais sábio."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "Por que VCs investem esperando que a maioria dos investimentos falhe?",
+        "options": [
+          "Porque VCs são descuidados na seleção de investimentos",
+          "Porque um único unicórnio pode retornar 10x-100x, pagando por todos os fracassos do portfólio",
+          "Porque as leis tributárias beneficiam perdas de capital",
+          "Porque é impossível prever quais startups vão ter sucesso"
+        ],
+        "correctIndex": 1,
+        "explanation": "O modelo de portfólio de VC prevê que poucos 'home runs' (retornos de 10x+) compensam os muitos fracassos. Por isso VCs buscam empresas com potencial de crescimento exponencial."
+      },
+      {
+        "question": "O que é dilution (diluição) no contexto de startups?",
+        "options": [
+          "A perda de clientes após uma rodada de financiamento",
+          "A redução na participação percentual dos fundadores quando novos investidores entram",
+          "A diminuição do valor de mercado da empresa",
+          "O processo de expandir para novos mercados"
+        ],
+        "correctIndex": 1,
+        "explanation": "A cada rodada de investimento, os fundadores cedem uma porcentagem da empresa em troca de capital. Sua participação percentual diminui (dilui), mas o valor absoluto pode crescer."
+      },
+      {
+        "question": "Qual rodada de financiamento é tipicamente a primeira com investidores externos?",
+        "options": ["Série A", "Série B", "Seed (capital semente)", "IPO"],
+        "correctIndex": 2,
+        "explanation": "A rodada seed é geralmente a primeira com investidores externos (anjos ou fundos seed), tipicamente $250k–$2M para provar o conceito e validar o product-market fit."
+      },
+      {
+        "question": "O VC é a forma de financiamento mais adequada para:",
+        "options": [
+          "Qualquer negócio lucrativo com fluxo de caixa positivo",
+          "Empresas com potencial de crescimento exponencial que precisam de escala rápida",
+          "Negócios tradicionais como restaurantes e varejo",
+          "Empresas que já dominam seus mercados"
+        ],
+        "correctIndex": 1,
+        "explanation": "VC é adequado para negócios que precisam crescer rapidamente para vencer (mercados winner-take-all, efeitos de rede). Para negócios com crescimento linear, o VC pode ser inadequado."
+      },
+      {
+        "question": "A 'liquidation preference' em um term sheet significa:",
+        "options": [
+          "O investidor pode retirar seu dinheiro a qualquer momento",
+          "Em caso de venda da empresa, investidores recebem seu dinheiro de volta antes dos fundadores",
+          "A empresa deve ser vendida em menos de 5 anos",
+          "Os fundadores têm preferência na compra das ações dos investidores"
+        ],
+        "correctIndex": 1,
+        "explanation": "A liquidation preference garante que investidores recuperem seu investimento (e frequentemente um múltiplo) antes dos fundadores receberem qualquer valor em caso de venda ou liquidação."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Venture Capital: How Startups Raise Money",
+      "summary": "From seed capital to IPO, each investment round has specific rules, expectations, and trade-offs. Understanding this structure is essential for any entrepreneur.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Arthur Rock, a pioneer of venture capital in Silicon Valley, said he invested in people, not business plans. This philosophy defines VC: risk capital for high-growth companies in early stages, where risk is high but potential returns are extraordinary."
+        },
+        {
+          "type": "text",
+          "content": "The VC model operates on a specific logic: in a portfolio of 10 investments, 6 fail, 3 return capital, and 1 — the 'unicorn' — pays for all others with 10x, 50x, or even 100x returns. Therefore, VCs seek companies with potential to become very large."
+        },
+        {
+          "type": "heading",
+          "content": "The Funding Funnel"
+        },
+        {
+          "type": "text",
+          "content": "**Pre-seed/Bootstrapping**: founders use personal savings or revenue to start. **Seed**: first external investors — angels or seed funds — typically $250k to $2M to prove the concept."
+        },
+        {
+          "type": "text",
+          "content": "**Series A**: $2M–$15M to scale what has been proven — team, product, first customers. **Series B**: $15M–$50M for accelerated growth — marketing, geographic expansion, new products. **Series C and beyond**: $50M+ for market dominance or international expansion. **IPO**: public stock offering."
+        },
+        {
+          "type": "heading",
+          "content": "Angel Investors"
+        },
+        {
+          "type": "text",
+          "content": "Before VC, many startups turn to **angel investors** — wealthy individuals who invest personal capital, typically $25k–$500k. Angels are often former entrepreneurs who add mentorship beyond capital. Peter Thiel invested $500k in Facebook in 2004; by 2012, it was worth $1 billion."
+        },
+        {
+          "type": "heading",
+          "content": "Dilution and Valuation"
+        },
+        {
+          "type": "text",
+          "content": "Each investment round **dilutes** the founders: in exchange for capital, investors receive a percentage of the company. If you have 100% and sell 20% for $1M, the company is valued at $5M (post-money valuation). Your stake falls to 80%, but 80% of $5M is worth more than 100% of $0."
+        },
+        {
+          "type": "text",
+          "content": "The term sheet defines investment terms. Important clauses: **liquidation preference** (investors get paid first in case of sale), **anti-dilution** (protection against future rounds at lower valuation) and **board seats** (control in decision-making)."
+        },
+        {
+          "type": "heading",
+          "content": "Alternatives to VC"
+        },
+        {
+          "type": "text",
+          "content": "VC is only appropriate for companies with exponential growth potential. Most businesses are funded by: **bank loans** (requires collateral), **revenue-based financing** (repayment as % of revenue), **crowdfunding** (capital from the 'crowd') or simply **organic growth** — using own revenue to fund expansion."
+        },
+        {
+          "type": "quote",
+          "content": "VC isn't for everyone. Most great businesses have never raised venture capital.",
+          "attribution": "Paul Graham, Y Combinator"
+        },
+        {
+          "type": "text",
+          "content": "Raising capital isn't synonymous with success — it's a tool. More capital accelerates growth but also increases return pressure and dilutes founder control. The decision to raise VC should be based on the nature of the business: if you need rapid scale to win, VC makes sense. If your business can grow sustainably with its own revenue, bootstrapping may be wiser."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "Why do VCs invest expecting most investments to fail?",
+        "options": [
+          "Because VCs are careless in investment selection",
+          "Because a single unicorn can return 10x-100x, paying for all portfolio failures",
+          "Because tax laws benefit capital losses",
+          "Because it's impossible to predict which startups will succeed"
+        ],
+        "correctIndex": 1,
+        "explanation": "The VC portfolio model expects that a few 'home runs' (10x+ returns) compensate for the many failures. That's why VCs seek companies with exponential growth potential."
+      },
+      {
+        "question": "What is dilution in the startup context?",
+        "options": [
+          "The loss of customers after a funding round",
+          "The reduction in founders' percentage ownership when new investors come in",
+          "The decrease in the company's market value",
+          "The process of expanding into new markets"
+        ],
+        "correctIndex": 1,
+        "explanation": "With each funding round, founders give up a percentage of the company in exchange for capital. Their percentage ownership decreases (dilutes), but the absolute value can grow."
+      },
+      {
+        "question": "Which funding round is typically the first with external investors?",
+        "options": ["Series A", "Series B", "Seed", "IPO"],
+        "correctIndex": 2,
+        "explanation": "The seed round is generally the first with external investors (angels or seed funds), typically $250k–$2M to prove the concept and validate product-market fit."
+      },
+      {
+        "question": "VC is the most appropriate form of financing for:",
+        "options": [
+          "Any profitable business with positive cash flow",
+          "Companies with exponential growth potential that need rapid scale",
+          "Traditional businesses like restaurants and retail",
+          "Companies that already dominate their markets"
+        ],
+        "correctIndex": 1,
+        "explanation": "VC is appropriate for businesses that need to grow quickly to win (winner-take-all markets, network effects). For businesses with linear growth, VC may be inappropriate."
+      },
+      {
+        "question": "'Liquidation preference' in a term sheet means:",
+        "options": [
+          "The investor can withdraw their money at any time",
+          "In case of company sale, investors get their money back before founders",
+          "The company must be sold within 5 years",
+          "Founders have preference in buying investors' shares"
+        ],
+        "correctIndex": 1,
+        "explanation": "Liquidation preference ensures investors recover their investment (and often a multiple) before founders receive any value in case of sale or liquidation."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Venture Capital: Cómo las Startups Consiguen Dinero",
+      "summary": "Del capital semilla al IPO, cada ronda de inversión tiene reglas, expectativas y trade-offs específicos. Entender esta estructura es esencial para cualquier emprendedor.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Arthur Rock, pionero del venture capital en Silicon Valley, decía que invertía en personas, no en planes de negocio. Esta filosofía define el VC: capital de riesgo para empresas de alto crecimiento en etapas iniciales, donde el riesgo es alto pero el retorno potencial es extraordinario."
+        },
+        {
+          "type": "text",
+          "content": "El modelo de VC opera bajo una lógica específica: en un portafolio de 10 inversiones, 6 fracasan, 3 recuperan el capital y 1 — el 'unicornio' — paga por todos los demás con retornos de 10x, 50x o incluso 100x. Por eso, los VCs buscan empresas con potencial de volverse muy grandes."
+        },
+        {
+          "type": "heading",
+          "content": "El Embudo de Financiamiento"
+        },
+        {
+          "type": "text",
+          "content": "**Pre-semilla/Bootstrapping**: los fundadores usan ahorros personales o ingresos para comenzar. **Semilla**: primeros inversores externos — ángeles o fondos semilla — típicamente $250k a $2M para probar el concepto."
+        },
+        {
+          "type": "text",
+          "content": "**Serie A**: $2M–$15M para escalar lo que ya fue probado — equipo, producto, primeros clientes. **Serie B**: $15M–$50M para crecimiento acelerado — marketing, expansión geográfica, nuevos productos. **Serie C y más**: $50M+ para dominio del mercado. **IPO**: apertura de capital al público en la bolsa."
+        },
+        {
+          "type": "heading",
+          "content": "Inversores Ángel"
+        },
+        {
+          "type": "text",
+          "content": "Antes del VC, muchas startups recurren a **inversores ángel** — individuos ricos que invierten capital propio, generalmente $25k–$500k. Los ángeles suelen ser ex emprendedores que aportan mentoría además del capital. Peter Thiel invirtió $500k en Facebook en 2004; en 2012, valía $1,000 millones."
+        },
+        {
+          "type": "heading",
+          "content": "Dilución y Valoración"
+        },
+        {
+          "type": "text",
+          "content": "Cada ronda de inversión **diluye** a los fundadores: a cambio de capital, los inversores reciben un porcentaje de la empresa. Si tienes el 100% y vendes el 20% por $1M, la empresa está valuada en $5M (valoración post-money). Tu participación cae al 80%, pero el 80% de $5M vale más que el 100% de $0."
+        },
+        {
+          "type": "text",
+          "content": "El term sheet define los términos de la inversión. Cláusulas importantes: **liquidation preference** (los inversores cobran primero en caso de venta), **anti-dilución** (protección contra rondas futuras a menor valoración) y **asientos en el directorio** (control en la toma de decisiones)."
+        },
+        {
+          "type": "heading",
+          "content": "Alternativas al VC"
+        },
+        {
+          "type": "text",
+          "content": "El VC solo es adecuado para empresas con potencial de crecimiento exponencial. La mayoría de los negocios se financian con: **préstamos bancarios** (requiere garantías), **financiamiento basado en ingresos** (reembolso como % de los ingresos), **crowdfunding** (capital de la 'multitud') o simplemente **crecimiento orgánico** — usar los propios ingresos para financiar la expansión."
+        },
+        {
+          "type": "quote",
+          "content": "El VC no es para todos. La mayoría de los grandes negocios nunca levantaron capital de riesgo.",
+          "attribution": "Paul Graham, Y Combinator"
+        },
+        {
+          "type": "text",
+          "content": "Captar capital no es sinónimo de éxito — es una herramienta. Más capital acelera el crecimiento pero también aumenta la presión por retorno y diluye el control de los fundadores. La decisión de levantar VC debe basarse en la naturaleza del negocio: si necesitas escala rápida para ganar, el VC tiene sentido. Si tu negocio puede crecer sosteniblemente con sus propios ingresos, el bootstrapping puede ser más sabio."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "¿Por qué los VCs invierten esperando que la mayoría de las inversiones fracase?",
+        "options": [
+          "Porque los VCs son descuidados en la selección de inversiones",
+          "Porque un único unicornio puede retornar 10x-100x, pagando por todos los fracasos del portafolio",
+          "Porque las leyes fiscales benefician las pérdidas de capital",
+          "Porque es imposible predecir qué startups tendrán éxito"
+        ],
+        "correctIndex": 1,
+        "explanation": "El modelo de portafolio de VC prevé que pocos 'home runs' (retornos de 10x+) compensen los muchos fracasos. Por eso los VCs buscan empresas con potencial de crecimiento exponencial."
+      },
+      {
+        "question": "¿Qué es la dilución en el contexto de las startups?",
+        "options": [
+          "La pérdida de clientes tras una ronda de financiamiento",
+          "La reducción del porcentaje de participación de los fundadores cuando entran nuevos inversores",
+          "La disminución del valor de mercado de la empresa",
+          "El proceso de expansión a nuevos mercados"
+        ],
+        "correctIndex": 1,
+        "explanation": "Con cada ronda de inversión, los fundadores ceden un porcentaje de la empresa a cambio de capital. Su participación porcentual disminuye (se diluye), pero el valor absoluto puede crecer."
+      },
+      {
+        "question": "¿Cuál ronda de financiamiento es típicamente la primera con inversores externos?",
+        "options": ["Serie A", "Serie B", "Semilla (seed)", "IPO"],
+        "correctIndex": 2,
+        "explanation": "La ronda semilla es generalmente la primera con inversores externos (ángeles o fondos semilla), típicamente $250k–$2M para probar el concepto y validar el product-market fit."
+      },
+      {
+        "question": "El VC es la forma de financiamiento más adecuada para:",
+        "options": [
+          "Cualquier negocio rentable con flujo de caja positivo",
+          "Empresas con potencial de crecimiento exponencial que necesitan escala rápida",
+          "Negocios tradicionales como restaurantes y comercio",
+          "Empresas que ya dominan sus mercados"
+        ],
+        "correctIndex": 1,
+        "explanation": "El VC es adecuado para negocios que necesitan crecer rápidamente para ganar (mercados winner-take-all, efectos de red). Para negocios con crecimiento lineal, el VC puede ser inadecuado."
+      },
+      {
+        "question": "La 'liquidation preference' en un term sheet significa:",
+        "options": [
+          "El inversor puede retirar su dinero en cualquier momento",
+          "En caso de venta de la empresa, los inversores reciben su dinero antes que los fundadores",
+          "La empresa debe venderse en menos de 5 años",
+          "Los fundadores tienen preferencia para comprar las acciones de los inversores"
+        ],
+        "correctIndex": 1,
+        "explanation": "La liquidation preference garantiza que los inversores recuperen su inversión (y frecuentemente un múltiplo) antes de que los fundadores reciban cualquier valor en caso de venta o liquidación."
+      }
+    ]
+  }
+}

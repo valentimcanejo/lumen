@@ -1,0 +1,270 @@
+{
+  "id": "science_physics",
+  "trackId": "science_tech",
+  "order": 3,
+  "difficulty": 2,
+  "estimatedMinutes": 12,
+  "prerequisites": [],
+  "title": {
+    "pt": "Física Moderna: Relatividade e Quântica",
+    "en": "Modern Physics: Relativity and Quantum",
+    "es": "Física Moderna: Relatividad y Cuántica"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "Física Moderna: Relatividade e Quântica",
+      "summary": "No início do século XX, a física passava por uma crise. Experimentos simples produziam resultados que contradiziam radicalmente a física clássica de Newton. Das ruínas dessa crise surgiram duas das teorias mais bem-testadas e estranhas da história: a relatividade de Einstein e a mecânica quântica. Juntas, elas redefiniram espaço, tempo, matéria e o próprio significado de 'realidade'.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Relatividade especial: espaço e tempo são relativos" },
+        { "type": "p", "text": "Em 1905, Einstein publicou a teoria da relatividade especial partindo de dois postulados: as leis da física são iguais para todos os observadores em movimento uniforme, e a velocidade da luz no vácuo é constante — independentemente do movimento da fonte ou do observador. As consequências são contraintuitivas: tempo passa mais devagar para quem se move mais rápido (dilatação do tempo), e objetos ficam mais curtos na direção do movimento (contração do comprimento)." },
+        { "type": "p", "text": "A equação mais famosa da física, E=mc², é uma consequência direta: massa e energia são formas intercambiáveis da mesma coisa. Uma pequena quantidade de massa pode liberar uma enorme quantidade de energia — o princípio por trás da fissão nuclear e das bombas atômicas." },
+        { "type": "h2", "text": "Relatividade geral: gravidade como curvatura do espaço-tempo" },
+        { "type": "p", "text": "Em 1915, Einstein publicou a relatividade geral, estendendo os princípios para gravidade. A ideia central é que a gravidade não é uma força — é a curvatura do espaço-tempo causada por massa e energia. Objetos massivos 'deformam' o tecido do espaço-tempo, e outros corpos seguem essa curvatura. A Terra orbita o Sol não porque uma força misteriosa a puxa, mas porque segue o caminho mais reto possível em um espaço-tempo curvado." },
+        { "type": "p", "text": "A relatividade geral previu o buraco negro antes de qualquer evidência observacional, e a imagem do primeiro buraco negro fotografado em 2019 confirmou suas previsões com precisão impressionante. GPS também depende dela: sem correções relativísticas, os satélites acumulariam erros de posição de vários quilômetros por dia." },
+        { "type": "quote", "text": "Deus não joga dados com o universo.", "author": "Albert Einstein (criticando a mecânica quântica)" },
+        { "type": "h2", "text": "Mecânica quântica: o mundo subatômico é estranho" },
+        { "type": "p", "text": "A mecânica quântica descreve o comportamento de partículas subatômicas — elétrons, fótons, quarks. Suas regras contradizem completamente o senso comum. O princípio da incerteza de Heisenberg diz que é impossível conhecer simultaneamente com precisão a posição e o momento de uma partícula — não por limitação dos instrumentos, mas como característica fundamental da natureza." },
+        { "type": "p", "text": "O superposição quântica afirma que partículas podem existir em múltiplos estados simultaneamente até serem observadas. O entanglement — 'ação fantasmagórica à distância', como Einstein chamou desdenhosamente — mostra que partículas correlacionadas instantaneamente afetam-se mutuamente independentemente da distância." },
+        { "type": "h2", "text": "Por que essas teorias importam?" },
+        { "type": "p", "text": "A mecânica quântica não é apenas filosoficamente intrigante — ela é a base de tecnologias que usamos diariamente. Transistores, lasers, MRI, painéis solares, LEDs — todos dependem de efeitos quânticos. Sem a mecânica quântica, não haveria eletrônica moderna." },
+        { "type": "p", "text": "O maior problema não resolvido da física é que a relatividade geral e a mecânica quântica são incompatíveis entre si. A relatividade descreve o universo em grande escala; a quântica descreve o submicroscópico. Unificá-las em uma 'teoria de tudo' é o Santo Graal da física teórica. Candidatos como a teoria das cordas e a gravidade quântica em loop ainda buscam confirmação experimental." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_physics_q1",
+        "question": "O que significa a equação E=mc² de Einstein?",
+        "options": [
+          "Que a energia de um sistema é igual à sua temperatura",
+          "Que massa e energia são formas intercambiáveis da mesma coisa",
+          "Que nada pode se mover mais rápido do que a luz",
+          "Que o espaço e o tempo se contraem em alta velocidade"
+        ],
+        "answerIndex": 1,
+        "explanation": "E=mc² expressa que massa e energia são formas intercambiáveis da mesma coisa — uma pequena quantidade de massa pode liberar enorme energia. É o princípio por trás da fissão nuclear."
+      },
+      {
+        "id": "science_physics_q2",
+        "question": "Na relatividade geral, o que é a gravidade?",
+        "options": [
+          "Uma força que age instantaneamente entre massas",
+          "Uma curvatura do espaço-tempo causada por massa e energia",
+          "Uma onda que se propaga pelo espaço a velocidade finita",
+          "Uma propriedade emergente de partículas subatômicas"
+        ],
+        "answerIndex": 1,
+        "explanation": "Na relatividade geral, gravidade não é uma força — é a curvatura do espaço-tempo causada por massa e energia. Objetos seguem o caminho mais reto possível nesse espaço-tempo curvado."
+      },
+      {
+        "id": "science_physics_q3",
+        "question": "O que diz o princípio da incerteza de Heisenberg?",
+        "options": [
+          "Que experimentos quânticos sempre produzem resultados aleatórios",
+          "Que é impossível construir instrumentos suficientemente precisos",
+          "Que posição e momento de uma partícula não podem ser conhecidos simultaneamente com precisão",
+          "Que partículas subatômicas não têm localização definida"
+        ],
+        "answerIndex": 2,
+        "explanation": "O princípio da incerteza diz que posição e momento não podem ser conhecidos simultaneamente com precisão — não por limitação dos instrumentos, mas como característica fundamental da natureza quântica."
+      },
+      {
+        "id": "science_physics_q4",
+        "question": "Qual é o maior problema não resolvido mencionado na física teórica?",
+        "options": [
+          "A origem do Big Bang",
+          "A natureza da matéria escura",
+          "A incompatibilidade entre relatividade geral e mecânica quântica",
+          "A velocidade máxima de transmissão de informação"
+        ],
+        "answerIndex": 2,
+        "explanation": "A relatividade geral e a mecânica quântica são incompatíveis entre si — a primeira descreve o universo em grande escala, a segunda o submicroscópico. Unificá-las em uma 'teoria de tudo' é o Santo Graal da física teórica."
+      },
+      {
+        "id": "science_physics_q5",
+        "question": "Qual tecnologia cotidiana depende diretamente de efeitos da mecânica quântica?",
+        "options": [
+          "Motores a combustão interna",
+          "Turbinas eólicas",
+          "Transistores e eletrônica moderna",
+          "Painéis de energia solar térmica"
+        ],
+        "answerIndex": 2,
+        "explanation": "Transistores — base de toda a eletrônica moderna — dependem de efeitos quânticos. Sem a mecânica quântica, computadores, smartphones e toda eletrônica moderna não seriam possíveis."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Modern Physics: Relativity and Quantum",
+      "summary": "At the start of the 20th century, physics was in crisis. Simple experiments produced results that radically contradicted Newton's classical physics. From the ruins of that crisis emerged two of history's most well-tested and strange theories: Einstein's relativity and quantum mechanics. Together, they redefined space, time, matter, and the very meaning of 'reality.'",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Special relativity: space and time are relative" },
+        { "type": "p", "text": "In 1905, Einstein published the theory of special relativity based on two postulates: the laws of physics are the same for all observers in uniform motion, and the speed of light in a vacuum is constant — regardless of the source's or observer's motion. The consequences are counterintuitive: time passes more slowly for faster-moving objects (time dilation), and objects shorten in the direction of motion (length contraction)." },
+        { "type": "p", "text": "Physics' most famous equation, E=mc², is a direct consequence: mass and energy are interchangeable forms of the same thing. A small amount of mass can release an enormous amount of energy — the principle behind nuclear fission and atomic bombs." },
+        { "type": "h2", "text": "General relativity: gravity as spacetime curvature" },
+        { "type": "p", "text": "In 1915, Einstein published general relativity, extending the principles to gravity. The central idea is that gravity isn't a force — it's the curvature of spacetime caused by mass and energy. Massive objects 'warp' the fabric of spacetime, and other bodies follow that curvature. Earth orbits the Sun not because a mysterious force pulls it, but because it follows the straightest possible path in curved spacetime." },
+        { "type": "p", "text": "General relativity predicted black holes before any observational evidence, and the image of the first photographed black hole in 2019 confirmed its predictions with impressive precision. GPS also depends on it: without relativistic corrections, satellites would accumulate position errors of several kilometers per day." },
+        { "type": "quote", "text": "God does not play dice with the universe.", "author": "Albert Einstein (criticizing quantum mechanics)" },
+        { "type": "h2", "text": "Quantum mechanics: the subatomic world is strange" },
+        { "type": "p", "text": "Quantum mechanics describes the behavior of subatomic particles — electrons, photons, quarks. Its rules completely contradict common sense. Heisenberg's uncertainty principle says it's impossible to simultaneously know both the position and momentum of a particle with precision — not due to instrument limitations, but as a fundamental feature of nature." },
+        { "type": "p", "text": "Quantum superposition holds that particles can exist in multiple states simultaneously until observed. Entanglement — 'spooky action at a distance,' as Einstein dismissively called it — shows that correlated particles instantaneously affect each other regardless of distance." },
+        { "type": "h2", "text": "Why do these theories matter?" },
+        { "type": "p", "text": "Quantum mechanics isn't just philosophically intriguing — it's the foundation of technologies we use daily. Transistors, lasers, MRI, solar panels, LEDs — all depend on quantum effects. Without quantum mechanics, there would be no modern electronics." },
+        { "type": "p", "text": "The greatest unsolved problem in physics is that general relativity and quantum mechanics are incompatible. Relativity describes the universe at large scale; quantum mechanics describes the submicroscopic. Unifying them into a 'theory of everything' is theoretical physics' Holy Grail. Candidates like string theory and loop quantum gravity still seek experimental confirmation." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_physics_q1",
+        "question": "What does Einstein's equation E=mc² mean?",
+        "options": [
+          "That the energy of a system equals its temperature",
+          "That mass and energy are interchangeable forms of the same thing",
+          "That nothing can move faster than light",
+          "That space and time contract at high speed"
+        ],
+        "answerIndex": 1,
+        "explanation": "E=mc² expresses that mass and energy are interchangeable forms of the same thing — a small amount of mass can release enormous energy. It's the principle behind nuclear fission."
+      },
+      {
+        "id": "science_physics_q2",
+        "question": "In general relativity, what is gravity?",
+        "options": [
+          "A force acting instantaneously between masses",
+          "A curvature of spacetime caused by mass and energy",
+          "A wave propagating through space at finite speed",
+          "An emergent property of subatomic particles"
+        ],
+        "answerIndex": 1,
+        "explanation": "In general relativity, gravity isn't a force — it's the curvature of spacetime caused by mass and energy. Objects follow the straightest possible path in that curved spacetime."
+      },
+      {
+        "id": "science_physics_q3",
+        "question": "What does Heisenberg's uncertainty principle state?",
+        "options": [
+          "That quantum experiments always produce random results",
+          "That it's impossible to build sufficiently precise instruments",
+          "That a particle's position and momentum cannot both be precisely known simultaneously",
+          "That subatomic particles have no defined location"
+        ],
+        "answerIndex": 2,
+        "explanation": "The uncertainty principle states that position and momentum cannot be simultaneously known with precision — not due to instrument limitations, but as a fundamental feature of quantum nature."
+      },
+      {
+        "id": "science_physics_q4",
+        "question": "What is the greatest unsolved problem mentioned in theoretical physics?",
+        "options": [
+          "The origin of the Big Bang",
+          "The nature of dark matter",
+          "The incompatibility between general relativity and quantum mechanics",
+          "The maximum speed of information transmission"
+        ],
+        "answerIndex": 2,
+        "explanation": "General relativity and quantum mechanics are incompatible — the former describes the large-scale universe, the latter the submicroscopic. Unifying them into a 'theory of everything' is theoretical physics' Holy Grail."
+      },
+      {
+        "id": "science_physics_q5",
+        "question": "Which everyday technology directly depends on quantum mechanics effects?",
+        "options": [
+          "Internal combustion engines",
+          "Wind turbines",
+          "Transistors and modern electronics",
+          "Solar thermal panels"
+        ],
+        "answerIndex": 2,
+        "explanation": "Transistors — the foundation of all modern electronics — depend on quantum effects. Without quantum mechanics, computers, smartphones, and all modern electronics would be impossible."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Física Moderna: Relatividad y Cuántica",
+      "summary": "A principios del siglo XX, la física atravesaba una crisis. Experimentos simples producían resultados que contradecían radicalmente la física clásica de Newton. De las ruinas de esa crisis surgieron dos de las teorías más probadas y extrañas de la historia: la relatividad de Einstein y la mecánica cuántica. Juntas, redefinieron el espacio, el tiempo, la materia y el propio significado de 'realidad'.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Relatividad especial: el espacio y el tiempo son relativos" },
+        { "type": "p", "text": "En 1905, Einstein publicó la teoría de la relatividad especial partiendo de dos postulados: las leyes de la física son iguales para todos los observadores en movimiento uniforme, y la velocidad de la luz en el vacío es constante — independientemente del movimiento de la fuente o del observador. Las consecuencias son contraintuitivas: el tiempo pasa más lento para quien se mueve más rápido (dilatación temporal), y los objetos se acortan en la dirección del movimiento (contracción de longitud)." },
+        { "type": "p", "text": "La ecuación más famosa de la física, E=mc², es una consecuencia directa: masa y energía son formas intercambiables de lo mismo. Una pequeña cantidad de masa puede liberar una enorme cantidad de energía — el principio detrás de la fisión nuclear y las bombas atómicas." },
+        { "type": "h2", "text": "Relatividad general: la gravedad como curvatura del espacio-tiempo" },
+        { "type": "p", "text": "En 1915, Einstein publicó la relatividad general, extendiendo los principios a la gravedad. La idea central es que la gravedad no es una fuerza — es la curvatura del espacio-tiempo causada por la masa y la energía. Los objetos masivos 'deforman' el tejido del espacio-tiempo, y otros cuerpos siguen esa curvatura. La Tierra orbita el Sol no porque una fuerza misteriosa la atraiga, sino porque sigue el camino más recto posible en un espacio-tiempo curvado." },
+        { "type": "p", "text": "La relatividad general predijo los agujeros negros antes de cualquier evidencia observacional, y la imagen del primer agujero negro fotografiado en 2019 confirmó sus predicciones con impresionante precisión. El GPS también depende de ella: sin correcciones relativistas, los satélites acumularían errores de posición de varios kilómetros por día." },
+        { "type": "quote", "text": "Dios no juega a los dados con el universo.", "author": "Albert Einstein (criticando la mecánica cuántica)" },
+        { "type": "h2", "text": "Mecánica cuántica: el mundo subatómico es extraño" },
+        { "type": "p", "text": "La mecánica cuántica describe el comportamiento de las partículas subatómicas — electrones, fotones, quarks. Sus reglas contradicen completamente el sentido común. El principio de incertidumbre de Heisenberg dice que es imposible conocer simultáneamente con precisión la posición y el momento de una partícula — no por limitación de los instrumentos, sino como característica fundamental de la naturaleza." },
+        { "type": "p", "text": "La superposición cuántica afirma que las partículas pueden existir en múltiples estados simultáneamente hasta ser observadas. El entrelazamiento — 'acción fantasmal a distancia', como Einstein lo llamó despectivamente — muestra que partículas correlacionadas se afectan mutuamente de forma instantánea independientemente de la distancia." },
+        { "type": "h2", "text": "¿Por qué importan estas teorías?" },
+        { "type": "p", "text": "La mecánica cuántica no es solo filosóficamente intrigante — es la base de tecnologías que usamos a diario. Transistores, láseres, resonancia magnética, paneles solares, LEDs — todos dependen de efectos cuánticos. Sin la mecánica cuántica, no existiría la electrónica moderna." },
+        { "type": "p", "text": "El mayor problema no resuelto de la física es que la relatividad general y la mecánica cuántica son incompatibles entre sí. La relatividad describe el universo a gran escala; la cuántica describe lo submicroscópico. Unificarlas en una 'teoría del todo' es el Santo Grial de la física teórica. Candidatos como la teoría de cuerdas y la gravedad cuántica de bucles aún buscan confirmación experimental." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_physics_q1",
+        "question": "¿Qué significa la ecuación E=mc² de Einstein?",
+        "options": [
+          "Que la energía de un sistema es igual a su temperatura",
+          "Que masa y energía son formas intercambiables de lo mismo",
+          "Que nada puede moverse más rápido que la luz",
+          "Que el espacio y el tiempo se contraen a alta velocidad"
+        ],
+        "answerIndex": 1,
+        "explanation": "E=mc² expresa que masa y energía son formas intercambiables de lo mismo — una pequeña cantidad de masa puede liberar enorme energía. Es el principio detrás de la fisión nuclear."
+      },
+      {
+        "id": "science_physics_q2",
+        "question": "En la relatividad general, ¿qué es la gravedad?",
+        "options": [
+          "Una fuerza que actúa instantáneamente entre masas",
+          "Una curvatura del espacio-tiempo causada por masa y energía",
+          "Una onda que se propaga por el espacio a velocidad finita",
+          "Una propiedad emergente de las partículas subatómicas"
+        ],
+        "answerIndex": 1,
+        "explanation": "En la relatividad general, la gravedad no es una fuerza — es la curvatura del espacio-tiempo causada por masa y energía. Los objetos siguen el camino más recto posible en ese espacio-tiempo curvado."
+      },
+      {
+        "id": "science_physics_q3",
+        "question": "¿Qué establece el principio de incertidumbre de Heisenberg?",
+        "options": [
+          "Que los experimentos cuánticos siempre producen resultados aleatorios",
+          "Que es imposible construir instrumentos suficientemente precisos",
+          "Que la posición y el momento de una partícula no pueden conocerse simultáneamente con precisión",
+          "Que las partículas subatómicas no tienen ubicación definida"
+        ],
+        "answerIndex": 2,
+        "explanation": "El principio de incertidumbre establece que posición y momento no pueden conocerse simultáneamente con precisión — no por limitación de los instrumentos, sino como característica fundamental de la naturaleza cuántica."
+      },
+      {
+        "id": "science_physics_q4",
+        "question": "¿Cuál es el mayor problema no resuelto mencionado en la física teórica?",
+        "options": [
+          "El origen del Big Bang",
+          "La naturaleza de la materia oscura",
+          "La incompatibilidad entre la relatividad general y la mecánica cuántica",
+          "La velocidad máxima de transmisión de información"
+        ],
+        "answerIndex": 2,
+        "explanation": "La relatividad general y la mecánica cuántica son incompatibles entre sí — la primera describe el universo a gran escala, la segunda lo submicroscópico. Unificarlas en una 'teoría del todo' es el Santo Grial de la física teórica."
+      },
+      {
+        "id": "science_physics_q5",
+        "question": "¿Qué tecnología cotidiana depende directamente de efectos de la mecánica cuántica?",
+        "options": [
+          "Motores de combustión interna",
+          "Turbinas eólicas",
+          "Transistores y electrónica moderna",
+          "Paneles de energía solar térmica"
+        ],
+        "answerIndex": 2,
+        "explanation": "Los transistores — base de toda la electrónica moderna — dependen de efectos cuánticos. Sin la mecánica cuántica, las computadoras, los smartphones y toda la electrónica moderna serían imposibles."
+      }
+    ]
+  }
+}

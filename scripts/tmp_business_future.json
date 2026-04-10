@@ -1,0 +1,397 @@
+{
+  "id": "business_future",
+  "trackId": "business",
+  "order": 10,
+  "difficulty": "intermediate",
+  "estimatedMinutes": 11,
+  "prerequisites": ["business_scale"],
+  "titlePt": "O Futuro do Trabalho e dos Negócios",
+  "titleEn": "The Future of Work and Business",
+  "titleEs": "El Futuro del Trabajo y los Negocios",
+  "coverImageUrl": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80",
+  "coverImageCredit": "Photo by Alex Knight on Unsplash",
+  "pt": {
+    "lesson": {
+      "title": "O Futuro do Trabalho e dos Negócios: Navegando a Disrupção",
+      "summary": "Automação, IA e globalização estão redesenhando o mundo do trabalho. Entender essas forças não é pessimismo — é preparação estratégica para o empreendedor do século XXI.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Cada revolução tecnológica destruiu empregos e criou outros, em maior número. A Revolução Industrial eliminou artesãos e criou fábricas. A automação eliminou trabalhadores de linha de montagem e criou engenheiros, técnicos e designers. A questão não é se a IA vai mudar o trabalho — é como se preparar."
+        },
+        {
+          "type": "text",
+          "content": "Klaus Schwab, fundador do Fórum Econômico Mundial, chama o momento atual de **Quarta Revolução Industrial**: a fusão do mundo físico, digital e biológico. IA, robótica, biotecnologia e computação quântica não são apenas novas ferramentas — representam uma mudança de paradigma na produção de valor."
+        },
+        {
+          "type": "heading",
+          "content": "O que a IA Vai Automatizar"
+        },
+        {
+          "type": "text",
+          "content": "Tarefas rotineiras e bem definidas são as mais vulneráveis: processamento de dados, transcrição, análise básica, contabilidade repetitiva, suporte ao cliente de nível 1. McKinsey estima que 30% das tarefas em 60% das ocupações podem ser automatizadas com tecnologia atual."
+        },
+        {
+          "type": "text",
+          "content": "O que é difícil de automatizar: pensamento criativo, julgamento em situações ambíguas, empatia genuína, liderança, construção de confiança, habilidades físicas complexas em ambientes não estruturados. Empreendedores que combinam domínio técnico com habilidades humanas estarão no lado certo da mudança."
+        },
+        {
+          "type": "heading",
+          "content": "Novos Modelos de Trabalho"
+        },
+        {
+          "type": "text",
+          "content": "A **economia de plataforma** (Uber, Freelancer, Airbnb) criou uma nova categoria: trabalhadores independentes que operam como micro-empresas. Vantagem: flexibilidade. Desvantagem: falta de seguridade social, benefícios e estabilidade."
+        },
+        {
+          "type": "text",
+          "content": "O **trabalho remoto**, acelerado pela pandemia de 2020, mudou a geografia do talento. Empresas podem contratar os melhores profissionais do mundo; profissionais podem trabalhar de qualquer lugar. Isso aumenta a concorrência global mas também cria oportunidades para quem vive em mercados de menor custo."
+        },
+        {
+          "type": "heading",
+          "content": "O Empreendedor do Futuro"
+        },
+        {
+          "type": "text",
+          "content": "Naveen Jain, empreendedor em saúde e tecnologia, argumenta que os maiores problemas do mundo são os maiores mercados do futuro. Saúde, educação, energia, alimentos e acesso à água são setores onde a tecnologia pode criar impacto em bilhões de vidas — e negócios extraordinariamente grandes."
+        },
+        {
+          "type": "text",
+          "content": "O empreendedor do século XXI precisa de novas competências: **aprendizagem contínua** (o conhecimento técnico tem validade menor), **pensamento sistêmico** (problemas complexos requerem soluções multidisciplinares), **adaptabilidade** (a única certeza é a mudança) e **ética tecnológica** (o poder de escala exige responsabilidade)."
+        },
+        {
+          "type": "heading",
+          "content": "Propósito como Vantagem Competitiva"
+        },
+        {
+          "type": "text",
+          "content": "A geração mais jovem de consumidores e talentos escolhe empresas com propósito claro. Estudos mostram que empresas com forte missão retêm melhor talentos, conquistam maior lealdade de clientes e frequentemente superam financeiramente concorrentes puramente orientados por lucro."
+        },
+        {
+          "type": "quote",
+          "content": "O melhor momento para plantar uma árvore foi há 20 anos. O segundo melhor momento é agora.",
+          "attribution": "Provérbio chinês"
+        },
+        {
+          "type": "text",
+          "content": "O futuro do trabalho e dos negócios não é determinístico — é construído pelas escolhas de empreendedores, líderes e cidadãos. A disrução cria tanto risco quanto oportunidade. Aqueles que entendem as forças em jogo, que desenvolvem habilidades duráveis e que constroem negócios com propósito real têm as melhores chances de prosperar no mundo que está sendo criado."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "O que Klaus Schwab chama de 'Quarta Revolução Industrial'?",
+        "options": [
+          "A digitalização de processos industriais tradicionais",
+          "A fusão do mundo físico, digital e biológico através de IA, robótica e biotecnologia",
+          "A automatização completa da manufatura global",
+          "O surgimento das grandes plataformas de internet"
+        ],
+        "correctIndex": 1,
+        "explanation": "Schwab define a Quarta Revolução Industrial como a convergência de tecnologias físicas, digitais e biológicas — representando uma mudança de paradigma, não apenas uma evolução das anteriores."
+      },
+      {
+        "question": "Quais tipos de tarefas são MENOS vulneráveis à automação por IA?",
+        "options": [
+          "Processamento de dados e análise básica",
+          "Pensamento criativo, julgamento em situações ambíguas e construção de confiança",
+          "Transcrição e suporte ao cliente de nível 1",
+          "Contabilidade e cálculos repetitivos"
+        ],
+        "correctIndex": 1,
+        "explanation": "IA automatiza bem tarefas rotineiras e bem definidas. Pensamento criativo, julgamento em contextos ambíguos, empatia genuína e liderança são difíceis de automatizar."
+      },
+      {
+        "question": "Qual é a principal vantagem e a principal desvantagem da economia de plataforma para trabalhadores?",
+        "options": [
+          "Vantagem: salário maior; Desvantagem: mais horas de trabalho",
+          "Vantagem: flexibilidade; Desvantagem: falta de seguridade social e benefícios",
+          "Vantagem: progressão de carreira; Desvantagem: menor autonomia",
+          "Vantagem: trabalho em equipe; Desvantagem: isolamento social"
+        ],
+        "correctIndex": 1,
+        "explanation": "Plataformas como Uber e Freelancer oferecem flexibilidade e autonomia, mas trabalhadores independentes geralmente não têm férias remuneradas, saúde, previdência ou proteção contra demissão."
+      },
+      {
+        "question": "Por que o trabalho remoto 'aumenta a concorrência mas também cria oportunidades'?",
+        "options": [
+          "Porque reduz os custos de infraestrutura para todas as empresas",
+          "Porque profissionais em mercados de menor custo podem competir globalmente enquanto mantêm poder de compra local",
+          "Porque elimina a necessidade de negociação salarial",
+          "Porque permite que todas as empresas operem sem escritório"
+        ],
+        "correctIndex": 1,
+        "explanation": "Um desenvolvedor no Brasil ou na Índia pode ganhar em dólares trabalhando para empresas americanas, mantendo poder de compra local muito maior — o trabalho remoto criou arbitragem geográfica de talento."
+      },
+      {
+        "question": "Segundo pesquisas, empresas com propósito claro tendem a:",
+        "options": [
+          "Crescer mais lento por priorizarem valores sobre lucro",
+          "Reter melhores talentos, conquistar maior lealdade e frequentemente superar financeiramente concorrentes",
+          "Atrair mais regulação governamental",
+          "Ter menos acesso a capital de risco"
+        ],
+        "correctIndex": 1,
+        "explanation": "Propósito não é apenas ética — é estratégia. Talentos da geração Z e millennials escolhem empresas com missão; consumidores pagam premium por marcas que compartilham seus valores; o desempenho financeiro tende a acompanhar."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "The Future of Work and Business: Navigating Disruption",
+      "summary": "Automation, AI, and globalization are reshaping the world of work. Understanding these forces isn't pessimism — it's strategic preparation for the 21st century entrepreneur.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Every technological revolution destroyed jobs and created others, in greater numbers. The Industrial Revolution eliminated craftsmen and created factories. Automation eliminated assembly line workers and created engineers, technicians, and designers. The question isn't whether AI will change work — it's how to prepare."
+        },
+        {
+          "type": "text",
+          "content": "Klaus Schwab, founder of the World Economic Forum, calls the current moment the **Fourth Industrial Revolution**: the fusion of the physical, digital, and biological worlds. AI, robotics, biotechnology, and quantum computing aren't just new tools — they represent a paradigm shift in value creation."
+        },
+        {
+          "type": "heading",
+          "content": "What AI Will Automate"
+        },
+        {
+          "type": "text",
+          "content": "Routine and well-defined tasks are most vulnerable: data processing, transcription, basic analysis, repetitive accounting, level-1 customer support. McKinsey estimates that 30% of tasks in 60% of occupations can be automated with current technology."
+        },
+        {
+          "type": "text",
+          "content": "What's hard to automate: creative thinking, judgment in ambiguous situations, genuine empathy, leadership, trust-building, complex physical skills in unstructured environments. Entrepreneurs who combine technical mastery with human skills will be on the right side of change."
+        },
+        {
+          "type": "heading",
+          "content": "New Work Models"
+        },
+        {
+          "type": "text",
+          "content": "The **platform economy** (Uber, Freelancer, Airbnb) created a new category: independent workers who operate like micro-businesses. Advantage: flexibility. Disadvantage: lack of social security, benefits, and stability."
+        },
+        {
+          "type": "text",
+          "content": "**Remote work**, accelerated by the 2020 pandemic, changed the geography of talent. Companies can hire the best professionals in the world; professionals can work from anywhere. This increases global competition but also creates opportunities for those living in lower-cost markets."
+        },
+        {
+          "type": "heading",
+          "content": "The Future Entrepreneur"
+        },
+        {
+          "type": "text",
+          "content": "Naveen Jain, entrepreneur in health and technology, argues that the world's biggest problems are the biggest markets of the future. Health, education, energy, food, and water access are sectors where technology can create impact for billions of lives — and extraordinarily large businesses."
+        },
+        {
+          "type": "text",
+          "content": "The 21st-century entrepreneur needs new competencies: **continuous learning** (technical knowledge has a shorter shelf life), **systems thinking** (complex problems require multidisciplinary solutions), **adaptability** (the only certainty is change) and **technological ethics** (the power of scale demands responsibility)."
+        },
+        {
+          "type": "heading",
+          "content": "Purpose as Competitive Advantage"
+        },
+        {
+          "type": "text",
+          "content": "The younger generation of consumers and talent chooses companies with clear purpose. Studies show that companies with strong missions better retain talent, win greater customer loyalty, and frequently outperform financially competitors that are purely profit-oriented."
+        },
+        {
+          "type": "quote",
+          "content": "The best time to plant a tree was 20 years ago. The second-best time is now.",
+          "attribution": "Chinese proverb"
+        },
+        {
+          "type": "text",
+          "content": "The future of work and business isn't deterministic — it's built by the choices of entrepreneurs, leaders, and citizens. Disruption creates as much risk as opportunity. Those who understand the forces at play, who develop durable skills, and who build businesses with real purpose have the best chances of thriving in the world being created."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "What does Klaus Schwab call the 'Fourth Industrial Revolution'?",
+        "options": [
+          "The digitization of traditional industrial processes",
+          "The fusion of the physical, digital, and biological worlds through AI, robotics, and biotechnology",
+          "The complete automation of global manufacturing",
+          "The rise of major internet platforms"
+        ],
+        "correctIndex": 1,
+        "explanation": "Schwab defines the Fourth Industrial Revolution as the convergence of physical, digital, and biological technologies — representing a paradigm shift, not just an evolution of previous revolutions."
+      },
+      {
+        "question": "Which types of tasks are LEAST vulnerable to AI automation?",
+        "options": [
+          "Data processing and basic analysis",
+          "Creative thinking, judgment in ambiguous situations, and trust-building",
+          "Transcription and level-1 customer support",
+          "Accounting and repetitive calculations"
+        ],
+        "correctIndex": 1,
+        "explanation": "AI automates routine and well-defined tasks well. Creative thinking, judgment in ambiguous contexts, genuine empathy, and leadership are difficult to automate."
+      },
+      {
+        "question": "What is the main advantage and main disadvantage of the platform economy for workers?",
+        "options": [
+          "Advantage: higher salary; Disadvantage: more working hours",
+          "Advantage: flexibility; Disadvantage: lack of social security and benefits",
+          "Advantage: career progression; Disadvantage: less autonomy",
+          "Advantage: teamwork; Disadvantage: social isolation"
+        ],
+        "correctIndex": 1,
+        "explanation": "Platforms like Uber and Freelancer offer flexibility and autonomy, but independent workers generally don't have paid vacation, health insurance, retirement, or dismissal protection."
+      },
+      {
+        "question": "Why does remote work 'increase competition but also create opportunities'?",
+        "options": [
+          "Because it reduces infrastructure costs for all companies",
+          "Because professionals in lower-cost markets can compete globally while maintaining local purchasing power",
+          "Because it eliminates the need for salary negotiation",
+          "Because it allows all companies to operate without offices"
+        ],
+        "correctIndex": 1,
+        "explanation": "A developer in Brazil or India can earn in dollars working for American companies while maintaining much greater local purchasing power — remote work created geographic talent arbitrage."
+      },
+      {
+        "question": "According to research, companies with clear purpose tend to:",
+        "options": [
+          "Grow slower by prioritizing values over profit",
+          "Retain better talent, win greater loyalty, and frequently outperform financially",
+          "Attract more government regulation",
+          "Have less access to venture capital"
+        ],
+        "correctIndex": 1,
+        "explanation": "Purpose isn't just ethics — it's strategy. Gen Z and millennial talent choose companies with missions; consumers pay premium for brands that share their values; financial performance tends to follow."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "El Futuro del Trabajo y los Negocios: Navegando la Disrupción",
+      "summary": "La automatización, la IA y la globalización están rediseñando el mundo del trabajo. Entender estas fuerzas no es pesimismo — es preparación estratégica para el emprendedor del siglo XXI.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Cada revolución tecnológica destruyó empleos y creó otros, en mayor número. La Revolución Industrial eliminó a los artesanos y creó fábricas. La automatización eliminó a los trabajadores de línea de montaje y creó ingenieros, técnicos y diseñadores. La pregunta no es si la IA va a cambiar el trabajo — es cómo prepararse."
+        },
+        {
+          "type": "text",
+          "content": "Klaus Schwab, fundador del Foro Económico Mundial, llama al momento actual la **Cuarta Revolución Industrial**: la fusión del mundo físico, digital y biológico. La IA, la robótica, la biotecnología y la computación cuántica no son solo nuevas herramientas — representan un cambio de paradigma en la creación de valor."
+        },
+        {
+          "type": "heading",
+          "content": "Lo que la IA Va a Automatizar"
+        },
+        {
+          "type": "text",
+          "content": "Las tareas rutinarias y bien definidas son las más vulnerables: procesamiento de datos, transcripción, análisis básico, contabilidad repetitiva, atención al cliente de nivel 1. McKinsey estima que el 30% de las tareas en el 60% de las ocupaciones pueden automatizarse con tecnología actual."
+        },
+        {
+          "type": "text",
+          "content": "Lo difícil de automatizar: pensamiento creativo, juicio en situaciones ambiguas, empatía genuina, liderazgo, construcción de confianza, habilidades físicas complejas en entornos no estructurados. Los emprendedores que combinen dominio técnico con habilidades humanas estarán del lado correcto del cambio."
+        },
+        {
+          "type": "heading",
+          "content": "Nuevos Modelos de Trabajo"
+        },
+        {
+          "type": "text",
+          "content": "La **economía de plataforma** (Uber, Freelancer, Airbnb) creó una nueva categoría: trabajadores independientes que operan como micro-empresas. Ventaja: flexibilidad. Desventaja: falta de seguridad social, beneficios y estabilidad."
+        },
+        {
+          "type": "text",
+          "content": "El **trabajo remoto**, acelerado por la pandemia de 2020, cambió la geografía del talento. Las empresas pueden contratar a los mejores profesionales del mundo; los profesionales pueden trabajar desde cualquier lugar. Esto aumenta la competencia global pero también crea oportunidades para quienes viven en mercados de menor costo."
+        },
+        {
+          "type": "heading",
+          "content": "El Emprendedor del Futuro"
+        },
+        {
+          "type": "text",
+          "content": "Naveen Jain, emprendedor en salud y tecnología, argumenta que los mayores problemas del mundo son los mayores mercados del futuro. Salud, educación, energía, alimentos y acceso al agua son sectores donde la tecnología puede crear impacto en miles de millones de vidas — y negocios extraordinariamente grandes."
+        },
+        {
+          "type": "text",
+          "content": "El emprendedor del siglo XXI necesita nuevas competencias: **aprendizaje continuo** (el conocimiento técnico tiene menor vigencia), **pensamiento sistémico** (los problemas complejos requieren soluciones multidisciplinarias), **adaptabilidad** (la única certeza es el cambio) y **ética tecnológica** (el poder de la escala exige responsabilidad)."
+        },
+        {
+          "type": "heading",
+          "content": "El Propósito como Ventaja Competitiva"
+        },
+        {
+          "type": "text",
+          "content": "La generación más joven de consumidores y talentos elige empresas con propósito claro. Los estudios muestran que las empresas con misión sólida retienen mejor los talentos, conquistan mayor lealtad de los clientes y frecuentemente superan financieramente a los competidores orientados puramente al lucro."
+        },
+        {
+          "type": "quote",
+          "content": "El mejor momento para plantar un árbol fue hace 20 años. El segundo mejor momento es ahora.",
+          "attribution": "Proverbio chino"
+        },
+        {
+          "type": "text",
+          "content": "El futuro del trabajo y los negocios no es determinístico — es construido por las elecciones de emprendedores, líderes y ciudadanos. La disrupción crea tanto riesgo como oportunidad. Quienes entienden las fuerzas en juego, desarrollan habilidades duraderas y construyen negocios con propósito real tienen las mejores posibilidades de prosperar en el mundo que se está creando."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "¿Qué llama Klaus Schwab la 'Cuarta Revolución Industrial'?",
+        "options": [
+          "La digitalización de los procesos industriales tradicionales",
+          "La fusión del mundo físico, digital y biológico a través de la IA, robótica y biotecnología",
+          "La automatización completa de la manufactura global",
+          "El surgimiento de las grandes plataformas de internet"
+        ],
+        "correctIndex": 1,
+        "explanation": "Schwab define la Cuarta Revolución Industrial como la convergencia de tecnologías físicas, digitales y biológicas — representando un cambio de paradigma, no solo una evolución de las anteriores."
+      },
+      {
+        "question": "¿Qué tipos de tareas son MENOS vulnerables a la automatización por IA?",
+        "options": [
+          "Procesamiento de datos y análisis básico",
+          "Pensamiento creativo, juicio en situaciones ambiguas y construcción de confianza",
+          "Transcripción y atención al cliente de nivel 1",
+          "Contabilidad y cálculos repetitivos"
+        ],
+        "correctIndex": 1,
+        "explanation": "La IA automatiza bien las tareas rutinarias y bien definidas. El pensamiento creativo, el juicio en contextos ambiguos, la empatía genuina y el liderazgo son difíciles de automatizar."
+      },
+      {
+        "question": "¿Cuál es la principal ventaja y la principal desventaja de la economía de plataforma para los trabajadores?",
+        "options": [
+          "Ventaja: salario más alto; Desventaja: más horas de trabajo",
+          "Ventaja: flexibilidad; Desventaja: falta de seguridad social y beneficios",
+          "Ventaja: progresión de carrera; Desventaja: menor autonomía",
+          "Ventaja: trabajo en equipo; Desventaja: aislamiento social"
+        ],
+        "correctIndex": 1,
+        "explanation": "Plataformas como Uber y Freelancer ofrecen flexibilidad y autonomía, pero los trabajadores independientes generalmente no tienen vacaciones pagadas, seguro médico, jubilación ni protección contra el despido."
+      },
+      {
+        "question": "¿Por qué el trabajo remoto 'aumenta la competencia pero también crea oportunidades'?",
+        "options": [
+          "Porque reduce los costos de infraestructura para todas las empresas",
+          "Porque los profesionales en mercados de menor costo pueden competir globalmente mientras mantienen poder adquisitivo local",
+          "Porque elimina la necesidad de negociación salarial",
+          "Porque permite que todas las empresas operen sin oficinas"
+        ],
+        "correctIndex": 1,
+        "explanation": "Un desarrollador en Brasil o India puede ganar en dólares trabajando para empresas estadounidenses, manteniendo un poder adquisitivo local mucho mayor — el trabajo remoto creó arbitraje geográfico de talento."
+      },
+      {
+        "question": "Según las investigaciones, las empresas con propósito claro tienden a:",
+        "options": [
+          "Crecer más lento por priorizar valores sobre ganancias",
+          "Retener mejores talentos, conquistar mayor lealtad y frecuentemente superar financieramente a los competidores",
+          "Atraer más regulación gubernamental",
+          "Tener menos acceso a capital de riesgo"
+        ],
+        "correctIndex": 1,
+        "explanation": "El propósito no es solo ética — es estrategia. Los talentos de la Generación Z y millennials eligen empresas con misión; los consumidores pagan prima por marcas que comparten sus valores; el desempeño financiero tiende a seguir."
+      }
+    ]
+  }
+}

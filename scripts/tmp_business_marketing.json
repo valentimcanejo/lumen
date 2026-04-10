@@ -1,0 +1,397 @@
+{
+  "id": "business_marketing",
+  "trackId": "business",
+  "order": 6,
+  "difficulty": "beginner",
+  "estimatedMinutes": 11,
+  "prerequisites": ["business_finance"],
+  "titlePt": "Marketing e Criação de Marca",
+  "titleEn": "Marketing and Brand Building",
+  "titleEs": "Marketing y Construcción de Marca",
+  "coverImageUrl": "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=800&q=80",
+  "coverImageCredit": "Photo by Campaign Creators on Unsplash",
+  "pt": {
+    "lesson": {
+      "title": "Marketing e Criação de Marca: Além da Propaganda",
+      "summary": "Marketing moderno não é sobre empurrar mensagens — é sobre criar valor real, entender profundamente o cliente e construir uma marca que as pessoas queiram defender.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Marketing é frequentemente confundido com publicidade. Mas Peter Drucker definiu sua essência de forma mais profunda: 'o objetivo do marketing é tornar a venda desnecessária'. Quando você entende tão bem o cliente que o produto se vende sozinho, isso é marketing bem feito."
+        },
+        {
+          "type": "text",
+          "content": "O marketing moderno evoluiu de um modelo de interrupção (anúncios que interrompem sua experiência) para um modelo de atração — criar conteúdo e experiências que os clientes buscam ativamente."
+        },
+        {
+          "type": "heading",
+          "content": "Os 4 Ps e Sua Evolução"
+        },
+        {
+          "type": "text",
+          "content": "O mix de marketing clássico — **Produto, Preço, Praça (distribuição) e Promoção** — foi desenvolvido por Jerome McCarthy nos anos 1960. Ainda é válido, mas o marketing digital adicionou novos elementos: Pessoas, Processo e Prova física (evidência da qualidade)."
+        },
+        {
+          "type": "text",
+          "content": "O mais importante dos Ps continua sendo o **Produto**. Nenhum marketing compensa um produto ruim no longo prazo. O boca a boca — positivo ou negativo — é o canal de marketing mais poderoso, e ele depende da experiência real do cliente."
+        },
+        {
+          "type": "heading",
+          "content": "O Funil de Marketing"
+        },
+        {
+          "type": "text",
+          "content": "Clientes passam por estágios antes de comprar: **Awareness** (descobrem que você existe) → **Consideração** (avaliam se você atende à necessidade) → **Conversão** (compram) → **Fidelização** (compram de novo) → **Advocacia** (recomendam a outros)."
+        },
+        {
+          "type": "text",
+          "content": "Cada etapa exige estratégias diferentes. Para awareness, use conteúdo e mídia de massa. Para conversão, use provas sociais, garantias e facilidade de compra. Para advocacia, entregue experiências que surpreendam positivamente."
+        },
+        {
+          "type": "heading",
+          "content": "Branding: O que é uma Marca"
+        },
+        {
+          "type": "text",
+          "content": "Uma marca não é um logo ou slogan — é o **conjunto de percepções** que as pessoas têm sobre sua empresa. Jeff Bezos definiu: 'sua marca é o que as pessoas dizem sobre você quando você não está na sala'."
+        },
+        {
+          "type": "text",
+          "content": "Marcas fortes criam **valor emocional** além do funcional. Por que alguém paga $1.000 a mais por um iPhone quando existem Android igualmente capazes? Porque Apple não vende telefone — vende identidade, design e pertencimento a uma tribo de pessoas criativas."
+        },
+        {
+          "type": "heading",
+          "content": "Marketing de Conteúdo e Era Digital"
+        },
+        {
+          "type": "text",
+          "content": "O marketing de conteúdo é uma das estratégias mais eficientes do século XXI: criar informação ou entretenimento útil que atrai o público certo. HubSpot construiu um negócio de bilhões ensinando marketing digital gratuitamente — os clientes vinham até eles."
+        },
+        {
+          "type": "quote",
+          "content": "As pessoas não compram produtos e serviços. Elas compram relações, histórias e magia.",
+          "attribution": "Seth Godin"
+        },
+        {
+          "type": "text",
+          "content": "No ambiente digital, o marketing eficaz combina dados e criatividade. Você pode medir tudo — taxas de clique, conversão, retorno sobre investimento. Mas os melhores marketeiros usam dados para entender o cliente, não para substituir a intuição. No final, marketing é sobre conexão humana."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "Como Peter Drucker definiu o objetivo do marketing?",
+        "options": [
+          "Maximizar o número de anúncios veiculados",
+          "Tornar a venda desnecessária, entendendo o cliente tão bem que o produto se vende sozinho",
+          "Criar a maior base possível de seguidores nas redes sociais",
+          "Superar os concorrentes em share of voice"
+        ],
+        "correctIndex": 1,
+        "explanation": "Drucker via marketing como a função de entender o cliente tão profundamente que o produto certo, no canal certo, ao preço certo, se vende sem esforço."
+      },
+      {
+        "question": "O estágio de 'Advocacia' no funil de marketing significa:",
+        "options": [
+          "O cliente está considerando comprar",
+          "O cliente recomenda ativamente o produto a outras pessoas",
+          "O cliente fez sua primeira compra",
+          "O cliente está insatisfeito e pedindo reembolso"
+        ],
+        "correctIndex": 1,
+        "explanation": "Advocacy é o topo da pirâmide de fidelização — quando o cliente se torna um defensor espontâneo da marca, recomendando-a sem ser pago para isso."
+      },
+      {
+        "question": "Jeff Bezos definiu marca como:",
+        "options": [
+          "O logo e identidade visual de uma empresa",
+          "O que as pessoas dizem sobre você quando você não está na sala",
+          "O valor de mercado acima do valor dos ativos físicos",
+          "O conjunto de produtos e serviços que uma empresa oferece"
+        ],
+        "correctIndex": 1,
+        "explanation": "Bezos capturou que marca é percepção — o conjunto de sentimentos, associações e reputação que existem na mente dos consumidores, independente do que a empresa diz sobre si mesma."
+      },
+      {
+        "question": "Por que a Apple consegue cobrar preços premium mesmo com concorrência capaz?",
+        "options": [
+          "Por ter a melhor tecnologia do mercado em todas as categorias",
+          "Por criar valor emocional — identidade, design e senso de pertencimento",
+          "Por gastar mais em publicidade que os concorrentes",
+          "Por ter contratos exclusivos com os melhores fornecedores"
+        ],
+        "correctIndex": 1,
+        "explanation": "Apple vende identidade e experiência, não apenas hardware. Consumidores pagam premium pelo que o produto diz sobre quem eles são — valor emocional além do funcional."
+      },
+      {
+        "question": "O marketing de conteúdo é mais eficiente porque:",
+        "options": [
+          "É mais barato que qualquer outro canal",
+          "Atrai clientes que buscam ativamente informação, em vez de interromper sua experiência",
+          "Garante posição no topo do Google automaticamente",
+          "Elimina a necessidade de equipe de vendas"
+        ],
+        "correctIndex": 1,
+        "explanation": "Marketing de conteúdo cria atração em vez de interrupção. Clientes que chegam por conteúdo já têm interesse real — são mais qualificados e convertem melhor."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Marketing and Brand Building: Beyond Advertising",
+      "summary": "Modern marketing isn't about pushing messages — it's about creating real value, deeply understanding the customer, and building a brand that people want to defend.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Marketing is frequently confused with advertising. But Peter Drucker defined its essence more deeply: 'the goal of marketing is to make selling unnecessary'. When you understand the customer so well that the product sells itself, that's marketing done right."
+        },
+        {
+          "type": "text",
+          "content": "Modern marketing has evolved from an interruption model (ads that interrupt your experience) to an attraction model — creating content and experiences that customers actively seek out."
+        },
+        {
+          "type": "heading",
+          "content": "The 4 Ps and Their Evolution"
+        },
+        {
+          "type": "text",
+          "content": "The classic marketing mix — **Product, Price, Place (distribution) and Promotion** — was developed by Jerome McCarthy in the 1960s. Still valid, but digital marketing added new elements: People, Process, and Physical evidence (proof of quality)."
+        },
+        {
+          "type": "text",
+          "content": "The most important P remains **Product**. No marketing compensates for a bad product in the long run. Word of mouth — positive or negative — is the most powerful marketing channel, and it depends on the customer's real experience."
+        },
+        {
+          "type": "heading",
+          "content": "The Marketing Funnel"
+        },
+        {
+          "type": "text",
+          "content": "Customers go through stages before buying: **Awareness** (they discover you exist) → **Consideration** (they evaluate if you meet their need) → **Conversion** (they buy) → **Loyalty** (they buy again) → **Advocacy** (they recommend to others)."
+        },
+        {
+          "type": "text",
+          "content": "Each stage requires different strategies. For awareness, use content and mass media. For conversion, use social proof, guarantees, and ease of purchase. For advocacy, deliver experiences that positively surprise."
+        },
+        {
+          "type": "heading",
+          "content": "Branding: What Is a Brand"
+        },
+        {
+          "type": "text",
+          "content": "A brand isn't a logo or slogan — it's the **set of perceptions** people have about your company. Jeff Bezos defined it: 'your brand is what people say about you when you're not in the room'."
+        },
+        {
+          "type": "text",
+          "content": "Strong brands create **emotional value** beyond functional value. Why does someone pay $1,000 more for an iPhone when equally capable Android phones exist? Because Apple doesn't sell phones — it sells identity, design, and belonging to a tribe of creative people."
+        },
+        {
+          "type": "heading",
+          "content": "Content Marketing and the Digital Era"
+        },
+        {
+          "type": "text",
+          "content": "Content marketing is one of the most efficient strategies of the 21st century: creating useful information or entertainment that attracts the right audience. HubSpot built a billion-dollar business by teaching digital marketing for free — customers came to them."
+        },
+        {
+          "type": "quote",
+          "content": "People don't buy goods and services. They buy relations, stories, and magic.",
+          "attribution": "Seth Godin"
+        },
+        {
+          "type": "text",
+          "content": "In the digital environment, effective marketing combines data and creativity. You can measure everything — click rates, conversion, return on investment. But the best marketers use data to understand the customer, not to replace intuition. In the end, marketing is about human connection."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "How did Peter Drucker define the goal of marketing?",
+        "options": [
+          "Maximize the number of ads placed",
+          "Make selling unnecessary, understanding the customer so well that the product sells itself",
+          "Create the largest possible social media following",
+          "Beat competitors in share of voice"
+        ],
+        "correctIndex": 1,
+        "explanation": "Drucker saw marketing as the function of understanding the customer so deeply that the right product, in the right channel, at the right price, sells without effort."
+      },
+      {
+        "question": "The 'Advocacy' stage in the marketing funnel means:",
+        "options": [
+          "The customer is considering buying",
+          "The customer actively recommends the product to other people",
+          "The customer has made their first purchase",
+          "The customer is dissatisfied and requesting a refund"
+        ],
+        "correctIndex": 1,
+        "explanation": "Advocacy is the top of the loyalty pyramid — when the customer becomes a spontaneous brand defender, recommending it without being paid to do so."
+      },
+      {
+        "question": "Jeff Bezos defined brand as:",
+        "options": [
+          "The logo and visual identity of a company",
+          "What people say about you when you're not in the room",
+          "The market value above physical asset value",
+          "The set of products and services a company offers"
+        ],
+        "correctIndex": 1,
+        "explanation": "Bezos captured that brand is perception — the set of feelings, associations, and reputation that exist in consumers' minds, regardless of what the company says about itself."
+      },
+      {
+        "question": "Why can Apple charge premium prices even with capable competition?",
+        "options": [
+          "By having the best technology in all categories",
+          "By creating emotional value — identity, design, and sense of belonging",
+          "By spending more on advertising than competitors",
+          "By having exclusive contracts with the best suppliers"
+        ],
+        "correctIndex": 1,
+        "explanation": "Apple sells identity and experience, not just hardware. Consumers pay a premium for what the product says about who they are — emotional value beyond the functional."
+      },
+      {
+        "question": "Content marketing is more efficient because:",
+        "options": [
+          "It's cheaper than any other channel",
+          "It attracts customers actively seeking information, instead of interrupting their experience",
+          "It automatically guarantees top Google rankings",
+          "It eliminates the need for a sales team"
+        ],
+        "correctIndex": 1,
+        "explanation": "Content marketing creates attraction instead of interruption. Customers who come through content already have real interest — they're more qualified and convert better."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Marketing y Construcción de Marca: Más Allá de la Publicidad",
+      "summary": "El marketing moderno no se trata de empujar mensajes — se trata de crear valor real, entender profundamente al cliente y construir una marca que la gente quiera defender.",
+      "audioUrl": "",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "El marketing frecuentemente se confunde con la publicidad. Pero Peter Drucker definió su esencia de manera más profunda: 'el objetivo del marketing es hacer que la venta sea innecesaria'. Cuando entiendes tan bien al cliente que el producto se vende solo, eso es marketing bien hecho."
+        },
+        {
+          "type": "text",
+          "content": "El marketing moderno ha evolucionado de un modelo de interrupción (anuncios que interrumpen tu experiencia) a un modelo de atracción — crear contenido y experiencias que los clientes buscan activamente."
+        },
+        {
+          "type": "heading",
+          "content": "Las 4 Ps y Su Evolución"
+        },
+        {
+          "type": "text",
+          "content": "El mix de marketing clásico — **Producto, Precio, Plaza (distribución) y Promoción** — fue desarrollado por Jerome McCarthy en los años 60. Sigue siendo válido, pero el marketing digital agregó nuevos elementos: Personas, Proceso y Prueba física (evidencia de calidad)."
+        },
+        {
+          "type": "text",
+          "content": "La P más importante sigue siendo el **Producto**. Ningún marketing compensa un mal producto a largo plazo. El boca a boca — positivo o negativo — es el canal de marketing más poderoso, y depende de la experiencia real del cliente."
+        },
+        {
+          "type": "heading",
+          "content": "El Embudo de Marketing"
+        },
+        {
+          "type": "text",
+          "content": "Los clientes pasan por etapas antes de comprar: **Conciencia** (descubren que existes) → **Consideración** (evalúan si satisfaces su necesidad) → **Conversión** (compran) → **Fidelización** (vuelven a comprar) → **Advocacía** (recomiendan a otros)."
+        },
+        {
+          "type": "text",
+          "content": "Cada etapa requiere estrategias diferentes. Para conciencia, usa contenido y medios masivos. Para conversión, usa prueba social, garantías y facilidad de compra. Para advocacía, entrega experiencias que sorprendan positivamente."
+        },
+        {
+          "type": "heading",
+          "content": "Branding: Qué es una Marca"
+        },
+        {
+          "type": "text",
+          "content": "Una marca no es un logo o un eslogan — es el **conjunto de percepciones** que las personas tienen sobre tu empresa. Jeff Bezos la definió: 'tu marca es lo que la gente dice sobre ti cuando no estás en la sala'."
+        },
+        {
+          "type": "text",
+          "content": "Las marcas fuertes crean **valor emocional** más allá del funcional. ¿Por qué alguien paga $1,000 más por un iPhone cuando existen Android igualmente capaces? Porque Apple no vende teléfonos — vende identidad, diseño y pertenencia a una tribu de personas creativas."
+        },
+        {
+          "type": "heading",
+          "content": "Marketing de Contenido y Era Digital"
+        },
+        {
+          "type": "text",
+          "content": "El marketing de contenido es una de las estrategias más eficientes del siglo XXI: crear información o entretenimiento útil que atrae al público correcto. HubSpot construyó un negocio de miles de millones enseñando marketing digital gratis — los clientes venían a ellos."
+        },
+        {
+          "type": "quote",
+          "content": "Las personas no compran productos y servicios. Compran relaciones, historias y magia.",
+          "attribution": "Seth Godin"
+        },
+        {
+          "type": "text",
+          "content": "En el entorno digital, el marketing efectivo combina datos y creatividad. Puedes medir todo — tasas de clics, conversión, retorno sobre inversión. Pero los mejores marketers usan los datos para entender al cliente, no para reemplazar la intuición. Al final, el marketing es sobre conexión humana."
+        }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "question": "¿Cómo definió Peter Drucker el objetivo del marketing?",
+        "options": [
+          "Maximizar el número de anuncios publicados",
+          "Hacer innecesaria la venta, entendiendo tan bien al cliente que el producto se vende solo",
+          "Crear la mayor base posible de seguidores en redes sociales",
+          "Superar a los competidores en share of voice"
+        ],
+        "correctIndex": 1,
+        "explanation": "Drucker veía el marketing como la función de entender al cliente tan profundamente que el producto correcto, en el canal correcto, al precio correcto, se vende sin esfuerzo."
+      },
+      {
+        "question": "La etapa de 'Advocacía' en el embudo de marketing significa:",
+        "options": [
+          "El cliente está considerando comprar",
+          "El cliente recomienda activamente el producto a otras personas",
+          "El cliente realizó su primera compra",
+          "El cliente está insatisfecho y pidiendo reembolso"
+        ],
+        "correctIndex": 1,
+        "explanation": "La advocacía es la cima de la pirámide de fidelización — cuando el cliente se convierte en un defensor espontáneo de la marca, recomendándola sin que le paguen por hacerlo."
+      },
+      {
+        "question": "Jeff Bezos definió marca como:",
+        "options": [
+          "El logo e identidad visual de una empresa",
+          "Lo que la gente dice sobre ti cuando no estás en la sala",
+          "El valor de mercado por encima del valor de los activos físicos",
+          "El conjunto de productos y servicios que ofrece una empresa"
+        ],
+        "correctIndex": 1,
+        "explanation": "Bezos capturó que la marca es percepción — el conjunto de sentimientos, asociaciones y reputación que existen en la mente de los consumidores, independientemente de lo que la empresa diga sobre sí misma."
+      },
+      {
+        "question": "¿Por qué Apple puede cobrar precios premium incluso con competencia capaz?",
+        "options": [
+          "Por tener la mejor tecnología en todas las categorías",
+          "Por crear valor emocional — identidad, diseño y sentido de pertenencia",
+          "Por gastar más en publicidad que los competidores",
+          "Por tener contratos exclusivos con los mejores proveedores"
+        ],
+        "correctIndex": 1,
+        "explanation": "Apple vende identidad y experiencia, no solo hardware. Los consumidores pagan prima por lo que el producto dice sobre quiénes son — valor emocional más allá del funcional."
+      },
+      {
+        "question": "El marketing de contenido es más eficiente porque:",
+        "options": [
+          "Es más barato que cualquier otro canal",
+          "Atrae clientes que buscan activamente información, en lugar de interrumpir su experiencia",
+          "Garantiza automáticamente la posición en el tope de Google",
+          "Elimina la necesidad de un equipo de ventas"
+        ],
+        "correctIndex": 1,
+        "explanation": "El marketing de contenido crea atracción en lugar de interrupción. Los clientes que llegan por contenido ya tienen interés real — están más calificados y convierten mejor."
+      }
+    ]
+  }
+}

@@ -1,0 +1,270 @@
+{
+  "id": "business",
+  "trackId": "business",
+  "order": 1,
+  "difficulty": 1,
+  "estimatedMinutes": 10,
+  "prerequisites": [],
+  "title": {
+    "pt": "O que é Empreendedorismo?",
+    "en": "What Is Entrepreneurship?",
+    "es": "¿Qué es el Emprendimiento?"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "O que é Empreendedorismo?",
+      "summary": "Empreendedorismo não é apenas abrir uma empresa. É uma forma de enxergar o mundo — identificar problemas que outros ignoram, imaginar soluções que ainda não existem, e ter a disposição de assumir risco e incerteza para criar algo novo. Entender o que diferencia empreendedores de outras pessoas, e o papel que desempenham na economia, é o ponto de partida para qualquer jornada empreendedora.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Destruição criativa: o motor do capitalismo" },
+        { "type": "p", "text": "O economista Joseph Schumpeter cunhou o conceito de 'destruição criativa' em 1942: o capitalismo avança destruindo continuamente estruturas econômicas existentes e criando novas. O empreendedor é o agente dessa destruição criativa — ele introduz inovações que tornam produtos, processos e empresas existentes obsoletos. A Kodak foi destruída criativamente pela fotografia digital; táxis convencionais foram transformados pela Uber." },
+        { "type": "p", "text": "Para Schumpeter, o empreendedor não é necessariamente inventor — é quem comercializa inovações, combinando recursos de formas novas. A inovação pode ser um novo produto, um novo método de produção, um novo mercado, uma nova fonte de suprimentos, ou uma nova forma de organização empresarial." },
+        { "type": "h2", "text": "Tipos de empreendedores" },
+        { "type": "p", "text": "Nem todo empreendedor quer construir o próximo unicórnio. Peter Drucker distinguia entre empreendedorismo de sobrevivência (autoemprego por necessidade), empreendedorismo de estilo de vida (empresa que sustenta o modo de vida do fundador sem ambição de escala), e empreendedorismo inovador (criação de algo genuinamente novo com potencial de impacto maior)." },
+        { "type": "p", "text": "A maior parte das empresas do mundo são do primeiro e segundo tipo — e isso tem valor imenso para as economias locais. Mas a narrativa dominante do Vale do Silício tende a celebrar apenas o terceiro tipo, criando uma visão distorcida do que empreendedorismo significa na prática." },
+        { "type": "quote", "text": "Empreendedores não são pessoas que fogem do risco. São pessoas que têm apetite por incerteza e a habilidade de agir sob ela.", "author": "Frank Knight (paráfrase)" },
+        { "type": "h2", "text": "Risco vs. incerteza" },
+        { "type": "p", "text": "O economista Frank Knight fez uma distinção crucial: risco é incerteza mensurável — você pode calcular a probabilidade. Incerteza (knightiana) é quando você nem sabe que probabilidades atribuir. Empreendedores operam principalmente no domínio da incerteza genuína — não há dados históricos suficientes para calcular probabilidades de sucesso de algo realmente novo." },
+        { "type": "p", "text": "Isso explica por que intuição, visão e julgamento importam tanto no empreendedorismo. Quando não há base racional para calcular probabilidades, o empreendedor aposta em sua leitura do mercado e do futuro. Falhar nesse contexto não é necessariamente erro — é o custo de explorar território desconhecido." },
+        { "type": "h2", "text": "O ecossistema empreendedor" },
+        { "type": "p", "text": "Empreendedores não operam no vácuo. O ecossistema que os suporta inclui: capital de risco (para financiar crescimento antes de haver lucro), talento (capital humano com habilidades técnicas e gerenciais), infraestrutura regulatória (leis de falência que não criminalizem o fracasso, proteção de propriedade intelectual), e cultura (tolerância ao fracasso, celebração da ambição)." },
+        { "type": "p", "text": "O Vale do Silício não é bem-sucedido por acidente — décadas de investimento público em pesquisa (DARPA, universidades), cultura de imigrantes ambiciosos, capital de risco sofisticado e normas culturais que normalizam o fracasso criaram um ecossistema único. Copiar apenas parte (por exemplo, criar um parque tecnológico sem as demais peças) raramente funciona." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "business_q1",
+        "question": "O que Schumpeter quis dizer com 'destruição criativa'?",
+        "options": [
+          "Que empresas devem destruir suas próprias linhas de produto para inovar",
+          "Que o capitalismo avança destruindo estruturas existentes e criando novas através da inovação",
+          "Que startups tecnológicas destroem empregos sem criar substitutos",
+          "Que crises econômicas são necessárias para o progresso"
+        ],
+        "answerIndex": 1,
+        "explanation": "Schumpeter descreveu a destruição criativa como o motor do capitalismo: inovações tornam produtos e empresas existentes obsoletos, criando novas estruturas. Kodak foi destruída criativamente pela fotografia digital."
+      },
+      {
+        "id": "business_q2",
+        "question": "Segundo Drucker, qual é a diferença entre empreendedorismo de estilo de vida e inovador?",
+        "options": [
+          "Estilo de vida usa tecnologia; inovador usa processos tradicionais",
+          "Estilo de vida sustenta o modo de vida do fundador; inovador cria algo novo com potencial de impacto maior",
+          "Estilo de vida é de curto prazo; inovador é de longo prazo",
+          "Estilo de vida é individual; inovador requer uma equipe"
+        ],
+        "answerIndex": 1,
+        "explanation": "Empreendedorismo de estilo de vida cria empresas que sustentam o modo de vida do fundador sem ambição de grande escala. Empreendedorismo inovador cria algo genuinamente novo com potencial de impacto maior."
+      },
+      {
+        "id": "business_q3",
+        "question": "Qual é a distinção de Frank Knight entre risco e incerteza?",
+        "options": [
+          "Risco é controlável; incerteza não é",
+          "Risco é mensurável (probabilidades calculáveis); incerteza é quando nem sabemos que probabilidades atribuir",
+          "Risco afeta empresas grandes; incerteza afeta startups",
+          "Risco é financeiro; incerteza é operacional"
+        ],
+        "answerIndex": 1,
+        "explanation": "Knight distinguiu risco (incerteza mensurável, com probabilidades calculáveis) de incerteza genuína (sem base histórica para calcular probabilidades). Empreendedores operam principalmente no domínio da incerteza."
+      },
+      {
+        "id": "business_q4",
+        "question": "Para Schumpeter, o que torna alguém um empreendedor?",
+        "options": [
+          "Ser o inventor de uma nova tecnologia",
+          "Ter capital suficiente para fundar uma empresa",
+          "Comercializar inovações, combinando recursos de formas novas",
+          "Assumir dívidas para financiar um negócio"
+        ],
+        "answerIndex": 2,
+        "explanation": "Para Schumpeter, o empreendedor não precisa ser o inventor — é quem comercializa inovações, combinando recursos de formas novas. A inovação pode ser um novo produto, método, mercado, fonte de suprimentos ou organização."
+      },
+      {
+        "id": "business_q5",
+        "question": "Por que copiar apenas parte do modelo do Vale do Silício raramente funciona?",
+        "options": [
+          "Porque a tecnologia é protegida por patentes que impedem sua replicação",
+          "Porque o ecossistema exige múltiplas peças interdependentes — capital, talento, cultura, regulação",
+          "Porque o mercado americano é único e não pode ser replicado em outros países",
+          "Porque as universidades americanas formam empreendedores de forma superior"
+        ],
+        "answerIndex": 1,
+        "explanation": "O sucesso do Vale do Silício resulta de décadas de investimento público, cultura de imigrantes ambiciosos, capital de risco sofisticado e normas culturais. Copiar apenas uma parte (como criar parques tecnológicos) sem as demais raramente funciona."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "What Is Entrepreneurship?",
+      "summary": "Entrepreneurship isn't just about starting a company. It's a way of seeing the world — identifying problems others ignore, imagining solutions that don't yet exist, and being willing to take on risk and uncertainty to create something new. Understanding what differentiates entrepreneurs from others, and the role they play in the economy, is the starting point for any entrepreneurial journey.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Creative destruction: the engine of capitalism" },
+        { "type": "p", "text": "Economist Joseph Schumpeter coined the concept of 'creative destruction' in 1942: capitalism advances by continuously destroying existing economic structures and creating new ones. The entrepreneur is the agent of this creative destruction — introducing innovations that make existing products, processes, and companies obsolete. Kodak was creatively destroyed by digital photography; conventional taxis were transformed by Uber." },
+        { "type": "p", "text": "For Schumpeter, the entrepreneur isn't necessarily an inventor — they're someone who commercializes innovations, combining resources in new ways. Innovation can be a new product, production method, market, supply source, or form of business organization." },
+        { "type": "h2", "text": "Types of entrepreneurs" },
+        { "type": "p", "text": "Not every entrepreneur wants to build the next unicorn. Peter Drucker distinguished between survival entrepreneurship (self-employment out of necessity), lifestyle entrepreneurship (a company sustaining the founder's lifestyle without scale ambition), and innovative entrepreneurship (creating something genuinely new with greater potential impact)." },
+        { "type": "p", "text": "Most of the world's businesses are the first and second type — and they have immense value for local economies. But Silicon Valley's dominant narrative tends to celebrate only the third type, creating a distorted view of what entrepreneurship means in practice." },
+        { "type": "quote", "text": "Entrepreneurs aren't people who run away from risk. They are people with an appetite for uncertainty and the ability to act under it.", "author": "Frank Knight (paraphrase)" },
+        { "type": "h2", "text": "Risk vs. uncertainty" },
+        { "type": "p", "text": "Economist Frank Knight made a crucial distinction: risk is measurable uncertainty — you can calculate the probability. (Knightian) uncertainty is when you don't even know what probabilities to assign. Entrepreneurs operate mainly in the domain of genuine uncertainty — there's insufficient historical data to calculate success probabilities for something truly new." },
+        { "type": "p", "text": "This explains why intuition, vision, and judgment matter so much in entrepreneurship. When there's no rational basis for calculating probabilities, the entrepreneur bets on their reading of the market and the future. Failing in this context isn't necessarily an error — it's the cost of exploring unknown territory." },
+        { "type": "h2", "text": "The entrepreneurial ecosystem" },
+        { "type": "p", "text": "Entrepreneurs don't operate in a vacuum. The ecosystem supporting them includes: venture capital (to fund growth before profitability), talent (human capital with technical and managerial skills), regulatory infrastructure (bankruptcy laws that don't criminalize failure, intellectual property protection), and culture (tolerance for failure, celebration of ambition)." },
+        { "type": "p", "text": "Silicon Valley isn't successful by accident — decades of public investment in research (DARPA, universities), ambitious immigrant culture, sophisticated venture capital, and cultural norms normalizing failure created a unique ecosystem. Copying only part (for example, creating a technology park without the other pieces) rarely works." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "business_q1",
+        "question": "What did Schumpeter mean by 'creative destruction'?",
+        "options": [
+          "That companies should destroy their own product lines to innovate",
+          "That capitalism advances by destroying existing structures and creating new ones through innovation",
+          "That tech startups destroy jobs without creating substitutes",
+          "That economic crises are necessary for progress"
+        ],
+        "answerIndex": 1,
+        "explanation": "Schumpeter described creative destruction as capitalism's engine: innovations make existing products and companies obsolete, creating new structures. Kodak was creatively destroyed by digital photography."
+      },
+      {
+        "id": "business_q2",
+        "question": "According to Drucker, what's the difference between lifestyle and innovative entrepreneurship?",
+        "options": [
+          "Lifestyle uses technology; innovative uses traditional processes",
+          "Lifestyle sustains the founder's lifestyle; innovative creates something new with greater potential impact",
+          "Lifestyle is short-term; innovative is long-term",
+          "Lifestyle is individual; innovative requires a team"
+        ],
+        "answerIndex": 1,
+        "explanation": "Lifestyle entrepreneurship creates businesses sustaining the founder's lifestyle without large-scale ambition. Innovative entrepreneurship creates something genuinely new with greater potential impact."
+      },
+      {
+        "id": "business_q3",
+        "question": "What is Frank Knight's distinction between risk and uncertainty?",
+        "options": [
+          "Risk is controllable; uncertainty isn't",
+          "Risk is measurable (calculable probabilities); uncertainty is when we don't even know what probabilities to assign",
+          "Risk affects large companies; uncertainty affects startups",
+          "Risk is financial; uncertainty is operational"
+        ],
+        "answerIndex": 1,
+        "explanation": "Knight distinguished risk (measurable uncertainty, with calculable probabilities) from genuine uncertainty (no historical basis for calculating probabilities). Entrepreneurs operate mainly in the domain of uncertainty."
+      },
+      {
+        "id": "business_q4",
+        "question": "For Schumpeter, what makes someone an entrepreneur?",
+        "options": [
+          "Being the inventor of a new technology",
+          "Having sufficient capital to found a company",
+          "Commercializing innovations, combining resources in new ways",
+          "Taking on debt to finance a business"
+        ],
+        "answerIndex": 2,
+        "explanation": "For Schumpeter, the entrepreneur doesn't need to be the inventor — they're someone who commercializes innovations, combining resources in new ways. Innovation can be a new product, method, market, supply source, or organization."
+      },
+      {
+        "id": "business_q5",
+        "question": "Why does copying only part of the Silicon Valley model rarely work?",
+        "options": [
+          "Because the technology is patent-protected and can't be replicated",
+          "Because the ecosystem requires multiple interdependent pieces — capital, talent, culture, regulation",
+          "Because the American market is unique and can't be replicated in other countries",
+          "Because American universities train entrepreneurs in a superior way"
+        ],
+        "answerIndex": 1,
+        "explanation": "Silicon Valley's success results from decades of public investment, ambitious immigrant culture, sophisticated venture capital, and cultural norms. Copying only one part (like creating tech parks) without the others rarely works."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "¿Qué es el Emprendimiento?",
+      "summary": "El emprendimiento no es solo abrir una empresa. Es una forma de ver el mundo — identificar problemas que otros ignoran, imaginar soluciones que aún no existen y tener la disposición de asumir riesgo e incertidumbre para crear algo nuevo. Entender qué diferencia a los emprendedores de otras personas, y el papel que desempeñan en la economía, es el punto de partida para cualquier camino emprendedor.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Destrucción creativa: el motor del capitalismo" },
+        { "type": "p", "text": "El economista Joseph Schumpeter acuñó el concepto de 'destrucción creativa' en 1942: el capitalismo avanza destruyendo continuamente estructuras económicas existentes y creando nuevas. El emprendedor es el agente de esta destrucción creativa — introduce innovaciones que vuelven obsoletos los productos, procesos y empresas existentes. Kodak fue destruida creativamente por la fotografía digital; los taxis convencionales fueron transformados por Uber." },
+        { "type": "p", "text": "Para Schumpeter, el emprendedor no es necesariamente inventor — es quien comercializa innovaciones, combinando recursos de nuevas maneras. La innovación puede ser un nuevo producto, un nuevo método de producción, un nuevo mercado, una nueva fuente de suministros o una nueva forma de organización empresarial." },
+        { "type": "h2", "text": "Tipos de emprendedores" },
+        { "type": "p", "text": "No todo emprendedor quiere construir el próximo unicornio. Peter Drucker distinguía entre emprendimiento de supervivencia (autoempleo por necesidad), emprendimiento de estilo de vida (empresa que sustenta el modo de vida del fundador sin ambición de escala) y emprendimiento innovador (creación de algo genuinamente nuevo con mayor potencial de impacto)." },
+        { "type": "p", "text": "La mayor parte de las empresas del mundo son del primer y segundo tipo — y tienen un valor inmenso para las economías locales. Pero la narrativa dominante de Silicon Valley tiende a celebrar solo el tercer tipo, creando una visión distorsionada de lo que significa el emprendimiento en la práctica." },
+        { "type": "quote", "text": "Los emprendedores no son personas que huyen del riesgo. Son personas con apetito por la incertidumbre y la habilidad de actuar bajo ella.", "author": "Frank Knight (paráfrasis)" },
+        { "type": "h2", "text": "Riesgo vs. incertidumbre" },
+        { "type": "p", "text": "El economista Frank Knight hizo una distinción crucial: el riesgo es incertidumbre medible — puedes calcular la probabilidad. La incertidumbre (knightiana) es cuando ni siquiera sabes qué probabilidades asignar. Los emprendedores operan principalmente en el dominio de la incertidumbre genuina — no hay suficientes datos históricos para calcular probabilidades de éxito de algo verdaderamente nuevo." },
+        { "type": "p", "text": "Esto explica por qué la intuición, la visión y el juicio importan tanto en el emprendimiento. Cuando no hay base racional para calcular probabilidades, el emprendedor apuesta por su lectura del mercado y del futuro. Fracasar en ese contexto no es necesariamente un error — es el costo de explorar territorio desconocido." },
+        { "type": "h2", "text": "El ecosistema emprendedor" },
+        { "type": "p", "text": "Los emprendedores no operan en el vacío. El ecosistema que los apoya incluye: capital de riesgo (para financiar el crecimiento antes de haber lucro), talento (capital humano con habilidades técnicas y gerenciales), infraestructura regulatoria (leyes de quiebra que no criminalicen el fracaso, protección de la propiedad intelectual) y cultura (tolerancia al fracaso, celebración de la ambición)." },
+        { "type": "p", "text": "Silicon Valley no tiene éxito por accidente — décadas de inversión pública en investigación (DARPA, universidades), cultura de inmigrantes ambiciosos, capital de riesgo sofisticado y normas culturales que normalizan el fracaso crearon un ecosistema único. Copiar solo una parte (por ejemplo, crear un parque tecnológico sin las demás piezas) rara vez funciona." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "business_q1",
+        "question": "¿Qué quiso decir Schumpeter con 'destrucción creativa'?",
+        "options": [
+          "Que las empresas deben destruir sus propias líneas de producto para innovar",
+          "Que el capitalismo avanza destruyendo estructuras existentes y creando nuevas a través de la innovación",
+          "Que las startups tecnológicas destruyen empleos sin crear sustitutos",
+          "Que las crisis económicas son necesarias para el progreso"
+        ],
+        "answerIndex": 1,
+        "explanation": "Schumpeter describió la destrucción creativa como el motor del capitalismo: las innovaciones vuelven obsoletos los productos y empresas existentes, creando nuevas estructuras. Kodak fue destruida creativamente por la fotografía digital."
+      },
+      {
+        "id": "business_q2",
+        "question": "Según Drucker, ¿cuál es la diferencia entre el emprendimiento de estilo de vida y el innovador?",
+        "options": [
+          "El de estilo de vida usa tecnología; el innovador usa procesos tradicionales",
+          "El de estilo de vida sustenta el modo de vida del fundador; el innovador crea algo nuevo con mayor potencial de impacto",
+          "El de estilo de vida es a corto plazo; el innovador es a largo plazo",
+          "El de estilo de vida es individual; el innovador requiere un equipo"
+        ],
+        "answerIndex": 1,
+        "explanation": "El emprendimiento de estilo de vida crea empresas que sustentan el modo de vida del fundador sin ambición de gran escala. El emprendimiento innovador crea algo genuinamente nuevo con mayor potencial de impacto."
+      },
+      {
+        "id": "business_q3",
+        "question": "¿Cuál es la distinción de Frank Knight entre riesgo e incertidumbre?",
+        "options": [
+          "El riesgo es controlable; la incertidumbre no",
+          "El riesgo es medible (probabilidades calculables); la incertidumbre es cuando ni sabemos qué probabilidades asignar",
+          "El riesgo afecta a las grandes empresas; la incertidumbre a las startups",
+          "El riesgo es financiero; la incertidumbre es operativa"
+        ],
+        "answerIndex": 1,
+        "explanation": "Knight distinguió el riesgo (incertidumbre medible, con probabilidades calculables) de la incertidumbre genuina (sin base histórica para calcular probabilidades). Los emprendedores operan principalmente en el dominio de la incertidumbre."
+      },
+      {
+        "id": "business_q4",
+        "question": "Para Schumpeter, ¿qué convierte a alguien en emprendedor?",
+        "options": [
+          "Ser el inventor de una nueva tecnología",
+          "Tener capital suficiente para fundar una empresa",
+          "Comercializar innovaciones, combinando recursos de nuevas maneras",
+          "Asumir deudas para financiar un negocio"
+        ],
+        "answerIndex": 2,
+        "explanation": "Para Schumpeter, el emprendedor no necesita ser el inventor — es quien comercializa innovaciones, combinando recursos de nuevas maneras. La innovación puede ser un nuevo producto, método, mercado, fuente de suministros u organización."
+      },
+      {
+        "id": "business_q5",
+        "question": "¿Por qué copiar solo una parte del modelo de Silicon Valley rara vez funciona?",
+        "options": [
+          "Porque la tecnología está protegida por patentes que impiden su replicación",
+          "Porque el ecosistema requiere múltiples piezas interdependientes — capital, talento, cultura, regulación",
+          "Porque el mercado estadounidense es único y no puede replicarse en otros países",
+          "Porque las universidades estadounidenses forman emprendedores de manera superior"
+        ],
+        "answerIndex": 1,
+        "explanation": "El éxito de Silicon Valley resulta de décadas de inversión pública, cultura de inmigrantes ambiciosos, capital de riesgo sofisticado y normas culturales. Copiar solo una parte (como crear parques tecnológicos) sin las demás rara vez funciona."
+      }
+    ]
+  }
+}

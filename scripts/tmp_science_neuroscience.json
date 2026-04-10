@@ -1,0 +1,270 @@
+{
+  "id": "science_neuroscience",
+  "trackId": "science_tech",
+  "order": 9,
+  "difficulty": 2,
+  "estimatedMinutes": 11,
+  "prerequisites": [],
+  "title": {
+    "pt": "Neurociência: Como o Cérebro Funciona",
+    "en": "Neuroscience: How the Brain Works",
+    "es": "Neurociencia: Cómo Funciona el Cerebro"
+  },
+  "coverImageUrl": null,
+  "coverImageCredit": null,
+  "pt": {
+    "lesson": {
+      "title": "Neurociência: Como o Cérebro Funciona",
+      "summary": "O cérebro humano é o objeto mais complexo conhecido no universo. Com 86 bilhões de neurônios formando centenas de trilhões de conexões, ele gera tudo o que somos: memórias, emoções, decisões, consciência. A neurociência moderna está desvendando como esse órgão extraordinário funciona — e descobrindo que muitas das nossas intuições sobre nós mesmos estavam erradas.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Neurônios e sinapses: a unidade básica" },
+        { "type": "p", "text": "O neurônio é a célula fundamental do sistema nervoso. Cada neurônio recebe sinais de centenas ou milhares de outros neurônios através de suas dendrites, processa esses sinais no corpo celular, e dispara um sinal elétrico (potencial de ação) pelo axônio se o estímulo for suficientemente forte. Na sinapse, esse sinal elétrico é convertido em sinal químico — neurotransmissores cruzam a fenda sináptica e ativam o próximo neurônio." },
+        { "type": "p", "text": "A plasticidade sináptica — a capacidade das sinapses de se fortalecerem ou enfraquecerem com uso — é a base física da memória e do aprendizado. 'Neurônios que disparam juntos, conectam-se juntos' (Hebb, 1949). Quando você aprende algo novo, conexões neurais específicas são fortalecidas; quando não usa uma habilidade, as conexões enfraquecem." },
+        { "type": "h2", "text": "Estrutura do cérebro: do antigo ao moderno" },
+        { "type": "p", "text": "O cérebro humano é frequentemente descrito em termos evolutivos. O tronco encefálico (mais antigo evolutivamente) controla funções básicas de sobrevivência: respiração, frequência cardíaca, sono. O sistema límbico (emoções, memória, recompensa) inclui a amígdala — central no processamento do medo — e o hipocampo, essencial para formação de novas memórias. O neocórtex (mais recente evolutivamente) é responsável pelo pensamento abstrato, linguagem, planejamento." },
+        { "type": "p", "text": "A divisão em 'cérebro reptiliano', 'límbico' e 'racional' é popularmente conhecida como teoria triune de MacLean — mas é uma simplificação excessiva que a neurociência moderna considera imprecisa. As diferentes regiões cerebrais interagem continuamente; não há uma hierarquia simples entre 'emocional' e 'racional'." },
+        { "type": "quote", "text": "Somos nosso cérebro. O que pensamos, o que fazemos, o que somos é determinado pelo cérebro.", "author": "Dick Swaab" },
+        { "type": "h2", "text": "Memória: não é um gravador" },
+        { "type": "p", "text": "A memória humana não funciona como um gravador fiel — ela é reconstrutiva. Toda vez que recuperamos uma memória, ela é ligeiramente alterada pelo contexto atual e depois re-armazenada. Isso significa que memórias podem ser implantadas, distorcidas ou completamente falsas. Elizabeth Loftus demonstrou experimentalmente que é possível fazer pessoas 'lembrarem' de eventos que nunca aconteceram." },
+        { "type": "p", "text": "A memória também não é unitária. Há memória episódica (eventos autobiográficos), semântica (fatos e conceitos), procedural (habilidades motoras), e memória de trabalho (informações ativas na mente agora). O famoso paciente H.M., que teve o hipocampo removido para tratar epilepsia, deixou de formar novas memórias declarativas mas manteve memórias procedurais — revelando a modularidade da memória." },
+        { "type": "h2", "text": "O problema difícil da consciência" },
+        { "type": "p", "text": "A neurociência pode descrever os correlatos neurais da consciência — padrões de atividade cerebral associados à experiência consciente. Mas não explica por que há experiência subjetiva. Por que o processamento de informação sobre vermelho é acompanhado pela experiência qualitativa de 'ver vermelho'? David Chalmers chamou isso de 'problema difícil da consciência' — e ele permanece sem solução." },
+        { "type": "p", "text": "Isso tem implicações práticas: como definir morte cerebral? Como saber se um paciente em estado vegetativo tem experiência consciente? Pesquisas com fMRI mostraram que alguns pacientes considerados inconscientes respondiam a comandos verbais — seus cérebros se ativavam como esperado, mas sem respostas motoras externas. A fronteira entre consciência e inconsciência é mais nebulosa do que imaginávamos." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_neuroscience_q1",
+        "question": "O que é plasticidade sináptica e por que é importante?",
+        "options": [
+          "A capacidade do cérebro de crescer novos neurônios após lesões",
+          "A capacidade das sinapses de se fortalecerem ou enfraquecerem com uso — base física da memória e aprendizado",
+          "A flexibilidade do crânio para acomodar um cérebro em crescimento",
+          "A habilidade de o cérebro funcionar com uma das metades danificada"
+        ],
+        "answerIndex": 1,
+        "explanation": "Plasticidade sináptica é a capacidade das sinapses de se fortalecerem ou enfraquecerem com uso — a base física da memória e aprendizado. 'Neurônios que disparam juntos, conectam-se juntos' (Hebb, 1949)."
+      },
+      {
+        "id": "science_neuroscience_q2",
+        "question": "Por que a memória humana é descrita como 'reconstrutiva' e não como 'gravação'?",
+        "options": [
+          "Porque lembra apenas as partes mais emocionalmente significativas de eventos",
+          "Porque toda vez que é recuperada, é ligeiramente alterada pelo contexto e re-armazenada",
+          "Porque é armazenada de forma fragmentada em diferentes partes do cérebro",
+          "Porque decai naturalmente com o tempo, como uma gravação degradada"
+        ],
+        "answerIndex": 1,
+        "explanation": "A memória é reconstrutiva — toda recuperação a altera ligeiramente pelo contexto atual. Isso explica por que memórias podem ser distorcidas ou implantadas, como demonstrou Elizabeth Loftus experimentalmente."
+      },
+      {
+        "id": "science_neuroscience_q3",
+        "question": "O que o caso do paciente H.M. revelou sobre a memória?",
+        "options": [
+          "Que memórias de longo prazo são armazenadas no córtex visual",
+          "Que a memória é unitária e processada em uma única região cerebral",
+          "Que memória declarativa e procedural são sistemas distintos — H.M. perdeu a primeira mas manteve a segunda",
+          "Que danos no hipocampo eliminam todas as formas de memória"
+        ],
+        "answerIndex": 2,
+        "explanation": "H.M. não formava novas memórias declarativas após a remoção do hipocampo, mas manteve memórias procedurais (habilidades motoras) — revelando que a memória é modular, com sistemas distintos para diferentes tipos."
+      },
+      {
+        "id": "science_neuroscience_q4",
+        "question": "O que é o 'problema difícil da consciência' de Chalmers?",
+        "options": [
+          "A dificuldade técnica de medir atividade cerebral durante estados conscientes",
+          "Por que há experiência subjetiva — por que o processamento neural é acompanhado de sentir algo",
+          "A complexidade de definir quais animais são conscientes",
+          "O desafio de criar sistemas artificiais com consciência"
+        ],
+        "answerIndex": 1,
+        "explanation": "O problema difícil é explicar por que há experiência subjetiva — por que o processamento de informação sobre vermelho é acompanhado pela experiência de 'ver vermelho'. A neurociência pode descrever os correlatos neurais, mas não explica a experiência qualitativa."
+      },
+      {
+        "id": "science_neuroscience_q5",
+        "question": "O que pesquisas com fMRI revelaram sobre pacientes em estado vegetativo?",
+        "options": [
+          "Que todos os pacientes em estado vegetativo não têm experiência consciente",
+          "Que o estado vegetativo é sempre resultado de danos no hipocampo",
+          "Que alguns pacientes considerados inconscientes respondiam a comandos verbais através de ativação cerebral",
+          "Que a consciência depende exclusivamente da atividade no córtex pré-frontal"
+        ],
+        "answerIndex": 2,
+        "explanation": "Pesquisas com fMRI mostraram que alguns pacientes considerados inconscientes ativavam regiões cerebrais esperadas em resposta a comandos verbais — sem respostas motoras externas. A fronteira entre consciência e inconsciência é mais nebulosa do que se pensava."
+      }
+    ]
+  },
+  "en": {
+    "lesson": {
+      "title": "Neuroscience: How the Brain Works",
+      "summary": "The human brain is the most complex object known in the universe. With 86 billion neurons forming hundreds of trillions of connections, it generates everything we are: memories, emotions, decisions, consciousness. Modern neuroscience is unraveling how this extraordinary organ works — and discovering that many of our intuitions about ourselves were wrong.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Neurons and synapses: the basic unit" },
+        { "type": "p", "text": "The neuron is the fundamental cell of the nervous system. Each neuron receives signals from hundreds or thousands of other neurons through its dendrites, processes these signals in the cell body, and fires an electrical signal (action potential) through the axon if the stimulus is strong enough. At the synapse, this electrical signal is converted into a chemical signal — neurotransmitters cross the synaptic gap and activate the next neuron." },
+        { "type": "p", "text": "Synaptic plasticity — the ability of synapses to strengthen or weaken with use — is the physical basis of memory and learning. 'Neurons that fire together, wire together' (Hebb, 1949). When you learn something new, specific neural connections are strengthened; when you don't use a skill, connections weaken." },
+        { "type": "h2", "text": "Brain structure: from ancient to modern" },
+        { "type": "p", "text": "The human brain is often described in evolutionary terms. The brainstem (evolutionarily oldest) controls basic survival functions: breathing, heart rate, sleep. The limbic system (emotions, memory, reward) includes the amygdala — central to fear processing — and the hippocampus, essential for forming new memories. The neocortex (evolutionarily newest) is responsible for abstract thinking, language, planning." },
+        { "type": "p", "text": "The division into 'reptilian brain,' 'limbic,' and 'rational' is popularly known as MacLean's triune theory — but it's an oversimplification that modern neuroscience considers inaccurate. Different brain regions continuously interact; there's no simple hierarchy between 'emotional' and 'rational.'" },
+        { "type": "quote", "text": "We are our brains. What we think, what we do, what we are is determined by the brain.", "author": "Dick Swaab" },
+        { "type": "h2", "text": "Memory: not a recorder" },
+        { "type": "p", "text": "Human memory doesn't work like a faithful recorder — it's reconstructive. Every time we retrieve a memory, it's slightly altered by the current context and then re-stored. This means memories can be implanted, distorted, or completely false. Elizabeth Loftus experimentally demonstrated that it's possible to make people 'remember' events that never happened." },
+        { "type": "p", "text": "Memory is also not unitary. There's episodic memory (autobiographical events), semantic memory (facts and concepts), procedural memory (motor skills), and working memory (information currently active in the mind). The famous patient H.M., who had his hippocampus removed to treat epilepsy, stopped forming new declarative memories but retained procedural memories — revealing memory's modularity." },
+        { "type": "h2", "text": "The hard problem of consciousness" },
+        { "type": "p", "text": "Neuroscience can describe the neural correlates of consciousness — brain activity patterns associated with conscious experience. But it doesn't explain why there is subjective experience. Why is information processing about red accompanied by the qualitative experience of 'seeing red'? David Chalmers called this the 'hard problem of consciousness' — and it remains unsolved." },
+        { "type": "p", "text": "This has practical implications: how to define brain death? How to know if a patient in a vegetative state has conscious experience? fMRI research showed that some patients considered unconscious responded to verbal commands — their brains activated as expected, but without external motor responses. The boundary between consciousness and unconsciousness is more nebulous than we imagined." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_neuroscience_q1",
+        "question": "What is synaptic plasticity and why is it important?",
+        "options": [
+          "The brain's ability to grow new neurons after injuries",
+          "The ability of synapses to strengthen or weaken with use — the physical basis of memory and learning",
+          "The skull's flexibility to accommodate a growing brain",
+          "The brain's ability to function with one hemisphere damaged"
+        ],
+        "answerIndex": 1,
+        "explanation": "Synaptic plasticity is the ability of synapses to strengthen or weaken with use — the physical basis of memory and learning. 'Neurons that fire together, wire together' (Hebb, 1949)."
+      },
+      {
+        "id": "science_neuroscience_q2",
+        "question": "Why is human memory described as 'reconstructive' rather than 'recording'?",
+        "options": [
+          "Because it only remembers the most emotionally significant parts of events",
+          "Because every time it's retrieved, it's slightly altered by context and re-stored",
+          "Because it's stored in fragments across different brain areas",
+          "Because it naturally decays over time, like a degraded recording"
+        ],
+        "answerIndex": 1,
+        "explanation": "Memory is reconstructive — every retrieval slightly alters it through current context. This explains why memories can be distorted or implanted, as Elizabeth Loftus demonstrated experimentally."
+      },
+      {
+        "id": "science_neuroscience_q3",
+        "question": "What did patient H.M.'s case reveal about memory?",
+        "options": [
+          "That long-term memories are stored in the visual cortex",
+          "That memory is unitary and processed in a single brain region",
+          "That declarative and procedural memory are distinct systems — H.M. lost the former but retained the latter",
+          "That hippocampal damage eliminates all forms of memory"
+        ],
+        "answerIndex": 2,
+        "explanation": "H.M. stopped forming new declarative memories after hippocampus removal, but retained procedural memories (motor skills) — revealing that memory is modular, with distinct systems for different types."
+      },
+      {
+        "id": "science_neuroscience_q4",
+        "question": "What is Chalmers' 'hard problem of consciousness'?",
+        "options": [
+          "The technical difficulty of measuring brain activity during conscious states",
+          "Why there is subjective experience — why neural processing is accompanied by feeling something",
+          "The complexity of defining which animals are conscious",
+          "The challenge of creating artificial systems with consciousness"
+        ],
+        "answerIndex": 1,
+        "explanation": "The hard problem is explaining why there is subjective experience — why information processing about red is accompanied by the experience of 'seeing red.' Neuroscience can describe neural correlates but can't explain qualitative experience."
+      },
+      {
+        "id": "science_neuroscience_q5",
+        "question": "What did fMRI research reveal about patients in vegetative states?",
+        "options": [
+          "That all vegetative state patients have no conscious experience",
+          "That vegetative states always result from hippocampal damage",
+          "That some patients considered unconscious responded to verbal commands through brain activation",
+          "That consciousness depends exclusively on prefrontal cortex activity"
+        ],
+        "answerIndex": 2,
+        "explanation": "fMRI research showed that some patients considered unconscious activated expected brain regions in response to verbal commands — without external motor responses. The boundary between consciousness and unconsciousness is more nebulous than thought."
+      }
+    ]
+  },
+  "es": {
+    "lesson": {
+      "title": "Neurociencia: Cómo Funciona el Cerebro",
+      "summary": "El cerebro humano es el objeto más complejo conocido en el universo. Con 86 mil millones de neuronas formando cientos de billones de conexiones, genera todo lo que somos: recuerdos, emociones, decisiones, consciencia. La neurociencia moderna está desvelando cómo funciona este extraordinario órgano — y descubriendo que muchas de nuestras intuiciones sobre nosotros mismos estaban equivocadas.",
+      "audioUrl": null,
+      "blocks": [
+        { "type": "h2", "text": "Neuronas y sinapsis: la unidad básica" },
+        { "type": "p", "text": "La neurona es la célula fundamental del sistema nervioso. Cada neurona recibe señales de cientos o miles de otras neuronas a través de sus dendritas, procesa estas señales en el cuerpo celular y dispara una señal eléctrica (potencial de acción) a través del axón si el estímulo es suficientemente fuerte. En la sinapsis, esta señal eléctrica se convierte en señal química — los neurotransmisores cruzan la hendidura sináptica y activan a la siguiente neurona." },
+        { "type": "p", "text": "La plasticidad sináptica — la capacidad de las sinapsis para fortalecerse o debilitarse con el uso — es la base física de la memoria y el aprendizaje. 'Las neuronas que se activan juntas, se conectan juntas' (Hebb, 1949). Cuando aprendes algo nuevo, conexiones neuronales específicas se fortalecen; cuando no usas una habilidad, las conexiones se debilitan." },
+        { "type": "h2", "text": "Estructura del cerebro: del antiguo al moderno" },
+        { "type": "p", "text": "El cerebro humano se describe frecuentemente en términos evolutivos. El tronco encefálico (evolutivamente más antiguo) controla funciones básicas de supervivencia: respiración, frecuencia cardíaca, sueño. El sistema límbico (emociones, memoria, recompensa) incluye la amígdala — central en el procesamiento del miedo — y el hipocampo, esencial para la formación de nuevos recuerdos. El neocórtex (evolutivamente más reciente) es responsable del pensamiento abstracto, el lenguaje y la planificación." },
+        { "type": "p", "text": "La división en 'cerebro reptiliano', 'límbico' y 'racional' es popularmente conocida como teoría triuna de MacLean — pero es una simplificación excesiva que la neurociencia moderna considera imprecisa. Las diferentes regiones cerebrales interactúan continuamente; no hay una jerarquía simple entre 'emocional' y 'racional'." },
+        { "type": "quote", "text": "Somos nuestro cerebro. Lo que pensamos, lo que hacemos, lo que somos está determinado por el cerebro.", "author": "Dick Swaab" },
+        { "type": "h2", "text": "La memoria: no es una grabadora" },
+        { "type": "p", "text": "La memoria humana no funciona como una grabadora fiel — es reconstructiva. Cada vez que recuperamos un recuerdo, este se altera ligeramente por el contexto actual y luego se re-almacena. Esto significa que los recuerdos pueden ser implantados, distorsionados o completamente falsos. Elizabeth Loftus demostró experimentalmente que es posible hacer que las personas 'recuerden' eventos que nunca ocurrieron." },
+        { "type": "p", "text": "La memoria tampoco es unitaria. Hay memoria episódica (eventos autobiográficos), semántica (hechos y conceptos), procedimental (habilidades motoras) y memoria de trabajo (información activa en la mente en este momento). El famoso paciente H.M., al que se le extirpó el hipocampo para tratar la epilepsia, dejó de formar nuevos recuerdos declarativos pero mantuvo los recuerdos procedimentales — revelando la modularidad de la memoria." },
+        { "type": "h2", "text": "El problema difícil de la consciencia" },
+        { "type": "p", "text": "La neurociencia puede describir los correlatos neurales de la consciencia — patrones de actividad cerebral asociados a la experiencia consciente. Pero no explica por qué existe la experiencia subjetiva. ¿Por qué el procesamiento de información sobre el rojo va acompañado de la experiencia cualitativa de 'ver rojo'? David Chalmers llamó a esto el 'problema difícil de la consciencia' — y permanece sin solución." },
+        { "type": "p", "text": "Esto tiene implicaciones prácticas: ¿cómo definir la muerte cerebral? ¿Cómo saber si un paciente en estado vegetativo tiene experiencia consciente? Investigaciones con fMRI mostraron que algunos pacientes considerados inconscientes respondían a comandos verbales — sus cerebros se activaban como se esperaba, pero sin respuestas motoras externas. La frontera entre consciencia e inconsciencia es más difusa de lo que imaginábamos." }
+      ]
+    },
+    "cards": [],
+    "quiz": [
+      {
+        "id": "science_neuroscience_q1",
+        "question": "¿Qué es la plasticidad sináptica y por qué es importante?",
+        "options": [
+          "La capacidad del cerebro de hacer crecer nuevas neuronas tras lesiones",
+          "La capacidad de las sinapsis para fortalecerse o debilitarse con el uso — base física de la memoria y el aprendizaje",
+          "La flexibilidad del cráneo para acomodar un cerebro en crecimiento",
+          "La habilidad del cerebro de funcionar con uno de sus hemisferios dañado"
+        ],
+        "answerIndex": 1,
+        "explanation": "La plasticidad sináptica es la capacidad de las sinapsis para fortalecerse o debilitarse con el uso — la base física de la memoria y el aprendizaje. 'Las neuronas que se activan juntas, se conectan juntas' (Hebb, 1949)."
+      },
+      {
+        "id": "science_neuroscience_q2",
+        "question": "¿Por qué la memoria humana se describe como 'reconstructiva' y no como 'grabación'?",
+        "options": [
+          "Porque solo recuerda las partes más emocionalmente significativas de los eventos",
+          "Porque cada vez que se recupera, se altera ligeramente por el contexto y se re-almacena",
+          "Porque se almacena de forma fragmentada en diferentes partes del cerebro",
+          "Porque decae naturalmente con el tiempo, como una grabación degradada"
+        ],
+        "answerIndex": 1,
+        "explanation": "La memoria es reconstructiva — cada recuperación la altera ligeramente a través del contexto actual. Esto explica por qué los recuerdos pueden ser distorsionados o implantados, como demostró experimentalmente Elizabeth Loftus."
+      },
+      {
+        "id": "science_neuroscience_q3",
+        "question": "¿Qué reveló el caso del paciente H.M. sobre la memoria?",
+        "options": [
+          "Que los recuerdos a largo plazo se almacenan en el córtex visual",
+          "Que la memoria es unitaria y se procesa en una única región cerebral",
+          "Que la memoria declarativa y la procedimental son sistemas distintos — H.M. perdió la primera pero conservó la segunda",
+          "Que los daños en el hipocampo eliminan todas las formas de memoria"
+        ],
+        "answerIndex": 2,
+        "explanation": "H.M. dejó de formar nuevos recuerdos declarativos tras la extirpación del hipocampo, pero conservó los recuerdos procedimentales (habilidades motoras) — revelando que la memoria es modular, con sistemas distintos para diferentes tipos."
+      },
+      {
+        "id": "science_neuroscience_q4",
+        "question": "¿Qué es el 'problema difícil de la consciencia' de Chalmers?",
+        "options": [
+          "La dificultad técnica de medir la actividad cerebral durante estados conscientes",
+          "Por qué existe la experiencia subjetiva — por qué el procesamiento neural va acompañado de sentir algo",
+          "La complejidad de definir qué animales son conscientes",
+          "El desafío de crear sistemas artificiales con consciencia"
+        ],
+        "answerIndex": 1,
+        "explanation": "El problema difícil es explicar por qué existe la experiencia subjetiva — por qué el procesamiento de información sobre el rojo va acompañado de la experiencia de 'ver rojo'. La neurociencia puede describir los correlatos neurales pero no puede explicar la experiencia cualitativa."
+      },
+      {
+        "id": "science_neuroscience_q5",
+        "question": "¿Qué revelaron las investigaciones con fMRI sobre pacientes en estado vegetativo?",
+        "options": [
+          "Que todos los pacientes en estado vegetativo no tienen experiencia consciente",
+          "Que el estado vegetativo siempre resulta de daños en el hipocampo",
+          "Que algunos pacientes considerados inconscientes respondían a comandos verbales mediante activación cerebral",
+          "Que la consciencia depende exclusivamente de la actividad en el córtex prefrontal"
+        ],
+        "answerIndex": 2,
+        "explanation": "Las investigaciones con fMRI mostraron que algunos pacientes considerados inconscientes activaban regiones cerebrales esperadas en respuesta a comandos verbales — sin respuestas motoras externas. La frontera entre consciencia e inconsciencia es más difusa de lo que se pensaba."
+      }
+    ]
+  }
+}
