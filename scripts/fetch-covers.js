@@ -210,11 +210,25 @@ async function main() {
     process.exit(1);
   }
 
+  const LEGACY_PACKS = [
+    "foundations", "foundations_mental_models", "foundations_first_principles",
+    "foundations_decision_making", "foundations_probabilistic",
+    "geopolitics", "geopolitics_nato", "geopolitics_brics",
+    "geopolitics_middle_east", "geopolitics_china_usa",
+    "economics", "economics_inflation", "economics_interest_rates",
+    "economics_trade",
+    "critical_thinking", "critical_thinking_fallacies", "critical_thinking_bias",
+    "critical_thinking_scientific", "critical_thinking_rhetoric",
+    "history", "history_wwii", "history_cold_war",
+    "history_colonialism", "history_industrial_revolution",
+  ];
+
   const args = process.argv.slice(2);
   const packFilter = args.includes("--pack") ? args[args.indexOf("--pack") + 1] : null;
-  const skipExisting = !args.includes("--force");
+  const skipExisting = !args.includes("--force") && !args.includes("--legacy");
+  const legacyOnly = args.includes("--legacy");
 
-  let packIds = packFilter ? [packFilter] : Object.keys(KEYWORDS);
+  let packIds = packFilter ? [packFilter] : legacyOnly ? LEGACY_PACKS : Object.keys(KEYWORDS);
 
   // Skip packs that already have a proper cover (object credit format)
   if (skipExisting && !packFilter) {
