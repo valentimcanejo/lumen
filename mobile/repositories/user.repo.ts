@@ -128,7 +128,7 @@ export async function resetAllUserData(uid: string): Promise<void> {
   const weekId = getCurrentWeekId();
   await Promise.all(
     TIER_IDS.map((tierId) =>
-      deleteDoc(doc(db, `leaderboard/${weekId}/${tierId}/entries/${uid}`)),
+      deleteDoc(doc(db, `leaderboard/${weekId}/${tierId}/${uid}`)),
     ),
   );
 

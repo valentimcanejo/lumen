@@ -41,7 +41,7 @@ export async function upsertLeaderboardEntry(
   tierId: TierId,
 ): Promise<void> {
   const weekId = getCurrentWeekId();
-  const ref = doc(db, `leaderboard/${weekId}/${tierId}/entries/${uid}`);
+  const ref = doc(db, `leaderboard/${weekId}/${tierId}/${uid}`);
   await setDoc(
     ref,
     {
@@ -63,7 +63,7 @@ export async function getTopEntries(
   weekId: string,
   tierId: TierId,
 ): Promise<LeaderboardEntry[]> {
-  const col = collection(db, `leaderboard/${weekId}/${tierId}/entries`);
+  const col = collection(db, `leaderboard/${weekId}/${tierId}`);
   const q = query(col, orderBy("weekXp", "desc"), limit(30));
   const snap = await getDocs(q);
   return snap.docs.map((d) => d.data() as LeaderboardEntry);
@@ -78,7 +78,7 @@ export async function getCurrentUserEntry(
   weekId: string,
   tierId: TierId,
 ): Promise<LeaderboardEntry | null> {
-  const ref = doc(db, `leaderboard/${weekId}/${tierId}/entries/${uid}`);
+  const ref = doc(db, `leaderboard/${weekId}/${tierId}/${uid}`);
   const snap = await getDoc(ref);
   return snap.exists() ? (snap.data() as LeaderboardEntry) : null;
 }
