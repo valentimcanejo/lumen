@@ -1,6 +1,8 @@
 import {
   doc, collection, getDocs, setDoc, deleteDoc, orderBy, query,
 } from "firebase/firestore";
+import { getCurrentWeekId } from "./leaderboard.repo";
+import type { TierId } from "../models/user";
 import { db } from "../firebase/firebaseConfig";
 import type { UserProfile } from "../models/user";
 import type { Lang } from "../models/lang";
@@ -93,4 +95,43 @@ export async function getSavedContentIds(uid: string): Promise<string[]> {
   );
   const snap = await getDocs(q);
   return snap.docs.map((d) => d.id);
+}
+
+// ---------------------------------------------------------------------------
+// Full reset — wipes all Firestore data for the user
+// Call this before clearing AsyncStorage/FileSystem and reloading the app.
+// ---------------------------------------------------------------------------
+
+const TIER_IDS: TierId[] = [
+  "bronze", "prata", "ouro", "platina", "safira",
+  "esmeralda", "ametista", "rubi", "diamante", "lumen",
+];
+
+const USER_SUBCOLS = [
+  "daily_sessions",
+  "card_progress",
+  "completed_content",
+  "saved_content",
+  "stats",
+];
+
+export async function resetAllUserData(uid: string): Promise<void> {
+  // Delete all docs in each subcollection
+  await Promise.all(
+    USER_SUBCOLS.map(async (col) => {
+      const snap = await getDocs(collection(db, "users", uid, col));
+      await Promise.all(snap.docs.map((d) => deleteDoc(d.ref)));
+    }),
+  );
+
+  // Delete leaderboard entries for the current week (all tiers)
+  const weekId = getCurrentWeekId();
+  await Promise.all(
+    TIER_IDS.map((tierId) =>
+      deleteDoc(doc(db, `leaderboard/${weekId}/${tierId}/entries/${uid}`)),
+    ),
+  );
+
+  // Delete the user doc itself
+  await deleteDoc(doc(db, "users", uid));
 }

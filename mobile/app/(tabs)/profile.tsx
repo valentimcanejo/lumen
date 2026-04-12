@@ -5,7 +5,9 @@ import Animated, {
   withTiming,
   withSpring,
 } from "react-native-reanimated";
-import { Platform, ScrollView, ActivityIndicator, Linking, Alert, useWindowDimensions, View, StyleSheet } from "react-native";
+import { Platform, ScrollView, ActivityIndicator, Linking, Alert, useWindowDimensions, View, StyleSheet, DevSettings } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as FileSystem from "expo-file-system/legacy";
 import * as Notifications from "expo-notifications";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -20,7 +22,7 @@ import { VStack } from "@/components/ui/vstack";
 
 import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
-import { setUserLanguage, getCompletedContentIds } from "../../repositories/user.repo";
+import { setUserLanguage, getCompletedContentIds, resetAllUserData } from "../../repositories/user.repo";
 import { getStudyHeatmap } from "../../repositories/progress.repo";
 import { getTracks } from "../../repositories/tracks.repo";
 import { getLessonCountForTrack } from "../../repositories/lessons.repo";
@@ -28,6 +30,7 @@ import { getLatestWeeklyReport } from "../../repositories/weeklyReports.repo";
 import { usePremium } from "../../hooks/usePremium";
 import type { WeeklyReport } from "../../models/weeklyReport";
 import { trackColor, trackBg } from "../../constants/tracks";
+import { SHOW_DEV_RESET } from "../../constants/config";
 import type { Track } from "../../models/track";
 import {
   requestNotificationPermission,
@@ -837,6 +840,33 @@ export default function ProfileScreen() {
     }
   }
 
+  async function handleDevReset() {
+    if (!uid) return;
+    Alert.alert(
+      "Reset completo",
+      "Isso apaga todo o seu progresso, XP, conquistas e sessões. O app voltará para o onboarding. Continuar?",
+      [
+        { text: "Cancelar", style: "cancel" },
+        {
+          text: "Resetar",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              await resetAllUserData(uid);
+              await AsyncStorage.clear();
+              const cacheDir = `${FileSystem.documentDirectory}lumen_cache/`;
+              await FileSystem.deleteAsync(cacheDir, { idempotent: true });
+              DevSettings.reload();
+            } catch (err) {
+              Alert.alert("Erro", "Não foi possível resetar. Tente novamente.");
+              console.error(err);
+            }
+          },
+        },
+      ],
+    );
+  }
+
   const streak = profileData?.streak?.current ?? 0;
   const dailyGoal = profileData?.dailyGoalMin ?? 10;
   const xp = profileData?.xp ?? 0;
@@ -1009,6 +1039,26 @@ export default function ProfileScreen() {
                 )}
               </Box>
             </Box>
+
+            {/* DEV: full reset — remove by setting SHOW_DEV_RESET=false + eas update */}
+            {SHOW_DEV_RESET && (
+              <Pressable
+                onPress={handleDevReset}
+                style={{
+                  marginTop: 8,
+                  paddingVertical: 14,
+                  borderRadius: 14,
+                  borderWidth: 1,
+                  borderColor: "#7F1D1D",
+                  backgroundColor: "#1a0a0a",
+                  alignItems: "center",
+                }}
+              >
+                <Text style={{ color: "#EF4444", fontSize: 13, fontWeight: "600" }}>
+                  Reset completo
+                </Text>
+              </Pressable>
+            )}
 
           </>
         )}
