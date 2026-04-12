@@ -1,5 +1,3 @@
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
-import { db } from "../firebase/firebaseConfig";
 import type { Lang } from "../models/lang";
 
 export type Goal = {
@@ -84,17 +82,60 @@ const BUNDLED_GOALS: Goal[] = [
       es: "Cómo la mente humana piensa, siente y se comporta",
     },
   },
+  {
+    id: "philosophy",
+    order: 6,
+    icon: "brain",
+    color: "#60A5FA",
+    title: { pt: "Filosofia", en: "Philosophy", es: "Filosofía" },
+    description: {
+      pt: "As grandes questões sobre existência, conhecimento e moral",
+      en: "The great questions about existence, knowledge and morality",
+      es: "Las grandes preguntas sobre existencia, conocimiento y moral",
+    },
+  },
+  {
+    id: "politics",
+    order: 7,
+    icon: "globe",
+    color: "#F87171",
+    title: { pt: "Política", en: "Politics", es: "Política" },
+    description: {
+      pt: "Como o poder é organizado e exercido nas sociedades",
+      en: "How power is organized and exercised in societies",
+      es: "Cómo el poder se organiza y ejerce en las sociedades",
+    },
+  },
+  {
+    id: "science",
+    order: 8,
+    icon: "brain",
+    color: "#34D399",
+    title: { pt: "Ciência", en: "Science", es: "Ciencia" },
+    description: {
+      pt: "As descobertas que transformaram nossa compreensão do universo",
+      en: "The discoveries that transformed our understanding of the universe",
+      es: "Los descubrimientos que transformaron nuestra comprensión del universo",
+    },
+  },
+  {
+    id: "business",
+    order: 9,
+    icon: "chart",
+    color: "#FBBF24",
+    title: { pt: "Negócios", en: "Business", es: "Negocios" },
+    description: {
+      pt: "Estratégia, empreendedorismo e como empresas crescem",
+      en: "Strategy, entrepreneurship and how companies grow",
+      es: "Estrategia, emprendimiento y cómo crecen las empresas",
+    },
+  },
 ];
 
 export function getBundledGoals(): Goal[] {
   return BUNDLED_GOALS;
 }
 
-export async function getGoals(): Promise<Goal[]> {
-  const q = query(collection(db, "goals"), orderBy("order"));
-  const snap = await getDocs(q);
-  const remote = snap.docs
-    .map((d) => ({ id: d.id, ...d.data() }) as Goal & { isActive?: boolean })
-    .filter((g) => g.isActive !== false);
-  return remote.length > 0 ? remote : BUNDLED_GOALS;
+export function getGoals(): Goal[] {
+  return BUNDLED_GOALS;
 }
