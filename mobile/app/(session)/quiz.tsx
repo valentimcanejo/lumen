@@ -21,13 +21,15 @@ import { Pressable } from "@/components/ui/pressable";
 import type { PackQuizQuestion } from "../../models/pack";
 import { usePack } from "../../hooks/usePack";
 import { SessionError } from "./_components/SessionError";
+import { getLessonMeta } from "../../repositories/lessons.repo";
+import { trackColor } from "../../constants/tracks";
 import type { Lang } from "../../models/lang";
 
-function TopProgress({ value }: { value: number }) {
+function TopProgress({ value, color }: { value: number; color: string }) {
   const pct = Math.max(0, Math.min(1, value));
   return (
     <Box className="flex-1 h-[6px] rounded-full bg-[#1A2233] overflow-hidden">
-      <Box style={{ width: `${pct * 100}%` }} className="h-full bg-[#F5C77A]" />
+      <Box style={{ width: `${pct * 100}%`, backgroundColor: color }} className="h-full" />
     </Box>
   );
 }
@@ -42,6 +44,7 @@ function OptionRow({
   selected,
   disabled,
   state,
+  color,
   onPress,
 }: {
   label: string;
@@ -49,6 +52,7 @@ function OptionRow({
   selected: boolean;
   disabled: boolean;
   state: OptionState;
+  color: string;
   onPress: () => void;
 }) {
   const scale = useSharedValue(1);
@@ -88,7 +92,7 @@ function OptionRow({
   const border =
     state === "correct" ? "#5ED19A" :
     state === "wrong"   ? "#E26D6D" :
-    selected            ? "#F5C77A" : "#1E2A3E";
+    selected            ? color : "#1E2A3E";
 
   const textColor =
     state === "correct" ? "#DFF7EC" :
@@ -97,12 +101,12 @@ function OptionRow({
   const badgeBg =
     state === "correct" ? "#5ED19A22" :
     state === "wrong"   ? "#E26D6D22" :
-    selected            ? "#F5C77A22" : "#1A2233";
+    selected            ? color + "22" : "#1A2233";
 
   const badgeColor =
     state === "correct" ? "#5ED19A" :
     state === "wrong"   ? "#E26D6D" :
-    selected            ? "#F5C77A" : "#4A5568";
+    selected            ? color : "#4A5568";
 
   return (
     <Animated.View style={[s.optionWrap, { backgroundColor: bg, borderColor: border }, animStyle]}>
@@ -125,7 +129,7 @@ function OptionRow({
           ) : state === "wrong" ? (
             <Ionicons name="close-circle" size={20} color="#E26D6D" />
           ) : selected ? (
-            <Ionicons name="ellipse" size={10} color="#F5C77A" />
+            <Ionicons name="ellipse" size={10} color={color} />
           ) : null}
         </RNView>
       </Pressable>
@@ -190,6 +194,9 @@ export default function QuizScreen() {
     version: Number(version),
     lang: lang ?? "pt",
   });
+
+  const lessonMeta = getLessonMeta(contentId);
+  const color = trackColor(lessonMeta?.trackId ?? contentId);
 
   const quiz = pack?.quiz ?? [];
   const total = quiz.length;
@@ -290,7 +297,7 @@ export default function QuizScreen() {
             <Ionicons name="chevron-back" size={22} color="#AAB0C0" />
           </Pressable>
 
-          <TopProgress value={progressValue} />
+          <TopProgress value={progressValue} color={color} />
 
           <Text className="text-[#AAB0C0] text-[12px] w-[54px] text-right">
             {t("session.quiz.step")}
@@ -351,8 +358,8 @@ export default function QuizScreen() {
             <RNView style={q.questionCard}>
               {/* Question number pill */}
               <RNView style={q.qNumRow}>
-                <RNView style={q.qNumPill}>
-                  <Text style={q.qNumText}>
+                <RNView style={[q.qNumPill, { backgroundColor: color + "15", borderColor: color + "30" }]}>
+                  <Text style={[q.qNumText, { color }]}>
                     {qIndex + 1}/{total}
                   </Text>
                 </RNView>
@@ -383,6 +390,7 @@ export default function QuizScreen() {
                     selected={selectedIndex === idx}
                     disabled={answered}
                     state={state}
+                    color={color}
                     onPress={() => onSelect(idx)}
                   />
                 );
