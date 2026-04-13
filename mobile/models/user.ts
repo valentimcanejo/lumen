@@ -119,7 +119,8 @@ export type CurrentWeeklyMissions = {
 // ---------------------------------------------------------------------------
 // XP / Level — formula-based, supports up to level 100
 // threshold(n) = round(30 * (n-1)^1.7)  — slow early, steep late
-// At ~25 XP/day: level 10 ≈ 40 days, level 50 ≈ 1.8 years, level 100 ≈ 6 years
+// Session XP: 25 base + up to 25 quiz bonus = 50 XP for a perfect session
+// At ~50 XP/day: level 10 ≈ 30 days, level 50 ≈ 330 days, level 100 ≈ 3 years
 // ---------------------------------------------------------------------------
 
 export function levelXpThreshold(level: number): number {

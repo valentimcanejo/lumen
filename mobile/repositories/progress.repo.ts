@@ -405,8 +405,8 @@ export async function grantSessionXP(
   options: { quizDone?: boolean } = {},
 ): Promise<{ xp: number; level: number; gained: number; base: number; quizBonus: number }> {
   const { quizDone = true } = options;
-  const base = 10;
-  const quizBonus = Math.round(quizScore * 10); // 0–10 XP
+  const base = 25;
+  const quizBonus = Math.round(quizScore * 25); // 0–25 XP
   const gained = base + quizBonus;
 
   const user = await getDocData<UserProfile>(`users/${uid}`);

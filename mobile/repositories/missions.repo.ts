@@ -16,10 +16,10 @@ import { getCurrentWeekId } from "./leaderboard.repo";
 type MissionTemplate = { id: MissionId; xpReward: number };
 
 const MISSION_POOL: MissionTemplate[] = [
-  { id: "complete_session", xpReward: 5 },
-  { id: "quiz_score_80",    xpReward: 10 },
-  { id: "quiz_score_100",   xpReward: 15 },
-  { id: "review_cards",     xpReward: 8 },
+  { id: "complete_session", xpReward: 15 },
+  { id: "quiz_score_80",    xpReward: 25 },
+  { id: "quiz_score_100",   xpReward: 40 },
+  { id: "review_cards",     xpReward: 20 },
 ];
 
 /** Deterministic selection of 3 missions from pool, seeded by date string. */
@@ -138,10 +138,10 @@ export async function checkAndCompleteDailyMissions(
 // ---------------------------------------------------------------------------
 
 export const WEEKLY_MISSIONS_DEFAULT: WeeklyMission[] = [
-  { id: "complete_5_sessions", progress: 0, target: 5,   xpReward: 30, completed: false },
-  { id: "earn_300_xp",         progress: 0, target: 300, xpReward: 40, completed: false },
-  { id: "perfect_quiz",        progress: 0, target: 1,   xpReward: 25, completed: false },
-  { id: "study_3_days",        progress: 0, target: 3,   xpReward: 20, completed: false },
+  { id: "complete_5_sessions", progress: 0, target: 5,   xpReward: 75,  completed: false },
+  { id: "earn_300_xp",         progress: 0, target: 750, xpReward: 100, completed: false },
+  { id: "perfect_quiz",        progress: 0, target: 1,   xpReward: 60,  completed: false },
+  { id: "study_3_days",        progress: 0, target: 3,   xpReward: 50,  completed: false },
 ];
 
 /**
