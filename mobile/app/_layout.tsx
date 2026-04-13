@@ -61,10 +61,13 @@ export default function RootLayout() {
     // Safety net: never block the splash indefinitely
     const timeout = setTimeout(() => setLessonsReady(true), 10_000);
 
-    const unsub = listenAuth((u) => {
+    const unsub = listenAuth(async (u) => {
       unsub();
-      // Fire-and-forget: don't await auth before fetching lessons
-      if (u === null) ensureAnonymousAuth().catch(() => {});
+      // Ensure we have a valid auth token before fetching lessons.
+      // Firestore rules require request.auth != null for public collections.
+      if (u === null) {
+        await ensureAnonymousAuth().catch(() => {});
+      }
       initLessons().finally(() => {
         clearTimeout(timeout);
         setLessonsReady(true);

@@ -49,12 +49,16 @@ async function _fetchFromFirestore(): Promise<LessonMeta[]> {
 }
 
 /** Fetch lessons from Firestore and populate the in-memory cache.
- *  Called once in _layout.tsx; subsequent calls are no-ops. */
+ *  Subsequent calls while a fetch is in-flight return the same promise.
+ *  On failure, the promise is reset so the next call will retry. */
 export function initLessons(): Promise<void> {
   if (_initPromise) return _initPromise;
   _initPromise = _fetchFromFirestore()
     .then((lessons) => { _cache = lessons; })
-    .catch(() => { _cache = []; }); // fail-open: empty cache on network error
+    .catch(() => {
+      _cache = [];
+      _initPromise = null; // allow retry on next call (e.g. after auth resolves)
+    });
   return _initPromise;
 }
 
