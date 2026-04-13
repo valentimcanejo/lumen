@@ -383,8 +383,8 @@ export async function updateStreak(uid: string, date: string) {
   } else if (!last || todayN === lastN + 1) {
     current = current + 1;
   } else {
-    if (shields > 0) shields -= 1;
-    else current = 1;
+    // shields disabled — if (shields > 0) shields -= 1; else
+    current = 1;
   }
 
   best = Math.max(best, current);
@@ -523,15 +523,11 @@ export async function finishSession(
 
   if (last === date) { /* already counted today */ }
   else if (!last || todayN === lastN + 1) { streakCurrent += 1; }
-  else if (shields > 0) { shields -= 1; }
+  // shields disabled — else if (shields > 0) { shields -= 1; }
   else { streakCurrent = 1; }
 
-  // Award a shield on every 7-day milestone (max 3)
-  let shieldEarned = false;
-  if (last !== date && streakCurrent > prevStreakCurrent && streakCurrent % 7 === 0) {
-    shields = Math.min(shields + 1, 3);
-    shieldEarned = true;
-  }
+  // shields disabled — no longer awarded on 7-day milestones
+  const shieldEarned = false;
 
   const streakBest = Math.max(user.streak?.best ?? 0, streakCurrent);
 
@@ -683,13 +679,7 @@ export async function finishSession(
 // Comeback mechanic — grants +1 streak shield (max 3) when returning after 3+ days
 // ---------------------------------------------------------------------------
 
-export async function grantComebackShield(uid: string): Promise<void> {
-  const user = await getDocData<UserProfile>(`users/${uid}`);
-  if (!user) return;
-  const current = user.streak?.shields ?? 0;
-  if (current >= 3) return;
-  await updateDoc(doc(db, "users", uid), {
-    "streak.shields": Math.min(current + 1, 3),
-    updatedAt: Date.now(),
-  });
+// shields disabled
+export async function grantComebackShield(_uid: string): Promise<void> {
+  return;
 }
