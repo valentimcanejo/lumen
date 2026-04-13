@@ -40,6 +40,9 @@ service cloud.firestore {
       // Only Cloud Functions (service account) can set premium.isActive = true.
       allow update: if isOwner(uid) && !upgradingPremium();
 
+      // Allow users to delete their own document (e.g. full reset).
+      allow delete: if isOwner(uid);
+
       // All user subcollections (daily_sessions, card_progress,
       // completed_content, saved_content, stats) — owner only.
       match /{subcollection}/{document=**} {
@@ -48,7 +51,7 @@ service cloud.firestore {
     }
 
     // ─── Leaderboard — authenticated read; write only to own entry ───────────
-    match /leaderboard/{weekId}/{tierId}/entries/{uid} {
+    match /leaderboard/{weekId}/{tierId}/{uid} {
       allow read: if request.auth != null;
       allow write: if isOwner(uid);
     }
