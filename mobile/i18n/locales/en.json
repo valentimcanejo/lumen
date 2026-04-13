@@ -261,7 +261,10 @@
       "correct_count": "correct",
       "explanation": "EXPLANATION",
       "finish": "Finish",
-      "skip": "Skip quiz"
+      "skip": "Skip quiz",
+      "exit_title": "Exit quiz?",
+      "exit_message": "Your quiz progress will be lost.",
+      "exit_confirm": "Exit"
     },
     "review": {
       "title": "Review",

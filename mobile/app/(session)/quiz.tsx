@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { ScrollView, StyleSheet, View as RNView } from "react-native";
+import { Alert, ScrollView, StyleSheet, View as RNView } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -285,7 +285,20 @@ export default function QuizScreen() {
     <Box className="flex-1 bg-[#0B0F14]">
       <Box className="px-5" style={{ paddingTop: insets.top + 8 }}>
         <HStack className="items-center" space="md">
-          <Pressable onPress={() => router.back()}>
+          <Pressable onPress={() => {
+            Alert.alert(
+              t("session.quiz.exit_title"),
+              t("session.quiz.exit_message"),
+              [
+                { text: t("common.cancel"), style: "cancel" },
+                {
+                  text: t("session.quiz.exit_confirm"),
+                  style: "destructive",
+                  onPress: () => router.replace("/(tabs)/home"),
+                },
+              ],
+            );
+          }}>
             <Ionicons name="chevron-back" size={22} color="#AAB0C0" />
           </Pressable>
 

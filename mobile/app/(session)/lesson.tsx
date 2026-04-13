@@ -439,7 +439,7 @@ export default function LessonScreen() {
       await soundRef.current.pauseAsync();
       setPlaying(false);
     }
-    router.push({
+    router.replace({
       pathname: "/(session)/quiz",
       params: { contentId, version, lang },
     });

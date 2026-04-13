@@ -261,7 +261,10 @@
       "correct_count": "acertos",
       "explanation": "EXPLICAÇÃO",
       "finish": "Finalizar",
-      "skip": "Pular quiz"
+      "skip": "Pular quiz",
+      "exit_title": "Sair do quiz?",
+      "exit_message": "Seu progresso no quiz será perdido.",
+      "exit_confirm": "Sair"
     },
     "review": {
       "title": "Revisão",

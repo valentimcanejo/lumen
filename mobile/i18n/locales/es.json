@@ -261,7 +261,10 @@
       "correct_count": "correctas",
       "explanation": "EXPLICACIÓN",
       "finish": "Finalizar",
-      "skip": "Saltar quiz"
+      "skip": "Saltar quiz",
+      "exit_title": "¿Salir del quiz?",
+      "exit_message": "Tu progreso en el quiz se perderá.",
+      "exit_confirm": "Salir"
     },
     "review": {
       "title": "Repaso",
