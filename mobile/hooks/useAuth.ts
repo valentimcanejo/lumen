@@ -9,6 +9,7 @@ import {
 } from "../services/auth.service";
 import { auth } from "../firebase/firebaseConfig";
 import { invalidateUserCache } from "./useUser";
+import { getUser } from "../repositories/user.repo";
 import { router } from "expo-router";
 
 export function useAuth() {
@@ -36,12 +37,23 @@ export function useAuth() {
     const u = await signInWithGoogle();
     invalidateUserCache(u.uid);
     setUser(u);
+    // If the user has no onboarded profile (e.g. UID changed due to
+    // credential-already-in-use, or data was reset), send them through onboarding.
+    const profile = await getUser(u.uid).catch(() => null);
+    if (!profile?.hasOnboarded) {
+      router.replace("/(onboarding)/welcome");
+    }
     return u;
   }, []);
 
   const handleSignInWithApple = useCallback(async () => {
     const u = await signInWithApple();
+    invalidateUserCache(u.uid);
     setUser(u);
+    const profile = await getUser(u.uid).catch(() => null);
+    if (!profile?.hasOnboarded) {
+      router.replace("/(onboarding)/welcome");
+    }
     return u;
   }, []);
 
