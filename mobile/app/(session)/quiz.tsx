@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Alert, ScrollView, StyleSheet, View as RNView } from "react-native";
+import { Modal, ScrollView, StyleSheet, View as RNView } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
@@ -197,6 +197,7 @@ export default function QuizScreen() {
   const [qIndex, setQIndex] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [answered, setAnswered] = useState(false);
+  const [showExitModal, setShowExitModal] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
   const correctCountRef = useRef(0);
 
@@ -285,20 +286,7 @@ export default function QuizScreen() {
     <Box className="flex-1 bg-[#0B0F14]">
       <Box className="px-5" style={{ paddingTop: insets.top + 8 }}>
         <HStack className="items-center" space="md">
-          <Pressable onPress={() => {
-            Alert.alert(
-              t("session.quiz.exit_title"),
-              t("session.quiz.exit_message"),
-              [
-                { text: t("common.cancel"), style: "cancel" },
-                {
-                  text: t("session.quiz.exit_confirm"),
-                  style: "destructive",
-                  onPress: () => router.replace("/(tabs)/home"),
-                },
-              ],
-            );
-          }}>
+          <Pressable onPress={() => setShowExitModal(true)}>
             <Ionicons name="chevron-back" size={22} color="#AAB0C0" />
           </Pressable>
 
@@ -477,6 +465,30 @@ export default function QuizScreen() {
           </RNView>
         </>
       )}
+
+      {/* Exit confirmation modal */}
+      <Modal visible={showExitModal} transparent animationType="fade">
+        <RNView style={q.modalOverlay}>
+          <RNView style={q.modalCard}>
+            <Text style={q.modalTitle}>{t("session.quiz.exit_title")}</Text>
+            <Text style={q.modalMessage}>{t("session.quiz.exit_message")}</Text>
+            <RNView style={q.modalButtons}>
+              <Pressable
+                onPress={() => setShowExitModal(false)}
+                style={q.modalBtnCancel}
+              >
+                <Text style={q.modalBtnCancelText}>{t("common.cancel")}</Text>
+              </Pressable>
+              <Pressable
+                onPress={() => router.replace("/(tabs)/home")}
+                style={q.modalBtnExit}
+              >
+                <Text style={q.modalBtnExitText}>{t("session.quiz.exit_confirm")}</Text>
+              </Pressable>
+            </RNView>
+          </RNView>
+        </RNView>
+      </Modal>
     </Box>
   );
 }
@@ -590,5 +602,67 @@ const q = StyleSheet.create({
     color: "#4A5568",
     fontSize: 15,
     fontWeight: "600",
+  },
+
+  // Exit modal
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.6)",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 32,
+  },
+  modalCard: {
+    backgroundColor: "#131C2E",
+    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: "#1E2A3E",
+    padding: 24,
+    width: "100%",
+    gap: 8,
+  },
+  modalTitle: {
+    color: "#E6EAF2",
+    fontSize: 18,
+    fontWeight: "700",
+  },
+  modalMessage: {
+    color: "#7B8193",
+    fontSize: 14,
+    lineHeight: 21,
+  },
+  modalButtons: {
+    flexDirection: "row",
+    gap: 10,
+    marginTop: 8,
+  },
+  modalBtnCancel: {
+    flex: 1,
+    height: 48,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#1E2A3E",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalBtnCancelText: {
+    color: "#AAB0C0",
+    fontSize: 15,
+    fontWeight: "600",
+  },
+  modalBtnExit: {
+    flex: 1,
+    height: 48,
+    borderRadius: 14,
+    backgroundColor: "#E26D6D18",
+    borderWidth: 1,
+    borderColor: "#E26D6D40",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalBtnExitText: {
+    color: "#E26D6D",
+    fontSize: 15,
+    fontWeight: "700",
   },
 });
