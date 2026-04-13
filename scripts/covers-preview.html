@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lumen — Preview de Covers</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0B0F14; color: #e0e0e0; font-family: system-ui, sans-serif; padding: 24px; }
+    h1 { color: #F5C77A; margin-bottom: 8px; font-size: 20px; }
+    .total { color: #888; font-size: 13px; margin-bottom: 16px; }
+
+    /* Rejected panel */
+    #rejected-panel { background: #121826; border: 1px solid #2a2a3a; border-radius: 10px; padding: 16px; margin-bottom: 24px; }
+    #rejected-panel h2 { font-size: 13px; color: #F5C77A; margin-bottom: 10px; }
+    #rejected-empty { color: #555; font-size: 13px; font-style: italic; }
+    #rejected-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .rejected-tag { background: #1f1030; border: 1px solid #7c3aed; border-radius: 6px; padding: 4px 10px; font-size: 12px; display: flex; align-items: center; gap: 6px; }
+    .rejected-tag button { background: none; border: none; color: #a78bfa; cursor: pointer; font-size: 14px; line-height: 1; padding: 0; }
+    #copy-btn { margin-top: 12px; background: #7c3aed; color: #fff; border: none; border-radius: 6px; padding: 6px 14px; font-size: 12px; cursor: pointer; }
+    #copy-btn:hover { background: #6d28d9; }
+
+    /* Grid */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .card { background: #121826; border-radius: 10px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: border-color 0.15s, opacity 0.15s; }
+    .card:hover { border-color: #7c3aed44; }
+    .card.rejected { border-color: #7c3aed; opacity: 0.6; }
+    .card img { width: 100%; height: 160px; object-fit: cover; display: block; }
+    .no-img { width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; color: #555; font-size: 13px; background: #1a1a2e; }
+    .info { padding: 10px 12px 12px; }
+    .id { display: block; font-size: 11px; color: #F5C77A; margin-bottom: 4px; opacity: 0.7; }
+    .title { display: block; font-size: 13px; font-weight: 600; line-height: 1.3; margin-bottom: 4px; }
+    .credit { display: block; font-size: 11px; color: #666; margin-top: 4px; }
+    .badge { float: right; background: #7c3aed; color: #fff; font-size: 10px; border-radius: 4px; padding: 2px 6px; margin-top: 2px; }
+  </style>
+</head>
+<body>
+  <h1>Lumen — Preview de Covers</h1>
+  <p class="total">100 lições · 100 com foto · clique para marcar como ruim</p>
+
+  <div id="rejected-panel">
+    <h2>Marcadas para trocar (<span id="rejected-count">0</span>)</h2>
+    <div id="rejected-empty">Nenhuma selecionada ainda.</div>
+    <div id="rejected-list" style="display:none"></div>
+    <button id="copy-btn" style="display:none" onclick="copyList()">Copiar lista</button>
+  </div>
+
+  <div class="grid">
+      <div class="card" data-id="business">
+        <img src="https://images.unsplash.com/photo-1758873272540-439a105db676?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxlbnRyZXByZW5ldXIlMjB3aGl0ZWJvYXJkJTIwc3RhcnR1cCUyMG9mZmljZXxlbnwwfDB8fHwxNzc1ODU4ODAyfDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">business</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Vitaly Gariev</span>
+        </div>
+      </div>
+      <div class="card" data-id="business_finance">
+        <img src="https://images.unsplash.com/photo-1772588627757-32365608b421?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxzcHJlYWRzaGVldCUyMGxhcHRvcCUyMGNvZmZlZSUyMGRlc2slMjBudW1iZXJzfGVufDB8MHx8fDE3NzU4NTg4MTF8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">business_finance</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Kelly Sikkema</span>
+        </div>
+      </div>
+      <div class="card" data-id="business_future">
+        <img src="https://images.unsplash.com/photo-1769002240965-7cc4b129d81a?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxyZW1vdGUlMjB3b3JrJTIwbGFwdG9wJTIwaG9tZSUyMGRlc2slMjB3aW5kb3d8ZW58MHwwfHx8MTc3NTg2MjkwMnww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">business_future</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Jon Tyson</span>
+        </div>
+      </div>
+      <div class="card" data-id="business_leadership">
+        <img src="https://images.unsplash.com/photo-1758691736580-a41e0cfe9e9f?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHx0ZWFtJTIwbWVldGluZyUyMHByZXNlbnRhdGlvbiUyMG9mZmljZSUyMGJvYXJkcm9vbXxlbnwwfDB8fHwxNzc1ODU4ODE1fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">business_leadership</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Vitaly Gariev</span>
+        </div>
+      </div>
+      <div class="card" data-id="business_marketing">
+        <img src="https://images.unsplash.com/photo-1774279922082-e2b6ea09e225?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxicmFuZCUyMGxvZ28lMjBuZW9uJTIwc2lnbiUyMHN0b3JlJTIwd2luZG93fGVufDB8MHx8fDE3NzU4NTg4MTN8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">business_marketing</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Lei Hwang</span>
+        </div>
+      </div>
+      <div class="card" data-id="business_models">
+        <img src="https://images.unsplash.com/photo-1759868937753-34859b641bc1?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxzdGlja3klMjBub3RlcyUyMHdoaXRlYm9hcmQlMjBidXNpbmVzcyUyMHBsYW5uaW5nfGVufDB8MHx8fDE3NzU4NTg4MDR8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">business_models</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Akinyemi Gbadamosi</span>
+        </div>
+      </div>
+      <div class="card" data-id="business_scale">
+        <img src="https://images.unsplash.com/photo-1769556136989-4c3d360ccdc9?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxhZXJpYWwlMjBjaXR5JTIwbmV0d29yayUyMHJvYWRzJTIwaW5mcmFzdHJ1Y3R1cmV8ZW58MHwwfHx8MTc3NTg2MjkwMHww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">business_scale</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Zoshua Colah</span>
+        </div>
+      </div>
+      <div class="card" data-id="business_startup">
+        <img src="https://images.unsplash.com/photo-1630673470267-417e4d361129?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxzdGFydHVwJTIwdGVhbSUyMG1lZXRpbmclMjB0YWJsZSUyMGxhcHRvcHxlbnwwfDB8fHwxNzc1ODU4ODA5fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">business_startup</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">airfocus</span>
+        </div>
+      </div>
+      <div class="card" data-id="business_strategy">
+        <img src="https://images.unsplash.com/photo-1774128362795-bf798b80fbd2?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxjaGVzcyUyMGJvYXJkJTIwZ2FtZSUyMHN0cmF0ZWd5JTIwcGllY2VzfGVufDB8MHx8fDE3NzU4NTg4MDZ8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">business_strategy</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">smileyhi</span>
+        </div>
+      </div>
+      <div class="card" data-id="business_vc">
+        <img src="https://images.unsplash.com/photo-1739285452618-0b7b3d04f953?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxoYW5kc2hha2UlMjBkZWFsJTIwYnVzaW5lc3MlMjBzdWl0JTIwb2ZmaWNlfGVufDB8MHx8fDE3NzU4NjI4OTh8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">business_vc</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Ninthgrid</span>
+        </div>
+      </div>
+      <div class="card" data-id="foundations">
+        <img src="https://images.unsplash.com/photo-1638366170147-06ca7c0ab6e4?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxvcGVuJTIwbWluZCUyMGlkZWElMjBsaWdodGJ1bGIlMjB0aGlua2luZyUyMGNvbmNlcHR8ZW58MHwwfHx8MTc3NTk0NjQ2OXww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">foundations</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Richard Bell</span>
+        </div>
+      </div>
+      <div class="card" data-id="foundations_complexity">
+        <img src="https://images.unsplash.com/photo-1614199548832-3f4b23ee2d9a?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHx0YW5nbGVkJTIwY29sb3JmdWwlMjB0aHJlYWRzJTIwa25vdHxlbnwwfDB8fHwxNzc1ODUzNjQ2fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">foundations_complexity</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Chris Curry</span>
+        </div>
+      </div>
+      <div class="card" data-id="foundations_decision_making">
+        <img src="https://images.unsplash.com/photo-1766229034549-0103e6d4a75f?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxmb3JrJTIwcm9hZCUyMHBhdGglMjBmb3Jlc3QlMjBjaG9pY2V8ZW58MHwwfHx8MTc3NTg1MzY0NHww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">foundations_decision_making</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Stacy</span>
+        </div>
+      </div>
+      <div class="card" data-id="foundations_first_principles">
+        <img src="https://images.unsplash.com/photo-1771582115253-b77d3c71d500?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxicmljayUyMHdhbGwlMjBmb3VuZGF0aW9uJTIwY29uc3RydWN0aW9ufGVufDB8MHx8fDE3NzU4NjQ1ODN8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">foundations_first_principles</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Truong Tuyet Ly</span>
+        </div>
+      </div>
+      <div class="card" data-id="foundations_inversion">
+        <img src="https://images.unsplash.com/photo-1637778735517-2300ecdd4d1b?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHx1cHNpZGUlMjBkb3duJTIwY2l0eSUyMHJlZmxlY3Rpb24lMjB3YXRlcnxlbnwwfDB8fHwxNzc1ODUzNjQ4fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">foundations_inversion</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Denis N.</span>
+        </div>
+      </div>
+      <div class="card" data-id="foundations_learning">
+        <img src="https://images.unsplash.com/photo-1523380262778-076eb862d38f?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxub3RlYm9vayUyMHBlbiUyMGRlc2slMjBzdHVkeWluZyUyMGxhbXB8ZW58MHwwfHx8MTc3NTg1MzY1Mnww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">foundations_learning</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Beth Jnr</span>
+        </div>
+      </div>
+      <div class="card" data-id="foundations_mental_models">
+        <img src="https://images.unsplash.com/photo-1756130085073-2c96cbac079d?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxjaGVzcyUyMHBpZWNlcyUyMHdvb2RlbiUyMHRhYmxlJTIwc3RyYXRlZ3l8ZW58MHwwfHx8MTc3NTg2NDU4MXww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">foundations_mental_models</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Alexandr Popadin</span>
+        </div>
+      </div>
+      <div class="card" data-id="foundations_opportunity_cost">
+        <img src="https://images.unsplash.com/photo-1664797523026-f6e277258f0c?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHx0d28lMjBkb29ycyUyMGhhbGx3YXklMjBjaG9pY2UlMjBhcmNoaXRlY3R1cmV8ZW58MHwwfHx8MTc3NTg1MzY1MHww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">foundations_opportunity_cost</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Peter Herrmann</span>
+        </div>
+      </div>
+      <div class="card" data-id="foundations_probabilistic">
+        <img src="https://images.unsplash.com/photo-1570303363992-7f95ee20ebdb?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxkaWNlJTIwcm9sbGluZyUyMHdvb2RlbiUyMHRhYmxlfGVufDB8MHx8fDE3NzU4NjQ1ODd8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">foundations_probabilistic</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Riho Kroll</span>
+        </div>
+      </div>
+      <div class="card" data-id="foundations_second_order">
+        <img src="https://images.unsplash.com/photo-1659198467247-2244740e1e19?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxkb21pbm8lMjBlZmZlY3QlMjBmYWxsaW5nJTIwY2hhaW4lMjByZWFjdGlvbnxlbnwwfDB8fHwxNzc1ODUzNjU0fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">foundations_second_order</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Tanel A. Lind</span>
+        </div>
+      </div>
+      <div class="card" data-id="geopolitics">
+        <img src="https://images.unsplash.com/photo-1742415105376-43d3a5fd03fc?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHx3b3JsZCUyMG1hcCUyMHBvbGl0aWNhbCUyMGJvcmRlcnMlMjBhZXJpYWx8ZW58MHwwfHx8MTc3NTk0NjQ4NHww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">geopolitics</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Community Archives of Belleville and Hastings County</span>
+        </div>
+      </div>
+      <div class="card" data-id="geopolitics_africa">
+        <img src="https://images.unsplash.com/photo-1756475471671-48813cf5ea5b?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxhZnJpY2ElMjBzYXZhbm5hJTIwbGFuZHNjYXBlJTIwc3VucmlzZXxlbnwwfDB8fHwxNzc1ODUzNjYxfDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">geopolitics_africa</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Catherine Merlin</span>
+        </div>
+      </div>
+      <div class="card" data-id="geopolitics_brics">
+        <img src="https://images.unsplash.com/photo-1649087897712-e33f116322da?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxjaGluYSUyMGFsbGllc3xlbnwwfDB8fHwxNzc1OTQ4MDczfDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">geopolitics_brics</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Road Ahead</span>
+        </div>
+      </div>
+      <div class="card" data-id="geopolitics_china_usa">
+        <img src="https://images.unsplash.com/photo-1495361174397-84e5b61bb77f?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxncmVhdCUyMHdhbGwlMjBjaGluYSUyMGxhbmRzY2FwZSUyMG1vdW50YWlufGVufDB8MHx8fDE3NzU5NDY1MDJ8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">geopolitics_china_usa</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Diego Jimenez</span>
+        </div>
+      </div>
+      <div class="card" data-id="geopolitics_climate">
+        <img src="https://images.unsplash.com/photo-1768767590032-c0a97cf778b2?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxtZWx0aW5nJTIwZ2xhY2llciUyMGljZSUyMGFyY3RpY3xlbnwwfDB8fHwxNzc1ODUzNjYzfDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">geopolitics_climate</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Jan Behnisch</span>
+        </div>
+      </div>
+      <div class="card" data-id="geopolitics_europe">
+        <img src="https://images.unsplash.com/photo-1597303214314-5822a80b5701?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxldXJvcGVhbiUyMHBhcmxpYW1lbnQlMjBzdHJhc2JvdXJnJTIwYXJjaGl0ZWN0dXJlfGVufDB8MHx8fDE3NzU4NTM2NTd8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">geopolitics_europe</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Jonathan Marchal</span>
+        </div>
+      </div>
+      <div class="card" data-id="geopolitics_middle_east">
+        <img src="https://images.unsplash.com/photo-1704313789392-28bd58a3057f?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxqZXJ1c2FsZW0lMjBvbGQlMjBjaXR5JTIwZG9tZSUyMHJvY2slMjBhZXJpYWx8ZW58MHwwfHx8MTc3NTk0NjUxMHww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">geopolitics_middle_east</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Virginia Portillo</span>
+        </div>
+      </div>
+      <div class="card" data-id="geopolitics_nato">
+        <img src="https://images.unsplash.com/photo-1589262804704-c5aa9e6def89?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxldXJvcGUlMjBtYXB8ZW58MHwwfHx8MTc3NTk0ODAyN3ww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">geopolitics_nato</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Christian Lue</span>
+        </div>
+      </div>
+      <div class="card" data-id="geopolitics_russia">
+        <img src="https://images.unsplash.com/photo-1700751701980-ee15fea4047b?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxrcmVtbGluJTIwbW9zY293JTIwcmVkJTIwc3F1YXJlJTIwd2ludGVyfGVufDB8MHx8fDE3NzU4NTM2NTl8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">geopolitics_russia</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Pauline Iakovleva</span>
+        </div>
+      </div>
+      <div class="card" data-id="geopolitics_tech_power">
+        <img src="https://images.unsplash.com/photo-1762004783262-b45b75716375?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxzYXRlbGxpdGUlMjBkaXNoJTIwYW50ZW5uYSUyMHRlY2hub2xvZ3l8ZW58MHwwfHx8MTc3NTg1NzIxN3ww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">geopolitics_tech_power</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Andrei Andreew</span>
+        </div>
+      </div>
+      <div class="card" data-id="economics">
+        <img src="https://images.unsplash.com/photo-1774742776286-76b540d6e7ab?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxtYXJrZXQlMjBzdGFsbCUyMHZlbmRvcnMlMjBnb29kcyUyMHRyYWRlfGVufDB8MHx8fDE3NzU4NjQ2MDB8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">economics</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Abigail Stone</span>
+        </div>
+      </div>
+      <div class="card" data-id="economics_behavioral">
+        <img src="https://images.unsplash.com/photo-1764083079459-ddb9a615d50e?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxwZW9wbGUlMjBjaG9pY2UlMjBzdXBlcm1hcmtldCUyMGFpc2xlJTIwc2hvcHBpbmd8ZW58MHwwfHx8MTc3NTg1MzY3MXww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">economics_behavioral</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Spencer Plouzek</span>
+        </div>
+      </div>
+      <div class="card" data-id="economics_fiscal_policy">
+        <img src="https://images.unsplash.com/photo-1620202304821-1f4f58199274?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxnb3Zlcm5tZW50JTIwYnVkZ2V0JTIwdHJlYXN1cnklMjBjb2lucyUyMGJhbmtub3Rlc3xlbnwwfDB8fHwxNzc1OTQ2NTM0fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">economics_fiscal_policy</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Lukasz Radziejewski</span>
+        </div>
+      </div>
+      <div class="card" data-id="economics_globalization">
+        <img src="https://images.unsplash.com/photo-1604938386170-d95a264576fa?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxhaXJwb3J0JTIwdGVybWluYWwlMjBpbnRlcm5hdGlvbmFsJTIwdHJhdmVsJTIwY3Jvd2R8ZW58MHwwfHx8MTc3NTg1MzY3M3ww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">economics_globalization</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Gary Meulemans</span>
+        </div>
+      </div>
+      <div class="card" data-id="economics_inequality">
+        <img src="https://images.unsplash.com/photo-1622196464576-446a4a65b63c?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxwb3ZlcnR5JTIwc3RyZWV0JTIwaG9tZWxlc3MlMjB1cmJhbnxlbnwwfDB8fHwxNzc1ODU3MjE5fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">economics_inequality</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Jon Tyson</span>
+        </div>
+      </div>
+      <div class="card" data-id="economics_inflation">
+        <img src="https://images.unsplash.com/photo-1710383934725-0895f9f20298?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxzdXBlcm1hcmtldCUyMHNoZWxmJTIwcHJpY2UlMjB0YWdzJTIwZ3JvY2VyeXxlbnwwfDB8fHwxNzc1ODY0NjAyfDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">economics_inflation</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Bernd 📷 Dittrich</span>
+        </div>
+      </div>
+      <div class="card" data-id="economics_interest_rates">
+        <img src="https://images.unsplash.com/photo-1561931447-5854ce1d41d9?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxiYW5rJTIwYnVpbGRpbmclMjBmYWNhZGUlMjBhcmNoaXRlY3R1cmUlMjBtYXJibGV8ZW58MHwwfHx8MTc3NTg2NDYwNHww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">economics_interest_rates</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Massimo Virgilio</span>
+        </div>
+      </div>
+      <div class="card" data-id="economics_markets">
+        <img src="https://images.unsplash.com/photo-1605512929726-8c542ede9c6e?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMHRyYWRpbmclMjBmbG9vciUyMGJyb2tlcnN8ZW58MHwwfHx8MTc3NTk0NjU0NXww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">economics_markets</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Infrarate.com</span>
+        </div>
+      </div>
+      <div class="card" data-id="economics_money">
+        <img src="https://images.unsplash.com/photo-1634108927657-344acccdc258?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxjb2lucyUyMHBhcGVyJTIwbW9uZXklMjBjdXJyZW5jeSUyMHNjYXR0ZXJlZHxlbnwwfDB8fHwxNzc1ODUzNjc1fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">economics_money</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">rc.xyz NFT gallery</span>
+        </div>
+      </div>
+      <div class="card" data-id="economics_trade">
+        <img src="https://images.unsplash.com/photo-1724364552281-dbed323c4633?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxjYXJnbyUyMHNoaXAlMjBjb250YWluZXIlMjBwb3J0JTIwYWVyaWFsfGVufDB8MHx8fDE3NzU4NjQ2MDZ8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">economics_trade</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Logan Voss</span>
+        </div>
+      </div>
+      <div class="card" data-id="critical_thinking">
+        <img src="https://images.unsplash.com/photo-1650700595108-81d737e78868?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxtYWduaWZ5aW5nJTIwZ2xhc3MlMjBuZXdzcGFwZXIlMjBpbnZlc3RpZ2F0aW9ufGVufDB8MHx8fDE3NzU4NjQ2MDh8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">critical_thinking</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Kanishk Agarwal</span>
+        </div>
+      </div>
+      <div class="card" data-id="critical_thinking_argumentation">
+        <img src="https://images.unsplash.com/photo-1773777166215-ffb246c73e91?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxwZW9wbGUlMjB0YWxraW5nJTIwY29mZmVlJTIwZGViYXRlJTIwdGFibGV8ZW58MHwwfHx8MTc3NTg1MzY4N3ww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">critical_thinking_argumentation</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Aphrodites daughter</span>
+        </div>
+      </div>
+      <div class="card" data-id="critical_thinking_bias">
+        <img src="https://images.unsplash.com/photo-1771015138394-6991efdeb557?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxvcHRpY2FsJTIwaWxsdXNpb24lMjBwZXJzcGVjdGl2ZSUyMHRyaWNrJTIwZXllfGVufDB8MHx8fDE3NzU4NjQ2MTJ8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">critical_thinking_bias</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Logan Voss</span>
+        </div>
+      </div>
+      <div class="card" data-id="critical_thinking_data">
+        <img src="https://images.unsplash.com/photo-1686061593213-98dad7c599b9?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxkYXNoYm9hcmQlMjBzY3JlZW4lMjBncmFwaHMlMjBkYXRhJTIwYW5hbHl0aWNzfGVufDB8MHx8fDE3NzU4NTM2ODF8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">critical_thinking_data</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">1981 Digital</span>
+        </div>
+      </div>
+      <div class="card" data-id="critical_thinking_epistemology">
+        <img src="https://images.unsplash.com/photo-1758730010177-1711515b7552?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxhbmNpZW50JTIwbGlicmFyeSUyMGJvb2tzJTIwc2hlbHZlcyUyMGtub3dsZWRnZXxlbnwwfDB8fHwxNzc1ODUzNjc5fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">critical_thinking_epistemology</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Jametlene Reskp</span>
+        </div>
+      </div>
+      <div class="card" data-id="critical_thinking_fallacies">
+        <img src="https://images.unsplash.com/photo-1552345387-67b2f85f25c6?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHx0d28lMjBwZW9wbGUlMjBkZWJhdGUlMjBhcmd1bWVudCUyMGRpc2N1c3Npb258ZW58MHwwfHx8MTc3NTg2NDYxMHww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">critical_thinking_fallacies</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Sebastian Herrmann</span>
+        </div>
+      </div>
+      <div class="card" data-id="critical_thinking_motivated">
+        <img src="https://images.unsplash.com/photo-1765059772965-9710203a7d31?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxwZXJzb24lMjBtaXJyb3IlMjBzZWxmJTIwcmVmbGVjdGlvbnxlbnwwfDB8fHwxNzc1ODUzNjg1fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">critical_thinking_motivated</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Taras Bohdan</span>
+        </div>
+      </div>
+      <div class="card" data-id="critical_thinking_rhetoric">
+        <img src="https://images.unsplash.com/photo-1773828977866-baed2942b424?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxtaWNyb3Bob25lJTIwc3BlYWtlciUyMHN0YWdlJTIwYXVkaWVuY2V8ZW58MHwwfHx8MTc3NTg2NDYxN3ww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">critical_thinking_rhetoric</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Marwen Larafa</span>
+        </div>
+      </div>
+      <div class="card" data-id="critical_thinking_scientific">
+        <img src="https://images.unsplash.com/photo-1769454777452-75071eefbda8?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxzY2llbnRpc3QlMjBtaWNyb3Njb3BlJTIwbGFib3JhdG9yeSUyMHdoaXRlJTIwY29hdHxlbnwwfDB8fHwxNzc1ODY0NjE0fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">critical_thinking_scientific</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Navy Medicine</span>
+        </div>
+      </div>
+      <div class="card" data-id="critical_thinking_systems">
+        <img src="https://images.unsplash.com/photo-1694674818352-f6061a0561a1?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxpbnRlcmNvbm5lY3RlZCUyMHBpcGVzJTIwbmV0d29yayUyMGluZHVzdHJpYWx8ZW58MHwwfHx8MTc3NTg1MzY4M3ww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">critical_thinking_systems</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Jens Freudenau</span>
+        </div>
+      </div>
+      <div class="card" data-id="history">
+        <img src="https://images.unsplash.com/photo-1767722613369-a550da3fdffc?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxhbmNpZW50JTIwcm9tYW4lMjBjb2xvc3NldW0lMjBydWlucyUyMHJvbWV8ZW58MHwwfHx8MTc3NTg2NDYxOXww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">history</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">José Luis Lobera</span>
+        </div>
+      </div>
+      <div class="card" data-id="history_cold_war">
+        <img src="https://images.unsplash.com/photo-1772132823993-e0cb98edf929?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxiZXJsaW4lMjB3YWxsJTIwZ3JhZmZpdGklMjBjaGVja3BvaW50fGVufDB8MHx8fDE3NzU4NjYwNzB8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">history_cold_war</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Daria K</span>
+        </div>
+      </div>
+      <div class="card" data-id="history_colonialism">
+        <img src="https://images.unsplash.com/photo-1771913044023-26a0f8949f0e?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxvbGQlMjBzYWlsaW5nJTIwc2hpcCUyMG9jZWFuJTIwZXhwbG9yYXRpb258ZW58MHwwfHx8MTc3NTg2NjA3M3ww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">history_colonialism</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Raúl Mermans García</span>
+        </div>
+      </div>
+      <div class="card" data-id="history_empires">
+        <img src="https://images.unsplash.com/photo-1726419836234-91bf88437714?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxyb21hbiUyMGNvbG9zc2V1bSUyMGFuY2llbnQlMjBlbXBpcmUlMjBhcmNoaXRlY3R1cmV8ZW58MHwwfHx8MTc3NTg1MzY5NHww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">history_empires</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Daniel Azevedo</span>
+        </div>
+      </div>
+      <div class="card" data-id="history_french_revolution">
+        <img src="https://images.unsplash.com/photo-1762766769172-3065e978c28e?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxmcmVuY2glMjByZXZvbHV0aW9uJTIwZ3VpbGxvdGluZSUyMHN0b3JtaW5nJTIwYmFzdGlsbGUlMjBwYWludGluZ3xlbnwwfDB8fHwxNzc1OTQ2NTUzfDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">history_french_revolution</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Nathan Cima</span>
+        </div>
+      </div>
+      <div class="card" data-id="history_industrial_revolution">
+        <img src="https://images.unsplash.com/photo-1548766053-7b1b87209611?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxzdGVhbSUyMGVuZ2luZSUyMGxvY29tb3RpdmUlMjBmYWN0b3J5JTIwc21va2V8ZW58MHwwfHx8MTc3NTg2NjA3NXww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">history_industrial_revolution</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Douwe Brouwer</span>
+        </div>
+      </div>
+      <div class="card" data-id="history_latin_america">
+        <img src="https://images.unsplash.com/photo-1561349935-e37adf5f5d70?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxtYWNodSUyMHBpY2NodSUyMGluY2ElMjBydWlucyUyMHBlcnUlMjBtb3VudGFpbnN8ZW58MHwwfHx8MTc3NTg1MzY5Nnww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">history_latin_america</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Matt Hughes</span>
+        </div>
+      </div>
+      <div class="card" data-id="history_renaissance">
+        <img src="https://images.unsplash.com/photo-1689024926635-8287a3734986?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxmbG9yZW5jZSUyMGNhdGhlZHJhbCUyMGR1b21vJTIwdHVzY2FueSUyMGl0YWx5fGVufDB8MHx8fDE3NzU4NTM2ODl8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">history_renaissance</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Matt Heno</span>
+        </div>
+      </div>
+      <div class="card" data-id="history_wwi">
+        <img src="https://images.unsplash.com/photo-1698351913454-58b2577e7074?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxzb2xkaWVycyUyMHRyZW5jaCUyMHdvcmxkJTIwd2FyJTIwb25lfGVufDB8MHx8fDE3NzU4NTcyMjF8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">history_wwi</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Library of Congress</span>
+        </div>
+      </div>
+      <div class="card" data-id="history_wwii">
+        <img src="https://images.unsplash.com/photo-1758204054606-fb5d59ee5631?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHx3b3JsZCUyMHdhciUyMHR3byUyMG5vcm1hbmR5JTIwYmVhY2glMjBsYW5kaW5nfGVufDB8MHx8fDE3NzU4NjQ2MjF8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">history_wwii</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Navy Medicine</span>
+        </div>
+      </div>
+      <div class="card" data-id="psychology">
+        <img src="https://images.unsplash.com/photo-1764105647126-c54dce2cab31?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxodW1hbiUyMGZhY2UlMjBwb3J0cmFpdCUyMGNsb3NlJTIwdXAlMjBlbW90aW9ufGVufDB8MHx8fDE3NzU4NTcyMjN8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">psychology</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Mehrpouya H</span>
+        </div>
+      </div>
+      <div class="card" data-id="psychology_anxiety">
+        <img src="https://images.unsplash.com/photo-1738528397889-42609e1ea6f1?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxwZXJzb24lMjBhbG9uZSUyMGNyb3dkZWQlMjBzdWJ3YXklMjB1bmRlcmdyb3VuZHxlbnwwfDB8fHwxNzc1ODU3MjQwfDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">psychology_anxiety</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Myznik Egor</span>
+        </div>
+      </div>
+      <div class="card" data-id="psychology_emotions">
+        <img src="https://images.unsplash.com/photo-1605446282484-56eb090b5fa3?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGNyeWluZyUyMHRlYXJzJTIwcmFpbiUyMGVtb3Rpb258ZW58MHwwfHx8MTc3NTg1NzIyNnww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">psychology_emotions</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">ALEXANDRE DINAUT</span>
+        </div>
+      </div>
+      <div class="card" data-id="psychology_habits">
+        <img src="https://images.unsplash.com/photo-1566392665193-f7b00b714cf0?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxtb3JuaW5nJTIwY29mZmVlJTIwcm91dGluZSUyMGFsYXJtJTIwY2xvY2t8ZW58MHwwfHx8MTc3NTg1NzIyOHww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">psychology_habits</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Sixteen Miles Out</span>
+        </div>
+      </div>
+      <div class="card" data-id="psychology_identity">
+        <img src="https://images.unsplash.com/photo-1760995421885-8618a5fe8110?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxwZXJzb24lMjBzaGFkb3clMjB3YWxsJTIwc2VsZiUyMHNpbGhvdWV0dGV8ZW58MHwwfHx8MTc3NTg1NzI0M3ww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">psychology_identity</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Valentin</span>
+        </div>
+      </div>
+      <div class="card" data-id="psychology_memory">
+        <img src="https://images.unsplash.com/photo-1761682751228-783c48e7cd30?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxvbGQlMjBwaG90b2dyYXBocyUyMGFsYnVtJTIwbm9zdGFsZ2lhJTIwbWVtb3JpZXN8ZW58MHwwfHx8MTc3NTg1NzIzNnww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">psychology_memory</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Jason Leung</span>
+        </div>
+      </div>
+      <div class="card" data-id="psychology_motivation">
+        <img src="https://images.unsplash.com/photo-1612032882906-2fa6f7b5f30f?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxydW5uZXIlMjBhdGhsZXRlJTIwc3RhcnRpbmclMjBsaW5lJTIwdHJhY2t8ZW58MHwwfHx8MTc3NTg1NzIzNHww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">psychology_motivation</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Philip Strong</span>
+        </div>
+      </div>
+      <div class="card" data-id="psychology_relationships">
+        <img src="https://images.unsplash.com/photo-1574740981348-fe6e45e9a294?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHx0d28lMjBwZW9wbGUlMjBoYW5kcyUyMGhvbGRpbmclMjB0b2dldGhlcnxlbnwwfDB8fHwxNzc1ODU3MjM4fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">psychology_relationships</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Priscilla Du Preez 🇨🇦</span>
+        </div>
+      </div>
+      <div class="card" data-id="psychology_resilience">
+        <img src="https://images.unsplash.com/photo-1604766038176-736d6d72d652?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxwZXJzb24lMjBjbGltYmluZyUyMG1vdW50YWluJTIwc3VtbWl0JTIwZWZmb3J0fGVufDB8MHx8fDE3NzU4NTcyMzJ8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">psychology_resilience</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Luke Helgeson</span>
+        </div>
+      </div>
+      <div class="card" data-id="psychology_social">
+        <img src="https://images.unsplash.com/photo-1758613171187-9a41d0fc93ab?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxncm91cCUyMHBlb3BsZSUyMGxhdWdoaW5nJTIwdG9nZXRoZXIlMjBvdXRkb29yc3xlbnwwfDB8fHwxNzc1ODU3MjMwfDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">psychology_social</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Vitaly Gariev</span>
+        </div>
+      </div>
+      <div class="card" data-id="philosophy">
+        <img src="https://images.unsplash.com/photo-1714961050135-8661d8a61e8b?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxhbmNpZW50JTIwZ3JlZWslMjB0ZW1wbGUlMjBwYXJ0aGVub24lMjBhdGhlbnN8ZW58MHwwfHx8MTc3NTg1NzI0NXww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">philosophy</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Chriso C</span>
+        </div>
+      </div>
+      <div class="card" data-id="philosophy_epistemology">
+        <img src="https://images.unsplash.com/photo-1763510385683-6374fac8df54?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxjYW5kbGUlMjBmbGFtZSUyMGRhcmtuZXNzJTIwYm9va3MlMjBuaWdodHxlbnwwfDB8fHwxNzc1ODU3MjQ5fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">philosophy_epistemology</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Mustafi Numann</span>
+        </div>
+      </div>
+      <div class="card" data-id="philosophy_ethics">
+        <img src="https://images.unsplash.com/photo-1768839719921-6a554fb3e847?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxzY2FsZXMlMjBqdXN0aWNlJTIwYmFsYW5jZSUyMGJyb256ZXxlbnwwfDB8fHwxNzc1ODU3MjQ3fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">philosophy_ethics</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Sasun Bughdaryan</span>
+        </div>
+      </div>
+      <div class="card" data-id="philosophy_existentialism">
+        <img src="https://images.unsplash.com/photo-1707901625933-89709047cb64?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxwZXJzb24lMjBhbG9uZSUyMGZvZyUyMHJvYWQlMjB3YWxraW5nfGVufDB8MHx8fDE3NzU4NTcyNTN8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">philosophy_existentialism</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Zoshua Colah</span>
+        </div>
+      </div>
+      <div class="card" data-id="philosophy_free_will">
+        <img src="https://images.unsplash.com/photo-1755811911127-ca3a91326403?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxvcGVuJTIwY2FnZSUyMGJpcmQlMjBmbHlpbmclMjBmcmVlZG9tJTIwc2t5fGVufDB8MHx8fDE3NzU4NTcyNjF8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">philosophy_free_will</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Artur Aldyrkhanov</span>
+        </div>
+      </div>
+      <div class="card" data-id="philosophy_logic">
+        <img src="https://images.unsplash.com/photo-1758685734312-5134968399a8?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxibGFja2JvYXJkJTIwZXF1YXRpb25zJTIwbWF0aGVtYXRpY3MlMjBjaGFsa3xlbnwwfDB8fHwxNzc1ODU3MjU1fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">philosophy_logic</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Vitaly Gariev</span>
+        </div>
+      </div>
+      <div class="card" data-id="philosophy_meaning">
+        <img src="https://images.unsplash.com/photo-1601241294051-710d4106f738?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxwZXJzb24lMjBzaWxob3VldHRlJTIwc3RhcnJ5JTIwc2t5JTIwbWlsa3klMjB3YXl8ZW58MHwwfHx8MTc3NTg1NzI2M3ww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">philosophy_meaning</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Stephan Widua</span>
+        </div>
+      </div>
+      <div class="card" data-id="philosophy_mind">
+        <img src="https://images.unsplash.com/photo-1489376646075-cd00ac377106?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxjb25zY2lvdXNuZXNzJTIwYWJzdHJhY3QlMjBsaWdodCUyMHR1bm5lbCUyMHN1cnJlYWx8ZW58MHwwfHx8MTc3NTg1ODc2Mnww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">philosophy_mind</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Esaias Tan</span>
+        </div>
+      </div>
+      <div class="card" data-id="philosophy_political_phil">
+        <img src="https://images.unsplash.com/photo-1755756383877-ae81a014986b?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxwYXJsaWFtZW50JTIwZW1wdHklMjBjaGFtYmVyJTIwc2VhdHMlMjBhcmNoaXRlY3R1cmV8ZW58MHwwfHx8MTc3NTg1NzI1N3ww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">philosophy_political_phil</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Hongwei FAN</span>
+        </div>
+      </div>
+      <div class="card" data-id="philosophy_stoicism">
+        <img src="https://images.unsplash.com/photo-1758485551979-361e441b4233?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxtYXJibGUlMjBidXN0JTIwYW5jaWVudCUyMHJvbWUlMjBzY3VscHR1cmV8ZW58MHwwfHx8MTc3NTg1NzI1MXww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">philosophy_stoicism</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Alina Bondar</span>
+        </div>
+      </div>
+      <div class="card" data-id="politics">
+        <img src="https://images.unsplash.com/photo-1568454158426-eaade5ec6a82?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxjYXBpdG9sJTIwYnVpbGRpbmclMjB3YXNoaW5ndG9uJTIwZGMlMjBkb21lfGVufDB8MHx8fDE3NzU4NTcyNjV8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">politics</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Sherry Xu</span>
+        </div>
+      </div>
+      <div class="card" data-id="politics_authoritarianism">
+        <img src="https://images.unsplash.com/photo-1761236301545-e0d533b3669b?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxiYXJiZWQlMjB3aXJlJTIwZmVuY2UlMjBib3JkZXIlMjB3YWxsJTIwZ3VhcmQlMjB0b3dlcnxlbnwwfDB8fHwxNzc1OTQ2NTYwfDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">politics_authoritarianism</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Stefan Szankowski</span>
+        </div>
+      </div>
+      <div class="card" data-id="politics_civil_rights">
+        <img src="https://images.unsplash.com/photo-1770904135997-6a7159dcf799?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxjaXZpbCUyMHJpZ2h0cyUyMG1hcmNoJTIwcHJvdGVzdCUyMGNyb3dkfGVufDB8MHx8fDE3NzU4NTg3Nzd8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">politics_civil_rights</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Chip Vincent</span>
+        </div>
+      </div>
+      <div class="card" data-id="politics_constitution">
+        <img src="https://images.unsplash.com/photo-1587716283570-f71969a1f854?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxvbGQlMjBkb2N1bWVudCUyMHBhcmNobWVudCUyMHNlYWwlMjBsYXd8ZW58MHwwfHx8MTc3NTg1NzI2OXww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">politics_constitution</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">David Nitschke</span>
+        </div>
+      </div>
+      <div class="card" data-id="politics_democracy">
+        <img src="https://images.unsplash.com/photo-1720128401402-81c9dc339870?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxlbGVjdGlvbiUyMGRheSUyMHBvbGxpbmclMjBzdGF0aW9uJTIwcXVldWUlMjBwZW9wbGV8ZW58MHwwfHx8MTc3NTg1ODc2NHww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">politics_democracy</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Phil Hearing</span>
+        </div>
+      </div>
+      <div class="card" data-id="politics_future">
+        <img src="https://images.unsplash.com/photo-1550458564-1c62225e810f?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxzbWFydCUyMGNpdHklMjBmdXR1cmlzdGljJTIwYXJjaGl0ZWN0dXJlJTIwbGlnaHRzfGVufDB8MHx8fDE3NzU4NTg3Nzl8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">politics_future</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Yumi Kim</span>
+        </div>
+      </div>
+      <div class="card" data-id="politics_media">
+        <img src="https://images.unsplash.com/photo-1575507479993-7bb702d5e966?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxuZXdzcm9vbSUyMGpvdXJuYWxpc3RzJTIwdGVsZXZpc2lvbiUyMGNhbWVyYXN8ZW58MHwwfHx8MTc3NTg1ODc3M3ww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">politics_media</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Matt C</span>
+        </div>
+      </div>
+      <div class="card" data-id="politics_parties">
+        <img src="https://images.unsplash.com/photo-1773946859972-880e6558b657?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxwb2xpdGljYWwlMjByYWxseSUyMGNyb3dkJTIwZmxhZ3MlMjBvdXRkb29yfGVufDB8MHx8fDE3NzU4NTg3Njh8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">politics_parties</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Bruno BD</span>
+        </div>
+      </div>
+      <div class="card" data-id="politics_populism">
+        <img src="https://images.unsplash.com/photo-1771959453981-b5417268a034?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxtYXNzaXZlJTIwY3Jvd2QlMjBzdGFkaXVtJTIwcmFsbHklMjBuaWdodHxlbnwwfDB8fHwxNzc1ODU4NzcxfDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">politics_populism</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Pravin Shinde</span>
+        </div>
+      </div>
+      <div class="card" data-id="politics_systems">
+        <img src="https://images.unsplash.com/photo-1761301643520-49c1ee626e72?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHx3b3JsZCUyMGZsYWdzJTIwdW5pdGVkJTIwbmF0aW9ucyUyMGFzc2VtYmx5fGVufDB8MHx8fDE3NzU4NTg3NjZ8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">politics_systems</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Maxim Klimashin</span>
+        </div>
+      </div>
+      <div class="card" data-id="science">
+        <img src="https://images.unsplash.com/photo-1582560469781-1965b9af903d?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxzY2llbnRpc3QlMjBsYWJvcmF0b3J5JTIwcGlwZXR0ZSUyMHJlc2VhcmNofGVufDB8MHx8fDE3NzU4NTg3ODF8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">science</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">CDC</span>
+        </div>
+      </div>
+      <div class="card" data-id="science_ai">
+        <img src="https://images.unsplash.com/photo-1768323102303-62da2858bd5b?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxyb2JvdCUyMGh1bWFub2lkJTIwbWFjaGluZSUyMHRlY2hub2xvZ3l8ZW58MHwwfHx8MTc3NTg1ODc5MXww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">science_ai</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Enchanted Tools</span>
+        </div>
+      </div>
+      <div class="card" data-id="science_biotech">
+        <img src="https://images.unsplash.com/photo-1688717579404-46566c4b72c6?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxkbmElMjBoZWxpeCUyMHN0cmFuZCUyMGJsdWUlMjBsYWJvcmF0b3J5fGVufDB8MHx8fDE3NzU4NTg3OTZ8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">science_biotech</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Rick Rothenberg</span>
+        </div>
+      </div>
+      <div class="card" data-id="science_climate">
+        <img src="https://images.unsplash.com/photo-1766258863224-64198afe8e8c?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHx3aWxkZmlyZSUyMHNtb2tlJTIwYWVyaWFsJTIwZm9yZXN0JTIwYnVybmluZ3xlbnwwfDB8fHwxNzc1ODU4NzkzfDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">science_climate</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Bernd 📷 Dittrich</span>
+        </div>
+      </div>
+      <div class="card" data-id="science_computing">
+        <img src="https://images.unsplash.com/photo-1762329404748-9a244ca636ee?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHx2aW50YWdlJTIwY29tcHV0ZXIlMjB0cmFuc2lzdG9yJTIwY2lyY3VpdCUyMGJvYXJkfGVufDB8MHx8fDE3NzU4NTg3ODd8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">science_computing</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Zulfugar Karimov</span>
+        </div>
+      </div>
+      <div class="card" data-id="science_evolution">
+        <img src="https://images.unsplash.com/photo-1771186884683-df72382b38fc?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxmb3NzaWwlMjBib25lcyUyMGRpbm9zYXVyJTIwbXVzZXVtJTIwbmF0dXJhbCUyMGhpc3Rvcnl8ZW58MHwwfHx8MTc3NTg1ODc4M3ww&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">science_evolution</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Jorge Escobedo</span>
+        </div>
+      </div>
+      <div class="card" data-id="science_future">
+        <img src="https://images.unsplash.com/photo-1647336300032-46629d50d001?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxmdXR1cmlzdGljJTIwbGFib3JhdG9yeSUyMHRlY2hub2xvZ3klMjByZXNlYXJjaHxlbnwwfDB8fHwxNzc1ODYyODk1fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">science_future</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Bruno Kelzer</span>
+        </div>
+      </div>
+      <div class="card" data-id="science_internet">
+        <img src="https://images.unsplash.com/photo-1606814540563-5c02d62fd409?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHx1bmRlcnNlYSUyMGNhYmxlJTIwZmliZXIlMjBvcHRpYyUyMGxpZ2h0fGVufDB8MHx8fDE3NzU4NTg3ODl8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">science_internet</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Compare Fibre</span>
+        </div>
+      </div>
+      <div class="card" data-id="science_neuroscience">
+        <img src="https://images.unsplash.com/photo-1758691463165-ca9b5bc2b28a?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxicmFpbiUyMHNjYW4lMjBtcmklMjBtZWRpY2FsJTIwaW1hZ2luZ3xlbnwwfDB8fHwxNzc1ODU4Nzk4fDA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">science_neuroscience</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Vitaly Gariev</span>
+        </div>
+      </div>
+      <div class="card" data-id="science_physics">
+        <img src="https://images.unsplash.com/photo-1668018193167-570b148406ba?ixid=M3w5MTkzOTB8MHwxfHNlYXJjaHwxfHxwaHlzaWNzJTIwcXVhbnR1bSUyMHdhdmUlMjBsaWdodCUyMGFic3RyYWN0fGVufDB8MHx8fDE3NzU4NjMxODd8MA&ixlib=rb-4.1.0&w=1080&q=80&fm=jpg&fit=crop&w=400&q=60" loading="lazy" />
+        <div class="info">
+          <span class="id">science_physics</span>
+          <span class="title">[object Object]</span>
+          <span class="credit">Pramod Tiwari</span>
+        </div>
+      </div></div>
+
+  <script>
+    const rejected = new Set();
+
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', () => {
+        const id = card.dataset.id;
+        if (rejected.has(id)) {
+          rejected.delete(id);
+          card.classList.remove('rejected');
+          card.querySelector('.badge')?.remove();
+        } else {
+          rejected.add(id);
+          card.classList.add('rejected');
+          const badge = document.createElement('span');
+          badge.className = 'badge';
+          badge.textContent = 'trocar';
+          card.querySelector('.info').prepend(badge);
+        }
+        updatePanel();
+      });
+    });
+
+    function updatePanel() {
+      const count = rejected.size;
+      document.getElementById('rejected-count').textContent = count;
+      const empty = document.getElementById('rejected-empty');
+      const list = document.getElementById('rejected-list');
+      const btn = document.getElementById('copy-btn');
+
+      if (count === 0) {
+        empty.style.display = '';
+        list.style.display = 'none';
+        btn.style.display = 'none';
+        return;
+      }
+
+      empty.style.display = 'none';
+      list.style.display = 'flex';
+      btn.style.display = 'inline-block';
+
+      list.innerHTML = [...rejected].map(id => `
+        <span class="rejected-tag">
+          ${id}
+          <button onclick="removeTag('${id}')" title="Desmarcar">×</button>
+        </span>
+      `).join('');
+    }
+
+    function removeTag(id) {
+      rejected.delete(id);
+      const card = document.querySelector(`.card[data-id="${id}"]`);
+      if (card) {
+        card.classList.remove('rejected');
+        card.querySelector('.badge')?.remove();
+      }
+      updatePanel();
+    }
+
+    function copyList() {
+      const text = [...rejected].join('\n');
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.textContent = 'Copiado!';
+        setTimeout(() => btn.textContent = 'Copiar lista', 1500);
+      });
+    }
+  </script>
+</body>
+</html>
