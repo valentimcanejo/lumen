@@ -479,8 +479,8 @@ export async function finishSession(
   if (existingSession) {
     // Session already counted. Only grant incremental quiz bonus if score improved.
     const prevScore = existingSession.quizScore ?? 0;
-    const prevQuizBonus = Math.round(prevScore * 10);
-    const newQuizBonus = quizDone ? Math.round(quizScore * 10) : 0;
+    const prevQuizBonus = Math.round(prevScore * 25);
+    const newQuizBonus = quizDone ? Math.round(quizScore * 25) : 0;
     const deltaQuizBonus = Math.max(0, newQuizBonus - prevQuizBonus);
 
     if (deltaQuizBonus === 0) {
@@ -555,8 +555,8 @@ export async function finishSession(
   // quiz skipped — preserve streak unchanged
 
   // ── XP ──────────────────────────────────────────────────────────────────
-  const base = 10;
-  const quizBonus = Math.round(quizScore * 10);
+  const base = 25;
+  const quizBonus = Math.round(quizScore * 25);
   const isPerfect = quizDone && quizScore >= 1.0;
   const prevConsecutive = user.consecutivePerfectQuizzes ?? 0;
   const newConsecutive = quizDone ? (isPerfect ? prevConsecutive + 1 : 0) : prevConsecutive;
