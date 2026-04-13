@@ -64,6 +64,14 @@
       "skip": "Agora não",
       "reminder_title": "Hora de estudar! 📚",
       "reminder_body": "Sua sessão diária te espera. Só 5 minutos fazem a diferença."
+    },
+    "setup": {
+      "title": "Sua jornada está sendo construída",
+      "subtitle": "Estamos preparando tudo para que sua primeira sessão seja perfeita.",
+      "step_profile": "Criando seu perfil",
+      "step_tracks": "Carregando suas trilhas",
+      "step_lesson": "Preparando sua primeira lição",
+      "footer": "Isso leva só um momento..."
     }
   },
   "premium": {

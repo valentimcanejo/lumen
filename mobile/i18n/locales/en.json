@@ -64,6 +64,14 @@
       "skip": "Not now",
       "reminder_title": "Time to study! 📚",
       "reminder_body": "Your daily session is waiting. Just 5 minutes makes a difference."
+    },
+    "setup": {
+      "title": "Your journey is being built",
+      "subtitle": "We're getting everything ready so your first session is perfect.",
+      "step_profile": "Creating your profile",
+      "step_tracks": "Loading your tracks",
+      "step_lesson": "Preparing your first lesson",
+      "footer": "This only takes a moment..."
     }
   },
   "premium": {

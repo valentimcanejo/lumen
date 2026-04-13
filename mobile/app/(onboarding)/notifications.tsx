@@ -31,12 +31,12 @@ export default function NotificationsOnboarding() {
       }
     } finally {
       setLoading(false);
-      router.replace("/(tabs)/home");
+      router.replace("/(onboarding)/setup");
     }
   }
 
   function handleSkip() {
-    router.replace("/(tabs)/home");
+    router.replace("/(onboarding)/setup");
   }
 
   return (
