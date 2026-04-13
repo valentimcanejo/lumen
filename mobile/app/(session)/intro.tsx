@@ -44,13 +44,12 @@ export default function LessonIntroScreen() {
 
   const { isPremium } = usePremium();
 
-  const color = trackColor(contentId);
-  const bg = trackBg(contentId);
-  const diffLabel = DIFFICULTY_LABELS[difficulty]?.[lang ?? "pt"] ?? difficulty;
-  const diffColor = DIFFICULTY_COLORS[difficulty] ?? "#AAB0C0";
-
   // Gate: if this is a premium lesson and user is not premium, redirect to paywall
   const lessonMeta = getLessonMeta(contentId);
+  const color = trackColor(lessonMeta?.trackId ?? contentId);
+  const bg = trackBg(lessonMeta?.trackId ?? contentId);
+  const diffLabel = DIFFICULTY_LABELS[difficulty]?.[lang ?? "pt"] ?? difficulty;
+  const diffColor = DIFFICULTY_COLORS[difficulty] ?? "#AAB0C0";
   const isPremiumLocked = lessonMeta?.tier === "premium" && !isPremium;
 
   function startLesson() {

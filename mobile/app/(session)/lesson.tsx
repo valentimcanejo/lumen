@@ -243,7 +243,8 @@ export default function LessonScreen() {
     lang: Lang;
   };
 
-  const color = trackColor(contentId);
+  const lessonMeta = getLessonMeta(contentId);
+  const color = trackColor(lessonMeta?.trackId ?? contentId);
 
   const { uid } = useAuth();
   const { getUserData } = useUser();
@@ -492,14 +493,13 @@ export default function LessonScreen() {
       >
         {/* Hero cover image — full bleed */}
         {(() => {
-          const meta = getLessonMeta(contentId);
-          const coverUri = meta?.coverImageUrl;
+          const coverUri = lessonMeta?.coverImageUrl;
           const coverLocal = getCoverImage(contentId);
           if (coverUri) {
             return (
               <CoverImage
                 uri={coverUri}
-                credit={meta?.coverImageCredit}
+                credit={lessonMeta?.coverImageCredit}
                 width="100%"
                 height={230}
               />
