@@ -10,6 +10,7 @@ import {
   setDoc,
   updateDoc,
   increment,
+  arrayUnion,
   type DocumentSnapshot,
 } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
@@ -33,6 +34,18 @@ export type CompletedSession = {
   minutes: number;
   quizScore: number;
   completedAt: number;
+};
+
+// One entry per completed session — stored as an array in
+// users/{uid}/stats/session_log for fast single-doc reads (e.g. weekly report).
+export type SessionLogEntry = {
+  date: string;        // "YYYY-MM-DD"
+  contentId: string;   // e.g. "foundations_decision_making"
+  trackId: string;     // e.g. "foundations"
+  lessonTitle: string; // localized title at time of completion
+  minutes: number;
+  quizScore: number;   // 0–1
+  completedAt: number; // unix ms
 };
 
 export type DayData = {
@@ -305,27 +318,48 @@ export async function markDayCompleted(
   payload: {
     contentId: string;
     contentVersion: number;
+    trackId: string;
+    lessonTitle: string;
     minutes: number;
     quizScore: number;
   },
 ) {
+  const completedAt = Date.now();
+
   await setDocData(userDailyPath(uid, date, payload.contentId), {
     date,
     ...payload,
-    completedAt: Date.now(),
+    completedAt,
   });
 
   // Monthly rollup — users/{uid}/stats/monthly_{YYYY-MM}
-  // Lets profile/analytics show "X minutes this month" without scanning daily_sessions.
-  const month = date.slice(0, 7); // "YYYY-MM"
+  const month = date.slice(0, 7);
   await setDoc(
     doc(db, "users", uid, "stats", `monthly_${month}`),
     {
       month,
       minutes: increment(payload.minutes),
       sessions: increment(1),
-      updatedAt: Date.now(),
+      updatedAt: completedAt,
     },
+    { merge: true },
+  );
+
+  // Session log — users/{uid}/stats/session_log
+  // Single document with array of all sessions; used by weekly report and
+  // future features that need full history without querying subcollections.
+  const entry: SessionLogEntry = {
+    date,
+    contentId: payload.contentId,
+    trackId: payload.trackId,
+    lessonTitle: payload.lessonTitle,
+    minutes: payload.minutes,
+    quizScore: payload.quizScore,
+    completedAt,
+  };
+  await setDoc(
+    doc(db, "users", uid, "stats", "session_log"),
+    { sessions: arrayUnion(entry), updatedAt: completedAt },
     { merge: true },
   );
 }

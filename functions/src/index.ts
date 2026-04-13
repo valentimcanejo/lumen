@@ -370,12 +370,15 @@ function getWeekId(date: Date): string {
 function buildReportPrompt(
   lang: "pt" | "en" | "es",
   weekId: string,
-  stats: { sessionsCompleted: number; minutesStudied: number; xpEarned: number; topTracks: string[] },
+  stats: { sessionsCompleted: number; minutesStudied: number; xpEarned: number; topTracks: string[]; lessonTitles: string[] },
 ): string {
   const langName = LANG_NAMES[lang];
   const tracksLine = stats.topTracks.length > 0
     ? `Top tracks studied: ${stats.topTracks.join(", ")}.`
     : "No specific tracks identified.";
+  const lessonsLine = stats.lessonTitles.length > 0
+    ? `Lessons completed this week: ${stats.lessonTitles.join("; ")}.`
+    : "";
 
   return `You are a learning coach for Lumen, a knowledge app. Write a personalised weekly learning report for a user in ${langName}.
 
@@ -384,18 +387,20 @@ Sessions completed: ${stats.sessionsCompleted}
 Minutes studied: ${stats.minutesStudied}
 XP earned: ${stats.xpEarned}
 ${tracksLine}
+${lessonsLine}
 
 Return ONLY valid JSON — no markdown — matching this exact structure:
 {
   "headline": "<motivational headline, max 60 chars>",
   "summary": "<2-3 sentences summarising the week's learning effort and achievements>",
-  "highlight": "<one interesting insight or fact the user likely encountered this week based on their tracks>",
-  "suggestion": "<one concrete suggestion for what to study next week, based on tracks covered>"
+  "highlight": "<one specific insight from the lessons studied this week — reference the actual topic>",
+  "suggestion": "<one concrete suggestion for what to study next week, based on lessons covered>"
 }
 
 Rules:
 - All text in ${langName}
 - Be warm, specific, and encouraging — like a smart friend reviewing their week
+- The highlight must reference something concrete from the lessons, not a generic observation
 - Return ONLY the JSON object`;
 }
 
@@ -447,37 +452,47 @@ export const generateWeeklyReports = onSchedule(
         continue;
       }
 
-      // Fetch daily session docs for the past week
-      const sessionsSnap = await db.collection(`users/${uid}/daily_sessions`)
-        .where("date", ">=", weekStartStr)
-        .where("date", "<=", weekEndStr)
-        .get();
+      // Read session log — single doc with full history
+      const logSnap = await db.doc(`users/${uid}/stats/session_log`).get();
+      const allSessions: Array<{
+        date: string;
+        trackId: string;
+        lessonTitle: string;
+        minutes: number;
+        quizScore: number;
+        completedAt: number;
+      }> = logSnap.exists ? (logSnap.data()?.sessions ?? []) : [];
 
-      let sessionsCompleted = 0;
-      let minutesStudied = 0;
-      let xpEarned = 0;
-      const trackCounts: Record<string, number> = {};
+      // Filter to past week
+      const weeklySessions = allSessions.filter(
+        (s) => s.date >= weekStartStr && s.date <= weekEndStr,
+      );
 
-      sessionsSnap.docs.forEach((d) => {
-        const s = d.data();
-        sessionsCompleted += s.sessionsCompleted ?? 1;
-        minutesStudied += s.totalMinutes ?? s.minutes ?? 0;
-        xpEarned += s.xpEarned ?? 0;
-        if (s.trackId) trackCounts[s.trackId] = (trackCounts[s.trackId] ?? 0) + 1;
-      });
-
-      // No activity this week — skip (don't write a "you did nothing" report)
-      if (sessionsCompleted === 0 && minutesStudied === 0) {
+      // No activity this week — skip
+      if (weeklySessions.length === 0) {
         skipped++;
         continue;
       }
+
+      const minutesStudied = weeklySessions.reduce((sum, s) => sum + (s.minutes ?? 0), 0);
+      const sessionsCompleted = weeklySessions.length;
+      const trackCounts: Record<string, number> = {};
+      const lessonTitles: string[] = [];
+
+      weeklySessions.forEach((s) => {
+        if (s.trackId) trackCounts[s.trackId] = (trackCounts[s.trackId] ?? 0) + 1;
+        if (s.lessonTitle) lessonTitles.push(s.lessonTitle);
+      });
 
       const topTracks = Object.entries(trackCounts)
         .sort(([, a], [, b]) => b - a)
         .slice(0, 3)
         .map(([id]) => id);
 
-      const stats = { sessionsCompleted, minutesStudied, xpEarned, topTracks };
+      // xpEarned not stored in session_log — read from user doc directly
+      const xpEarned: number = userData.xp ?? 0;
+
+      const stats = { sessionsCompleted, minutesStudied, xpEarned, topTracks, lessonTitles };
 
       try {
         const completion = await openai.chat.completions.create({

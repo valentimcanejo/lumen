@@ -661,6 +661,8 @@ export default function SummaryScreen() {
           markDayCompleted(uid, date, {
             contentId,
             contentVersion: Number(version),
+            trackId: getLessonMeta(contentId)?.trackId ?? "",
+            lessonTitle: getLessonMeta(contentId)?.title?.[lang as Lang] ?? contentId,
             minutes: estimatedMinutes,
             quizScore,
           }),
