@@ -14,7 +14,8 @@
     "finished": "Listo",
     "content": "Contenido",
     "error_not_found": "Contenido no encontrado.",
-    "error_connect": "No se pudo conectar. Inténtalo de nuevo."
+    "error_connect": "No se pudo conectar. Inténtalo de nuevo.",
+    "cancel": "Cancelar"
   },
   "onboarding": {
     "welcome": {

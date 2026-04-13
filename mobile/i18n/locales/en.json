@@ -14,7 +14,8 @@
     "finished": "Done",
     "content": "Content",
     "error_not_found": "Content not found.",
-    "error_connect": "Could not connect. Please try again."
+    "error_connect": "Could not connect. Please try again.",
+    "cancel": "Cancel"
   },
   "onboarding": {
     "welcome": {
