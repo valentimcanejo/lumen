@@ -5,7 +5,7 @@ import { Platform } from "react-native";
 // ---------------------------------------------------------------------------
 
 // Shows the full reset button in the profile screen (dev/testing only)
-export const SHOW_DEV_RESET = true;
+export const SHOW_DEV_RESET = false;
 
 // ---------------------------------------------------------------------------
 // RevenueCat API keys — https://app.revenuecat.com → Your Project → API Keys
