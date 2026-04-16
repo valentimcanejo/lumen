@@ -378,6 +378,27 @@
     "day": "Dia {{n}}",
     "completed_toast": "🎉 Desafio concluído! +50 XP"
   },
+  "notifications": {
+    "streak_risk_title": "🔥 Não quebre sua sequência!",
+    "streak_risk_body": "Sua sequência de {{count}} dia(s) termina esta noite. Complete uma lição!",
+    "daily_mission_title": "📋 Suas missões de hoje estão prontas!",
+    "daily_mission_body": "Complete suas missões diárias e ganhe XP bônus."
+  },
+  "support": {
+    "title": "Reportar um problema",
+    "category_label": "Categoria",
+    "category_bug": "Bug",
+    "category_content": "Conteúdo",
+    "category_suggestion": "Sugestão",
+    "category_other": "Outro",
+    "message_label": "Descreva o problema",
+    "message_placeholder": "Conte o que aconteceu com o máximo de detalhes possível…",
+    "submit": "Enviar",
+    "error": "Não foi possível enviar. Tente novamente.",
+    "success_title": "Enviado!",
+    "success_subtitle": "Agradecemos o seu relato. Vamos analisar em breve.",
+    "open_button": "Reportar problema"
+  },
   "leaderboard": {
     "title": "Ranking da Semana",
     "home_sub": "Veja sua posição entre todos os usuários",

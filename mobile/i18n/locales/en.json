@@ -378,6 +378,27 @@
     "day": "Day {{n}}",
     "completed_toast": "🎉 Challenge complete! +50 XP"
   },
+  "notifications": {
+    "streak_risk_title": "🔥 Don't break your streak!",
+    "streak_risk_body": "Your {{count}}-day streak ends tonight. Complete a lesson!",
+    "daily_mission_title": "📋 Today's missions are ready!",
+    "daily_mission_body": "Complete your daily missions and earn bonus XP."
+  },
+  "support": {
+    "title": "Report a problem",
+    "category_label": "Category",
+    "category_bug": "Bug",
+    "category_content": "Content",
+    "category_suggestion": "Suggestion",
+    "category_other": "Other",
+    "message_label": "Describe the issue",
+    "message_placeholder": "Tell us what happened in as much detail as possible…",
+    "submit": "Send",
+    "error": "Could not send. Please try again.",
+    "success_title": "Sent!",
+    "success_subtitle": "Thank you for your report. We'll look into it shortly.",
+    "open_button": "Report a problem"
+  },
   "leaderboard": {
     "title": "Weekly Ranking",
     "home_sub": "See your position among all users",

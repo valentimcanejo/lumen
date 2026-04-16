@@ -50,6 +50,17 @@ service cloud.firestore {
       }
     }
 
+    // ─── Support requests — authenticated write only, no client read ─────────
+    match /support_requests/{doc} {
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly(['uid', 'category', 'message', 'createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.message is string
+        && request.resource.data.message.size() > 0
+        && request.resource.data.message.size() <= 1000;
+      allow read, update, delete: if false;
+    }
+
     // ─── Leaderboard — authenticated read; write only to own entry ───────────
     match /leaderboard/{weekId}/{tierId}/{uid} {
       allow read: if request.auth != null;

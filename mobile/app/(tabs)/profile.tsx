@@ -47,6 +47,7 @@ import {
   type UserProfile,
 } from "../../models/user";
 import { ACHIEVEMENTS, type AchievementDef } from "../../repositories/achievements.repo";
+import { SupportSheet } from "../../components/ui/lumen/SupportSheet";
 
 // ---------------------------------------------------------------------------
 // Achievements grid — compact 5-column layout, expandable
@@ -794,6 +795,7 @@ export default function ProfileScreen() {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [completedIds, setCompletedIds] = useState<string[]>([]);
   const [weeklyReport, setWeeklyReport] = useState<WeeklyReport | null | "loading">(null);
+  const [supportOpen, setSupportOpen] = useState(false);
   const { isPremium } = usePremium();
 
   useEffect(() => {
@@ -1039,6 +1041,29 @@ export default function ProfileScreen() {
                 )}
               </Box>
             </Box>
+
+            {/* Support */}
+            <Pressable
+              onPress={() => setSupportOpen(true)}
+              style={{
+                marginBottom: 12,
+                paddingVertical: 14,
+                borderRadius: 14,
+                borderWidth: 1,
+                borderColor: "#1A2233",
+                backgroundColor: "#111827",
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "center",
+                gap: 8,
+              }}
+            >
+              <Ionicons name="chatbubble-ellipses-outline" size={16} color="#7B8193" />
+              <Text style={{ color: "#7B8193", fontSize: 14, fontWeight: "600" }}>
+                {t("support.open_button")}
+              </Text>
+            </Pressable>
+            <SupportSheet visible={supportOpen} onClose={() => setSupportOpen(false)} />
 
             {/* DEV: full reset — remove by setting SHOW_DEV_RESET=false + eas update */}
             {SHOW_DEV_RESET && (

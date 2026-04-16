@@ -378,6 +378,27 @@
     "day": "Día {{n}}",
     "completed_toast": "🎉 ¡Desafío completado! +50 XP"
   },
+  "notifications": {
+    "streak_risk_title": "🔥 ¡No rompas tu racha!",
+    "streak_risk_body": "Tu racha de {{count}} día(s) termina esta noche. ¡Completa una lección!",
+    "daily_mission_title": "📋 ¡Tus misiones de hoy están listas!",
+    "daily_mission_body": "Completa tus misiones diarias y gana XP extra."
+  },
+  "support": {
+    "title": "Reportar un problema",
+    "category_label": "Categoría",
+    "category_bug": "Error",
+    "category_content": "Contenido",
+    "category_suggestion": "Sugerencia",
+    "category_other": "Otro",
+    "message_label": "Describe el problema",
+    "message_placeholder": "Cuéntanos qué pasó con el mayor detalle posible…",
+    "submit": "Enviar",
+    "error": "No se pudo enviar. Inténtalo de nuevo.",
+    "success_title": "¡Enviado!",
+    "success_subtitle": "Gracias por tu reporte. Lo revisaremos pronto.",
+    "open_button": "Reportar problema"
+  },
   "leaderboard": {
     "title": "Ranking Semanal",
     "home_sub": "Ve tu posición entre todos los usuarios",
