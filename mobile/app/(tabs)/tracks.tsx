@@ -413,7 +413,10 @@ export default function Tracks() {
   const { uid } = useAuth();
   const { getUserData } = useUser();
   const [tracks, setTracks] = useState<Track[]>([]);
-  const [lang, setLang] = useState<Lang>("pt");
+  const { i18n } = useTranslation();
+  const [lang, setLang] = useState<Lang>(() =>
+    (["pt", "en", "es"].includes(i18n.language) ? i18n.language : "pt") as Lang
+  );
   const [loading, setLoading] = useState(true);
   const [completedIds, setCompletedIds] = useState<string[]>([]);
   const [selectedTrackIds, setSelectedTrackIds] = useState<string[]>([]);
@@ -430,7 +433,7 @@ export default function Tracks() {
   useEffect(() => {
     if (!uid) return;
     getUserData({ userId: uid }).then((user) => {
-      if (user?.lang) setLang(user.lang);
+      if (user?.lang && !["pt", "en", "es"].includes(i18n.language)) setLang(user.lang);
       setSelectedTrackIds(
         user?.selectedTrackIds ?? user?.selectedGoalIds ?? [],
       );

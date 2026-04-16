@@ -669,7 +669,7 @@ export default function Home() {
     }, [currentUserId]),
   );
 
-  const lang = (user?.lang ?? i18n.language ?? "pt") as Lang;
+  const lang = (["pt", "en", "es"].includes(i18n.language) ? i18n.language : user?.lang ?? "pt") as Lang;
   const streak = user?.streak?.current ?? 0;
 
   useEffect(() => {

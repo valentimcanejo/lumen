@@ -19,7 +19,7 @@ import {
 } from "@expo-google-fonts/dm-sans";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { OfflineBanner } from "../components/ui/lumen/OfflineBanner";
-import "../i18n";
+import i18n from "../i18n";
 import { loadLanguage } from "../i18n/setLanguage";
 import "@/global.css";
 import { auth } from "../firebase/firebaseConfig";
@@ -33,6 +33,7 @@ import {
   initLessons,
 } from "../repositories/lessons.repo";
 import { todayYmd } from "../repositories/session.repo";
+import type { Lang } from "../models/lang";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -123,7 +124,7 @@ export default function RootLayout() {
           const contentId = pickNextLesson(trackIds, completedIds, today);
           if (!contentId) return;
           const meta = getLessonMeta(contentId);
-          const lang = user?.lang ?? "pt";
+          const lang = (["pt", "en", "es"].includes(i18n.language) ? i18n.language : user?.lang ?? "pt") as Lang;
 
           router.push({
             pathname: "/(session)/intro",
