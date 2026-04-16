@@ -34,6 +34,7 @@
     },
     "plugins": [
       "./plugins/withAgpVersion",
+      "./plugins/withRemoveRecordAudio",
       "expo-router",
       "expo-apple-authentication",
       "@react-native-google-signin/google-signin",
