@@ -7,6 +7,9 @@ import { Platform } from "react-native";
 // Shows the full reset button in the profile screen (dev/testing only)
 export const SHOW_DEV_RESET = false;
 
+// Set to true when production RevenueCat keys are configured
+export const PURCHASES_ENABLED = false;
+
 // ---------------------------------------------------------------------------
 // RevenueCat API keys — https://app.revenuecat.com → Your Project → API Keys
 // iOS key starts with "appl_", Android key starts with "goog_"

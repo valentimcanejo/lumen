@@ -25,6 +25,7 @@ import "@/global.css";
 import { auth } from "../firebase/firebaseConfig";
 import { listenAuth, ensureAnonymousAuth } from "../services/auth.service";
 import { configurePurchases } from "../services/purchases.service";
+import { PURCHASES_ENABLED } from "../constants/config";
 import { getUser, getCompletedContentIds } from "../repositories/user.repo";
 import {
   getLessonMeta,
@@ -91,7 +92,7 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    configurePurchases();
+    if (PURCHASES_ENABLED) configurePurchases();
   }, []);
 
   useEffect(() => {
