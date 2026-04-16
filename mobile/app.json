@@ -25,7 +25,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "versionCode": 2,
+      "versionCode": 3,
       "package": "com.valentimcanejo.lumen",
       "googleServicesFile": "./google-services.json"
     },
