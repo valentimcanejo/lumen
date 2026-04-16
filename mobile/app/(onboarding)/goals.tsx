@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { ScrollView, StyleSheet, View as RNView, useWindowDimensions } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
-import * as Localization from "expo-localization";
 import { Box } from "../../components/ui/box";
 import { Text } from "../../components/ui/text";
 import { Pressable } from "../../components/ui/pressable";
@@ -11,15 +10,7 @@ import { LumenButton } from "../../components/ui/lumen/Button";
 import { useTranslation } from "react-i18next";
 import { Lang } from "../../models/lang";
 import { getGoals, type Goal } from "../../repositories/goals.repo";
-import { setLanguage } from "../../i18n/setLanguage";
 import { useAuth } from "../../hooks/useAuth";
-
-const SUPPORTED: Lang[] = ["pt", "en", "es"];
-
-function detectDeviceLang(): Lang {
-  const code = Localization.getLocales()?.[0]?.languageCode ?? "";
-  return SUPPORTED.includes(code as Lang) ? (code as Lang) : "pt";
-}
 
 const ICON_MAP: Record<string, keyof typeof Ionicons.glyphMap> = {
   book:      "book-outline",
@@ -38,19 +29,15 @@ export default function Goals() {
   const { width } = useWindowDimensions();
   const [goals] = useState<Goal[]>(() => getGoals());
   const [selected, setSelected] = useState<string[]>([]);
-  const [selectedLanguage] = useState<Lang>(detectDeviceLang);
   const canContinue = selected.length >= 1;
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { uid: userId } = useAuth();
+  const selectedLanguage = (["pt","en","es"].includes(i18n.language) ? i18n.language : "pt") as Lang;
 
   const COLS = 2;
   const GAP = 12;
   const H_PAD = 24;
   const tileSize = (width - H_PAD * 2 - GAP) / COLS;
-
-  React.useEffect(() => {
-    setLanguage(selectedLanguage).catch(console.error);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function toggle(key: string) {
     setSelected((prev) =>

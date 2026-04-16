@@ -36,7 +36,6 @@ import {
   requestNotificationPermission,
   scheduleDailyReminder,
 } from "../../services/notifications.service";
-import { setLanguageManual as setI18nLanguage } from "../../i18n/setLanguage";
 import type { Lang } from "../../models/lang";
 import {
   levelXpThreshold,
@@ -498,46 +497,8 @@ function AccountCard({
 // Sub-components
 // ---------------------------------------------------------------------------
 
-function LanguageSelector({
-  lang,
-  onChange,
-}: {
-  lang: string;
-  onChange: (lang: string) => void;
-}) {
-  const LABELS: Record<string, string> = { pt: "PT", en: "EN", es: "ES" };
-  return (
-    <HStack className="gap-2">
-      {(["pt", "en", "es"] as const).map((code) => {
-        const active = lang === code;
-        return (
-          <Pressable
-            key={code}
-            onPress={() => onChange(code)}
-            style={{
-              paddingHorizontal: 14,
-              paddingVertical: 6,
-              borderRadius: 20,
-              borderWidth: 1,
-              borderColor: active ? "#F5C77A" : "#2A3448",
-              backgroundColor: active ? "#F5C77A18" : "transparent",
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 12,
-                fontWeight: "700",
-                color: active ? "#F5C77A" : "#4A5568",
-                letterSpacing: 0.5,
-              }}
-            >
-              {LABELS[code]}
-            </Text>
-          </Pressable>
-        );
-      })}
-    </HStack>
-  );
+function LanguageSelector() {
+  return null;
 }
 
 // ---------------------------------------------------------------------------
@@ -782,12 +743,11 @@ const wr = StyleSheet.create({
 // ---------------------------------------------------------------------------
 
 export default function ProfileScreen() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { loading, getUserData } = useUser();
   const { uid, user, isAnonymous, signInWithGoogle, signInWithApple, signOut } =
     useAuth();
   const insets = useSafeAreaInsets();
-  const [language, setLanguage] = useState<Lang>("pt");
   const [profileData, setProfileData] = useState<UserProfile | null>(null);
   const [notifGranted, setNotifGranted] = useState<boolean | null>(null);
   const [enablingNotif, setEnablingNotif] = useState(false);
@@ -803,7 +763,6 @@ export default function ProfileScreen() {
     getUserData({ userId: uid }).then((u) => {
       if (!u) return;
       setProfileData(u);
-      setLanguage(u.lang);
     });
     getStudyHeatmap(uid).then(setHeatmap);
     getTracks().then(setTracks).catch(() => {});
@@ -961,7 +920,7 @@ export default function ProfileScreen() {
             <MasterySection
               tracks={tracks}
               completedIds={completedIds}
-              lang={language}
+              lang={(["pt","en","es"].includes(i18n.language) ? i18n.language : "pt") as Lang}
             />
 
             {/* Achievements */}
@@ -977,24 +936,6 @@ export default function ProfileScreen() {
               <WeeklyReportCard report={weeklyReport} />
             )}
 
-            {/* Language */}
-            <HStack className="items-center justify-between mb-6">
-              <Text className="text-[#4A5568] text-[13px]">
-                {t("tabs.profile.language")}
-              </Text>
-              <LanguageSelector
-                lang={language}
-                onChange={async (l) => {
-                  setLanguage(l as Lang);
-                  if (uid) {
-                    await Promise.all([
-                      setUserLanguage(uid, l as Lang),
-                      setI18nLanguage(l as Lang),
-                    ]).catch(console.error);
-                  }
-                }}
-              />
-            </HStack>
 
             {/* Notifications */}
             <Box className="mb-6">
