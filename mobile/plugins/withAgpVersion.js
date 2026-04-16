@@ -12,24 +12,24 @@ const fs = require("fs");
  *     reanimated, gesture-handler, etc.) due to Kotlin/variant configuration failures.
  *   - AGP 8.3.2 + Gradle 8.6 is the most stable combination for Expo SDK 54 / RN 0.81.x.
  *
- * Solution: pin AGP → 8.3.2, Kotlin → 2.0.21, Gradle wrapper → 8.7.
+ * Solution: pin AGP → 8.7.3, Kotlin → 2.1.20, Gradle wrapper → 8.10.2.
  */
 module.exports = function withAgpVersion(config) {
   // 1. Pin AGP and Kotlin in build.gradle
   config = withProjectBuildGradle(config, (config) => {
     let contents = config.modResults.contents;
 
-    // Pin AGP to 8.3.2
+    // Pin AGP to 8.7.3
     contents = contents.replace(
       /com\.android\.tools\.build:gradle:[0-9]+\.[0-9]+\.[0-9]+/g,
-      "com.android.tools.build:gradle:8.3.2"
+      "com.android.tools.build:gradle:8.7.3"
     );
 
     // Pin Kotlin compiler to 2.1.20 via ext + explicit classpath version.
     if (!contents.includes("kotlinVersion")) {
       contents = contents.replace(
         "buildscript {",
-        'buildscript {\n  ext {\n    kotlinVersion = "2.0.21"\n  }'
+        'buildscript {\n  ext {\n    kotlinVersion = "2.1.20"\n  }'
       );
     }
     contents = contents.replace(
@@ -53,7 +53,7 @@ module.exports = function withAgpVersion(config) {
         let contents = fs.readFileSync(wrapperPath, "utf8");
         contents = contents.replace(
           /distributionUrl=.*gradle-[0-9]+\.[0-9]+(?:\.[0-9]+)?-bin\.zip/,
-          "distributionUrl=https\\://services.gradle.org/distributions/gradle-8.7-bin.zip"
+          "distributionUrl=https\\://services.gradle.org/distributions/gradle-8.10.2-bin.zip"
         );
         fs.writeFileSync(wrapperPath, contents);
       }
