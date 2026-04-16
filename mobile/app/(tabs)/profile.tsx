@@ -36,7 +36,7 @@ import {
   requestNotificationPermission,
   scheduleDailyReminder,
 } from "../../services/notifications.service";
-import { setLanguage as setI18nLanguage } from "../../i18n/setLanguage";
+import { setLanguageManual as setI18nLanguage } from "../../i18n/setLanguage";
 import type { Lang } from "../../models/lang";
 import {
   levelXpThreshold,
