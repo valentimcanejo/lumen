@@ -12,6 +12,8 @@ Notifications.setNotificationHandler({
 // Stable identifiers — allows cancel/replace without storing returned IDs
 const ID_STREAK_RISK    = "streak-risk";
 const ID_DAILY_MISSION  = "daily-mission";
+const ID_DAILY_REMINDER = "daily-reminder";
+const ID_REVIEW         = "review-reminder";
 
 export async function requestNotificationPermission(): Promise<boolean> {
   if (Platform.OS === "web") return false;
@@ -93,9 +95,10 @@ export async function scheduleDailyReminder(
   title: string,
   body: string,
 ): Promise<void> {
-  await Notifications.cancelAllScheduledNotificationsAsync();
+  await Notifications.cancelScheduledNotificationAsync(ID_DAILY_REMINDER).catch(() => {});
   await Notifications.scheduleNotificationAsync({
-    content: { title, body },
+    identifier: ID_DAILY_REMINDER,
+    content: { title, body, data: { type: "daily-reminder" } },
     trigger: {
       type: Notifications.SchedulableTriggerInputTypes.DAILY,
       hour,
@@ -112,7 +115,9 @@ export async function scheduleReviewReminder(
   title: string,
   body: string,
 ): Promise<void> {
+  await Notifications.cancelScheduledNotificationAsync(ID_REVIEW).catch(() => {});
   await Notifications.scheduleNotificationAsync({
+    identifier: ID_REVIEW,
     content: { title, body, data: { type: "review" } },
     trigger: {
       type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,

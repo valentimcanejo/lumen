@@ -701,16 +701,16 @@ export default function SummaryScreen() {
         // Streak at-risk notification for tomorrow 8 pm
         scheduleStreakRiskNotification(
           newStreak,
-          "🔥 Não quebre sua sequência!",
-          `Sua sequência de ${newStreak} dia${newStreak !== 1 ? "s" : ""} termina esta noite. Complete uma lição!`,
+          t("notifications.streak_risk_title"),
+          t("notifications.streak_risk_body", { count: newStreak }),
         ).catch(() => {});
 
         // Schedule review notification if there are due cards
         const dueCount = await getDueCardCount(uid);
         if (dueCount > 0) {
           scheduleReviewReminder(
-            "Cards para revisar 🧠",
-            `Você tem ${dueCount} card(s) para revisar. Não perca o ritmo!`,
+            t("session.review.notification_title"),
+            t("session.review.notification_body", { count: dueCount }),
           ).catch(() => {});
         }
       }
@@ -758,7 +758,7 @@ export default function SummaryScreen() {
           {t("session.summary.title")}
         </Text>
         <Text className="text-[#AAB0C0] text-[13px] mt-1">
-          {pack?.lesson?.title ?? t("common.content")} • {pack?.estimatedMinutes ?? 0} min
+          {pack?.lesson?.title ?? t("common.content")}
         </Text>
         <Box className="h-[1px] bg-[#1A2233] mt-4" />
       </Box>

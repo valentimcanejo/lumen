@@ -628,8 +628,8 @@ export default function Home() {
         Notifications.getPermissionsAsync().then(({ status }) => {
           if (status === "granted") {
             scheduleDailyMissionNotification(
-              "📋 Suas missões de hoje estão prontas!",
-              "Complete suas missões diárias e ganhe XP bônus.",
+              t("notifications.daily_mission_title"),
+              t("notifications.daily_mission_body"),
             ).catch(() => {});
           }
         });
