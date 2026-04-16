@@ -23,6 +23,9 @@
     },
     "production": {
       "channel": "production",
+      "android": {
+        "image": "ubuntu-22.04-jdk-17-ndk-r26b"
+      },
       "env": {
         "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "304073115831-e7j9hsou4bqns0bv8rikr0qo9o73cnlo.apps.googleusercontent.com"
       }
