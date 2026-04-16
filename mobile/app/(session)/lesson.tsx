@@ -517,7 +517,7 @@ export default function LessonScreen() {
           {/* Title + meta below the hero */}
           <Text style={ls.lessonTitle} numberOfLines={2}>{pack.lesson.title}</Text>
           <Text style={ls.lessonMeta}>
-            {pack.tags?.[0] ?? t("common.content")} • {pack.estimatedMinutes} min
+            {pack.tags?.[0] ?? t("common.content")}
           </Text>
 
           <View style={ls.divider} />
