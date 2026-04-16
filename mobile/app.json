@@ -20,7 +20,7 @@
     "android": {
       "allowBackup": false,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/icon.png",
+        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#0B0F14"
       },
       "edgeToEdgeEnabled": true,
