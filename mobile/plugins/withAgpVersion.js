@@ -17,12 +17,14 @@ const fs = require("fs");
  *   AGP 8.7.x breaks all RN submodule builds (react-native-async-storage,
  *   react-native-gesture-handler, etc.) because it adds a required AgpVersionAttr
  *   consumer attribute that old modules don't declare → "No variants exist" error.
+ *   AGP 8.3.2 is too old: androidx.core:core:1.16.0 requires AGP >= 8.6.0.
+ *   AGP 8.6.0 is the sweet spot: satisfies androidx.core and doesn't break RN modules.
  *
- * FIX: patch @react-native/gradle-plugin/gradle/libs.versions.toml to use agp = "8.3.2".
+ * FIX: patch @react-native/gradle-plugin/gradle/libs.versions.toml to use agp = "8.6.0".
  *   Also pin Kotlin to 2.1.20 and Gradle wrapper to 8.10.2 for consistency.
  */
 
-const AGP_VERSION = "8.3.2";
+const AGP_VERSION = "8.6.0";
 const KOTLIN_VERSION = "2.1.20";
 const GRADLE_VERSION = "8.10.2";
 
