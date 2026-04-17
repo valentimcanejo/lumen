@@ -46,7 +46,6 @@ import {
   getTodaySession,
   getDueCardCount,
   getRecentSessions,
-  grantComebackShield,
   type DayData,
 } from "../../repositories/progress.repo";
 import { invalidateUserCache } from "../../hooks/useUser";
@@ -587,8 +586,6 @@ export default function Home() {
   const [retryRecommendation, setRetryRecommendation] = useState<{
     contentId: string; quizScore: number;
   } | null>(null);
-  const [comebackShield, setComebackShield] = useState(false);
-  const comebackCheckedRef = useRef(false);
   const notifScheduledRef = useRef(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const shareCheckedRef = useRef(false);
@@ -606,19 +603,6 @@ export default function Home() {
       getUserData({ userId: currentUserId })
         .then((u) => {
           setUser(u ?? null);
-          // Comeback mechanic — 3+ days absent → grant shield once per app session
-          if (!comebackCheckedRef.current && u?.streak?.lastStudyDate) {
-            const today = new Date().toISOString().slice(0, 10);
-            const last = new Date(u.streak.lastStudyDate).getTime();
-            const daysSince = Math.floor((Date.now() - last) / 86_400_000);
-            if (daysSince >= 3 && today !== u.streak.lastStudyDate) {
-              comebackCheckedRef.current = true;
-              setComebackShield(true);
-              grantComebackShield(currentUserId)
-                .then(() => invalidateUserCache(currentUserId))
-                .catch(() => {});
-            }
-          }
         })
         .finally(() => setLoadingUser(false));
 
@@ -814,26 +798,6 @@ export default function Home() {
           />
         </View>
       </View>
-
-      {/* ── Comeback banner ────────────────────────────────────── */}
-      {comebackShield && (
-        <View style={{ paddingHorizontal: 20, marginTop: 12 }}>
-          <View style={cb.card}>
-            <View style={cb.iconWrap}>
-              <Ionicons name="shield" size={20} color="#7B8FE0" />
-            </View>
-            <View style={{ flex: 1 }}>
-              <Text style={cb.title}>Bem-vindo de volta!</Text>
-              <Text style={cb.body}>
-                Sentimos sua falta. Você ganhou um shield para proteger sua sequência.
-              </Text>
-            </View>
-            <TouchableOpacity onPress={() => setComebackShield(false)} style={cb.close}>
-              <Ionicons name="close" size={16} color="#4A5568" />
-            </TouchableOpacity>
-          </View>
-        </View>
-      )}
 
       {/* ── Lição de hoje ──────────────────────────────────────── */}
       {loadingUser && (
@@ -1188,39 +1152,6 @@ const hd = StyleSheet.create({
 // Comeback banner styles
 // ---------------------------------------------------------------------------
 
-const cb = StyleSheet.create({
-  card: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#121826",
-    borderWidth: 1,
-    borderColor: "#7B8FE030",
-    borderRadius: 20,
-    padding: 16,
-    gap: 12,
-  },
-  iconWrap: {
-    width: 42,
-    height: 42,
-    borderRadius: 21,
-    backgroundColor: "#7B8FE015",
-    alignItems: "center",
-    justifyContent: "center",
-    flexShrink: 0,
-  },
-  title: {
-    color: "#E6EAF2",
-    fontSize: 14,
-    fontWeight: "700",
-    marginBottom: 3,
-  },
-  body: {
-    color: "#7B8193",
-    fontSize: 12,
-    lineHeight: 17,
-  },
-  close: { padding: 4, flexShrink: 0 },
-});
 
 // ---------------------------------------------------------------------------
 // Lesson card styles

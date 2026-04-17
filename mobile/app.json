@@ -21,7 +21,12 @@
       "allowBackup": false,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png",
         "backgroundColor": "#0B0F14"
+      },
+      "notification": {
+        "icon": "./assets/images/android-icon-monochrome.png",
+        "color": "#0B0F14"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
