@@ -446,5 +446,11 @@
     "your_position": "SUA POSIÇÃO",
     "outside_top": "Fora do top 30",
     "empty": "Complete uma sessão para aparecer no ranking!"
+  },
+  "insight": {
+    "label": "Conexão de Conhecimento",
+    "card_eyebrow": "INSIGHT DA SEMANA",
+    "card_new": "NOVO",
+    "card_cta": "Explorar →"
   }
 }

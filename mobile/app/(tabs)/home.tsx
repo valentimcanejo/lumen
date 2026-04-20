@@ -54,6 +54,8 @@ import {
 } from "../../services/notifications.service";
 import * as Notifications from "expo-notifications";
 import { getCompletedContentIds } from "../../repositories/user.repo";
+import { getLatestInsights } from "../../repositories/insights.repo";
+import type { KnowledgeInsight } from "../../models/insight";
 import { getCurrentWeekId } from "../../repositories/leaderboard.repo";
 import { WeeklyShareCard } from "../../components/WeeklyShareCard";
 import { getTodayMissions, getWeeklyMissions } from "../../repositories/missions.repo";
@@ -591,6 +593,7 @@ export default function Home() {
   const shareCheckedRef = useRef(false);
   const viewShotRef = useRef<ViewShot>(null);
   const [sharing, setSharing] = useState(false);
+  const [latestInsight, setLatestInsight] = useState<KnowledgeInsight | null>(null);
 
   // Flame pulse animation for streak pill
   const flameScale = useSharedValue(1);
@@ -638,6 +641,7 @@ export default function Home() {
       getCompletedContentIds(currentUserId).then(setCompletedIds).catch(() => {});
       getTodayMissions(currentUserId).then(setMissions).catch(() => {});
       getWeeklyMissions(currentUserId).then(setWeeklyMissions).catch(() => {});
+      getLatestInsights(currentUserId, 1).then((arr) => setLatestInsight(arr[0] ?? null)).catch(() => {});
       getRecentSessions(currentUserId).then((sessions) => {
         const seen = new Set<string>();
         for (const s of sessions) {
@@ -1035,6 +1039,29 @@ export default function Home() {
         );
       })()}
 
+      {/* ── Knowledge Insight card ────────────────────────────── */}
+      {latestInsight && (
+        <View style={{ paddingHorizontal: 20, marginTop: 10 }}>
+          <TouchableOpacity
+            onPress={() => router.push({ pathname: "/insight", params: { data: JSON.stringify(latestInsight) } })}
+            style={ic.card}
+            activeOpacity={0.85}
+          >
+            <View style={ic.topRow}>
+              <Text style={ic.eyebrow}>{t("insight.card_eyebrow")}</Text>
+              {!latestInsight.read && (
+                <View style={ic.newBadge}>
+                  <Text style={ic.newBadgeText}>{t("insight.card_new")}</Text>
+                </View>
+              )}
+            </View>
+            <Text style={ic.title} numberOfLines={2}>{latestInsight.title}</Text>
+            <Text style={ic.intro} numberOfLines={2}>{latestInsight.intro}</Text>
+            <Text style={ic.cta}>{t("insight.card_cta")}</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
       {/* ── Desafio inicial ────────────────────────────────────── */}
       {!loadingUser && user?.createdAt && (
         <View style={{ paddingHorizontal: 20, marginTop: 14 }}>
@@ -1419,6 +1446,45 @@ const ab = StyleSheet.create({
   },
 });
 
+
+// ---------------------------------------------------------------------------
+// Insight card styles
+// ---------------------------------------------------------------------------
+
+const ic = StyleSheet.create({
+  card: {
+    backgroundColor: "#0D1428",
+    borderWidth: 1,
+    borderColor: "#7B8FE040",
+    borderRadius: 20,
+    padding: 16,
+    gap: 8,
+  },
+  topRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  eyebrow: {
+    color: "#7B8FE0",
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 1.2,
+    textTransform: "uppercase",
+  },
+  newBadge: {
+    backgroundColor: "#7B8FE020",
+    borderWidth: 1,
+    borderColor: "#7B8FE050",
+    borderRadius: 8,
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+  },
+  newBadgeText: { color: "#7B8FE0", fontSize: 10, fontWeight: "700" },
+  title: { color: "#E6EAF2", fontSize: 15, fontWeight: "700", lineHeight: 21 },
+  intro: { color: "#7B8193", fontSize: 13, lineHeight: 19 },
+  cta: { color: "#7B8FE0", fontSize: 13, fontWeight: "700", marginTop: 2 },
+});
 
 // ---------------------------------------------------------------------------
 // Share modal styles

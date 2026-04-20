@@ -668,3 +668,144 @@ export const generateMonthlyReports = onSchedule(
     console.log(`Monthly reports done — generated: ${generated}`);
   }
 );
+
+// ---------------------------------------------------------------------------
+// generateKnowledgeInsights — runs every Wednesday at 11:00 UTC
+// For premium users who've studied 2+ tracks with ≥3 sessions each in the
+// last 30 days, generates an AI insight connecting those topics with
+// real-world examples. Max 1 new insight per user per week.
+// Saves to: users/{uid}/insights/{id}
+// ---------------------------------------------------------------------------
+
+function buildInsightPrompt(
+  lang: "pt" | "en" | "es",
+  tracks: string[],
+  lessonTitles: string[],
+): string {
+  const langName = LANG_NAMES[lang];
+  return `You are a knowledge synthesis expert for Lumen, a learning app. A user has recently studied the following topics:
+
+Tracks: ${tracks.join(", ")}
+Lessons completed: ${lessonTitles.slice(0, 10).join("; ")}
+
+Your task: write a short, insightful piece that CONNECTS these topics and illustrates them with 3 CONCRETE real-world examples happening today (or in recent history). The examples should be specific — name real events, countries, people, or organizations.
+
+Return ONLY valid JSON matching this structure:
+{
+  "title": "<compelling title connecting the topics, max 70 chars>",
+  "intro": "<2 sentences showing how these topics connect — be specific>",
+  "connections": [
+    { "headline": "<example title, max 50 chars>", "body": "<2-3 sentences explaining this real-world example and how it connects the topics studied>" },
+    { "headline": "<example title>", "body": "<2-3 sentences>" },
+    { "headline": "<example title>", "body": "<2-3 sentences>" }
+  ],
+  "takeaway": "<1 sentence — the key insight the user should walk away with>"
+}
+
+Rules:
+- All text in ${langName}
+- Be specific and factual — avoid vague generalities
+- Examples must be real, not hypothetical
+- Return ONLY the JSON object`;
+}
+
+export const generateKnowledgeInsights = onSchedule(
+  {
+    schedule: "0 11 * * 3",
+    timeZone: "UTC",
+    secrets: [openaiApiKey],
+    memory: "512MiB",
+    timeoutSeconds: 540,
+  },
+  async () => {
+    const db = admin.firestore();
+    const now = new Date();
+    const thirtyDaysAgoStr = new Date(now.getTime() - 30 * 86400000).toISOString().split("T")[0];
+    const oneWeekAgoMs = now.getTime() - 7 * 86400000;
+
+    const usersSnap = await db.collection("users")
+      .where("premium.isActive", "==", true)
+      .get();
+
+    if (usersSnap.empty) return;
+
+    const openai = new OpenAI({ apiKey: openaiApiKey.value() });
+    let generated = 0;
+
+    for (const userDoc of usersSnap.docs) {
+      const uid = userDoc.id;
+      const userData = userDoc.data();
+      const lang: "pt" | "en" | "es" = ["pt", "en", "es"].includes(userData.lang) ? userData.lang : "pt";
+
+      // Skip if user already got an insight this week
+      const recentInsight = await db.collection(`users/${uid}/insights`)
+        .where("generatedAt", ">", oneWeekAgoMs)
+        .limit(1)
+        .get();
+      if (!recentInsight.empty) continue;
+
+      const logSnap = await db.doc(`users/${uid}/stats/session_log`).get();
+      const allSessions: Array<{ date: string; trackId: string; lessonTitle: string }> =
+        logSnap.exists ? (logSnap.data()?.sessions ?? []) : [];
+
+      // Count sessions per track in the last 30 days
+      const recentSessions = allSessions.filter((s) => s.date >= thirtyDaysAgoStr);
+      const trackCounts: Record<string, { count: number; titles: string[] }> = {};
+      for (const s of recentSessions) {
+        if (!s.trackId) continue;
+        if (!trackCounts[s.trackId]) trackCounts[s.trackId] = { count: 0, titles: [] };
+        trackCounts[s.trackId].count += 1;
+        if (s.lessonTitle && !trackCounts[s.trackId].titles.includes(s.lessonTitle)) {
+          trackCounts[s.trackId].titles.push(s.lessonTitle);
+        }
+      }
+
+      // Need ≥2 tracks with ≥3 sessions each
+      const eligibleTracks = Object.entries(trackCounts)
+        .filter(([, v]) => v.count >= 3)
+        .sort(([, a], [, b]) => b.count - a.count)
+        .slice(0, 3);
+
+      if (eligibleTracks.length < 2) continue;
+
+      const trackIds = eligibleTracks.map(([id]) => id);
+      const allTitles = eligibleTracks.flatMap(([, v]) => v.titles);
+
+      try {
+        const completion = await openai.chat.completions.create({
+          model: "gpt-4o-mini",
+          max_tokens: 700,
+          messages: [{ role: "user", content: buildInsightPrompt(lang, trackIds, allTitles) }],
+        });
+
+        const raw = completion.choices[0]?.message?.content ?? "{}";
+        let parsed: {
+          title?: string;
+          intro?: string;
+          connections?: { headline: string; body: string }[];
+          takeaway?: string;
+        };
+        try { parsed = JSON.parse(raw); } catch { continue; }
+
+        if (!parsed.title || !parsed.connections?.length) continue;
+
+        await db.collection(`users/${uid}/insights`).add({
+          generatedAt: Date.now(),
+          lang,
+          trackIds,
+          title: parsed.title,
+          intro: parsed.intro ?? "",
+          connections: parsed.connections,
+          takeaway: parsed.takeaway ?? "",
+          read: false,
+        });
+
+        generated++;
+      } catch (err) {
+        console.error(`[${uid}] Insight error:`, err);
+      }
+    }
+
+    console.log(`Knowledge insights done — generated: ${generated}`);
+  }
+);
