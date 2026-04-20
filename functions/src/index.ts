@@ -489,6 +489,21 @@ export const generateWeeklyReports = onSchedule(
         .slice(0, 3)
         .map(([id]) => id);
 
+      // Mentor: weakest track (lowest avg quiz score) from last 28 days
+      const fourWeeksAgoStr = new Date(now.getTime() - 28 * 86400000).toISOString().split("T")[0];
+      const trackScores: Record<string, { total: number; count: number }> = {};
+      allSessions
+        .filter((s) => s.date >= fourWeeksAgoStr && s.trackId)
+        .forEach((s) => {
+          if (!trackScores[s.trackId]) trackScores[s.trackId] = { total: 0, count: 0 };
+          trackScores[s.trackId].total += s.quizScore ?? 0;
+          trackScores[s.trackId].count += 1;
+        });
+      const mentorTrackId = Object.entries(trackScores)
+        .filter(([, v]) => v.count >= 2)
+        .sort(([, a], [, b]) => (a.total / a.count) - (b.total / b.count))
+        [0]?.[0] ?? null;
+
       // xpEarned not stored in session_log — read from user doc directly
       const xpEarned: number = userData.xp ?? 0;
 
@@ -519,6 +534,7 @@ export const generateWeeklyReports = onSchedule(
           highlight: parsed.highlight ?? "",
           suggestion: parsed.suggestion ?? "",
           stats,
+          mentorTrackId: mentorTrackId ?? null,
         });
 
         generated++;
@@ -528,5 +544,127 @@ export const generateWeeklyReports = onSchedule(
     }
 
     console.log(`Weekly reports done — generated: ${generated}, skipped: ${skipped}`);
+  }
+);
+
+// ---------------------------------------------------------------------------
+// generateMonthlyReports — runs on 1st of each month at 10:00 UTC
+// Aggregates 4 weeks of data and generates a deeper AI monthly digest
+// Saves to: users/{uid}/monthly_reports/{YYYY-MM}
+// ---------------------------------------------------------------------------
+
+function buildMonthlyPrompt(
+  lang: "pt" | "en" | "es",
+  monthId: string,
+  stats: { sessionsCompleted: number; minutesStudied: number; xpEarned: number; topTracks: string[]; avgQuizScore: number },
+): string {
+  const langName = LANG_NAMES[lang];
+  return `You are a learning coach for Lumen. Write a concise monthly learning digest for a user in ${langName}.
+
+Month: ${monthId}
+Sessions: ${stats.sessionsCompleted}
+Minutes studied: ${stats.minutesStudied}
+XP earned: ${stats.xpEarned}
+Average quiz score: ${Math.round(stats.avgQuizScore * 100)}%
+Top tracks: ${stats.topTracks.join(", ") || "none"}
+
+Return ONLY valid JSON matching this structure:
+{
+  "headline": "<motivational headline, max 60 chars>",
+  "summary": "<2-3 sentences on this month's learning journey>",
+  "growth": "<one concrete observation about their progress trend>",
+  "challenge": "<one specific challenge or goal for next month>"
+}
+
+All text in ${langName}. Return ONLY the JSON object.`;
+}
+
+export const generateMonthlyReports = onSchedule(
+  {
+    schedule: "0 10 1 * *",
+    timeZone: "UTC",
+    secrets: [openaiApiKey],
+    memory: "512MiB",
+    timeoutSeconds: 540,
+  },
+  async () => {
+    const db = admin.firestore();
+    const now = new Date();
+    const monthId = `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, "0")}`;
+
+    // Look back 30 days
+    const monthStartStr = new Date(now.getTime() - 30 * 86400000).toISOString().split("T")[0];
+    const monthEndStr = new Date(now.getTime() - 86400000).toISOString().split("T")[0];
+
+    const usersSnap = await db.collection("users")
+      .where("premium.isActive", "==", true)
+      .get();
+
+    if (usersSnap.empty) return;
+
+    const openai = new OpenAI({ apiKey: openaiApiKey.value() });
+    let generated = 0;
+
+    for (const userDoc of usersSnap.docs) {
+      const uid = userDoc.id;
+      const userData = userDoc.data();
+      const lang: "pt" | "en" | "es" = ["pt", "en", "es"].includes(userData.lang) ? userData.lang : "pt";
+
+      const reportRef = db.doc(`users/${uid}/monthly_reports/${monthId}`);
+      if ((await reportRef.get()).exists) continue;
+
+      const logSnap = await db.doc(`users/${uid}/stats/session_log`).get();
+      const allSessions: Array<{ date: string; trackId: string; minutes: number; quizScore: number }> =
+        logSnap.exists ? (logSnap.data()?.sessions ?? []) : [];
+
+      const monthlySessions = allSessions.filter((s) => s.date >= monthStartStr && s.date <= monthEndStr);
+      if (monthlySessions.length === 0) continue;
+
+      const minutesStudied = monthlySessions.reduce((sum, s) => sum + (s.minutes ?? 0), 0);
+      const sessionsCompleted = monthlySessions.length;
+      const totalQuizScore = monthlySessions.reduce((sum, s) => sum + (s.quizScore ?? 0), 0);
+      const avgQuizScore = sessionsCompleted > 0 ? totalQuizScore / sessionsCompleted : 0;
+
+      const trackCounts: Record<string, number> = {};
+      monthlySessions.forEach((s) => {
+        if (s.trackId) trackCounts[s.trackId] = (trackCounts[s.trackId] ?? 0) + 1;
+      });
+      const topTracks = Object.entries(trackCounts)
+        .sort(([, a], [, b]) => b - a)
+        .slice(0, 3)
+        .map(([id]) => id);
+
+      const xpEarned: number = userData.xp ?? 0;
+      const stats = { sessionsCompleted, minutesStudied, xpEarned, topTracks, avgQuizScore };
+
+      try {
+        const completion = await openai.chat.completions.create({
+          model: "gpt-4o-mini",
+          max_tokens: 400,
+          messages: [{ role: "user", content: buildMonthlyPrompt(lang, monthId, stats) }],
+        });
+
+        const raw = completion.choices[0]?.message?.content ?? "{}";
+        let parsed: { headline?: string; summary?: string; growth?: string; challenge?: string };
+        try { parsed = JSON.parse(raw); } catch { continue; }
+
+        await reportRef.set({
+          monthId,
+          generatedAt: Date.now(),
+          lang,
+          headline: parsed.headline ?? "",
+          summary: parsed.summary ?? "",
+          growth: parsed.growth ?? "",
+          challenge: parsed.challenge ?? "",
+          stats,
+        });
+
+        generated++;
+      } catch (err) {
+        console.error(`[${uid}] Monthly report error:`, err);
+      }
+    }
+
+    console.log(`Monthly reports done — generated: ${generated}`);
   }
 );

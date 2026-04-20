@@ -223,7 +223,14 @@
       "weekly_report_suggestion": "Próxima semana",
       "weekly_report_sessions": "{{count}} sesiones",
       "weekly_report_minutes": "{{count}} min",
-      "weekly_report_xp": "+{{count}} XP"
+      "weekly_report_xp": "+{{count}} XP",
+      "weekly_report_mentor": "Enfoque del mentor",
+      "weekly_report_mentor_body": "Tienes mayor margen de mejora en {{track}}. Enfócate en esta ruta esta semana.",
+      "weekly_report_mentor_cta": "Ver lecciones",
+      "monthly_report_title": "Resumen mensual",
+      "monthly_report_empty": "Tu resumen mensual aparecerá aquí después del primer mes.",
+      "monthly_report_growth": "Evolución",
+      "monthly_report_challenge": "Desafío del próximo mes"
     }
   },
   "track": {

@@ -26,9 +26,9 @@ import { setUserLanguage, getCompletedContentIds, resetAllUserData } from "../..
 import { getStudyHeatmap } from "../../repositories/progress.repo";
 import { getTracks } from "../../repositories/tracks.repo";
 import { getLessonCountForTrack } from "../../repositories/lessons.repo";
-import { getLatestWeeklyReport } from "../../repositories/weeklyReports.repo";
+import { getLatestWeeklyReport, getLatestMonthlyReport } from "../../repositories/weeklyReports.repo";
 import { usePremium } from "../../hooks/usePremium";
-import type { WeeklyReport } from "../../models/weeklyReport";
+import type { WeeklyReport, MonthlyReport } from "../../models/weeklyReport";
 import { trackColor, trackBg } from "../../constants/tracks";
 import { SHOW_DEV_RESET } from "../../constants/config";
 import type { Track } from "../../models/track";
@@ -638,8 +638,11 @@ function MasterySection({
 // WeeklyReportCard — premium feature
 // ---------------------------------------------------------------------------
 
-function WeeklyReportCard({ report }: { report: WeeklyReport | null | "loading" }) {
+function WeeklyReportCard({ report, tracks }: { report: WeeklyReport | null | "loading"; tracks: Track[] }) {
   const { t } = useTranslation();
+  const mentorTrack = report && report !== "loading" && report.mentorTrackId
+    ? tracks.find((tr) => tr.id === report.mentorTrackId)
+    : null;
 
   return (
     <View style={wr.container}>
@@ -692,13 +695,32 @@ function WeeklyReportCard({ report }: { report: WeeklyReport | null | "loading" 
             </View>
 
             {/* Suggestion */}
-            <View style={[wr.section, { marginBottom: 0 }]}>
+            <View style={wr.section}>
               <View style={wr.sectionHeader}>
                 <Text style={wr.sectionIcon}>🎯</Text>
                 <Text style={wr.sectionLabel}>{t("tabs.profile.weekly_report_suggestion")}</Text>
               </View>
               <Text style={wr.sectionText}>{report.suggestion}</Text>
             </View>
+
+            {/* Mentor */}
+            {mentorTrack && (
+              <View style={[wr.section, { marginBottom: 0, borderWidth: 1, borderColor: "#F5C77A20", backgroundColor: "#1A130A" }]}>
+                <View style={wr.sectionHeader}>
+                  <Text style={wr.sectionIcon}>🧑‍🏫</Text>
+                  <Text style={[wr.sectionLabel, { color: "#F5C77A" }]}>{t("tabs.profile.weekly_report_mentor")}</Text>
+                </View>
+                <Text style={wr.sectionText}>
+                  {t("tabs.profile.weekly_report_mentor_body", {
+                    track: mentorTrack.title?.[(report as WeeklyReport).lang] ?? mentorTrack.id,
+                  })}
+                </Text>
+                <Pressable onPress={() => router.push("/(tabs)/tracks")} style={wr.mentorBtn}>
+                  <Text style={wr.mentorBtnText}>{t("tabs.profile.weekly_report_mentor_cta")}</Text>
+                  <Ionicons name="arrow-forward" size={13} color="#F5C77A" />
+                </Pressable>
+              </View>
+            )}
           </>
         )}
       </View>
@@ -736,7 +758,58 @@ const wr = StyleSheet.create({
   sectionIcon: { fontSize: 14 },
   sectionLabel: { color: "#E6EAF2", fontSize: 12, fontWeight: "700", textTransform: "uppercase", letterSpacing: 0.5 },
   sectionText: { color: "#AAB0C0", fontSize: 13, lineHeight: 20 },
+  mentorBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    marginTop: 8,
+  },
+  mentorBtnText: { color: "#F5C77A", fontSize: 12, fontWeight: "700" },
 });
+
+// ---------------------------------------------------------------------------
+// MonthlyReportCard — premium feature
+// ---------------------------------------------------------------------------
+
+function MonthlyReportCard({ report }: { report: MonthlyReport | null | "loading" }) {
+  const { t } = useTranslation();
+  return (
+    <View style={[wr.container, { marginTop: 4 }]}>
+      <View style={wr.header}>
+        <Text style={wr.title}>{t("tabs.profile.monthly_report_title")}</Text>
+        <View style={wr.premiumBadge}>
+          <Text style={wr.premiumBadgeText}>PREMIUM</Text>
+        </View>
+      </View>
+      <View style={wr.card}>
+        {report === "loading" ? (
+          <Text style={wr.empty}>{t("tabs.profile.weekly_report_loading")}</Text>
+        ) : report === null ? (
+          <Text style={wr.empty}>{t("tabs.profile.monthly_report_empty")}</Text>
+        ) : (
+          <>
+            <Text style={wr.headline}>{report.headline}</Text>
+            <Text style={wr.summary}>{report.summary}</Text>
+            <View style={wr.section}>
+              <View style={wr.sectionHeader}>
+                <Text style={wr.sectionIcon}>📈</Text>
+                <Text style={wr.sectionLabel}>{t("tabs.profile.monthly_report_growth")}</Text>
+              </View>
+              <Text style={wr.sectionText}>{report.growth}</Text>
+            </View>
+            <View style={[wr.section, { marginBottom: 0 }]}>
+              <View style={wr.sectionHeader}>
+                <Text style={wr.sectionIcon}>🏆</Text>
+                <Text style={wr.sectionLabel}>{t("tabs.profile.monthly_report_challenge")}</Text>
+              </View>
+              <Text style={wr.sectionText}>{report.challenge}</Text>
+            </View>
+          </>
+        )}
+      </View>
+    </View>
+  );
+}
 
 // ---------------------------------------------------------------------------
 // Screen
@@ -755,6 +828,7 @@ export default function ProfileScreen() {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [completedIds, setCompletedIds] = useState<string[]>([]);
   const [weeklyReport, setWeeklyReport] = useState<WeeklyReport | null | "loading">(null);
+  const [monthlyReport, setMonthlyReport] = useState<MonthlyReport | null | "loading">(null);
   const [supportOpen, setSupportOpen] = useState(false);
   const { isPremium } = usePremium();
 
@@ -773,9 +847,13 @@ export default function ProfileScreen() {
   useEffect(() => {
     if (!uid || !isPremium) return;
     setWeeklyReport("loading");
+    setMonthlyReport("loading");
     getLatestWeeklyReport(uid)
       .then(setWeeklyReport)
       .catch(() => setWeeklyReport(null));
+    getLatestMonthlyReport(uid)
+      .then(setMonthlyReport)
+      .catch(() => setMonthlyReport(null));
   }, [uid, isPremium]);
 
   useEffect(() => {
@@ -933,7 +1011,10 @@ export default function ProfileScreen() {
 
             {/* Weekly AI report — premium only */}
             {isPremium && (
-              <WeeklyReportCard report={weeklyReport} />
+              <>
+                <WeeklyReportCard report={weeklyReport} tracks={tracks} />
+                <MonthlyReportCard report={monthlyReport} />
+              </>
             )}
 
 
