@@ -1,6 +1,7 @@
 import {
   collection,
   getDocs,
+  getDoc,
   query,
   orderBy,
   where,
@@ -362,6 +363,12 @@ export async function markDayCompleted(
     { sessions: arrayUnion(entry), updatedAt: completedAt },
     { merge: true },
   );
+}
+
+export async function getSessionLog(uid: string): Promise<SessionLogEntry[]> {
+  const snap = await getDoc(doc(db, "users", uid, "stats", "session_log"));
+  if (!snap.exists()) return [];
+  return (snap.data()?.sessions ?? []) as SessionLogEntry[];
 }
 
 export async function updateStreak(uid: string, date: string) {

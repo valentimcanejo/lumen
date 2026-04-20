@@ -1027,6 +1027,21 @@ export default function ProfileScreen() {
             {/* Weekly AI report — premium only */}
             {isPremium && (
               <>
+                {/* Stats shortcut */}
+                <Pressable
+                  onPress={() => router.push("/stats")}
+                  style={pg.glossaryBtn}
+                >
+                  <View style={pg.glossaryLeft}>
+                    <Text style={{ fontSize: 20 }}>📊</Text>
+                    <View>
+                      <Text style={pg.glossaryTitle}>{t("stats.shortcut_title")}</Text>
+                      <Text style={pg.glossarySubtitle}>{t("stats.shortcut_subtitle")}</Text>
+                    </View>
+                  </View>
+                  <Ionicons name="chevron-forward" size={16} color="#7B8193" />
+                </Pressable>
+
                 {/* Glossary shortcut */}
                 <Pressable
                   onPress={() => router.push("/glossary")}

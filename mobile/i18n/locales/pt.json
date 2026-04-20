@@ -18,6 +18,18 @@
     "cancel": "Cancelar",
     "close": "Fechar"
   },
+  "stats": {
+    "title": "Estatísticas",
+    "shortcut_title": "Estatísticas avançadas",
+    "shortcut_subtitle": "Desempenho por trilha e evolução",
+    "total_sessions": "Sessões",
+    "total_time": "Tempo total",
+    "avg_score": "Acerto médio",
+    "by_track": "Por trilha",
+    "best_track": "Melhor trilha",
+    "weakest_track": "Maior potencial",
+    "empty": "Complete algumas sessões para ver suas estatísticas."
+  },
   "glossary": {
     "title": "Glossário pessoal",
     "shortcut_title": "Glossário pessoal",

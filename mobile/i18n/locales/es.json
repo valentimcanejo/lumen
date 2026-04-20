@@ -18,6 +18,18 @@
     "cancel": "Cancelar",
     "close": "Cerrar"
   },
+  "stats": {
+    "title": "Estadísticas",
+    "shortcut_title": "Estadísticas avanzadas",
+    "shortcut_subtitle": "Rendimiento por ruta y evolución",
+    "total_sessions": "Sesiones",
+    "total_time": "Tiempo total",
+    "avg_score": "Promedio",
+    "by_track": "Por ruta",
+    "best_track": "Mejor ruta",
+    "weakest_track": "Mayor potencial",
+    "empty": "Completa algunas sesiones para ver tus estadísticas."
+  },
   "glossary": {
     "title": "Glosario personal",
     "shortcut_title": "Glosario personal",

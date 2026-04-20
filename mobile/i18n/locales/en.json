@@ -18,6 +18,18 @@
     "cancel": "Cancel",
     "close": "Close"
   },
+  "stats": {
+    "title": "Statistics",
+    "shortcut_title": "Advanced statistics",
+    "shortcut_subtitle": "Performance by track and progress",
+    "total_sessions": "Sessions",
+    "total_time": "Total time",
+    "avg_score": "Avg. score",
+    "by_track": "By track",
+    "best_track": "Best track",
+    "weakest_track": "Most potential",
+    "empty": "Complete some sessions to see your statistics."
+  },
   "glossary": {
     "title": "Personal glossary",
     "shortcut_title": "Personal glossary",
