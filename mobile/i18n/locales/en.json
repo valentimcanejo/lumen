@@ -256,7 +256,8 @@
     "lesson": {
       "step": "1 / 4",
       "loading": "Preparing content…",
-      "audio_hint": "You can lock the screen — audio keeps playing."
+      "audio_hint": "You can lock the screen — audio keeps playing.",
+      "hardcore_mode": "⚡ Hardcore Mode"
     },
     "cards": {
       "step": "2 / 4",

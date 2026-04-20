@@ -42,6 +42,7 @@ import { getStorageDownloadUrl } from "../../services/storage.service";
 import { generateAudio } from "../../services/functions.service";
 import type { Lang } from "../../models/lang";
 import type { LessonBlock } from "../../models/pack";
+import { usePremium } from "../../hooks/usePremium";
 
 function extractText(blocks: LessonBlock[]): string {
   return blocks
@@ -248,6 +249,7 @@ export default function LessonScreen() {
   const color = trackColor(lessonMeta?.trackId ?? contentId);
 
   const { uid } = useAuth();
+  const { isPremium } = usePremium();
   const { getUserData } = useUser();
   const { pack, loading, error } = usePack({
     contentId,
@@ -455,14 +457,14 @@ export default function LessonScreen() {
     setPositionMs(next);
   }
 
-  async function handleNext() {
+  async function handleNext(hardcore = false) {
     if (soundRef.current && playing) {
       await soundRef.current.pauseAsync();
       setPlaying(false);
     }
     router.replace({
       pathname: "/(session)/quiz",
-      params: { contentId, version, lang },
+      params: { contentId, version, lang, ...(hardcore && { hardcore: "true" }) },
     });
   }
 
@@ -651,11 +653,21 @@ export default function LessonScreen() {
 
           <View style={ls.actions}>
             <Pressable
-              onPress={handleNext}
+              onPress={() => handleNext(false)}
               style={[ls.nextBtn, { backgroundColor: color }]}
             >
               <Text style={ls.nextBtnText}>{t("common.next")}</Text>
             </Pressable>
+
+            {isPremium && (
+              <Pressable
+                onPress={() => handleNext(true)}
+                style={ls.hardcoreBtn}
+              >
+                <Ionicons name="flash" size={14} color="#E26D6D" />
+                <Text style={ls.hardcoreBtnText}>{t("session.lesson.hardcore_mode")}</Text>
+              </Pressable>
+            )}
 
             <Pressable
               onPress={handleSave}
@@ -814,6 +826,18 @@ const ls = StyleSheet.create({
     color: "#0B0F14",
     fontSize: 16,
     fontWeight: "700",
+  },
+  hardcoreBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 6,
+    paddingVertical: 10,
+  },
+  hardcoreBtnText: {
+    color: "#E26D6D",
+    fontSize: 13,
+    fontWeight: "600",
   },
   saveBtn: {
     height: 52,

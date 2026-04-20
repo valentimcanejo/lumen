@@ -461,6 +461,7 @@ export type FinishSessionResult = {
   streakRecoverable?: boolean;
   streakRecoverySessions?: number;
   streakRecoveryCompleted?: boolean;
+  hardcoreBonus?: number;
 };
 
 /**
@@ -471,9 +472,9 @@ export type FinishSessionResult = {
  */
 export async function finishSession(
   uid: string,
-  context: { date: string; contentId: string; quizScore: number; quizDone: boolean; completedTrackCount?: number; totalTrackCount?: number },
+  context: { date: string; contentId: string; quizScore: number; quizDone: boolean; completedTrackCount?: number; totalTrackCount?: number; hardcore?: boolean },
 ): Promise<FinishSessionResult> {
-  const { date, contentId, quizScore, quizDone, completedTrackCount = 0, totalTrackCount = Infinity } = context;
+  const { date, contentId, quizScore, quizDone, completedTrackCount = 0, totalTrackCount = Infinity, hardcore = false } = context;
 
   // ── Idempotency / replay guard ────────────────────────────────────────────
   // IMPORTANT: summary.tsx must await finishSession BEFORE calling markDayCompleted
@@ -602,6 +603,7 @@ export async function finishSession(
   // ── XP ──────────────────────────────────────────────────────────────────
   const base = 25;
   const quizBonus = Math.round(quizScore * 25);
+  const hardcoreBonus = hardcore && quizDone ? Math.round(quizBonus * 0.5) : 0;
   const isPerfect = quizDone && quizScore >= 1.0;
   const prevConsecutive = user.consecutivePerfectQuizzes ?? 0;
   const newConsecutive = quizDone ? (isPerfect ? prevConsecutive + 1 : 0) : prevConsecutive;
@@ -680,7 +682,7 @@ export async function finishSession(
   if (justCompletedChallenge) starterBonus = STARTER_BONUS_XP;
 
   // ── Total XP + level ─────────────────────────────────────────────────────
-  const gained = base + quizBonus;
+  const gained = base + quizBonus + hardcoreBonus;
   const newXp = (user.xp ?? 0) + gained + missionBonus + weeklyMissionBonus + starterBonus;
   const newLevel = xpToLevel(newXp);
 
@@ -717,7 +719,7 @@ export async function finishSession(
     updatedAt: Date.now(),
   });
 
-  return { gained, base, quizBonus, missionBonus, weeklyMissionBonus, starterBonus, starterDaysCompleted, newWeeklyMissionIds, newAchievementIds, leveledUp: newLevel > prevLevel, newLevel, prevLevel, shieldEarned, newStreak: streakCurrent, streakRecoverable, streakRecoverySessions, streakRecoveryCompleted };
+  return { gained, base, quizBonus, missionBonus, weeklyMissionBonus, starterBonus, starterDaysCompleted, newWeeklyMissionIds, newAchievementIds, leveledUp: newLevel > prevLevel, newLevel, prevLevel, shieldEarned, newStreak: streakCurrent, streakRecoverable, streakRecoverySessions, streakRecoveryCompleted, hardcoreBonus };
 }
 
 // ---------------------------------------------------------------------------

@@ -549,13 +549,15 @@ const sr = StyleSheet.create({
 
 export default function SummaryScreen() {
   const { t } = useTranslation();
-  const { contentId, version, lang, correct, total } = useLocalSearchParams() as {
+  const { contentId, version, lang, correct, total, hardcore: hardcoreParam } = useLocalSearchParams() as {
     contentId: string;
     version: string;
     lang: Lang;
     correct?: string;
     total?: string;
+    hardcore?: string;
   };
+  const hardcore = hardcoreParam === "true";
 
   const { pack } = usePack({
     contentId,
@@ -660,7 +662,7 @@ export default function SummaryScreen() {
 
         // finishSession must run FIRST — its idempotency guard reads the daily_sessions
         // doc that markDayCompleted writes. Running them in parallel would cause a race.
-        const sessionResult = await finishSession(uid, { date, contentId, quizScore, quizDone, completedTrackCount, totalTrackCount });
+        const sessionResult = await finishSession(uid, { date, contentId, quizScore, quizDone, completedTrackCount, totalTrackCount, hardcore });
 
         // After finishSession, the remaining writes touch different paths — safe to parallelize.
         await Promise.all([
@@ -676,7 +678,7 @@ export default function SummaryScreen() {
           incrementContentCompletion(contentId, quizScore, estimatedMinutes).catch(() => {}),
         ]);
 
-        const { gained, base, quizBonus, missionBonus, weeklyMissionBonus, starterBonus, newAchievementIds, leveledUp, newLevel, shieldEarned, newStreak } = sessionResult;
+        const { gained, base, quizBonus, missionBonus, weeklyMissionBonus, starterBonus, newAchievementIds, leveledUp, newLevel, shieldEarned, newStreak, hardcoreBonus } = sessionResult;
 
         // Leaderboard — fire-and-forget, does not block UI
         const displayName = auth.currentUser?.displayName
@@ -684,7 +686,7 @@ export default function SummaryScreen() {
         const newTier = getLevelTier(newLevel);
         upsertLeaderboardEntry(uid, displayName, gained + missionBonus, newLevel, newTier.id).catch(() => {});
         setGainedXp(gained + missionBonus + weeklyMissionBonus + starterBonus);
-        setXpBreakdown({ base, quizBonus, missionBonus });
+        setXpBreakdown({ base, quizBonus: quizBonus + (hardcoreBonus ?? 0), missionBonus });
         const defs = newAchievementIds
           .map((id) => ACHIEVEMENTS.find((a) => a.id === id))
           .filter(Boolean) as AchievementDef[];

@@ -256,7 +256,8 @@
     "lesson": {
       "step": "1 / 4",
       "loading": "Preparando conteúdo…",
-      "audio_hint": "Pode fechar a tela — o áudio continua reproduzindo."
+      "audio_hint": "Pode fechar a tela — o áudio continua reproduzindo.",
+      "hardcore_mode": "⚡ Modo Hardcore"
     },
     "cards": {
       "step": "2 / 4",

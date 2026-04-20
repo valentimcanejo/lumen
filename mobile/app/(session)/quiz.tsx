@@ -172,10 +172,13 @@ function getOptionState(args: {
   optionIndex: number;
   selectedIndex: number | null;
   correctIndex: number;
+  hardcore?: boolean;
 }): OptionState {
-  const { answered, optionIndex, selectedIndex, correctIndex } = args;
+  const { answered, optionIndex, selectedIndex, correctIndex, hardcore } = args;
   if (!answered) return "idle";
-  if (optionIndex === correctIndex) return "correct";
+  const isWrongAnswer = selectedIndex !== null && selectedIndex !== correctIndex;
+  // In hardcore mode, don't reveal the correct answer after a wrong selection
+  if (optionIndex === correctIndex && (!hardcore || !isWrongAnswer)) return "correct";
   if (selectedIndex === optionIndex && selectedIndex !== correctIndex) return "wrong";
   return "idle";
 }
@@ -183,11 +186,13 @@ function getOptionState(args: {
 export default function QuizScreen() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
-  const { contentId, version, lang } = useLocalSearchParams() as {
+  const { contentId, version, lang, hardcore: hardcoreParam } = useLocalSearchParams() as {
     contentId: string;
     version: string;
     lang: Lang;
+    hardcore?: string;
   };
+  const hardcore = hardcoreParam === "true";
 
   const { pack, loading, error } = usePack({
     contentId,
@@ -263,6 +268,10 @@ export default function QuizScreen() {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     } else {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+      // In hardcore mode, auto-advance after a short delay without revealing the answer
+      if (hardcore) {
+        setTimeout(() => onNext(), 900);
+      }
     }
   }
 
@@ -278,6 +287,7 @@ export default function QuizScreen() {
           lang,
           correct: String(correctCountRef.current),
           total: String(total),
+          ...(hardcore && { hardcore: "true" }),
         },
       });
       return;
@@ -312,6 +322,7 @@ export default function QuizScreen() {
         <Text className="text-[#AAB0C0] text-[13px] mt-1">
           {pack?.lesson?.title ?? t("common.content")} •{" "}
           {total ? `${qIndex + 1}/${total}` : ""}
+          {hardcore ? "  ⚡ HARDCORE" : ""}
         </Text>
 
         <Box className="h-[1px] bg-[#1A2233] mt-4" />
@@ -381,6 +392,7 @@ export default function QuizScreen() {
                   optionIndex: idx,
                   selectedIndex,
                   correctIndex: shuffled?.answerIndex ?? current.answerIndex,
+                  hardcore,
                 });
                 return (
                   <OptionRow
