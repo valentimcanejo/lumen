@@ -393,7 +393,9 @@
     "streak_risk_title": "🔥 ¡No rompas tu racha!",
     "streak_risk_body": "Tu racha de {{count}} día(s) termina esta noche. ¡Completa una lección!",
     "daily_mission_title": "📋 ¡Tus misiones de hoy están listas!",
-    "daily_mission_body": "Completa tus misiones diarias y gana XP extra."
+    "daily_mission_body": "Completa tus misiones diarias y gana XP extra.",
+    "smart_reminder_title": "⚡ ¡Hora de aprender!",
+    "smart_reminder_body": "Tu sesión de hoy está esperando. Sigue creciendo."
   },
   "support": {
     "title": "Reportar un problema",

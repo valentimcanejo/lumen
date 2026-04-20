@@ -30,6 +30,7 @@ import {
 import {
   scheduleReviewReminder,
   scheduleStreakRiskNotification,
+  recordSessionAndScheduleSmartReminder,
 } from "../../services/notifications.service";
 import { upsertLeaderboardEntry } from "../../repositories/leaderboard.repo";
 import { auth } from "../../firebase/firebaseConfig";
@@ -718,6 +719,12 @@ export default function SummaryScreen() {
           newStreak,
           t("notifications.streak_risk_title"),
           t("notifications.streak_risk_body", { count: newStreak }),
+        ).catch(() => {});
+
+        // Smart daily reminder — records this session's hour and adapts schedule
+        recordSessionAndScheduleSmartReminder(
+          t("notifications.smart_reminder_title"),
+          t("notifications.smart_reminder_body"),
         ).catch(() => {});
 
         // Schedule review notification if there are due cards

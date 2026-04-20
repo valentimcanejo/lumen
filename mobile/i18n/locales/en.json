@@ -393,7 +393,9 @@
     "streak_risk_title": "🔥 Don't break your streak!",
     "streak_risk_body": "Your {{count}}-day streak ends tonight. Complete a lesson!",
     "daily_mission_title": "📋 Today's missions are ready!",
-    "daily_mission_body": "Complete your daily missions and earn bonus XP."
+    "daily_mission_body": "Complete your daily missions and earn bonus XP.",
+    "smart_reminder_title": "⚡ Time to learn!",
+    "smart_reminder_body": "Your session is waiting. Keep growing."
   },
   "support": {
     "title": "Report a problem",

@@ -393,7 +393,9 @@
     "streak_risk_title": "🔥 Não quebre sua sequência!",
     "streak_risk_body": "Sua sequência de {{count}} dia(s) termina esta noite. Complete uma lição!",
     "daily_mission_title": "📋 Suas missões de hoje estão prontas!",
-    "daily_mission_body": "Complete suas missões diárias e ganhe XP bônus."
+    "daily_mission_body": "Complete suas missões diárias e ganhe XP bônus.",
+    "smart_reminder_title": "⚡ Hora de aprender!",
+    "smart_reminder_body": "Sua sessão de hoje está esperando. Continue evoluindo."
   },
   "support": {
     "title": "Reportar um problema",
