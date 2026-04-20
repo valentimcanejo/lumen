@@ -10,6 +10,10 @@ export type StreakInfo = {
   best: number;
   lastStudyDate?: string; // "YYYY-MM-DD"
   shields: number;
+  recoverable?: boolean;
+  recoverablePrevStreak?: number;
+  recoverySessions?: number;
+  recoverableUntil?: number; // ms timestamp
 };
 
 export type AchievementId =

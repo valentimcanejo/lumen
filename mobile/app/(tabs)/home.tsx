@@ -788,7 +788,7 @@ export default function Home() {
           </Pressable>
         </View>
 
-        {/* XP progress bar */}
+{/* XP progress bar */}
         <View style={hd.xpBarTrack}>
           <View
             style={[
@@ -798,6 +798,19 @@ export default function Home() {
           />
         </View>
       </View>
+
+      {/* ── Streak recovery banner ─────────────────────────────── */}
+      {user?.streak?.recoverable && Date.now() < (user.streak.recoverableUntil ?? 0) && (
+        <View style={hd.recoveryBanner}>
+          <Text style={{ fontSize: 18 }}>🔥</Text>
+          <View style={{ flex: 1 }}>
+            <Text style={hd.recoveryTitle}>{t("tabs.home.streak_recovery_title")}</Text>
+            <Text style={hd.recoverySubtitle}>
+              {t("tabs.home.streak_recovery_subtitle", { count: 2 - (user.streak.recoverySessions ?? 0) })}
+            </Text>
+          </View>
+        </View>
+      )}
 
       {/* ── Lição de hoje ──────────────────────────────────────── */}
       {loadingUser && (
@@ -1116,6 +1129,29 @@ const hd = StyleSheet.create({
     paddingVertical: 1,
   },
   shieldNum: { color: "#7B8FE0", fontSize: 10, fontWeight: "700" },
+  recoveryBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    marginHorizontal: 20,
+    marginTop: 12,
+    backgroundColor: "#1A130A",
+    borderWidth: 1,
+    borderColor: "#F5C77A30",
+    borderRadius: 14,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+  },
+  recoveryTitle: {
+    color: "#F5C77A",
+    fontSize: 13,
+    fontWeight: "700",
+  },
+  recoverySubtitle: {
+    color: "#AAB0C0",
+    fontSize: 12,
+    marginTop: 2,
+  },
   levelGroup: {
     flexDirection: "row",
     alignItems: "center",

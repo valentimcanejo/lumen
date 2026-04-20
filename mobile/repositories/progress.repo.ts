@@ -19,7 +19,7 @@ import {
   getDocData,
   updateDocData,
 } from "../services/firestore.service";
-import type { UserProfile, AchievementId } from "../models/user";
+import type { UserProfile, AchievementId, StreakInfo } from "../models/user";
 import { xpToLevel } from "../models/user";
 import { getMissionsForDate, WEEKLY_MISSIONS_DEFAULT } from "./missions.repo";
 import { getCurrentWeekId } from "./leaderboard.repo";
@@ -458,6 +458,9 @@ export type FinishSessionResult = {
   prevLevel: number;
   shieldEarned: boolean;
   newStreak: number;
+  streakRecoverable?: boolean;
+  streakRecoverySessions?: number;
+  streakRecoveryCompleted?: boolean;
 };
 
 /**
@@ -520,11 +523,53 @@ export async function finishSession(
   const prevStreakCurrent = user.streak?.current ?? 0;
   let streakCurrent = prevStreakCurrent;
   let shields = user.streak?.shields ?? 0;
+  const isPremium = user.premium?.isActive ?? false;
 
-  if (last === date) { /* already counted today */ }
-  else if (!last || todayN === lastN + 1) { streakCurrent += 1; }
-  // shields disabled — else if (shields > 0) { shields -= 1; }
-  else { streakCurrent = 1; }
+  let streakRecoverable: boolean | undefined;
+  let streakRecoverySessions: number | undefined;
+  let streakRecoveryCompleted: boolean | undefined;
+  let newRecoveryFields: Partial<StreakInfo> = {};
+
+  if (last === date) {
+    // Same day — check if user is completing a recovery (2nd session)
+    if (
+      user.streak?.recoverable &&
+      user.streak.recoverySessions === 1 &&
+      Date.now() < (user.streak.recoverableUntil ?? 0)
+    ) {
+      streakCurrent = (user.streak.recoverablePrevStreak ?? prevStreakCurrent) + 1;
+      streakRecoveryCompleted = true;
+      newRecoveryFields = { recoverable: false, recoverySessions: 0, recoverablePrevStreak: 0, recoverableUntil: 0 };
+    }
+  } else if (!last || todayN === lastN + 1) {
+    streakCurrent += 1;
+    // Clear any lingering recovery state when streak is naturally extended
+    if (user.streak?.recoverable) {
+      newRecoveryFields = { recoverable: false, recoverySessions: 0, recoverablePrevStreak: 0, recoverableUntil: 0 };
+    }
+  } else {
+    // Streak break
+    const inRecovery = user.streak?.recoverable && Date.now() < (user.streak.recoverableUntil ?? 0);
+    if (inRecovery) {
+      // Already had session 1; this session on a new day still within window counts as session 2
+      streakCurrent = (user.streak!.recoverablePrevStreak ?? prevStreakCurrent) + 1;
+      streakRecoveryCompleted = true;
+      newRecoveryFields = { recoverable: false, recoverySessions: 0, recoverablePrevStreak: 0, recoverableUntil: 0 };
+    } else if (isPremium && prevStreakCurrent > 1) {
+      // Start recovery window — premium perk
+      streakCurrent = prevStreakCurrent; // streak unchanged during recovery
+      streakRecoverable = true;
+      streakRecoverySessions = 1;
+      newRecoveryFields = {
+        recoverable: true,
+        recoverablePrevStreak: prevStreakCurrent,
+        recoverySessions: 1,
+        recoverableUntil: Date.now() + 24 * 60 * 60 * 1000,
+      };
+    } else {
+      streakCurrent = 1;
+    }
+  }
 
   // shields disabled — no longer awarded on 7-day milestones
   const shieldEarned = false;
@@ -642,7 +687,7 @@ export async function finishSession(
   // ── Achievements (computed against updated state) ─────────────────────────
   const updatedUser: UserProfile = {
     ...user,
-    streak: { current: streakCurrent, best: streakBest, shields, lastStudyDate: date },
+    streak: { current: streakCurrent, best: streakBest, shields, lastStudyDate: date, ...newRecoveryFields },
     xp: newXp,
     level: newLevel,
     totalSessions,
@@ -655,7 +700,7 @@ export async function finishSession(
 
   // ── Single write ─────────────────────────────────────────────────────────
   await updateDocData<UserProfile>(`users/${uid}`, {
-    streak: { current: streakCurrent, best: streakBest, shields, lastStudyDate: date },
+    streak: { current: streakCurrent, best: streakBest, shields, lastStudyDate: date, ...newRecoveryFields },
     xp: newXp,
     level: newLevel,
     totalSessions,
@@ -672,7 +717,7 @@ export async function finishSession(
     updatedAt: Date.now(),
   });
 
-  return { gained, base, quizBonus, missionBonus, weeklyMissionBonus, starterBonus, starterDaysCompleted, newWeeklyMissionIds, newAchievementIds, leveledUp: newLevel > prevLevel, newLevel, prevLevel, shieldEarned, newStreak: streakCurrent };
+  return { gained, base, quizBonus, missionBonus, weeklyMissionBonus, starterBonus, starterDaysCompleted, newWeeklyMissionIds, newAchievementIds, leveledUp: newLevel > prevLevel, newLevel, prevLevel, shieldEarned, newStreak: streakCurrent, streakRecoverable, streakRecoverySessions, streakRecoveryCompleted };
 }
 
 // ---------------------------------------------------------------------------

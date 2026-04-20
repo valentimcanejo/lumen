@@ -119,6 +119,8 @@
       "welcome_back_no_streak": "¿Listo para aprender algo nuevo hoy?",
       "welcome_back_cta": "Comenzar sesión",
       "done_today": "Completado hoy",
+      "streak_recovery_title": "¡Tu racha está en riesgo!",
+      "streak_recovery_subtitle": "Completa {{count}} sesión(es) más hoy para recuperarla",
       "redo": "Repetir",
       "review_due": "{{count}} tarjeta(s) para repasar",
       "start_review": "Repasar ahora",
