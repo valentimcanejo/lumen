@@ -18,6 +18,14 @@
     "cancel": "Cancel",
     "close": "Close"
   },
+  "glossary": {
+    "title": "Personal glossary",
+    "shortcut_title": "Personal glossary",
+    "shortcut_subtitle": "Terms from all completed lessons",
+    "search_placeholder": "Search term…",
+    "empty": "Complete some lessons to build your glossary.",
+    "no_results": "No terms found."
+  },
   "certificate": {
     "label": "Certificate of Completion",
     "this_certifies": "This certifies that",

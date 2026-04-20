@@ -18,6 +18,14 @@
     "cancel": "Cancelar",
     "close": "Fechar"
   },
+  "glossary": {
+    "title": "Glossário pessoal",
+    "shortcut_title": "Glossário pessoal",
+    "shortcut_subtitle": "Termos de todas as lições concluídas",
+    "search_placeholder": "Buscar termo…",
+    "empty": "Conclua algumas lições para construir seu glossário.",
+    "no_results": "Nenhum termo encontrado."
+  },
   "certificate": {
     "label": "Certificado de Conclusão",
     "this_certifies": "Certificamos que",

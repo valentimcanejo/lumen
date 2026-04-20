@@ -728,6 +728,21 @@ function WeeklyReportCard({ report, tracks }: { report: WeeklyReport | null | "l
   );
 }
 
+const pg = StyleSheet.create({
+  glossaryBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#111827",
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
+  },
+  glossaryLeft: { flexDirection: "row", alignItems: "center", gap: 12, flex: 1 },
+  glossaryTitle: { color: "#E6EAF2", fontSize: 14, fontWeight: "600" },
+  glossarySubtitle: { color: "#7B8193", fontSize: 12, marginTop: 2 },
+});
+
 const wr = StyleSheet.create({
   container: { marginBottom: 24 },
   header: { flexDirection: "row", alignItems: "center", marginBottom: 12, gap: 8 },
@@ -1012,6 +1027,21 @@ export default function ProfileScreen() {
             {/* Weekly AI report — premium only */}
             {isPremium && (
               <>
+                {/* Glossary shortcut */}
+                <Pressable
+                  onPress={() => router.push("/glossary")}
+                  style={pg.glossaryBtn}
+                >
+                  <View style={pg.glossaryLeft}>
+                    <Text style={{ fontSize: 20 }}>📖</Text>
+                    <View>
+                      <Text style={pg.glossaryTitle}>{t("glossary.shortcut_title")}</Text>
+                      <Text style={pg.glossarySubtitle}>{t("glossary.shortcut_subtitle")}</Text>
+                    </View>
+                  </View>
+                  <Ionicons name="chevron-forward" size={16} color="#7B8193" />
+                </Pressable>
+
                 <WeeklyReportCard report={weeklyReport} tracks={tracks} />
                 <MonthlyReportCard report={monthlyReport} />
               </>

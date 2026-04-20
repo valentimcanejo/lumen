@@ -47,6 +47,7 @@ import {
   getLessonMeta,
 } from "../../repositories/lessons.repo";
 import { getCompletedContentIds, getSavedContentIds } from "../../repositories/user.repo";
+import { saveGlossaryForLesson } from "../../repositories/glossary.repo";
 import type { Lang } from "../../models/lang";
 import type { AchievementId } from "../../models/user";
 import { getLevelTier, xpToLevel, type TierInfo } from "../../models/user";
@@ -665,6 +666,18 @@ export default function SummaryScreen() {
         const sessionResult = await finishSession(uid, { date, contentId, quizScore, quizDone, completedTrackCount, totalTrackCount, hardcore });
 
         // After finishSession, the remaining writes touch different paths — safe to parallelize.
+        // Save glossary entries from this lesson's cards (fire-and-forget)
+        if (pack?.cards?.length) {
+          const meta = getLessonMeta(contentId);
+          saveGlossaryForLesson(uid, {
+            contentId,
+            trackId: meta?.trackId ?? "",
+            lessonTitle: meta?.title?.[lang as Lang] ?? contentId,
+            lang,
+            entries: pack.cards.map((c) => ({ term: c.front, definition: c.back })),
+          }).catch(() => {});
+        }
+
         await Promise.all([
           markDayCompleted(uid, date, {
             contentId,
