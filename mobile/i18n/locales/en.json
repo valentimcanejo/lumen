@@ -15,7 +15,16 @@
     "content": "Content",
     "error_not_found": "Content not found.",
     "error_connect": "Could not connect. Please try again.",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "close": "Close"
+  },
+  "certificate": {
+    "label": "Certificate of Completion",
+    "this_certifies": "This certifies that",
+    "completed": "has successfully completed the track",
+    "share_title": "Share certificate",
+    "share": "Share",
+    "default_name": "Lumen Explorer"
   },
   "onboarding": {
     "welcome": {

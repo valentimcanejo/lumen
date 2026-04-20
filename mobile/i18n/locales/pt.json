@@ -15,7 +15,16 @@
     "content": "Conteúdo",
     "error_not_found": "Conteúdo não encontrado.",
     "error_connect": "Não foi possível conectar. Tente novamente.",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "close": "Fechar"
+  },
+  "certificate": {
+    "label": "Certificado de Conclusão",
+    "this_certifies": "Certificamos que",
+    "completed": "concluiu com êxito a trilha",
+    "share_title": "Compartilhar certificado",
+    "share": "Compartilhar",
+    "default_name": "Explorador Lumen"
   },
   "onboarding": {
     "welcome": {

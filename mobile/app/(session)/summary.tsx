@@ -37,6 +37,7 @@ import { toggleSaveContent, markContentCompleted } from "../../repositories/user
 import { invalidateUserCache } from "../../hooks/useUser";
 import { incrementContentCompletion } from "../../repositories/content_stats.repo";
 import { ACHIEVEMENTS, type AchievementDef } from "../../repositories/achievements.repo";
+import { CertificateModal } from "./_components/CertificateModal";
 import { todayYmd } from "../../repositories/session.repo";
 import { usePack } from "../../hooks/usePack";
 import {
@@ -580,6 +581,7 @@ export default function SummaryScreen() {
   const [bookmarked, setBookmarked] = useState(false);
   const [confettiActive, setConfettiActive] = useState(false);
   const [levelUpInfo, setLevelUpInfo] = useState<{ level: number; tier: TierInfo } | null>(null);
+  const [certificateInfo, setCertificateInfo] = useState<{ trackId: string; trackName: string; userName: string } | null>(null);
   const completedIdsRef = useRef<string[]>([]);
 
   // Auto-save once uid is available (uid may be null on first render if auth
@@ -644,9 +646,12 @@ export default function SummaryScreen() {
         const quizDone = Number(total ?? 0) > 0;
 
         // Compute track completion (include current contentId as it's being completed)
+        const tracksBefore = getCompletedTracks(completedIdsRef.current);
         const withCurrent = [...new Set([...completedIdsRef.current, contentId])];
-        const completedTrackCount = getCompletedTracks(withCurrent).length;
+        const tracksAfter = getCompletedTracks(withCurrent);
+        const completedTrackCount = tracksAfter.length;
         const totalTrackCount = getAllTrackIds().length;
+        const newlyCompletedTrackId = tracksAfter.find((id) => !tracksBefore.includes(id));
 
         // estimatedMinutes: prefer loaded pack, fall back to bundled meta (always available)
         const estimatedMinutes =
@@ -698,6 +703,16 @@ export default function SummaryScreen() {
         // Invalidate cache so next home load gets fresh user data
         invalidateUserCache(uid);
 
+        // Show certificate if a track was just fully completed
+        if (newlyCompletedTrackId) {
+          const { getTracks } = await import("../../repositories/tracks.repo");
+          const tracks = await getTracks();
+          const track = tracks.find((tr) => tr.id === newlyCompletedTrackId);
+          const trackName = track?.title?.[lang as Lang] ?? newlyCompletedTrackId;
+          const userName = auth.currentUser?.displayName ?? t("certificate.default_name");
+          setCertificateInfo({ trackId: newlyCompletedTrackId, trackName, userName });
+        }
+
         // Streak at-risk notification for tomorrow 8 pm
         scheduleStreakRiskNotification(
           newStreak,
@@ -732,6 +747,16 @@ export default function SummaryScreen() {
       <AchievementToast achievements={newAchievements} />
       {levelUpInfo && (
         <LevelUpModal info={levelUpInfo} onDismiss={() => setLevelUpInfo(null)} />
+      )}
+      {certificateInfo && (
+        <CertificateModal
+          visible
+          trackId={certificateInfo.trackId}
+          trackName={certificateInfo.trackName}
+          userName={certificateInfo.userName}
+          completedDate={todayYmd()}
+          onClose={() => setCertificateInfo(null)}
+        />
       )}
 
       <Box className="px-5" style={{ paddingTop: insets.top + 8 }}>
