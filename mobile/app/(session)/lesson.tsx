@@ -37,6 +37,7 @@ import { trackColor } from "../../constants/tracks";
 import { getCoverImage } from "../../constants/covers";
 import { getLessonMeta } from "../../repositories/lessons.repo";
 import { CoverImage } from "../../components/ui/lumen/CoverImage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getStorageDownloadUrl } from "../../services/storage.service";
 import { generateAudio } from "../../services/functions.service";
 import type { Lang } from "../../models/lang";
@@ -260,6 +261,24 @@ export default function LessonScreen() {
   const [playing, setPlaying] = useState(false);
   const [positionMs, setPositionMs] = useState(0);
   const [durationMs, setDurationMs] = useState(0);
+  const [playbackRate, setPlaybackRate] = useState(1.0);
+
+  const RATE_KEY = "audio_playback_rate";
+  const RATES = [0.75, 1.0, 1.25, 1.5];
+
+  useEffect(() => {
+    AsyncStorage.getItem(RATE_KEY).then((val) => {
+      if (val) setPlaybackRate(parseFloat(val));
+    });
+  }, []);
+
+  async function handleRateChange(rate: number) {
+    setPlaybackRate(rate);
+    AsyncStorage.setItem(RATE_KEY, String(rate));
+    if (soundRef.current) {
+      await soundRef.current.setRateAsync(rate, true);
+    }
+  }
 
   // Refs para o slider — lidos dentro do PanResponder (criado uma vez)
   const audioReadyRef = useRef(false);
@@ -379,6 +398,7 @@ export default function LessonScreen() {
         }
 
         soundRef.current = sound;
+        await sound.setRateAsync(playbackRate, true);
 
         sound.setOnPlaybackStatusUpdate((status) => {
           if (!status.isLoaded) return;
@@ -594,6 +614,25 @@ export default function LessonScreen() {
               </View>
             </View>
 
+            {audioReady && (
+              <View style={ls.rateRow}>
+                {RATES.map((r) => (
+                  <TouchableOpacity
+                    key={r}
+                    onPress={() => handleRateChange(r)}
+                    style={[
+                      ls.rateBtn,
+                      playbackRate === r && { borderColor: color, backgroundColor: color + "20" },
+                    ]}
+                  >
+                    <Text style={[ls.rateBtnText, playbackRate === r && { color }]}>
+                      {r === 1.0 ? "1×" : `${r}×`}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            )}
+
             {pack.lesson.summary ? (
               <Text style={ls.summaryText}>{pack.lesson.summary}</Text>
             ) : null}
@@ -724,6 +763,24 @@ const ls = StyleSheet.create({
     height: 14,
     borderRadius: 7,
     marginLeft: -7,
+  },
+  rateRow: {
+    flexDirection: "row",
+    gap: 6,
+    marginTop: 12,
+    justifyContent: "flex-end",
+  },
+  rateBtn: {
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#2A3347",
+  },
+  rateBtnText: {
+    color: "#7B8193",
+    fontSize: 12,
+    fontWeight: "600",
   },
   summaryText: {
     color: "#7B8193",
