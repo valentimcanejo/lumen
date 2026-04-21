@@ -281,7 +281,8 @@
       "hardcore_mode": "⚡ Hardcore Mode",
       "audio_premium_title": "Audio narration",
       "audio_premium_desc": "Listen to the lesson with high-quality narration while driving or walking.",
-      "audio_premium_cta": "Unlock Premium"
+      "audio_premium_cta": "Unlock Premium",
+      "audio_generating": "You're the first to explore this lesson — preparing exclusive narration…"
     },
     "cards": {
       "step": "2 / 4",

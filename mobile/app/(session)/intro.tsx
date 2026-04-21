@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -15,6 +15,7 @@ import { trackColor, trackBg } from "../../constants/tracks";
 import { incrementContentStart } from "../../repositories/content_stats.repo";
 import { getLessonMeta } from "../../repositories/lessons.repo";
 import { usePremium } from "../../hooks/usePremium";
+import { getStorageDownloadUrl } from "../../services/storage.service";
 import type { Lang } from "../../models/lang";
 
 const DIFFICULTY_LABELS: Record<string, Record<Lang, string>> = {
@@ -51,6 +52,16 @@ export default function LessonIntroScreen() {
   const diffLabel = DIFFICULTY_LABELS[difficulty]?.[lang ?? "pt"] ?? difficulty;
   const diffColor = DIFFICULTY_COLORS[difficulty] ?? "#AAB0C0";
   const isPremiumLocked = lessonMeta?.tier === "premium" && !isPremium;
+
+  // Pre-warm the audio download URL while user reads the intro.
+  // If the URL resolves, lesson.tsx skips the generation step entirely.
+  // If it fails (audio not yet generated), lesson.tsx handles generation
+  // and shows the "first explorer" message.
+  useEffect(() => {
+    if (!isPremium) return;
+    const storagePath = `packs/${contentId}/v${version}/audio/${lang}_gpt.mp3`;
+    getStorageDownloadUrl(storagePath).catch(() => {});
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function startLesson() {
     if (isPremiumLocked) {

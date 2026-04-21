@@ -260,6 +260,7 @@ export default function LessonScreen() {
   const soundRef = useRef<Audio.Sound | null>(null);
   const [audioReady, setAudioReady] = useState(false);
   const [audioLoading, setAudioLoading] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [positionMs, setPositionMs] = useState(0);
   const [durationMs, setDurationMs] = useState(0);
@@ -375,15 +376,11 @@ export default function LessonScreen() {
         try {
           url = await getStorageDownloadUrl(storagePath);
         } catch (e) {
-          // Audio not yet generated — call Cloud Function with extracted text, then retry
+          // Audio not yet generated — this user is the first to open this lesson
+          setIsGenerating(true);
           const text = extractText(pack.lesson.blocks);
-
-          await generateAudio({
-            contentId,
-            version: Number(version),
-            lang,
-            text,
-          });
+          await generateAudio({ contentId, version: Number(version), lang, text });
+          setIsGenerating(false);
           url = await getStorageDownloadUrl(storagePath);
         }
 
@@ -583,9 +580,7 @@ export default function LessonScreen() {
                 <Text style={ls.timeLabel}>
                   {audioReady
                     ? `${formatMs(positionMs)} / ${formatMs(durationMs)}`
-                    : audioLoading
-                      ? t("common.loading")
-                      : "--:-- / --:--"}
+                    : "..."}
                 </Text>
               </View>
 
@@ -639,6 +634,15 @@ export default function LessonScreen() {
               {pack.lesson.summary ? (
                 <Text style={ls.summaryText}>{pack.lesson.summary}</Text>
               ) : null}
+
+              {isGenerating && (
+                <View style={ls.audioHint}>
+                  <Ionicons name="star-outline" size={13} color="#F5C77A" />
+                  <Text style={[ls.audioHintText, { color: "#F5C77A" }]}>
+                    {t("session.lesson.audio_generating")}
+                  </Text>
+                </View>
+              )}
 
               {audioReady && (
                 <View style={ls.audioHint}>
