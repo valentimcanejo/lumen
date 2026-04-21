@@ -361,9 +361,9 @@ export default function LessonScreen() {
     }).catch(() => {});
   }, []);
 
-  // Prepare audio when pack is ready
+  // Prepare audio when pack is ready — premium only
   useEffect(() => {
-    if (!pack || !uid) return;
+    if (!pack || !uid || !isPremium) return;
     let cancelled = false;
 
     async function prepareAudio() {
@@ -544,110 +544,137 @@ export default function LessonScreen() {
 
           <View style={ls.divider} />
 
-          {/* Audio player */}
-          <View
-            style={[
-              ls.playerCard,
-              { borderColor: color + "30", borderLeftColor: color + "70" },
-            ]}
-          >
-            <View style={ls.playerRow}>
-              <TouchableOpacity
-                onPress={handlePlayPause}
-                activeOpacity={0.65}
-                disabled={!audioReady}
-                style={[
-                  as.playBtn,
-                  {
-                    borderColor: color + "55",
-                    backgroundColor: color + "15",
-                    opacity: audioReady ? 1 : 0.4,
-                  },
-                ]}
-              >
-                {showLoadingIcon ? (
-                  <SpinningLoader color={color} />
-                ) : (
-                  <Ionicons
-                    name={playIconName}
-                    size={18}
-                    color={color}
-                    style={{ marginLeft: playing ? 0 : 2 }}
-                  />
-                )}
-              </TouchableOpacity>
-
-              <Waveform progress={audioProgress} color={color} />
-
-              <Text style={ls.timeLabel}>
-                {audioReady
-                  ? `${formatMs(positionMs)} / ${formatMs(durationMs)}`
-                  : audioLoading
-                    ? t("common.loading")
-                    : "--:-- / --:--"}
-              </Text>
-            </View>
-
+          {/* Audio player — premium only */}
+          {isPremium ? (
             <View
-              ref={progressBarRef}
-              onLayout={() => {
-                progressBarRef.current?.measureInWindow((x, _y, width) => {
-                  progressBarLayout.current = { x, width: width || 1 };
-                });
-              }}
-              {...panResponder.panHandlers}
-              style={ls.progressHitArea}
+              style={[
+                ls.playerCard,
+                { borderColor: color + "30", borderLeftColor: color + "70" },
+              ]}
             >
-              <View style={ls.progressTrack}>
-                <View
+              <View style={ls.playerRow}>
+                <TouchableOpacity
+                  onPress={handlePlayPause}
+                  activeOpacity={0.65}
+                  disabled={!audioReady}
                   style={[
-                    ls.progressFill,
-                    { width: `${audioProgress * 100}%`, backgroundColor: color },
+                    as.playBtn,
+                    {
+                      borderColor: color + "55",
+                      backgroundColor: color + "15",
+                      opacity: audioReady ? 1 : 0.4,
+                    },
                   ]}
-                />
-                {audioReady && (
-                  <View
-                    style={[
-                      ls.progressThumb,
-                      { left: `${audioProgress * 100}%` as any, backgroundColor: color },
-                    ]}
-                  />
-                )}
-              </View>
-            </View>
+                >
+                  {showLoadingIcon ? (
+                    <SpinningLoader color={color} />
+                  ) : (
+                    <Ionicons
+                      name={playIconName}
+                      size={18}
+                      color={color}
+                      style={{ marginLeft: playing ? 0 : 2 }}
+                    />
+                  )}
+                </TouchableOpacity>
 
-            {audioReady && (
-              <View style={ls.rateRow}>
-                {RATES.map((r) => (
-                  <TouchableOpacity
-                    key={r}
-                    onPress={() => handleRateChange(r)}
-                    style={[
-                      ls.rateBtn,
-                      playbackRate === r && { borderColor: color, backgroundColor: color + "20" },
-                    ]}
-                  >
-                    <Text style={[ls.rateBtnText, playbackRate === r && { color }]}>
-                      {r === 1.0 ? "1×" : `${r}×`}
-                    </Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
-            )}
+                <Waveform progress={audioProgress} color={color} />
 
-            {pack.lesson.summary ? (
-              <Text style={ls.summaryText}>{pack.lesson.summary}</Text>
-            ) : null}
-
-            {audioReady && (
-              <View style={ls.audioHint}>
-                <Ionicons name="headset-outline" size={13} color="#4A5568" />
-                <Text style={ls.audioHintText}>
-                  {t("session.lesson.audio_hint")}
+                <Text style={ls.timeLabel}>
+                  {audioReady
+                    ? `${formatMs(positionMs)} / ${formatMs(durationMs)}`
+                    : audioLoading
+                      ? t("common.loading")
+                      : "--:-- / --:--"}
                 </Text>
               </View>
-            )}
-          </View>
+
+              <View
+                ref={progressBarRef}
+                onLayout={() => {
+                  progressBarRef.current?.measureInWindow((x, _y, width) => {
+                    progressBarLayout.current = { x, width: width || 1 };
+                  });
+                }}
+                {...panResponder.panHandlers}
+                style={ls.progressHitArea}
+              >
+                <View style={ls.progressTrack}>
+                  <View
+                    style={[
+                      ls.progressFill,
+                      { width: `${audioProgress * 100}%`, backgroundColor: color },
+                    ]}
+                  />
+                  {audioReady && (
+                    <View
+                      style={[
+                        ls.progressThumb,
+                        { left: `${audioProgress * 100}%` as any, backgroundColor: color },
+                      ]}
+                    />
+                  )}
+                </View>
+              </View>
+
+              {audioReady && (
+                <View style={ls.rateRow}>
+                  {RATES.map((r) => (
+                    <TouchableOpacity
+                      key={r}
+                      onPress={() => handleRateChange(r)}
+                      style={[
+                        ls.rateBtn,
+                        playbackRate === r && { borderColor: color, backgroundColor: color + "20" },
+                      ]}
+                    >
+                      <Text style={[ls.rateBtnText, playbackRate === r && { color }]}>
+                        {r === 1.0 ? "1×" : `${r}×`}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              )}
+
+              {pack.lesson.summary ? (
+                <Text style={ls.summaryText}>{pack.lesson.summary}</Text>
+              ) : null}
+
+              {audioReady && (
+                <View style={ls.audioHint}>
+                  <Ionicons name="headset-outline" size={13} color="#4A5568" />
+                  <Text style={ls.audioHintText}>
+                    {t("session.lesson.audio_hint")}
+                  </Text>
+                </View>
+              )}
+            </View>
+          ) : (
+            /* Locked audio card for free users */
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => router.push("/(premium)/paywall")}
+              style={[ls.playerCard, ls.playerCardLocked, { borderColor: "#2A3347" }]}
+            >
+              <View style={ls.lockedRow}>
+                <View style={[as.playBtn, ls.lockedPlayBtn]}>
+                  <Ionicons name="headset-outline" size={18} color="#4A5568" />
+                </View>
+                <Waveform progress={0} color="#2A3347" />
+                <View style={[ls.premiumBadge, { backgroundColor: color + "20", borderColor: color + "40" }]}>
+                  <Ionicons name="star" size={10} color={color} />
+                  <Text style={[ls.premiumBadgeText, { color }]}>Premium</Text>
+                </View>
+              </View>
+              <View style={ls.lockedInfo}>
+                <Text style={ls.lockedTitle}>{t("session.lesson.audio_premium_title")}</Text>
+                <Text style={ls.lockedDesc}>{t("session.lesson.audio_premium_desc")}</Text>
+                <View style={[ls.lockedCta, { backgroundColor: color }]}>
+                  <Text style={ls.lockedCtaText}>{t("session.lesson.audio_premium_cta")}</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          )}
 
           <LessonBlocks blocks={pack.lesson.blocks} />
 
@@ -852,5 +879,56 @@ const ls = StyleSheet.create({
   saveBtnText: {
     fontSize: 16,
     fontWeight: "600",
+  },
+  playerCardLocked: {
+    borderLeftWidth: 1,
+    opacity: 0.9,
+  },
+  lockedRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  lockedPlayBtn: {
+    borderColor: "#2A3347",
+    backgroundColor: "#1A2233",
+  },
+  premiumBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 8,
+    borderWidth: 1,
+  },
+  premiumBadgeText: {
+    fontSize: 11,
+    fontWeight: "700",
+  },
+  lockedInfo: {
+    marginTop: 14,
+    gap: 6,
+  },
+  lockedTitle: {
+    color: "#AAB0C0",
+    fontSize: 14,
+    fontWeight: "700",
+  },
+  lockedDesc: {
+    color: "#4A5568",
+    fontSize: 12,
+    lineHeight: 18,
+  },
+  lockedCta: {
+    marginTop: 10,
+    height: 40,
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  lockedCtaText: {
+    color: "#0B0F14",
+    fontSize: 14,
+    fontWeight: "700",
   },
 });

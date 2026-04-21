@@ -270,6 +270,7 @@
     "intro": {
       "start": "Start lesson",
       "includes_lesson": "Reading with narration",
+      "includes_lesson_free": "Reading",
       "includes_cards": "Review cards",
       "includes_quiz": "Knowledge quiz"
     },
@@ -277,7 +278,10 @@
       "step": "1 / 4",
       "loading": "Preparing content…",
       "audio_hint": "You can lock the screen — audio keeps playing.",
-      "hardcore_mode": "⚡ Hardcore Mode"
+      "hardcore_mode": "⚡ Hardcore Mode",
+      "audio_premium_title": "Audio narration",
+      "audio_premium_desc": "Listen to the lesson with high-quality narration while driving or walking.",
+      "audio_premium_cta": "Unlock Premium"
     },
     "cards": {
       "step": "2 / 4",

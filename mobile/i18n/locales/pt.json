@@ -270,6 +270,7 @@
     "intro": {
       "start": "Começar lição",
       "includes_lesson": "Leitura com narração",
+      "includes_lesson_free": "Leitura",
       "includes_cards": "Cards de revisão",
       "includes_quiz": "Quiz de fixação"
     },
@@ -277,7 +278,10 @@
       "step": "1 / 4",
       "loading": "Preparando conteúdo…",
       "audio_hint": "Pode fechar a tela — o áudio continua reproduzindo.",
-      "hardcore_mode": "⚡ Modo Hardcore"
+      "hardcore_mode": "⚡ Modo Hardcore",
+      "audio_premium_title": "Narração em áudio",
+      "audio_premium_desc": "Ouça a lição com narração de alta qualidade enquanto dirige ou caminha.",
+      "audio_premium_cta": "Desbloquear Premium"
     },
     "cards": {
       "step": "2 / 4",

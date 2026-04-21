@@ -67,7 +67,7 @@ export default function LessonIntroScreen() {
   const STEPS = [
     {
       icon: "book-outline" as const,
-      labelKey: "session.intro.includes_lesson",
+      labelKey: isPremium ? "session.intro.includes_lesson" : "session.intro.includes_lesson_free",
     },
     {
       icon: "layers-outline" as const,
