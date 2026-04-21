@@ -211,6 +211,49 @@ function AchievementToast({
 }
 
 // ---------------------------------------------------------------------------
+// Streak recovery toast
+// ---------------------------------------------------------------------------
+
+function StreakRecoveryToast({ streak }: { streak: number }) {
+  const { t } = useTranslation();
+  const opacity = useSharedValue(0);
+  const translateY = useSharedValue(20);
+
+  useEffect(() => {
+    opacity.value = withDelay(600, withSequence(
+      withTiming(1, { duration: 300 }),
+      withDelay(2500, withTiming(0, { duration: 400 })),
+    ));
+    translateY.value = withDelay(600, withTiming(0, { duration: 300 }));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const style = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+    transform: [{ translateY: translateY.value }],
+  }));
+
+  return (
+    <Animated.View
+      style={[style, { position: "absolute", top: 100, left: 20, right: 20, zIndex: 99 }]}
+    >
+      <Box className="bg-[#1A2233] border border-[#F5A623]/40 rounded-2xl px-5 py-4">
+        <HStack space="sm" className="items-center">
+          <Text className="text-[22px]">🔥</Text>
+          <VStack>
+            <Text className="text-[#F5A623] text-[13px] font-bold">
+              {t("session.summary.streak_recovered")}
+            </Text>
+            <Text className="text-[#AAB0C0] text-[12px]">
+              {t("session.summary.streak_recovered_body", { count: streak })}
+            </Text>
+          </VStack>
+        </HStack>
+      </Box>
+    </Animated.View>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Level-up modal (full-screen celebration)
 // ---------------------------------------------------------------------------
 
@@ -585,6 +628,7 @@ export default function SummaryScreen() {
   const [bookmarked, setBookmarked] = useState(false);
   const [confettiActive, setConfettiActive] = useState(false);
   const [levelUpInfo, setLevelUpInfo] = useState<{ level: number; tier: TierInfo } | null>(null);
+  const [recoveredStreak, setRecoveredStreak] = useState<number | null>(null);
   const [certificateInfo, setCertificateInfo] = useState<{ trackId: string; trackName: string; userName: string } | null>(null);
   const completedIdsRef = useRef<string[]>([]);
 
@@ -691,7 +735,7 @@ export default function SummaryScreen() {
           incrementContentCompletion(contentId, quizScore, estimatedMinutes).catch(() => {}),
         ]);
 
-        const { gained, base, quizBonus, missionBonus, weeklyMissionBonus, starterBonus, newAchievementIds, leveledUp, newLevel, shieldEarned, newStreak, hardcoreBonus } = sessionResult;
+        const { gained, base, quizBonus, missionBonus, weeklyMissionBonus, starterBonus, newAchievementIds, leveledUp, newLevel, shieldEarned, newStreak, streakRecoveryCompleted, hardcoreBonus } = sessionResult;
 
         // Leaderboard — fire-and-forget, does not block UI
         const displayName = auth.currentUser?.displayName
@@ -704,6 +748,10 @@ export default function SummaryScreen() {
           .map((id) => ACHIEVEMENTS.find((a) => a.id === id))
           .filter(Boolean) as AchievementDef[];
         setNewAchievements(defs);
+        if (streakRecoveryCompleted) {
+          setRecoveredStreak(newStreak);
+          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        }
         if (leveledUp) {
           setLevelUpInfo({ level: newLevel, tier: getLevelTier(newLevel) });
           setConfettiActive(true);
@@ -767,6 +815,7 @@ export default function SummaryScreen() {
     <Box className="flex-1 bg-[#0B0F14]">
       <ConfettiOverlay active={confettiActive} />
       <AchievementToast achievements={newAchievements} />
+      {recoveredStreak !== null && <StreakRecoveryToast streak={recoveredStreak} />}
       {levelUpInfo && (
         <LevelUpModal info={levelUpInfo} onDismiss={() => setLevelUpInfo(null)} />
       )}

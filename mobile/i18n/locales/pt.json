@@ -351,6 +351,8 @@
       "insight_keep_going": "Não desanime! Cada sessão é aprendizado. Revise o conteúdo e tente o quiz de novo.",
       "xp_gained": "+{{xp}} XP",
       "new_achievement": "Nova conquista!",
+      "streak_recovered": "Sequência recuperada!",
+      "streak_recovered_body": "Seu streak de {{count}} dias está de volta 🔥",
       "level_up": "Subiu de nível!",
       "xp_row_session": "Sessão concluída",
       "xp_row_quiz": "Quiz: {{pct}}%",
