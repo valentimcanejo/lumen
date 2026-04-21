@@ -741,6 +741,15 @@ const pg = StyleSheet.create({
   glossaryLeft: { flexDirection: "row", alignItems: "center", gap: 12, flex: 1 },
   glossaryTitle: { color: "#E6EAF2", fontSize: 14, fontWeight: "600" },
   glossarySubtitle: { color: "#7B8193", fontSize: 12, marginTop: 2 },
+  premiumTag: {
+    backgroundColor: "#F5C77A20",
+    borderWidth: 1,
+    borderColor: "#F5C77A50",
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+  },
+  premiumTagText: { color: "#F5C77A", fontSize: 11, fontWeight: "700" },
 });
 
 const wr = StyleSheet.create({
@@ -1024,39 +1033,45 @@ export default function ProfileScreen() {
             {/* Activity heatmap */}
             <StudyHeatmap heatmap={heatmap} />
 
+            {/* Stats shortcut — visible to all, gated for free */}
+            <Pressable
+              onPress={() => isPremium ? router.push("/stats") : router.push("/(premium)/paywall")}
+              style={pg.glossaryBtn}
+            >
+              <View style={pg.glossaryLeft}>
+                <Text style={{ fontSize: 20 }}>📊</Text>
+                <View>
+                  <Text style={pg.glossaryTitle}>{t("stats.shortcut_title")}</Text>
+                  <Text style={pg.glossarySubtitle}>{t("stats.shortcut_subtitle")}</Text>
+                </View>
+              </View>
+              {isPremium
+                ? <Ionicons name="chevron-forward" size={16} color="#7B8193" />
+                : <View style={pg.premiumTag}><Text style={pg.premiumTagText}>Premium</Text></View>
+              }
+            </Pressable>
+
+            {/* Glossary shortcut — visible to all, gated for free */}
+            <Pressable
+              onPress={() => isPremium ? router.push("/glossary") : router.push("/(premium)/paywall")}
+              style={pg.glossaryBtn}
+            >
+              <View style={pg.glossaryLeft}>
+                <Text style={{ fontSize: 20 }}>📖</Text>
+                <View>
+                  <Text style={pg.glossaryTitle}>{t("glossary.shortcut_title")}</Text>
+                  <Text style={pg.glossarySubtitle}>{t("glossary.shortcut_subtitle")}</Text>
+                </View>
+              </View>
+              {isPremium
+                ? <Ionicons name="chevron-forward" size={16} color="#7B8193" />
+                : <View style={pg.premiumTag}><Text style={pg.premiumTagText}>Premium</Text></View>
+              }
+            </Pressable>
+
             {/* Weekly AI report — premium only */}
             {isPremium && (
               <>
-                {/* Stats shortcut */}
-                <Pressable
-                  onPress={() => router.push("/stats")}
-                  style={pg.glossaryBtn}
-                >
-                  <View style={pg.glossaryLeft}>
-                    <Text style={{ fontSize: 20 }}>📊</Text>
-                    <View>
-                      <Text style={pg.glossaryTitle}>{t("stats.shortcut_title")}</Text>
-                      <Text style={pg.glossarySubtitle}>{t("stats.shortcut_subtitle")}</Text>
-                    </View>
-                  </View>
-                  <Ionicons name="chevron-forward" size={16} color="#7B8193" />
-                </Pressable>
-
-                {/* Glossary shortcut */}
-                <Pressable
-                  onPress={() => router.push("/glossary")}
-                  style={pg.glossaryBtn}
-                >
-                  <View style={pg.glossaryLeft}>
-                    <Text style={{ fontSize: 20 }}>📖</Text>
-                    <View>
-                      <Text style={pg.glossaryTitle}>{t("glossary.shortcut_title")}</Text>
-                      <Text style={pg.glossarySubtitle}>{t("glossary.shortcut_subtitle")}</Text>
-                    </View>
-                  </View>
-                  <Ionicons name="chevron-forward" size={16} color="#7B8193" />
-                </Pressable>
-
                 <WeeklyReportCard report={weeklyReport} tracks={tracks} />
                 <MonthlyReportCard report={monthlyReport} />
               </>
