@@ -317,9 +317,13 @@ export default function Paywall() {
 
         {/* Features */}
         <Box style={{ marginBottom: 32 }}>
-          <FeatureRow icon="✨" title={t("premium.feature_1_title")} desc={t("premium.feature_1_desc")} />
-          <FeatureRow icon="📰" title={t("premium.feature_2_title")} desc={t("premium.feature_2_desc")} />
-          <FeatureRow icon="🎯" title={t("premium.feature_3_title")} desc={t("premium.feature_3_desc")} />
+          <FeatureRow icon="🎙️" title={t("premium.feature_1_title")} desc={t("premium.feature_1_desc")} />
+          <FeatureRow icon="📚" title={t("premium.feature_2_title")} desc={t("premium.feature_2_desc")} />
+          <FeatureRow icon="⚡" title={t("premium.feature_3_title")} desc={t("premium.feature_3_desc")} />
+          <FeatureRow icon="🔥" title={t("premium.feature_4_title")} desc={t("premium.feature_4_desc")} />
+          <FeatureRow icon="📊" title={t("premium.feature_5_title")} desc={t("premium.feature_5_desc")} />
+          <FeatureRow icon="📖" title={t("premium.feature_6_title")} desc={t("premium.feature_6_desc")} />
+          <FeatureRow icon="🏆" title={t("premium.feature_7_title")} desc={t("premium.feature_7_desc")} />
         </Box>
 
         {/* Plan selector */}
@@ -341,6 +345,20 @@ export default function Paywall() {
                     <Text style={{ color: "#E6EAF2", fontSize: 16, fontWeight: "700" }}>
                       {annualPrice}
                     </Text>
+                    <Box
+                      style={{
+                        backgroundColor: "#50C87822",
+                        borderRadius: 6,
+                        paddingHorizontal: 6,
+                        paddingVertical: 2,
+                        borderWidth: 1,
+                        borderColor: "#50C87855",
+                      }}
+                    >
+                      <Text style={{ color: "#50C878", fontSize: 10, fontWeight: "800" }}>
+                        −50%
+                      </Text>
+                    </Box>
                     <Box
                       style={{
                         backgroundColor: "#F5C77A",
