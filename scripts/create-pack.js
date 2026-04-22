@@ -47,6 +47,7 @@ async function main() {
   const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
   const { id, trackId, order, difficulty, estimatedMinutes, prerequisites } = data;
   const title = data.title ?? { pt: data.titlePt, en: data.titleEn, es: data.titleEs };
+  const tier = data.tier ?? "free";
 
   // Upload Storage files for each lang
   for (const lang of ["pt", "en", "es"]) {
@@ -76,6 +77,7 @@ async function main() {
     title,
     estimatedMinutes: estimatedMinutes ?? 10,
     difficulty: difficulty ?? 2,
+    tier,
     prerequisites: prerequisites ?? [],
     coverImageUrl: data.coverImageUrl ?? null,
     coverImageCredit: data.coverImageCredit ?? null,
