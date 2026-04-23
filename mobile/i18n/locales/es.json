@@ -234,6 +234,7 @@
       "notifications_open_settings": "Abrir ajustes",
       "achievements_show_all": "+{{count}} más",
       "achievements_collapse": "Mostrar menos",
+      "achievement_unlocked": "Desbloqueada",
       "tracks": "Mis rutas",
       "tracks_hint": "Selecciona las rutas que aparecen en tu inicio (mín. 1)",
       "heatmap_title": "Actividad",

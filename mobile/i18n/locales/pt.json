@@ -234,6 +234,7 @@
       "notifications_open_settings": "Abrir configurações",
       "achievements_show_all": "+{{count}} mais",
       "achievements_collapse": "Mostrar menos",
+      "achievement_unlocked": "Desbloqueada",
       "tracks": "Minhas trilhas",
       "tracks_hint": "Selecione as trilhas que aparecem na sua home (mín. 1)",
       "heatmap_title": "Atividade",

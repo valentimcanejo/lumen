@@ -101,15 +101,22 @@ function AchievementsGrid({ achievements }: { achievements: AchievementDef[] }) 
       <View style={ag.card}>
         {rows.map((row, ri) => (
           <View key={ri} style={[ag.row, ri > 0 && { marginTop: BADGE_GAP }]}>
-            {row.map((a) => (
-              <Pressable
-                key={a.id}
-                onPress={() => handleBadgePress(a)}
-                style={[ag.badge, { width: cellSize, height: cellSize }]}
-              >
-                <Text style={{ fontSize: cellSize * 0.42 }}>{a.icon}</Text>
-              </Pressable>
-            ))}
+            {row.map((a) => {
+              const isSelected = selected?.id === a.id;
+              return (
+                <Pressable
+                  key={a.id}
+                  onPress={() => handleBadgePress(a)}
+                  style={[
+                    ag.badge,
+                    { width: cellSize, height: cellSize },
+                    isSelected && ag.badgeSelected,
+                  ]}
+                >
+                  <Text style={{ fontSize: cellSize * 0.42 }}>{a.icon}</Text>
+                </Pressable>
+              );
+            })}
             {row.length < COLS &&
               Array.from({ length: COLS - row.length }).map((_, i) => (
                 <View key={`empty-${i}`} style={{ width: cellSize }} />
@@ -131,8 +138,14 @@ function AchievementsGrid({ achievements }: { achievements: AchievementDef[] }) 
         {selected && (
           <Pressable onPress={dismissTooltip} style={ag.tooltipTouchable}>
             <Animated.View style={[ag.tooltip, tooltipStyle]}>
-              <Text style={ag.tooltipIcon}>{selected.icon}</Text>
-              <Text style={ag.tooltipName}>{t(selected.titleKey)}</Text>
+              <View style={ag.tooltipIconWrap}>
+                <Text style={ag.tooltipIcon}>{selected.icon}</Text>
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={ag.tooltipName}>{t(selected.titleKey)}</Text>
+                <Text style={ag.tooltipHint}>{t("tabs.profile.achievement_unlocked")}</Text>
+              </View>
+              <Ionicons name="checkmark-circle" size={16} color="#5ED19A" />
             </Animated.View>
           </Pressable>
         )}
@@ -153,10 +166,16 @@ const ag = StyleSheet.create({
   card: { backgroundColor: "#111827", borderRadius: 16, padding: 16 },
   row: { flexDirection: "row", gap: BADGE_GAP },
   badge: {
-    backgroundColor: "#1A2233",
-    borderRadius: 12,
+    backgroundColor: "#151E2E",
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#252E42",
     alignItems: "center",
     justifyContent: "center",
+  },
+  badgeSelected: {
+    backgroundColor: "#1A2A1A",
+    borderColor: "#5ED19A60",
   },
   expandBtn: { marginTop: 12, alignItems: "center" },
   expandLabel: { color: "#AAB0C0", fontSize: 13 },
@@ -164,16 +183,26 @@ const ag = StyleSheet.create({
   tooltip: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
+    gap: 12,
     backgroundColor: "#1A2233",
     borderWidth: 1,
-    borderColor: "#252E42",
-    borderRadius: 12,
+    borderColor: "#2A3850",
+    borderRadius: 14,
     paddingHorizontal: 14,
-    paddingVertical: 10,
+    paddingVertical: 12,
   },
-  tooltipIcon: { fontSize: 20 },
-  tooltipName: { color: "#E6EAF2", fontSize: 14, fontWeight: "600", flex: 1 },
+  tooltipIconWrap: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    backgroundColor: "#252E42",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  tooltipIcon: { fontSize: 18 },
+  tooltipName: { color: "#E6EAF2", fontSize: 14, fontWeight: "700" },
+  tooltipHint: { color: "#5ED19A", fontSize: 11, fontWeight: "600", marginTop: 2 },
 });
 
 // ---------------------------------------------------------------------------
@@ -973,7 +1002,7 @@ export default function ProfileScreen() {
         ) : (
           <>
             {/* Level card — unified stats + XP progress */}
-            <View style={[pf.levelCard, { borderColor: tier.color + "40" }]}>
+            <View style={[pf.levelCard, { borderColor: tier.color + "60", shadowColor: tier.color }]}>
               {/* Top accent bar */}
               <View style={[pf.levelAccentBar, { backgroundColor: tier.color }]} />
 
@@ -1181,13 +1210,17 @@ export default function ProfileScreen() {
 const pf = StyleSheet.create({
   levelCard: {
     backgroundColor: "#111827",
-    borderWidth: 1,
+    borderWidth: 1.5,
     borderRadius: 24,
     overflow: "hidden",
     marginBottom: 24,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.35,
+    shadowRadius: 16,
+    elevation: 6,
   },
   levelAccentBar: {
-    height: 3,
+    height: 4,
     width: "100%",
   },
   levelCardInner: {

@@ -234,6 +234,7 @@
       "notifications_open_settings": "Open settings",
       "achievements_show_all": "+{{count}} more",
       "achievements_collapse": "Show less",
+      "achievement_unlocked": "Unlocked",
       "tracks": "My tracks",
       "tracks_hint": "Select the tracks that appear on your home (min. 1)",
       "heatmap_title": "Activity",
