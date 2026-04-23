@@ -41,6 +41,11 @@ import {
   getNextLessonPerTrack,
   getLessonCountForTrack,
 } from "../../repositories/lessons.repo";
+import { getBundledGoals } from "../../repositories/goals.repo";
+
+const TRACK_TITLES: Record<string, Record<string, string>> = Object.fromEntries(
+  getBundledGoals().map((g) => [g.id, g.title])
+);
 import {
   getWeeklyData,
   getTodaySession,
@@ -315,16 +320,22 @@ function StarterChallengeCard({
         {days.map((label, i) => {
           const done = i < daysCompleted;
           const current = i === daysCompleted;
+          const isLast = i === days.length - 1;
           return (
-            <View key={i} style={sc.dayItem}>
-              <View style={[sc.dayCircle, done && sc.dayCircleDone, current && sc.dayCircleCurrent]}>
-                {done
-                  ? <Ionicons name="checkmark" size={20} color="#0B0F14" />
-                  : <Text style={[sc.dayNum, current && sc.dayNumCurrent]}>{i + 1}</Text>
-                }
+            <React.Fragment key={i}>
+              <View style={sc.dayItem}>
+                <View style={[sc.dayCircle, done && sc.dayCircleDone, current && sc.dayCircleCurrent]}>
+                  {done
+                    ? <Ionicons name="checkmark" size={20} color="#0B0F14" />
+                    : <Text style={[sc.dayNum, current && sc.dayNumCurrent]}>{i + 1}</Text>
+                  }
+                </View>
+                <Text style={[sc.dayLabel, done && sc.dayLabelDone, current && sc.dayLabelCurrent]}>{label}</Text>
               </View>
-              <Text style={[sc.dayLabel, done && sc.dayLabelDone]}>{label}</Text>
-            </View>
+              {!isLast && (
+                <View style={[sc.connector, done && sc.connectorDone]} />
+              )}
+            </React.Fragment>
           );
         })}
       </View>
@@ -364,8 +375,16 @@ const sc = StyleSheet.create({
     paddingVertical: 5,
   },
   bonusText: { color: "#F5C77A", fontSize: 12, fontWeight: "800" },
-  daysRow: { flexDirection: "row", justifyContent: "space-around" },
+  daysRow: { flexDirection: "row", alignItems: "center", justifyContent: "center" },
   dayItem: { alignItems: "center", gap: 8 },
+  connector: {
+    flex: 1,
+    height: 2,
+    backgroundColor: "#1E2A3E",
+    marginBottom: 26,
+    marginHorizontal: 4,
+  },
+  connectorDone: { backgroundColor: "#5ED19A60" },
   dayCircle: {
     width: 52,
     height: 52,
@@ -382,6 +401,7 @@ const sc = StyleSheet.create({
   dayNumCurrent: { color: "#F5C77A" },
   dayLabel: { color: "#3A4558", fontSize: 11, fontWeight: "600" },
   dayLabelDone: { color: "#5ED19A" },
+  dayLabelCurrent: { color: "#F5C77A" },
 });
 
 // ---------------------------------------------------------------------------
@@ -437,14 +457,14 @@ const wk = StyleSheet.create({
   },
   dayCol: { alignItems: "center", gap: 8 },
   circle: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     alignItems: "center",
     justifyContent: "center",
   },
-  dot: { width: 7, height: 7, borderRadius: 4 },
-  dayLabel: { fontSize: 11, fontWeight: "600" },
+  dot: { width: 6, height: 6, borderRadius: 3 },
+  dayLabel: { fontSize: 11, fontWeight: "700" },
   barTrack: {
     height: 4,
     backgroundColor: "#0E1420",
@@ -932,6 +952,9 @@ export default function Home() {
             <View style={lc.listCard}>
               {otherRows.map(({ trackId, lessonId, meta }, index) => {
                 const color = trackColor(trackId);
+                const total = getLessonCountForTrack(trackId);
+                const done = completedIds.filter((id) => id.startsWith(trackId)).length;
+                const pct = total > 0 ? done / total : 0;
                 return (
                   <React.Fragment key={trackId}>
                     {index > 0 && <View style={lc.listDivider} />}
@@ -940,26 +963,26 @@ export default function Home() {
                       style={lc.listRow}
                       activeOpacity={0.7}
                     >
-                      <View style={[lc.trackDot, { backgroundColor: color }]} />
-                      <VStack style={{ flex: 1 }}>
+                      <View style={[lc.trackIcon, { backgroundColor: color + "18", borderColor: color + "35" }]}>
+                        <Text style={[lc.trackIconLetter, { color }]}>
+                          {trackId.replace(/_/g, " ").charAt(0).toUpperCase()}
+                        </Text>
+                      </View>
+                      <VStack style={{ flex: 1, gap: 2 }}>
+                        <Text style={[lc.listRowEyebrow, { color }]}>
+                          {TRACK_TITLES[trackId]?.[lang] ?? trackId.replace(/_/g, " ")}
+                        </Text>
                         <Text style={lc.listRowTitle} numberOfLines={1}>
                           {meta!.title[lang] ?? meta!.title.en}
                         </Text>
-                        {(() => {
-                          const total = getLessonCountForTrack(trackId);
-                          const done = completedIds.filter((id) => id.startsWith(trackId)).length;
-                          const pct = total > 0 ? done / total : 0;
-                          return (
-                            <View style={{ flexDirection: "row", alignItems: "center", gap: 7, marginTop: 5 }}>
-                              <View style={{ flex: 1, height: 3, backgroundColor: "#0E1420", borderRadius: 2, overflow: "hidden" }}>
-                                <View style={{ height: "100%", width: `${pct * 100}%`, backgroundColor: color, borderRadius: 2 }} />
-                              </View>
-                              <Text style={{ color: done > 0 ? color : "#3A4558", fontSize: 10, fontWeight: "700" }}>
-                                {done}/{total}
-                              </Text>
-                            </View>
-                          );
-                        })()}
+                        <View style={{ flexDirection: "row", alignItems: "center", gap: 7, marginTop: 4 }}>
+                          <View style={{ flex: 1, height: 3, backgroundColor: "#0E1420", borderRadius: 2, overflow: "hidden" }}>
+                            <View style={{ height: "100%", width: `${pct * 100}%`, backgroundColor: color, borderRadius: 2 }} />
+                          </View>
+                          <Text style={{ color: done > 0 ? color : "#3A4558", fontSize: 10, fontWeight: "700" }}>
+                            {done}/{total}
+                          </Text>
+                        </View>
                       </VStack>
                       <Ionicons name="chevron-forward" size={14} color="#3A4558" style={{ marginLeft: 8 }} />
                     </TouchableOpacity>
@@ -1348,14 +1371,14 @@ const lc = StyleSheet.create({
   listRow: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 18,
-    paddingVertical: 15,
-    gap: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    gap: 14,
   },
   listDivider: {
     height: 1,
     backgroundColor: "#1A2233",
-    marginHorizontal: 18,
+    marginHorizontal: 16,
   },
   trackDot: {
     width: 9,
@@ -1363,10 +1386,31 @@ const lc = StyleSheet.create({
     borderRadius: 5,
     flexShrink: 0,
   },
+  trackIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  trackIconLetter: {
+    fontSize: 17,
+    fontWeight: "800",
+  },
+  listRowEyebrow: {
+    fontSize: 10,
+    fontWeight: "700",
+    textTransform: "capitalize",
+    letterSpacing: 0.3,
+    opacity: 0.85,
+  },
   listRowTitle: {
     color: "#E6EAF2",
     fontSize: 14,
     fontWeight: "600",
+    lineHeight: 19,
   },
 });
 
