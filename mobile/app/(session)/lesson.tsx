@@ -27,8 +27,8 @@ import { Pressable } from "@/components/ui/pressable";
 import { HStack } from "@/components/ui/hstack";
 import { Text } from "@/components/ui/text";
 
-import { LessonBlocks } from "./_components/LessonBlocks";
-import { SessionError } from "./_components/SessionError";
+import { LessonBlocks } from "../../components/session/LessonBlocks";
+import { SessionError } from "../../components/session/SessionError";
 import { usePack } from "../../hooks/usePack";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";

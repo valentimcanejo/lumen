@@ -18,7 +18,7 @@ import { VStack } from "@/components/ui/vstack";
 import { Pressable } from "@/components/ui/pressable";
 import { useAuth } from "../../hooks/useAuth";
 import { usePack } from "../../hooks/usePack";
-import { SessionError } from "./_components/SessionError";
+import { SessionError } from "../../components/session/SessionError";
 import { gradeCard } from "../../repositories/progress.repo";
 import type { Lang } from "../../models/lang";
 

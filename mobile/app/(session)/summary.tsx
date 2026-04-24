@@ -39,7 +39,7 @@ import { toggleSaveContent, markContentCompleted } from "../../repositories/user
 import { invalidateUserCache } from "../../hooks/useUser";
 import { incrementContentCompletion } from "../../repositories/content_stats.repo";
 import { ACHIEVEMENTS, type AchievementDef } from "../../repositories/achievements.repo";
-import { CertificateModal } from "./_components/CertificateModal";
+import { CertificateModal } from "../../components/session/CertificateModal";
 import { todayYmd } from "../../repositories/session.repo";
 import { usePack } from "../../hooks/usePack";
 import {

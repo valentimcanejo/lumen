@@ -20,7 +20,7 @@ import { VStack } from "@/components/ui/vstack";
 import { Pressable } from "@/components/ui/pressable";
 import type { PackQuizQuestion } from "../../models/pack";
 import { usePack } from "../../hooks/usePack";
-import { SessionError } from "./_components/SessionError";
+import { SessionError } from "../../components/session/SessionError";
 import { getLessonMeta } from "../../repositories/lessons.repo";
 import { trackColor } from "../../constants/tracks";
 import type { Lang } from "../../models/lang";
