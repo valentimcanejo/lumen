@@ -137,7 +137,10 @@ function TrackCard({
                   tc.followingPill,
                   pressedFollow
                     ? { backgroundColor: "#E26D6D18", borderColor: "#E26D6D50" }
-                    : { backgroundColor: color + "18", borderColor: color + "40" },
+                    : {
+                        backgroundColor: color + "18",
+                        borderColor: color + "40",
+                      },
                 ]}
               >
                 <Ionicons
@@ -145,7 +148,12 @@ function TrackCard({
                   size={11}
                   color={pressedFollow ? "#E26D6D" : color}
                 />
-                <Text style={[tc.followingText, { color: pressedFollow ? "#E26D6D" : color }]}>
+                <Text
+                  style={[
+                    tc.followingText,
+                    { color: pressedFollow ? "#E26D6D" : color },
+                  ]}
+                >
                   {pressedFollow
                     ? t("tabs.tracks.btn_unfollow")
                     : t("tabs.tracks.section_following")}
@@ -414,10 +422,10 @@ const pb = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
-    marginHorizontal: 24,
     marginBottom: 12,
     padding: 14,
     borderRadius: 16,
+    marginTop: 12,
     backgroundColor: "#111420",
     borderWidth: 1,
     borderColor: "#F5C77A33",
@@ -465,8 +473,11 @@ export default function Tracks() {
   const { isPremium } = usePremium();
   const [tracks, setTracks] = useState<Track[]>([]);
   const { i18n } = useTranslation();
-  const [lang, setLang] = useState<Lang>(() =>
-    (["pt", "en", "es"].includes(i18n.language) ? i18n.language : "pt") as Lang
+  const [lang, setLang] = useState<Lang>(
+    () =>
+      (["pt", "en", "es"].includes(i18n.language)
+        ? i18n.language
+        : "pt") as Lang,
   );
   const [loading, setLoading] = useState(true);
   const [completedIds, setCompletedIds] = useState<string[]>([]);
@@ -484,7 +495,8 @@ export default function Tracks() {
   useEffect(() => {
     if (!uid) return;
     getUserData({ userId: uid }).then((user) => {
-      if (user?.lang && !["pt", "en", "es"].includes(i18n.language)) setLang(user.lang);
+      if (user?.lang && !["pt", "en", "es"].includes(i18n.language))
+        setLang(user.lang);
       setSelectedTrackIds(
         user?.selectedTrackIds ?? user?.selectedGoalIds ?? [],
       );
@@ -586,7 +598,6 @@ export default function Tracks() {
     { key: "hard", label: t("tabs.tracks.difficulty_3") },
   ];
 
-
   return (
     <Box className="flex-1 bg-[#0B0F14]">
       {/* Static header */}
@@ -623,7 +634,7 @@ export default function Tracks() {
       <HScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 10 }}
+        contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 20 }}
       >
         <HStack space="xs">
           {FILTERS.map(({ key, label }) => {
@@ -650,25 +661,6 @@ export default function Tracks() {
           })}
         </HStack>
       </HScrollView>
-
-      {/* Premium banner — free users only */}
-      {!isPremium && (
-        <Pressable
-          onPress={() => router.push("/(premium)/paywall")}
-          style={pb.wrap}
-        >
-          <RNView style={pb.iconWrap}>
-            <Ionicons name="sparkles" size={18} color="#F5C77A" />
-          </RNView>
-          <RNView style={{ flex: 1 }}>
-            <Text style={pb.title}>{t("tabs.tracks.premium_banner_title")}</Text>
-            <Text style={pb.desc}>{t("tabs.tracks.premium_banner_desc")}</Text>
-          </RNView>
-          <RNView style={pb.cta}>
-            <Text style={pb.ctaText}>{t("tabs.tracks.premium_banner_cta")}</Text>
-          </RNView>
-        </Pressable>
-      )}
 
       {/* Track list */}
       {loading ? (
@@ -698,6 +690,31 @@ export default function Tracks() {
               />
             );
           }}
+          ListHeaderComponent={
+            !isPremium ? (
+              <Pressable
+                onPress={() => router.push("/(premium)/paywall")}
+                style={pb.wrap}
+              >
+                <RNView style={pb.iconWrap}>
+                  <Ionicons name="sparkles" size={18} color="#F5C77A" />
+                </RNView>
+                <RNView style={{ flex: 1 }}>
+                  <Text style={pb.title}>
+                    {t("tabs.tracks.premium_banner_title")}
+                  </Text>
+                  <Text style={pb.desc}>
+                    {t("tabs.tracks.premium_banner_desc")}
+                  </Text>
+                </RNView>
+                <RNView style={pb.cta}>
+                  <Text style={pb.ctaText}>
+                    {t("tabs.tracks.premium_banner_cta")}
+                  </Text>
+                </RNView>
+              </Pressable>
+            ) : null
+          }
           ListEmptyComponent={
             <Text className="text-[#AAB0C0] text-center mt-6">
               {tracks.length === 0
