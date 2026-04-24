@@ -8,13 +8,13 @@ import { Platform } from "react-native";
 export const SHOW_DEV_RESET = false;
 
 // Set to true when production RevenueCat keys are configured
-export const PURCHASES_ENABLED = false;
+export const PURCHASES_ENABLED = true;
 
 // ---------------------------------------------------------------------------
 // RevenueCat API keys — https://app.revenuecat.com → Your Project → API Keys
 // iOS key starts with "appl_", Android key starts with "goog_"
 export const REVENUECAT_API_KEY =
   Platform.select({
-    ios: "test_dgesgRedSyhygBDsqJVjNGLOlCU",
-    android: "test_dgesgRedSyhygBDsqJVjNGLOlCU",
+    ios: "appl_placeholder",
+    android: "goog_GlbmcFLIRgEUiUDDoEcLccRIVgc",
   }) ?? "";
