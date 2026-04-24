@@ -23,6 +23,7 @@ import {
 } from "../../repositories/user.repo";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
+import { usePremium } from "../../hooks/usePremium";
 import { SkeletonTrackCard } from "../../components/ui/lumen/Skeleton";
 import { trackColor, trackBg } from "../../constants/tracks";
 import type { Track } from "../../models/track";
@@ -380,6 +381,7 @@ const tc = StyleSheet.create({
     textAlign: "right",
   },
   // ── Section headers
+
   sectionHeader: {
     flexDirection: "row",
     alignItems: "center",
@@ -407,11 +409,60 @@ const tc = StyleSheet.create({
   },
 });
 
+const pb = StyleSheet.create({
+  wrap: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    marginHorizontal: 24,
+    marginBottom: 12,
+    padding: 14,
+    borderRadius: 16,
+    backgroundColor: "#111420",
+    borderWidth: 1,
+    borderColor: "#F5C77A33",
+  },
+  iconWrap: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    backgroundColor: "#F5C77A15",
+    borderWidth: 1,
+    borderColor: "#F5C77A30",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  title: {
+    color: "#E6EAF2",
+    fontSize: 13,
+    fontWeight: "700",
+  },
+  desc: {
+    color: "#7B8193",
+    fontSize: 12,
+    marginTop: 2,
+  },
+  cta: {
+    backgroundColor: "#F5C77A",
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    flexShrink: 0,
+  },
+  ctaText: {
+    color: "#0B0F14",
+    fontSize: 12,
+    fontWeight: "700",
+  },
+});
+
 export default function Tracks() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const { uid } = useAuth();
   const { getUserData } = useUser();
+  const { isPremium } = usePremium();
   const [tracks, setTracks] = useState<Track[]>([]);
   const { i18n } = useTranslation();
   const [lang, setLang] = useState<Lang>(() =>
@@ -599,6 +650,25 @@ export default function Tracks() {
           })}
         </HStack>
       </HScrollView>
+
+      {/* Premium banner — free users only */}
+      {!isPremium && (
+        <Pressable
+          onPress={() => router.push("/(premium)/paywall")}
+          style={pb.wrap}
+        >
+          <RNView style={pb.iconWrap}>
+            <Ionicons name="sparkles" size={18} color="#F5C77A" />
+          </RNView>
+          <RNView style={{ flex: 1 }}>
+            <Text style={pb.title}>{t("tabs.tracks.premium_banner_title")}</Text>
+            <Text style={pb.desc}>{t("tabs.tracks.premium_banner_desc")}</Text>
+          </RNView>
+          <RNView style={pb.cta}>
+            <Text style={pb.ctaText}>{t("tabs.tracks.premium_banner_cta")}</Text>
+          </RNView>
+        </Pressable>
+      )}
 
       {/* Track list */}
       {loading ? (

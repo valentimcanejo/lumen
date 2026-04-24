@@ -191,7 +191,10 @@
       "section_following": "Following",
       "section_explore": "Explore",
       "btn_follow": "Follow",
-      "btn_unfollow": "Leave"
+      "btn_unfollow": "Leave",
+      "premium_banner_title": "Unlock Premium",
+      "premium_banner_desc": "All lessons + narrated audio",
+      "premium_banner_cta": "See plans"
     },
     "library": {
       "title": "Library",

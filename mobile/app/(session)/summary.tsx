@@ -22,6 +22,7 @@ import { VStack } from "@/components/ui/vstack";
 import { Pressable } from "@/components/ui/pressable";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
+import { usePremium } from "../../hooks/usePremium";
 import {
   markDayCompleted,
   getDueCardCount,
@@ -617,6 +618,7 @@ export default function SummaryScreen() {
   const insets = useSafeAreaInsets();
   const { uid } = useAuth();
   const { getUserData } = useUser();
+  const { isPremium } = usePremium();
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const hasStartedRef = useRef(false);
@@ -949,6 +951,25 @@ export default function SummaryScreen() {
                 )}
               </View>
             </View>
+
+            {/* Premium banner — free users only */}
+            {!isPremium && (
+              <Pressable
+                onPress={() => router.push("/(premium)/paywall")}
+                style={smb.wrap}
+              >
+                <View style={smb.iconWrap}>
+                  <Ionicons name="sparkles" size={18} color="#F5C77A" />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={smb.title}>{t("tabs.tracks.premium_banner_title")}</Text>
+                  <Text style={smb.desc}>{t("tabs.tracks.premium_banner_desc")}</Text>
+                </View>
+                <View style={smb.cta}>
+                  <Text style={smb.ctaText}>{t("tabs.tracks.premium_banner_cta")}</Text>
+                </View>
+              </Pressable>
+            )}
           </ScrollView>
         );
       })()}
@@ -975,3 +996,38 @@ export default function SummaryScreen() {
     </Box>
   );
 }
+
+const smb = StyleSheet.create({
+  wrap: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    marginTop: 12,
+    padding: 14,
+    borderRadius: 16,
+    backgroundColor: "#111420",
+    borderWidth: 1,
+    borderColor: "#F5C77A33",
+  },
+  iconWrap: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    backgroundColor: "#F5C77A15",
+    borderWidth: 1,
+    borderColor: "#F5C77A30",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  title: { color: "#E6EAF2", fontSize: 13, fontWeight: "700" },
+  desc: { color: "#7B8193", fontSize: 12, marginTop: 2 },
+  cta: {
+    backgroundColor: "#F5C77A",
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    flexShrink: 0,
+  },
+  ctaText: { color: "#0B0F14", fontSize: 12, fontWeight: "700" },
+});

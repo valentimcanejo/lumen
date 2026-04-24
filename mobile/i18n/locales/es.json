@@ -191,7 +191,10 @@
       "section_following": "Siguiendo",
       "section_explore": "Explorar",
       "btn_follow": "Seguir",
-      "btn_unfollow": "Dejar"
+      "btn_unfollow": "Dejar",
+      "premium_banner_title": "Desbloquea Premium",
+      "premium_banner_desc": "Todas las lecciones + audio narrado",
+      "premium_banner_cta": "Ver planes"
     },
     "library": {
       "title": "Biblioteca",

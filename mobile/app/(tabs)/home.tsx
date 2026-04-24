@@ -34,6 +34,7 @@ import { getCoverImage } from "../../constants/covers";
 import { CoverImage } from "../../components/ui/lumen/CoverImage";
 
 import { useUser } from "../../hooks/useUser";
+import { usePremium } from "../../hooks/usePremium";
 import { useAuth } from "../../hooks/useAuth";
 import {
   getLessonMeta,
@@ -596,6 +597,7 @@ export default function Home() {
   const insets = useSafeAreaInsets();
   const { uid: currentUserId } = useAuth();
   const { getUserData } = useUser();
+  const { isPremium } = usePremium();
 
   const [user, setUser] = useState<UserProfile | null>(null);
   const [completedIds, setCompletedIds] = useState<string[]>([]);
@@ -1121,6 +1123,25 @@ export default function Home() {
         </View>
       )}
 
+      {/* ── Premium banner — free users only ──────────────────── */}
+      {!isPremium && (
+        <Pressable
+          onPress={() => router.push("/(premium)/paywall")}
+          style={pmb.wrap}
+        >
+          <View style={pmb.iconWrap}>
+            <Ionicons name="sparkles" size={18} color="#F5C77A" />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={pmb.title}>{t("tabs.tracks.premium_banner_title")}</Text>
+            <Text style={pmb.desc}>{t("tabs.tracks.premium_banner_desc")}</Text>
+          </View>
+          <View style={pmb.cta}>
+            <Text style={pmb.ctaText}>{t("tabs.tracks.premium_banner_cta")}</Text>
+          </View>
+        </Pressable>
+      )}
+
     </ScrollView>
     </>
   );
@@ -1528,6 +1549,46 @@ const ic = StyleSheet.create({
   title: { color: "#E6EAF2", fontSize: 15, fontWeight: "700", lineHeight: 21 },
   intro: { color: "#7B8193", fontSize: 13, lineHeight: 19 },
   cta: { color: "#7B8FE0", fontSize: 13, fontWeight: "700", marginTop: 2 },
+});
+
+// ---------------------------------------------------------------------------
+// Premium banner styles
+// ---------------------------------------------------------------------------
+
+const pmb = StyleSheet.create({
+  wrap: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    marginHorizontal: 20,
+    marginTop: 14,
+    padding: 14,
+    borderRadius: 16,
+    backgroundColor: "#111420",
+    borderWidth: 1,
+    borderColor: "#F5C77A33",
+  },
+  iconWrap: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    backgroundColor: "#F5C77A15",
+    borderWidth: 1,
+    borderColor: "#F5C77A30",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  title: { color: "#E6EAF2", fontSize: 13, fontWeight: "700" },
+  desc: { color: "#7B8193", fontSize: 12, marginTop: 2 },
+  cta: {
+    backgroundColor: "#F5C77A",
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    flexShrink: 0,
+  },
+  ctaText: { color: "#0B0F14", fontSize: 12, fontWeight: "700" },
 });
 
 // ---------------------------------------------------------------------------
