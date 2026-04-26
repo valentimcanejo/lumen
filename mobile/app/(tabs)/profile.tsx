@@ -30,7 +30,7 @@ import { getLatestWeeklyReport, getLatestMonthlyReport } from "../../repositorie
 import { usePremium } from "../../hooks/usePremium";
 import type { WeeklyReport, MonthlyReport } from "../../models/weeklyReport";
 import { trackColor, trackBg } from "../../constants/tracks";
-import { SHOW_DEV_RESET } from "../../constants/config";
+import { SHOW_DEV_RESET, FEATURES } from "../../constants/config";
 import type { Track } from "../../models/track";
 import {
   requestNotificationPermission,
@@ -432,7 +432,7 @@ function AccountCard({
           {t("tabs.profile.account_save_description")}
         </Text>
 
-        <Pressable
+        {FEATURES.GOOGLE_SIGN_IN && <Pressable
           onPress={() => handle("google", onSignInWithGoogle)}
           disabled={loading !== null}
           className="flex-row items-center justify-center h-[52px] rounded-2xl bg-white mb-3 opacity-100 disabled:opacity-60"
@@ -447,7 +447,7 @@ function AccountCard({
               </Text>
             </>
           )}
-        </Pressable>
+        </Pressable>}
 
         {Platform.OS === "ios" && (
           <Pressable
@@ -1062,44 +1062,8 @@ export default function ProfileScreen() {
             {/* Activity heatmap */}
             <StudyHeatmap heatmap={heatmap} />
 
-            {/* Stats shortcut — visible to all, gated for free */}
-            <Pressable
-              onPress={() => isPremium ? router.push("/stats") : router.push("/(premium)/paywall")}
-              style={pg.glossaryBtn}
-            >
-              <View style={pg.glossaryLeft}>
-                <Text style={{ fontSize: 20 }}>📊</Text>
-                <View>
-                  <Text style={pg.glossaryTitle}>{t("stats.shortcut_title")}</Text>
-                  <Text style={pg.glossarySubtitle}>{t("stats.shortcut_subtitle")}</Text>
-                </View>
-              </View>
-              {isPremium
-                ? <Ionicons name="chevron-forward" size={16} color="#7B8193" />
-                : <View style={pg.premiumTag}><Text style={pg.premiumTagText}>Premium</Text></View>
-              }
-            </Pressable>
-
-            {/* Glossary shortcut — visible to all, gated for free */}
-            <Pressable
-              onPress={() => isPremium ? router.push("/glossary") : router.push("/(premium)/paywall")}
-              style={pg.glossaryBtn}
-            >
-              <View style={pg.glossaryLeft}>
-                <Text style={{ fontSize: 20 }}>📖</Text>
-                <View>
-                  <Text style={pg.glossaryTitle}>{t("glossary.shortcut_title")}</Text>
-                  <Text style={pg.glossarySubtitle}>{t("glossary.shortcut_subtitle")}</Text>
-                </View>
-              </View>
-              {isPremium
-                ? <Ionicons name="chevron-forward" size={16} color="#7B8193" />
-                : <View style={pg.premiumTag}><Text style={pg.premiumTagText}>Premium</Text></View>
-              }
-            </Pressable>
-
             {/* Weekly AI report — premium only */}
-            {isPremium && (
+            {FEATURES.PREMIUM && isPremium && (
               <>
                 <WeeklyReportCard report={weeklyReport} tracks={tracks} />
                 <MonthlyReportCard report={monthlyReport} />

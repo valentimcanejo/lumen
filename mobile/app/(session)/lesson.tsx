@@ -43,6 +43,7 @@ import { generateAudio } from "../../services/functions.service";
 import type { Lang } from "../../models/lang";
 import type { LessonBlock } from "../../models/pack";
 import { usePremium } from "../../hooks/usePremium";
+import { FEATURES } from "../../constants/config";
 
 function extractText(blocks: LessonBlock[]): string {
   return blocks
@@ -512,6 +513,13 @@ export default function LessonScreen() {
       >
         {/* Hero cover image — full bleed */}
         {(() => {
+          if (!FEATURES.COVER_IMAGES) {
+            return (
+              <View style={[ls.heroPlaceholder, { backgroundColor: color + "20" }]}>
+                <Ionicons name="book-outline" size={44} color={color} />
+              </View>
+            );
+          }
           const coverUri = lessonMeta?.coverImageUrl;
           const coverLocal = getCoverImage(contentId);
           if (coverUri) {
@@ -541,8 +549,8 @@ export default function LessonScreen() {
 
           <View style={ls.divider} />
 
-          {/* Audio player — premium only */}
-          {isPremium ? (
+          {/* Audio player — premium only, hidden in test mode */}
+          {FEATURES.AUDIO && isPremium ? (
             <View
               style={[
                 ls.playerCard,
@@ -653,7 +661,7 @@ export default function LessonScreen() {
                 </View>
               )}
             </View>
-          ) : (
+          ) : FEATURES.AUDIO ? (
             /* Locked audio card for free users */
             <TouchableOpacity
               activeOpacity={0.8}
@@ -678,7 +686,7 @@ export default function LessonScreen() {
                 </View>
               </View>
             </TouchableOpacity>
-          )}
+          ) : null}
 
           <LessonBlocks blocks={pack.lesson.blocks} />
 

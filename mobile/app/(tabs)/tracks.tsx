@@ -28,6 +28,7 @@ import { SkeletonTrackCard } from "../../components/ui/lumen/Skeleton";
 import { trackColor, trackBg } from "../../constants/tracks";
 import type { Track } from "../../models/track";
 import type { Lang } from "../../models/lang";
+import { FEATURES, TEST_TRACKS } from "../../constants/config";
 
 type FilterKey = "all" | "following" | "easy" | "medium" | "hard";
 
@@ -513,7 +514,7 @@ export default function Tracks() {
     const isFiltering = activeFilter !== "all";
 
     // Apply difficulty/following filter first
-    let filtered = tracks;
+    let filtered = FEATURES.TEST_MODE ? tracks.filter((t) => TEST_TRACKS.includes(t.id)) : tracks;
     if (activeFilter === "following") {
       filtered = filtered.filter((t) => selectedTrackIds.includes(t.id));
     } else if (activeFilter === "easy") {
@@ -691,7 +692,7 @@ export default function Tracks() {
             );
           }}
           ListHeaderComponent={
-            !isPremium ? (
+            FEATURES.PREMIUM && !isPremium ? (
               <Pressable
                 onPress={() => router.push("/(premium)/paywall")}
                 style={pb.wrap}

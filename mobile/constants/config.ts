@@ -1,18 +1,26 @@
 import { Platform } from "react-native";
 
 // ---------------------------------------------------------------------------
-// Feature flags — change to false + run `eas update` to remove without rebuild
+// Feature flags — change values + `eas update` to toggle without rebuild
 // ---------------------------------------------------------------------------
 
-// Shows the full reset button in the profile screen (dev/testing only)
 export const SHOW_DEV_RESET = false;
+export const PURCHASES_ENABLED = false;
 
-// Set to true when production RevenueCat keys are configured
-export const PURCHASES_ENABLED = true;
+export const FEATURES = {
+  PREMIUM: false,
+  AUDIO: false,
+  COVER_IMAGES: false,
+  GOOGLE_SIGN_IN: false,
+  WEEKLY_SHARE: false,
+  TEST_MODE: true,
+};
+
+// Tracks visible during TEST_MODE — flip FEATURES.TEST_MODE to false to show all
+export const TEST_TRACKS = ["foundations", "critical_thinking", "psychology"];
 
 // ---------------------------------------------------------------------------
-// RevenueCat API keys — https://app.revenuecat.com → Your Project → API Keys
-// iOS key starts with "appl_", Android key starts with "goog_"
+// RevenueCat API keys
 export const REVENUECAT_API_KEY =
   Platform.select({
     ios: "appl_placeholder",

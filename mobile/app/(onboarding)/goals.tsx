@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { Lang } from "../../models/lang";
 import { getGoals, type Goal } from "../../repositories/goals.repo";
 import { useAuth } from "../../hooks/useAuth";
+import { FEATURES, TEST_TRACKS } from "../../constants/config";
 
 const ICON_MAP: Record<string, keyof typeof Ionicons.glyphMap> = {
   book:      "book-outline",
@@ -27,7 +28,10 @@ const ICON_MAP: Record<string, keyof typeof Ionicons.glyphMap> = {
 export default function Goals() {
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
-  const [goals] = useState<Goal[]>(() => getGoals());
+  const [goals] = useState<Goal[]>(() => {
+    const all = getGoals();
+    return FEATURES.TEST_MODE ? all.filter((g) => TEST_TRACKS.includes(g.id)) : all;
+  });
   const [selected, setSelected] = useState<string[]>([]);
   const canContinue = selected.length >= 1;
   const { t, i18n } = useTranslation();
@@ -47,7 +51,7 @@ export default function Goals() {
 
   const handleNext = () =>
     router.push({
-      pathname: `/(onboarding)/social-proof`,
+      pathname: FEATURES.TEST_MODE ? `/(onboarding)/daily-time` : `/(onboarding)/social-proof`,
       params: { selectedLanguage, selectedTracks: selected.join(","), userId },
     });
 

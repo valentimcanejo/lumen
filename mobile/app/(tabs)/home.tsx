@@ -64,6 +64,7 @@ import { getLatestInsights } from "../../repositories/insights.repo";
 import type { KnowledgeInsight } from "../../models/insight";
 import { getCurrentWeekId } from "../../repositories/leaderboard.repo";
 import { WeeklyShareCard } from "../../components/WeeklyShareCard";
+import { FEATURES } from "../../constants/config";
 import { getTodayMissions, getWeeklyMissions } from "../../repositories/missions.repo";
 import type { DailyMission, WeeklyMission } from "../../models/user";
 import { todayYmd } from "../../repositories/session.repo";
@@ -751,7 +752,7 @@ export default function Home() {
   return (
     <>
     {/* Weekly share modal */}
-    <Modal visible={showShareModal} transparent animationType="fade" onRequestClose={dismissShareModal}>
+    {FEATURES.WEEKLY_SHARE && <Modal visible={showShareModal} transparent animationType="fade" onRequestClose={dismissShareModal}>
       <View style={sh.overlay}>
         <View style={sh.sheet}>
           <Text style={sh.sheetTitle}>Sua semana em resumo 🎉</Text>
@@ -776,7 +777,7 @@ export default function Home() {
           </Pressable>
         </View>
       </View>
-    </Modal>
+    </Modal>}
 
     <ScrollView
       style={{ flex: 1, backgroundColor: "#0B0F14" }}
@@ -869,14 +870,14 @@ export default function Home() {
             <View style={[lc.heroWrap, { borderColor: isDone ? "#1E2A3E" : color + "50" }]}>
               {/* Image */}
               <View style={lc.heroCard}>
-                {coverUri ? (
+                {FEATURES.COVER_IMAGES && coverUri ? (
                   <CoverImage
                     uri={coverUri}
                     credit={todayLesson.coverImageCredit}
                     width="100%"
                     height={210}
                   />
-                ) : coverLocal ? (
+                ) : FEATURES.COVER_IMAGES && coverLocal ? (
                   <Image source={coverLocal} style={lc.heroImage} resizeMode="cover" />
                 ) : (
                   <View style={[lc.heroImage, { backgroundColor: color + "18", alignItems: "center", justifyContent: "center" }]}>
@@ -1124,7 +1125,7 @@ export default function Home() {
       )}
 
       {/* ── Premium banner — free users only ──────────────────── */}
-      {!isPremium && (
+      {FEATURES.PREMIUM && !isPremium && (
         <Pressable
           onPress={() => router.push("/(premium)/paywall")}
           style={pmb.wrap}
