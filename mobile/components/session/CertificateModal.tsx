@@ -11,7 +11,7 @@ import * as Sharing from "expo-sharing";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import { Text } from "@/components/ui/text";
-import { trackColor } from "../../../constants/tracks";
+import { trackColor } from "../../constants/tracks";
 
 type Props = {
   visible: boolean;
