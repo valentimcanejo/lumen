@@ -9,11 +9,11 @@ export const PURCHASES_ENABLED = false;
 
 export const FEATURES = {
   PREMIUM: false,
-  AUDIO: false,
-  COVER_IMAGES: false,
-  GOOGLE_SIGN_IN: false,
+  AUDIO: true,
+  COVER_IMAGES: true,
+  GOOGLE_SIGN_IN: true,
   WEEKLY_SHARE: false,
-  TEST_MODE: true,
+  TEST_MODE: false,
 };
 
 // Tracks visible during TEST_MODE — flip FEATURES.TEST_MODE to false to show all
