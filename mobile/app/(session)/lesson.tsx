@@ -550,7 +550,7 @@ export default function LessonScreen() {
           <View style={ls.divider} />
 
           {/* Audio player — premium only, hidden in test mode */}
-          {FEATURES.AUDIO && isPremium ? (
+          {FEATURES.AUDIO ? (
             <View
               style={[
                 ls.playerCard,
