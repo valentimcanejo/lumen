@@ -51,7 +51,7 @@ export default function Goals() {
 
   const handleNext = () =>
     router.push({
-      pathname: FEATURES.TEST_MODE ? `/(onboarding)/daily-time` : `/(onboarding)/social-proof`,
+      pathname: `/(onboarding)/daily-time`,
       params: { selectedLanguage, selectedTracks: selected.join(","), userId },
     });
 
