@@ -365,7 +365,7 @@ export default function LessonScreen() {
 
   // Prepare audio when pack is ready — premium only
   useEffect(() => {
-    if (!pack || !uid || !isPremium) return;
+    if (!pack || !uid) return;
     let cancelled = false;
 
     async function prepareAudio() {
