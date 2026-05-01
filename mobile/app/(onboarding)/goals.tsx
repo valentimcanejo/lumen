@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { ScrollView, StyleSheet, View as RNView, useWindowDimensions } from "react-native";
+import { ScrollView, StyleSheet, View as RNView, useWindowDimensions, Text as RNText } from "react-native";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  withSequence,
+} from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { Box } from "../../components/ui/box";
@@ -13,14 +19,76 @@ import { getGoals, type Goal } from "../../repositories/goals.repo";
 import { useAuth } from "../../hooks/useAuth";
 import { FEATURES, TEST_TRACKS } from "../../constants/config";
 
-const ICON_MAP: Record<string, keyof typeof Ionicons.glyphMap> = {
-  book:      "book-outline",
-  brain:     "bulb-outline",
-  globe:     "globe-outline",
-  chart:     "bar-chart-outline",
-  hourglass: "hourglass-outline",
-  person:    "person-outline",
+const COLS = 3;
+const GAP = 10;
+const H_PAD = 24;
+
+function selectedLabel(count: number, lang: Lang): string {
+  if (count === 0) return "";
+  if (lang === "en") return count === 1 ? "1 selected" : `${count} selected`;
+  if (lang === "es") return count === 1 ? "1 seleccionada" : `${count} seleccionadas`;
+  return count === 1 ? "1 selecionada" : `${count} selecionadas`;
+}
+
+// ---------------------------------------------------------------------------
+// Tile
+// ---------------------------------------------------------------------------
+type TileProps = {
+  g: Goal;
+  active: boolean;
+  onToggle: (id: string) => void;
+  tileSize: number;
+  lang: Lang;
 };
+
+function GoalTile({ g, active, onToggle, tileSize, lang }: TileProps) {
+  const color = g.color ?? "#AAB0C0";
+  const scale = useSharedValue(1);
+
+  const animStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
+
+  function handlePress() {
+    scale.value = withSequence(
+      withSpring(0.93, { damping: 15, stiffness: 400 }),
+      withSpring(1.0, { damping: 12, stiffness: 200 }),
+    );
+    onToggle(g.id);
+  }
+
+  return (
+    <Animated.View style={[animStyle, { width: tileSize, marginBottom: GAP }]}>
+      <Pressable onPress={handlePress}>
+        <RNView
+          style={[
+            go.tile,
+            {
+              height: tileSize * 1.05,
+              borderColor: active ? color : "#1E2A3E",
+              backgroundColor: active ? color + "18" : "#111827",
+            },
+          ]}
+        >
+          {active && (
+            <RNView style={[go.checkBadge, { backgroundColor: color }]}>
+              <Ionicons name="checkmark" size={10} color="#0B0F14" />
+            </RNView>
+          )}
+
+          <RNText style={go.emoji}>{g.emoji}</RNText>
+
+          <Text
+            style={[go.tileTitle, { color: active ? "#E6EAF2" : "#C8CDD8" }]}
+            numberOfLines={2}
+          >
+            {g.title[lang]}
+          </Text>
+        </RNView>
+      </Pressable>
+    </Animated.View>
+  );
+}
 
 // ---------------------------------------------------------------------------
 // Main screen
@@ -38,10 +106,7 @@ export default function Goals() {
   const { uid: userId } = useAuth();
   const selectedLanguage = (["pt","en","es"].includes(i18n.language) ? i18n.language : "pt") as Lang;
 
-  const COLS = 2;
-  const GAP = 12;
-  const H_PAD = 24;
-  const tileSize = (width - H_PAD * 2 - GAP) / COLS;
+  const tileSize = (width - H_PAD * 2 - GAP * (COLS - 1)) / COLS;
 
   function toggle(key: string) {
     setSelected((prev) =>
@@ -55,11 +120,12 @@ export default function Goals() {
       params: { selectedLanguage, selectedTracks: selected.join(","), userId },
     });
 
-  // pair goals into rows of 2
   const rows: Goal[][] = [];
   for (let i = 0; i < goals.length; i += COLS) {
     rows.push(goals.slice(i, i + COLS));
   }
+
+  const counter = selectedLabel(selected.length, selectedLanguage);
 
   return (
     <Box className="flex-1 bg-[#0B0F14]">
@@ -71,59 +137,37 @@ export default function Goals() {
         }}
         showsVerticalScrollIndicator={false}
       >
-        {/* Header */}
         <Text className="text-[#E6EAF2] text-[26px] font-semibold">
           {t("onboarding.goals.title")}
         </Text>
-        <Text className="text-[#AAB0C0] mt-2 mb-6">
-          {t("onboarding.goals.subtitle")}
-        </Text>
+        <RNView style={go.subtitleRow}>
+          <Text className="text-[#AAB0C0]">
+            {t("onboarding.goals.subtitle")}
+          </Text>
+          {counter !== "" && (
+            <Text style={go.counter}>{counter}</Text>
+          )}
+        </RNView>
+
+        <RNView style={{ height: 20 }} />
 
         {rows.map((row, ri) => (
           <RNView key={ri} style={go.row}>
-            {row.map((g) => {
-              const active = selected.includes(g.id);
-              const color = g.color ?? "#AAB0C0";
-              const iconName = ICON_MAP[g.icon] ?? "ellipse-outline";
-
-              return (
-                <Pressable
-                  key={g.id}
-                  onPress={() => toggle(g.id)}
-                  style={{ width: tileSize, marginBottom: GAP }}
-                >
-                  <RNView
-                    style={[
-                      go.tile,
-                      {
-                        height: tileSize * 0.95,
-                        borderColor: active ? color : "#1E2A3E",
-                        backgroundColor: active ? color + "12" : "#111827",
-                      },
-                    ]}
-                  >
-                    {/* Checkmark badge */}
-                    {active && (
-                      <RNView style={[go.checkBadge, { backgroundColor: color }]}>
-                        <Ionicons name="checkmark" size={11} color="#0B0F14" />
-                      </RNView>
-                    )}
-
-                    {/* Icon */}
-                    <RNView style={[go.iconWrap, { backgroundColor: color + "20" }]}>
-                      <Ionicons name={iconName} size={26} color={color} />
-                    </RNView>
-
-                    {/* Title */}
-                    <Text style={[go.tileTitle, { color: active ? "#E6EAF2" : "#AAB0C0" }]} numberOfLines={2}>
-                      {g.title[selectedLanguage as Lang]}
-                    </Text>
-                  </RNView>
-                </Pressable>
-              );
-            })}
-            {/* Fill empty slot if odd number */}
-            {row.length < COLS && <RNView style={{ width: tileSize }} />}
+            {row.map((g) => (
+              <GoalTile
+                key={g.id}
+                g={g}
+                active={selected.includes(g.id)}
+                onToggle={toggle}
+                tileSize={tileSize}
+                lang={selectedLanguage}
+              />
+            ))}
+            {row.length < COLS &&
+              Array.from({ length: COLS - row.length }).map((_, i) => (
+                <RNView key={i} style={{ width: tileSize }} />
+              ))
+            }
           </RNView>
         ))}
       </ScrollView>
@@ -141,38 +185,49 @@ export default function Goals() {
 }
 
 const go = StyleSheet.create({
+  subtitleRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginTop: 6,
+  },
+  counter: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#F5C77A",
+  },
   row: {
     flexDirection: "row",
-    gap: 12,
+    gap: GAP,
   },
   tile: {
-    borderRadius: 20,
+    borderRadius: 16,
     borderWidth: 1.5,
-    padding: 16,
-    justifyContent: "flex-end",
-    gap: 10,
+    paddingHorizontal: 6,
+    paddingVertical: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 4,
     position: "relative",
   },
   checkBadge: {
     position: "absolute",
-    top: 12,
-    right: 12,
-    width: 22,
-    height: 22,
-    borderRadius: 11,
+    top: 8,
+    right: 8,
+    width: 18,
+    height: 18,
+    borderRadius: 9,
     alignItems: "center",
     justifyContent: "center",
   },
-  iconWrap: {
-    width: 52,
-    height: 52,
-    borderRadius: 16,
-    alignItems: "center",
-    justifyContent: "center",
+  emoji: {
+    fontSize: 32,
+    lineHeight: 38,
   },
   tileTitle: {
-    fontSize: 15,
+    fontSize: 12,
     fontWeight: "700",
-    lineHeight: 20,
+    lineHeight: 16,
+    textAlign: "center",
   },
 });

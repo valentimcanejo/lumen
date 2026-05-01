@@ -63,7 +63,7 @@
     },
     "goals": {
       "title": "Que quieres desarrollar?",
-      "subtitle": "Selecciona de 1 a 3 areas.",
+      "subtitle": "Elige una o más. Puedes cambiarlo después.",
       "hint": "Puedes cambiar esto luego en tu perfil.",
       "continue": "Continuar"
     },
