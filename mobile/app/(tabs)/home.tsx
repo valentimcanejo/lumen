@@ -607,6 +607,10 @@ export default function Home() {
     () => Object.fromEntries(getBundledGoals().map((g) => [g.id, g.title])),
     [],
   );
+  const trackEmojis = useMemo(
+    () => Object.fromEntries(getBundledGoals().map((g) => [g.id, g.emoji])),
+    [],
+  );
   const { isPremium } = usePremium();
 
   const [user, setUser] = useState<UserProfile | null>(null);
@@ -976,8 +980,8 @@ export default function Home() {
                       activeOpacity={0.7}
                     >
                       <View style={[lc.trackIcon, { backgroundColor: color + "18", borderColor: color + "35" }]}>
-                        <Text style={[lc.trackIconLetter, { color }]}>
-                          {trackId.replace(/_/g, " ").charAt(0).toUpperCase()}
+                        <Text style={lc.trackIconEmoji}>
+                          {trackEmojis[trackId] ?? trackId.charAt(0).toUpperCase()}
                         </Text>
                       </View>
                       <VStack style={{ flex: 1, gap: 2 }}>
@@ -1430,6 +1434,9 @@ const lc = StyleSheet.create({
   trackIconLetter: {
     fontSize: 17,
     fontWeight: "800",
+  },
+  trackIconEmoji: {
+    fontSize: 20,
   },
   listRowEyebrow: {
     fontSize: 10,
