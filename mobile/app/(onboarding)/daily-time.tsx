@@ -55,7 +55,7 @@ export default function DailyTime() {
   const selected = OPTIONS.find((o) => o.key === minutes)!;
 
   return (
-    <Box className="flex-1 bg-[#0B0F14] px-6 pt-6">
+    <Box className="flex-1 bg-[#0B0F14] px-6" style={{ paddingTop: insets.top + 24 }}>
       <Text className="text-[#E6EAF2] text-[26px] font-semibold">
         {t("onboarding.daily-time.title")}
       </Text>
