@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ScrollView,
   View,
@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Modal,
+  useWindowDimensions,
 } from "react-native";
 import ViewShot from "react-native-view-shot";
 import * as Sharing from "expo-sharing";
@@ -44,9 +45,6 @@ import {
 } from "../../repositories/lessons.repo";
 import { getBundledGoals } from "../../repositories/goals.repo";
 
-const TRACK_TITLES: Record<string, Record<string, string>> = Object.fromEntries(
-  getBundledGoals().map((g) => [g.id, g.title])
-);
 import {
   getWeeklyData,
   getTodaySession,
@@ -454,7 +452,6 @@ const wk = StyleSheet.create({
   badgeText: { color: "#F5C77A", fontSize: 12, fontWeight: "700" },
   daysRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
     marginBottom: 22,
   },
   dayCol: { alignItems: "center", gap: 8 },
@@ -487,11 +484,13 @@ function WeeklyCard({
   goalMin,
   lang,
   studiedLabel,
+  screenWidth,
 }: {
   data: DayData[];
   goalMin: number;
   lang: string;
   studiedLabel: string;
+  screenWidth: number;
 }) {
   const today = new Date().getDay();
   const todayIndex = today === 0 ? 6 : today - 1;
@@ -500,6 +499,8 @@ function WeeklyCard({
   const weekGoal = goalMin * 7;
   const weekPct = weekGoal > 0 ? Math.min(totalMinutes / weekGoal, 1) : 0;
   const weekDone = weekPct >= 1;
+  // outer paddingH 20 + card padding 20 = 40px each side; 6 gaps of 4px
+  const circleSize = Math.floor((screenWidth - 80 - 24) / 7);
 
   return (
     <View style={wk.card}>
@@ -521,7 +522,7 @@ function WeeklyCard({
       </View>
 
       {/* Day circles */}
-      <View style={wk.daysRow}>
+      <View style={[wk.daysRow, { gap: 4 }]}>
         {data.map((d, i) => {
           const done = d.minutes >= goalMin;
           const isToday = i === todayIndex;
@@ -533,6 +534,9 @@ function WeeklyCard({
                 style={[
                   wk.circle,
                   {
+                    width: circleSize,
+                    height: circleSize,
+                    borderRadius: circleSize / 2,
                     backgroundColor: done
                       ? "#F5C77A"
                       : isToday
@@ -595,9 +599,14 @@ function WeeklyCard({
 
 export default function Home() {
   const { t, i18n } = useTranslation();
+  const { width: screenWidth } = useWindowDimensions();
   const insets = useSafeAreaInsets();
   const { uid: currentUserId } = useAuth();
   const { getUserData } = useUser();
+  const trackTitles = useMemo(
+    () => Object.fromEntries(getBundledGoals().map((g) => [g.id, g.title])),
+    [],
+  );
   const { isPremium } = usePremium();
 
   const [user, setUser] = useState<UserProfile | null>(null);
@@ -896,7 +905,7 @@ export default function Home() {
                 <View style={lc.heroOverlay}>
                   <View style={[lc.trackPill, { backgroundColor: color + "25", borderColor: color + "55" }]}>
                     <Text style={[lc.trackPillText, { color }]}>
-                      {todayLesson.trackId.replace(/_/g, " ")}
+                      {trackTitles[todayLesson.trackId]?.[lang] ?? todayLesson.trackId.replace(/_/g, " ")}
                     </Text>
                   </View>
                   <Text style={lc.heroTitle} numberOfLines={2}>
@@ -973,7 +982,7 @@ export default function Home() {
                       </View>
                       <VStack style={{ flex: 1, gap: 2 }}>
                         <Text style={[lc.listRowEyebrow, { color }]}>
-                          {TRACK_TITLES[trackId]?.[lang] ?? trackId.replace(/_/g, " ")}
+                          {trackTitles[trackId]?.[lang] ?? trackId.replace(/_/g, " ")}
                         </Text>
                         <Text style={lc.listRowTitle} numberOfLines={1}>
                           {meta!.title[lang] ?? meta!.title.en}
@@ -1120,6 +1129,7 @@ export default function Home() {
             goalMin={user?.dailyGoalMin ?? 10}
             lang={lang}
             studiedLabel={t("tabs.home.studied")}
+            screenWidth={screenWidth}
           />
         </View>
       )}
