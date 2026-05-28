@@ -9,9 +9,9 @@ export const PURCHASES_ENABLED = false;
 
 export const FEATURES = {
   PREMIUM: false,
-  AUDIO: true,
-  COVER_IMAGES: true,
-  GOOGLE_SIGN_IN: true,
+  AUDIO: false,
+  COVER_IMAGES: false,
+  GOOGLE_SIGN_IN: false,
   WEEKLY_SHARE: false,
   TEST_MODE: true,
 };
