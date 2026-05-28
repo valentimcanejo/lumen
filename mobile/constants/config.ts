@@ -13,7 +13,7 @@ export const FEATURES = {
   COVER_IMAGES: true,
   GOOGLE_SIGN_IN: true,
   WEEKLY_SHARE: false,
-  TEST_MODE: false,
+  TEST_MODE: true,
 };
 
 // Tracks visible during TEST_MODE — flip FEATURES.TEST_MODE to false to show all
