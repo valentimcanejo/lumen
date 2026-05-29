@@ -1,0 +1,3391 @@
+{
+  "critical_thinking": {
+    "pt": {
+      "title": "O Equilíbrio de Poder",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "O que é equilíbrio de poder?"
+        },
+        {
+          "type": "p",
+          "text": "O equilíbrio de poder é um princípio da política internacional segundo o qual nenhuma nação deve se tornar poderosa demais a ponto de dominar as outras."
+        },
+        {
+          "type": "p",
+          "text": "Quando um país cresce rapidamente, os demais tendem a reagir formando alianças, aumentando seus gastos militares ou criando mecanismos de contenção."
+        },
+        {
+          "type": "quote",
+          "text": "O poder não é algo que se possui isoladamente, mas algo que existe em relação aos outros."
+        },
+        {
+          "type": "h2",
+          "text": "Por que isso importa?"
+        },
+        {
+          "type": "p",
+          "text": "Esse mecanismo ajuda a explicar por que grandes guerras muitas vezes surgem quando o equilíbrio é rompido — e por que alianças internacionais são tão comuns."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Evita hegemonias absolutas",
+            "Incentiva alianças estratégicas",
+            "Reduz o risco de dominação total"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "The Balance of Power",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "What is the balance of power?"
+        },
+        {
+          "type": "p",
+          "text": "The balance of power is a principle of international politics stating that no nation should become powerful enough to dominate all others."
+        },
+        {
+          "type": "p",
+          "text": "When a country grows rapidly, others tend to react by forming alliances, increasing military spending, or creating containment mechanisms."
+        },
+        {
+          "type": "quote",
+          "text": "Power is not something one possesses in isolation, but something that exists in relation to others."
+        },
+        {
+          "type": "h2",
+          "text": "Why does it matter?"
+        },
+        {
+          "type": "p",
+          "text": "This mechanism helps explain why major wars often arise when the balance is broken — and why international alliances are so common."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Prevents absolute hegemonies",
+            "Encourages strategic alliances",
+            "Reduces the risk of total domination"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "El Equilibrio de Poder",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "¿Qué es el equilibrio de poder?"
+        },
+        {
+          "type": "p",
+          "text": "El equilibrio de poder es un principio de la política internacional según el cual ninguna nación debe volverse tan poderosa como para dominar a las demás."
+        },
+        {
+          "type": "p",
+          "text": "Cuando un país crece rápidamente, los demás tienden a reaccionar formando alianzas, aumentando el gasto militar o creando mecanismos de contención."
+        },
+        {
+          "type": "quote",
+          "text": "El poder no es algo que se posee de forma aislada, sino algo que existe en relación con los demás."
+        },
+        {
+          "type": "h2",
+          "text": "¿Por qué importa?"
+        },
+        {
+          "type": "p",
+          "text": "Este mecanismo ayuda a explicar por qué las grandes guerras suelen surgir cuando el equilibrio se rompe — y por qué las alianzas internacionales son tan comunes."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Evita hegemonías absolutas",
+            "Fomenta alianzas estratégicas",
+            "Reduce el riesgo de dominación total"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "critical_thinking_bias": {
+    "pt": {
+      "title": "Vieses Cognitivos",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "O que são vieses cognitivos?"
+        },
+        {
+          "type": "p",
+          "text": "Vieses cognitivos são padrões sistemáticos de desvio do raciocínio lógico. Nosso cérebro usa atalhos (heurísticas) para economizar energia — mas esses atalhos frequentemente distorcem a realidade."
+        },
+        {
+          "type": "h2",
+          "text": "Vieses mais impactantes"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Viés de confirmação: buscar informações que confirmam o que já acreditamos",
+            "Efeito de ancoragem: dar peso excessivo à primeira informação recebida",
+            "Viés do sobrevivente: analisar apenas os casos que 'sobreviveram', ignorando os que falharam",
+            "Efeito Dunning-Kruger: superestimar a própria competência em áreas de pouco conhecimento"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "O primeiro princípio é não se enganar — e você é a pessoa mais fácil de enganar. — Richard Feynman"
+        },
+        {
+          "type": "h2",
+          "text": "Como mitigar"
+        },
+        {
+          "type": "p",
+          "text": "Buscar perspectivas contrárias, decidir com dados, questionar suas certezas e ter checklist de decisão são estratégias que reduzem o impacto dos vieses."
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "Cognitive Biases",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "What are cognitive biases?"
+        },
+        {
+          "type": "p",
+          "text": "Cognitive biases are systematic patterns of deviation from logical reasoning. Our brain uses shortcuts (heuristics) to save energy — but these shortcuts often distort reality."
+        },
+        {
+          "type": "h2",
+          "text": "Most impactful biases"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Confirmation bias: seeking information that confirms what we already believe",
+            "Anchoring effect: giving excessive weight to the first piece of information received",
+            "Survivorship bias: analyzing only cases that 'survived', ignoring those that failed",
+            "Dunning-Kruger effect: overestimating one's own competence in areas of little knowledge"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "The first principle is not to fool yourself — and you are the easiest person to fool. — Richard Feynman"
+        },
+        {
+          "type": "h2",
+          "text": "How to mitigate them"
+        },
+        {
+          "type": "p",
+          "text": "Seeking opposing perspectives, deciding with data, questioning your certainties, and using decision checklists are strategies that reduce the impact of biases."
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Sesgos Cognitivos",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "¿Qué son los sesgos cognitivos?"
+        },
+        {
+          "type": "p",
+          "text": "Los sesgos cognitivos son patrones sistemáticos de desviación del razonamiento lógico. Nuestro cerebro usa atajos (heurísticas) para ahorrar energía — pero estos atajos frecuentemente distorsionan la realidad."
+        },
+        {
+          "type": "h2",
+          "text": "Sesgos más impactantes"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Sesgo de confirmación: buscar información que confirme lo que ya creemos",
+            "Efecto de anclaje: dar peso excesivo a la primera información recibida",
+            "Sesgo del superviviente: analizar solo los casos que 'sobrevivieron', ignorando los que fallaron",
+            "Efecto Dunning-Kruger: sobreestimar la propia competencia en áreas de poco conocimiento"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "El primer principio es no engañarte a ti mismo — y eres la persona más fácil de engañar. — Richard Feynman"
+        },
+        {
+          "type": "h2",
+          "text": "Cómo mitigarlos"
+        },
+        {
+          "type": "p",
+          "text": "Buscar perspectivas contrarias, decidir con datos, cuestionar tus certezas y usar listas de verificación para decisiones son estrategias que reducen el impacto de los sesgos."
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "critical_thinking_fallacies": {
+    "pt": {
+      "title": "Falácias Lógicas",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "O que é uma falácia?"
+        },
+        {
+          "type": "p",
+          "text": "Uma falácia lógica é um erro no raciocínio que torna um argumento inválido, mesmo que pareça convincente. Reconhecer falácias é essencial para pensar criticamente."
+        },
+        {
+          "type": "h2",
+          "text": "Falácias mais comuns"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Ad hominem: atacar a pessoa em vez do argumento",
+            "Homem de palha: distorcer a posição do oponente para refutá-la mais facilmente",
+            "Apelo à autoridade: aceitar algo como verdade porque uma autoridade disse",
+            "Falsa dicotomia: apresentar apenas duas opções quando há mais"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Um argumento que parece bom nem sempre é um bom argumento."
+        },
+        {
+          "type": "h2",
+          "text": "Por que isso importa"
+        },
+        {
+          "type": "p",
+          "text": "Falácias aparecem em discursos políticos, publicidade, debates públicos e até conversas cotidianas. Identificá-las protege você de ser manipulado e melhora a qualidade dos seus próprios argumentos."
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "Logical Fallacies",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "What is a fallacy?"
+        },
+        {
+          "type": "p",
+          "text": "A logical fallacy is an error in reasoning that makes an argument invalid, even if it seems convincing. Recognizing fallacies is essential for critical thinking."
+        },
+        {
+          "type": "h2",
+          "text": "Most common fallacies"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Ad hominem: attacking the person instead of the argument",
+            "Straw man: distorting the opponent's position to refute it more easily",
+            "Appeal to authority: accepting something as true because an authority said so",
+            "False dichotomy: presenting only two options when more exist"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "An argument that sounds good is not always a good argument."
+        },
+        {
+          "type": "h2",
+          "text": "Why it matters"
+        },
+        {
+          "type": "p",
+          "text": "Fallacies appear in political speeches, advertising, public debates, and everyday conversations. Identifying them protects you from manipulation and improves the quality of your own arguments."
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Falacias Lógicas",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "¿Qué es una falacia?"
+        },
+        {
+          "type": "p",
+          "text": "Una falacia lógica es un error en el razonamiento que hace inválido un argumento, aunque parezca convincente. Reconocer falacias es esencial para el pensamiento crítico."
+        },
+        {
+          "type": "h2",
+          "text": "Falacias más comunes"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Ad hominem: atacar a la persona en vez del argumento",
+            "Hombre de paja: distorsionar la posición del oponente para refutarla más fácilmente",
+            "Apelación a la autoridad: aceptar algo como verdad porque lo dijo una autoridad",
+            "Falsa dicotomía: presentar solo dos opciones cuando existen más"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Un argumento que suena bien no siempre es un buen argumento."
+        },
+        {
+          "type": "h2",
+          "text": "Por qué importa"
+        },
+        {
+          "type": "p",
+          "text": "Las falacias aparecen en discursos políticos, publicidad, debates públicos y conversaciones cotidianas. Identificarlas te protege de la manipulación y mejora la calidad de tus propios argumentos."
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "critical_thinking_rhetoric": {
+    "pt": {
+      "title": "Retorica e Persuasao",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Os tres pilares da persuasao"
+        },
+        {
+          "type": "p",
+          "text": "Aristoteles identificou tres modos de persuasao que permanecem fundamentais ate hoje. Ethos e a credibilidade e o carater do orador. Pathos e o apelo emocional ao publico. Logos e a estrutura logica do argumento. Os comunicadores mais eficazes combinam os tres habilmente, mas estar ciente de qual esta sendo usado ajuda voce a avaliar argumentos criticamente."
+        },
+        {
+          "type": "h2",
+          "text": "Tecnicas comuns de persuasao"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Prova social: as pessoas seguem o que os outros estao fazendo, especialmente em situacoes de incerteza",
+            "Reciprocidade: quando alguem lhe da algo, voce se sente compelido a retribuir",
+            "Escassez: a disponibilidade limitada aumenta o valor percebido",
+            "Ancoragem: o primeiro numero ou ideia apresentado molda todos os julgamentos seguintes"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Reconhecendo e construindo argumentos"
+        },
+        {
+          "type": "p",
+          "text": "Um argumento forte tem premissas claras que apoiam logicamente uma conclusao. Fique atento a falacias comuns: ad hominem ataca a pessoa em vez do argumento, espantalho distorce a visao oposta, e apelo a autoridade depende de status em vez de evidencias. Ao construir seus proprios argumentos, declare sua tese claramente, forneca evidencias, aborde contra-argumentos e evite manipulacao emocional."
+        },
+        {
+          "type": "quote",
+          "text": "O objetivo da retorica nao e a verdade, mas a persuasao. Para se defender dela, voce precisa primeiro entende-la. -- Aristoteles (adaptado)"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "Rhetoric and Persuasion",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "The Three Pillars of Persuasion"
+        },
+        {
+          "type": "p",
+          "text": "Aristotle identified three modes of persuasion that remain foundational today. Ethos is the credibility and character of the speaker. Pathos is the emotional appeal to the audience. Logos is the logical structure of the argument. The most effective communicators skillfully blend all three, but being aware of which is being used helps you evaluate arguments critically."
+        },
+        {
+          "type": "h2",
+          "text": "Common Persuasion Techniques"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Social proof: people follow what others are doing, especially in uncertain situations",
+            "Reciprocity: when someone gives you something, you feel compelled to give back",
+            "Scarcity: limited availability increases perceived value",
+            "Anchoring: the first number or idea presented shapes all subsequent judgments"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Recognizing and Constructing Arguments"
+        },
+        {
+          "type": "p",
+          "text": "A strong argument has clear premises that logically support a conclusion. Watch for common fallacies: ad hominem attacks the person instead of the argument, straw man misrepresents the opposing view, and appeal to authority relies on status rather than evidence. When constructing your own arguments, state your claim clearly, provide evidence, address counterarguments, and avoid emotional manipulation."
+        },
+        {
+          "type": "quote",
+          "text": "The object of rhetoric is not truth but persuasion. To defend against it, you must first understand it. -- Aristotle (adapted)"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Retorica y Persuasion",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Los tres pilares de la persuasion"
+        },
+        {
+          "type": "p",
+          "text": "Aristoteles identifico tres modos de persuasion que siguen siendo fundamentales hoy. Ethos es la credibilidad y el caracter del orador. Pathos es la apelacion emocional al publico. Logos es la estructura logica del argumento. Los comunicadores mas efectivos combinan habilmente los tres, pero ser consciente de cual se esta usando te ayuda a evaluar argumentos criticamente."
+        },
+        {
+          "type": "h2",
+          "text": "Tecnicas comunes de persuasion"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Prueba social: las personas siguen lo que otros estan haciendo, especialmente en situaciones de incertidumbre",
+            "Reciprocidad: cuando alguien te da algo, te sientes obligado a devolver el favor",
+            "Escasez: la disponibilidad limitada aumenta el valor percibido",
+            "Anclaje: el primer numero o idea presentado moldea todos los juicios posteriores"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Reconocer y construir argumentos"
+        },
+        {
+          "type": "p",
+          "text": "Un argumento solido tiene premisas claras que apoyan logicamente una conclusion. Presta atencion a falacias comunes: ad hominem ataca a la persona en lugar del argumento, hombre de paja tergiversa la posicion opuesta, y apelacion a la autoridad depende del estatus en lugar de la evidencia. Al construir tus propios argumentos, expresa tu tesis claramente, proporciona evidencia, aborda contraargumentos y evita la manipulacion emocional."
+        },
+        {
+          "type": "quote",
+          "text": "El objetivo de la retorica no es la verdad sino la persuasion. Para defenderte de ella, primero debes entenderla. -- Aristoteles (adaptado)"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "critical_thinking_scientific": {
+    "pt": {
+      "title": "Metodo Cientifico",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "O processo central"
+        },
+        {
+          "type": "p",
+          "text": "O metodo cientifico e uma abordagem sistematica para entender o mundo. Comeca com a observacao, avanca para a formulacao de uma hipotese testavel e depois projeta experimentos para testa-la. Os resultados sao analisados e conclusoes sao tiradas. Esse ciclo se repete, construindo gradualmente um conhecimento mais confiavel."
+        },
+        {
+          "type": "h2",
+          "text": "Falseabilidade e revisao por pares"
+        },
+        {
+          "type": "p",
+          "text": "Karl Popper argumentou que para uma afirmacao ser cientifica, ela precisa ser falseavel, ou seja, deve existir uma observacao possivel que possa prova-la errada. A revisao por pares adiciona outra camada: outros cientistas avaliam os metodos e conclusoes antes da publicacao. Esse processo detecta erros, vieses e raciocinio fraco."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Uma hipotese deve fazer previsoes que possam ser testadas e potencialmente refutadas",
+            "A revisao por pares e imperfeita, mas continua sendo o melhor filtro para alegacoes cientificas",
+            "A replicacao por equipes independentes fortalece a confianca nos resultados"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "A crise de replicacao"
+        },
+        {
+          "type": "p",
+          "text": "Nas ultimas decadas, muitas descobertas publicadas em psicologia, medicina e outras areas nao conseguiram ser replicadas quando outros pesquisadores repetiram os experimentos. Essa crise revelou problemas como amostras pequenas, vies de publicacao favorecendo resultados positivos e praticas de pesquisa questionaveis. Isso levou a reformas incluindo pre-registro de estudos e compartilhamento aberto de dados."
+        },
+        {
+          "type": "quote",
+          "text": "O primeiro principio e que voce nao deve enganar a si mesmo, e voce e a pessoa mais facil de enganar. -- Richard Feynman"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "Scientific Method",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "The Core Process"
+        },
+        {
+          "type": "p",
+          "text": "The scientific method is a systematic approach to understanding the world. It begins with observation, moves to forming a testable hypothesis, then designs experiments to test that hypothesis. Results are analyzed and conclusions drawn. This cycle repeats, gradually building more reliable knowledge."
+        },
+        {
+          "type": "h2",
+          "text": "Falsifiability and Peer Review"
+        },
+        {
+          "type": "p",
+          "text": "Karl Popper argued that for a claim to be scientific, it must be falsifiable, meaning there must be a possible observation that could prove it wrong. Peer review adds another layer: other scientists scrutinize methods and conclusions before publication. This process catches errors, biases, and weak reasoning."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A hypothesis must make predictions that can be tested and potentially disproven",
+            "Peer review is imperfect but remains the best filter for scientific claims",
+            "Replication by independent teams strengthens confidence in findings"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "The Replication Crisis"
+        },
+        {
+          "type": "p",
+          "text": "In recent decades, many published findings in psychology, medicine, and other fields have failed to replicate when other researchers repeated the experiments. This replication crisis revealed problems like small sample sizes, publication bias favoring positive results, and questionable research practices. It has led to reforms including pre-registration of studies and open data sharing."
+        },
+        {
+          "type": "quote",
+          "text": "The first principle is that you must not fool yourself, and you are the easiest person to fool. -- Richard Feynman"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Metodo Cientifico",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "El proceso central"
+        },
+        {
+          "type": "p",
+          "text": "El metodo cientifico es un enfoque sistematico para entender el mundo. Comienza con la observacion, avanza hacia la formulacion de una hipotesis comprobable y luego disena experimentos para probarla. Los resultados se analizan y se extraen conclusiones. Este ciclo se repite, construyendo gradualmente un conocimiento mas confiable."
+        },
+        {
+          "type": "h2",
+          "text": "Falsabilidad y revision por pares"
+        },
+        {
+          "type": "p",
+          "text": "Karl Popper argumento que para que una afirmacion sea cientifica, debe ser falsable, es decir, debe existir una observacion posible que pueda demostrar que es incorrecta. La revision por pares agrega otra capa: otros cientificos examinan los metodos y conclusiones antes de la publicacion. Este proceso detecta errores, sesgos y razonamientos debiles."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Una hipotesis debe hacer predicciones que puedan ser probadas y potencialmente refutadas",
+            "La revision por pares es imperfecta pero sigue siendo el mejor filtro para afirmaciones cientificas",
+            "La replicacion por equipos independientes fortalece la confianza en los hallazgos"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "La crisis de replicacion"
+        },
+        {
+          "type": "p",
+          "text": "En las ultimas decadas, muchos hallazgos publicados en psicologia, medicina y otros campos no pudieron replicarse cuando otros investigadores repitieron los experimentos. Esta crisis revelo problemas como muestras pequenas, sesgo de publicacion que favorece resultados positivos y practicas de investigacion cuestionables. Esto ha llevado a reformas que incluyen el pre-registro de estudios y el intercambio abierto de datos."
+        },
+        {
+          "type": "quote",
+          "text": "El primer principio es que no debes enganarte a ti mismo, y tu eres la persona mas facil de enganar. -- Richard Feynman"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "economics": {
+    "pt": {
+      "title": "O que é o PIB?",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Definição"
+        },
+        {
+          "type": "p",
+          "text": "O Produto Interno Bruto (PIB) é o valor total de todos os bens e serviços finais produzidos em um país durante um período, geralmente um ano."
+        },
+        {
+          "type": "p",
+          "text": "É o principal termômetro da atividade econômica de um país: cresce quando a economia aquece e cai em recessões."
+        },
+        {
+          "type": "h2",
+          "text": "Como é calculado?"
+        },
+        {
+          "type": "p",
+          "text": "A fórmula mais comum é: PIB = Consumo + Investimento + Gastos do governo + (Exportações − Importações)."
+        },
+        {
+          "type": "quote",
+          "text": "O PIB mede tudo, exceto o que faz a vida valer a pena. — Robert Kennedy"
+        },
+        {
+          "type": "h2",
+          "text": "Limitações do PIB"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Não mede desigualdade na distribuição da renda",
+            "Ignora trabalho não remunerado (doméstico, voluntário)",
+            "Pode crescer com atividades prejudiciais (poluição, guerras)",
+            "Não capta bem-estar ou qualidade de vida"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "What is GDP?",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Definition"
+        },
+        {
+          "type": "p",
+          "text": "Gross Domestic Product (GDP) is the total value of all final goods and services produced in a country during a period, usually one year."
+        },
+        {
+          "type": "p",
+          "text": "It is the main thermometer of a country's economic activity: it grows when the economy heats up and falls during recessions."
+        },
+        {
+          "type": "h2",
+          "text": "How is it calculated?"
+        },
+        {
+          "type": "p",
+          "text": "The most common formula is: GDP = Consumption + Investment + Government Spending + (Exports − Imports)."
+        },
+        {
+          "type": "quote",
+          "text": "GDP measures everything, except that which makes life worthwhile. — Robert Kennedy"
+        },
+        {
+          "type": "h2",
+          "text": "Limitations of GDP"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Does not measure inequality in income distribution",
+            "Ignores unpaid work (domestic, volunteer)",
+            "Can grow from harmful activities (pollution, wars)",
+            "Does not capture well-being or quality of life"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "¿Qué es el PIB?",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Definición"
+        },
+        {
+          "type": "p",
+          "text": "El Producto Interno Bruto (PIB) es el valor total de todos los bienes y servicios finales producidos en un país durante un período, generalmente un año."
+        },
+        {
+          "type": "p",
+          "text": "Es el principal termómetro de la actividad económica de un país: crece cuando la economía se activa y cae durante las recesiones."
+        },
+        {
+          "type": "h2",
+          "text": "¿Cómo se calcula?"
+        },
+        {
+          "type": "p",
+          "text": "La fórmula más común es: PIB = Consumo + Inversión + Gasto público + (Exportaciones − Importaciones)."
+        },
+        {
+          "type": "quote",
+          "text": "El PIB lo mide todo, excepto lo que hace que la vida valga la pena. — Robert Kennedy"
+        },
+        {
+          "type": "h2",
+          "text": "Limitaciones del PIB"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "No mide la desigualdad en la distribución del ingreso",
+            "Ignora el trabajo no remunerado (doméstico, voluntario)",
+            "Puede crecer por actividades perjudiciales (contaminación, guerras)",
+            "No capta el bienestar ni la calidad de vida"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "economics_inflation": {
+    "pt": {
+      "title": "Inflação e Poder de Compra",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "O que é inflação?"
+        },
+        {
+          "type": "p",
+          "text": "Inflação é o aumento generalizado e contínuo dos preços ao longo do tempo. Quando a inflação sobe, cada real compra menos — o poder de compra diminui."
+        },
+        {
+          "type": "h2",
+          "text": "Causas principais"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Excesso de demanda: mais dinheiro perseguindo os mesmos bens",
+            "Choque de oferta: escassez de insumos eleva preços",
+            "Expectativas: se todos esperam inflação, ela tende a se auto-realizar"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Quem ganha e quem perde"
+        },
+        {
+          "type": "p",
+          "text": "Devedores ganham: suas dívidas valem menos em termos reais. Credores e trabalhadores com salários fixos perdem: seu poder de compra cai. Por isso bancos centrais buscam manter a inflação sob controle."
+        },
+        {
+          "type": "quote",
+          "text": "A inflação é sempre e em todo lugar um fenômeno monetário. — Milton Friedman"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "Inflation and Purchasing Power",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "What is inflation?"
+        },
+        {
+          "type": "p",
+          "text": "Inflation is the generalized and continuous increase in prices over time. When inflation rises, each dollar buys less — purchasing power falls."
+        },
+        {
+          "type": "h2",
+          "text": "Main causes"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Excess demand: more money chasing the same goods",
+            "Supply shock: scarcity of inputs drives prices up",
+            "Expectations: if everyone expects inflation, it tends to become self-fulfilling"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Who gains and who loses"
+        },
+        {
+          "type": "p",
+          "text": "Debtors gain: their debts are worth less in real terms. Creditors and fixed-wage workers lose: their purchasing power falls. That is why central banks aim to keep inflation under control."
+        },
+        {
+          "type": "quote",
+          "text": "Inflation is always and everywhere a monetary phenomenon. — Milton Friedman"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Inflación y Poder Adquisitivo",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "¿Qué es la inflación?"
+        },
+        {
+          "type": "p",
+          "text": "La inflación es el aumento generalizado y continuo de los precios a lo largo del tiempo. Cuando la inflación sube, cada peso compra menos — el poder adquisitivo disminuye."
+        },
+        {
+          "type": "h2",
+          "text": "Causas principales"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Exceso de demanda: más dinero persiguiendo los mismos bienes",
+            "Choque de oferta: escasez de insumos eleva los precios",
+            "Expectativas: si todos esperan inflación, tiende a autoconfirmarse"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Quién gana y quién pierde"
+        },
+        {
+          "type": "p",
+          "text": "Los deudores ganan: sus deudas valen menos en términos reales. Los acreedores y trabajadores con salarios fijos pierden: su poder adquisitivo cae. Por eso los bancos centrales buscan mantener la inflación bajo control."
+        },
+        {
+          "type": "quote",
+          "text": "La inflación es siempre y en todo lugar un fenómeno monetario. — Milton Friedman"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "economics_interest_rates": {
+    "pt": {
+      "title": "Juros e Bancos Centrais",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "O que é a taxa de juros?"
+        },
+        {
+          "type": "p",
+          "text": "A taxa de juros é o custo do dinheiro ao longo do tempo. Quando você pega emprestado, paga juros. Quando você poupa, recebe juros. Os bancos centrais controlam a taxa básica da economia."
+        },
+        {
+          "type": "h2",
+          "text": "O papel do banco central"
+        },
+        {
+          "type": "p",
+          "text": "No Brasil, o Banco Central define a Selic — a taxa básica de juros. Nos EUA, o Federal Reserve controla os Fed Funds. Essas taxas influenciam todo o sistema financeiro: crédito, poupança, câmbio."
+        },
+        {
+          "type": "h2",
+          "text": "Como os juros controlam a economia"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Juros altos: crédito fica caro, consumo cai, inflação recua",
+            "Juros baixos: crédito fica barato, consumo sobe, economia acelera",
+            "O desafio: calibrar sem causar recessão ou inflação descontrolada"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "O banco central tem apenas um instrumento, que é a taxa de juros de curto prazo. — Ben Bernanke"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "Interest Rates and Central Banks",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "What is an interest rate?"
+        },
+        {
+          "type": "p",
+          "text": "An interest rate is the cost of money over time. When you borrow, you pay interest. When you save, you earn interest. Central banks control the economy's base rate."
+        },
+        {
+          "type": "h2",
+          "text": "The role of the central bank"
+        },
+        {
+          "type": "p",
+          "text": "In the US, the Federal Reserve controls the Fed Funds rate. In the EU, the European Central Bank sets its key rates. These base rates influence the entire financial system: credit, savings, and exchange rates."
+        },
+        {
+          "type": "h2",
+          "text": "How rates control the economy"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "High rates: credit becomes expensive, consumption falls, inflation retreats",
+            "Low rates: credit becomes cheap, consumption rises, economy accelerates",
+            "The challenge: calibrating without causing recession or runaway inflation"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "The central bank has only one instrument, which is the short-term interest rate. — Ben Bernanke"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Tasas de Interés y Bancos Centrales",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "¿Qué es la tasa de interés?"
+        },
+        {
+          "type": "p",
+          "text": "La tasa de interés es el costo del dinero a lo largo del tiempo. Cuando pides prestado, pagas intereses. Cuando ahorras, recibes intereses. Los bancos centrales controlan la tasa base de la economía."
+        },
+        {
+          "type": "h2",
+          "text": "El papel del banco central"
+        },
+        {
+          "type": "p",
+          "text": "En EE.UU., la Reserva Federal controla la tasa de fondos federales. En la eurozona, el BCE fija sus tasas clave. Estas tasas base influyen en todo el sistema financiero: crédito, ahorro y tipo de cambio."
+        },
+        {
+          "type": "h2",
+          "text": "Cómo las tasas controlan la economía"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Tasas altas: el crédito se encarece, el consumo cae, la inflación retrocede",
+            "Tasas bajas: el crédito se abarata, el consumo sube, la economía acelera",
+            "El desafío: calibrar sin causar recesión ni inflación descontrolada"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "El banco central tiene solo un instrumento, que es la tasa de interés a corto plazo. — Ben Bernanke"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "economics_trade": {
+    "pt": {
+      "title": "Comercio Internacional",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Vantagem comparativa"
+        },
+        {
+          "type": "p",
+          "text": "O principio da vantagem comparativa de David Ricardo explica por que o comercio beneficia paises mesmo quando um deles e melhor em produzir tudo. Um pais deve se especializar em bens onde tem o menor custo de oportunidade. Se o Brasil pode produzir cafe de forma muito mais eficiente que eletronicos em relacao ao Japao, ambas as nacoes ganham quando o Brasil exporta cafe e importa eletronicos. Este principio continua sendo a base da teoria do comercio."
+        },
+        {
+          "type": "h2",
+          "text": "Protecionismo vs livre comercio"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Tarifas sao impostos sobre importacoes que aumentam precos para consumidores mas protegem industrias domesticas",
+            "O livre comercio maximiza a producao economica total mas pode prejudicar trabalhadores e industrias especificos",
+            "Argumento da industria nascente: novas industrias podem precisar de protecao temporaria para competir globalmente",
+            "Deficits comerciais ocorrem quando um pais importa mais do que exporta, o que nem sempre e prejudicial"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "O sistema de comercio global"
+        },
+        {
+          "type": "p",
+          "text": "A Organizacao Mundial do Comercio (OMC) estabelece regras para o comercio internacional entre seus 164 paises membros. Ela promove a reducao de barreiras comerciais e fornece um forum para resolver disputas. Acordos regionais como o mercado unico da UE ou o USMCA criam integracao mais profunda entre grupos menores de paises. Criticos argumentam que esses sistemas beneficiam nacoes ricas desproporcionalmente."
+        },
+        {
+          "type": "quote",
+          "text": "Nenhuma nacao jamais foi arruinada pelo comercio. -- Benjamin Franklin"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "International Trade",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Comparative Advantage"
+        },
+        {
+          "type": "p",
+          "text": "David Ricardo's principle of comparative advantage explains why trade benefits countries even when one is better at producing everything. A country should specialize in goods where it has the lowest opportunity cost. If Brazil can produce coffee far more efficiently than electronics relative to Japan, both nations gain when Brazil exports coffee and imports electronics. This principle remains the foundation of trade theory."
+        },
+        {
+          "type": "h2",
+          "text": "Protectionism vs Free Trade"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Tariffs are taxes on imports that raise prices for consumers but protect domestic industries",
+            "Free trade maximizes total economic output but can hurt specific workers and industries",
+            "Infant industry argument: new industries may need temporary protection to compete globally",
+            "Trade deficits occur when a country imports more than it exports, which is not always harmful"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "The Global Trade System"
+        },
+        {
+          "type": "p",
+          "text": "The World Trade Organization (WTO) sets rules for international trade among its 164 member nations. It promotes reducing trade barriers and provides a forum for resolving disputes. Regional agreements like the EU single market or USMCA create deeper integration among smaller groups of countries. Critics argue these systems benefit wealthy nations disproportionately."
+        },
+        {
+          "type": "quote",
+          "text": "No nation was ever ruined by trade. -- Benjamin Franklin"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Comercio Internacional",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Ventaja comparativa"
+        },
+        {
+          "type": "p",
+          "text": "El principio de ventaja comparativa de David Ricardo explica por que el comercio beneficia a los paises incluso cuando uno es mejor produciendo todo. Un pais debe especializarse en bienes donde tiene el menor costo de oportunidad. Si Brasil puede producir cafe mucho mas eficientemente que electronica en comparacion con Japon, ambas naciones ganan cuando Brasil exporta cafe e importa electronica. Este principio sigue siendo la base de la teoria comercial."
+        },
+        {
+          "type": "h2",
+          "text": "Proteccionismo vs libre comercio"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Los aranceles son impuestos a las importaciones que elevan los precios para los consumidores pero protegen las industrias nacionales",
+            "El libre comercio maximiza la produccion economica total pero puede perjudicar a trabajadores e industrias especificos",
+            "Argumento de la industria naciente: nuevas industrias pueden necesitar proteccion temporal para competir globalmente",
+            "Los deficits comerciales ocurren cuando un pais importa mas de lo que exporta, lo cual no siempre es perjudicial"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "El sistema de comercio global"
+        },
+        {
+          "type": "p",
+          "text": "La Organizacion Mundial del Comercio (OMC) establece reglas para el comercio internacional entre sus 164 naciones miembros. Promueve la reduccion de barreras comerciales y proporciona un foro para resolver disputas. Acuerdos regionales como el mercado unico de la UE o el T-MEC crean una integracion mas profunda entre grupos mas pequenos de paises. Los criticos argumentan que estos sistemas benefician desproporcionadamente a las naciones ricas."
+        },
+        {
+          "type": "quote",
+          "text": "Ninguna nacion fue jamas arruinada por el comercio. -- Benjamin Franklin"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "foundations": {
+    "pt": {
+      "title": "Pensamento Sistêmico",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "O que é pensamento sistêmico?"
+        },
+        {
+          "type": "p",
+          "text": "Pensamento sistêmico é a habilidade de enxergar além dos eventos isolados e perceber os padrões, estruturas e interconexões que os geram."
+        },
+        {
+          "type": "p",
+          "text": "Em vez de perguntar 'quem causou isso?', o pensamento sistêmico pergunta 'como esse sistema produz esse resultado?'."
+        },
+        {
+          "type": "h2",
+          "text": "Loops de feedback"
+        },
+        {
+          "type": "p",
+          "text": "Sistemas funcionam por loops de feedback: uma ação gera um efeito, que por sua vez influencia a próxima ação. Loops podem ser reforçadores (amplificam mudanças) ou balanceadores (estabilizam o sistema)."
+        },
+        {
+          "type": "quote",
+          "text": "Você não pode resolver um problema com o mesmo nível de pensamento que o criou. — Albert Einstein"
+        },
+        {
+          "type": "h2",
+          "text": "Por que isso importa?"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Evita soluções que criam novos problemas",
+            "Revela causas profundas, não apenas sintomas",
+            "Melhora decisões em ambientes complexos"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "Systems Thinking",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "What is systems thinking?"
+        },
+        {
+          "type": "p",
+          "text": "Systems thinking is the ability to see beyond isolated events and notice the patterns, structures, and interconnections that generate them."
+        },
+        {
+          "type": "p",
+          "text": "Instead of asking 'who caused this?', systems thinking asks 'how does this system produce this result?'."
+        },
+        {
+          "type": "h2",
+          "text": "Feedback loops"
+        },
+        {
+          "type": "p",
+          "text": "Systems operate through feedback loops: an action produces an effect, which in turn influences the next action. Loops can be reinforcing (amplifying change) or balancing (stabilizing the system)."
+        },
+        {
+          "type": "quote",
+          "text": "You cannot solve a problem with the same level of thinking that created it. — Albert Einstein"
+        },
+        {
+          "type": "h2",
+          "text": "Why does it matter?"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Avoids solutions that create new problems",
+            "Reveals root causes, not just symptoms",
+            "Improves decisions in complex environments"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Pensamiento Sistémico",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "¿Qué es el pensamiento sistémico?"
+        },
+        {
+          "type": "p",
+          "text": "El pensamiento sistémico es la habilidad de ver más allá de los eventos aislados y percibir los patrones, estructuras e interconexiones que los generan."
+        },
+        {
+          "type": "p",
+          "text": "En lugar de preguntar '¿quién causó esto?', el pensamiento sistémico pregunta '¿cómo produce este sistema este resultado?'."
+        },
+        {
+          "type": "h2",
+          "text": "Bucles de retroalimentación"
+        },
+        {
+          "type": "p",
+          "text": "Los sistemas funcionan mediante bucles de retroalimentación: una acción produce un efecto que a su vez influye en la siguiente acción. Los bucles pueden ser reforzadores (amplifican el cambio) o equilibradores (estabilizan el sistema)."
+        },
+        {
+          "type": "quote",
+          "text": "No puedes resolver un problema con el mismo nivel de pensamiento que lo creó. — Albert Einstein"
+        },
+        {
+          "type": "h2",
+          "text": "¿Por qué importa?"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Evita soluciones que crean nuevos problemas",
+            "Revela causas profundas, no solo síntomas",
+            "Mejora las decisiones en entornos complejos"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "foundations_first_principles": {
+    "pt": {
+      "title": "Primeiros Princípios",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "O que são primeiros princípios?"
+        },
+        {
+          "type": "p",
+          "text": "Raciocinar por primeiros princípios significa decompor um problema em seus elementos mais fundamentais — verdades que não podem ser reduzidas ainda mais — e reconstruir a solução a partir daí."
+        },
+        {
+          "type": "p",
+          "text": "É o oposto do raciocínio por analogia, que se baseia em 'como as coisas sempre foram feitas'."
+        },
+        {
+          "type": "h2",
+          "text": "Como aplicar"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Identifique as suposições que você está fazendo",
+            "Questione cada suposição: 'Isso é realmente verdade?'",
+            "Construa sua solução a partir das verdades fundamentais restantes"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "É importante raciocinar por primeiros princípios em vez de analogia. — Elon Musk"
+        },
+        {
+          "type": "h2",
+          "text": "Por que isso importa"
+        },
+        {
+          "type": "p",
+          "text": "A maioria das ideias inovadoras emerge de pessoas que se recusaram a aceitar 'é assim que sempre foi feito' como resposta final. Primeiros princípios liberam o pensamento criativo."
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "First Principles",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "What are first principles?"
+        },
+        {
+          "type": "p",
+          "text": "Reasoning from first principles means breaking a problem down to its most fundamental elements — truths that cannot be reduced further — and reconstructing solutions from there."
+        },
+        {
+          "type": "p",
+          "text": "It is the opposite of reasoning by analogy, which relies on 'how things have always been done'."
+        },
+        {
+          "type": "h2",
+          "text": "How to apply it"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Identify the assumptions you are making",
+            "Question each assumption: 'Is this actually true?'",
+            "Build your solution from the remaining fundamental truths"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "It's important to reason from first principles rather than by analogy. — Elon Musk"
+        },
+        {
+          "type": "h2",
+          "text": "Why it matters"
+        },
+        {
+          "type": "p",
+          "text": "Most innovative ideas come from people who refused to accept 'that's how it's always been done' as a final answer. First principles unlock creative thinking."
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Primeros Principios",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "¿Qué son los primeros principios?"
+        },
+        {
+          "type": "p",
+          "text": "Razonar desde primeros principios significa descomponer un problema en sus elementos más fundamentales — verdades que no pueden reducirse más — y reconstruir soluciones desde ahí."
+        },
+        {
+          "type": "p",
+          "text": "Es lo opuesto al razonamiento por analogía, que se basa en 'cómo siempre se han hecho las cosas'."
+        },
+        {
+          "type": "h2",
+          "text": "Cómo aplicarlo"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Identifica las suposiciones que estás haciendo",
+            "Cuestiona cada suposición: '¿Esto es realmente cierto?'",
+            "Construye tu solución desde las verdades fundamentales restantes"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Es importante razonar desde primeros principios en lugar de por analogía. — Elon Musk"
+        },
+        {
+          "type": "h2",
+          "text": "Por qué importa"
+        },
+        {
+          "type": "p",
+          "text": "La mayoría de las ideas innovadoras surgen de personas que se negaron a aceptar 'así siempre se ha hecho' como respuesta final. Los primeros principios liberan el pensamiento creativo."
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "foundations_mental_models": {
+    "pt": {
+      "title": "Modelos Mentais",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "O que são modelos mentais?"
+        },
+        {
+          "type": "p",
+          "text": "Modelos mentais são representações simplificadas da realidade que usamos para entender e navegar pelo mundo. Nenhum modelo é perfeito — mas os melhores modelos são os mais úteis."
+        },
+        {
+          "type": "h2",
+          "text": "Modelos essenciais"
+        },
+        {
+          "type": "p",
+          "text": "Navalhão de Occam: entre explicações igualmente válidas, prefira a mais simples. Mapa vs. território: nossas percepções são o mapa, não a realidade em si. Pensamento de segunda ordem: analise as consequências das consequências."
+        },
+        {
+          "type": "quote",
+          "text": "Todos os modelos são errados, mas alguns são úteis. — George Box"
+        },
+        {
+          "type": "h2",
+          "text": "Como usar modelos mentais"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Identifique qual modelo se aplica à situação",
+            "Combine múltiplos modelos para ter perspectivas diferentes",
+            "Questione os modelos que usa automaticamente"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "Mental Models",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "What are mental models?"
+        },
+        {
+          "type": "p",
+          "text": "Mental models are simplified representations of reality that we use to understand and navigate the world. No model is perfect — but the best models are the most useful."
+        },
+        {
+          "type": "h2",
+          "text": "Essential models"
+        },
+        {
+          "type": "p",
+          "text": "Occam's Razor: among equally valid explanations, prefer the simplest. Map vs. territory: our perceptions are the map, not reality itself. Second-order thinking: analyze the consequences of consequences."
+        },
+        {
+          "type": "quote",
+          "text": "All models are wrong, but some are useful. — George Box"
+        },
+        {
+          "type": "h2",
+          "text": "How to use mental models"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Identify which model applies to the situation",
+            "Combine multiple models for different perspectives",
+            "Question the models you use automatically"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Modelos Mentales",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "¿Qué son los modelos mentales?"
+        },
+        {
+          "type": "p",
+          "text": "Los modelos mentales son representaciones simplificadas de la realidad que usamos para entender y navegar el mundo. Ningún modelo es perfecto — pero los mejores modelos son los más útiles."
+        },
+        {
+          "type": "h2",
+          "text": "Modelos esenciales"
+        },
+        {
+          "type": "p",
+          "text": "Navaja de Occam: entre explicaciones igualmente válidas, prefiere la más simple. Mapa vs. territorio: nuestras percepciones son el mapa, no la realidad misma. Pensamiento de segundo orden: analiza las consecuencias de las consecuencias."
+        },
+        {
+          "type": "quote",
+          "text": "Todos los modelos son incorrectos, pero algunos son útiles. — George Box"
+        },
+        {
+          "type": "h2",
+          "text": "Cómo usar modelos mentales"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Identifica qué modelo se aplica a la situación",
+            "Combina múltiples modelos para obtener diferentes perspectivas",
+            "Cuestiona los modelos que usas automáticamente"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "foundations_probabilistic": {
+    "pt": {
+      "title": "Pensamento Probabilistico",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Por que pensar em probabilidades?"
+        },
+        {
+          "type": "p",
+          "text": "A maioria dos resultados no mundo real e incerta. Pensar de forma probabilistica significa atribuir chances aos eventos em vez de trata-los como certos ou impossiveis. Essa mudanca ajuda voce a tomar melhores decisoes sob incerteza, evitar excesso de confianca e atualizar suas crencas quando surgem novas evidencias."
+        },
+        {
+          "type": "h2",
+          "text": "Taxas base importam"
+        },
+        {
+          "type": "p",
+          "text": "Uma taxa base e a probabilidade geral de algo acontecer em uma populacao. Antes de julgar um caso especifico, comece pela taxa base. Se uma doenca afeta 1 em cada 10.000 pessoas e um teste tem 99% de precisao, um resultado positivo ainda tem baixa chance de estar correto porque a taxa base e muito pequena. Ignorar taxas base e um dos erros de raciocinio mais comuns."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Negligenciar a taxa base leva a reacoes exageradas diante de eventos dramaticos mas raros",
+            "Sempre pergunte: qual a frequencia disso na populacao geral?",
+            "Combine a taxa base com evidencias especificas para julgamentos mais precisos"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Atualizacao Bayesiana"
+        },
+        {
+          "type": "p",
+          "text": "A atualizacao bayesiana e o processo de revisar suas crencas conforme novas evidencias surgem. Voce comeca com uma probabilidade inicial (sua melhor estimativa antes dos novos dados), observa a evidencia e calcula uma probabilidade posterior. Evidencias fortes devem mudar bastante suas crencas; evidencias fracas devem muda-las apenas levemente."
+        },
+        {
+          "type": "quote",
+          "text": "A chave para o bom julgamento nao e a certeza, mas a calibracao: saber o quanto voce sabe e o quanto nao sabe. -- Philip Tetlock"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "Probabilistic Thinking",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Why Think in Probabilities?"
+        },
+        {
+          "type": "p",
+          "text": "Most real-world outcomes are uncertain. Probabilistic thinking means assigning likelihoods to events rather than treating them as guaranteed or impossible. This shift helps you make better decisions under uncertainty, avoid overconfidence, and update your beliefs when new evidence appears."
+        },
+        {
+          "type": "h2",
+          "text": "Base Rates Matter"
+        },
+        {
+          "type": "p",
+          "text": "A base rate is the general probability of something happening in a population. Before judging a specific case, start with the base rate. If a disease affects 1 in 10,000 people and a test is 99% accurate, a positive result still has a low chance of being correct because the base rate is so small. Ignoring base rates is one of the most common reasoning errors."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Base rate neglect leads to overreacting to dramatic but rare events",
+            "Always ask: how common is this in the general population?",
+            "Combine the base rate with specific evidence for more accurate judgments"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Bayesian Updating"
+        },
+        {
+          "type": "p",
+          "text": "Bayesian updating is the process of revising your beliefs as new evidence arrives. You start with a prior probability (your best estimate before new data), observe evidence, and calculate a posterior probability. Strong evidence should shift your beliefs significantly; weak evidence should shift them only slightly."
+        },
+        {
+          "type": "quote",
+          "text": "The key to good judgment is not certainty, but calibration: knowing how much you know and how much you do not. -- Philip Tetlock"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Pensamiento Probabilistico",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Por que pensar en probabilidades?"
+        },
+        {
+          "type": "p",
+          "text": "La mayoria de los resultados en el mundo real son inciertos. El pensamiento probabilistico consiste en asignar probabilidades a los eventos en lugar de tratarlos como seguros o imposibles. Este cambio te ayuda a tomar mejores decisiones bajo incertidumbre, evitar el exceso de confianza y actualizar tus creencias cuando aparecen nuevas evidencias."
+        },
+        {
+          "type": "h2",
+          "text": "Las tasas base importan"
+        },
+        {
+          "type": "p",
+          "text": "Una tasa base es la probabilidad general de que algo ocurra en una poblacion. Antes de juzgar un caso especifico, comienza con la tasa base. Si una enfermedad afecta a 1 de cada 10.000 personas y una prueba tiene un 99% de precision, un resultado positivo aun tiene pocas posibilidades de ser correcto porque la tasa base es muy pequena. Ignorar las tasas base es uno de los errores de razonamiento mas comunes."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Ignorar la tasa base lleva a reaccionar exageradamente ante eventos dramaticos pero raros",
+            "Siempre pregunta: que tan comun es esto en la poblacion general?",
+            "Combina la tasa base con evidencia especifica para juicios mas precisos"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Actualizacion bayesiana"
+        },
+        {
+          "type": "p",
+          "text": "La actualizacion bayesiana es el proceso de revisar tus creencias a medida que llegan nuevas evidencias. Comienzas con una probabilidad inicial (tu mejor estimacion antes de los nuevos datos), observas la evidencia y calculas una probabilidad posterior. Las evidencias fuertes deben cambiar significativamente tus creencias; las debiles solo ligeramente."
+        },
+        {
+          "type": "quote",
+          "text": "La clave del buen juicio no es la certeza, sino la calibracion: saber cuanto sabes y cuanto no sabes. -- Philip Tetlock"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "geopolitics": {
+    "pt": {
+      "title": "Esfera de Influência",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "O que é uma esfera de influência?"
+        },
+        {
+          "type": "p",
+          "text": "Uma esfera de influência é uma região onde um Estado exerce poder político, econômico ou militar predominante, mesmo sem controle formal sobre ela."
+        },
+        {
+          "type": "p",
+          "text": "Grandes potências usam esferas de influência para garantir segurança nas suas fronteiras, acesso a recursos e projeção de poder no cenário internacional."
+        },
+        {
+          "type": "h2",
+          "text": "Como funciona na prática?"
+        },
+        {
+          "type": "p",
+          "text": "Os mecanismos vão desde acordos comerciais e alianças militares até pressão diplomática e apoio a governos aliados. A influência raramente exige presença física direta."
+        },
+        {
+          "type": "quote",
+          "text": "As grandes potências não pedem permissão para definir suas zonas de interesse."
+        },
+        {
+          "type": "h2",
+          "text": "Exemplos históricos e atuais"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Doutrina Monroe (EUA na América Latina)",
+            "Espaço pós-soviético (Rússia e países vizinhos)",
+            "Iniciativa Cinturão e Rota (China na Ásia e África)"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "Sphere of Influence",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "What is a sphere of influence?"
+        },
+        {
+          "type": "p",
+          "text": "A sphere of influence is a region where a state exercises predominant political, economic, or military power, even without formal control over it."
+        },
+        {
+          "type": "p",
+          "text": "Great powers use spheres of influence to ensure border security, access to resources, and power projection in the international arena."
+        },
+        {
+          "type": "h2",
+          "text": "How does it work in practice?"
+        },
+        {
+          "type": "p",
+          "text": "Mechanisms range from trade agreements and military alliances to diplomatic pressure and support for allied governments. Influence rarely requires direct physical presence."
+        },
+        {
+          "type": "quote",
+          "text": "Great powers do not ask permission to define their zones of interest."
+        },
+        {
+          "type": "h2",
+          "text": "Historical and current examples"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Monroe Doctrine (USA in Latin America)",
+            "Post-Soviet space (Russia and neighboring countries)",
+            "Belt and Road Initiative (China in Asia and Africa)"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Esfera de Influencia",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "¿Qué es una esfera de influencia?"
+        },
+        {
+          "type": "p",
+          "text": "Una esfera de influencia es una región donde un Estado ejerce poder político, económico o militar predominante, incluso sin control formal sobre ella."
+        },
+        {
+          "type": "p",
+          "text": "Las grandes potencias usan esferas de influencia para garantizar seguridad en sus fronteras, acceso a recursos y proyección de poder en el escenario internacional."
+        },
+        {
+          "type": "h2",
+          "text": "¿Cómo funciona en la práctica?"
+        },
+        {
+          "type": "p",
+          "text": "Los mecanismos van desde acuerdos comerciales y alianzas militares hasta presión diplomática y apoyo a gobiernos aliados. La influencia rara vez requiere presencia física directa."
+        },
+        {
+          "type": "quote",
+          "text": "Las grandes potencias no piden permiso para definir sus zonas de interés."
+        },
+        {
+          "type": "h2",
+          "text": "Ejemplos históricos y actuales"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Doctrina Monroe (EE.UU. en América Latina)",
+            "Espacio postsoviético (Rusia y países vecinos)",
+            "Iniciativa de la Franja y la Ruta (China en Asia y África)"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "geopolitics_brics": {
+    "pt": {
+      "title": "BRICS e o Sul Global",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "O que é o BRICS?"
+        },
+        {
+          "type": "p",
+          "text": "BRICS é o acrônimo para Brasil, Rússia, Índia, China e África do Sul — um grupo de grandes economias emergentes que buscam maior representação na ordem global."
+        },
+        {
+          "type": "h2",
+          "text": "A expansão de 2024"
+        },
+        {
+          "type": "p",
+          "text": "Em 2024, o bloco se expandiu para incluir Egito, Etiópia, Irã e Emirados Árabes Unidos, dobrando quase sua representação geográfica e sinalizando uma crescente rejeição à hegemonia ocidental."
+        },
+        {
+          "type": "h2",
+          "text": "O que o BRICS representa?"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Alternativa ao FMI e ao Banco Mundial",
+            "Uso de moedas locais para evitar o dólar",
+            "Voz coletiva do Sul Global nas negociações internacionais"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "O BRICS não é anti-Ocidente, mas pró-Sul Global. — Cyril Ramaphosa"
+        },
+        {
+          "type": "p",
+          "text": "O bloco representa cerca de 40% da população mundial e mais de 30% do PIB global, mas ainda enfrenta divisões internas — especialmente entre China e Índia."
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "BRICS and the Global South",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "What is BRICS?"
+        },
+        {
+          "type": "p",
+          "text": "BRICS is an acronym for Brazil, Russia, India, China, and South Africa — a group of major emerging economies seeking greater representation in the global order."
+        },
+        {
+          "type": "h2",
+          "text": "The 2024 expansion"
+        },
+        {
+          "type": "p",
+          "text": "In 2024, the bloc expanded to include Egypt, Ethiopia, Iran, and the United Arab Emirates, nearly doubling its geographic representation and signaling a growing rejection of Western hegemony."
+        },
+        {
+          "type": "h2",
+          "text": "What does BRICS represent?"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "An alternative to the IMF and World Bank",
+            "Use of local currencies to bypass the dollar",
+            "Collective voice of the Global South in international negotiations"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "BRICS is not anti-West, but pro-Global South. — Cyril Ramaphosa"
+        },
+        {
+          "type": "p",
+          "text": "The bloc represents about 40% of the world's population and over 30% of global GDP, but still faces internal divisions — especially between China and India."
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "BRICS y el Sur Global",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "¿Qué es el BRICS?"
+        },
+        {
+          "type": "p",
+          "text": "BRICS es el acrónimo de Brasil, Rusia, India, China y Sudáfrica — un grupo de grandes economías emergentes que buscan mayor representación en el orden global."
+        },
+        {
+          "type": "h2",
+          "text": "La expansión de 2024"
+        },
+        {
+          "type": "p",
+          "text": "En 2024, el bloque se expandió para incluir a Egipto, Etiopía, Irán y los Emiratos Árabes Unidos, casi duplicando su representación geográfica y señalando un rechazo creciente a la hegemonía occidental."
+        },
+        {
+          "type": "h2",
+          "text": "¿Qué representa el BRICS?"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Alternativa al FMI y al Banco Mundial",
+            "Uso de monedas locales para evitar el dólar",
+            "Voz colectiva del Sur Global en las negociaciones internacionales"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "El BRICS no es anti-Occidente, sino pro-Sur Global. — Cyril Ramaphosa"
+        },
+        {
+          "type": "p",
+          "text": "El bloque representa alrededor del 40% de la población mundial y más del 30% del PIB global, pero aún enfrenta divisiones internas — especialmente entre China e India."
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "geopolitics_china_usa": {
+    "pt": {
+      "title": "A Rivalidade Geopolítica China-EUA",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "China e EUA: Uma Rivalidade Estratégica"
+        },
+        {
+          "type": "p",
+          "text": "A relação entre China e EUA é uma das mais importantes na política global. Como as duas maiores economias do mundo, suas interações afetam o comércio, a segurança global e a estabilidade geopolítica."
+        },
+        {
+          "type": "h2",
+          "text": "Comércio e Interações Econômicas"
+        },
+        {
+          "type": "p",
+          "text": "China e EUA são grandes parceiros comerciais, mas sua relação é marcada por tensões significativas. Questões como tarifas, direitos de propriedade intelectual e desequilíbrios comerciais criaram um ambiente econômico complexo."
+        },
+        {
+          "type": "h2",
+          "text": "Tensões Militares e Alianças"
+        },
+        {
+          "type": "p",
+          "text": "Tanto a China quanto os EUA são grandes potências militares, com interesses competitivos em regiões como o Mar do Sul da China e Taiwan. Os EUA têm alianças militares antigas na Ásia, enquanto a China busca afirmar seu domínio no Pacífico."
+        },
+        {
+          "type": "quote",
+          "text": "A relação mais importante no mundo hoje é entre China e os Estados Unidos. — Henry Kissinger"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "As duas maiores economias do mundo",
+            "Tensões sobre comércio e tecnologia",
+            "Rivalidade no Mar do Sul da China"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "The China-USA Geopolitical Rivalry",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "China and the USA: A Strategic Rivalry"
+        },
+        {
+          "type": "p",
+          "text": "The relationship between China and the USA is one of the most consequential in global politics. As the two largest economies in the world, their interactions affect trade, global security, and geopolitical stability."
+        },
+        {
+          "type": "h2",
+          "text": "Trade and Economic Interactions"
+        },
+        {
+          "type": "p",
+          "text": "China and the USA are major trade partners, but their relationship is marked by significant tension. Issues such as tariffs, intellectual property rights, and trade imbalances have created a complicated economic environment."
+        },
+        {
+          "type": "h2",
+          "text": "Military Tensions and Alliances"
+        },
+        {
+          "type": "p",
+          "text": "Both China and the USA are major military powers, with competing interests in regions like the South China Sea and Taiwan. The USA has longstanding military alliances in Asia, while China seeks to assert its dominance in the Pacific."
+        },
+        {
+          "type": "quote",
+          "text": "The most important relationship in the world today is between China and the United States. — Henry Kissinger"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "World's two largest economies",
+            "Tensions over trade and technology",
+            "Rivalry in the South China Sea"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "La Rivalidad Geopolítica China-EE.UU.",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "China y EE. UU.: Una Rivalidad Estratégica"
+        },
+        {
+          "type": "p",
+          "text": "La relación entre China y EE. UU. es una de las más importantes en la política global. Como las dos economías más grandes del mundo, sus interacciones afectan al comercio, la seguridad global y la estabilidad geopolítica."
+        },
+        {
+          "type": "h2",
+          "text": "Comercio e Interacciones Económicas"
+        },
+        {
+          "type": "p",
+          "text": "China y EE. UU. son grandes socios comerciales, pero su relación está marcada por una tensión significativa. Temas como aranceles, derechos de propiedad intelectual y desequilibrios comerciales han creado un entorno económico complejo."
+        },
+        {
+          "type": "h2",
+          "text": "Tensiones Militares y Alianzas"
+        },
+        {
+          "type": "p",
+          "text": "Tanto China como EE. UU. son grandes potencias militares, con intereses competitivos en regiones como el Mar de China Meridional y Taiwán. EE. UU. tiene alianzas militares de larga data en Asia, mientras que China busca afirmar su dominio en el Pacífico."
+        },
+        {
+          "type": "quote",
+          "text": "La relación más importante en el mundo hoy es entre China y los Estados Unidos. — Henry Kissinger"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Las dos economías más grandes del mundo",
+            "Tensiones por comercio y tecnología",
+            "Rivalidad en el Mar de China Meridional"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "geopolitics_middle_east": {
+    "pt": {
+      "title": "O Oriente Médio: Uma Região em Conflito",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "O que é o Oriente Médio?"
+        },
+        {
+          "type": "p",
+          "text": "O Oriente Médio é uma região que inclui partes da Ásia e da África. É lar de civilizações antigas, grandes reservas de petróleo e diversos conflitos em andamento."
+        },
+        {
+          "type": "h2",
+          "text": "Conflitos principais no Oriente Médio"
+        },
+        {
+          "type": "p",
+          "text": "A região tem sido marcada por uma série de conflitos políticos e militares, incluindo o conflito israelo-palestino, a guerra civil síria e as tensões entre Irã e Arábia Saudita."
+        },
+        {
+          "type": "h2",
+          "text": "O Papel do Petróleo"
+        },
+        {
+          "type": "p",
+          "text": "O petróleo é um recurso crítico no Oriente Médio, e sua riqueza tem atraído a atenção tanto regional quanto internacional, influenciando a dinâmica geopolítica da região."
+        },
+        {
+          "type": "quote",
+          "text": "O Oriente Médio esteve no coração da política global por décadas, com seus conflitos influenciando a segurança mundial. — Desconhecido"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Reservas significativas de petróleo",
+            "Relações geopolíticas tensas",
+            "Principais atores: EUA, Rússia, Irã, Arábia Saudita"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "The Middle East: A Region in Conflict",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "What is the Middle East?"
+        },
+        {
+          "type": "p",
+          "text": "The Middle East is a region that includes parts of Asia and Africa. It is home to ancient civilizations, significant oil reserves, and numerous ongoing conflicts."
+        },
+        {
+          "type": "h2",
+          "text": "Key Conflicts in the Middle East"
+        },
+        {
+          "type": "p",
+          "text": "The region has been marked by a series of political and military conflicts, including the Israeli-Palestinian conflict, the Syrian Civil War, and tensions between Iran and Saudi Arabia."
+        },
+        {
+          "type": "h2",
+          "text": "The Role of Oil"
+        },
+        {
+          "type": "p",
+          "text": "Oil is a critical resource in the Middle East, and the region's oil wealth has attracted both regional and international attention, influencing its geopolitical dynamics."
+        },
+        {
+          "type": "quote",
+          "text": "The Middle East has been at the heart of global politics for decades, with its conflicts influencing world security. — Unknown"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Significant oil reserves",
+            "Tense geopolitical relations",
+            "Key players: USA, Russia, Iran, Saudi Arabia"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "El Medio Oriente: Una Región en Conflicto",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "¿Qué es el Medio Oriente?"
+        },
+        {
+          "type": "p",
+          "text": "El Medio Oriente es una región que incluye partes de Asia y África. Es hogar de antiguas civilizaciones, importantes reservas de petróleo y numerosos conflictos en curso."
+        },
+        {
+          "type": "h2",
+          "text": "Conflictos clave en el Medio Oriente"
+        },
+        {
+          "type": "p",
+          "text": "La región ha estado marcada por una serie de conflictos políticos y militares, incluyendo el conflicto israelo-palestino, la guerra civil siria y las tensiones entre Irán y Arabia Saudita."
+        },
+        {
+          "type": "h2",
+          "text": "El Papel del Petróleo"
+        },
+        {
+          "type": "p",
+          "text": "El petróleo es un recurso crítico en el Medio Oriente, y la riqueza petrolera de la región ha atraído tanto la atención regional como internacional, influyendo en su dinámica geopolítica."
+        },
+        {
+          "type": "quote",
+          "text": "El Medio Oriente ha estado en el corazón de la política global durante décadas, con sus conflictos influyendo en la seguridad mundial. — Desconocido"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Reservas significativas de petróleo",
+            "Relaciones geopolíticas tensas",
+            "Actores clave: EE.UU., Rusia, Irán, Arabia Saudita"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "geopolitics_nato": {
+    "pt": {
+      "title": "A OTAN e o Atlântico",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "O que é a OTAN?"
+        },
+        {
+          "type": "p",
+          "text": "A Organização do Tratado do Atlântico Norte (OTAN) é uma aliança militar fundada em 1949 com o objetivo de garantir a defesa coletiva dos países membros. Seu princípio central: um ataque a um membro é um ataque a todos."
+        },
+        {
+          "type": "h2",
+          "text": "A cláusula do Artigo 5"
+        },
+        {
+          "type": "p",
+          "text": "O Artigo 5 do Tratado do Atlântico Norte é a espinha dorsal da aliança. Foi invocado uma única vez na história — após os ataques de 11 de setembro de 2001 nos EUA."
+        },
+        {
+          "type": "h2",
+          "text": "OTAN no século XXI"
+        },
+        {
+          "type": "p",
+          "text": "Com a invasão russa da Ucrânia em 2022, a OTAN voltou ao centro do debate geopolítico. Países como Finlândia e Suécia, historicamente neutros, aderiram à aliança — mostrando como a segurança europeia se transformou."
+        },
+        {
+          "type": "quote",
+          "text": "A OTAN é a aliança de defesa mais bem-sucedida da história. — Anders Fogh Rasmussen"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "32 países membros (2024)",
+            "Meta: 2% do PIB em gastos de defesa",
+            "Sede em Bruxelas, Bélgica"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "NATO and the Atlantic",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "What is NATO?"
+        },
+        {
+          "type": "p",
+          "text": "The North Atlantic Treaty Organization (NATO) is a military alliance founded in 1949 to ensure the collective defense of its member states. Its central principle: an attack on one member is an attack on all."
+        },
+        {
+          "type": "h2",
+          "text": "The Article 5 clause"
+        },
+        {
+          "type": "p",
+          "text": "Article 5 of the North Atlantic Treaty is the backbone of the alliance. It has been invoked only once in history — after the September 11, 2001 attacks in the United States."
+        },
+        {
+          "type": "h2",
+          "text": "NATO in the 21st century"
+        },
+        {
+          "type": "p",
+          "text": "With Russia's invasion of Ukraine in 2022, NATO returned to the center of geopolitical debate. Historically neutral countries like Finland and Sweden joined the alliance — showing how European security has transformed."
+        },
+        {
+          "type": "quote",
+          "text": "NATO is the most successful defense alliance in history. — Anders Fogh Rasmussen"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "32 member countries (2024)",
+            "Target: 2% of GDP in defense spending",
+            "Headquarters in Brussels, Belgium"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "La OTAN y el Atlántico",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "¿Qué es la OTAN?"
+        },
+        {
+          "type": "p",
+          "text": "La Organización del Tratado del Atlántico Norte (OTAN) es una alianza militar fundada en 1949 para garantizar la defensa colectiva de sus países miembros. Su principio central: un ataque a un miembro es un ataque a todos."
+        },
+        {
+          "type": "h2",
+          "text": "La cláusula del Artículo 5"
+        },
+        {
+          "type": "p",
+          "text": "El Artículo 5 del Tratado del Atlántico Norte es la columna vertebral de la alianza. Fue invocado solo una vez en la historia — tras los ataques del 11 de septiembre de 2001 en Estados Unidos."
+        },
+        {
+          "type": "h2",
+          "text": "La OTAN en el siglo XXI"
+        },
+        {
+          "type": "p",
+          "text": "Con la invasión rusa de Ucrania en 2022, la OTAN volvió al centro del debate geopolítico. Países históricamente neutrales como Finlandia y Suecia ingresaron a la alianza — mostrando cómo la seguridad europea se ha transformado."
+        },
+        {
+          "type": "quote",
+          "text": "La OTAN es la alianza de defensa más exitosa de la historia. — Anders Fogh Rasmussen"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "32 países miembros (2024)",
+            "Meta: 2% del PIB en gasto de defensa",
+            "Sede en Bruselas, Bélgica"
+          ]
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "history": {
+    "pt": {
+      "title": "O que a Historia Ensina",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Por que estudar historia?"
+        },
+        {
+          "type": "p",
+          "text": "Historia nao e apenas uma colecao de datas e nomes. Ela revela padroes recorrentes no comportamento humano: como sociedades ascendem e caem, como lideres ganham e perdem poder, e como ideias se espalham e se transformam. Entender esses padroes oferece um quadro para interpretar eventos atuais e antecipar o que pode vir a seguir."
+        },
+        {
+          "type": "h2",
+          "text": "Padroes recorrentes"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Ciclos de expansao e colapso aparecem em imperios de Roma ao Imperio Britanico",
+            "Revolucoes tecnologicas consistentemente rompem estruturas sociais e criam novos vencedores e perdedores",
+            "Movimentos populistas tendem a surgir durante periodos de desigualdade economica",
+            "Sociedades frequentemente repetem erros quando a memoria coletiva se dissipa, geralmente em duas a tres geracoes"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Pensamento historico"
+        },
+        {
+          "type": "p",
+          "text": "Pensamento historico significa avaliar fontes criticamente, entender o contexto e resistir a tentacao de julgar o passado pelos padroes do presente. Tambem significa reconhecer que a historia e escrita por pessoas com perspectivas e vieses. Multiplos relatos do mesmo evento frequentemente diferem drasticamente. O objetivo nao e memorizar fatos, mas desenvolver a capacidade de pensar em meio a complexidade e ambiguidade."
+        },
+        {
+          "type": "quote",
+          "text": "Aqueles que nao conseguem lembrar o passado estao condenados a repeti-lo. -- George Santayana"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "What History Teaches",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Why Study History?"
+        },
+        {
+          "type": "p",
+          "text": "History is not just a collection of dates and names. It reveals recurring patterns in human behavior: how societies rise and fall, how leaders gain and lose power, and how ideas spread and transform. Understanding these patterns gives you a framework for interpreting current events and anticipating what might come next."
+        },
+        {
+          "type": "h2",
+          "text": "Recurring Patterns"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Cycles of expansion and collapse appear in empires from Rome to the British Empire",
+            "Technological revolutions consistently disrupt social structures and create new winners and losers",
+            "Populist movements tend to emerge during periods of economic inequality",
+            "Societies often repeat mistakes when collective memory fades, typically within two to three generations"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Historical Thinking"
+        },
+        {
+          "type": "p",
+          "text": "Historical thinking means evaluating sources critically, understanding context, and resisting the temptation to judge the past by present standards. It also means recognizing that history is written by people with perspectives and biases. Multiple accounts of the same event often differ dramatically. The goal is not to memorize facts but to develop the ability to think through complexity and ambiguity."
+        },
+        {
+          "type": "quote",
+          "text": "Those who cannot remember the past are condemned to repeat it. -- George Santayana"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Lo que la Historia Ensena",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Por que estudiar historia?"
+        },
+        {
+          "type": "p",
+          "text": "La historia no es solo una coleccion de fechas y nombres. Revela patrones recurrentes en el comportamiento humano: como las sociedades ascienden y caen, como los lideres ganan y pierden poder, y como las ideas se difunden y transforman. Entender estos patrones te da un marco para interpretar eventos actuales y anticipar lo que podria venir despues."
+        },
+        {
+          "type": "h2",
+          "text": "Patrones recurrentes"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Ciclos de expansion y colapso aparecen en imperios desde Roma hasta el Imperio Britanico",
+            "Las revoluciones tecnologicas consistentemente alteran estructuras sociales y crean nuevos ganadores y perdedores",
+            "Los movimientos populistas tienden a surgir durante periodos de desigualdad economica",
+            "Las sociedades frecuentemente repiten errores cuando la memoria colectiva se desvanece, tipicamente en dos a tres generaciones"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Pensamiento historico"
+        },
+        {
+          "type": "p",
+          "text": "El pensamiento historico significa evaluar fuentes criticamente, entender el contexto y resistir la tentacion de juzgar el pasado por los estandares del presente. Tambien significa reconocer que la historia es escrita por personas con perspectivas y sesgos. Multiples relatos del mismo evento a menudo difieren dramaticamente. El objetivo no es memorizar hechos, sino desarrollar la capacidad de pensar a traves de la complejidad y la ambiguedad."
+        },
+        {
+          "type": "quote",
+          "text": "Aquellos que no pueden recordar el pasado estan condenados a repetirlo. -- George Santayana"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "history_cold_war": {
+    "pt": {
+      "title": "A Guerra Fria",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Duas superpotencias, duas visoes"
+        },
+        {
+          "type": "p",
+          "text": "Apos a Segunda Guerra Mundial, os Estados Unidos e a Uniao Sovietica emergiram como as potencias dominantes do mundo com visoes incompativeis. Os EUA defendiam o capitalismo e a democracia liberal. A URSS promovia o comunismo e o controle estatal. Essa divisao ideologica partiu a Europa com a Cortina de Ferro, dividiu a Alemanha e criou aliancas militares rivais: a OTAN no Ocidente e o Pacto de Varsovia no Leste."
+        },
+        {
+          "type": "h2",
+          "text": "Guerras por procuracao e dissuasao nuclear"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A Guerra da Coreia (1950-1953) e a Guerra do Vietna (1955-1975) foram travadas entre lados apoiados pelos EUA e pela URSS",
+            "A Crise dos Misseis de Cuba em 1962 levou o mundo a beira de uma guerra nuclear",
+            "A Destruicao Mutua Assegurada (MAD) paradoxalmente impediu as superpotencias de entrar em conflito direto",
+            "A corrida armamentista consumiu enormes recursos de ambos os lados e impulsionou a corrida espacial"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "O fim da Guerra Fria"
+        },
+        {
+          "type": "p",
+          "text": "Na decada de 1980, a economia sovietica estava estagnada sob o peso dos gastos militares e do planejamento centralizado. Mikhail Gorbachev introduziu reformas de abertura (glasnost) e reestruturacao (perestroika), mas estas aceleraram o colapso do sistema. O Muro de Berlim caiu em novembro de 1989, simbolizando o fim do mundo dividido. A Uniao Sovietica se dissolveu em 1991, deixando os Estados Unidos como a unica superpotencia."
+        },
+        {
+          "type": "quote",
+          "text": "Na guerra nuclear, todos os homens sao cremados igualmente. -- Dexter Gordon"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "The Cold War",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Two Superpowers, Two Visions"
+        },
+        {
+          "type": "p",
+          "text": "After World War II, the United States and Soviet Union emerged as the world's dominant powers with incompatible visions. The US championed capitalism and liberal democracy. The USSR promoted communism and state control. This ideological divide split Europe with the Iron Curtain, divided Germany, and created rival military alliances: NATO in the West and the Warsaw Pact in the East."
+        },
+        {
+          "type": "h2",
+          "text": "Proxy Wars and Nuclear Deterrence"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The Korean War (1950-1953) and Vietnam War (1955-1975) were fought between US and Soviet-backed sides",
+            "The Cuban Missile Crisis of 1962 brought the world to the brink of nuclear war",
+            "Mutually Assured Destruction (MAD) paradoxically kept the superpowers from direct conflict",
+            "The arms race consumed enormous resources on both sides and fueled the space race"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "The End of the Cold War"
+        },
+        {
+          "type": "p",
+          "text": "By the 1980s, the Soviet economy was stagnating under the weight of military spending and centralized planning. Mikhail Gorbachev introduced reforms of openness (glasnost) and restructuring (perestroika), but these accelerated the system's collapse. The Berlin Wall fell in November 1989, symbolizing the end of the divided world. The Soviet Union dissolved in 1991, leaving the United States as the sole superpower."
+        },
+        {
+          "type": "quote",
+          "text": "In nuclear war, all men are cremated equal. -- Dexter Gordon"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "La Guerra Fria",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Dos superpotencias, dos visiones"
+        },
+        {
+          "type": "p",
+          "text": "Tras la Segunda Guerra Mundial, Estados Unidos y la Union Sovietica emergieron como las potencias dominantes del mundo con visiones incompatibles. EE.UU. defendia el capitalismo y la democracia liberal. La URSS promovia el comunismo y el control estatal. Esta division ideologica partio Europa con el Telon de Acero, dividio Alemania y creo alianzas militares rivales: la OTAN en Occidente y el Pacto de Varsovia en el Este."
+        },
+        {
+          "type": "h2",
+          "text": "Guerras por delegacion y disuasion nuclear"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "La Guerra de Corea (1950-1953) y la Guerra de Vietnam (1955-1975) fueron libradas entre bandos respaldados por EE.UU. y la URSS",
+            "La Crisis de los Misiles de Cuba en 1962 llevo al mundo al borde de una guerra nuclear",
+            "La Destruccion Mutua Asegurada (MAD) paradojicamente impidio a las superpotencias entrar en conflicto directo",
+            "La carrera armamentista consumio enormes recursos de ambos lados e impulso la carrera espacial"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "El fin de la Guerra Fria"
+        },
+        {
+          "type": "p",
+          "text": "En la decada de 1980, la economia sovietica se estancaba bajo el peso del gasto militar y la planificacion centralizada. Mijail Gorbachov introdujo reformas de apertura (glasnost) y reestructuracion (perestroika), pero estas aceleraron el colapso del sistema. El Muro de Berlin cayo en noviembre de 1989, simbolizando el fin del mundo dividido. La Union Sovietica se disolvio en 1991, dejando a Estados Unidos como la unica superpotencia."
+        },
+        {
+          "type": "quote",
+          "text": "En la guerra nuclear, todos los hombres son cremados por igual. -- Dexter Gordon"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "history_colonialism": {
+    "pt": {
+      "title": "Colonialismo e Descolonizacao",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Expansao europeia"
+        },
+        {
+          "type": "p",
+          "text": "A partir do seculo XV, as potencias europeias se expandiram pelo globo. Portugal e Espanha lideraram o caminho, seguidos por Gra-Bretanha, Franca, Paises Baixos e Belgica. Motivados por interesses economicos, missao religiosa e competicao entre imperios, estabeleceram colonias nas Americas, Africa e Asia. Em 1914, as potencias europeias controlavam cerca de 84% da superficie terrestre do mundo."
+        },
+        {
+          "type": "h2",
+          "text": "A mecanica da extracao"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "As colonias forneciam materias-primas como borracha, algodao, minerais e especiarias a precos artificialmente baixos",
+            "As fronteiras coloniais foram tracadas ignorando limites etnicos, linguisticos e culturais existentes",
+            "As populacoes locais eram frequentemente submetidas a trabalho forcado, deslocamento e supressao cultural",
+            "Infraestrutura como ferrovias e portos foi construida para extrair recursos, nao para desenvolver economias locais"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Movimentos de independencia e legados"
+        },
+        {
+          "type": "p",
+          "text": "Apos a Segunda Guerra Mundial, os movimentos de independencia ganharam forca na Africa e na Asia. A India conquistou a independencia em 1947, seguida por ondas de descolonizacao nas decadas de 1950 e 1960. Lideres como Gandhi, Nkrumah e Ho Chi Minh conduziram lutas por meios diversos: resistencia nao violenta, conflito armado e negociacao politica. Os legados do colonialismo persistem em fronteiras que dividem grupos etnicos, estruturas economicas que favorecem exportacao de materias-primas e debates em curso sobre reparacoes."
+        },
+        {
+          "type": "quote",
+          "text": "O colonizado e elevado acima de sua condicao selvagem na medida em que adota os padroes culturais da mae patria. -- Frantz Fanon"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "Colonialism and Decolonization",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "European Expansion"
+        },
+        {
+          "type": "p",
+          "text": "From the 15th century onward, European powers expanded across the globe. Portugal and Spain led the way, followed by Britain, France, the Netherlands, and Belgium. Driven by economic interests, religious mission, and competition among empires, they established colonies across the Americas, Africa, and Asia. By 1914, European powers controlled about 84% of the world's land surface."
+        },
+        {
+          "type": "h2",
+          "text": "The Mechanics of Extraction"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Colonies provided raw materials like rubber, cotton, minerals, and spices at artificially low prices",
+            "Colonial borders were drawn ignoring existing ethnic, linguistic, and cultural boundaries",
+            "Local populations were often subjected to forced labor, displacement, and cultural suppression",
+            "Infrastructure like railroads and ports was built to extract resources, not to develop local economies"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Independence Movements and Legacies"
+        },
+        {
+          "type": "p",
+          "text": "After World War II, independence movements gained momentum across Africa and Asia. India gained independence in 1947, followed by waves of decolonization in the 1950s and 1960s. Leaders like Gandhi, Nkrumah, and Ho Chi Minh led struggles through diverse means: nonviolent resistance, armed conflict, and political negotiation. The legacies of colonialism persist in borders that divide ethnic groups, economic structures favoring raw material exports, and ongoing debates about reparations."
+        },
+        {
+          "type": "quote",
+          "text": "The colonized is elevated above his jungle status in proportion to his adoption of the mother country's cultural standards. -- Frantz Fanon"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Colonialismo y Descolonizacion",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Expansion europea"
+        },
+        {
+          "type": "p",
+          "text": "Desde el siglo XV, las potencias europeas se expandieron por todo el globo. Portugal y Espana lideraron el camino, seguidos por Gran Bretana, Francia, los Paises Bajos y Belgica. Impulsados por intereses economicos, mision religiosa y competencia entre imperios, establecieron colonias en las Americas, Africa y Asia. Para 1914, las potencias europeas controlaban aproximadamente el 84% de la superficie terrestre del mundo."
+        },
+        {
+          "type": "h2",
+          "text": "La mecanica de la extraccion"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Las colonias proporcionaban materias primas como caucho, algodon, minerales y especias a precios artificialmente bajos",
+            "Las fronteras coloniales fueron trazadas ignorando los limites etnicos, linguisticos y culturales existentes",
+            "Las poblaciones locales eran frecuentemente sometidas a trabajo forzado, desplazamiento y supresion cultural",
+            "La infraestructura como ferrocarriles y puertos fue construida para extraer recursos, no para desarrollar economias locales"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Movimientos de independencia y legados"
+        },
+        {
+          "type": "p",
+          "text": "Tras la Segunda Guerra Mundial, los movimientos de independencia cobraron impulso en Africa y Asia. India logro su independencia en 1947, seguida por oleadas de descolonizacion en las decadas de 1950 y 1960. Lideres como Gandhi, Nkrumah y Ho Chi Minh lideraron luchas por medios diversos: resistencia no violenta, conflicto armado y negociacion politica. Los legados del colonialismo persisten en fronteras que dividen grupos etnicos, estructuras economicas que favorecen la exportacion de materias primas y debates en curso sobre reparaciones."
+        },
+        {
+          "type": "quote",
+          "text": "El colonizado es elevado por encima de su condicion salvaje en proporcion a su adopcion de los estandares culturales de la madre patria. -- Frantz Fanon"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "history_industrial_revolution": {
+    "pt": {
+      "title": "A Revolucao Industrial",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Por que a Gra-Bretanha primeiro?"
+        },
+        {
+          "type": "p",
+          "text": "A Revolucao Industrial comecou na Gra-Bretanha no final do seculo XVIII devido a uma combinacao unica de fatores. A Gra-Bretanha tinha depositos abundantes de carvao e ferro, um sistema politico estavel que protegia direitos de propriedade, um imperio colonial crescente fornecendo materias-primas e mercados, e uma cultura de inovacao. O movimento de cercamento expulsou trabalhadores rurais da terra, criando uma forca de trabalho pronta para as fabricas."
+        },
+        {
+          "type": "h2",
+          "text": "Vapor, fabricas e urbanizacao"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A maquina a vapor aprimorada de James Watt (1769) alimentou fabricas e depois ferrovias e navios",
+            "O sistema fabril substituiu a industria caseira, concentrando trabalhadores em grandes instalacoes com maquinario",
+            "As cidades cresceram explosivamente conforme trabalhadores migravam das fazendas, frequentemente vivendo em condicoes superlotadas e insalubres",
+            "Novas redes de transporte como canais e ferrovias conectaram materias-primas, fabricas e mercados"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Condicoes de trabalho e expansao global"
+        },
+        {
+          "type": "p",
+          "text": "Os primeiros trabalhadores industriais enfrentaram condicoes brutais: jornadas de 14 horas, trabalho infantil, maquinario perigoso e salarios de pobreza. Com o tempo, movimentos trabalhistas lutaram por reformas incluindo jornadas mais curtas, regulamentacoes de seguranca e o direito de organizar sindicatos. A industrializacao se espalhou pela Europa continental, Estados Unidos e eventualmente Japao e outras nacoes, cada uma adaptando o modelo as suas proprias condicoes e recursos."
+        },
+        {
+          "type": "quote",
+          "text": "A maquina de fiar e a ferrovia mudaram o mundo mais profundamente do que qualquer revolucao travada com armas. -- Eric Hobsbawm (parafraseado)"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "The Industrial Revolution",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Why Britain First?"
+        },
+        {
+          "type": "p",
+          "text": "The Industrial Revolution began in Britain in the late 18th century due to a unique combination of factors. Britain had abundant coal and iron deposits, a stable political system that protected property rights, a growing colonial empire providing raw materials and markets, and a culture of innovation. The enclosure movement pushed rural workers off the land, creating a labor force ready for factories."
+        },
+        {
+          "type": "h2",
+          "text": "Steam, Factories, and Urbanization"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "James Watt's improved steam engine (1769) powered factories and later railways and ships",
+            "The factory system replaced cottage industry, concentrating workers in large facilities with machinery",
+            "Cities grew explosively as workers migrated from farms, often living in overcrowded and unsanitary conditions",
+            "New transportation networks like canals and railways connected raw materials, factories, and markets"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Labor Conditions and Global Spread"
+        },
+        {
+          "type": "p",
+          "text": "Early industrial workers faced brutal conditions: 14-hour days, child labor, dangerous machinery, and poverty wages. Over time, labor movements fought for reforms including shorter hours, safety regulations, and the right to organize unions. Industrialization spread to continental Europe, the United States, and eventually Japan and other nations, each adapting the model to their own conditions and resources."
+        },
+        {
+          "type": "quote",
+          "text": "The spinning jenny and the railroad changed the world more profoundly than any revolution fought with weapons. -- Eric Hobsbawm (paraphrased)"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "La Revolucion Industrial",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Por que Gran Bretana primero?"
+        },
+        {
+          "type": "p",
+          "text": "La Revolucion Industrial comenzo en Gran Bretana a finales del siglo XVIII debido a una combinacion unica de factores. Gran Bretana tenia depositos abundantes de carbon y hierro, un sistema politico estable que protegia los derechos de propiedad, un imperio colonial creciente que proporcionaba materias primas y mercados, y una cultura de innovacion. El movimiento de cercamiento expulso a los trabajadores rurales de la tierra, creando una fuerza laboral lista para las fabricas."
+        },
+        {
+          "type": "h2",
+          "text": "Vapor, fabricas y urbanizacion"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "La maquina de vapor mejorada de James Watt (1769) impulso fabricas y luego ferrocarriles y barcos",
+            "El sistema fabril reemplazo la industria casera, concentrando trabajadores en grandes instalaciones con maquinaria",
+            "Las ciudades crecieron explosivamente cuando los trabajadores migraron de las granjas, a menudo viviendo en condiciones hacinadas e insalubres",
+            "Nuevas redes de transporte como canales y ferrocarriles conectaron materias primas, fabricas y mercados"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Condiciones laborales y expansion global"
+        },
+        {
+          "type": "p",
+          "text": "Los primeros trabajadores industriales enfrentaron condiciones brutales: jornadas de 14 horas, trabajo infantil, maquinaria peligrosa y salarios de pobreza. Con el tiempo, los movimientos obreros lucharon por reformas que incluyeron jornadas mas cortas, regulaciones de seguridad y el derecho a organizar sindicatos. La industrializacion se extendio a la Europa continental, Estados Unidos y eventualmente Japon y otras naciones, cada una adaptando el modelo a sus propias condiciones y recursos."
+        },
+        {
+          "type": "quote",
+          "text": "La maquina de hilar y el ferrocarril cambiaron el mundo mas profundamente que cualquier revolucion librada con armas. -- Eric Hobsbawm (parafraseado)"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "history_wwii": {
+    "pt": {
+      "title": "Segunda Guerra Mundial",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Causas da guerra"
+        },
+        {
+          "type": "p",
+          "text": "A Segunda Guerra Mundial cresceu a partir de tensoes nao resolvidas da Primeira Guerra. O Tratado de Versalhes humilhou a Alemanha com reparacoes severas. A Grande Depressao criou desemprego em massa e extremismo politico. Adolf Hitler explorou esse ressentimento, prometendo restauracao nacional. Sua expansao agressiva, comecando com a remilitarizacao da Renania e a anexacao da Austria, nao foi contestada pelas democracias ocidentais que buscavam a politica de apaziguamento."
+        },
+        {
+          "type": "h2",
+          "text": "Eventos-chave"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "1939: Alemanha invade a Polonia, provocando declaracoes de guerra da Gra-Bretanha e Franca",
+            "1941: Alemanha invade a Uniao Sovietica; Japao ataca Pearl Harbor, trazendo os EUA para a guerra",
+            "1941-1945: O Holocausto, o assassinato sistematico de seis milhoes de judeus e milhoes de outras pessoas pela Alemanha nazista",
+            "1944: Desembarque do Dia D na Normandia abre uma frente ocidental; 1945: bombas atomicas lancadas sobre Hiroshima e Nagasaki"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Resultados e nova ordem mundial"
+        },
+        {
+          "type": "p",
+          "text": "A guerra matou cerca de 70 a 85 milhoes de pessoas. Encerrou a supremacia colonial europeia e estabeleceu os Estados Unidos e a Uniao Sovietica como superpotencias rivais. A Organizacao das Nacoes Unidas foi criada para prevenir conflitos futuros. Os Julgamentos de Nuremberg estabeleceram o principio de que individuos sao responsaveis por crimes de guerra. O legado da guerra moldou a Guerra Fria, a descolonizacao e a ordem internacional moderna."
+        },
+        {
+          "type": "quote",
+          "text": "A unica coisa que devemos temer e o proprio medo. -- Franklin D. Roosevelt"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "World War II",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Causes of the War"
+        },
+        {
+          "type": "p",
+          "text": "World War II grew from the unresolved tensions of World War I. The Treaty of Versailles humiliated Germany with harsh reparations. The Great Depression created mass unemployment and political extremism. Adolf Hitler exploited this resentment, promising national restoration. His aggressive expansion, starting with the remilitarization of the Rhineland and annexation of Austria, went unchallenged by Western democracies pursuing appeasement."
+        },
+        {
+          "type": "h2",
+          "text": "Key Events"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "1939: Germany invades Poland, triggering declarations of war from Britain and France",
+            "1941: Germany invades the Soviet Union; Japan attacks Pearl Harbor, bringing the US into the war",
+            "1941-1945: The Holocaust, the systematic murder of six million Jews and millions of others by Nazi Germany",
+            "1944: D-Day landings in Normandy open a western front; 1945: atomic bombs dropped on Hiroshima and Nagasaki"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Outcomes and New World Order"
+        },
+        {
+          "type": "p",
+          "text": "The war killed an estimated 70-85 million people. It ended European colonial supremacy and established the United States and Soviet Union as rival superpowers. The United Nations was created to prevent future conflicts. The Nuremberg Trials established the principle that individuals are accountable for war crimes. The war's legacy shaped the Cold War, decolonization, and the modern international order."
+        },
+        {
+          "type": "quote",
+          "text": "The only thing we have to fear is fear itself. -- Franklin D. Roosevelt"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Segunda Guerra Mundial",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Causas de la guerra"
+        },
+        {
+          "type": "p",
+          "text": "La Segunda Guerra Mundial surgio de las tensiones no resueltas de la Primera Guerra. El Tratado de Versalles humillo a Alemania con reparaciones severas. La Gran Depresion creo desempleo masivo y extremismo politico. Adolf Hitler exploto ese resentimiento, prometiendo restauracion nacional. Su expansion agresiva, comenzando con la remilitarizacion de Renania y la anexion de Austria, no fue desafiada por las democracias occidentales que buscaban el apaciguamiento."
+        },
+        {
+          "type": "h2",
+          "text": "Eventos clave"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "1939: Alemania invade Polonia, provocando declaraciones de guerra de Gran Bretana y Francia",
+            "1941: Alemania invade la Union Sovietica; Japon ataca Pearl Harbor, trayendo a EE.UU. a la guerra",
+            "1941-1945: El Holocausto, el asesinato sistematico de seis millones de judios y millones de otras personas por la Alemania nazi",
+            "1944: Desembarco del Dia D en Normandia abre un frente occidental; 1945: bombas atomicas lanzadas sobre Hiroshima y Nagasaki"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Resultados y nuevo orden mundial"
+        },
+        {
+          "type": "p",
+          "text": "La guerra mato entre 70 y 85 millones de personas. Termino con la supremacia colonial europea y establecio a Estados Unidos y la Union Sovietica como superpotencias rivales. Las Naciones Unidas fueron creadas para prevenir conflictos futuros. Los Juicios de Nuremberg establecieron el principio de que los individuos son responsables por crimenes de guerra. El legado de la guerra moldeo la Guerra Fria, la descolonizacion y el orden internacional moderno."
+        },
+        {
+          "type": "quote",
+          "text": "Lo unico que debemos temer es al miedo mismo. -- Franklin D. Roosevelt"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "psychology": {
+    "pt": {
+      "title": "Como a Mente Funciona",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Dois sistemas de pensamento"
+        },
+        {
+          "type": "p",
+          "text": "A teoria do processo dual de Daniel Kahneman descreve dois modos de pensar. O Sistema 1 e rapido, automatico e intuitivo. Ele lida com decisoes rotineiras como reconhecer rostos ou pegar uma bola. O Sistema 2 e lento, deliberado e analitico. Ele se ativa quando voce faz contas, planeja uma viagem ou pondera decisoes complexas. Na maior parte do tempo, o Sistema 1 comanda, e o Sistema 2 so se ativa quando necessario, o que pode levar a erros sistematicos."
+        },
+        {
+          "type": "h2",
+          "text": "Atencao: o gargalo"
+        },
+        {
+          "type": "p",
+          "text": "Seu cerebro recebe muito mais informacao sensorial do que consegue processar conscientemente. A atencao age como um filtro, selecionando o que importa e ignorando o resto. Por isso voce consegue focar em uma conversa em um ambiente barulhento, mas pode nao perceber um gorila andando em um jogo de basquete enquanto conta passes. A atencao e limitada e facilmente capturada por novidade, emocao e movimento."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A memoria de trabalho mantem cerca de 4 itens por vez, nao os frequentemente citados 7",
+            "A memoria de longo prazo tem capacidade virtualmente ilimitada, mas recuperacao imperfeita",
+            "O sono e essencial para a consolidacao da memoria, transferindo aprendizado do armazenamento de curto para longo prazo",
+            "A pratica de recuperacao (testar a si mesmo) fortalece a memoria muito mais do que releitura"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Pensar e para humanos assim como nadar e para gatos. Eles conseguem, mas preferem nao fazer. -- Daniel Kahneman"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "How the Mind Works",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Two Systems of Thinking"
+        },
+        {
+          "type": "p",
+          "text": "Daniel Kahneman's dual-process theory describes two modes of thinking. System 1 is fast, automatic, and intuitive. It handles routine decisions like recognizing faces or catching a ball. System 2 is slow, deliberate, and analytical. It engages when you do math, plan a trip, or weigh complex decisions. Most of the time, System 1 runs the show, and System 2 only activates when needed, which can lead to systematic errors."
+        },
+        {
+          "type": "h2",
+          "text": "Attention: The Bottleneck"
+        },
+        {
+          "type": "p",
+          "text": "Your brain receives far more sensory information than it can consciously process. Attention acts as a filter, selecting what matters and ignoring the rest. This is why you can focus on a conversation in a noisy room but miss a gorilla walking through a basketball game when counting passes. Attention is limited and easily hijacked by novelty, emotion, and movement."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Working memory holds about 4 items at a time, not the often-cited 7",
+            "Long-term memory has virtually unlimited capacity but imperfect retrieval",
+            "Sleep is essential for memory consolidation, transferring learning from short-term to long-term storage",
+            "Retrieval practice (testing yourself) strengthens memory far more than rereading"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Thinking is to humans as swimming is to cats. They can do it but they prefer not to. -- Daniel Kahneman"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Como Funciona la Mente",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Dos sistemas de pensamiento"
+        },
+        {
+          "type": "p",
+          "text": "La teoria del proceso dual de Daniel Kahneman describe dos modos de pensar. El Sistema 1 es rapido, automatico e intuitivo. Maneja decisiones rutinarias como reconocer rostros o atrapar una pelota. El Sistema 2 es lento, deliberado y analitico. Se activa cuando haces calculos, planificas un viaje o evaluas decisiones complejas. La mayor parte del tiempo, el Sistema 1 dirige el espectaculo, y el Sistema 2 solo se activa cuando es necesario, lo que puede llevar a errores sistematicos."
+        },
+        {
+          "type": "h2",
+          "text": "Atencion: el cuello de botella"
+        },
+        {
+          "type": "p",
+          "text": "Tu cerebro recibe mucha mas informacion sensorial de la que puede procesar conscientemente. La atencion actua como un filtro, seleccionando lo que importa e ignorando el resto. Por eso puedes concentrarte en una conversacion en un lugar ruidoso pero no notar un gorila caminando por un juego de baloncesto mientras cuentas pases. La atencion es limitada y facilmente capturada por la novedad, la emocion y el movimiento."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "La memoria de trabajo retiene aproximadamente 4 elementos a la vez, no los frecuentemente citados 7",
+            "La memoria a largo plazo tiene capacidad virtualmente ilimitada pero recuperacion imperfecta",
+            "El sueno es esencial para la consolidacion de la memoria, transfiriendo el aprendizaje del almacenamiento a corto al de largo plazo",
+            "La practica de recuperacion (autoevaluarse) fortalece la memoria mucho mas que la relectura"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Pensar es para los humanos como nadar es para los gatos. Pueden hacerlo, pero prefieren no hacerlo. -- Daniel Kahneman"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "psychology_emotions": {
+    "pt": {
+      "title": "Emocoes e Decisoes",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Emocoes nao sao o inimigo"
+        },
+        {
+          "type": "p",
+          "text": "Ao contrario da visao antiga de que pensar racionalmente significa suprimir emocoes, a neurociencia mostra que emocoes sao essenciais para boas decisoes. Antonio Damasio estudou pacientes com danos em regioes cerebrais que processam emocoes e descobriu que eles tomavam decisoes terriveis apesar de terem logica intacta. Emocoes fornecem sinais rapidos sobre o que importa, o que e perigoso e o que esta alinhado com nossos valores."
+        },
+        {
+          "type": "h2",
+          "text": "A heuristica do afeto e interocepcao"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Heuristica do afeto: julgamos riscos e beneficios com base em como algo nos faz sentir, nao apenas em dados",
+            "Interocepcao e a capacidade de perceber estados internos do corpo como batimento cardiaco e sensacoes viscerais",
+            "Pessoas com melhor consciencia interoceptiva tendem a tomar melhores decisoes intuitivas",
+            "Estados emocionais podem distorcer o julgamento: medo nos faz superestimar riscos, raiva nos faz superestimar nosso controle"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Regulacao emocional"
+        },
+        {
+          "type": "p",
+          "text": "Regulacao emocional nao e sobre suprimir sentimentos, mas sobre gerenciar como e quando voce os expressa. A reavaliacao cognitiva, reenquadrar uma situacao para mudar seu impacto emocional, e uma das estrategias mais eficazes. Por exemplo, ver uma entrevista de emprego como uma oportunidade em vez de uma ameaca reduz a ansiedade sem negar o que esta em jogo. Rotular emocoes com precisao tambem reduz sua intensidade: dizer que voce se sente desapontado em vez de apenas mal ajuda seu cerebro a processar o sentimento."
+        },
+        {
+          "type": "quote",
+          "text": "Nao somos maquinas pensantes que sentem, somos maquinas que sentem e que pensam. -- Antonio Damasio"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "Emotions and Decisions",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Emotions Are Not the Enemy"
+        },
+        {
+          "type": "p",
+          "text": "Contrary to the old view that rational thinking means suppressing emotions, neuroscience shows that emotions are essential for good decisions. Antonio Damasio studied patients with damage to emotion-processing brain regions and found they made terrible decisions despite intact logic. Emotions provide rapid signals about what matters, what is dangerous, and what aligns with our values."
+        },
+        {
+          "type": "h2",
+          "text": "The Affect Heuristic and Interoception"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The affect heuristic: we judge risks and benefits based on how something makes us feel, not just on data",
+            "Interoception is the ability to sense internal body states like heartbeat and gut feelings",
+            "People with better interoceptive awareness tend to make better intuitive decisions",
+            "Emotional states can distort judgment: fear makes us overestimate risks, anger makes us overestimate our control"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Emotional Regulation"
+        },
+        {
+          "type": "p",
+          "text": "Emotional regulation is not about suppressing feelings but about managing how and when you express them. Cognitive reappraisal, reframing a situation to change its emotional impact, is one of the most effective strategies. For example, viewing a job interview as an opportunity rather than a threat reduces anxiety without denying the stakes. Labeling emotions precisely also reduces their intensity: saying you feel disappointed rather than just bad helps your brain process the feeling."
+        },
+        {
+          "type": "quote",
+          "text": "We are not thinking machines that feel, we are feeling machines that think. -- Antonio Damasio"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Emociones y Decisiones",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Las emociones no son el enemigo"
+        },
+        {
+          "type": "p",
+          "text": "Contrario a la vieja vision de que pensar racionalmente significa suprimir emociones, la neurociencia muestra que las emociones son esenciales para buenas decisiones. Antonio Damasio estudio pacientes con danos en regiones cerebrales que procesan emociones y descubrio que tomaban decisiones terribles a pesar de tener logica intacta. Las emociones proporcionan senales rapidas sobre que importa, que es peligroso y que se alinea con nuestros valores."
+        },
+        {
+          "type": "h2",
+          "text": "La heuristica del afecto e interocepcion"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Heuristica del afecto: juzgamos riesgos y beneficios basandonos en como algo nos hace sentir, no solo en datos",
+            "La interocepcion es la capacidad de percibir estados internos del cuerpo como el latido cardiaco y las sensaciones viscerales",
+            "Las personas con mejor conciencia interoceptiva tienden a tomar mejores decisiones intuitivas",
+            "Los estados emocionales pueden distorsionar el juicio: el miedo nos hace sobreestimar riesgos, la ira nos hace sobreestimar nuestro control"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Regulacion emocional"
+        },
+        {
+          "type": "p",
+          "text": "La regulacion emocional no consiste en suprimir sentimientos sino en gestionar como y cuando los expresas. La reevaluacion cognitiva, reencuadrar una situacion para cambiar su impacto emocional, es una de las estrategias mas efectivas. Por ejemplo, ver una entrevista de trabajo como una oportunidad en lugar de una amenaza reduce la ansiedad sin negar lo que esta en juego. Etiquetar emociones con precision tambien reduce su intensidad: decir que te sientes decepcionado en lugar de simplemente mal ayuda a tu cerebro a procesar el sentimiento."
+        },
+        {
+          "type": "quote",
+          "text": "No somos maquinas pensantes que sienten, somos maquinas que sienten y que piensan. -- Antonio Damasio"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "psychology_habits": {
+    "pt": {
+      "title": "A Ciencia dos Habitos",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "O ciclo do habito"
+        },
+        {
+          "type": "p",
+          "text": "Todo habito segue o mesmo padrao neurologico: gatilho, rotina, recompensa. Um gatilho dispara o comportamento (como sentir estresse), a rotina e o comportamento em si (como pegar um lanche), e a recompensa e o beneficio que seu cerebro recebe (um pico de acucar). Com o tempo, esse ciclo se torna automatico, rodando nos ganglios da base com esforco consciente minimo. Entender esse ciclo e o primeiro passo para mudar qualquer habito."
+        },
+        {
+          "type": "h2",
+          "text": "Construindo e quebrando habitos"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Para construir um habito: torne o gatilho obvio, a rotina facil e a recompensa satisfatoria",
+            "Para quebrar um habito: torne o gatilho invisivel, a rotina dificil e a recompensa insatisfatoria",
+            "Empilhamento de habitos: vincule um novo habito a um existente (depois que servir meu cafe, vou meditar por dois minutos)",
+            "Intencoes de implementacao (quando X acontecer, farei Y) dobram a probabilidade de seguir adiante"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Neuroplasticidade e paciencia"
+        },
+        {
+          "type": "p",
+          "text": "Neuroplasticidade significa que seu cerebro se reconecta fisicamente com base em comportamentos repetidos. Cada vez que voce repete um habito, a via neural se fortalece. Pesquisas sugerem que leva em media 66 dias para um novo comportamento se tornar automatico, embora isso varie amplamente de 18 a 254 dias dependendo da pessoa e da complexidade. A chave e consistencia, nao perfeicao. Perder um dia nao reseta seu progresso."
+        },
+        {
+          "type": "quote",
+          "text": "Voce nao sobe ao nivel dos seus objetivos. Voce cai ao nivel dos seus sistemas. -- James Clear"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "The Science of Habits",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "The Habit Loop"
+        },
+        {
+          "type": "p",
+          "text": "Every habit follows the same neurological pattern: cue, routine, reward. A cue triggers the behavior (like feeling stressed), the routine is the behavior itself (like reaching for a snack), and the reward is the benefit your brain receives (a sugar rush). Over time, this loop becomes automatic, running in the basal ganglia with minimal conscious effort. Understanding this loop is the first step to changing any habit."
+        },
+        {
+          "type": "h2",
+          "text": "Building and Breaking Habits"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "To build a habit: make the cue obvious, the routine easy, and the reward satisfying",
+            "To break a habit: make the cue invisible, the routine difficult, and the reward unsatisfying",
+            "Habit stacking: attach a new habit to an existing one (after I pour my coffee, I will meditate for two minutes)",
+            "Implementation intentions (when X happens, I will do Y) double the likelihood of following through"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Neuroplasticity and Patience"
+        },
+        {
+          "type": "p",
+          "text": "Neuroplasticity means your brain physically rewires itself based on repeated behaviors. Each time you repeat a habit, the neural pathway strengthens. Research suggests it takes an average of 66 days for a new behavior to become automatic, though this varies widely from 18 to 254 days depending on the person and complexity. The key is consistency, not perfection. Missing one day does not reset your progress."
+        },
+        {
+          "type": "quote",
+          "text": "You do not rise to the level of your goals. You fall to the level of your systems. -- James Clear"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "La Ciencia de los Habitos",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "El ciclo del habito"
+        },
+        {
+          "type": "p",
+          "text": "Todo habito sigue el mismo patron neurologico: senal, rutina, recompensa. Una senal desencadena el comportamiento (como sentir estres), la rutina es el comportamiento en si (como buscar un snack), y la recompensa es el beneficio que tu cerebro recibe (un subidón de azucar). Con el tiempo, este ciclo se vuelve automatico, ejecutandose en los ganglios basales con minimo esfuerzo consciente. Entender este ciclo es el primer paso para cambiar cualquier habito."
+        },
+        {
+          "type": "h2",
+          "text": "Construir y romper habitos"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Para construir un habito: haz la senal obvia, la rutina facil y la recompensa satisfactoria",
+            "Para romper un habito: haz la senal invisible, la rutina dificil y la recompensa insatisfactoria",
+            "Apilamiento de habitos: vincula un nuevo habito a uno existente (despues de servir mi cafe, meditare dos minutos)",
+            "Las intenciones de implementacion (cuando X suceda, hare Y) duplican la probabilidad de cumplir"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Neuroplasticidad y paciencia"
+        },
+        {
+          "type": "p",
+          "text": "La neuroplasticidad significa que tu cerebro se recablea fisicamente basandose en comportamientos repetidos. Cada vez que repites un habito, la via neuronal se fortalece. Las investigaciones sugieren que se necesitan en promedio 66 dias para que un nuevo comportamiento se vuelva automatico, aunque esto varia ampliamente de 18 a 254 dias dependiendo de la persona y la complejidad. La clave es la consistencia, no la perfeccion. Perder un dia no reinicia tu progreso."
+        },
+        {
+          "type": "quote",
+          "text": "No te elevas al nivel de tus metas. Caes al nivel de tus sistemas. -- James Clear"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "psychology_resilience": {
+    "pt": {
+      "title": "Resiliencia Mental",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "A resposta ao estresse"
+        },
+        {
+          "type": "p",
+          "text": "Quando voce enfrenta uma ameaca, seu corpo ativa a resposta de luta ou fuga. Cortisol e adrenalina inundam seu sistema, aguçando o foco e preparando os musculos para a acao. Isso serviu bem nossos ancestrais contra predadores, mas na vida moderna, a ativacao cronica por pressao do trabalho, redes sociais e incerteza prejudica a saude. Entender que o estresse e uma resposta fisiologica, nao uma fraqueza pessoal, e o primeiro passo para gerencia-lo."
+        },
+        {
+          "type": "h2",
+          "text": "Estrategias de enfrentamento"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Enfrentamento focado no problema: agir para mudar a situacao estressante em si",
+            "Enfrentamento focado na emocao: gerenciar a resposta emocional quando voce nao pode mudar a situacao",
+            "O apoio social e um dos mais fortes amortecedores contra o estresse, reduzindo o cortisol e aumentando a ocitocina",
+            "Exercicio fisico regular e tao eficaz quanto medicacao para ansiedade e depressao leves a moderadas"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Mentalidade de crescimento e crescimento pos-traumatico"
+        },
+        {
+          "type": "p",
+          "text": "A pesquisa de Carol Dweck sobre mentalidade de crescimento mostra que pessoas que acreditam que habilidades podem ser desenvolvidas por meio de esforco sao mais resilientes do que aquelas que veem o talento como fixo. O crescimento pos-traumatico vai alem: algumas pessoas que enfrentam adversidades serias relatam mudancas positivas incluindo relacionamentos mais profundos, maior apreciacao pela vida, maior forca pessoal e novas possibilidades. Isso nao minimiza o sofrimento, mas reconhece que seres humanos podem encontrar significado e crescimento mesmo em experiencias dificeis."
+        },
+        {
+          "type": "quote",
+          "text": "Entre o estimulo e a resposta ha um espaco. Nesse espaco esta nosso poder de escolher nossa resposta. -- Viktor Frankl"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "Mental Resilience",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "The Stress Response"
+        },
+        {
+          "type": "p",
+          "text": "When you face a threat, your body activates the fight-or-flight response. Cortisol and adrenaline flood your system, sharpening focus and preparing muscles for action. This served our ancestors well against predators, but in modern life, chronic activation from work pressure, social media, and uncertainty damages health. Understanding that stress is a physiological response, not a personal weakness, is the first step toward managing it."
+        },
+        {
+          "type": "h2",
+          "text": "Coping Strategies"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Problem-focused coping: take action to change the stressful situation itself",
+            "Emotion-focused coping: manage the emotional response when you cannot change the situation",
+            "Social support is one of the strongest buffers against stress, reducing cortisol and increasing oxytocin",
+            "Regular physical exercise is as effective as medication for mild to moderate anxiety and depression"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Growth Mindset and Post-Traumatic Growth"
+        },
+        {
+          "type": "p",
+          "text": "Carol Dweck's research on growth mindset shows that people who believe abilities can be developed through effort are more resilient than those who see talent as fixed. Post-traumatic growth goes further: some people who face serious adversity report positive changes including deeper relationships, greater appreciation for life, increased personal strength, and new possibilities. This does not minimize suffering but recognizes that humans can find meaning and growth even in difficult experiences."
+        },
+        {
+          "type": "quote",
+          "text": "Between stimulus and response there is a space. In that space is our power to choose our response. -- Viktor Frankl"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Resiliencia Mental",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "La respuesta al estres"
+        },
+        {
+          "type": "p",
+          "text": "Cuando enfrentas una amenaza, tu cuerpo activa la respuesta de lucha o huida. El cortisol y la adrenalina inundan tu sistema, agudizando el enfoque y preparando los musculos para la accion. Esto sirvio bien a nuestros ancestros contra depredadores, pero en la vida moderna, la activacion cronica por la presion laboral, las redes sociales y la incertidumbre dana la salud. Entender que el estres es una respuesta fisiologica, no una debilidad personal, es el primer paso para manejarlo."
+        },
+        {
+          "type": "h2",
+          "text": "Estrategias de afrontamiento"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Afrontamiento centrado en el problema: actuar para cambiar la situacion estresante en si",
+            "Afrontamiento centrado en la emocion: manejar la respuesta emocional cuando no puedes cambiar la situacion",
+            "El apoyo social es uno de los amortiguadores mas fuertes contra el estres, reduciendo el cortisol y aumentando la oxitocina",
+            "El ejercicio fisico regular es tan efectivo como la medicacion para la ansiedad y depresion leves a moderadas"
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Mentalidad de crecimiento y crecimiento postraumatico"
+        },
+        {
+          "type": "p",
+          "text": "La investigacion de Carol Dweck sobre mentalidad de crecimiento muestra que las personas que creen que las habilidades pueden desarrollarse a traves del esfuerzo son mas resilientes que quienes ven el talento como fijo. El crecimiento postraumatico va mas alla: algunas personas que enfrentan adversidades serias reportan cambios positivos incluyendo relaciones mas profundas, mayor apreciacion por la vida, mayor fuerza personal y nuevas posibilidades. Esto no minimiza el sufrimiento, pero reconoce que los seres humanos pueden encontrar significado y crecimiento incluso en experiencias dificiles."
+        },
+        {
+          "type": "quote",
+          "text": "Entre el estimulo y la respuesta hay un espacio. En ese espacio esta nuestro poder de elegir nuestra respuesta. -- Viktor Frankl"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  },
+  "psychology_social": {
+    "pt": {
+      "title": "Psicologia Social",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Conformidade: os experimentos de Asch"
+        },
+        {
+          "type": "p",
+          "text": "Nos anos 1950, Solomon Asch mostrou que as pessoas negarao a evidencia dos proprios olhos para se conformar com um grupo. Participantes foram solicitados a comparar comprimentos de linhas, uma tarefa com resposta obviamente correta. Quando complices unanimemente davam uma resposta errada, cerca de 75% dos participantes se conformaram pelo menos uma vez. As pessoas se conformam por influencia normativa (querer se encaixar) e influencia informacional (assumir que o grupo sabe mais)."
+        },
+        {
+          "type": "h2",
+          "text": "Obediencia: o experimento de Milgram"
+        },
+        {
+          "type": "p",
+          "text": "O famoso experimento de Stanley Milgram em 1961 revelou a extensao perturbadora da obediencia a autoridade. Participantes foram instruidos a aplicar choques eletricos cada vez mais dolorosos em um aprendiz (na verdade um ator). Cerca de 65% obedeceram ate a voltagem maxima. O estudo mostrou que pessoas comuns podem cometer atos prejudiciais quando direcionadas por uma figura de autoridade percebida, especialmente em contextos estruturados e institucionais."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Prova social: olhamos para o comportamento dos outros para determinar o que e correto, especialmente em situacoes ambiguas",
+            "Vies intragrupo/extragrupo: favorecemos pessoas que vemos como parte do nosso grupo e desconfiamos de estranhos",
+            "Efeito espectador: quanto mais pessoas presentes em uma emergencia, menos provavel que qualquer individuo ajude",
+            "Desindividuacao: o anonimato em grupos pode reduzir a autoconsciencia e aumentar o comportamento impulsivo"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "O desaparecimento do senso de responsabilidade e a consequencia mais abrangente da submissao a autoridade. -- Stanley Milgram"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "en": {
+      "title": "Social Psychology",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Conformity: The Asch Experiments"
+        },
+        {
+          "type": "p",
+          "text": "In the 1950s, Solomon Asch showed that people will deny the evidence of their own eyes to conform with a group. Participants were asked to match line lengths, a task with an obvious correct answer. When confederates unanimously gave a wrong answer, about 75% of participants conformed at least once. People conform due to normative influence (wanting to fit in) and informational influence (assuming the group knows better)."
+        },
+        {
+          "type": "h2",
+          "text": "Obedience: The Milgram Experiment"
+        },
+        {
+          "type": "p",
+          "text": "Stanley Milgram's famous 1961 experiment revealed the disturbing extent of obedience to authority. Participants were instructed to deliver increasingly painful electric shocks to a learner (actually an actor). About 65% obeyed all the way to the maximum voltage. The study showed that ordinary people can commit harmful acts when directed by a perceived authority figure, especially in structured, institutional settings."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Social proof: we look to others' behavior to determine what is correct, especially in ambiguous situations",
+            "In-group/out-group bias: we favor people we see as part of our group and are suspicious of outsiders",
+            "The bystander effect: the more people present during an emergency, the less likely any individual is to help",
+            "Deindividuation: anonymity in groups can reduce self-awareness and increase impulsive behavior"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "The disappearance of a sense of responsibility is the most far-reaching consequence of submission to authority. -- Stanley Milgram"
+        }
+      ],
+      "currentQuizCount": 2
+    },
+    "es": {
+      "title": "Psicologia Social",
+      "blocks": [
+        {
+          "type": "h2",
+          "text": "Conformidad: los experimentos de Asch"
+        },
+        {
+          "type": "p",
+          "text": "En los anos 1950, Solomon Asch demostro que las personas negaran la evidencia de sus propios ojos para conformarse con un grupo. Se pidio a los participantes que compararan longitudes de lineas, una tarea con una respuesta obviamente correcta. Cuando los complices unanimemente daban una respuesta incorrecta, alrededor del 75% de los participantes se conformaron al menos una vez. Las personas se conforman por influencia normativa (querer encajar) e influencia informacional (asumir que el grupo sabe mas)."
+        },
+        {
+          "type": "h2",
+          "text": "Obediencia: el experimento de Milgram"
+        },
+        {
+          "type": "p",
+          "text": "El famoso experimento de Stanley Milgram en 1961 revelo la perturbadora extension de la obediencia a la autoridad. Se instruyo a los participantes a aplicar descargas electricas cada vez mas dolorosas a un aprendiz (en realidad un actor). Alrededor del 65% obedecio hasta el voltaje maximo. El estudio demostro que personas comunes pueden cometer actos daninos cuando son dirigidas por una figura de autoridad percibida, especialmente en entornos estructurados e institucionales."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Prueba social: miramos el comportamiento de otros para determinar que es correcto, especialmente en situaciones ambiguas",
+            "Sesgo intragrupo/extragrupo: favorecemos a personas que vemos como parte de nuestro grupo y desconfiamos de los de afuera",
+            "Efecto espectador: cuantas mas personas estan presentes en una emergencia, menos probable es que cualquier individuo ayude",
+            "Desindividuacion: el anonimato en grupos puede reducir la autoconciencia y aumentar el comportamiento impulsivo"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "La desaparicion del sentido de responsabilidad es la consecuencia mas abarcadora de la sumision a la autoridad. -- Stanley Milgram"
+        }
+      ],
+      "currentQuizCount": 2
+    }
+  }
+}

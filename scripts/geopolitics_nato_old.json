@@ -1,0 +1,128 @@
+{
+  "pt": {
+    "title": "A OTAN e o Atlântico",
+    "blocks": [
+      {
+        "type": "h2",
+        "text": "O que é a OTAN?"
+      },
+      {
+        "type": "p",
+        "text": "A Organização do Tratado do Atlântico Norte (OTAN) é uma aliança militar fundada em 1949 com o objetivo de garantir a defesa coletiva dos países membros. Seu princípio central: um ataque a um membro é um ataque a todos."
+      },
+      {
+        "type": "h2",
+        "text": "A cláusula do Artigo 5"
+      },
+      {
+        "type": "p",
+        "text": "O Artigo 5 do Tratado do Atlântico Norte é a espinha dorsal da aliança. Foi invocado uma única vez na história — após os ataques de 11 de setembro de 2001 nos EUA."
+      },
+      {
+        "type": "h2",
+        "text": "OTAN no século XXI"
+      },
+      {
+        "type": "p",
+        "text": "Com a invasão russa da Ucrânia em 2022, a OTAN voltou ao centro do debate geopolítico. Países como Finlândia e Suécia, historicamente neutros, aderiram à aliança — mostrando como a segurança europeia se transformou."
+      },
+      {
+        "type": "quote",
+        "text": "A OTAN é a aliança de defesa mais bem-sucedida da história. — Anders Fogh Rasmussen"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "32 países membros (2024)",
+          "Meta: 2% do PIB em gastos de defesa",
+          "Sede em Bruxelas, Bélgica"
+        ]
+      }
+    ],
+    "currentQuizCount": 2
+  },
+  "en": {
+    "title": "NATO and the Atlantic",
+    "blocks": [
+      {
+        "type": "h2",
+        "text": "What is NATO?"
+      },
+      {
+        "type": "p",
+        "text": "The North Atlantic Treaty Organization (NATO) is a military alliance founded in 1949 to ensure the collective defense of its member states. Its central principle: an attack on one member is an attack on all."
+      },
+      {
+        "type": "h2",
+        "text": "The Article 5 clause"
+      },
+      {
+        "type": "p",
+        "text": "Article 5 of the North Atlantic Treaty is the backbone of the alliance. It has been invoked only once in history — after the September 11, 2001 attacks in the United States."
+      },
+      {
+        "type": "h2",
+        "text": "NATO in the 21st century"
+      },
+      {
+        "type": "p",
+        "text": "With Russia's invasion of Ukraine in 2022, NATO returned to the center of geopolitical debate. Historically neutral countries like Finland and Sweden joined the alliance — showing how European security has transformed."
+      },
+      {
+        "type": "quote",
+        "text": "NATO is the most successful defense alliance in history. — Anders Fogh Rasmussen"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "32 member countries (2024)",
+          "Target: 2% of GDP in defense spending",
+          "Headquarters in Brussels, Belgium"
+        ]
+      }
+    ],
+    "currentQuizCount": 2
+  },
+  "es": {
+    "title": "La OTAN y el Atlántico",
+    "blocks": [
+      {
+        "type": "h2",
+        "text": "¿Qué es la OTAN?"
+      },
+      {
+        "type": "p",
+        "text": "La Organización del Tratado del Atlántico Norte (OTAN) es una alianza militar fundada en 1949 para garantizar la defensa colectiva de sus países miembros. Su principio central: un ataque a un miembro es un ataque a todos."
+      },
+      {
+        "type": "h2",
+        "text": "La cláusula del Artículo 5"
+      },
+      {
+        "type": "p",
+        "text": "El Artículo 5 del Tratado del Atlántico Norte es la columna vertebral de la alianza. Fue invocado solo una vez en la historia — tras los ataques del 11 de septiembre de 2001 en Estados Unidos."
+      },
+      {
+        "type": "h2",
+        "text": "La OTAN en el siglo XXI"
+      },
+      {
+        "type": "p",
+        "text": "Con la invasión rusa de Ucrania en 2022, la OTAN volvió al centro del debate geopolítico. Países históricamente neutrales como Finlandia y Suecia ingresaron a la alianza — mostrando cómo la seguridad europea se ha transformado."
+      },
+      {
+        "type": "quote",
+        "text": "La OTAN es la alianza de defensa más exitosa de la historia. — Anders Fogh Rasmussen"
+      },
+      {
+        "type": "bullets",
+        "items": [
+          "32 países miembros (2024)",
+          "Meta: 2% del PIB en gasto de defensa",
+          "Sede en Bruselas, Bélgica"
+        ]
+      }
+    ],
+    "currentQuizCount": 2
+  }
+}

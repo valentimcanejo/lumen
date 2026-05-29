@@ -19,20 +19,20 @@ const db = admin.firestore();
 
 async function main() {
   const track = {
-    id: "business",
-    order: 10,
+    id: "health",
+    order: 12,
     difficulty: 2,
     title: {
-      pt: "Negócios e Empreendedorismo",
-      en: "Business and Entrepreneurship",
-      es: "Negocios y Emprendimiento",
+      pt: "Saúde",
+      en: "Health",
+      es: "Salud",
     },
     description: {
-      pt: "De Schumpeter ao Vale do Silício — como empreendedores criam valor, como empresas crescem e competem, e as forças que estão transformando o trabalho no século XXI",
-      en: "From Schumpeter to Silicon Valley — how entrepreneurs create value, how companies grow and compete, and the forces transforming work in the 21st century",
-      es: "De Schumpeter a Silicon Valley — cómo los emprendedores crean valor, cómo las empresas crecen y compiten, y las fuerzas que están transformando el trabajo en el siglo XXI",
+      pt: "Do sono ao câncer, do coração ao microbioma — entenda como seu corpo funciona e o que a ciência diz sobre viver mais e melhor",
+      en: "From sleep to cancer, from the heart to the microbiome — understand how your body works and what science says about living longer and better",
+      es: "Del sueño al cáncer, del corazón al microbioma — entiende cómo funciona tu cuerpo y qué dice la ciencia sobre vivir más y mejor",
     },
-    tags: ["business", "entrepreneurship", "startups", "strategy", "finance"],
+    tags: ["health", "medicine", "biology", "wellness", "science"],
   };
 
   await db.collection("tracks").doc(track.id).set(track);

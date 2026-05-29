@@ -136,6 +136,18 @@ const KEYWORDS = {
   science_neuroscience: "brain scan mri medical imaging",
   science_future: "futuristic laboratory technology research",
 
+  // Cosmos — literal, objeto de estudo astronômico
+  cosmos: "milky way galaxy stars long exposure night sky",
+  cosmos_what_is_life: "microorganism bacteria microscope petri dish close up",
+  cosmos_origin_of_life: "volcanic eruption hot springs geothermal primordial",
+  cosmos_habitable_zone: "earth from space blue marble orbit planet",
+  cosmos_solar_system_life: "jupiter moon ice surface planet nasa space",
+  cosmos_exoplanets: "observatory telescope dome night sky stars",
+  cosmos_drake_equation: "radio telescope dish antenna night",
+  cosmos_seti: "radio telescope array antenna field",
+  cosmos_fermi_paradox: "deep space galaxy stars universe long exposure",
+  cosmos_first_contact: "earth blue planet space satellite view",
+
   // Negócios — contexto real de trabalho
   business: "entrepreneur whiteboard startup office",
   business_models: "sticky notes whiteboard business planning",
@@ -147,6 +159,18 @@ const KEYWORDS = {
   business_vc: "handshake deal business suit office",
   business_scale: "aerial city network roads infrastructure",
   business_future: "remote work laptop home desk window",
+
+  // Saúde — literal, corpo humano e contexto médico/científico
+  health_sleep: "person sleeping bed bedroom night dark calm",
+  health_immune: "white blood cells microscope immune defense",
+  health_stress: "person meditation calm breathe mindfulness nature",
+  health_nutrition: "colorful vegetables fruits market fresh healthy",
+  health_mental: "person therapy session talking counseling couch",
+  health_heart: "human heart anatomy cardiology medical illustration",
+  health_cancer: "oncology laboratory research scientist cancer cell",
+  health_microbiome: "gut bacteria intestine digestive system microbiome",
+  health_first_aid: "first aid kit ambulance emergency red cross",
+  health_longevity: "elderly couple walking park aging healthy active",
 };
 
 const UNSPLASH_API = "api.unsplash.com";
