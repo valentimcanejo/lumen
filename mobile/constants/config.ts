@@ -5,7 +5,7 @@ import { Platform } from "react-native";
 // ---------------------------------------------------------------------------
 
 export const SHOW_DEV_RESET = false;
-export const PURCHASES_ENABLED = false;
+export const PURCHASES_ENABLED = true;
 
 export const FEATURES = {
   PREMIUM: false,
