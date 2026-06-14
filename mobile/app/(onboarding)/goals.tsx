@@ -141,7 +141,7 @@ export default function Goals() {
           {t("onboarding.goals.title")}
         </Text>
         <RNView style={go.subtitleRow}>
-          <Text className="text-[#AAB0C0]">
+          <Text className="text-[#AAB0C0] flex-1">
             {t("onboarding.goals.subtitle")}
           </Text>
           {counter !== "" && (
@@ -187,7 +187,7 @@ export default function Goals() {
 const go = StyleSheet.create({
   subtitleRow: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     gap: 10,
     marginTop: 6,
   },
@@ -195,6 +195,7 @@ const go = StyleSheet.create({
     fontSize: 13,
     fontWeight: "600",
     color: "#F5C77A",
+    flexShrink: 0,
   },
   row: {
     flexDirection: "row",
