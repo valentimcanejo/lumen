@@ -365,7 +365,7 @@ export default function LessonScreen() {
 
   // Prepare audio when pack is ready — premium only
   useEffect(() => {
-    if (!pack || !uid) return;
+    if (!pack || !uid || !isPremium) return;
     let cancelled = false;
 
     async function prepareAudio() {
@@ -428,7 +428,7 @@ export default function LessonScreen() {
     return () => {
       cancelled = true;
     };
-  }, [pack, uid]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [pack, uid, isPremium]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Cleanup sound on unmount
   useEffect(() => {
@@ -550,7 +550,7 @@ export default function LessonScreen() {
           <View style={ls.divider} />
 
           {/* Audio player — premium only, hidden in test mode */}
-          {FEATURES.AUDIO ? (
+          {isPremium ? (
             <View
               style={[
                 ls.playerCard,
