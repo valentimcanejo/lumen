@@ -8,7 +8,7 @@ export const SHOW_DEV_RESET = false;
 export const PURCHASES_ENABLED = true;
 
 export const FEATURES = {
-  PREMIUM: false,
+  PREMIUM: true,
   AUDIO: true,
   COVER_IMAGES: true,
   GOOGLE_SIGN_IN: true,
