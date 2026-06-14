@@ -23,13 +23,6 @@ const COLS = 3;
 const GAP = 10;
 const H_PAD = 24;
 
-function selectedLabel(count: number, lang: Lang): string {
-  if (count === 0) return "";
-  if (lang === "en") return count === 1 ? "1 selected" : `${count} selected`;
-  if (lang === "es") return count === 1 ? "1 seleccionada" : `${count} seleccionadas`;
-  return count === 1 ? "1 selecionada" : `${count} selecionadas`;
-}
-
 // ---------------------------------------------------------------------------
 // Tile
 // ---------------------------------------------------------------------------
@@ -125,8 +118,6 @@ export default function Goals() {
     rows.push(goals.slice(i, i + COLS));
   }
 
-  const counter = selectedLabel(selected.length, selectedLanguage);
-
   return (
     <Box className="flex-1 bg-[#0B0F14]">
       <ScrollView
@@ -140,14 +131,9 @@ export default function Goals() {
         <Text className="text-[#E6EAF2] text-[26px] font-semibold">
           {t("onboarding.goals.title")}
         </Text>
-        <RNView style={go.subtitleRow}>
-          <Text className="text-[#AAB0C0] flex-1">
-            {t("onboarding.goals.subtitle")}
-          </Text>
-          {counter !== "" && (
-            <Text style={go.counter}>{counter}</Text>
-          )}
-        </RNView>
+        <Text className="text-[#AAB0C0] mt-1.5">
+          {t("onboarding.goals.subtitle")}
+        </Text>
 
         <RNView style={{ height: 20 }} />
 
@@ -185,18 +171,6 @@ export default function Goals() {
 }
 
 const go = StyleSheet.create({
-  subtitleRow: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: 10,
-    marginTop: 6,
-  },
-  counter: {
-    fontSize: 13,
-    fontWeight: "600",
-    color: "#F5C77A",
-    flexShrink: 0,
-  },
   row: {
     flexDirection: "row",
     gap: GAP,
