@@ -13,7 +13,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box } from "../../components/ui/box";
 import { Text } from "../../components/ui/text";
 import { HStack } from "../../components/ui/hstack";
-import { useAuth } from "../../hooks/useAuth";
 import { usePremium } from "../../hooks/usePremium";
 
 type Plan = "annual" | "monthly";
@@ -198,7 +197,6 @@ export default function Paywall() {
   const [restoring, setRestoring] = useState(false);
   const [feedback, setFeedback] = useState<FeedbackModal>(null);
 
-  const { isAnonymous, signInWithGoogle } = useAuth();
   const { annualPackage, monthlyPackage, purchasePlan, restorePurchases } = usePremium();
 
   // Dynamic prices from RevenueCat packages, fallback to i18n strings
@@ -217,8 +215,6 @@ export default function Paywall() {
   async function handleSubscribe() {
     setProcessing(true);
     try {
-      if (isAnonymous) await signInWithGoogle();
-
       const pkg = selectedPlan === "annual" ? annualPackage : monthlyPackage;
       if (!pkg) { setFeedback("error"); return; }
 
