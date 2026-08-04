@@ -218,6 +218,8 @@
       "loading": "Loading profile data...",
       "account_save_progress": "Save your progress",
       "account_save_description": "Link an account so you don't lose your streak and history when switching devices.",
+      "account_save_progress_premium": "Protect your Premium",
+      "account_save_description_premium": "Your subscription is safe, but your progress (XP, streak, lessons) is only saved on this device. Link your account so you don't lose it.",
       "account_google": "Continue with Google",
       "account_apple": "Continue with Apple",
       "account_linked": "Account linked",

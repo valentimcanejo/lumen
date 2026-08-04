@@ -218,6 +218,8 @@
       "loading": "Carregando dados do perfil...",
       "account_save_progress": "Salve seu progresso",
       "account_save_description": "Vincule uma conta para não perder streak e histórico ao trocar de dispositivo.",
+      "account_save_progress_premium": "Proteja seu Premium",
+      "account_save_description_premium": "Sua assinatura está segura, mas seu progresso (XP, sequência, lições) fica salvo só neste aparelho. Vincule sua conta para não perder nada.",
       "account_google": "Continuar com Google",
       "account_apple": "Continuar com Apple",
       "account_linked": "Conta vinculada",

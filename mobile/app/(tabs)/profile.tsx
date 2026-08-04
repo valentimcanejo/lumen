@@ -384,12 +384,14 @@ function StudyHeatmap({ heatmap }: { heatmap: Record<string, number> }) {
 
 function AccountCard({
   isAnonymous,
+  isPremium,
   email,
   onSignInWithGoogle,
   onSignInWithApple,
   onSignOut,
 }: {
   isAnonymous: boolean;
+  isPremium: boolean;
   email?: string | null;
   onSignInWithGoogle: () => Promise<void>;
   onSignInWithApple: () => Promise<void>;
@@ -424,12 +426,27 @@ function AccountCard({
 
   if (isAnonymous && !justLinked) {
     return (
-      <Box className="bg-[#111827] rounded-2xl p-5 mb-6">
+      <Box
+        className="rounded-2xl p-5 mb-6"
+        style={
+          isPremium
+            ? { backgroundColor: "#1C1608", borderWidth: 1, borderColor: "#F5C77A50" }
+            : { backgroundColor: "#111827" }
+        }
+      >
+        {isPremium && (
+          <HStack className="items-center mb-2" space="xs">
+            <Ionicons name="alert-circle" size={14} color="#F5C77A" />
+            <Text className="text-[#F5C77A] text-[11px] font-bold" style={{ letterSpacing: 0.5 }}>
+              PREMIUM
+            </Text>
+          </HStack>
+        )}
         <Text className="text-[#E6EAF2] text-[16px] font-semibold mb-1">
-          {t("tabs.profile.account_save_progress")}
+          {t(isPremium ? "tabs.profile.account_save_progress_premium" : "tabs.profile.account_save_progress")}
         </Text>
         <Text className="text-[#AAB0C0] text-[13px] mb-5">
-          {t("tabs.profile.account_save_description")}
+          {t(isPremium ? "tabs.profile.account_save_description_premium" : "tabs.profile.account_save_description")}
         </Text>
 
         {FEATURES.GOOGLE_SIGN_IN && <Pressable
@@ -991,6 +1008,7 @@ export default function ProfileScreen() {
       >
         <AccountCard
           isAnonymous={isAnonymous}
+          isPremium={isPremium}
           email={user?.email}
           onSignInWithGoogle={signInWithGoogle}
           onSignInWithApple={signInWithApple}
