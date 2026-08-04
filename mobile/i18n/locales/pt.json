@@ -138,6 +138,10 @@
     "success_title": "Bem-vindo ao Premium!",
     "success_subtitle": "Agora você tem acesso a todo o conteúdo ilimitado do Lumen.",
     "success_cta": "Começar",
+    "link_invite_title": "Não perca seu progresso",
+    "link_invite_subtitle": "Vincule sua conta Google para manter seu Premium e progresso salvos, mesmo se trocar de aparelho.",
+    "link_invite_cta": "Vincular conta Google",
+    "link_invite_skip": "Agora não",
     "per_year": "/ano",
     "per_month": "/mês"
   },

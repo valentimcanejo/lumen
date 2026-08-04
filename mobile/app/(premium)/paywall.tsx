@@ -13,6 +13,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box } from "../../components/ui/box";
 import { Text } from "../../components/ui/text";
 import { HStack } from "../../components/ui/hstack";
+import { useAuth } from "../../hooks/useAuth";
 import { usePremium } from "../../hooks/usePremium";
 
 type Plan = "annual" | "monthly";
@@ -189,6 +190,116 @@ function FeedbackOverlay({
   );
 }
 
+// Shown once, right after a successful purchase — never blocks the purchase
+// itself. Cancelling the native picker just dismisses this, no error shown.
+function LinkInviteOverlay({
+  visible,
+  linking,
+  onLink,
+  onSkip,
+}: {
+  visible: boolean;
+  linking: boolean;
+  onLink: () => void;
+  onSkip: () => void;
+}) {
+  const { t } = useTranslation();
+  if (!visible) return null;
+
+  return (
+    <Modal transparent animationType="fade" visible statusBarTranslucent>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "#000000CC",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingHorizontal: 32,
+        }}
+      >
+        <View
+          style={{
+            backgroundColor: "#111827",
+            borderRadius: 24,
+            padding: 32,
+            width: "100%",
+            alignItems: "center",
+            borderWidth: 1,
+            borderColor: "#F5C77A33",
+          }}
+        >
+          <View
+            style={{
+              width: 64,
+              height: 64,
+              borderRadius: 32,
+              backgroundColor: "#F5C77A22",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 20,
+            }}
+          >
+            <Ionicons name="shield-checkmark" size={32} color="#F5C77A" />
+          </View>
+
+          <Text
+            style={{
+              color: "#E6EAF2",
+              fontSize: 22,
+              fontWeight: "800",
+              textAlign: "center",
+              marginBottom: 10,
+            }}
+          >
+            {t("premium.link_invite_title")}
+          </Text>
+
+          <Text
+            style={{
+              color: "#AAB0C0",
+              fontSize: 14,
+              textAlign: "center",
+              lineHeight: 20,
+              marginBottom: 28,
+            }}
+          >
+            {t("premium.link_invite_subtitle")}
+          </Text>
+
+          <TouchableOpacity
+            onPress={onLink}
+            disabled={linking}
+            activeOpacity={0.85}
+            style={{
+              backgroundColor: "#F5C77A",
+              borderRadius: 14,
+              height: 48,
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 12,
+            }}
+          >
+            {linking ? (
+              <ActivityIndicator color="#0B0F14" />
+            ) : (
+              <Text style={{ color: "#0B0F14", fontSize: 15, fontWeight: "700" }}>
+                {t("premium.link_invite_cta")}
+              </Text>
+            )}
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={onSkip} disabled={linking} activeOpacity={0.7}>
+            <Text style={{ color: "#4A5568", fontSize: 13, fontWeight: "600" }}>
+              {t("premium.link_invite_skip")}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </Modal>
+  );
+}
+
 export default function Paywall() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
@@ -196,7 +307,10 @@ export default function Paywall() {
   const [processing, setProcessing] = useState(false);
   const [restoring, setRestoring] = useState(false);
   const [feedback, setFeedback] = useState<FeedbackModal>(null);
+  const [showLinkInvite, setShowLinkInvite] = useState(false);
+  const [linking, setLinking] = useState(false);
 
+  const { isAnonymous, signInWithGoogle } = useAuth();
   const { annualPackage, monthlyPackage, purchasePlan, restorePurchases } = usePremium();
 
   // Dynamic prices from RevenueCat packages, fallback to i18n strings
@@ -208,8 +322,32 @@ export default function Paywall() {
     : t("premium.plan_monthly_price");
 
   function handleFeedbackClose() {
+    const wasSuccess = feedback === "success";
+    const shouldClose = feedback === "success" || feedback === "restored";
     setFeedback(null);
-    if (feedback === "success" || feedback === "restored") router.back();
+    if (wasSuccess && isAnonymous) {
+      setShowLinkInvite(true);
+    } else if (shouldClose) {
+      router.back();
+    }
+  }
+
+  async function handleLinkAccount() {
+    setLinking(true);
+    try {
+      await signInWithGoogle();
+    } catch {
+      // Cancelled or failed — linking is optional, never block on it.
+    } finally {
+      setLinking(false);
+      setShowLinkInvite(false);
+      router.back();
+    }
+  }
+
+  function handleSkipLink() {
+    setShowLinkInvite(false);
+    router.back();
   }
 
   async function handleSubscribe() {
@@ -242,6 +380,12 @@ export default function Paywall() {
   return (
     <Box className="flex-1 bg-[#0B0F14]">
       <FeedbackOverlay type={feedback} onClose={handleFeedbackClose} />
+      <LinkInviteOverlay
+        visible={showLinkInvite}
+        linking={linking}
+        onLink={handleLinkAccount}
+        onSkip={handleSkipLink}
+      />
 
       {/* Close button */}
       <TouchableOpacity
