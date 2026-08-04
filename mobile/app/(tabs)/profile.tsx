@@ -47,6 +47,7 @@ import {
 } from "../../models/user";
 import { ACHIEVEMENTS, type AchievementDef } from "../../repositories/achievements.repo";
 import { SupportSheet } from "../../components/ui/lumen/SupportSheet";
+import { trackEvent } from "../../services/analytics.service";
 
 // ---------------------------------------------------------------------------
 // Achievements grid — compact 5-column layout, expandable
@@ -410,7 +411,10 @@ function AccountCard({
     setError(null);
     try {
       await fn();
-      if (action !== "signout") setJustLinked(true);
+      if (action !== "signout") {
+        setJustLinked(true);
+        trackEvent("account_link", { source: "profile", result: "linked", method: action });
+      }
     } catch (err: unknown) {
       const e = err as { message?: string; code?: string };
       if (

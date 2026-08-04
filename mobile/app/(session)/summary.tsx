@@ -38,6 +38,7 @@ import { auth } from "../../firebase/firebaseConfig";
 import { toggleSaveContent, markContentCompleted } from "../../repositories/user.repo";
 import { invalidateUserCache } from "../../hooks/useUser";
 import { incrementContentCompletion } from "../../repositories/content_stats.repo";
+import { trackEvent } from "../../services/analytics.service";
 import { ACHIEVEMENTS, type AchievementDef } from "../../repositories/achievements.repo";
 import { CertificateModal } from "../../components/session/CertificateModal";
 import { todayYmd } from "../../repositories/session.repo";
@@ -738,6 +739,13 @@ export default function SummaryScreen() {
         ]);
 
         const { gained, base, quizBonus, missionBonus, weeklyMissionBonus, starterBonus, newAchievementIds, leveledUp, newLevel, shieldEarned, newStreak, streakRecoveryCompleted, hardcoreBonus } = sessionResult;
+
+        trackEvent("lesson_complete", {
+          content_id: contentId,
+          track_id: getLessonMeta(contentId)?.trackId ?? "",
+          quiz_score: quizScore,
+          xp_gained: gained,
+        });
 
         // Leaderboard — fire-and-forget, does not block UI
         const displayName = auth.currentUser?.displayName

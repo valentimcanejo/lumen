@@ -25,6 +25,7 @@ import "@/global.css";
 import { auth } from "../firebase/firebaseConfig";
 import { listenAuth, ensureAnonymousAuth } from "../services/auth.service";
 import { configurePurchases } from "../services/purchases.service";
+import { setAnalyticsUserId } from "../services/analytics.service";
 import { PURCHASES_ENABLED } from "../constants/config";
 import { getUser, getCompletedContentIds } from "../repositories/user.repo";
 import {
@@ -94,6 +95,11 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (PURCHASES_ENABLED) configurePurchases();
+  }, []);
+
+  useEffect(() => {
+    const unsub = listenAuth((u) => setAnalyticsUserId(u?.uid ?? null));
+    return unsub;
   }, []);
 
   useEffect(() => {

@@ -20,6 +20,8 @@
     "@gluestack-ui/utils": "^3.0.11",
     "@legendapp/motion": "^2.3.0",
     "@react-native-async-storage/async-storage": "2.2.0",
+    "@react-native-firebase/analytics": "^26.1.0",
+    "@react-native-firebase/app": "^26.1.0",
     "@react-native-google-signin/google-signin": "^16.1.2",
     "@react-navigation/bottom-tabs": "^7.4.0",
     "@react-navigation/elements": "^2.6.3",

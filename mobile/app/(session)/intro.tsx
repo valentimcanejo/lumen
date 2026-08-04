@@ -16,6 +16,7 @@ import { incrementContentStart } from "../../repositories/content_stats.repo";
 import { getLessonMeta } from "../../repositories/lessons.repo";
 import { usePremium } from "../../hooks/usePremium";
 import { getStorageDownloadUrl } from "../../services/storage.service";
+import { trackEvent } from "../../services/analytics.service";
 import type { Lang } from "../../models/lang";
 
 const DIFFICULTY_LABELS: Record<string, Record<Lang, string>> = {
@@ -69,6 +70,10 @@ export default function LessonIntroScreen() {
       return;
     }
     incrementContentStart(contentId).catch(() => {});
+    trackEvent("lesson_start", {
+      content_id: contentId,
+      track_id: lessonMeta?.trackId ?? "",
+    });
     router.push({
       pathname: "/(session)/lesson",
       params: { contentId, version, lang },

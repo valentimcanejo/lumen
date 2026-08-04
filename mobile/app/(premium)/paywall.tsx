@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ScrollView,
   TouchableOpacity,
@@ -15,6 +15,7 @@ import { Text } from "../../components/ui/text";
 import { HStack } from "../../components/ui/hstack";
 import { useAuth } from "../../hooks/useAuth";
 import { usePremium } from "../../hooks/usePremium";
+import { trackEvent } from "../../services/analytics.service";
 
 type Plan = "annual" | "monthly";
 type FeedbackModal = "success" | "restored" | "none_found" | "error" | null;
@@ -313,6 +314,10 @@ export default function Paywall() {
   const { isAnonymous, signInWithGoogle } = useAuth();
   const { annualPackage, monthlyPackage, purchasePlan, restorePurchases } = usePremium();
 
+  useEffect(() => {
+    trackEvent("paywall_view");
+  }, []);
+
   // Dynamic prices from RevenueCat packages, fallback to i18n strings
   const annualPrice = annualPackage
     ? `${annualPackage.product.priceString}${t("premium.per_year")}`
@@ -336,6 +341,7 @@ export default function Paywall() {
     setLinking(true);
     try {
       await signInWithGoogle();
+      trackEvent("account_link", { source: "post_purchase", result: "linked" });
     } catch {
       // Cancelled or failed — linking is optional, never block on it.
     } finally {
@@ -346,20 +352,30 @@ export default function Paywall() {
   }
 
   function handleSkipLink() {
+    trackEvent("account_link", { source: "post_purchase", result: "skipped" });
     setShowLinkInvite(false);
     router.back();
   }
 
   async function handleSubscribe() {
     setProcessing(true);
+    const pkg = selectedPlan === "annual" ? annualPackage : monthlyPackage;
+    trackEvent("purchase_start", { plan: selectedPlan });
     try {
-      const pkg = selectedPlan === "annual" ? annualPackage : monthlyPackage;
       if (!pkg) { setFeedback("error"); return; }
 
       const success = await purchasePlan(pkg);
-      if (success) setFeedback("success");
+      if (success) {
+        setFeedback("success");
+        trackEvent("purchase", {
+          value: pkg.product.price,
+          currency: pkg.product.currencyCode,
+          item_id: pkg.product.identifier,
+        });
+      }
     } catch {
       setFeedback("error");
+      trackEvent("purchase_error", { plan: selectedPlan });
     } finally {
       setProcessing(false);
     }
@@ -370,6 +386,7 @@ export default function Paywall() {
     try {
       const active = await restorePurchases();
       setFeedback(active ? "restored" : "none_found");
+      if (active) trackEvent("purchase_restore");
     } catch {
       setFeedback("error");
     } finally {
