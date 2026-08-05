@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View as RNView, useWindowDimensions, Text as RNText } from "react-native";
 import Animated, {
   useSharedValue,
@@ -18,6 +18,7 @@ import { Lang } from "../../models/lang";
 import { getGoals, type Goal } from "../../repositories/goals.repo";
 import { useAuth } from "../../hooks/useAuth";
 import { FEATURES, TEST_TRACKS } from "../../constants/config";
+import { trackEvent } from "../../services/analytics.service";
 
 const COLS = 3;
 const GAP = 10;
@@ -98,6 +99,10 @@ export default function Goals() {
   const { t, i18n } = useTranslation();
   const { uid: userId } = useAuth();
   const selectedLanguage = (["pt","en","es"].includes(i18n.language) ? i18n.language : "pt") as Lang;
+
+  useEffect(() => {
+    trackEvent("onboarding_step", { step: "goals" });
+  }, []);
 
   const tileSize = (width - H_PAD * 2 - GAP * (COLS - 1)) / COLS;
 

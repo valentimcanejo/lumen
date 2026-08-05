@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ImageBackground, StyleSheet, View as RNView } from "react-native";
 import { Box } from "../../components/ui/box";
 import { Text } from "../../components/ui/text";
@@ -8,6 +8,7 @@ import { router } from "expo-router";
 import { LumenButton } from "../../components/ui/lumen/Button";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { trackEvent } from "../../services/analytics.service";
 
 const VALUE_PROPS = [
   { emoji: "🧠", key: "prop_1" },
@@ -78,6 +79,10 @@ const wl = StyleSheet.create({
 export default function Welcome() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
+
+  useEffect(() => {
+    trackEvent("onboarding_step", { step: "welcome" });
+  }, []);
 
   return (
     <ImageBackground

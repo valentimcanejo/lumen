@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "../../components/ui/text";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
+import { trackEvent } from "../../services/analytics.service";
 
 // ---------------------------------------------------------------------------
 // Each step: label key, icon, how long to "run" before completing (ms)
@@ -113,6 +114,8 @@ export default function SetupScreen() {
   const titleFade = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
+    trackEvent("onboarding_step", { step: "setup" });
+
     Animated.timing(titleFade, {
       toValue: 1,
       duration: 600,
@@ -143,6 +146,7 @@ export default function SetupScreen() {
 
     // Brief pause to let the user see all checkmarks, then navigate
     await delay(600);
+    trackEvent("onboarding_complete");
     router.replace("/(tabs)/home");
   }
 

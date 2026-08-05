@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box } from "../../components/ui/box";
 import { Text } from "../../components/ui/text";
@@ -11,11 +11,16 @@ import {
   requestNotificationPermission,
   scheduleDailyReminder,
 } from "../../services/notifications.service";
+import { trackEvent } from "../../services/analytics.service";
 
 export default function NotificationsOnboarding() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    trackEvent("onboarding_step", { step: "notifications" });
+  }, []);
 
   async function handleAllow() {
     setLoading(true);

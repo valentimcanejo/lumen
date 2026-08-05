@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box } from "../../components/ui/box";
 import { Text } from "../../components/ui/text";
@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
 import { Lang } from "../../models/lang";
+import { trackEvent } from "../../services/analytics.service";
 
 const OPTIONS = [
   { key: 5,  nameKey: "onboarding.daily-time.name_5",  desc: "onboarding.daily-time.desc_5" },
@@ -30,6 +31,10 @@ export default function DailyTime() {
       selectedLanguage: Lang;
       selectedTracks: string;
     };
+
+  useEffect(() => {
+    trackEvent("onboarding_step", { step: "daily_time" });
+  }, []);
 
   const handleNext = async () => {
     if (!uid) return;
