@@ -1,3 +1,4 @@
+import { TurboModuleRegistry } from "react-native";
 import type { Analytics } from "@react-native-firebase/analytics";
 
 type AnalyticsModule = typeof import("@react-native-firebase/analytics");
@@ -5,10 +6,15 @@ type AnalyticsModule = typeof import("@react-native-firebase/analytics");
 let analytics: Analytics | null = null;
 let mod: AnalyticsModule | null = null;
 
-// Lazy require: builds shipped before the native module was added receive this
-// code via OTA update, so a top-level import must not be evaluated at boot.
+// Builds shipped before the native module was added (vC15 and older) receive
+// this code via OTA update. Requiring RNFirebase there throws at module init,
+// and Metro reports module-init errors as fatal before try/catch sees them —
+// so check the native module exists before requiring anything.
+const nativeAvailable = TurboModuleRegistry.get("NativeRNFBTurboApp") != null;
+
 function instance(): Analytics | null {
   if (analytics) return analytics;
+  if (!nativeAvailable) return null;
   try {
     const { getApp } = require("@react-native-firebase/app");
     mod = require("@react-native-firebase/analytics") as AnalyticsModule;
